@@ -1,0 +1,228 @@
+.login-wrapper {
+	position:relative;
+}
+.login {
+	position: absolute;
+	margin: 0 auto;
+	left:0;
+	right: 0;
+	font-family: $font-normal;
+	height: 100%;
+	background: white;
+	text-align: center;
+	max-width: 500px;
+	padding: 80px 40px 0px 40px;
+	.logo-wrap {
+		height: 100px;
+		position: relative;
+		width: 100%;
+		img {
+			height:auto;
+			width: 100%;
+			max-height: 100px;
+			position: absolute;
+			margin: 0px auto;
+			left: 0;
+			right: 0;
+		}
+	}
+
+	h1 {
+		font-size: 1.5em;
+		color: $black;
+		margin: 1.8em 0;
+	}
+
+	p {
+		color: $black;
+		font-size: 18px;
+	}
+
+	button {
+		height: 60px;
+		line-height:60px;
+		font-size:18px;
+		display: inline-block;
+		border-radius: 3px;
+		width: 100%;
+		margin: 20px 0;
+		cursor: pointer;
+		outline: none;
+		&.fb-login {
+			background-color: $fbblue;
+			color: white;
+			width: 100%;
+			border: 1px solid $fbbluedark;
+		}
+		&.tw-login, &.email-login {
+			border: 1px solid $grey;
+			background-color: white;
+				@media screen and (max-device-width: 480px), screen and (max-width: 480px) {
+			font-size:12px;}
+			margin: 20px 0;
+			width: calc(50% - 10px);
+		}
+		
+		&.tw-login {
+			margin-right: 10px;
+		}
+	
+	}
+	//email signin
+	section {
+
+	position: relative;
+	background: white;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+&:after, &:before {
+	bottom: 100%;
+	left: 75%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+&:after {
+	border-color: rgba(136, 183, 213, 0);
+	border-bottom-color: white;
+	border-width: 10px;
+	margin-left: -10px;
+}
+&:before {
+	border-color: rgba(204, 204, 204, 0);
+	border-bottom-color: #cccccc;
+	border-width: 11px;
+	margin-left: -11px;
+}
+		// overflow: hidden;
+		// padding: 20px;
+		label {
+			text-align: left;
+			width: calc(100% - 40px);
+			display: block;
+			margin-bottom: 20px;
+			margin-left:20px;
+			&:first-child {
+				margin-top: 20px;
+			}
+		}
+		input {
+			width: calc(100% - 40px);
+			height: 35px;
+			margin-bottom: 20px;
+			margin-left:20px;
+			margin-right: 20px;
+			border-radius: 3px;
+			border: 1px solid $grey;
+			font-size: 14px;
+			color: $grey;
+			padding-left: 20px;
+			outline: none;
+			&:focus {
+				border: 1px solid $purple;
+			}
+		}
+		input[type="submit"] {
+			padding: 0px;
+			width: 50%;
+			background-color: $lightpurple;
+			color: white;
+			display: inline-block;
+			border: none;
+			outline: none;
+			height: 60px;
+			line-height: 60px;
+			margin-right: 0px;
+			margin-bottom: 0px;
+			font-size:18px;
+			@media screen and (max-device-width: 480px), screen and (max-width: 480px) {
+			font-size:12px;}
+			margin-left: 0;
+			margin-top: 0;
+			border-radius: 0px;
+			border-bottom-left-radius: 3px;
+			cursor: pointer;
+			&:last-child {
+				background-color: $purple;
+				border-radius: 0px;
+				border-bottom-right-radius: 3px;
+			}
+			&:focus {
+				border: none;
+			}
+		}
+	}
+
+}
+
+
+.quote {
+	background-image: url('../img/signup-bg.jpg');
+	background-size: cover;
+	height: 100%;
+	padding: 80px 40px;
+	@media screen and (max-device-width: 480px), screen and (max-width: 480px) {
+		display:none;
+	}
+	h1 {
+		color: white;
+		font-size: 36px;
+		font-family: Georgia, Times, 'Times New Roman', serif ;
+		font-style: italic;
+	}
+	h2 {
+		margin: 10px 0px;
+		color: white;
+		font-size: 40px;
+		font-family: Georgia, Times, 'Times New Roman', serif ;
+		font-style: italic;	
+	}
+	span {
+		font-size: 30px;
+		color: white;
+		font-weight:light;
+		font-family: Georgia, Times, 'Times New Roman', serif ;
+	}
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
