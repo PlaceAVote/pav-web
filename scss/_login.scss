@@ -1,5 +1,35 @@
 .login-wrapper {
 	position:relative;
+	.login-footer {
+		@media screen and (max-device-width: 480px), screen and (max-width: 480px) {
+			display: none;
+		}
+		border-top: 1px solid $grey;
+		position: absolute;
+		width: auto;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		margin: 0px auto;
+		height: auto;
+		width: 370px;
+		ul {
+			
+			li {
+				cursor: pointer;
+				display: inline-block;
+				height: 60px;
+				line-height: 60px;
+				font-family: $font-normal;
+				padding: 0px 40px;
+				transition: all 0.2s ease;
+				&:hover {
+				background-color: lighten($purple, 50%);
+				color: $purple;
+				}
+			}
+		}
+	}
 }
 .login {
 	position: absolute;
@@ -48,11 +78,16 @@
 		margin: 20px 0;
 		cursor: pointer;
 		outline: none;
+		transition: all 0.2s ease;
 		&.fb-login {
 			background-color: $fbblue;
 			color: white;
 			width: 100%;
 			border: 1px solid $fbbluedark;
+			&:hover {
+				background-color: lighten($fbbluedark, 20%);
+				border-color: $fbblue;
+			}
 		}
 		&.tw-login, &.email-login {
 			border: 1px solid $grey;
@@ -61,10 +96,19 @@
 			font-size:12px;}
 			margin: 20px 0;
 			width: calc(50% - 10px);
+			&:hover {
+				background-color: $purple;
+				color: white;
+				border-color: lighten($purple, 40%);
+			}
 		}
 		
 		&.tw-login {
 			margin-right: 10px;
+			&:hover {
+			background-color: $twblue;
+			border-color: lighten($twblue, 20%);
+			}
 		}
 	
 	}
@@ -104,7 +148,7 @@
 			text-align: left;
 			width: calc(100% - 40px);
 			display: block;
-			margin-bottom: 20px;
+			margin-bottom: 10px;
 			margin-left:20px;
 			&:first-child {
 				margin-top: 20px;
@@ -119,12 +163,25 @@
 			border-radius: 3px;
 			border: 1px solid $grey;
 			font-size: 14px;
-			color: $grey;
+			color: $purple;
 			padding-left: 20px;
 			outline: none;
+			transition: all 0.2s ease;
 			&:focus {
 				border: 1px solid $purple;
 			}
+				&::-webkit-input-placeholder {
+				color: $grey;
+				}
+				&::-moz-placeholder { /* Firefox 19+ */
+				color: $grey;
+				}
+				&:-ms-input-placeholder {
+				color: $grey;
+				}
+				&:-moz-placeholder { /* Firefox 18- */
+				color: $grey;
+				}
 		}
 		input[type="submit"] {
 			padding: 0px;
@@ -146,10 +203,18 @@
 			border-radius: 0px;
 			border-bottom-left-radius: 3px;
 			cursor: pointer;
+			&:hover {
+				background-color: lighten($purple, 50%);
+				color: $purple;
+			}
 			&:last-child {
 				background-color: $purple;
 				border-radius: 0px;
 				border-bottom-right-radius: 3px;
+				&:hover {
+				background-color: lighten($purple, 50%);
+				color: $purple;
+			}
 			}
 			&:focus {
 				border: none;
@@ -165,6 +230,9 @@
 	background-size: cover;
 	height: 100%;
 	padding: 80px 40px;
+		@media screen and (max-device-width: 900px), screen and (max-width: 900px) {
+		display:none;
+	}
 	@media screen and (max-device-width: 480px), screen and (max-width: 480px) {
 		display:none;
 	}
