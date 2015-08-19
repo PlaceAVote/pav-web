@@ -70,7 +70,7 @@
 
 	button {
 		height: 60px;
-		line-height:60px;
+		line-height:57px;
 		font-size:18px;
 		display: inline-block;
 		border-radius: 3px;
@@ -258,6 +258,18 @@
 
 
 
+}
+
+.login-error {
+	border: 2px solid $red !important;
+	color: $red !important;
+}
+
+.error-message {
+	color: $red !important;
+	text-align:left;
+	padding-left: 20px;
+	margin-bottom:20px;
 }
 
 

@@ -5,12 +5,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1">
   <title>Place A Vote | Login</title>
-  <script src="js/jquery.js"></script>
-  <script src="js/login.js"></script>
   <link rel="shortcut icon" href="img/favicon.png" type="image/vnd.microsoft.icon">
   <link rel="stylesheet" href="css/styles.css" type="text/css">
  </head>
- <body>
+ <body ng-app="pavApp">
 <div class="wrapper s-12 m-12 l-12">
 	<div class="quote l-7">
 	<h1>
@@ -20,21 +18,22 @@
 	John Melton <span>- PICTURED</span>
 	</h2>
 	</div>
-	<div class="l-5 m-12 s-12 login-wrapper">
+	<div ng-controller="loginController as login" class="l-5 m-12 s-12 login-wrapper">
 		<section class="s-12 login">
 			<div class="logo-wrap"><img src="../img/pav-logo-color.png" /></div>
-			<h1>Democracy is the best thing since democracy.</h1>
+			<h1>{{login.message}}</h1>
 			<button class="fb-login">Sign in with Facebook</button>
 			<p>Or</p>
 			<button class="tw-login">Sign in with Twitter</button>
 			<button class="email-login">Sign in with Email</button>
 
 			<section class="vanish s-12">
-			 <form>
+			 <form ng-submit="login.signIn()">
 			 <label>Email</label>
-			 <input name="email" type="email" placeholder="yourname@example.com" />
+			 <input name="email" type="email" ng-class="{'login-error':login.invalid == true}" ng-model="login.user.email" placeholder="yourname@example.com" />
 			 <label>Password</label>
-			 <input name="password" type="password" placeholder="*******" />
+			 <input name="password" type="password" ng-model="login.user.password" placeholder="*******" />
+			 <p class="error-message" ng-show="login.invalid === true">Email address is invalid, please try again</p>
 			 <input type="submit" value="Create an account" /><input type="submit" value="Sign in" />
 			 </form>
 			</section>
@@ -57,6 +56,6 @@
 
 
 </div>
-
+<script src="dist/js/app.js"></script>
  </body>
 </html>

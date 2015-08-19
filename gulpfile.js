@@ -18,18 +18,28 @@ return gulp.src('scss/styles.scss')
 });
 
 gulp.task('autoPrefix', ['compileSass'], function() {
-	return gulp.src('css/styles.css')
+return gulp.src('css/styles.css')
 			.pipe(autoprefix())
 			.pipe(gulp.dest('css'));
 });
 
+gulp.task('concatScripts', function() {
+return gulp.src([
+	'node_modules/angular/angular.min.js',
+	'js/*.js',
+	'js/**/*.js'
+	])
+	.pipe(concat('app.js'))
+	.pipe(gulp.dest('dist/js'));
+});
+
 gulp.task('watchFiles', function() {
 	gulp.watch('scss/*.scss', ['autoPrefix']);
-	gulp.watch('html/login.html');
+	gulp.watch(['js/**/*.js', 'js/*.js'], ['concatScripts']);
 });
 
 
 
 
 
-gulp.task('default', ['watchFiles']);
+gulp.task('default', ['watchFiles', 'concatScripts']);

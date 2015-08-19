@@ -301,7 +301,7 @@ body, html, div, .wrapper {
     font-size: 18px; }
   .login button {
     height: 60px;
-    line-height: 60px;
+    line-height: 57px;
     font-size: 18px;
     display: inline-block;
     border-radius: 3px;
@@ -455,3 +455,13 @@ body, html, div, .wrapper {
     color: white;
     font-weight: light;
     font-family: Georgia, Times, 'Times New Roman', serif; }
+
+.login-error {
+  border: 2px solid #e64a33 !important;
+  color: #e64a33 !important; }
+
+.error-message {
+  color: #e64a33 !important;
+  text-align: left;
+  padding-left: 20px;
+  margin-bottom: 20px; }
