@@ -6,6 +6,7 @@
   <meta name="viewport" content="initial-scale=1, maximum-scale=1">
   <title>Place A Vote | Login</title>
   <link rel="shortcut icon" href="img/favicon.png" type="image/vnd.microsoft.icon">
+  <link href="https://fontastic.s3.amazonaws.com/rudCymsEeXM4KWngZaYazX/icons.css" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css" type="text/css">
  </head>
  <body ng-app="pavApp">
@@ -21,12 +22,12 @@
 	<div ng-controller="loginController as login" class="l-5 m-12 s-12 login-wrapper">
 		<section class="s-12 login">
 			<div class="logo-wrap"><img src="../img/pav-logo-color.png" /></div>
-			<h1>{{login.message}}</h1>
-			<button class="fb-login">Sign in with Facebook</button>
+			<h1>{{login.message}}
+			</h1>
+			<button class="fb-login"><span class="icon-facebook"></span>Sign in with Facebook</button>
 			<p>Or</p>
 			<button class="tw-login">Sign in with Twitter</button>
 			<button class="email-login">Sign in with Email</button>
-
 			<section class="vanish s-12">
 			 <form ng-submit="login.signIn()">
 			 <label>Email</label>

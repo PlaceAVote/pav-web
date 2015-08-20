@@ -347,25 +347,24 @@ $( document ).ready(function() {
 
 
 
-app.controller('loginController', ['$scope', 'loginUser', function($scope, loginUser) {
+app.controller('loginController', ['$scope', 'userAuth', function($scope, userAuth) {
 
 	var login = this;
 
 	login.message = 'Democracy is the best thing since democracy';
 
-	login.user = {
-		email: '',
-		password: ''
-	}
-
-	//Dummy Service Awaiting API endpoint
+	//Dummy authentication method
 	login.loginService = function(email, password) {
-		if (email == "user@test.com" && password == "password") {
-			console.log('sucess');
-		} else {
-			console.log('fail');
-			login.invalid = true;
-		}
+
+		login.userIsValid = userAuth.userAuthenticate();
+
+
+		if (email == login.userIsValid.email && password == login.userIsValid.password) {
+		 	console.log('sucess really?');
+		 } else {
+		 	console.log('fail');
+		 	login.invalid = true;
+		 }
 	}
 
 	login.signIn = function() {
@@ -376,12 +375,18 @@ app.controller('loginController', ['$scope', 'loginUser', function($scope, login
 
 
 
-app.factory('loginUser', ['$http', function($http) {
-  return $http.get('api-endpoint')
-         .success(function(data) {
-           return data;
-         })
-         .error(function(data) {
-           return data;
-         });
+app.factory('userAuth', [ function() {
+ 
+  var user = {
+  	email: 'test@user.com',
+  	password: 'password'
+  }
+
+  return {
+  	userAuthenticate: function() {
+  		return user;
+  	}
+  }
+
+
 }]);

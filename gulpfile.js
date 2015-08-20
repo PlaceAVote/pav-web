@@ -6,7 +6,20 @@ var gulp = require('gulp'),
 	rename = require('gulp-rename'),
 	sass = require('gulp-sass'),
 	maps = require('gulp-sourcemaps'),
-	autoprefix = require('gulp-autoprefixer');
+	autoprefix = require('gulp-autoprefixer'),
+	browserSync = require('browser-sync').create();
+
+// Static server
+gulp.task('browser-sync', function() {
+    browserSync.init({
+        server: {
+            baseDir: "./"
+        }
+
+    });
+    gulp.watch("*.html").on("change", browserSync.reload);
+});
+
 
 
 gulp.task('compileSass', function() {
@@ -42,4 +55,4 @@ gulp.task('watchFiles', function() {
 
 
 
-gulp.task('default', ['watchFiles', 'concatScripts']);
+gulp.task('default', ['watchFiles', 'concatScripts', 'browser-sync']);

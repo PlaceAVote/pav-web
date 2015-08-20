@@ -310,12 +310,18 @@ body, html, div, .wrapper {
     cursor: pointer;
     outline: none;
     -webkit-transition: all 0.2s ease;
-            transition: all 0.2s ease; }
+            transition: all 0.2s ease;
+    position: relative; }
     .login button.fb-login {
       background-color: #3b5998;
       color: white;
       width: 100%;
       border: 1px solid #324b81; }
+      .login button.fb-login .icon-facebook {
+        position: absolute;
+        left: 30px;
+        top: 4px;
+        font-size: 26px; }
       .login button.fb-login:hover {
         background-color: #5a7abf;
         border-color: #3b5998; }

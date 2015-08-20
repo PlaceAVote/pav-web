@@ -79,11 +79,18 @@
 		cursor: pointer;
 		outline: none;
 		transition: all 0.2s ease;
+		position: relative;
 		&.fb-login {
 			background-color: $fbblue;
 			color: white;
 			width: 100%;
 			border: 1px solid $fbbluedark;
+			& .icon-facebook {
+			    position: absolute;
+			    left: 30px;
+			    top: 4px;
+			    font-size: 26px;
+			}
 			&:hover {
 				background-color: lighten($fbbluedark, 20%);
 				border-color: $fbblue;
