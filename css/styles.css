@@ -204,15 +204,6 @@ div, input {
 .left {
   float: left; }
 
-body, html, div, .wrapper {
-  height: 100%; }
-
-.vanish {
-  opacity: 0; }
-
-.visible {
-  opacity: 1; }
-
 @font-face {
   font-family: "whitneymedium";
   src: url("../font/whitney-medium-bas-webfont.eot");
@@ -241,8 +232,33 @@ body, html, div, .wrapper {
   font-weight: normal;
   font-style: normal; }
 
-.login-wrapper {
+body, html, div, .wrapper {
+  height: 100%; }
+
+body {
+  background-color: #e8e7ee;
+  font-family: "whitneymedium", sans-serif; }
+
+body::-moz-selection {
+  color: #543594;
+  background: #8767c8; }
+
+body::selection {
+  color: #543594;
+  background: #8767c8; }
+
+.vanish {
+  opacity: 0; }
+
+.visible {
+  opacity: 1; }
+
+.wrapper {
   position: relative; }
+
+.login-wrapper {
+  position: relative;
+  background-color: white; }
   .login-wrapper .login-footer {
     border-top: 1px solid #cccccc;
     position: absolute;
@@ -471,3 +487,82 @@ body, html, div, .wrapper {
   text-align: left;
   padding-left: 20px;
   margin-bottom: 20px; }
+
+.onboarding-container {
+  position: absolute;
+  margin: 0px auto;
+  left: 0;
+  right: 0;
+  top: 10%;
+  border-radius: 3px;
+  background-color: white;
+  border: 1px solid #d6d4e1;
+  padding: 35px 20px;
+  height: auto;
+  box-shadow: 0px 2px 4px -2px rgba(0, 0, 0, 0.2); }
+  @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
+    .onboarding-container {
+      top: 0;
+      padding: 0; } }
+  .onboarding-container header {
+    border-bottom: 1px solid #d6d4e1; }
+    @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
+      .onboarding-container header {
+        background-color: #cccccc; } }
+    .onboarding-container header img {
+      width: 300px;
+      padding-bottom: 20px; }
+  @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
+    .onboarding-container section {
+      padding: 0px 20px; } }
+  .onboarding-container section h2 {
+    color: #3b3b3b;
+    font-size: 24px;
+    font-family: "whitneymedium", sans-serif;
+    padding: 20px 0px; }
+  .onboarding-container section form label {
+    color: #3b3b3b;
+    font-size: 18px;
+    font-family: "whitneymedium", sans-serif;
+    display: inline-block;
+    width: calc(50% - 12px); }
+    .onboarding-container section form label input, .onboarding-container section form label select {
+      margin-top: 10px;
+      margin-bottom: 20px;
+      width: 100%;
+      color: #543594;
+      font-size: 18px;
+      height: 35px;
+      padding-left: 20px;
+      -webkit-transition: all 0.2s ease;
+              transition: all 0.2s ease;
+      outline: none;
+      border: 1px solid #cccccc;
+      border-radius: 3px; }
+      .onboarding-container section form label input:focus, .onboarding-container section form label select:focus {
+        border: 1px solid #543594; }
+    .onboarding-container section form label input[type="date"] {
+      color: #cccccc; }
+  .onboarding-container section form .firstname, .onboarding-container section form .signupdob {
+    margin-right: 20px; }
+  .onboarding-container section form .email-label {
+    width: 100%; }
+    .onboarding-container section form .email-label input {
+      margin-bottom: 35px; }
+  .onboarding-container section form button {
+    height: 85px;
+    border: 1px solid #739e39;
+    background-color: #a5cc71;
+    line-height: 85px;
+    color: white;
+    font-size: 24px;
+    text-align: center;
+    width: 100%;
+    display: inline-block;
+    -webkit-transition: all 0.2s ease;
+            transition: all 0.2s ease;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none; }
+    .onboarding-container section form button:hover {
+      background-color: #b1d384; }

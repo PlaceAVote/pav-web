@@ -1,2 +1,2 @@
-'use strict';
-var app = angular.module('pavApp', []);
+// 'use strict';
+// var app = angular.module('pavApp', []);

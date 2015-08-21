@@ -2,10 +2,21 @@ body, html, div, .wrapper {
 	height: 100%;
 }
 
+body {
+	background-color: $bgcolor;
+	font-family: $font-normal;
+}
+body::-moz-selection { color: $purple; background: lighten($purple, 20%);}
+body::selection { color: $purple; background: lighten($purple, 20%); }
+
 .vanish {
 	opacity: 0;
 }
 
 .visible {
 	opacity: 1;
+}
+
+.wrapper {
+	position: relative;
 }

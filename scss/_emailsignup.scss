@@ -1,0 +1,105 @@
+.onboarding-container {
+	position: absolute;
+	margin: 0px auto;
+	left: 0;
+	right: 0;
+	top: 10%;
+		@media screen and (max-device-width: 480px), screen and (max-width: 480px) {
+			top: 0;
+			padding: 0;
+		}
+	border-radius: 3px;
+	background-color: white;
+	border: 1px solid $widgetborder;
+	padding: 35px 20px;
+	height: auto;
+	-webkit-box-shadow: 0px 2px 4px -2px rgba(0,0,0,0.2);
+	-moz-box-shadow: 0px 2px 4px -2px rgba(0,0,0,0.2);
+	box-shadow: 0px 2px 4px -2px rgba(0,0,0,0.2);
+	header {
+	@media screen and (max-device-width: 480px), screen and (max-width: 480px) { 
+		background-color: $grey;
+	}
+		border-bottom: 1px solid $widgetborder;
+		img {
+			width: 300px;
+			padding-bottom: 20px;
+		}
+	}
+	section {
+			@media screen and (max-device-width: 480px), screen and (max-width: 480px) {
+				padding: 0px 20px;
+			}
+			h2 {
+			color: $black;
+			font-size: 24px;
+			font-family: $font-normal;
+			padding:20px 0px;
+		}
+		form {
+			label {
+			color: $black;
+			font-size: 18px;
+			font-family: $font-normal;
+			display: inline-block;
+			width:calc(50% - 12px);
+				input, select {
+					margin-top: 10px;
+					margin-bottom: 20px;
+					width: 100%;
+					color: $purple;
+					font-size: 18px;
+					height: 35px;
+					padding-left: 20px;
+					transition: all 0.2s ease;
+					outline: none;
+					border: 1px solid $grey;
+					border-radius: 3px;
+					&:focus {
+							border: 1px solid $purple;
+					}
+				}
+
+				input[type="date"] {
+					color: $grey;
+				}
+			}
+
+			
+
+			.firstname, .signupdob {
+				margin-right: 20px;
+
+			}
+
+			.email-label {
+				width: 100%;
+				input {
+					margin-bottom: 35px;
+				}
+			}
+
+			button {
+				height:85px;
+				border: 1px solid darken($green, 20%);
+				background-color: $green;
+				line-height: 85px;
+				color: white;
+				font-size: 24px;
+				text-align: center;
+				width: 100%;
+				display: inline-block;
+				transition: all 0.2s ease;
+				border-radius: 5px;
+				cursor: pointer;
+				outline: none;
+				&:hover {
+					background-color: lighten($green, 5%);
+				}
+
+			}
+		}
+	}
+
+	
+}

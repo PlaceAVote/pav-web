@@ -6,19 +6,19 @@ var gulp = require('gulp'),
 	rename = require('gulp-rename'),
 	sass = require('gulp-sass'),
 	maps = require('gulp-sourcemaps'),
-	autoprefix = require('gulp-autoprefixer'),
-	browserSync = require('browser-sync').create();
+	autoprefix = require('gulp-autoprefixer');
+// 	browserSync = require('browser-sync').create();
 
-// Static server
-gulp.task('browser-sync', function() {
-    browserSync.init({
-        server: {
-            baseDir: "./"
-        }
+// // Static server
+// gulp.task('browser-sync', function() {
+//     browserSync.init({
+//         server: {
+//             baseDir: "./"
+//         }
 
-    });
-    gulp.watch("*.html").on("change", browserSync.reload);
-});
+//     });
+//     gulp.watch("*.html").on("change", browserSync.reload);
+// });
 
 
 
@@ -38,7 +38,7 @@ return gulp.src('css/styles.css')
 
 gulp.task('concatScripts', function() {
 return gulp.src([
-	'node_modules/angular/angular.min.js',
+	// 'node_modules/angular/angular.min.js',
 	'js/*.js',
 	'js/**/*.js'
 	])
@@ -55,4 +55,4 @@ gulp.task('watchFiles', function() {
 
 
 
-gulp.task('default', ['watchFiles', 'concatScripts', 'browser-sync']);
+gulp.task('default', ['watchFiles', 'concatScripts']);
