@@ -7,10 +7,15 @@
 		@media screen and (max-device-width: 480px), screen and (max-width: 480px) {
 			top: 0;
 			padding: 0;
+			background-color: $grey;
+			height: 100%;
 		}
 	border-radius: 3px;
 	background-color: white;
 	border: 1px solid $widgetborder;
+	@media screen and (max-device-width: 480px), screen and (max-width: 480px) { 
+		border: none;
+	}
 	padding: 35px 20px;
 	height: auto;
 	-webkit-box-shadow: 0px 2px 4px -2px rgba(0,0,0,0.2);
@@ -18,13 +23,38 @@
 	box-shadow: 0px 2px 4px -2px rgba(0,0,0,0.2);
 	header {
 	@media screen and (max-device-width: 480px), screen and (max-width: 480px) { 
-		background-color: $grey;
+		background-color: $greylight;
+		position: relative;
+		height: 100px;
 	}
 		border-bottom: 1px solid $widgetborder;
 		img {
 			width: 300px;
 			padding-bottom: 20px;
+			@media screen and (max-device-width: 480px), screen and (max-width: 480px) {
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: 25px;
+				margin: 0px auto;
+			}
 		}
+	}
+	.border {
+		height: 0;
+			@media screen and (max-device-width: 480px), screen and (max-width: 480px) { 
+				height: 7px;
+				width: 100%;
+								/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#7abcff+0,6769a0+0,7f538e+100 */
+				background: #7abcff; /* Old browsers */
+				background: -moz-linear-gradient(left,  #7abcff 0%, #6769a0 0%, #7f538e 100%); /* FF3.6+ */
+				background: -webkit-gradient(linear, left top, right top, color-stop(0%,#7abcff), color-stop(0%,#6769a0), color-stop(100%,#7f538e)); /* Chrome,Safari4+ */
+				background: -webkit-linear-gradient(left,  #7abcff 0%,#6769a0 0%,#7f538e 100%); /* Chrome10+,Safari5.1+ */
+				background: -o-linear-gradient(left,  #7abcff 0%,#6769a0 0%,#7f538e 100%); /* Opera 11.10+ */
+				background: -ms-linear-gradient(left,  #7abcff 0%,#6769a0 0%,#7f538e 100%); /* IE10+ */
+				background: linear-gradient(to right,  #7abcff 0%,#6769a0 0%,#7f538e 100%); /* W3C */
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7abcff', endColorstr='#7f538e',GradientType=1 ); /* IE6-9 */
+			}
 	}
 	section {
 			@media screen and (max-device-width: 480px), screen and (max-width: 480px) {
@@ -32,25 +62,29 @@
 			}
 			h2 {
 			color: $black;
-			font-size: 24px;
+			font-size: 20px;
 			font-family: $font-normal;
 			padding:20px 0px;
 		}
 		form {
 			label {
+			@media screen and (max-device-width: 480px), screen and (max-width: 480px) {
+				width: 100%;
+			}
 			color: $black;
-			font-size: 18px;
+			font-size: 12px;
 			font-family: $font-normal;
 			display: inline-block;
 			width:calc(50% - 12px);
 				input, select {
+					font-family: $font-normal;
 					margin-top: 10px;
-					margin-bottom: 20px;
+					margin-bottom: 15px;
 					width: 100%;
 					color: $purple;
-					font-size: 18px;
-					height: 35px;
-					padding-left: 20px;
+					font-size: 12px;
+					height: 30px;
+					padding-left: 10px;
 					transition: all 0.2s ease;
 					outline: none;
 					border: 1px solid $grey;
@@ -61,6 +95,7 @@
 				}
 
 				input[type="date"] {
+					background-color: white;
 					color: $grey;
 				}
 			}
@@ -80,19 +115,23 @@
 			}
 
 			button {
-				height:85px;
+				height:50px;
 				border: 1px solid darken($green, 20%);
 				background-color: $green;
-				line-height: 85px;
+				line-height: 50px;
 				color: white;
-				font-size: 24px;
+				font-size: 18px;
 				text-align: center;
+				font-family: $font-normal;
 				width: 100%;
 				display: inline-block;
 				transition: all 0.2s ease;
 				border-radius: 5px;
 				cursor: pointer;
 				outline: none;
+				@media screen and (max-device-width: 480px), screen and (max-width: 480px) {
+					margin-bottom: 20px;
+				}
 				&:hover {
 					background-color: lighten($green, 5%);
 				}

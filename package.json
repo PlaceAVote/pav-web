@@ -9,6 +9,8 @@
   "author": "Anthony O'Neill",
   "license": "MIT",
   "devDependencies": {
+    "angular": "^1.4.4",
+    "angular-resource": "^1.4.4",
     "browser-sync": "^2.8.2",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^2.3.1",
@@ -17,5 +19,8 @@
     "gulp-sass": "^2.0.4",
     "gulp-sourcemaps": "^1.5.2",
     "gulp-uglify": "^1.2.0"
+  },
+  "dependencies": {
+    "angular-resource": "^1.4.4"
   }
 }

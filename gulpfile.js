@@ -7,27 +7,27 @@ var gulp = require('gulp'),
 	sass = require('gulp-sass'),
 	maps = require('gulp-sourcemaps'),
 	autoprefix = require('gulp-autoprefixer');
-// 	browserSync = require('browser-sync').create();
+	browserSync = require('browser-sync').create();
 
-// // Static server
-// gulp.task('browser-sync', function() {
-//     browserSync.init({
-//         server: {
-//             baseDir: "./"
-//         }
+// Static server
+gulp.task('browser-sync', function() {
+    browserSync.init({
+        server: {
+            baseDir: "./"
+        }
 
-//     });
-//     gulp.watch("*.html").on("change", browserSync.reload);
-// });
+    });
+    gulp.watch(["*.html", "css/*.css", "dist/js/*.js"]).on("change", browserSync.reload);
+});
 
 
 
 gulp.task('compileSass', function() {
-return gulp.src('scss/styles.scss')
+return gulp.src('./scss/*.scss')
 	.pipe(maps.init())
-	.pipe(sass())
+	.pipe(sass({includePaths: ['./scss']}))
 	.pipe(maps.write('./'))
-	.pipe(gulp.dest('css'));
+	.pipe(gulp.dest('./css'));
 });
 
 gulp.task('autoPrefix', ['compileSass'], function() {
@@ -38,16 +38,18 @@ return gulp.src('css/styles.css')
 
 gulp.task('concatScripts', function() {
 return gulp.src([
-	// 'node_modules/angular/angular.min.js',
-	'js/*.js',
-	'js/**/*.js'
+	'node_modules/angular/angular.min.js',
+	'node_modules/angular-resource/angular-resource.min.js',
+	'js/**/*.js',
+	'!js/jquery.js'
 	])
 	.pipe(concat('app.js'))
 	.pipe(gulp.dest('dist/js'));
 });
 
 gulp.task('watchFiles', function() {
-	gulp.watch('scss/*.scss', ['autoPrefix']);
+	gulp.watch('scss/*.scss', ['compileSass']);
+	gulp.watch('css/*.css', ['autoPrefix']);
 	gulp.watch(['js/**/*.js', 'js/*.js'], ['concatScripts']);
 });
 

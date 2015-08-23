@@ -1,15 +1,15 @@
-// app.factory('userAuth', [ function() {
+app.factory('userAuth', [ function() {
  
-//   var user = {
-//   	email: 'test@user.com',
-//   	password: 'password'
-//   }
+  var user = {
+  	email: 'test@user.com',
+  	password: 'password'
+  }
 
-//   return {
-//   	userAuthenticate: function() {
-//   		return user;
-//   	}
-//   }
+  return {
+  	userAuthenticate: function() {
+  		return user;
+  	}
+  }
 
 
-// }]);
+}]);
