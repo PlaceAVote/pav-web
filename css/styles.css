@@ -519,7 +519,7 @@ body::selection {
     .onboarding-container {
       top: 0;
       padding: 0;
-      background-color: #cccccc;
+      background-color: white;
       height: 100%; } }
   @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
     .onboarding-container {
@@ -624,3 +624,111 @@ body::selection {
         margin-bottom: 20px; } }
     .onboarding-container section form button:hover {
       background-color: #b1d384; }
+
+.topics {
+  margin-top: 30px; }
+  .topics button {
+    height: 50px;
+    border: 1px solid #739e39;
+    background-color: #a5cc71;
+    line-height: 50px;
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    font-family: "whitneymedium", sans-serif;
+    width: 100%;
+    display: inline-block;
+    -webkit-transition: all 0.2s ease;
+            transition: all 0.2s ease;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none; }
+    @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
+      .topics button {
+        margin-bottom: 20px; } }
+    .topics button:hover {
+      background-color: #b1d384; }
+
+.topic-container {
+  cursor: pointer;
+  margin-right: 30px;
+  margin-bottom: 30px;
+  border-radius: 3px;
+  border: 1px solid #543594;
+  position: relative;
+  float: left;
+  width: calc(33.33% - 20px);
+  box-shadow: 0px 2px 15px -2px transparent;
+  -webkit-transition: all 0.2s ease;
+          transition: all 0.2s ease; }
+  .topic-container:hover {
+    box-shadow: 0px 2px 15px -2px rgba(0, 0, 0, 0.3); }
+  @media screen and (max-device-width: 900px), screen and (max-width: 900px) {
+    .topic-container {
+      width: calc(50% - 15px); } }
+  .topic-container:nth-child(3n+3) {
+    margin-right: 0px; }
+    @media screen and (max-device-width: 900px), screen and (max-width: 900px) {
+      .topic-container:nth-child(3n+3) {
+        margin-right: 30px; } }
+  @media screen and (max-device-width: 900px), screen and (max-width: 900px) {
+    .topic-container:nth-child(2n+2) {
+      margin-right: 0px; } }
+  .topic-container:before {
+    content: "";
+    display: block;
+    padding-top: 100%;
+    /* initial ratio of 1:1*/ }
+  .topic-container .topic {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0; }
+    .topic-container .topic p {
+      color: #3b3b3b;
+      font-size: 22px;
+      font-family: "whitneymedium", sans-serif;
+      position: absolute;
+      bottom: 30px;
+      left: 30px; }
+      @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
+        .topic-container .topic p {
+          font-size: 12px;
+          bottom: 10px;
+          left: 10px; } }
+    .topic-container .topic .topic-tick {
+      background-color: white;
+      border: 2px solid #cccccc;
+      height: 30px;
+      width: 30px;
+      border-radius: 50%;
+      position: absolute;
+      bottom: 25px;
+      right: 30px; }
+      @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
+        .topic-container .topic .topic-tick {
+          bottom: 7px;
+          right: 10px;
+          width: 20px;
+          height: 20px; } }
+  .topic-container.topic-selected {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#87e0fd+0,5b7da8+0,746898+100 */
+    background: #87e0fd;
+    /* Old browsers */
+    /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #87e0fd), color-stop(0%, #5b7da8), color-stop(100%, #746898));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(-45deg, #87e0fd 0%, #5b7da8 0%, #746898 100%);
+    /* Chrome10+,Safari5.1+ */
+    /* Opera 11.10+ */
+    /* IE10+ */
+    background: -webkit-linear-gradient(315deg, #87e0fd 0%, #5b7da8 0%, #746898 100%);
+    background: linear-gradient(135deg, #87e0fd 0%, #5b7da8 0%, #746898 100%);
+    /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#87e0fd', endColorstr='#746898',GradientType=1 );
+    /* IE6-9 fallback on horizontal gradient */ }
+    .topic-container.topic-selected p {
+      color: white; }
+    .topic-container.topic-selected .topic-tick {
+      border: none; }
