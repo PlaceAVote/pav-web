@@ -1,21 +1,26 @@
 // $( document ).ready(function() {
 //     console.log( "ready!" );
 
-//     $('.email-login').on('click', function() {
-//     	$('.vanish').toggleClass('visible');
-//     })
 
-// 	$( "form" ).on( "submit", function( event ) {
-// 	  event.preventDefault();
-// 	  // console.log( $( this ).serialize() );
+
+//  
+//  	var regData = { "password": "stuff",
+//    "email": "tony@place.com",
+//    "first_name": "tony",
+//    "last_name": "montana",
+//    "dob": "01/01/1979",
+//    "country_code": 840
+// }
+	
+//  	  // console.log( $( this ).serialize() );
 // 	  // var loginData = $( this ).serialize();
-// 	  var loginUrl = "https://pav-user-api-1042958048.us-west-2.elb.amazonaws.com:8443/user";
+//  	  var loginUrl = "http://192.168.99.100:8080/user";
 	  	
 // 	  $.ajax({
 // 	  		type: "PUT",
 // 	  		url: loginUrl,
-// 	  		data: {"email":"anthony@place.com", "password" : "stuff"},
-// 	  		dataType: "json",
+// 	  		data: JSON.stringify(regData),
+// 	  		dataType: "JSON",
 // 	  		crossDomain: true,
 // 	  		headers: {"Content-Type": "application/json", "Accept": "application/json", "Access-Control-Allow-Origin":"*"},
 // 	  		success: function(data) {
@@ -27,10 +32,9 @@
 // 	  			console.log(data);
 // 	  		}
 // 	  });
-//
 
 
-// 	});
+
 
 
 // });

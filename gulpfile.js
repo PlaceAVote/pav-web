@@ -42,8 +42,7 @@ return gulp.src([
 	'node_modules/angular-resource/angular-resource.min.js',
 	'node_modules/angular-route/angular-route.min.js',
 	'node_modules/angular-animate/angular-animate.min.js',
-	'js/**/*.js',
-	'!js/jquery.js'
+	'js/**/*.js'
 	])
 	.pipe(concat('app.js'))
 	.pipe(gulp.dest('dist/js'));

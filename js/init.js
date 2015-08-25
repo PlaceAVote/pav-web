@@ -19,20 +19,3 @@ app.config(['$routeProvider', function($routeProvider) {
 			redirectTo: '/'
 		})
 }]);
-
-
-
-
-// 'user_strict';
-// var app = angular.module('app', ['ngRoute', 'ngAnimate']);
-
-// app.config(['$routeProvider', function($routeProvider) {
-// 	$routeProvider
-// 		.when('/', {
-// 			templateUrl: 'partials/login.html',
-// 			controller: 'LoginCtrl as login'
-// 		})
-// 		.otherwise({
-// 			redirectTo: '/'
-// 		});
-// }]);

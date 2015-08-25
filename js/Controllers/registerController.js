@@ -7,6 +7,12 @@ app.controller('TopicRegisterCtrl', ['$scope','$location', 'userAuth', function(
   		$location.path(hash);
 	};
 
+
+	//Jquery solution for adding selected class
+	$('.topic-container').on('click', function() {
+		$(this).toggleClass('topic-selected');
+	})
+
 }]);
 
 

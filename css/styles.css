@@ -526,7 +526,8 @@ body::selection {
   margin: 0px auto;
   left: 0;
   right: 0;
-  top: 10%;
+  max-width: 900px;
+  top: 5%;
   border-radius: 3px;
   background-color: white;
   border: 1px solid #d6d4e1;
@@ -667,6 +668,8 @@ body::selection {
       background-color: #b1d384; }
 
 .topic-container {
+  -webkit-transition: all 0.2s ease;
+          transition: all 0.2s ease;
   cursor: pointer;
   margin-right: 30px;
   margin-bottom: 30px;
@@ -676,8 +679,9 @@ body::selection {
   float: left;
   width: calc(33.33% - 20px);
   box-shadow: 0px 2px 15px -2px transparent;
-  -webkit-transition: all 0.2s ease;
-          transition: all 0.2s ease; }
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#87e0fd+0,5b7da8+0,746898+100 */
+  background: white;
+  /* Old browsers */ }
   .topic-container:hover {
     box-shadow: 0px 2px 15px -2px rgba(0, 0, 0, 0.3); }
   @media screen and (max-device-width: 900px), screen and (max-width: 900px) {
@@ -723,6 +727,17 @@ body::selection {
       position: absolute;
       bottom: 25px;
       right: 30px; }
+      .topic-container .topic .topic-tick .icon-check-mark {
+        -webkit-transition: 0.5s ease;
+                transition: 0.5s ease;
+        color: white;
+        text-align: center;
+        padding-top: 15%;
+        font-size: 20px; }
+        @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
+          .topic-container .topic .topic-tick .icon-check-mark {
+            padding-top: 20%;
+            font-size: 12px; } }
       @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
         .topic-container .topic .topic-tick {
           bottom: 7px;
@@ -749,3 +764,45 @@ body::selection {
       color: white; }
     .topic-container.topic-selected .topic-tick {
       border: none; }
+
+.topic span {
+  text-align: center;
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  color: #cccccc;
+  font-size: 130px;
+  padding-top: 15%; }
+  @media screen and (max-device-width: 1460px), screen and (max-width: 1460px) {
+    .topic span {
+      font-size: 90px;
+      padding-top: 25%; } }
+  @media screen and (max-device-width: 1360px), screen and (max-width: 1360px) {
+    .topic span {
+      font-size: 70px;
+      padding-top: 25%; } }
+  @media screen and (max-device-width: 770px), screen and (max-width: 770px) {
+    .topic span {
+      font-size: 80px;
+      padding-top: 25%; } }
+  @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
+    .topic span {
+      font-size: 60px;
+      padding-top: 20%; } }
+
+.topic-selected span {
+  color: white; }
+
+.topic-selected .topic-tick .icon-check-mark {
+  color: #a5cc71 !important; }
+
+.topic-container {
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  -webkit-transform: perspective(600) translateZ(0px);
+          transform: perspective(600) translateZ(0px);
+  -webkit-tap-highlight-color: transparent; }
+  .topic-container:active {
+    -webkit-transform: perspective(600) translateZ(-50px);
+            transform: perspective(600) translateZ(-50px); }
