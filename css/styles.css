@@ -368,6 +368,7 @@ body::selection {
         background-color: #4099FF;
         border-color: #a6cfff; }
   .login section {
+    opacity: 1;
     margin-top: 5px;
     position: relative;
     background: white;
@@ -376,6 +377,11 @@ body::selection {
     @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
       .login section {
         margin-bottom: 20px; } }
+    .login section.ng-hide-add, .login section.ng-hide-remove {
+      -webkit-transition: all 0.2s ease;
+              transition: all 0.2s ease; }
+    .login section.ng-hide {
+      opacity: 0; }
     .login section:after, .login section:before {
       bottom: 100%;
       left: 75%;
@@ -430,39 +436,38 @@ body::selection {
       .login section input:-moz-placeholder {
         /* Firefox 18- */
         color: #cccccc; }
-    .login section input[type="submit"] {
+    .login section button {
       padding: 0px;
       width: 50%;
-      background-color: #9283b4;
+      background-color: #543594;
       color: white;
       display: inline-block;
       border: none;
       outline: none;
       height: 40px;
       line-height: 39px;
+      margin-top: 10px;
       margin-right: 0px;
       margin-bottom: 0px;
       font-size: 12px;
       font-family: "whitneymedium", sans-serif;
       margin-left: 0;
-      margin-top: 0;
       border-radius: 0px;
       border-bottom-left-radius: 3px;
       cursor: pointer; }
       @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
-        .login section input[type="submit"] {
+        .login section button {
           font-size: 12px; } }
-      .login section input[type="submit"]:hover {
+      .login section button:hover {
         background-color: #e0d7f1;
         color: #543594; }
-      .login section input[type="submit"]:last-child {
-        background-color: #543594;
+      .login section button:last-child {
         border-radius: 0px;
         border-bottom-right-radius: 3px; }
-        .login section input[type="submit"]:last-child:hover {
+        .login section button:last-child:hover {
           background-color: #e0d7f1;
           color: #543594; }
-      .login section input[type="submit"]:focus {
+      .login section button:focus {
         border: none; }
 
 .quote {
@@ -502,6 +507,19 @@ body::selection {
   text-align: left;
   padding-left: 20px;
   margin-bottom: 20px; }
+  .error-message.ng-enter {
+    -webkit-transition: 0.2s;
+            transition: 0.2s;
+    opacity: 0; }
+  .error-message.ng-enter-active {
+    opacity: 1;
+    right: 0; }
+  .error-message.ng-leave {
+    -webkit-transition: 0.2s;
+            transition: 0.2s;
+    opacity: 1; }
+  .error-message.ng-leave-active {
+    opacity: 0; }
 
 .onboarding-container {
   position: absolute;
@@ -519,8 +537,7 @@ body::selection {
     .onboarding-container {
       top: 0;
       padding: 0;
-      background-color: white;
-      height: 100%; } }
+      background-color: white; } }
   @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
     .onboarding-container {
       border: none; } }

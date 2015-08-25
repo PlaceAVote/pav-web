@@ -10,52 +10,8 @@
   <link rel="stylesheet" href="css/styles.css" type="text/css">
  </head>
  <body ng-app="pavApp">
-<div class="wrapper s-12 m-12 l-12">
-	<div class="quote l-7">
-	<h1>
-	"A vote for me is a vote for Real Democracy"
-	</h1>
-	<h2>
-	John Melton <span>- PICTURED</span>
-	</h2>
-	</div>
-	<div ng-controller="loginController as login" class="l-5 m-12 s-12 login-wrapper">
-		<section class="s-12 login">
-			<div class="logo-wrap"><img src="../img/pav-logo-color.png" /></div>
-			<h1>{{login.message}}
-			</h1>
-			<button class="fb-login"><span class="icon-facebook"></span>Sign in with Facebook</button>
-			<p>Or</p>
-			<button class="tw-login">Sign in with Twitter</button>
-			<button class="email-login">Sign in with Email</button>
-			<section class="vanish s-12">
-			 <form ng-submit="login.signIn()">
-			 <label>Email</label>
-			 <input name="email" type="email" ng-class="{'login-error':login.invalid == true}" ng-model="login.user.email" placeholder="yourname@example.com" />
-			 <label>Password</label>
-			 <input name="password" type="password" ng-model="login.user.password" placeholder="*******" />
-			 <p class="error-message" ng-show="login.invalid === true">Email address is invalid, please try again</p>
-			 <input type="submit" value="Create an account" /><input type="submit" value="Sign in" />
-			 </form>
-			</section>
-		</section>
-
-<div class="login-footer">		
-<ul>
-			<li>
-				FAQ
-			</li>
-			<li>
-				Press Kit
-			</li>
-			<li>
-				Jobs
-			</li>
-		</ul>
-		</div>
-	</div>
-
-
+<div class="wrapper s-12 m-12 l-12" ng-view>
+	
 </div>
 <script src="dist/js/app.js"></script>
  </body>

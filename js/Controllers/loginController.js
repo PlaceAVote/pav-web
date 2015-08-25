@@ -1,4 +1,4 @@
-app.controller('loginController', ['$scope', 'userAuth', function($scope, userAuth) {
+app.controller('LoginCtrl', ['$scope','$location', 'userAuth', function($scope, $location, userAuth) {
 
 	var login = this;
 
@@ -21,6 +21,11 @@ app.controller('loginController', ['$scope', 'userAuth', function($scope, userAu
 	login.signIn = function() {
 		login.loginService(login.user.email, login.user.password);
 	}
+
+
+	$scope.go = function ( hash ) {
+  		$location.path(hash);
+	};
 
 }]);
 

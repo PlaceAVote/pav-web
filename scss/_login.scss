@@ -135,6 +135,15 @@
 		@media screen and (max-device-width: 480px), screen and (max-width: 480px) {
 			margin-bottom: 20px;
 		}
+		opacity: 1;
+	&.ng-hide-add, &.ng-hide-remove {
+	transition: all 0.2s ease;
+	}	
+
+	&.ng-hide {
+	  opacity: 0;
+	}
+
 	margin-top: 5px;
 	position: relative;
 	background: white;
@@ -205,16 +214,17 @@
 				color: $grey;
 				}
 		}
-		input[type="submit"] {
+		button {
 			padding: 0px;
 			width: 50%;
-			background-color: $lightpurple;
+			background-color: $purple;
 			color: white;
 			display: inline-block;
 			border: none;
 			outline: none;
 			height: 40px;
 			line-height: 39px;
+			margin-top:10px;
 			margin-right: 0px;
 			margin-bottom: 0px;
 			font-size:12px;
@@ -222,7 +232,6 @@
 			@media screen and (max-device-width: 480px), screen and (max-width: 480px) {
 			font-size:12px;}
 			margin-left: 0;
-			margin-top: 0;
 			border-radius: 0px;
 			border-bottom-left-radius: 3px;
 			cursor: pointer;
@@ -231,7 +240,6 @@
 				color: $purple;
 			}
 			&:last-child {
-				background-color: $purple;
 				border-radius: 0px;
 				border-bottom-right-radius: 3px;
 				&:hover {
@@ -294,6 +302,23 @@
 	text-align:left;
 	padding-left: 20px;
 	margin-bottom:20px;
+
+
+	&.ng-enter {
+		transition: 0.2s;
+		opacity:0;
+	}
+	&.ng-enter-active {
+		opacity: 1;
+		right:0;
+	}
+	&.ng-leave {
+		transition: 0.2s;
+		opacity:1;
+	}
+	&.ng-leave-active {
+		opacity:0;
+	}
 }
 
 
