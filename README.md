@@ -5,14 +5,14 @@ Install dependencies with Node.js
 
 	npm install
 
-Run the javascript task runner, Gulp.
+Run the javascript task runner Gulp.
 
 	gulp
 
-Run browser-sync or http-server to preview partials in browser
+Run browser-sync for live browser experience with option to view on mobile if your device is connected to the same network.
 
-	browser-sync
+	gulp browser-sync
 
-or
+or you can use htto-server
 
 	http-server -o
