@@ -237,7 +237,8 @@ body, html, div, .wrapper {
 
 body {
   background-color: #e8e7ee;
-  font-family: "whitneymedium", sans-serif; }
+  font-family: "whitneymedium", sans-serif;
+  position: relative; }
 
 body::-moz-selection {
   color: #543594;
@@ -254,7 +255,25 @@ body::selection {
   opacity: 1; }
 
 .wrapper {
-  position: relative; }
+  top: 0;
+  position: absolute;
+  opacity: 1; }
+  .wrapper.ng-leave, .wrapper.ng-enter {
+    -webkit-transition: all 0.4s ease;
+            transition: all 0.4s ease; }
+  .wrapper.ng-leave {
+    opacity: 1; }
+  .wrapper.ng-enter {
+    opacity: 0; }
+  .wrapper.ng-enter-stagger {
+    -webkit-transition-delay: 0.4s;
+            transition-delay: 0.4s;
+    -webkit-animation-delay: 0.4s;
+            animation-delay: 0.4s; }
+  .wrapper.ng-enter.ng-enter-active {
+    opacity: 1; }
+  .wrapper.ng-leave.ng-leave-active {
+    opacity: 0; }
 
 .login-wrapper {
   position: relative;
@@ -806,3 +825,51 @@ body::selection {
   .topic-container:active {
     -webkit-transform: perspective(600) translateZ(-50px);
             transform: perspective(600) translateZ(-50px); }
+
+.progress-bar {
+  width: 200px;
+  height: 15px;
+  background-color: #E8E7EE;
+  position: absolute;
+  right: 29px;
+  top: 52px;
+  border-radius: 3px;
+  overflow: hidden; }
+  @media screen and (max-device-width: 1020px), screen and (max-width: 1020px) {
+    .progress-bar {
+      display: none; } }
+  .progress-bar span {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 30px;
+    background: #66689e;
+    /* Old browsers */
+    /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%, #66689e), color-stop(100%, #725e97));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(left, #66689e 0%, #725e97 100%);
+    /* Chrome10+,Safari5.1+ */
+    /* Opera 11.10+ */
+    /* IE10+ */
+    background: linear-gradient(to right, #66689e 0%, #725e97 100%);
+    /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#66689e', endColorstr='#725e97',GradientType=1 );
+    /* IE6-9 */ }
+    .progress-bar span.complete {
+      width: 100%;
+      -webkit-animation: fullbar 2s ease;
+              animation: fullbar 2s ease; }
+
+@-webkit-keyframes fullbar {
+  0% {
+    width: 50%; }
+  100% {
+    width: 100%; } }
+
+@keyframes fullbar {
+  0% {
+    width: 50%; }
+  100% {
+    width: 100%; } }
