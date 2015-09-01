@@ -1,28 +1,35 @@
+angular.module('pavApp');
 app.controller('LoginCtrl', ['$scope','$location', 'userAuth', function($scope, $location, userAuth) {
 
-	var login = this;
-
-	login.message = 'Democracy is the best thing since democracy';
-
-	//Dummy authentication method
-	login.loginService = function(email, password) {
-
-		login.userIsValid = userAuth.userAuthenticate();
+	$scope.login = this;
 
 
-		if (email == login.userIsValid.email && password == login.userIsValid.password) {
-		 	console.log('sucess really?');
-		 } else {
-		 	console.log('fail');
-		 	login.invalid = true;
-		 }
+	$scope.login.user = {
+		email: '',
+		password: ''
 	}
 
-	login.signIn = function() {
-		login.loginService(login.user.email, login.user.password);
+	$scope.login.validate = function(u) {
+		//Email Address Regex
+		var e = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+		//Password of atleast one capital and number Regex
+		var p = /^(?=.*\d)(?=.*[A-Z])(?!.*[^a-zA-Z0-9@#$^+=])(.{8,15})$/;
+
+		var email = u['email'];
+		var password = u['password'];
+
+		if(e.test(email) && p.test(password)){
+
+			//check against exisiting emails
+			//go to topic selection
+
+		} else if (e.test(email) === false) {
+			return $scope.login.user.email = false;
+		} else if (p.test(password) === false ) {
+			return $scope.login.user.password = false;
+		}
 	}
-
-
+	
 	$scope.go = function ( hash ) {
   		$location.path(hash);
 	};

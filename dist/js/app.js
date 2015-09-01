@@ -453,31 +453,38 @@ $( document ).ready(function() {
 
 
 
+angular.module('pavApp');
 app.controller('LoginCtrl', ['$scope','$location', 'userAuth', function($scope, $location, userAuth) {
 
-	var login = this;
-
-	login.message = 'Democracy is the best thing since democracy';
-
-	//Dummy authentication method
-	login.loginService = function(email, password) {
-
-		login.userIsValid = userAuth.userAuthenticate();
+	$scope.login = this;
 
 
-		if (email == login.userIsValid.email && password == login.userIsValid.password) {
-		 	console.log('sucess really?');
-		 } else {
-		 	console.log('fail');
-		 	login.invalid = true;
-		 }
+	$scope.login.user = {
+		email: '',
+		password: ''
 	}
 
-	login.signIn = function() {
-		login.loginService(login.user.email, login.user.password);
+	$scope.login.validate = function(u) {
+		//Email Address Regex
+		var e = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+		//Password of atleast one capital and number Regex
+		var p = /^(?=.*\d)(?=.*[A-Z])(?!.*[^a-zA-Z0-9@#$^+=])(.{8,15})$/;
+
+		var email = u['email'];
+		var password = u['password'];
+
+		if(e.test(email) && p.test(password)){
+
+			//check against exisiting emails
+			//go to topic selection
+
+		} else if (e.test(email) === false) {
+			return $scope.login.user.email = false;
+		} else if (p.test(password) === false ) {
+			return $scope.login.user.password = false;
+		}
 	}
-
-
+	
 	$scope.go = function ( hash ) {
   		$location.path(hash);
 	};
@@ -534,3 +541,45 @@ app.factory('userAuth', [ function() {
 
 
 }]);
+'use stict';
+
+describe('Controller: LoginCtrl', function() {
+
+	beforeEach(module('pavApp'));
+
+	var LoginCtrl,
+		scope;
+
+		beforeEach(inject(function ($controller, $rootScope) {
+			scope = $rootScope.$new();
+			LoginCtrl = $controller('LoginCtrl', {
+				$scope: scope
+			});
+		}));
+
+
+		it('Should make sure the email fail if not valid', function() {
+			scope.login.user.email = "anthony.com";
+			console.log(scope.login.user.email);
+			scope.login.validate(scope.login.user);
+			expect(scope.login.user.email).toBe(false);
+			console.log(scope.login.user.email);
+		});
+
+
+
+		it('Should make sure the password fails client side validation', function() {
+			scope.login.user.email = "anthony@email.com";
+			scope.login.user.password = "password";
+			scope.login.validate(scope.login.user);
+			expect(scope.login.user.password).toBe(false);
+		});
+
+		it('Should allow valid email address and password to pass client side validation', function() {
+			scope.login.user.email = "anthony@email.com";
+			scope.login.user.password = "p455worD";
+			scope.login.validate(scope.login.user);
+			expect(scope.login.user.email).toBe('anthony@email.com');
+			expect(scope.login.user.password).toBe('p455worD');
+		});
+});
