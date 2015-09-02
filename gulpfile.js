@@ -13,9 +13,14 @@ var gulp = require('gulp'),
 gulp.task('browser-sync', function() {
     browserSync.init({
         server: {
-            baseDir: "./"
-        }
+            baseDir: "./",
+            // Tunnel the Browsersync server through a random Public URL
+// -> http://randomstring23232.localtunnel.me
+tunnel: true,
 
+// Attempt to use the URL "http://my-private-site.localtunnel.me"
+tunnel: "pavappdev"
+        }
     });
     gulp.watch(["*.html", "css/*.css", "dist/js/*.js"]).on("change", browserSync.reload);
 });
@@ -43,7 +48,8 @@ return gulp.src([
 	'node_modules/angular-route/angular-route.min.js',
 	'node_modules/angular-animate/angular-animate.min.js',
 	'js/init.js',
-	'js/**/*.js'
+	'js/**/*.js',
+	'!js/tests/*.js'
 	])
 	.pipe(concat('app.js'))
 	.pipe(gulp.dest('dist/js'));
@@ -53,6 +59,7 @@ gulp.task('watchFiles', function() {
 	gulp.watch('scss/*.scss', ['compileSass']);
 	gulp.watch('css/*.css', ['autoPrefix']);
 	gulp.watch(['js/**/*.js', 'js/*.js'], ['concatScripts']);
+	gulp.watch('partials/*.html');
 });
 
 

@@ -256,24 +256,25 @@ body::selection {
 
 .wrapper {
   top: 0;
-  position: absolute;
-  opacity: 1; }
+  position: absolute; }
   .wrapper.ng-leave, .wrapper.ng-enter {
-    -webkit-transition: all 0.4s ease;
-            transition: all 0.4s ease; }
+    -webkit-transition: all 0.25s ease;
+            transition: all 0.25s ease; }
   .wrapper.ng-leave {
     opacity: 1; }
   .wrapper.ng-enter {
-    opacity: 0; }
-  .wrapper.ng-enter-stagger {
-    -webkit-transition-delay: 0.4s;
-            transition-delay: 0.4s;
-    -webkit-animation-delay: 0.4s;
-            animation-delay: 0.4s; }
+    opacity: 0;
+    -webkit-transition-delay: 0.25s;
+            transition-delay: 0.25s;
+    -webkit-animation-delay: 0.25s;
+            animation-delay: 0.25s; }
   .wrapper.ng-enter.ng-enter-active {
     opacity: 1; }
   .wrapper.ng-leave.ng-leave-active {
     opacity: 0; }
+
+input {
+  -webkit-appearance: none; }
 
 .login-wrapper {
   position: relative;
@@ -525,7 +526,14 @@ body::selection {
   color: #e64a33 !important;
   text-align: left;
   padding-left: 20px;
-  margin-bottom: 20px; }
+  height: 1px;
+  oveflow: hidden;
+  opacity: 0;
+  -webkit-transition: all 0.2s ease;
+          transition: all 0.2s ease; }
+  .error-message.show {
+    opacity: 1;
+    height: 20px; }
   .error-message.ng-enter {
     -webkit-transition: 0.2s;
             transition: 0.2s;

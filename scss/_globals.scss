@@ -21,24 +21,20 @@ body::selection { color: $purple; background: lighten($purple, 20%); }
 .wrapper {
 	top: 0;
 	position: absolute;
-	opacity: 1;
 	&.ng-leave, &.ng-enter {
-		transition: all 0.4s ease;
+		transition: all 0.25s ease;
 	}
 	&.ng-leave {
 		opacity: 1;
 	}
 	&.ng-enter {
 		opacity: 0;
+		transition-delay: 0.25s;
+		animation-delay: 0.25s
 	}
-	&.ng-enter-stagger {
-		transition-delay: 0.4s;
-		animation-delay: 0.4s
+	&.ng-enter.ng-enter-stagger {
+
 	}
-	// &.ng-leave-stagger {
-	// 	transition-delay: 0.4s;
-	// 	animation-delay: 0.4s;
-	// }
 	&.ng-enter.ng-enter-active {
 		opacity: 1;
 	}
@@ -47,3 +43,6 @@ body::selection { color: $purple; background: lighten($purple, 20%); }
 	}
 }
 
+input {
+	-webkit-appearance: none;
+}

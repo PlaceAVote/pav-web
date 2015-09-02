@@ -16,3 +16,5 @@ Run browser-sync for live browser experience with option to view on mobile if yo
 or you can use htto-server
 
 	http-server -o
+
+You must provide a valid email and password containing a minimum of 8 characters that consists of at least one digit and one uppercase character. 

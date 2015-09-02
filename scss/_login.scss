@@ -301,7 +301,16 @@
 	color: $red !important;
 	text-align:left;
 	padding-left: 20px;
-	margin-bottom:20px;
+	// margin-bottom:20px;
+	height:1px;
+	oveflow:hidden;
+	opacity:0;
+	transition:all 0.2s ease;
+
+	&.show {
+		opacity:1;
+		height: 20px;
+	}
 
 
 	&.ng-enter {
