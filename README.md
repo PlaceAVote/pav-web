@@ -21,11 +21,11 @@ You must provide a valid email and password containing a minimum of 8 characters
 
 Testing:
 
-	Testing is ran using a combination of Karma, PhantomJS and Jasmine.
-	All Tests reside within the js/tests directory.
-	Run tests with:
+Testing is ran using a combination of Karma, PhantomJS and Jasmine.
+All Tests reside within the js/tests directory.
+Run tests with:
 	
-		npm test
+	npm test
 
-	All tests should be passing before submitting a pull request from branch -> master.
+All tests should be passing before submitting a pull request from branch -> master.
 	
