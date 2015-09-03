@@ -392,7 +392,7 @@ app.config(['$routeProvider', function($routeProvider) {
 		})
 		.when('/user-signup', {
 			templateUrl: 'partials/user-signup.html',
-			controller: 'UserRegisterCtrl as userRegister'
+			controller: 'SignUpCtrl as signup'
 		})
 		.otherwise({
 			redirectTo: '/'
@@ -454,56 +454,67 @@ return new Za.prototype.init(a,b,c,d,e)}m.Tween=Za,Za.prototype={constructor:Za,
 
 
 angular.module('pavApp');
-app.controller('LoginCtrl', ['$scope','$location', 'userAuth', function($scope, $location, userAuth) {
 
-	$scope.login = this;
+	
+    var LoginCtrl = function($scope, $location) {
+
+		var login = this;
+
+		login.forgot = false;
+		login.passwordSent = false;
 
 
-	$scope.login.user = {
-		email: ['', true],
-		password: ['', true]
-	}
+		login.user = {
+			email: '',
+			emailValid: true,
+			password: '',
+			passwordValid: true
+		}
 
-	$scope.login.validate = function(u, hash) {
 
-		//Email Address Regex
-		var e = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-		//Password of atleast one capital and number Regex
-		var p = /^(?=.*\d)(?=.*[A-Z])(?!.*[^a-zA-Z0-9@#$^+=])(.{8,15})$/;
+		$scope.validate = function() {
+			login.validate();
+		}
 
-		var email = u.email[0];
-		var password = u.password[0];
-		console.log('email: ' + email + ' password: ' + password);
-		if(e.test(email) && p.test(password)){
-			$scope.login.user.email[0] = email;
-			$scope.login.user.password[0] = password;
-			$scope.login.user.email[1] = true;
-			$scope.login.user.password[1] = true;
-			$scope.go(hash);			
-		} 
-
-		else if (e.test(email) === false && p.test(password) === false) {
-			$scope.login.user.email[1] = false;
-			$scope.login.user.password[1] = false;
-		} 
-
-		else if (e.test(email) === false) {
-			$scope.login.user.email[1] = false;
-		} 
-
-		else if (p.test(password) === false ) {
-			$scope.login.user.password[1] = false;
+		login.go = function ( hash ) {
+  			$location.path(hash);
 		}
 	}
-	
-	$scope.go = function ( hash ) {
-  		$location.path(hash);
+
+
+
+	LoginCtrl.prototype.validate = function(u, hash) {
+
+		var email = u.email;
+		var password = u.password;
+		
+		this.user.emailValid = this.emailValidation(email);
+		this.user.passwordValid = this.passwordValidation(password);
+		
+		if(this.user.emailValid && this.user.passwordValid) {
+			this.go(hash);		
+		} 
+
+	}
+
+
+	LoginCtrl.prototype.emailValidation = function(email) {
+		var e = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+		return e.test(email);
 	};
 
-}]);
+	LoginCtrl.prototype.passwordValidation = function(password) {
+		var p = /^(?=.*\d)(?=.*[A-Z])(?!.*[^a-zA-Z0-9@#$^+=])(.{8,15})$/;
+		return p.test(password);
+	}
 
 
-	
+
+
+
+	LoginCtrl.$inject = ['$scope', '$location'];
+
+	app.controller('LoginCtrl', LoginCtrl);
 app.controller('TopicRegisterCtrl', ['$scope','$location', 'userAuth', function($scope, $location, userAuth) {
 
 	var topicsRegister = this;
@@ -523,17 +534,28 @@ app.controller('TopicRegisterCtrl', ['$scope','$location', 'userAuth', function(
 
 
 
-app.controller('UserRegisterCtrl', ['$scope','$location', 'userAuth', function($scope, $location, userAuth) {
+var SignUpCtrl = function($scope, $location) {
 
-	var userRegister = this;
+	var signup = this;
 
-	userRegister.test = "hello world";
 	
-	userRegister.go = function ( hash ) {
-  		$location.path(hash);
-	};
+ 	signup.user = { 
+	 	password: "stuff",
+	  	email: "tony@place.com",
+	  	first_name: "tony",
+	   	last_name: "montana",
+	  	dob: "01/01/1979",
+	 	country_code: 840
+	}
 
-}]);
+	console.log(signup.user);
+
+}
+
+
+	SignUpCtrl.$inject = ['$scope', '$location'];
+
+	app.controller('SignUpCtrl', SignUpCtrl);
 
 
 

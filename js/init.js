@@ -13,7 +13,7 @@ app.config(['$routeProvider', function($routeProvider) {
 		})
 		.when('/user-signup', {
 			templateUrl: 'partials/user-signup.html',
-			controller: 'UserRegisterCtrl as userRegister'
+			controller: 'SignUpCtrl as signup'
 		})
 		.otherwise({
 			redirectTo: '/'

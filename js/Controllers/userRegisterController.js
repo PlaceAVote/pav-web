@@ -1,13 +1,24 @@
-app.controller('UserRegisterCtrl', ['$scope','$location', 'userAuth', function($scope, $location, userAuth) {
+var SignUpCtrl = function($scope, $location) {
 
-	var userRegister = this;
+	var signup = this;
 
-	userRegister.test = "hello world";
 	
-	userRegister.go = function ( hash ) {
-  		$location.path(hash);
-	};
+ 	signup.user = { 
+	 	password: "stuff",
+	  	email: "tony@place.com",
+	  	first_name: "tony",
+	   	last_name: "montana",
+	  	dob: "01/01/1979",
+	 	country_code: 840
+	}
 
-}]);
+	console.log(signup.user);
+
+}
+
+
+	SignUpCtrl.$inject = ['$scope', '$location'];
+
+	app.controller('SignUpCtrl', SignUpCtrl);
 
 

@@ -18,11 +18,11 @@
 			<section ng-show="emailLogin" class="s-12">
 			 <form name="emailForm">
 			 <label>Email</label>
-			 <input name="email" type="text" ng-class="{'login-error':login.user.email[1] === false}" ng-model="login.user.email[0]" placeholder="yourname@example.com" required/>
-			  <p class="error-message" ng-class="{'show':login.user.email[1] === false}">Email address is invalid, please try again.</p>
+			 <input name="email" type="text" ng-class="{'login-error': !login.user.emailValid}" ng-model="login.user.email" placeholder="yourname@example.com" required/>
+			  <p class="error-message" ng-class="{'show': !login.user.emailValid}">Email address is invalid, please try again.</p>
 			 <label>Password</label>
-			 <input name="password" type="password" ng-class="{'login-error':login.user.password[1] === false}"  ng-model="login.user.password[0]" placeholder="*******" />
-			 <p class="error-message" ng-class="{'show':login.user.password[1] === false}">Password requires at least one digit and one capital letter.</p>
+			 <input name="password" type="password" ng-class="{'login-error': !login.user.passwordValid}"  ng-model="login.user.password" placeholder="*******" />
+			 <p class="error-message" ng-class="{'show': !login.user.passwordValid}">Password requires at least one digit and one capital letter.</p>
 			 <button ng-click="login.validate(login.user, '/topics');">Create an account</button><button ng-click="signInEmail()">Sign In</button>
 			 </form>
 			</section>
