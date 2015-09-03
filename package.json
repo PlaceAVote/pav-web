@@ -4,7 +4,7 @@
   "description": "Front End for Place a Vote",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/karma start --single-run" 
+    "test": "./node_modules/.bin/karma start --single-run"
   },
   "author": "Anthony O'Neill",
   "license": "MIT",
@@ -30,5 +30,11 @@
     "localtunnel": "^1.7.0",
     "phantomjs": "^1.9.18"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "repository" :
+  {
+      "type" : "git",
+      "url" : "https://github.com/PlaceAVote/pav-web"
+  }
+
 }
