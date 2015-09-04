@@ -550,7 +550,7 @@ input {
 
 .onboarding-container {
   position: absolute;
-  margin: 0px auto;
+  margin: 0px auto 40px auto;
   left: 0;
   right: 0;
   max-width: 900px;
@@ -732,7 +732,8 @@ input {
     top: 0;
     left: 0;
     bottom: 0;
-    right: 0; }
+    right: 0;
+    overflow: hidden; }
     .topic-container .topic p {
       color: #3b3b3b;
       font-size: 22px;
