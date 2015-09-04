@@ -540,12 +540,12 @@ var SignUpCtrl = function($scope, $location) {
 
 	
  	signup.user = { 
-	 	password: "stuff",
-	  	email: "tony@place.com",
-	  	first_name: "tony",
-	   	last_name: "montana",
-	  	dob: "01/01/1979",
-	 	country_code: 840
+	 	"password": "stuff",
+	  	"email": "tony@place.com",
+	  	"first_name": "atony",
+	   	"last_name": "montana",
+	  	"dob": "01/01/1979",
+	 	"country_code": "840"
 	}
 
 	console.log(signup.user);
@@ -556,9 +556,6 @@ var SignUpCtrl = function($scope, $location) {
 	SignUpCtrl.$inject = ['$scope', '$location'];
 
 	app.controller('SignUpCtrl', SignUpCtrl);
-
-
-
 app.factory('userAuth', [ function() {
  
   var user = {
