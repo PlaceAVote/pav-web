@@ -43,10 +43,13 @@ return gulp.src('css/styles.css')
 
 gulp.task('concatScripts', function() {
 return gulp.src([
+	'js/jquery.js',
 	'node_modules/angular/angular.min.js',
 	'node_modules/angular-resource/angular-resource.min.js',
 	'node_modules/angular-route/angular-route.min.js',
 	'node_modules/angular-animate/angular-animate.min.js',
+	'node_modules/mailcheck/src/mailcheck.min.js',
+	'js/libs/mailcheck.js',
 	'js/init.js',
 	'js/**/*.js',
 	'!js/tests/*.js'

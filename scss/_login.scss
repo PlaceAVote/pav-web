@@ -331,13 +331,55 @@
 }
 
 
+.mailcheck {
+	height: 0;
+	padding: 0 0;
+	overflow: hidden;
+	transition: all 0.3s ease;
+	color: white;
+	font-size: 11px;
+}
 
-
-
-
-
-
-
+.mailcheckshow {
+    padding: 10px;
+    background-color: $green;
+    color: white;
+    height: auto;
+    min-height: 31px;
+    line-height: 24px;
+    margin-bottom: 10px;
+    a {
+    	background-color:white;
+    	color: $green;
+    	padding: 0px 10px;
+    	border-radius: 3px;
+    	cursor: pointer;
+    	margin-right: 5px;
+    	transition: all 0.3s ease;
+    	border: 1px solid transparent;
+    	&:hover {
+    		background-color:lighten($green, 10%);
+    		border: 1px solid white;
+    		color: white;
+    	}
+    	&:last-child {
+    		border-radius:50%;
+    		color: white;
+    		background-color:$red;
+			padding: 0px;
+			width: 14px;
+			font-size: 11px;
+			height: 14px;
+			display: inline-block;
+			vertical-align: middle;
+			line-height: 11px;
+			font-size: 10px;
+			&:hover {
+				background-color:lighten($red, 20%);
+			}
+    	}
+    }
+}
 
 
 
