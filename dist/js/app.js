@@ -449,7 +449,7 @@ window.angular);
 
 })();
 'use strict';
-var app = angular.module('pavApp', ['ngRoute','ngAnimate','angular-mailcheck']);
+var app = angular.module('pavApp', ['ngRoute','ngAnimate', 'angular-mailcheck']);
 
 app.config(['$routeProvider', function($routeProvider) {
 	$routeProvider
@@ -518,7 +518,7 @@ app.config(['$routeProvider', function($routeProvider) {
 
 
 
-angular.module('pavApp');
+// angular.module('pavApp');
 
 	
     var LoginCtrl = function($scope, $location) {

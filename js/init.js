@@ -1,5 +1,5 @@
 'use strict';
-var app = angular.module('pavApp', ['ngRoute','ngAnimate','angular-mailcheck']);
+var app = angular.module('pavApp', ['ngRoute','ngAnimate']);
 
 app.config(['$routeProvider', function($routeProvider) {
 	$routeProvider
