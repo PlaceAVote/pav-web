@@ -1,17 +1,31 @@
 function RegisterController($scope, $location, userAuth){
+$scope = $scope || {};
 $scope.register = this;
-this.selected = false;
+this.location = $location;
 this.interests = [];
-this.go = function(hash) {
-	$location.path(hash);
-}
-
-this.select = function(){
-	this.selected = this.selected ? false : true;
-	return this.selected;
-}
 
 }
+RegisterController.prototype.go = function(hash) {
+	this.location.path(hash);
+}
+
+RegisterController.prototype.select = function(name) {
+	var interest = this.getInterest(name);
+	if (interest) {
+		interest.select();
+	}
+	
+}
+
+RegisterController.prototype.getInterest = function(name) {
+	var len = this.interests.length;
+	for(var i = len -1; i >= 0; i --){
+		if(this.interests[i].name === name){
+			return this.interests[i];
+		}
+	}
+};
+
 
 module.exports = RegisterController;
 
