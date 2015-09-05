@@ -9,62 +9,14 @@
 		<section>
 		<h2>Welcome to Placeavote!</h2>
 		<p>To get you started, please select the topics that interest you</p>
-		<div class="topics">
-		<div class="topic-container topic-selected">
+		<div class="topics" ng-repeat="interest in interests">
+		<div class="topic-container" ng-class="topic-selected: {{interest.selected}}" ng-click="select({{interest.name}})"> 
 			<div class="topic">
-				<span class="icon-religion"></span>
-				<p>Religion</p>
+				<span class="{{interest.icon}}"></span>
+				<p>{{interest.name}}</p>
 				<div class="topic-tick"><div class="icon-check-mark"></div></div>
 			</div>
 		</div>
-		<div class="topic-container">
-			<div class="topic" ng-c>
-				<span class="icon-smoking-area"></span>
-				<p>Drugs</p>
-				<div class="topic-tick"><div class="icon-check-mark"></div></div>
-			</div>
-		</div>
-		<div class="topic-container">
-			<div class="topic">
-				<span class="icon-tank"></span>
-				<p>Defense</p>
-				<div class="topic-tick"><div class="icon-check-mark"></div></div>
-			</div>
-		</div>
-		<div class="topic-container">
-			<div class="topic">
-				<span class="icon-building"></span>
-				<p>Politics</p>
-				<div class="topic-tick"><div class="icon-check-mark"></div></div>
-			</div>
-		</div>
-		<div class="topic-container">
-			<div class="topic">
-				<span class="icon-gun"></span>
-				<p>Gun Rights</p>
-				<div class="topic-tick"><div class="icon-check-mark"></div></div>
-			</div>
-		</div>
-		<div class="topic-container">
-			<div class="topic">
-				<span class="icon-ipad"></span>
-				<p>Technology</p>
-				<div class="topic-tick"><div class="icon-check-mark"></div></div>
-			</div>
-		</div>
-		<div class="topic-container">
-			<div class="topic">
-				<span class="icon-money"></span>
-				<p>Economics</p>
-				<div class="topic-tick"><div class="icon-check-mark"></div></div>
-			</div>
-		</div>
-		<div class="topic-container">
-			<div class="topic">
-				<span class="icon-police"></span>
-				<p>Social Issues</p>
-				<div class="topic-tick"><div class="icon-check-mark"></div></div>
-			</div>
 		</div>
 		<button ng-click="go('/user-signup')">Continue</button>
 		</div>
