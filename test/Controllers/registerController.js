@@ -28,4 +28,8 @@ describe("RegisterController", function(){
 		expect(called).to.be.true;
 		expect(args).to.eql('test');
 	});
+	it("should have a list of topics", function(){
+		var subject = new RegisterController({}, {});
+		expect(!!subject.interests).to.be.true;
+	});
 });

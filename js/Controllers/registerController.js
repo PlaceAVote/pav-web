@@ -1,7 +1,7 @@
 function RegisterController($scope, $location, userAuth){
 $scope.register = this;
 this.selected = false;
-
+this.interests = [];
 this.go = function(hash) {
 	$location.path(hash);
 }
