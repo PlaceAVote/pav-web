@@ -49,8 +49,7 @@ return gulp.src([
 	'node_modules/angular-route/angular-route.min.js',
 	'node_modules/angular-animate/angular-animate.min.js',
 	'node_modules/mailcheck/src/mailcheck.min.js',
-	'js/init.js',
-	'js/**/*.js',
+	'js/web-app.js',
 	'!js/tests/*.js'
 	])
 	.pipe(concat('app.js'))

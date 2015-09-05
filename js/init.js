@@ -1,4 +1,4 @@
-'use strict';
+var RegisterController = require('./Controllers/registerController.js');
 var app = angular.module('pavApp', ['ngRoute','ngAnimate']);
 
 app.config(['$routeProvider', function($routeProvider) {
@@ -19,3 +19,5 @@ app.config(['$routeProvider', function($routeProvider) {
 			redirectTo: '/'
 		})
 }]);
+
+app.controller('TopicRegisterCtrl',['$scope','$location', RegisterController]);

@@ -385,71 +385,65 @@ b?(B="leave",f="afterLeave"):(B="before"+b.charAt(0).toUpperCase()+b.substr(1),f
 window.angular);
 //# sourceMappingURL=angular-animate.min.js.map
 
-/*! mailcheck v1.1.1 @licence MIT */var Mailcheck={domainThreshold:2,secondLevelThreshold:2,topLevelThreshold:2,defaultDomains:["msn.com","bellsouth.net","telus.net","comcast.net","optusnet.com.au","earthlink.net","qq.com","sky.com","icloud.com","mac.com","sympatico.ca","googlemail.com","att.net","xtra.co.nz","web.de","cox.net","gmail.com","ymail.com","aim.com","rogers.com","verizon.net","rocketmail.com","google.com","optonline.net","sbcglobal.net","aol.com","me.com","btinternet.com","charter.net","shaw.ca"],defaultSecondLevelDomains:["yahoo","hotmail","mail","live","outlook","gmx"],defaultTopLevelDomains:["com","com.au","com.tw","ca","co.nz","co.uk","de","fr","it","ru","net","org","edu","gov","jp","nl","kr","se","eu","ie","co.il","us","at","be","dk","hk","es","gr","ch","no","cz","in","net","net.au","info","biz","mil","co.jp","sg","hu"],run:function(a){a.domains=a.domains||Mailcheck.defaultDomains,a.secondLevelDomains=a.secondLevelDomains||Mailcheck.defaultSecondLevelDomains,a.topLevelDomains=a.topLevelDomains||Mailcheck.defaultTopLevelDomains,a.distanceFunction=a.distanceFunction||Mailcheck.sift3Distance;var b=function(a){return a},c=a.suggested||b,d=a.empty||b,e=Mailcheck.suggest(Mailcheck.encodeEmail(a.email),a.domains,a.secondLevelDomains,a.topLevelDomains,a.distanceFunction);return e?c(e):d()},suggest:function(a,b,c,d,e){a=a.toLowerCase();var f=this.splitEmail(a);if(c&&d&&-1!==c.indexOf(f.secondLevelDomain)&&-1!==d.indexOf(f.topLevelDomain))return!1;var g=this.findClosestDomain(f.domain,b,e,this.domainThreshold);if(g)return g==f.domain?!1:{address:f.address,domain:g,full:f.address+"@"+g};var h=this.findClosestDomain(f.secondLevelDomain,c,e,this.secondLevelThreshold),i=this.findClosestDomain(f.topLevelDomain,d,e,this.topLevelThreshold);if(f.domain){var g=f.domain,j=!1;if(h&&h!=f.secondLevelDomain&&(g=g.replace(f.secondLevelDomain,h),j=!0),i&&i!=f.topLevelDomain&&(g=g.replace(f.topLevelDomain,i),j=!0),1==j)return{address:f.address,domain:g,full:f.address+"@"+g}}return!1},findClosestDomain:function(a,b,c,d){d=d||this.topLevelThreshold;var e,f=99,g=null;if(!a||!b)return!1;c||(c=this.sift3Distance);for(var h=0;h<b.length;h++){if(a===b[h])return a;e=c(a,b[h]),f>e&&(f=e,g=b[h])}return d>=f&&null!==g?g:!1},sift3Distance:function(a,b){if(null==a||0===a.length)return null==b||0===b.length?0:b.length;if(null==b||0===b.length)return a.length;for(var c=0,d=0,e=0,f=0,g=5;c+d<a.length&&c+e<b.length;){if(a.charAt(c+d)==b.charAt(c+e))f++;else{d=0,e=0;for(var h=0;g>h;h++){if(c+h<a.length&&a.charAt(c+h)==b.charAt(c)){d=h;break}if(c+h<b.length&&a.charAt(c)==b.charAt(c+h)){e=h;break}}}c++}return(a.length+b.length)/2-f},splitEmail:function(a){var b=a.trim().split("@");if(b.length<2)return!1;for(var c=0;c<b.length;c++)if(""===b[c])return!1;var d=b.pop(),e=d.split("."),f="",g="";if(0==e.length)return!1;if(1==e.length)g=e[0];else{f=e[0];for(var c=1;c<e.length;c++)g+=e[c]+".";g=g.substring(0,g.length-1)}return{topLevelDomain:g,secondLevelDomain:f,domain:d,address:b.join("@")}},encodeEmail:function(a){var b=encodeURI(a);return b=b.replace("%20"," ").replace("%25","%").replace("%5E","^").replace("%60","`").replace("%7B","{").replace("%7C","|").replace("%7D","}")}};"undefined"!=typeof module&&module.exports&&(module.exports=Mailcheck),"function"==typeof define&&define.amd&&define("mailcheck",[],function(){return Mailcheck}),"undefined"!=typeof window&&window.jQuery&&!function(a){a.fn.mailcheck=function(a){var b=this;if(a.suggested){var c=a.suggested;a.suggested=function(a){c(b,a)}}if(a.empty){var d=a.empty;a.empty=function(){d.call(null,b)}}a.email=this.val(),Mailcheck.run(a)}}(jQuery);
-(function(){
-  'use strict';
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+var Interest = require("./../Models/interest.js");
 
-  /**
-   * @ngdoc directive
-   * @name mailcheck.directive:mailcheck
-   * @description
-   * Angular wrapper for Mailcheck.js
-   */
-  angular
-    .module('angular-mailcheck', [])
-    .directive('mailcheck', mailcheckDirective);
+function RegisterController($scope, $location, userAuth){
+$scope = $scope || {};
+$scope.register = this;
+this.location = $location;
+this.interests = [
+	new Interest('Religion', 'icon-religion'),
+	new Interest('Drugs', 'icon-smoking-area'),
+	new Interest('Defense', 'icon-tank'),
+	new Interest('Politics','icon-building'),
+	new Interest('Gun Rights','icon-gun'),
+	new Interest('Technology','icon-ipad'),
+	new Interest('Economics', 'icon-money'),
+	new Interest('Social Interest','icon-police')
+];
 
-  mailcheckDirective.$inject = ['$compile', '$sce'];
+}
+RegisterController.prototype.go = function(hash) {
+	this.location.path(hash);
+}
 
-  function mailcheckDirective($compile, $sce) {
-    return {
-      restrict: 'A',
-      replace: false,
-      link: function(scope, el, attrs) {
+RegisterController.prototype.select = function(name) {
+	var interest = this.getInterest(name);
+	if (interest) {
+		interest.select();
+	}
+	
+}
 
-        // Limit to input element of specific types
-        var inputTypes = /text|email/i;
-        if(el[0].nodeName !== 'INPUT') {
-          throw new Error('angular-mailcheck is limited to input elements');
-        }
-        if(!inputTypes.test(attrs.type)) {
-          throw new Error('Invalid input type for angular-mailcheck: ' + attrs.type);
-        }
+RegisterController.prototype.getInterest = function(name) {
+	var len = this.interests.length;
+	for(var i = len -1; i >= 0; i --){
+		if(this.interests[i].name === name){
+			return this.interests[i];
+		}
+	}
+};
 
-        scope.suggestion = false;
-        scope.bugmenot = false;
 
-        // Compiled template
-        var template = $compile('<div class="help-block mailcheck" ng-class="{'+ "'mailcheckshow'" + ': suggestion && !bugmenot}">Did you mean <a ng-bind="suggestion" ng-click="useSuggestion()"></a>? <a ng-click="suggestion=false;bugmenot=true">x</a></div>')(scope);
-        el.after(template);
+module.exports = RegisterController;
 
-        el.bind('input', function() {
-            scope.suggestion = false;
-          })
-          .bind('blur', function() {
-            el.mailcheck({
-              suggested: function(element, suggestion) {
-                scope.suggestion = suggestion.full;
-                scope.$apply();
-              },
-              empty: function(element) {
-                scope.suggestion = false;
-              }
-            });
-          });
+},{"./../Models/interest.js":2}],2:[function(require,module,exports){
+function Interest(name, icon){
+	this.name = name;
+	this.icon = icon;
+	this.selected = false;
+}
 
-        scope.useSuggestion = function() {
-          el.val(scope.suggestion);
-          scope.suggestion = false;
-        };
+Interest.prototype.select = function() {
+	this.selected = this.selected ? false : true;
+}
 
-      }
-    };
-  }
+module.exports = Interest;
 
-})();
-'use strict';
-var app = angular.module('pavApp', ['ngRoute','ngAnimate', 'angular-mailcheck']);
+},{}],3:[function(require,module,exports){
+var RegisterController = require('./Controllers/registerController.js');
+var app = angular.module('pavApp', ['ngRoute','ngAnimate']);
 
 app.config(['$routeProvider', function($routeProvider) {
 	$routeProvider
@@ -469,170 +463,7 @@ app.config(['$routeProvider', function($routeProvider) {
 			redirectTo: '/'
 		})
 }]);
-// $( document ).ready(function() {
-//     console.log( "ready!" );
 
+app.controller('TopicRegisterCtrl',['$scope','$location', RegisterController]);
 
-
- 
-//  	var regData = { "password": "stuff",
-//    "email": "tony@place.com",
-//    "first_name": "tony",
-//    "last_name": "montana",
-//    "dob": "01/01/1979",
-//    "country_code": 840
-// }
-	
-//  	  // console.log( $( this ).serialize() );
-// 	  // var loginData = $( this ).serialize();
-//  	  var loginUrl = "http://192.168.99.100:8080/user";
-	  	
-// 	  $.ajax({
-// 	  		type: "PUT",
-// 	  		url: loginUrl,
-// 	  		data: JSON.stringify(regData),
-// 	  		dataType: "JSON",
-// 	  		crossDomain: true,
-// 	  		headers: {"Content-Type": "application/json", "Accept": "application/json", "Access-Control-Allow-Origin":"*"},
-// 	  		success: function(data) {
-// 	  			console.log('success');
-// 	  			console.log(data);
-// 	  		},
-// 	  		error: function(data) {
-// 	  			console.log('error');
-// 	  			console.log(data);
-// 	  		}
-// 	  });
-
-
-
-
-
-// });
-
-
-
-
-
-
-
-
-
-// angular.module('pavApp');
-
-	
-    var LoginCtrl = function($scope, $location) {
-
-		var login = this;
-
-		login.forgot = false;
-		login.passwordSent = false;
-
-
-		login.user = {
-			email: '',
-			emailValid: true,
-			password: '',
-			passwordValid: true
-		}
-
-
-		$scope.validate = function() {
-			login.validate();
-		}
-
-		login.go = function ( hash ) {
-  			$location.path(hash);
-		}
-	}
-
-
-
-	LoginCtrl.prototype.validate = function(u, hash) {
-
-		var email = u.email;
-		var password = u.password;
-		
-		this.user.emailValid = this.emailValidation(email);
-		this.user.passwordValid = this.passwordValidation(password);
-		
-		if(this.user.emailValid && this.user.passwordValid) {
-			this.go(hash);		
-		} 
-
-	}
-
-
-	LoginCtrl.prototype.emailValidation = function(email) {
-		var e = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-		return e.test(email);
-	};
-
-	LoginCtrl.prototype.passwordValidation = function(password) {
-		var p = /^(?=.*\d)(?=.*[A-Z])(?!.*[^a-zA-Z0-9@#$^+=])(.{8,15})$/;
-		return p.test(password);
-	}
-
-
-
-
-
-	LoginCtrl.$inject = ['$scope', '$location'];
-
-	app.controller('LoginCtrl', LoginCtrl);
-app.controller('TopicRegisterCtrl', ['$scope','$location', 'userAuth', function($scope, $location, userAuth) {
-
-	var topicsRegister = this;
-
-	
-	$scope.go = function ( hash ) {
-  		$location.path(hash);
-	};
-
-
-	//Jquery solution for adding selected class
-	$('.topic-container').on('click', function() {
-		$(this).toggleClass('topic-selected');
-	})
-
-}]);
-
-
-
-var SignUpCtrl = function($scope, $location) {
-
-	var signup = this;
-
-	
- 	signup.user = { 
-	 	"password": "stuff",
-	  	"email": "tony@place.com",
-	  	"first_name": "atony",
-	   	"last_name": "montana",
-	  	"dob": "01/01/1979",
-	 	"country_code": "840"
-	}
-
-	console.log(signup.user);
-
-}
-
-
-	SignUpCtrl.$inject = ['$scope', '$location'];
-
-	app.controller('SignUpCtrl', SignUpCtrl);
-app.factory('userAuth', [ function() {
- 
-  var user = {
-  	email: 'test@user.com',
-  	password: 'password'
-  }
-
-  return {
-  	userAuthenticate: function() {
-  		return user;
-  	}
-  }
-
-
-}]);
+},{"./Controllers/registerController.js":1}]},{},[3]);

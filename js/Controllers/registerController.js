@@ -1,4 +1,4 @@
-var Interest = require("../Models/interest.js");
+var Interest = require("./../Models/interest.js");
 
 function RegisterController($scope, $location, userAuth){
 $scope = $scope || {};
@@ -39,6 +39,3 @@ RegisterController.prototype.getInterest = function(name) {
 
 
 module.exports = RegisterController;
-
-/*app.controller('TopicRegisterCtrl', ['$scope','$location', 'userAuth', function($scope, $location, userAuth) {
-*/
