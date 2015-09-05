@@ -1,8 +1,19 @@
+var Interest = require("../Models/interest.js");
+
 function RegisterController($scope, $location, userAuth){
 $scope = $scope || {};
 $scope.register = this;
 this.location = $location;
-this.interests = [];
+this.interests = [
+	new Interest('Religion', 'icon-religion'),
+	new Interest('Drugs', 'icon-smoking-area'),
+	new Interest('Defense', 'icon-tank'),
+	new Interest('Politics','icon-building'),
+	new Interest('Gun Rights','icon-gun'),
+	new Interest('Technology','icon-ipad'),
+	new Interest('Economics', 'icon-money'),
+	new Interest('Social Interest','icon-police')
+];
 
 }
 RegisterController.prototype.go = function(hash) {
