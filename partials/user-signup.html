@@ -25,10 +25,7 @@
 		
 
 		<label>Country
-		<select>
-			<option ng-repeat="country in signup.country" ng-selected='country["country-code"]=="840"' ng-value='{{country["country-code"]}}'>
-				{{country["name"]}}
-			</option>
+		<select ng-model='signup.user["country_code"]' ng-options="country['country-code'] as country.name for country in signup.country">
 		</select>
 		</label>
 
