@@ -1,0 +1,5 @@
+expertimental:
+        notify:
+                branches:
+                        only:
+                                -master
