@@ -18,7 +18,7 @@
 			<section ng-show="emailLogin" class="s-12">
 			 <form name="emailForm">
 			 <label>Email</label>
-			 <input name="email" type="text" ng-class="{'login-error': !login.user.emailValid}" ng-model="login.user.email" placeholder="yourname@example.com" required/>
+			 <input id="email" name="email" type="text" mailcheck ng-class="{'login-error': !login.user.emailValid}" ng-model="login.user.email" placeholder="yourname@example.com" required/>
 			  <p class="error-message" ng-class="{'show': !login.user.emailValid}">Email address is invalid, please try again.</p>
 			 <label>Password</label>
 			 <input name="password" type="password" ng-class="{'login-error': !login.user.passwordValid}"  ng-model="login.user.password" placeholder="*******" />

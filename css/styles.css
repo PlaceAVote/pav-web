@@ -548,6 +548,52 @@ input {
   .error-message.ng-leave-active {
     opacity: 0; }
 
+.mailcheck {
+  height: 0;
+  padding: 0 0;
+  overflow: hidden;
+  -webkit-transition: all 0.3s ease;
+          transition: all 0.3s ease;
+  color: white;
+  font-size: 11px; }
+
+.mailcheckshow {
+  padding: 10px;
+  background-color: #a5cc71;
+  color: white;
+  height: auto;
+  min-height: 31px;
+  line-height: 24px;
+  margin-bottom: 10px; }
+  .mailcheckshow a {
+    background-color: white;
+    color: #a5cc71;
+    padding: 0px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-right: 5px;
+    -webkit-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+    border: 1px solid transparent; }
+    .mailcheckshow a:hover {
+      background-color: #bdd997;
+      border: 1px solid white;
+      color: white; }
+    .mailcheckshow a:last-child {
+      border-radius: 50%;
+      color: white;
+      background-color: #e64a33;
+      padding: 0px;
+      width: 14px;
+      font-size: 11px;
+      height: 14px;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 11px;
+      font-size: 10px; }
+      .mailcheckshow a:last-child:hover {
+        background-color: #f19b8e; }
+
 .onboarding-container {
   position: absolute;
   margin: 0px auto 40px auto;
