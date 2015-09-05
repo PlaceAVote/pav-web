@@ -1,6 +1,6 @@
-var SignUpCtrl = function($scope, $location) {
+function SignUpCtrl($scope, $location) {
 
-	var signup = this;
+	$scope.signup = this;
 
 	
  	signup.user = { 
@@ -16,7 +16,4 @@ var SignUpCtrl = function($scope, $location) {
 
 }
 
-
-	SignUpCtrl.$inject = ['$scope', '$location'];
-
-	app.controller('SignUpCtrl', SignUpCtrl);
+module.exports = SignUpCtrl;
