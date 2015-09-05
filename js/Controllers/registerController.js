@@ -1,5 +1,5 @@
 function RegisterController($scope, $location, userAuth){
-this = $scope;
+$scope.register = this;
 this.selected = false;
 
 this.go = function(hash) {
