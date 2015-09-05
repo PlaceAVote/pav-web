@@ -4,6 +4,8 @@ var gulp = require('gulp'),
 	concat = require('gulp-concat'),
 	uglify = require('gulp-uglify'),
 	rename = require('gulp-rename'),
+	browserify = require('browserify'),
+	source = require('vinyl-source-stream'),
 	sass = require('gulp-sass'),
 	maps = require('gulp-sourcemaps'),
 	autoprefix = require('gulp-autoprefixer');
@@ -41,6 +43,17 @@ return gulp.src('css/styles.css')
 			.pipe(gulp.dest('css'));
 });
 
+gulp.task('browserify-web', function() {
+	browserify('./js/init.js')
+	.bundle()
+	.pipe(source('web-app.js'))
+	.pipe(gulp.dest('./bundle-js'));
+	
+	gulp.src(['js/jquery.js', 'node_modules/mailcheck/src/mailcheck.min.js', './bundle-js/web-app.js','js/directives/','!js/test/*'])
+	.pipe(concat('app.js'))
+	.pipe(gulp.dest('dist/js'));
+});
+
 gulp.task('concatScripts', function() {
 return gulp.src([
 	'js/jquery.js',
@@ -50,6 +63,7 @@ return gulp.src([
 	'node_modules/angular-animate/angular-animate.min.js',
 	'node_modules/mailcheck/src/mailcheck.min.js',
 	'js/web-app.js',
+	'js/',
 	'!js/tests/*.js'
 	])
 	.pipe(concat('app.js'))
@@ -59,7 +73,7 @@ return gulp.src([
 gulp.task('watchFiles', function() {
 	gulp.watch('scss/*.scss', ['compileSass']);
 	gulp.watch('css/*.css', ['autoPrefix']);
-	gulp.watch(['js/**/*.js', 'js/*.js'], ['concatScripts']);
+	//gulp.watch(['js/**/*.js', 'js/*.js'], ['browserify-web']);
 	gulp.watch('partials/*.html');
 });
 
@@ -67,4 +81,4 @@ gulp.task('watchFiles', function() {
 
 
 
-gulp.task('default', ['watchFiles', 'concatScripts']);
+gulp.task('default', ['watchFiles', 'browserify-web']);

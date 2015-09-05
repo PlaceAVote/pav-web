@@ -1,15 +1,12 @@
-angular.module('pavApp');
+    function LoginCtrl($scope, $location) {
 
-	
-    var LoginCtrl = function($scope, $location) {
+		$scope.login = this;
 
-		var login = this;
-
-		login.forgot = false;
-		login.passwordSent = false;
+		this.forgot = false;
+		this.passwordSent = false;
 
 
-		login.user = {
+		this.user = {
 			email: '',
 			emailValid: true,
 			password: '',
@@ -18,10 +15,10 @@ angular.module('pavApp');
 
 
 		$scope.validate = function() {
-			login.validate();
+			this.validate();
 		}
 
-		login.go = function ( hash ) {
+		this.go = function ( hash ) {
   			$location.path(hash);
 		}
 	}
@@ -53,10 +50,4 @@ angular.module('pavApp');
 		return p.test(password);
 	}
 
-
-
-
-
-	LoginCtrl.$inject = ['$scope', '$location'];
-
-	app.controller('LoginCtrl', LoginCtrl);
+module.exports = LoginCtrl;
