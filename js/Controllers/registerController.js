@@ -1,18 +1,19 @@
-app.controller('TopicRegisterCtrl', ['$scope','$location', 'userAuth', function($scope, $location, userAuth) {
+function RegisterController($scope, $location, userAuth){
+this = $scope;
+this.selected = false;
 
-	var topicsRegister = this;
+this.go = function(hash) {
+	$location.path(hash);
+}
 
-	
-	$scope.go = function ( hash ) {
-  		$location.path(hash);
-	};
+this.select = function(){
+	this.selected = this.selected ? false : true;
+	return this.selected;
+}
 
+}
 
-	//Jquery solution for adding selected class
-	$('.topic-container').on('click', function() {
-		$(this).toggleClass('topic-selected');
-	})
+module.exports = RegisterController;
 
-}]);
-
-
+/*app.controller('TopicRegisterCtrl', ['$scope','$location', 'userAuth', function($scope, $location, userAuth) {
+*/
