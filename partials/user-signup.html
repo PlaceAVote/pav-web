@@ -20,7 +20,7 @@
 		
 
 		<label class="signupdob" >Date of Birth
-		<input  type="date" ng-model='signup.user["dob"]' placeholder="MM/DD/YYYY" />
+		<input type="date" ng-model='signup.user["dob"]' placeholder="MM/DD/YYYY" max="{{signup.max}}" min="1900-01-01" required/>
 		</label>
 		
 
