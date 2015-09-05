@@ -25,12 +25,14 @@
 		
 
 		<label>Country
-		<input type="text" ng-model="country_code" placeholder="Please choose a country" />
+		<select>
+			<option ng-repeat="country in signup.country" ng-selected='country["country-code"]=="840"' ng-value='{{country["country-code"]}}'>
+				{{country["name"]}}
+			</option>
+		</select>
 		</label>
-		<label class="email-label">Email Address
-		<input type="email" placeolder="example@example.com" />
-		</label>	
-		<button>Continue</button>
+
+		<button ng-click="signup.test();">Continue</button>
 		</form>
 		</section>
 
