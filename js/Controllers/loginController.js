@@ -1,7 +1,7 @@
     function LoginCtrl($scope, $location) {
 
 		$scope.login = this;
-
+		this.location = $location;
 		this.forgot = false;
 		this.passwordSent = false;
 
@@ -12,18 +12,12 @@
 			password: '',
 			passwordValid: true
 		}
-
-
-		$scope.validate = function() {
-			this.validate();
-		}
-
-		this.go = function ( hash ) {
-  			$location.path(hash);
-		}
 	}
 
-
+	LoginCtrl.prototype.go = function ( hash ) {
+  		this.location.path(hash);
+	}
+	
 
 	LoginCtrl.prototype.validate = function(u, hash) {
 
