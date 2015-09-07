@@ -20,17 +20,16 @@
 		
 
 		<label class="signupdob" >Date of Birth
-		<input  type="date" ng-model='signup.user["dob"]' placeholder="MM/DD/YYYY" />
+		<input type="date" ng-model='signup.user["dob"]' placeholder="MM/DD/YYYY" max="{{signup.max}}" min="1900-01-01" required/>
 		</label>
 		
 
 		<label>Country
-		<input type="text" ng-model="country_code" placeholder="Please choose a country" />
+		<select ng-model='signup.user["country_code"]' ng-options="country['country-code'] as country.name for country in signup.country">
+		</select>
 		</label>
-		<label class="email-label">Email Address
-		<input type="email" placeolder="example@example.com" />
-		</label>	
-		<button>Continue</button>
+
+		<button ng-click="signup.test();">Continue</button>
 		</form>
 		</section>
 
