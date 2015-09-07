@@ -1,6 +1,6 @@
-var RegisterController = require('./Controllers/registerController.js');
-var SignUpController = require('./Controllers/sign_up_controller.js');
-var LoginController = require('./Controllers/loginController.js');
+var RegisterController = require('./controllers/register_controller.js');
+var SignUpController = require('./controllers/sign_up_controller.js');
+var LoginController = require('./controllers/login_controller.js');
 var angular = require('angular');
 
 var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource')]);
