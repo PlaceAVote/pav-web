@@ -44,16 +44,13 @@ return gulp.src('css/styles.css')
 });
 
 gulp.task('browserify-web', function() {
-	browserify('./js/init.js')
-	.bundle()
-	.pipe(source('web-app.js'))
-	.pipe(gulp.dest('./bundle-js'));
-	
-	gulp.src(['js/jquery.js', 'node_modules/mailcheck/src/mailcheck.min.js', './bundle-js/web-app.js','js/directives/','!js/test/*'])
-	.pipe(concat('app.js'))
-	.pipe(gulp.dest('dist/js'));
+	return	browserify('./src/web-app.js')
+		.bundle()
+		.pipe(source('app.js'))
+		.pipe(gulp.dest('dist/js'));
 });
 
+//can be removed
 gulp.task('concatScripts', function() {
 return gulp.src([
 	'js/jquery.js',
@@ -73,7 +70,7 @@ return gulp.src([
 gulp.task('watchFiles', function() {
 	gulp.watch('scss/*.scss', ['compileSass']);
 	gulp.watch('css/*.css', ['autoPrefix']);
-	//gulp.watch(['js/**/*.js', 'js/*.js'], ['browserify-web']);
+	gulp.watch(['src/**/*.js', 'src/*.js'], ['browserify-web']);
 	gulp.watch('partials/*.html');
 });
 

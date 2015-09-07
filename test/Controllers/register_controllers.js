@@ -1,5 +1,5 @@
-var RegisterController = require('../../js/Controllers/registerController.js');
-var Interest = require('../../js/Models/interest.js');
+var RegisterController = require('../../src/controllers/register_controller.js');
+var Interest = require('../../src/models/interest.js');
 var expect = require('chai').expect;
 
 describe("RegisterController", function() {

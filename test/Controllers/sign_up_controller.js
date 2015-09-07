@@ -1,4 +1,4 @@
-var SignUpController = require('../../js/Controllers/sign_up_controller.js');
+var SignUpController = require('../../src/controllers/sign_up_controller.js');
 var expect = require('chai').expect;
 
 describe("SignUpController", function(){

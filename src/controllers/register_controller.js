@@ -1,4 +1,4 @@
-var Interest = require("./../Models/interest.js");
+var Interest = require("./../models/interest.js");
 
 function RegisterController($scope, $location, userAuth){
 $scope = $scope || {};
