@@ -1,4 +1,4 @@
-var Interest = require("../../js/Models/interest.js");
+var Interest = require("../../src/models/interest.js");
 var expect = require("chai").expect;
 
 describe("Interest", function(){

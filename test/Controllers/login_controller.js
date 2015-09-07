@@ -1,4 +1,4 @@
-var LoginCtrl = require("../../js/Controllers/loginController.js");
+var LoginCtrl = require("../../src/controllers/login_controller.js");
 var expect = require("chai").expect;
 describe('LoginCtrl', function() {
 
