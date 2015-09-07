@@ -16,7 +16,7 @@ function SignUpCtrl ($scope, $location) {
 };
 
 SignUpCtrl.prototype.test = function() {
-	console.log(ths.user);
+	console.log(this.user);
 };
 
 SignUpCtrl.prototype.maxDate = function() {
