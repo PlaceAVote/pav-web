@@ -3,6 +3,9 @@ var RegisterController = require('./controllers/register_controller.js');
 var SignUpController = require('./controllers/sign_up_controller.js');
 var LoginController = require('./controllers/login_controller.js');
 
+//services
+var UserService = require('./services/user_service.js');
+
 //directives
 var mailcheck = require('./directives/mailcheck.js');
 
@@ -30,10 +33,13 @@ app.config(['$routeProvider', function($routeProvider) {
 		})
 }]);
 
+//services
+app.factory('userService', [UserService]);
+
 //controllers
-app.controller('TopicRegisterCtrl',['$scope','$location', RegisterController]);
-app.controller('SignUpCtrl',['$scope','$location', SignUpController]);
-app.controller('LoginCtrl',['$scope','$location', LoginController]);
+app.controller('TopicRegisterCtrl',['$scope','$location', 'userService', RegisterController]);
+app.controller('SignUpCtrl',['$scope','$location', 'userService', SignUpController]);
+app.controller('LoginCtrl',['$scope','$location', 'userService', LoginController]);
 
 //directives
 app.directive('mailcheck', ['$compile','$sce', mailcheck]);
