@@ -48,10 +48,10 @@ describe("User Service", function() {
 		it("returns undefined if user isn't created", function(){
 			var subject = new UserService();
 			var additonalInformation = {
-				firstname : "paul",
-				surname : "barber",
+				first_name : "paul",
+				last_name : "barber",
 				dob : "04/01/1990",
-				country: "usa"
+				country_code: "804"
 			}
 			subject.addAdditionalInformation(additonalInformation);
 			var user = subject.getUser();
@@ -61,17 +61,17 @@ describe("User Service", function() {
 			var subject = new UserService();
 			subject.createUser("test@email.com", "p4SSw0rD!");
 			var additionalInformation = {
-				firstname : "paul",
-				surname : "barber",
+				first_name : "paul",
+				last_name : "barber",
 				dob : "04/01/1990",
-				country: "usa"
+				country_code: "804"
 			};
 			subject.addAdditionalInformation(additionalInformation);
 			var user = subject.getUser();
-			expect(user.firstname).to.eql("paul");	
-			expect(user.surname).to.eql("barber");	
+			expect(user.first_name).to.eql("paul");	
+			expect(user.last_name).to.eql("barber");	
 			expect(user.dob).to.eql("04/01/1990");	
-			expect(user.country).to.eql("usa");	
+			expect(user.country_code).to.eql("804");	
 		});
 	});	
 });

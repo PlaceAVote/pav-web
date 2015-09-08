@@ -22,9 +22,9 @@ UserService.prototype.addAdditionalInformation = function(additionalInformation)
 	if(!this.user){
 		return;
 	}
-	this.user.firstname = additionalInformation.firstname;
-	this.user.surname = additionalInformation.surname;
-	this.user.country = additionalInformation.country;
+	this.user.first_name = additionalInformation.first_name;
+	this.user.last_name = additionalInformation.last_name;
+	this.user.country_code = additionalInformation.country_code;
 	this.user.dob = additionalInformation.dob;
 };
 

@@ -1,12 +1,11 @@
 var countryCodes = require('../utils/countrycodes.json');
-function SignUpCtrl ($scope, $location) {
+function SignUpCtrl ($scope, $location, userService) {
 	$scope = $scope || this;
 	$scope.signup = this;
+	this.userService = userService;
 	this.max = this.maxDate();
 
- 	this.user = { 
-	 	"password": "",
-	  	"email": "",
+ 	this.additionalInformation = { 
 	  	"first_name": "",
 	   	"last_name": "",
 	  	"dob": "",
@@ -16,7 +15,9 @@ function SignUpCtrl ($scope, $location) {
 };
 
 SignUpCtrl.prototype.test = function() {
-	console.log(this.user);
+	userService.addAdditionalInformation(this.additionalInformation);
+	var user = getUser();
+	console.log(user);
 };
 
 SignUpCtrl.prototype.maxDate = function() {
