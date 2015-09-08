@@ -2,6 +2,7 @@ function LoginCtrl($scope, $location, userService) {
 	$scope = $scope || {};
 	this.userService = userService;
 	$scope.login = this;
+	console.log(this.userService);
 	this.location = $location;
 	this.forgot = false;
 	this.passwordSent = false;

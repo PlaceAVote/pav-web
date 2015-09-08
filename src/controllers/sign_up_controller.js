@@ -15,9 +15,8 @@ function SignUpCtrl ($scope, $location, userService) {
 };
 
 SignUpCtrl.prototype.test = function() {
-	userService.addAdditionalInformation(this.additionalInformation);
-	var user = getUser();
-	console.log(user);
+	this.userService.addAdditionalInformation(this.additionalInformation);
+	var user = this.userService.getUser();
 };
 
 SignUpCtrl.prototype.maxDate = function() {
