@@ -21,8 +21,8 @@ You must provide a valid email and password containing a minimum of 8 characters
 
 Testing:
 
-Testing is ran using a combination of Karma, PhantomJS and Jasmine.
-All Tests reside within the js/tests directory.
+Testing is ran using a mocha js.
+All Tests reside within the tests directory, which mirrors the src directory.
 Run tests with:
 	
 	npm test
