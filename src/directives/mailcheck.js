@@ -1,9 +1,4 @@
-
-app.directive('mailcheck', mailcheckDirective);
-
-  mailcheckDirective.$inject = ['$compile', '$sce'];
-
-  function mailcheckDirective($compile, $sce) {
+  module.exports = function ($compile, $sce) {
     return {
       restrict: 'A',
       replace: false,

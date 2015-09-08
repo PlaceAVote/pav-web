@@ -1,6 +1,12 @@
+//controllers
 var RegisterController = require('./controllers/register_controller.js');
 var SignUpController = require('./controllers/sign_up_controller.js');
 var LoginController = require('./controllers/login_controller.js');
+
+//directives
+var mailcheck = require('./directives/mailcheck.js');
+
+//dependencies
 var angular = require('angular');
 
 var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource')]);
@@ -23,6 +29,11 @@ app.config(['$routeProvider', function($routeProvider) {
 			redirectTo: '/'
 		})
 }]);
+
+//controllers
 app.controller('TopicRegisterCtrl',['$scope','$location', RegisterController]);
 app.controller('SignUpCtrl',['$scope','$location', SignUpController]);
 app.controller('LoginCtrl',['$scope','$location', LoginController]);
+
+//directives
+app.directive('mailcheck', ['$compile','$sce', mailcheck]);
