@@ -5,13 +5,11 @@ describe("SignUpController", function(){
 	it("has a user object", function(){
 	var subject = new SignUpController();
 	var blankUser = {
-		password : "",
-		email : "",
 		first_name : "",
 		last_name : "",
 		dob : "",
 		country_code : "840"
 	};
-	expect(subject.user).to.eql(blankUser);
+	expect(subject.additionalInformation).to.eql(blankUser);
 	});
 });

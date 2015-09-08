@@ -4,16 +4,22 @@ var expect = require('chai').expect;
 
 describe("RegisterController", function() {
 	it("go function calls location.path", function() {
-		var called, args;
+		var called, args, added;
 		var location = {
 			path : function(hash){
 				called = true;
 				args = hash;
 			}
-		}
-		var subject = new RegisterController({}, location);
+		};
+		var userService = {
+			addInterests : function(interests) {
+				added = true;
+			}
+		};
+		var subject = new RegisterController({}, location, userService);
 		subject.go('test');
 		expect(called).to.be.true;
+		expect(added).to.be.true;
 		expect(args).to.eql('test');
 	});
 	it("has a list of topics", function() {
@@ -49,6 +55,17 @@ describe("RegisterController", function() {
 			}
 			subject.select('cat');
 			expect(called).to.be.false;
+		});
+	});
+	describe("Get Selected", function(){
+		it("returns a list of selected interests", function(){
+			var subject = new RegisterController();
+			subject.select('Religion');
+			subject.select('Drugs');
+			var interest = subject.getSelected();
+			expect(interest.length).to.eql(2);
+			expect(interest[0].name).to.eql('Drugs');
+			expect(interest[1].name).to.eql('Religion');		
 		});
 	});
 });

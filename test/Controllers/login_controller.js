@@ -32,12 +32,18 @@ describe('LoginCtrl', function() {
 
 		it('Should not call location when neither password and email are valid', function() {
 			var changed = false;
+			var created = false;
 			var scope = {};
 			var subject = new LoginCtrl(scope);
 			var user = {
 				email : "anthonyemail.com",
 				password : "password"
 			}
+			subject.userService = {
+				createUser : function(){
+					created = true;
+				}
+			};			
 			subject.location = {
 				path : function() {
 					changed = true;
@@ -45,12 +51,14 @@ describe('LoginCtrl', function() {
 			}
 			subject.validate(user);
 			expect(changed).to.be.false;
+			expect(created).to.be.false;
 			expect(subject.user.emailValid).to.be.false;
 			expect(subject.user.passwordValid).to.be.false;
 
 		});
 
 		it('Should allow valid email address and password to pass client side validation', function() {
+			var created = false;
 			var changed = false;
 			var scope = {};
 			var subject = new LoginCtrl(scope);
@@ -58,6 +66,11 @@ describe('LoginCtrl', function() {
 				email : "testing.test1@test.com",
 				password : "p34swOrD1"
 			}
+			subject.userService = {
+				createUser : function(){
+					created = true;
+				}
+			};	
 			subject.location = {
 				path : function() {
 					changed = true;
@@ -67,5 +80,6 @@ describe('LoginCtrl', function() {
 			expect(subject.user.emailValid).to.be.true;
 			expect(subject.user.passwordValid).to.be.true;
 			expect(changed).to.be.true;
+			expect(created).to.be.true;
 		});
 });

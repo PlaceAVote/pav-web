@@ -25,12 +25,9 @@ module.exports = function ($compile, $sce) {
            			scope.suggestion = false;
           		})
           		.bind('blur', function() {
-				console.log(this.value);
             			mailcheck.run({
 					email: this.value,
               				suggested: function(suggestion) {
-						
-						console.log('suggestions: ' + suggestion);
                 				scope.suggestion = suggestion.full;
                 				scope.$apply();
               				},

@@ -1,8 +1,9 @@
 var Interest = require("./../models/interest.js");
 
-function RegisterController($scope, $location, userAuth){
+function RegisterController($scope, $location, userService){
 $scope = $scope || {};
 $scope.register = this;
+this.userService = userService;
 this.location = $location;
 this.interests = [
 	new Interest('Religion', 'icon-religion'),
@@ -17,6 +18,7 @@ this.interests = [
 
 }
 RegisterController.prototype.go = function(hash) {
+	this.userService.addInterests(this.getSelected());
 	this.location.path(hash);
 }
 
@@ -27,6 +29,17 @@ RegisterController.prototype.select = function(name) {
 	}
 	
 }
+
+RegisterController.prototype.getSelected = function(){
+	var interests = [];
+	var len = this.interests.length;
+	for(var i = len -1; i >= 0; i--) {
+		if(this.interests[i].selected) {
+			interests.push(this.interests[i]);
+		}
+	}	
+	return interests;
+};
 
 RegisterController.prototype.getInterest = function(name) {
 	var len = this.interests.length;
