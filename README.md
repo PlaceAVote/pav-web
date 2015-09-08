@@ -13,7 +13,7 @@ Run browser-sync for live browser experience with option to view on mobile if yo
 
 	gulp browser-sync
 
-or you can use htto-server
+or you can use http-server
 
 	http-server -o
 
@@ -26,6 +26,11 @@ All Tests reside within the tests directory, which mirrors the src directory.
 Run tests with:
 	
 	npm test
+
+To recieve instance feedback the tests you are writing, use:
+	
+	mocha --watch [filename]
+
 
 All tests should be passing before submitting a pull request from branch -> master.
 	
