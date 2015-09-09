@@ -16,7 +16,7 @@ zip -r ${file} ./* -x '*.git*' -x '*node_modules/*' -x '*scripts/*' -x '*test/*'
 
 
 echo "Uploading zip to S3"
-#aws s3api put-object --bucket ${bucket} --key ${file} --body ${file}
+aws s3api put-object --bucket ${bucket} --key ${file} --body ${file}
 
 echo "Updating Elasticbeanstalk Instance"
-#aws elasticbeanstalk update-application --application-name ${application}
+aws elasticbeanstalk update-application --application-name ${application}
