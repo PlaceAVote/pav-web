@@ -4,15 +4,12 @@ set -e
 
 echo "-- Building Web-app..."
 
-gulp browserify-web
+#gulp browserify-web
 
 echo "-- Deploying to environment..."
 
-timestamp() {
-  date +"%s"
-}
 
-label=timestamp
+label=$(date +%s)
 file="pav-web-dev.zip"
 bucket="pav-web-app"
 application="pav-web-dev"
