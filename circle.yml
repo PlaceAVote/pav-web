@@ -1,3 +1,11 @@
+dependencies:
+	post:
+		- sudo pip install awscli==1.7.43
+deployment:
+	production:
+		branch: master
+		commands:
+			- ./scripts/deploy.sh
 experimental:
   notify:
     branches:
