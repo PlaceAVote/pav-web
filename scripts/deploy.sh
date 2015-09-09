@@ -20,4 +20,4 @@ echo "Uploading zip to S3"
 aws s3api put-object --bucket ${bucket} --key ${file} --body ${file}
 
 echo "Updating Elasticbeanstalk Instance"
-aws --region ${reg} elasticbeanstalk update-environment --environment-name ${application}
+aws --region ${reg} elasticbeanstalk rebuild-environment --environment-name ${application}
