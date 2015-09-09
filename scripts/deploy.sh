@@ -25,4 +25,4 @@ echo "Uploading zip to S3"
 aws s3api put-object --bucket ${bucket} --key ${file} --body ${file}
 
 echo "Updating Elasticbeanstalk Instance"
-aws --region ${reg} elasticbeanstalk create-application-version --application-name ${application} --version-label ${timestamp} --source-bundle S3Bucket=${bucket},S3Key=${file} --auto-create-application 
+aws --region ${reg} elasticbeanstalk create-application-version --application-name ${application} --version-label ${label} --source-bundle S3Bucket=${bucket},S3Key=${file} --auto-create-application 
