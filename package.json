@@ -2,9 +2,10 @@
   "name": "pav",
   "version": "0.0.1",
   "description": "Front End for Place a Vote",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "mocha --recursive"
+    "test": "mocha --recursive",
+    "start": "app.js"
   },
   "author": "Anthony O'Neill",
   "license": "MIT",
