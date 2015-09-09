@@ -8,6 +8,12 @@ gulp browserify-web
 
 echo "-- Deploying to environment..."
 
+timestamp() {
+  date +"%s"
+}
+
+timestamp
+
 file="pav-web-dev.zip"
 bucket="pav-web-app"
 application="pav-web-dev"
@@ -20,4 +26,4 @@ echo "Uploading zip to S3"
 aws s3api put-object --bucket ${bucket} --key ${file} --body ${file}
 
 echo "Updating Elasticbeanstalk Instance"
-aws --region ${reg} elasticbeanstalk rebuild-environment --environment-name ${application}
+aws --region ${reg} elasticbeanstalk create-application-version --application-name ${application} --version-label timestamp --source-bundle S3Bucker=${bucket},S3Key=${file}
