@@ -50,6 +50,13 @@ gulp.task('browserify-web', function() {
 		.pipe(gulp.dest('dist/js'));
 });
 
+gulp.task('browserify-mobile', function() {
+	return	browserify('./src/ionic-app.js')
+		.bundle()
+		.pipe(source('mobile-app.js'))
+		.pipe(gulp.dest('dist/js'));
+});
+
 //can be removed
 gulp.task('concatScripts', function() {
 return gulp.src([
