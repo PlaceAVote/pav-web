@@ -10,15 +10,14 @@
 	<h2>Welcome to Placeavote!</h2>
 	<p>To get you started, please select the topics that interest you</p>
 	<div class="topics">
-		<div ng-repeat="interest in register.interests">
-			<div class="topic-container" ng-class="{'topic-selected': interest.selected}" ng-click="register.select(interest.name)"> 
+			<div class="topic-container" ng-repeat="interest in register.interests" ng-class="{'topic-selected': interest.selected}" ng-click="register.select(interest.name)"> 
+				<div class="white-block"></div>
 				<div class="topic">
 					<span class="{{interest.icon}}"></span>
 					<p>{{interest.name}}</p>
 					<div class="topic-tick"><div class="icon-check-mark"></div></div>
 				</div>
 			</div>
-		</div>
 	<button ng-click="register.go('/user-signup')">Continue</button>
 	</div>
 	</section>	

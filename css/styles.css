@@ -304,6 +304,7 @@ input {
       display: inline-block;
       height: 40px;
       font-size: 11px;
+      font-size: 0.6875rem;
       line-height: 39px;
       font-family: "whitneymedium", sans-serif;
       padding: 0px 20px;
@@ -338,15 +339,18 @@ input {
       right: 0; }
   .login h1 {
     font-size: 20px;
+    font-size: 1.25rem;
     color: #3b3b3b;
     margin: 24px 0; }
   .login p {
     color: #3b3b3b;
-    font-size: 12px; }
+    font-size: 12px;
+    font-size: 0.75rem; }
   .login button {
     height: 40px;
     line-height: 39px;
     font-size: 12px;
+    font-size: 0.75rem;
     display: inline-block;
     border-radius: 3px;
     width: 100%;
@@ -366,7 +370,8 @@ input {
         position: absolute;
         left: 15px;
         top: 3px;
-        font-size: 18px; }
+        font-size: 18px;
+        font-size: 1.125rem; }
       .login button.fb-login:hover {
         background-color: #5a7abf;
         border-color: #3b5998; }
@@ -377,7 +382,8 @@ input {
       width: calc(50% - 10px); }
       @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
         .login button.tw-login, .login button.email-login {
-          font-size: 12px; } }
+          font-size: 12px;
+          font-size: 0.75rem; } }
       .login button.tw-login:hover, .login button.email-login:hover {
         background-color: #543594;
         color: white;
@@ -423,6 +429,7 @@ input {
       margin-left: -11px; }
     .login section label {
       font-size: 12px;
+      font-size: 0.75rem;
       text-align: left;
       width: calc(100% - 40px);
       display: block;
@@ -439,6 +446,7 @@ input {
       border-radius: 3px;
       border: 1px solid #cccccc;
       font-size: 12px;
+      font-size: 0.75rem;
       color: #543594;
       padding-left: 10px;
       outline: none;
@@ -470,6 +478,7 @@ input {
       margin-right: 0px;
       margin-bottom: 0px;
       font-size: 12px;
+      font-size: 0.75rem;
       font-family: "whitneymedium", sans-serif;
       margin-left: 0;
       border-radius: 0px;
@@ -477,7 +486,8 @@ input {
       cursor: pointer; }
       @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
         .login section button {
-          font-size: 12px; } }
+          font-size: 12px;
+          font-size: 0.75rem; } }
       .login section button:hover {
         background-color: #e0d7f1;
         color: #543594; }
@@ -504,16 +514,19 @@ input {
   .quote h1 {
     color: white;
     font-size: 24px;
+    font-size: 1.5rem;
     font-family: Georgia, Times, 'Times New Roman', serif;
     font-style: italic; }
   .quote h2 {
     margin: 10px 0px;
     color: white;
     font-size: 28px;
+    font-size: 1.75rem;
     font-family: Georgia, Times, 'Times New Roman', serif;
     font-style: italic; }
   .quote span {
     font-size: 22px;
+    font-size: 1.375rem;
     color: white;
     font-weight: light;
     font-family: Georgia, Times, 'Times New Roman', serif; }
@@ -555,7 +568,8 @@ input {
   -webkit-transition: all 0.3s ease;
           transition: all 0.3s ease;
   color: white;
-  font-size: 11px; }
+  font-size: 11px;
+  font-size: 0.6875rem; }
 
 .mailcheckshow {
   padding: 10px;
@@ -599,7 +613,7 @@ input {
   margin: 0px auto 40px auto;
   left: 0;
   right: 0;
-  max-width: 900px;
+  max-width: 750px;
   top: 5%;
   border-radius: 3px;
   background-color: white;
@@ -725,6 +739,7 @@ input {
     line-height: 50px;
     color: white;
     font-size: 18px;
+    font-size: 1.125rem;
     text-align: center;
     font-family: "whitneymedium", sans-serif;
     width: 100%;
@@ -741,6 +756,7 @@ input {
       background-color: #b1d384; }
 
 .topic-container {
+  overflow: hidden;
   -webkit-transition: all 0.2s ease;
           transition: all 0.2s ease;
   cursor: pointer;
@@ -753,8 +769,21 @@ input {
   width: calc(33.33% - 20px);
   box-shadow: 0px 2px 15px -2px transparent;
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#87e0fd+0,5b7da8+0,746898+100 */
-  background: white;
-  /* Old browsers */ }
+  background-position: 100px;
+  background: #87e0fd;
+  /* Old browsers */
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #87e0fd), color-stop(0%, #5b7da8), color-stop(100%, #746898));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(-45deg, #87e0fd 0%, #5b7da8 0%, #746898 100%);
+  /* Chrome10+,Safari5.1+ */
+  /* Opera 11.10+ */
+  /* IE10+ */
+  background: -webkit-linear-gradient(315deg, #87e0fd 0%, #5b7da8 0%, #746898 100%);
+  background: linear-gradient(135deg, #87e0fd 0%, #5b7da8 0%, #746898 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#87e0fd', endColorstr='#746898',GradientType=1 );
+  /* IE6-9 fallback on horizontal gradient */ }
   .topic-container:hover {
     box-shadow: 0px 2px 15px -2px rgba(0, 0, 0, 0.3); }
   @media screen and (max-device-width: 900px), screen and (max-width: 900px) {
@@ -773,6 +802,19 @@ input {
     display: block;
     padding-top: 100%;
     /* initial ratio of 1:1*/ }
+  .topic-container .white-block {
+    background-color: white;
+    height: 250%;
+    width: 250%;
+    position: absolute;
+    top: 0%;
+    left: -154px;
+    -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+    -webkit-transition: all 0.4s cubic-bezier(0.68, 0.33, 0.04, 0.89);
+            transition: all 0.4s cubic-bezier(0.68, 0.33, 0.04, 0.89);
+    box-shadow: 0 0 75px 40px white; }
   .topic-container .topic {
     position: absolute;
     top: 0;
@@ -781,15 +823,19 @@ input {
     right: 0;
     overflow: hidden; }
     .topic-container .topic p {
+      -webkit-transition: all 0.3s ease;
+              transition: all 0.3s ease;
       color: #3b3b3b;
-      font-size: 22px;
+      font-size: 15px;
+      font-size: 0.9375rem;
       font-family: "whitneymedium", sans-serif;
       position: absolute;
-      bottom: 30px;
-      left: 30px; }
+      bottom: 15px;
+      left: 15px; }
       @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
         .topic-container .topic p {
           font-size: 12px;
+          font-size: 0.75rem;
           bottom: 10px;
           left: 10px; } }
     .topic-container .topic .topic-tick {
@@ -799,47 +845,40 @@ input {
       width: 30px;
       border-radius: 50%;
       position: absolute;
-      bottom: 25px;
-      right: 30px; }
+      bottom: 15px;
+      right: 15px; }
       .topic-container .topic .topic-tick .icon-check-mark {
         -webkit-transition: 0.5s ease;
                 transition: 0.5s ease;
         color: white;
         text-align: center;
         padding-top: 15%;
-        font-size: 20px; }
+        font-size: 20px;
+        font-size: 1.25rem; }
         @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
           .topic-container .topic .topic-tick .icon-check-mark {
             padding-top: 20%;
-            font-size: 12px; } }
+            font-size: 12px;
+            font-size: 0.75rem; } }
       @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
         .topic-container .topic .topic-tick {
           bottom: 7px;
           right: 10px;
           width: 20px;
           height: 20px; } }
-  .topic-container.topic-selected {
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#87e0fd+0,5b7da8+0,746898+100 */
-    background: #87e0fd;
-    /* Old browsers */
-    /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #87e0fd), color-stop(0%, #5b7da8), color-stop(100%, #746898));
-    /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(-45deg, #87e0fd 0%, #5b7da8 0%, #746898 100%);
-    /* Chrome10+,Safari5.1+ */
-    /* Opera 11.10+ */
-    /* IE10+ */
-    background: -webkit-linear-gradient(315deg, #87e0fd 0%, #5b7da8 0%, #746898 100%);
-    background: linear-gradient(135deg, #87e0fd 0%, #5b7da8 0%, #746898 100%);
-    /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#87e0fd', endColorstr='#746898',GradientType=1 );
-    /* IE6-9 fallback on horizontal gradient */ }
-    .topic-container.topic-selected p {
-      color: white; }
-    .topic-container.topic-selected .topic-tick {
-      border: none; }
+  .topic-container.topic-selected .white-block {
+    left: -177%;
+    top: -650px; }
+  .topic-container.topic-selected p {
+    color: white; }
+  .topic-container.topic-selected span {
+    color: white; }
+  .topic-container.topic-selected .topic-tick .icon-check-mark {
+    color: #a5cc71 !important; }
 
 .topic span {
+  -webkit-transition: all 0.3s ease;
+          transition: all 0.3s ease;
   text-align: center;
   display: block;
   position: absolute;
@@ -847,29 +886,28 @@ input {
   height: 100%;
   color: #cccccc;
   font-size: 130px;
+  font-size: 8.125rem;
   padding-top: 15%; }
   @media screen and (max-device-width: 1460px), screen and (max-width: 1460px) {
     .topic span {
       font-size: 90px;
+      font-size: 5.625rem;
       padding-top: 25%; } }
   @media screen and (max-device-width: 1360px), screen and (max-width: 1360px) {
     .topic span {
       font-size: 70px;
+      font-size: 4.375rem;
       padding-top: 25%; } }
   @media screen and (max-device-width: 770px), screen and (max-width: 770px) {
     .topic span {
       font-size: 80px;
+      font-size: 5rem;
       padding-top: 25%; } }
   @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
     .topic span {
       font-size: 60px;
+      font-size: 3.75rem;
       padding-top: 20%; } }
-
-.topic-selected span {
-  color: white; }
-
-.topic-selected .topic-tick .icon-check-mark {
-  color: #a5cc71 !important; }
 
 .topic-container {
   -webkit-transform-style: preserve-3d;

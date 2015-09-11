@@ -28,7 +28,7 @@
 				cursor: pointer;
 				display: inline-block;
 				height: 40px;
-				font-size: 11px;
+				@include font-size(11px);
 				line-height: 39px;
 				font-family: $font-normal;
 				padding: 0px 20px;
@@ -68,20 +68,20 @@
 	}
 
 	h1 {
-		font-size: 20px;
+		@include font-size(20px);
 		color: $black;
 		margin: 24px 0;
 	}
 
 	p {
 		color: $black;
-		font-size: 12px;
+		@include font-size(12px);
 	}
 
 	button {
 		height: 40px;
 		line-height:39px;
-		font-size:12px;
+		@include font-size(12px);
 		display: inline-block;
 		border-radius: 3px;
 		width: 100%;
@@ -100,7 +100,7 @@
 			    position: absolute;
 			    left: 15px;
 			    top: 3px;
-			    font-size: 18px;
+			    @include font-size(18px);
 			}
 			&:hover {
 				background-color: lighten($fbbluedark, 20%);
@@ -111,7 +111,7 @@
 			border: 1px solid $grey;
 			background-color: white;
 				@media screen and (max-device-width: 480px), screen and (max-width: 480px) {
-			font-size:12px;}
+			@include font-size(12px);}
 			margin: 10px 0;
 			width: calc(50% - 10px);
 			&:hover {
@@ -175,7 +175,7 @@
 		// overflow: hidden;
 		// padding: 20px;
 		label {
-			font-size: 12px;
+			@include font-size(12px);
 			text-align: left;
 			width: calc(100% - 40px);
 			display: block;
@@ -193,7 +193,7 @@
 			margin-right: 20px;
 			border-radius: 3px;
 			border: 1px solid $grey;
-			font-size: 12px;
+			@include font-size(12px);
 			color: $purple;
 			padding-left: 10px;
 			outline: none;
@@ -227,10 +227,10 @@
 			margin-top:10px;
 			margin-right: 0px;
 			margin-bottom: 0px;
-			font-size:12px;
+			@include font-size(12px);
 			font-family: $font-normal;
 			@media screen and (max-device-width: 480px), screen and (max-width: 480px) {
-			font-size:12px;}
+			@include font-size(12px);}
 			margin-left: 0;
 			border-radius: 0px;
 			border-bottom-left-radius: 3px;
@@ -270,19 +270,19 @@
 	}
 	h1 {
 		color: white;
-		font-size: 24px;
+		@include font-size(24px);
 		font-family: Georgia, Times, 'Times New Roman', serif ;
 		font-style: italic;
 	}
 	h2 {
 		margin: 10px 0px;
 		color: white;
-		font-size: 28px;
+		@include font-size(28px);
 		font-family: Georgia, Times, 'Times New Roman', serif ;
 		font-style: italic;	
 	}
 	span {
-		font-size: 22px;
+		@include font-size(22px);
 		color: white;
 		font-weight:light;
 		font-family: Georgia, Times, 'Times New Roman', serif ;
@@ -301,7 +301,6 @@
 	color: $red !important;
 	text-align:left;
 	padding-left: 20px;
-	// margin-bottom:20px;
 	height:1px;
 	oveflow:hidden;
 	opacity:0;
@@ -337,7 +336,7 @@
 	overflow: hidden;
 	transition: all 0.3s ease;
 	color: white;
-	font-size: 11px;
+	@include font-size(11px);
 }
 
 .mailcheckshow {
