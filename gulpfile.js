@@ -6,10 +6,13 @@ var gulp = require('gulp'),
 	rename = require('gulp-rename'),
 	browserify = require('browserify'),
 	source = require('vinyl-source-stream'),
-	sass = require('gulp-sass'),
+	sassbeautify = require('gulp-sassbeautify'),
 	maps = require('gulp-sourcemaps'),
 	autoprefix = require('gulp-autoprefixer');
 	browserSync = require('browser-sync').create();
+
+
+ 
 
 // Static server
 gulp.task('browser-sync', function() {
