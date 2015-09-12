@@ -1,4 +1,4 @@
-
+(function(){
 // Ionic Starter App
 //controllers
 var RegisterController = require('./controllers/register_controller.js');
@@ -6,18 +6,18 @@ var SignUpController = require('./controllers/sign_up_controller.js');
 var LoginController = require('./controllers/login_controller.js');
 //services
 var UserService = require('./services/user_service.js');
-
+require('ionic');
 //directives
 var mailcheck = require('./directives/mailcheck.js');
 
 //dependencies
 require('angular');
-require('ionic');
+//require('ionic');
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-var app = angular.module('starter', ['ionic', require('angular-route'), require('angular-animate'), require('angular-resource')]);
+var app = angular.module('starter', ['ionic', require('angular-route'), require('angular-resource')]);
 
 console.log("APP");
 app.run(function($ionicPlatform) {
@@ -85,3 +85,4 @@ app.controller('LoginCtrl',['$scope','$location', 'userService', LoginController
 
 //directives
 app.directive('mailcheck', ['$compile','$sce', mailcheck]);
+})();
