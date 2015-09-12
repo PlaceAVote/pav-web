@@ -1,6 +1,4 @@
 {
   "name": "pav",
-  "app_id": "",
-  "documentRoot" : "ionic-build",
-  "createDocumentRoot" : "ionic-build"
+  "app_id": ""
 }
