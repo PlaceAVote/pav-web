@@ -31,10 +31,9 @@ app.config(function($stateProvider, $urlRouterProvider) {
 console.log("In Config");
   $stateProvider.state('app', {
     url : '/app',
-    abstract: true, 
     templateUrl: 'partials/login.html',
     controller: 'LoginCtrl'
-  });
+  })
 $urlRouterProvider.otherwise('/app');
 /*
   $routeProvider
