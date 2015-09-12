@@ -54,7 +54,7 @@ gulp.task('browserify-mobile', function() {
 	return	browserify('./src/ionic-app.js')
 		.bundle()
 		.pipe(source('mobile-app.js'))
-		.pipe(gulp.dest('dist/js'));
+		.pipe(gulp.dest('ionic/www/dist/js'));
 });
 
 //can be removed

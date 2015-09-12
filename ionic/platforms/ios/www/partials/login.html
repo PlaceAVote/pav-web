@@ -1,0 +1,47 @@
+	
+<ion-content>
+	<div class="quote l-7">
+	<h1>
+	"A vote for me is a vote for Real Democracy"
+	</h1>
+	<h2>
+	John Melton <span>- PICTURED</span>
+	</h2>
+	</div>
+	<div class="l-5 m-12 s-12 login-wrapper">
+		<section class="s-12 login">
+			<div class="logo-wrap"><img src="../img/pav-logo-color.png" /></div>
+			<h1>Democracy is the best thing since Democracy
+			</h1>
+			<button class="fb-login"><span class="icon-facebook"></span>Sign in with Facebook</button>
+			<p>Or</p>
+			<button class="tw-login">Sign in with Twitter</button>
+			<button class="email-login" ng-click="emailLogin = !emailLogin">Sign in with Email</button>
+			<section ng-show="emailLogin" class="s-12">
+			 <form name="emailForm">
+			 <label>Email</label>
+			 <input id="email" name="email" type="text" mailcheck ng-class="{'login-error': !login.user.emailValid}" ng-model="login.user.email" placeholder="yourname@example.com" required/>
+			  <p class="error-message" ng-class="{'show': !login.user.emailValid}">Email address is invalid, please try again.</p>
+			 <label>Password</label>
+			 <input name="password" type="password" ng-class="{'login-error': !login.user.passwordValid}"  ng-model="login.user.password" placeholder="*******" />
+			 <p class="error-message" ng-class="{'show': !login.user.passwordValid}">Password requires at least one digit and one capital letter.</p>
+			 <button ng-click="login.validate(login.user, '/topics');">Create an account</button><button ng-click="signInEmail()">Sign In</button>
+			 </form>
+			</section>
+		</section>
+
+<div class="login-footer">		
+<ul>
+			<li>
+				FAQ
+			</li>
+			<li>
+				Press Kit
+			</li>
+			<li>
+				Jobs
+			</li>
+		</ul>
+		</div>
+	</div>
+<ion-content>
