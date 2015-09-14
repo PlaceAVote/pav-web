@@ -33,4 +33,31 @@ To recieve instance feedback the tests you are writing, use:
 
 
 All tests should be passing before submitting a pull request from branch -> master.
-	
+
+#pav ionic
+
+Install dependencies
+
+	npm install
+
+Install ionic & cordova
+
+	sudo npm install -g cordova ionic
+
+Create the ionic app
+
+	ionic start pav_ionic
+
+The name here is very important so make sure it's right.  Other naming conventions include naming specific
+ionic only files (eg. index_ionic.html) to have a trailing _ionic attatched before the file type.
+
+Run the gulp tak
+
+	gulp ionicise
+
+Finally jump into the pav_ionic folder and run the emulate function:
+
+	cd pav_ionic && ionic emulate ios
+
+By default ionic adds the ios platform to the project.  However, you must be running OSX and XCode installed.
+To run android versions refer see [here] (http://cordova.apache.org/docs/en/3.3.0/guide_platforms_android_index.md.html#Android%20Platform%20Guide)

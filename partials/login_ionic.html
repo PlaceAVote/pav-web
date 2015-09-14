@@ -1,0 +1,40 @@
+<ion-content>
+<img style="margin-top: 50px; padding-left: 20px;" src="img/pav-logo-color.png" width="220" height="35"/>
+<p style="padding-left: 20px; padding-top: 10px;">Changing Democracy, one Angular App at a time</p>
+	<div style="padding-top: 20px;"> 
+		<div class="row">
+			<div class="col col-55 col-offset-8">	
+				<button class="button button-block"><span class="icon-facebook"></span>Sign in with Facebook</button>
+			</div>
+		</div>
+		<div style="margin-top: 2px;" class="row row-center">
+			<div class="col col-55 col-offset-8">	
+				<button class="button button-block">Sign in with Twitter</button>
+			</div>
+		</div>
+		<div style="margin-top: 2px;" class="row row-center">
+			<div class="col col-55 col-offset-8">	
+				<button class="button button-block" ng-click="emailLogin = !emailLogin">Sign in with Email</button>
+			</div>
+		</div>
+	</div>	
+
+	<div class="list" ng-show="emailLogin">
+  		<label class="item item-input">
+    		<span class="input-label">Username</span>
+    		<input type="text">
+  		</label>
+  		<label class="item item-input">
+  		<span class="input-label">Password</span>
+    		<input type="password">
+  		</label>
+ 	 	<div>
+    			<button class="button">Login</button>
+    			<button class="button">Create Account</button>
+  		</div>
+	</div>
+
+</ion-content>
+<ion-footer-bar class="bar bar-barbalanced">
+<p style="margin: auto;">Contact</p>
+</ion-footer>
