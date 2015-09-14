@@ -50,11 +50,22 @@ gulp.task('browserify-web', function() {
 		.pipe(gulp.dest('dist/js'));
 });
 
-gulp.task('browserify-mobile', function() {
-	return	browserify('./src/ionic-app.js')
-		.bundle()
-		.pipe(source('mobile-app.js'))
-		.pipe(gulp.dest('ionic/www/dist/js'));
+gulp.task('ionicise', function(){
+	//css
+	gulp.src(['css/*.css'])
+	.pipe(gulp.dest('pav_ionic/www/css'));
+	//partials
+	gulp.src(['partials/*_ionic.html'])
+	.pipe(gulp.dest('pav_ionic/www/partials'));
+	//index
+	gulp.src(['index_ionic.html'])
+	.pipe(source('index.html'))
+	.pipe(gulp.dest('pav_ionic/www/'));
+	//brosweify
+	browserify('./src/ionic-app.js')
+	.bundle()
+	.pipe(source('mobile-app.js'))
+	.pipe(gulp.dest('pav_ionic/www/dist/js'));
 });
 
 //can be removed
@@ -79,6 +90,10 @@ gulp.task('watchFiles', function() {
 	gulp.watch('css/*.css', ['autoPrefix']);
 	gulp.watch(['src/**/*.js', 'src/*.js'], ['browserify-web']);
 	gulp.watch('partials/*.html');
+});
+
+gulp.task('watchIonic', function() {
+	gulp.watch(['src/**/*_ionic.js', 'src/*_ionic.js', 'src/ionic-app.js', 'partials/*_ionic.html'], ['ionicise']);
 });
 
 
