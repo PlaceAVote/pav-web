@@ -5,3 +5,4 @@ dist/*
 *.log
 *.zip
 pav_ionic/
+.idea/
