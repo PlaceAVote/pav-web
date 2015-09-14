@@ -5,8 +5,8 @@ var gulp = require('gulp'),
 	uglify = require('gulp-uglify'),
 	rename = require('gulp-rename'),
 	browserify = require('browserify'),
+	sass = require('gulp-sass'),
 	source = require('vinyl-source-stream'),
-	sassbeautify = require('gulp-sassbeautify'),
 	maps = require('gulp-sourcemaps'),
 	autoprefix = require('gulp-autoprefixer');
 	browserSync = require('browser-sync').create();
@@ -18,13 +18,7 @@ var gulp = require('gulp'),
 gulp.task('browser-sync', function() {
     browserSync.init({
         server: {
-            baseDir: "./",
-            // Tunnel the Browsersync server through a random Public URL
-// -> http://randomstring23232.localtunnel.me
-tunnel: true,
-
-// Attempt to use the URL "http://my-private-site.localtunnel.me"
-tunnel: "pavappdev"
+            baseDir: "./"
         }
     });
     gulp.watch(["*.html", "css/*.css", "dist/js/*.js"]).on("change", browserSync.reload);
