@@ -85,7 +85,7 @@ describe("User Service", function() {
                 expect(params).to.be.undefined;
                 expect(methods.create).to.eql({method : 'PUT'});
                 expect(options).to.be.undefined;
-                this.$create = function(){
+                this.create = function(){
 
                 };
                 done();
@@ -100,7 +100,7 @@ describe("User Service", function() {
                 expect(params).to.be.undefined;
                 expect(methods.create).to.eql({method : 'PUT'});
                 expect(options).to.be.undefined;
-                this.$create = function(user, succeed, error){
+                this.create = function(user, succeed, error){
                     expect(user.first_name).to.eql('paul');
                     expect(user.last_name).to.eql('barber');
                     expect(user.dob).to.eql('04/01/1990');
@@ -125,7 +125,7 @@ describe("User Service", function() {
               expect(params).to.be.undefined;
               expect(methods.create).to.eql({method : 'PUT'});
               expect(options).to.be.undefined;
-              this.$create = function(user, succeed, error){
+              this.create = function(user, succeed, error){
                 succeed(user);                
               };
             };
@@ -153,7 +153,7 @@ describe("User Service", function() {
               expect(params).to.be.undefined;
               expect(methods.create).to.eql({method : 'PUT'});
               expect(options).to.be.undefined;
-              this.$create = function(user, succeed, error){
+              this.create = function(user, succeed, error){
                  error("Create User Failed");                
               };
             };

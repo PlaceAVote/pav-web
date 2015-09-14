@@ -39,7 +39,7 @@ function UserService($resource) {
             return;
         }
         var saveUser = new $resource(config.users.endpoint, undefined, {create : config.users.create});
-        saveUser.$create(this.user, onLoad, onError);
+        saveUser.create(this.user, onLoad, onError);
 
     };
 	

@@ -15,8 +15,15 @@ function SignUpCtrl ($scope, $location, userService) {
 };
 
 SignUpCtrl.prototype.test = function() {
+    var that = this;
 	this.userService.addAdditionalInformation(this.additionalInformation);
 	var user = this.userService.getUser();
+    this.userService.saveUser(function(err, result){
+        if(err) {
+            that.error = true;
+        }
+
+    });
 };
 
 SignUpCtrl.prototype.maxDate = function() {
