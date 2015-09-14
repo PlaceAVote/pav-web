@@ -51,18 +51,16 @@ gulp.task('browserify-web', function() {
 });
 
 gulp.task('ionicise', function(){
-	//css
+	gulp.src(['img/*'])
+	.pipe(gulp.dest('pav_ionic/www/img'));
 	gulp.src(['css/*.css'])
 	.pipe(gulp.dest('pav_ionic/www/css'));
-	//partials
 	gulp.src(['partials/*_ionic.html'])
 	.pipe(gulp.dest('pav_ionic/www/partials'));
-	//index
 	gulp.src(['index_ionic.html'])
-	.pipe(source('index.html'))
+	.pipe(rename('index.html'))
 	.pipe(gulp.dest('pav_ionic/www/'));
-	//brosweify
-	browserify('./src/ionic-app.js')
+        browserify('./src/ionic-app.js')
 	.bundle()
 	.pipe(source('mobile-app.js'))
 	.pipe(gulp.dest('pav_ionic/www/dist/js'));

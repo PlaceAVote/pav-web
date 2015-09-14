@@ -31,7 +31,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 console.log("In Config");
   $stateProvider.state('app', {
     url : '/app',
-    templateUrl: 'partials/login.html',
+    templateUrl: 'partials/login_ionic.html',
     controller: 'LoginCtrl'
   })
 $urlRouterProvider.otherwise('/app');
