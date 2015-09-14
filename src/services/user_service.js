@@ -1,7 +1,9 @@
 var User = require('../models/user.js');
+var config = require('../config/endpoints.js');
 
-function UserService() {
-	var createUser = function(username, password) {
+function UserService($resource) {
+
+    var createUser = function(username, password) {
 		this.user = new User(username, password);
 	};
 
@@ -25,12 +27,28 @@ function UserService() {
 		this.user.country_code = additionalInformation.country_code;
 		this.user.dob = additionalInformation.dob;
 	};
+
+    var saveUser = function(callback){
+        var onLoad = function(user){
+            callback(undefined, user);
+        };
+        var onError = function(err){
+            callback(err);
+        };
+        if(!this.user){
+            return;
+        }
+        var saveUser = new $resource(config.users.endpoint, undefined, {create : config.users.create});
+        saveUser.$create(this.user, onLoad, onError);
+
+    };
 	
 	return {
 		createUser : createUser,
 		getUser : getUser,
 		addInterests: addInterests,
-		addAdditionalInformation : addAdditionalInformation	
+		addAdditionalInformation : addAdditionalInformation,
+        saveUser : saveUser
 	};
 };
 

@@ -74,4 +74,103 @@ describe("User Service", function() {
 			expect(user.country_code).to.eql("804");	
 		});
 	});	
+    describe("Save User", function() {
+        it("returns undefined if user isn't defined", function(){
+            var subject = new UserService();
+            expect(subject.saveUser()).to.be.undefined;
+        });
+        it("passes resource correct instantiation params to query", function(done){
+            function mockResource(url, params, methods, options) {
+                expect(url).to.eql('user/');
+                expect(params).to.be.undefined;
+                expect(methods.create).to.eql({method : 'PUT'});
+                expect(options).to.be.undefined;
+                this.$create = function(){
+
+                };
+                done();
+            }
+            var subject = new UserService(mockResource);
+            subject.createUser("test@email.com", "p4SSw0rD!");
+            subject.saveUser();
+        });
+        it("passes resource correct user", function(done){
+            function mockResource(url, params, methods, options) {
+                expect(url).to.eql('user/');
+                expect(params).to.be.undefined;
+                expect(methods.create).to.eql({method : 'PUT'});
+                expect(options).to.be.undefined;
+                this.$create = function(user, succeed, error){
+                    expect(user.first_name).to.eql('paul');
+                    expect(user.last_name).to.eql('barber');
+                    expect(user.dob).to.eql('04/01/1990');
+                    expect(user.country_code).to.eql('804');
+                    done();
+                };
+            }
+            var subject = new UserService(mockResource);
+            subject.createUser("test@email.com", "p4SSw0rD!");
+			var additionalInformation = {
+				first_name : "paul",
+				last_name : "barber",
+				dob : "04/01/1990",
+				country_code: "804"
+			};
+			subject.addAdditionalInformation(additionalInformation);
+            subject.saveUser();
+        });
+        it("returns user to callback when there's no error", function(done){
+           function mockResource(url, params, methods, options) {
+              expect(url).to.eql('user/');
+              expect(params).to.be.undefined;
+              expect(methods.create).to.eql({method : 'PUT'});
+              expect(options).to.be.undefined;
+              this.$create = function(user, succeed, error){
+                succeed(user);                
+              };
+            };
+            var subject = new UserService(mockResource);
+            subject.createUser("test@email.com", "p4SSw0rD!");
+			var additionalInformation = {
+				first_name : "paul",
+				last_name : "barber",
+				dob : "04/01/1990",
+				country_code: "804"
+			};
+			subject.addAdditionalInformation(additionalInformation);
+            subject.saveUser(function(err, user){
+                expect(err).to.be.undefined;
+                expect(user.first_name).to.eql('paul');
+                expect(user.last_name).to.eql('barber');
+                expect(user.dob).to.eql('04/01/1990');
+                expect(user.country_code).to.eql('804');
+                done();
+            });
+        });
+        it("returns error to callback when service fails", function(done){
+           function mockResource(url, params, methods, options) {
+              expect(url).to.eql('user/');
+              expect(params).to.be.undefined;
+              expect(methods.create).to.eql({method : 'PUT'});
+              expect(options).to.be.undefined;
+              this.$create = function(user, succeed, error){
+                 error("Create User Failed");                
+              };
+            };
+            var subject = new UserService(mockResource);
+            subject.createUser("test@email.com", "p4SSw0rD!");
+			var additionalInformation = {
+				first_name : "paul",
+				last_name : "barber",
+				dob : "04/01/1990",
+				country_code: "804"
+			};
+			subject.addAdditionalInformation(additionalInformation);
+            subject.saveUser(function(err, user){
+                expect(err).to.eql("Create User Failed");
+                done();
+            });
+        });
+
+    });
 });
