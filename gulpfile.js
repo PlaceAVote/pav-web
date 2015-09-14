@@ -47,6 +47,22 @@ gulp.task('browserify-web', function() {
 		.pipe(gulp.dest('dist/js'));
 });
 
+gulp.task('ionicise', function(){
+	gulp.src(['img/*'])
+	.pipe(gulp.dest('pav_ionic/www/img'));
+	gulp.src(['css/*.css'])
+	.pipe(gulp.dest('pav_ionic/www/css'));
+	gulp.src(['partials/*_ionic.html'])
+	.pipe(gulp.dest('pav_ionic/www/partials'));
+	gulp.src(['index_ionic.html'])
+	.pipe(rename('index.html'))
+	.pipe(gulp.dest('pav_ionic/www/'));
+        browserify('./src/ionic-app.js')
+	.bundle()
+	.pipe(source('mobile-app.js'))
+	.pipe(gulp.dest('pav_ionic/www/dist/js'));
+});
+
 //can be removed
 gulp.task('concatScripts', function() {
 return gulp.src([
@@ -69,6 +85,10 @@ gulp.task('watchFiles', function() {
 	gulp.watch('css/*.css', ['autoPrefix']);
 	gulp.watch(['src/**/*.js', 'src/*.js'], ['browserify-web']);
 	gulp.watch('partials/*.html');
+});
+
+gulp.task('watchIonic', function() {
+	gulp.watch(['src/**/*_ionic.js', 'src/*_ionic.js', 'src/ionic-app.js', 'partials/*_ionic.html'], ['ionicise']);
 });
 
 

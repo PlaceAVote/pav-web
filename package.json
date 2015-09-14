@@ -5,7 +5,11 @@
   "main": "app.js",
   "scripts": {
     "test": "mocha --recursive",
-    "start": "app.js"
+    "start": "app.js",
+    "install": "napa"
+  },
+  "napa": {
+    "ionic": "driftyco/ionic-bower#v1.0.0"
   },
   "author": "Anthony O'Neill",
   "license": "MIT",
@@ -17,7 +21,9 @@
     "angular-route": "^1.4.4",
     "browser-sync": "^2.8.2",
     "browserify": "^11.0.1",
+    "browserify-shim": "^3.8.10",
     "chai": "^3.2.0",
+    "cordova": "^5.3.1",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^2.3.1",
     "gulp-concat": "^2.6.0",
@@ -25,19 +31,26 @@
     "gulp-sass": "^2.0.4",
     "gulp-sourcemaps": "^1.5.2",
     "gulp-uglify": "^1.2.0",
-    "jasmine-core": "^2.3.4",
-    "karma": "^0.13.9",
-    "karma-chrome-launcher": "^0.2.0",
-    "karma-jasmine": "^0.3.6",
-    "karma-phantomjs-launcher": "^0.2.1",
+    "ionic": "^1.6.4",
     "localtunnel": "^1.7.0",
     "mocha": "^2.3.0",
-    "phantomjs": "^1.9.18"
+    "napa": "^1.2.0"
   },
   "dependencies": {
     "express": "^4.13.3",
     "mailcheck": "^1.1.1",
     "vinyl-source-stream": "^1.1.0"
+  },
+  "browser": {
+    "ionic": "./node_modules/ionic/js/ionic.js"
+  },
+  "browserify": {
+    "transform": [
+      "browserify-shim"
+    ]
+  },
+  "browserify-shim": {
+    "ionic": "ionic"
   },
   "repository": {
     "type": "git",
