@@ -22,7 +22,10 @@ SignUpCtrl.prototype.test = function() {
         if(err) {
             that.error = true;
         }
-
+        else {
+            //temporary console log to see what is returned from server
+            console.log(result);
+        }
     });
 };
 
