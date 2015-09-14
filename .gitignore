@@ -4,4 +4,4 @@ node_modules
 dist/*
 *.log
 *.zip
-ionic_pav
+pav_ionic/
