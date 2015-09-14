@@ -11,11 +11,11 @@ function UserService($resource) {
 		return this.user;
 	};
 
-	var addInterests = function(interests) {
+	var addTopics = function(topics) {
 		if(!this.user) {
 			return;
 		}
-		this.user.interests = interests;
+		this.user.topics = topics;
 	};
 
 	var addAdditionalInformation = function(additionalInformation){
@@ -38,6 +38,7 @@ function UserService($resource) {
         if(!this.user){
             return;
         }
+        console.log(this.user);
         var saveUser = new $resource(config.users.endpoint, undefined, {create : config.users.create});
         saveUser.create(this.user, onLoad, onError);
 
@@ -46,7 +47,7 @@ function UserService($resource) {
 	return {
 		createUser : createUser,
 		getUser : getUser,
-		addInterests: addInterests,
+		addTopics: addTopics,
 		addAdditionalInformation : addAdditionalInformation,
         saveUser : saveUser
 	};

@@ -1,7 +1,7 @@
-function User(username, password) {
-	this.username = username;
+function User(email, password) {
+	this.email = email;
 	this.password = password;
-	this.interests;
+	this.topics;
 	this.first_name;
 	this.last_name;
 	this.dob;

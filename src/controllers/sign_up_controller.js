@@ -18,9 +18,11 @@ SignUpCtrl.prototype.test = function() {
     var that = this;
 	this.userService.addAdditionalInformation(this.additionalInformation);
 	var user = this.userService.getUser();
+    console.log(user);
     this.userService.saveUser(function(err, result){
         if(err) {
             that.error = true;
+            console.error(err);
         }
         else {
             //temporary console log to see what is returned from server

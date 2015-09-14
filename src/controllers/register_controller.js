@@ -18,7 +18,7 @@ this.interests = [
 
 }
 RegisterController.prototype.go = function(hash) {
-	this.userService.addInterests(this.getSelected());
+	this.userService.addTopics(this.getSelected());
 	this.location.path(hash);
 }
 
