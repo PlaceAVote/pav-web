@@ -82,7 +82,7 @@
 					margin-top: 10px;
 					margin-bottom: 15px;
 					width: 100%;
-					color: $purple;
+					background: white;
 					font-size: 12px;
 					height: 30px;
 					padding-left: 10px;
@@ -90,14 +90,23 @@
 					outline: none;
 					border: 1px solid $grey;
 					border-radius: 3px;
+					&.ng-pristine {
+						color: $grey;
+					}
+					&.ng-dirty {
+						color: $purple;
+					}
 					&:focus {
 							border: 1px solid $purple;
 					}
 				}
 
-				input[type="date"] {
+				input[type="date"].ng-pristine {
 					background-color: white;
 					color: $grey;
+				}
+				input[type="date"].ng-dirty {
+					color: $purple;
 				}
 			}
 

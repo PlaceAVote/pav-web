@@ -689,7 +689,7 @@ input {
       margin-top: 10px;
       margin-bottom: 15px;
       width: 100%;
-      color: #543594;
+      background: white;
       font-size: 12px;
       height: 30px;
       padding-left: 10px;
@@ -698,11 +698,17 @@ input {
       outline: none;
       border: 1px solid #cccccc;
       border-radius: 3px; }
+      .onboarding-container section form label input.ng-pristine, .onboarding-container section form label select.ng-pristine {
+        color: #cccccc; }
+      .onboarding-container section form label input.ng-dirty, .onboarding-container section form label select.ng-dirty {
+        color: #543594; }
       .onboarding-container section form label input:focus, .onboarding-container section form label select:focus {
         border: 1px solid #543594; }
-    .onboarding-container section form label input[type="date"] {
+    .onboarding-container section form label input[type="date"].ng-pristine {
       background-color: white;
       color: #cccccc; }
+    .onboarding-container section form label input[type="date"].ng-dirty {
+      color: #543594; }
   .onboarding-container section form .firstname, .onboarding-container section form .signupdob {
     margin-right: 20px; }
   .onboarding-container section form .email-label {
