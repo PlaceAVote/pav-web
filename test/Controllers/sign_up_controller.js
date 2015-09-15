@@ -8,7 +8,7 @@ describe("SignUpController", function(){
 		first_name : "",
 		last_name : "",
 		dob : "",
-		country_code : "840"
+		country_code : "USA"
 	};
 	expect(subject.additionalInformation).to.eql(blankUser);
 	});

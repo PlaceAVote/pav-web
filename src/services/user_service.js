@@ -30,16 +30,20 @@ function UserService($resource) {
 	};
     
     var saveUser = function(callback){
+        var that = this;
         var extractTopicNames = function(topics){
             var names = [];
-            var topicLength = topics.length;
-            for(var i = topicLength-1; i>=0; i--) {
-                names.push(topics[i].name);
-            };
+            if(topics){
+                var topicLength = topics.length;
+                for(var i = topicLength-1; i>=0; i--) {
+                    names.push(topics[i].name);
+                };
+            }
             return names;
         };
 
         var onLoad = function(user){
+            that.user.setToken(user.token);
             callback(undefined, user);
         };
         var onError = function(err){

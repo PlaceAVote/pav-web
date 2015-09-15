@@ -1,6 +1,6 @@
 var UserService = require("../../src/services/user_service.js");
 var Interest = require("../../src/models/interest.js");
-
+var strftime = require("strftime");
 var expect = require("chai").expect;
 
 describe("User Service", function() {
@@ -51,7 +51,7 @@ describe("User Service", function() {
 				first_name : "paul",
 				last_name : "barber",
 				dob : "04/01/1990",
-				country_code: "804"
+				country_code: "USA"
 			}
 			subject.addAdditionalInformation(additonalInformation);
 			var user = subject.getUser();
@@ -63,15 +63,15 @@ describe("User Service", function() {
 			var additionalInformation = {
 				first_name : "paul",
 				last_name : "barber",
-				dob : "04/01/1990",
-				country_code: "804"
+				dob : new Date(),
+				country_code: "USA"
 			};
 			subject.addAdditionalInformation(additionalInformation);
 			var user = subject.getUser();
 			expect(user.first_name).to.eql("paul");	
 			expect(user.last_name).to.eql("barber");	
-			expect(user.dob).to.eql("04/01/1990");	
-			expect(user.country_code).to.eql("804");	
+			expect(user.dob).to.eql(strftime('%m/%d/%Y', new Date()));	
+			expect(user.country_code).to.eql("USA");	
 		});
 	});	
     describe("Save User", function() {
@@ -92,6 +92,13 @@ describe("User Service", function() {
             }
             var subject = new UserService(mockResource);
             subject.createUser("test@email.com", "p4SSw0rD!");
+            var additionalInformation = {
+                first_name : "paul",
+                last_name : "barber",
+                dob : new Date(),
+                country_code: "USA"
+            };
+            subject.addAdditionalInformation(additionalInformation);
             subject.saveUser();
         });
         it("passes resource correct user", function(done){
@@ -103,7 +110,7 @@ describe("User Service", function() {
                 this.create = function(user, succeed, error){
                     expect(user.first_name).to.eql('paul');
                     expect(user.last_name).to.eql('barber');
-                    expect(user.dob).to.eql('04/01/1990');
+                    expect(user.dob).to.eql(strftime('%m/%d/%Y', new Date()));
                     expect(user.country_code).to.eql('804');
                     done();
                 };
@@ -113,7 +120,7 @@ describe("User Service", function() {
 			var additionalInformation = {
 				first_name : "paul",
 				last_name : "barber",
-				dob : "04/01/1990",
+				dob : new Date(),
 				country_code: "804"
 			};
 			subject.addAdditionalInformation(additionalInformation);
@@ -134,7 +141,7 @@ describe("User Service", function() {
 			var additionalInformation = {
 				first_name : "paul",
 				last_name : "barber",
-				dob : "04/01/1990",
+				dob : new Date(),
 				country_code: "804"
 			};
 			subject.addAdditionalInformation(additionalInformation);
@@ -142,7 +149,7 @@ describe("User Service", function() {
                 expect(err).to.be.undefined;
                 expect(user.first_name).to.eql('paul');
                 expect(user.last_name).to.eql('barber');
-                expect(user.dob).to.eql('04/01/1990');
+                expect(user.dob).to.eql(strftime('%m/%d/%Y', new Date()));
                 expect(user.country_code).to.eql('804');
                 done();
             });
@@ -162,7 +169,7 @@ describe("User Service", function() {
 			var additionalInformation = {
 				first_name : "paul",
 				last_name : "barber",
-				dob : "04/01/1990",
+				dob : new Date(),
 				country_code: "804"
 			};
 			subject.addAdditionalInformation(additionalInformation);
