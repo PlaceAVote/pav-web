@@ -12,7 +12,11 @@ var gulp = require('gulp'),
 	browserSync = require('browser-sync').create();
 
 
- 
+gulp.task('live-config', function() {
+    gulp.src(['./src/config/live_endpoints.js'])
+	.pipe(rename('endpoints.js'))
+	.pipe(gulp.dest('./src/config/'));
+}); 
 
 // Static server
 gulp.task('browser-sync', function() {

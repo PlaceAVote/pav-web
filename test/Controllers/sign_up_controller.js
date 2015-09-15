@@ -8,8 +8,25 @@ describe("SignUpController", function(){
 		first_name : "",
 		last_name : "",
 		dob : "",
-		country_code : "840"
+		country_code : "USA"
 	};
 	expect(subject.additionalInformation).to.eql(blankUser);
 	});
+    it("when service returns error, set scope.error to be true", function(done){
+        function mockUserService() {
+             this.saveUser = function(callback){
+                callback("Server returned error");
+                expect(subject.error).to.eql(true);
+                done();
+             };
+             this.addAdditionalInformation = function() {
+             
+             };
+             this.getUser = function() {
+             
+             };
+        }
+        var subject = new SignUpController(undefined, undefined, new mockUserService());
+        subject.test();
+     });
 });

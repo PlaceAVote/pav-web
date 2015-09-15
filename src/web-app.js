@@ -34,7 +34,7 @@ app.config(['$routeProvider', function($routeProvider) {
 }]);
 
 //services
-app.factory('userService', [UserService]);
+app.factory('userService', ['$resource', UserService]);
 
 //controllers
 app.controller('TopicRegisterCtrl',['$scope','$location', 'userService', RegisterController]);

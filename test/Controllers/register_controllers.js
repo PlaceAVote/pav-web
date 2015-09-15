@@ -12,7 +12,7 @@ describe("RegisterController", function() {
 			}
 		};
 		var userService = {
-			addInterests : function(interests) {
+			addTopics : function(interests) {
 				added = true;
 			}
 		};

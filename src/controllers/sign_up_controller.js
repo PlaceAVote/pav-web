@@ -9,14 +9,26 @@ function SignUpCtrl ($scope, $location, userService) {
 	  	"first_name": "",
 	   	"last_name": "",
 	  	"dob": "",
-	 	"country_code": "840"
+	 	"country_code": "USA"
 	}
 	this.country = countryCodes;	
 };
 
 SignUpCtrl.prototype.test = function() {
+    var that = this;
 	this.userService.addAdditionalInformation(this.additionalInformation);
 	var user = this.userService.getUser();
+    console.log(user);
+    this.userService.saveUser(function(err, result){
+        if(err) {
+            that.error = true;
+            console.error(err);
+        }
+        else {
+            //temporary console log to see what is returned from server
+            console.log(result);
+        }
+    });
 };
 
 SignUpCtrl.prototype.maxDate = function() {

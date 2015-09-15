@@ -4,6 +4,7 @@ set -e
 
 echo "-- Building Web-app..."
 
+gulp live-config
 gulp browserify-web
 
 echo "-- Deploying to environment..."
