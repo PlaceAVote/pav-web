@@ -9,7 +9,7 @@ function SignUpCtrl ($scope, $location, userService) {
 	  	"first_name": "",
 	   	"last_name": "",
 	  	"dob": "",
-	 	"country_code": "840"
+	 	"country_code": "USA"
 	}
 	this.country = countryCodes;	
 };

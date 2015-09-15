@@ -1,5 +1,6 @@
 var User = require('../models/user.js');
 var config = require('../config/endpoints.js');
+var strftime = require('strftime');
 
 function UserService($resource) {
 
@@ -25,10 +26,19 @@ function UserService($resource) {
 		this.user.first_name = additionalInformation.first_name;
 		this.user.last_name = additionalInformation.last_name;
 		this.user.country_code = additionalInformation.country_code;
-		this.user.dob = additionalInformation.dob;
+		this.user.dob = strftime('%m/%d/%Y', additionalInformation.dob);
 	};
-
+    
     var saveUser = function(callback){
+        var extractTopicNames = function(topics){
+            var names = [];
+            var topicLength = topics.length;
+            for(var i = topicLength-1; i>=0; i--) {
+                names.push(topics[i].name);
+            };
+            return names;
+        };
+
         var onLoad = function(user){
             callback(undefined, user);
         };
@@ -40,7 +50,17 @@ function UserService($resource) {
         }
         console.log(this.user);
         var saveUser = new $resource(config.users.endpoint, undefined, {create : config.users.create});
-        saveUser.create(this.user, onLoad, onError);
+        var toSave = {
+            first_name: this.user.first_name,
+            last_name: this.user.last_name,
+            country_code: this.user.country_code,
+            password: this.user.password,
+            dob: this.user.dob,
+            topics: extractTopicNames(this.user.topics),
+            email: this.user.email
+        };
+        console.log(toSave);
+        saveUser.create(toSave, onLoad, onError);
 
     };
 	

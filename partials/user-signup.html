@@ -25,7 +25,7 @@
 		
 
 		<label>Country
-		<select ng-model='signup.additionalInformation["country_code"]' ng-options="country['country-code'] as country.name for country in signup.country">
+		<select ng-model='signup.additionalInformation["country_code"]' ng-options="country['alpha-3'] as country.name for country in signup.country">
 		</select>
 		</label>
 
