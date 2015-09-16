@@ -23,7 +23,9 @@ describe("SignUpController", function(){
              
              };
              this.getUser = function() {
-             
+                return {
+                    name : "paul"
+                }
              };
         }
         var subject = new SignUpController(undefined, undefined, new mockUserService());

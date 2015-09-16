@@ -1,5 +1,5 @@
 var User = require('../models/user.js');
-var config = require('../config/live_endpoints.js');
+var config = require('../config/endpoints.js');
 var strftime = require('strftime');
 
 function UserService($resource) {
