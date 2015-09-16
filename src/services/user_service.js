@@ -1,5 +1,5 @@
 var User = require('../models/user.js');
-var config = require('../config/endpoints.js');
+var config = require('../config/live_endpoints.js');
 var strftime = require('strftime');
 
 function UserService($resource) {
@@ -52,7 +52,6 @@ function UserService($resource) {
         if(!this.user){
             return;
         }
-        console.log(this.user);
         var saveUser = new $resource(config.users.endpoint, undefined, {create : config.users.create});
         var toSave = {
             first_name: this.user.first_name,
@@ -63,7 +62,6 @@ function UserService($resource) {
             topics: extractTopicNames(this.user.topics),
             email: this.user.email
         };
-        console.log(toSave);
         saveUser.create(toSave, onLoad, onError);
 
     };
