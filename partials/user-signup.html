@@ -30,7 +30,10 @@
 		</label>
 
 		<button ng-click="signup.test();">Continue</button>
+        <p class="error-message" ng-class="{'show': signup.user_exists_error}">A User with this email has already been created.</p>
+        <p class="error-message" ng-class="{'show': signup.error}">Oops! An unexpected error occured.</p>
+        <p class="error-message" ng-class="{'show': signup.invalid_user}">The User details you entered are invalid.</p>
 		</form>
-		</section>
+        </section>
 
 	</div>

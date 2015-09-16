@@ -16,19 +16,27 @@ function SignUpCtrl ($scope, $location, userService) {
 
 SignUpCtrl.prototype.test = function() {
     var that = this;
-	this.userService.addAdditionalInformation(this.additionalInformation);
-	var user = this.userService.getUser();
-    console.log(user);
-    this.userService.saveUser(function(err, result){
-        if(err) {
-            that.error = true;
-            console.error(err);
-        }
-        else {
-            //temporary console log to see what is returned from server
-            console.log(result);
-        }
-    });
+    this.userService.addAdditionalInformation(this.additionalInformation);
+    var user = this.userService.getUser();
+    if(!user) {
+        that.invalid_user = true;
+    }
+
+    else {
+        this.userService.saveUser(function(err, result){
+            if(err) {
+                if(err.status === 409) {
+                    that.user_exists_error = true;
+                }
+                else {
+                that.error = true;
+                }
+            }
+            else {
+                //move page
+            }
+        });
+    }
 };
 
 SignUpCtrl.prototype.maxDate = function() {
