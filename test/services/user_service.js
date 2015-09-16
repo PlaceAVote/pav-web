@@ -79,34 +79,8 @@ describe("User Service", function() {
             var subject = new UserService();
             expect(subject.saveUser()).to.be.undefined;
         });
-        it("passes resource correct instantiation params to query", function(done){
-            function mockResource(url, params, methods, options) {
-                expect(url).to.eql('http://192.168.99.100:8080/user/');
-                expect(params).to.be.undefined;
-                expect(methods.create).to.eql({method : 'PUT'});
-                expect(options).to.be.undefined;
-                this.create = function(){
-
-                };
-                done();
-            }
-            var subject = new UserService(mockResource);
-            subject.createUser("test@email.com", "p4SSw0rD!");
-            var additionalInformation = {
-                first_name : "paul",
-                last_name : "barber",
-                dob : new Date(),
-                country_code: "USA"
-            };
-            subject.addAdditionalInformation(additionalInformation);
-            subject.saveUser();
-        });
         it("passes resource correct user", function(done){
             function mockResource(url, params, methods, options) {
-                expect(url).to.eql('http://192.168.99.100:8080/user/');
-                expect(params).to.be.undefined;
-                expect(methods.create).to.eql({method : 'PUT'});
-                expect(options).to.be.undefined;
                 this.create = function(user, succeed, error){
                     expect(user.first_name).to.eql('paul');
                     expect(user.last_name).to.eql('barber');
@@ -128,10 +102,6 @@ describe("User Service", function() {
         });
         it("returns user to callback when there's no error", function(done){
            function mockResource(url, params, methods, options) {
-              expect(url).to.eql('http://192.168.99.100:8080/user/');
-              expect(params).to.be.undefined;
-              expect(methods.create).to.eql({method : 'PUT'});
-              expect(options).to.be.undefined;
               this.create = function(user, succeed, error){
                 succeed(user);                
               };
@@ -156,10 +126,6 @@ describe("User Service", function() {
         });
         it("returns error to callback when service fails", function(done){
            function mockResource(url, params, methods, options) {
-              expect(url).to.eql('http://192.168.99.100:8080/user/');
-              expect(params).to.be.undefined;
-              expect(methods.create).to.eql({method : 'PUT'});
-              expect(options).to.be.undefined;
               this.create = function(user, succeed, error){
                  error("Create User Failed");                
               };
