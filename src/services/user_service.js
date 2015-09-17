@@ -1,5 +1,5 @@
 var User = require('../models/user.js');
-var config = require('../config/endpoints.js');
+var config = require('../config/live_endpoints.js');
 var strftime = require('strftime');
 
 function UserService($resource) {
@@ -52,7 +52,7 @@ function UserService($resource) {
         if(!this.user){
             return;
         }
-        var saveUser = new $resource(config.users.endpoint, undefined, {create : config.users.create});
+        var saveUser = new $resource(config.users.create_endpoint, undefined, {create : config.users.create});
         var toSave = {
             first_name: this.user.first_name,
             last_name: this.user.last_name,
@@ -65,13 +65,31 @@ function UserService($resource) {
         saveUser.create(toSave, onLoad, onError);
 
     };
-	
+
+    var login = function(user, callback) {
+
+        var onLoad = function(response) {
+            return callback(undefined, response);
+        };
+
+        var onError = function(err) {
+            return callback(err);
+        }
+
+        if(!user || !user.email || !user.password) {
+            return callback({message: "User has no password or username"});
+        }
+        var loginResource = new $resource(config.users.login_endpoint, undefined, {login : config.users.login});
+        loginResource.login(user, onLoad, onError);
+    }
+
 	return {
 		createUser : createUser,
 		getUser : getUser,
 		addTopics: addTopics,
 		addAdditionalInformation : addAdditionalInformation,
-        saveUser : saveUser
+        saveUser : saveUser,
+        login : login
 	};
 };
 

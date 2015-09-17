@@ -144,6 +144,56 @@ describe("User Service", function() {
                 done();
             });
         });
-
+       it("login returns callback with a invalid password error", function(done){
+            var subject = new UserService();
+            var callback = function(err, result) {
+               expect(err.message).to.eql("User has no password or username");
+               done();
+            }; 
+            var user = {
+                password: 'P4ssWORD'
+            }
+            subject.login(user, callback);
+       });
+       it("calls resource with valid user", function(done) {
+           function mockResource(url, params, methods, options) {
+               this.login = function(user, succeed, error){
+                  expect(user.email).to.eql('paul');
+                  expect(user.password).to.eql('TEST555');
+                  done();
+               };
+           };
+           var subject = UserService(mockResource);
+           subject.login({
+            email: 'paul',
+            password: 'TEST555'
+           });
+       });
+       it("calls callback with no error when user has logged in", function(done) {
+           function mockResource(url, params, methods, options) {
+               this.login = function(user, succeed, error){
+                  succeed({token : '000001', first_name: 'paul'});
+               };
+           };
+           var subject = UserService(mockResource);
+           subject.login({email: 'paul', password: 'passWO3rd'}, function(err, resource) {
+                expect(err).to.eql(undefined);
+                expect(!!resource).to.eql(true);
+                done();
+           });
+       });
+       it("calls back with error if server returns an error", function(done) {
+           function mockResource(url, params, methods, options) {
+               this.login = function(user, succeed, error){
+                   error({message: 'Server Error'});
+               };
+           };
+           var subject = UserService(mockResource);
+           subject.login({email: 'paul', password: 'passWO3rd'}, function(err, resource) {
+               expect(err).to.eql({message: 'Server Error'});
+               expect(!!resource).to.eql(false);
+               done();
+           });
+       });
     });
 });

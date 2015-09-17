@@ -8,11 +8,16 @@ describe("Configs", function() {
         it("all properties of users endpoints (bar endpoint) should be the same", function() {
             expect(config.users.create).to.eql(live_config.users.create);
         });
-        it("should have the same add user token functionality", function(){
-            config.users.addUserToken('AAAAA');
-            live_config.users.addUserToken('AAAAA');
-            expect(config.users.create.headers['PAV-USER-AUTH']).to.eql(live_config.users.create.headers['PAV-USER-AUTH']);
+        it("all login should be the some", function() {
+            expect(config.users.login).to.eql(live_config.users.login);
+        })
+        it("user should have a create_endpoint", function(){
+            expect(!!config.users.create_endpoint).to.eql(true);
+            expect(!!live_config.users.create_endpoint).to.eql(true);
         });
-
+        it("users should have a login endpoint", function(){
+            expect(!!config.users.login_endpoint).to.eql(true);
+            expect(!!live_config.users.login_endpoint).to.eql(true);
+        })
     });
 });

@@ -14,7 +14,7 @@ function LoginCtrl($scope, $location, userService) {
 	}
 }
 
-LoginCtrl.prototype.go = function ( hash ) {
+LoginCtrl.prototype.go = function (hash) {
  	this.location.path(hash);
 }
 	
@@ -31,6 +31,23 @@ LoginCtrl.prototype.validate = function(u, hash) {
 
 };
 
+LoginCtrl.prototype.login = function(u, hash) {
+    console.log("in login");
+    var email = u.email;
+    var password = u.password;
+    this.user.emailValid = this.emailValidation(email);
+    this.user.passwordValid = this.passwordValidation(password);	
+    if(this.user.emailValid && this.user.passwordValid) {
+        this.userService.login({email: email, password: password}, function(err, response){
+            ///this.go(hash);
+            if (err) {
+                console.log("**ERROR: ", err);
+            } else {
+                console.log("**Response: ", response);
+            }
+        });
+    }
+};
 
 LoginCtrl.prototype.emailValidation = function(email) {
 	var e = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;

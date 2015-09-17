@@ -1,6 +1,6 @@
 var countryCodes = require('../utils/countrycodes.json');
 function SignUpCtrl ($scope, $location, userService) {
-	$scope = $scope || this;
+	$scope = $scope || {};
 	$scope.signup = this;
 	this.userService = userService;
 	this.max = this.maxDate();
@@ -10,7 +10,7 @@ function SignUpCtrl ($scope, $location, userService) {
 	   	"last_name": "",
 	  	"dob": "",
 	 	"country_code": "USA"
-	}
+	};
 	this.country = countryCodes;	
 };
 

@@ -1,6 +1,6 @@
 module.exports = {
     users : {
-                endpoint : 'http://pav-user-api-1888417595.us-west-2.elb.amazonaws.com:8080/user',
+                create_endpoint : 'http://pav-user-api-1888417595.us-west-2.elb.amazonaws.com:8080/user',
                 create : {
                     method : 'PUT',
                     headers: {
@@ -8,8 +8,13 @@ module.exports = {
                     },
                     withCredentials : false
                 },
-                addUserToken: function(token) {
-                                  this.create.headers['PAV-USER-AUTH'] = token;
-                              }
+                login_endpoint: 'http://pav-user-api-1888417595.us-west-2.elb.amazonwas.com:8080/user/authenticate',
+                login: {
+                           method: 'POST',
+                           headers: {
+                                'Content-Type': 'application/json'
+                           },
+                           withCredentials: false
+                }
             }
 }

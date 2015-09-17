@@ -1,6 +1,6 @@
 module.exports = {
     users : {
-                endpoint : 'http://192.168.99.100:8080/user/',
+                create_endpoint : 'http://192.168.99.100:8080/user/',
                 create : {
                     method : 'PUT',
                     headers: {
@@ -8,8 +8,14 @@ module.exports = {
                     },
                     withCredentials : false
                 },
-                addUserToken: function(token) {
-                                  this.create.headers['PAV-USER-AUTH'] = token;
-                              }
+                login_endpoint: 'http://192.168.99.100:8080/user/authenticate',
+                login: {
+                           method: 'POST',
+                           headers: {
+                                'Content-Type': 'application/json'
+                           },
+                           withCredentials: false
+                }
             }
 }
+//PAV-USER-AUTH'
