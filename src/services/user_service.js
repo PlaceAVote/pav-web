@@ -1,8 +1,13 @@
 var User = require('../models/user.js');
 var config = require('../config/live_endpoints.js');
 var strftime = require('strftime');
+var facebook = require('../integrations/facebook.js');
 
 function UserService($resource) {
+    var loginWithFacebook = function(){
+        var facebook = new Facebook();
+        facebook.login();
+    };
 
     var createUser = function(username, password) {
 		this.user = new User(username, password);
@@ -89,7 +94,8 @@ function UserService($resource) {
 		addTopics: addTopics,
 		addAdditionalInformation : addAdditionalInformation,
         saveUser : saveUser,
-        login : login
+        login : login,
+        loginWithFacebook : loginWithFacebook
 	};
 };
 

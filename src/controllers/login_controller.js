@@ -14,6 +14,10 @@ function LoginCtrl($scope, $location, userService) {
 	}
 }
 
+LoginCtrl.prototype.loginWithFacebook = function(){
+    this.userService.loginWithFacebook();
+}
+
 LoginCtrl.prototype.go = function (hash) {
  	this.location.path(hash);
 }
