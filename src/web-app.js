@@ -12,6 +12,9 @@ var mailcheck = require('./directives/mailcheck.js');
 //dependencies
 var angular = require('angular');
 
+//thirdparty integrations
+var facebook = require('./integrations/facebook.js');
+
 var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource')]);
 
 app.config(['$routeProvider', function($routeProvider) {
