@@ -62,7 +62,7 @@ function UserService($resource) {
         var that = this;
 
         var onLoad = function(user){
-            this.usertoken = response.token;
+            this.usertoken = user.token;
             callback(undefined, user);
         };
         var onError = function(err){
