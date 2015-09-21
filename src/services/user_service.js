@@ -4,7 +4,7 @@ var strftime = require('strftime');
 var facebook = require('../integrations/facebook.js');
 
 function UserService($resource) {
-
+    this.facebook = new Facebook();
     var createUserTroughFacebook = function(user, auth) {
     
     };
@@ -18,8 +18,7 @@ function UserService($resource) {
         };
 
         var that = this;
-        var facebook = new Facebook();
-        facebook.login(function(resource, auth){
+        that.facebook.login(function(resource, auth){
             console.log("*****FB*******", resource);
             that.userToken = auth;
             that.user = new User(resource.email);
