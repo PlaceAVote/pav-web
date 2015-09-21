@@ -1,48 +1,37 @@
 Facebook = function(){
-    this.initialized = false;
     return this;
 };
 
-
-Facebook.prototype.getUser = function(response) {
-    console.log(JSON.stringify(response));
-    this.FB.api('/me', function(response) {
-        console.log(JSON.stringify(response));
-    });
-};
-
 Facebook.prototype.login = function(callback){
-    var that = this;
-    if(!this.initialized) {
-        window.fbAsyncInit = function() {
-            FB.init({
-                appId      : '1686777641544347',
-                xfbml      : true,
-                version    : 'v2.4'
-            });
-            this.FB = FB;
-            FB.getLoginStatus(function(response) {
-                console.log(JSON.stringify(response));
-                if (response.status === 'connected') {
-                    console.log('Logged in.');
-                    FB.api('/me', {fields: 'first_name, last_name, picture, email'}, function(response) {
-                           console.log(response);
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId      : '1686777641544347',
+            xfbml      : true,
+            version    : 'v2.4'
+        });
+        FB.getLoginStatus(function(response) {
+            var auth = response.authResponse;
+            if (response.status === 'connected') {
+                FB.api('/me', {fields: 'first_name, last_name, picture, email birthday'}, function(response) {
+                    callback(response, auth);
+                });
+            }
+            else {
+                FB.login(function(response){
+                    FB.api('/me', {fields: 'first_name, last_name, picture, email, birthday'}, function(response) {
+                        callback(response, auth);
                     });
-                }
-                else {
-                    FB.login(that.getUser, {scope: 'email'});
-                }
-            });
-        };
-        (function(d, s, id){
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) {return;}
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-        this.initialised = true;
-    }
+                }, {scope: 'email, public_profile, user_birthday'});
+            }
+        });
+    };
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
     return this;
 };
 
