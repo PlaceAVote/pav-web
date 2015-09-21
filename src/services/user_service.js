@@ -1,13 +1,36 @@
 var User = require('../models/user.js');
-var config = require('../config/live_endpoints.js');
+var config = require('../config/endpoints.js');
 var strftime = require('strftime');
 var facebook = require('../integrations/facebook.js');
 
 function UserService($resource) {
 
-    var loginWithFacebook = function(){
+    var createUserTroughFacebook = function(user, auth) {
+    
+    };
+    
+    var loginWithFacebook = function(callback){   
+        var onLoad = function(resource) {
+            callback(undefined, resource);
+        };
+        var onError = function(err) {
+            callback(err, this.user);
+        };
+
+        var that = this;
         var facebook = new Facebook();
-        facebook.login(function(resource){
+        facebook.login(function(resource, auth){
+            console.log("*****FB*******", resource);
+            that.userToken = auth;
+            that.user = new User(resource.email);
+            that.user.dob = new Date(resource.birthday);
+            that.user.first_name = resource.first_name;
+            that.user.last_name = resource.last_name;
+            that.user.img_url = resource.picture.data.url;
+            config.users.facebook.login.headers["X-FACEBOOK-ACCESS-TOKEN"] = auth.accessToken;
+            var facebookUserLoginResource = new $resource(config.users.facebookLoginUrl, undefined, {login : config.users.facebook.login});
+            console.log("******USER*******",that.user);
+            //facebookUserLoginResource.login(that.user, onLoad, onError);
         });
     };
 
@@ -39,7 +62,7 @@ function UserService($resource) {
         var that = this;
 
         var onLoad = function(user){
-            that.user.setToken(user.token);
+            this.usertoken = response.token;
             callback(undefined, user);
         };
         var onError = function(err){
@@ -57,6 +80,7 @@ function UserService($resource) {
     var login = function(user, callback) {
 
         var onLoad = function(response) {
+            this.usertoken = response.token;
             return callback(undefined, response);
         };
 

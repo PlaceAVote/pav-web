@@ -3,6 +3,7 @@ Facebook = function(){
 };
 
 Facebook.prototype.login = function(callback){
+    //ideally move this elsewhere to allow global access to FB
     window.fbAsyncInit = function() {
         FB.init({
             appId      : '1686777641544347',
@@ -12,16 +13,18 @@ Facebook.prototype.login = function(callback){
         FB.getLoginStatus(function(response) {
             var auth = response.authResponse;
             if (response.status === 'connected') {
-                FB.api('/me', {fields: 'first_name, last_name, picture, email birthday'}, function(response) {
+                FB.api('/me', {fields: 'first_name, last_name, picture, email, birthday, hometown'}, function(response) {
                     callback(response, auth);
                 });
             }
             else {
                 FB.login(function(response){
-                    FB.api('/me', {fields: 'first_name, last_name, picture, email, birthday'}, function(response) {
+                    var auth = response.authResponse;
+                    FB.api('/me', {fields: 'first_name, last_name, picture, email, birthday, hometown'}, function(response) {
+                        console.log("AUTH", auth);
                         callback(response, auth);
                     });
-                }, {scope: 'email, public_profile, user_birthday'});
+                }, {scope: 'email, user_birthday'});
             }
         });
     };

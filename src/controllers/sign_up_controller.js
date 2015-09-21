@@ -34,6 +34,7 @@ SignUpCtrl.prototype.test = function() {
             }
             else {
                 //move page
+                console.log("YAY YOU SIGNED UP");
             }
         });
     }

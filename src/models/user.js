@@ -6,6 +6,7 @@ function User(email, password) {
 	this.last_name;
 	this.dob;
 	this.country_code;
+    this.img_url;
 }
 
 User.prototype.setToken = function(token) {
