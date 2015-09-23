@@ -27,16 +27,25 @@ User.prototype.getTopicNames = function() {
 };
 
 
-User.prototype.toBody = function() {
-    return {
+User.prototype.toBody = function(auth) {
+    var body = {
         first_name: this.first_name,
-            last_name: this.last_name,
-            country_code: this.country_code,
-            password: this.password,
-            dob: this.dob,
-            topics: this.getTopicNames(),
-            email: this.email
+        last_name: this.last_name,
+        country_code: this.country_code,
+        dob: this.dob,
+        topics: this.getTopicNames(),
+        email: this.email
     };
+    if(auth) {
+        body.auth_token = auth;
+    }
+    else {
+        body.password = this.password;
+    }
+    if(this.img_url){
+        body.image = this.img_url;
+    }
+    return body;
 };
 
 module.exports = User;

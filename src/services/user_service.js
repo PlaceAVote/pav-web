@@ -81,7 +81,7 @@ function UserService($resource, facebookService) {
         }
         var create_config = getSaveConfig(this.createdFB);
         var saveUser = new $resource(create_config.url, undefined, {create : create_config.method});
-        var toSave = this.user.toBody();
+        var toSave = this.user.toBody(this.createdFB);
         saveUser.create(toSave, onLoad, onError);
     };
 
