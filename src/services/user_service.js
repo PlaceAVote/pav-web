@@ -9,6 +9,7 @@ function UserService($resource, facebookService) {
             callback(undefined, resource);
         };
         var onError = function(err) {
+            that.createdFB = true;
             callback(err, that.user);
         };
 

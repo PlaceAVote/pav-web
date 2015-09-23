@@ -264,5 +264,18 @@ describe("User Service", function() {
             subject.createdFB = true;
             subject.saveUser();
         });
+        it("onError sets created via facebook bool", function(done){
+            function mockResource(url, params, methods, options) {
+                this.login = function(data, onLoad, onError){
+                    onError({message: "User Not Found"});
+                }
+            };
+            facebook = new MockFacebook();
+            var subject = new UserService(mockResource, facebook);
+            subject.loginWithFacebook(function(err, resource){
+                expect(subject.createdFB).to.eql(true);
+                done();
+            });
+        });
     });
 });
