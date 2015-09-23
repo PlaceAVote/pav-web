@@ -15,8 +15,18 @@ function LoginCtrl($scope, $location, userService) {
 }
 
 LoginCtrl.prototype.loginWithFacebook = function(){
-    this.userService.loginWithFacebook();
-}
+    var that = this;
+    this.userService.loginWithFacebook(function(err, response){
+        if(err){
+            if(err.message === "User Not Found"){
+                that.go('/topics');
+            }
+        }
+        else {
+            that.go('/feed');
+        }
+    });
+};
 
 LoginCtrl.prototype.go = function (hash) {
  	this.location.path(hash);

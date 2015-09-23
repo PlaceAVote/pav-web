@@ -82,4 +82,32 @@ describe('LoginCtrl', function() {
 			expect(changed).to.be.true;
 			expect(created).to.be.true;
 		});
+        describe("Facebook login", function(){
+            it("should call go with 'topics' if user is undefined", function(done){
+                var subject = new LoginCtrl();
+                subject.userService = {
+                   loginWithFacebook : function(callback){
+                      callback({message:"User Not Found"});
+                   }
+                };
+               subject.go = function(hash){
+                expect(hash).to.eql("/topics");
+                done();
+               };
+               subject.loginWithFacebook();
+            });
+            it("should call go with 'feed' if no errors", function(done){
+                var subject = new LoginCtrl();
+                subject.userService = {
+                   loginWithFacebook : function(callback){
+                      callback();
+                   }
+                };
+               subject.go = function(hash){
+                expect(hash).to.eql("/feed");
+                done();
+               };
+               subject.loginWithFacebook();
+            });
+        });
 });
