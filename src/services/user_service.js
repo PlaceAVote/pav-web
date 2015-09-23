@@ -23,7 +23,7 @@ function UserService($resource, facebookService) {
             that.user.first_name = resource.first_name;
             that.user.last_name = resource.last_name;
             that.user.img_url = resource.picture.data.url;
-            config.users.facebook.login.headers["X-FACEBOOK-ACCESS-TOKEN"] = auth.accessToken;
+            config.users.facebook.login.headers["PAV_AUTH_TOKEN"] = auth.accessToken;
             var facebookUserLoginResource = new $resource(config.users.facebookLoginUrl, undefined, {login : config.users.facebook.login});
             facebookUserLoginResource.login(that.user, onLoad, onError);
         });

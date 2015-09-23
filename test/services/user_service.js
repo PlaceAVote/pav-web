@@ -224,7 +224,7 @@ describe("User Service", function() {
                     expect(user.last_name).to.eql("barber");
                     expect(user.img_url).to.eql("img.com");
                     expect(user.dob).to.eql(new Date("04/01/1990"));
-                    expect(methods.login.headers["X-FACEBOOK-ACCESS-TOKEN"]).to.eql("authT0k3n4000");
+                    expect(methods.login.headers["PAV_AUTH_TOKEN"]).to.eql("authT0k3n4000");
                     done();
                };
             };
