@@ -13,7 +13,7 @@ var mailcheck = require('./directives/mailcheck.js');
 var angular = require('angular');
 
 //thirdparty integrations
-var facebook = require('./integrations/facebook.js');
+var Facebook = require('./integrations/facebook.js');
 
 var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource')]);
 
@@ -38,7 +38,8 @@ app.config(['$routeProvider', function($routeProvider) {
 }]);
 
 //services
-app.factory('userService', ['$resource', UserService]);
+app.factory('facebookService', [Facebook]);
+app.factory('userService', ['$resource', 'facebookService', UserService]);
 
 //controllers
 app.controller('TopicRegisterCtrl',['$scope','$location', 'userService', RegisterController]);

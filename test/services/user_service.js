@@ -228,8 +228,8 @@ describe("User Service", function() {
                     done();
                };
             };
-            var subject = new UserService(mockResource);
-            subject.facebook = new MockFacebook();
+            facebook = new MockFacebook();
+            var subject = new UserService(mockResource, facebook);
             subject.loginWithFacebook();
 
         });
@@ -240,8 +240,8 @@ describe("User Service", function() {
                     done();
                };
             };
-            var subject = new UserService(mockResource);
-            subject.facebook = new MockFacebook();
+            facebook = new MockFacebook();
+            var subject = new UserService(mockResource, facebook);
             subject.loginWithFacebook(function(err, resource){
                 expect(err.message).to.eql("User Not Found");
                 expect(resource.first_name).to.eql("paul");

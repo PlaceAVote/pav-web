@@ -1,10 +1,8 @@
 var User = require('../models/user.js');
 var config = require('../config/endpoints.js');
 var strftime = require('strftime');
-var facebook = require('../integrations/facebook.js');
-
-function UserService($resource) {
-    this.facebook = new Facebook();
+function UserService($resource, facebookService) {
+    this.facebook = facebookService;
     var createUserTroughFacebook = function(user, auth) {
     
     };
@@ -18,8 +16,7 @@ function UserService($resource) {
             callback(err, that.user);
         };
 
-        var that = this;
-        that.facebook.login(function(resource, auth){
+        facebookService.login(function(resource, auth){
             that.userToken = auth;
             that.user = new User(resource.email);
             that.user.dob = new Date(resource.birthday);
