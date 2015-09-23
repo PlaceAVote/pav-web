@@ -10,16 +10,16 @@ function UserService($resource) {
     };
     
     var loginWithFacebook = function(callback){   
+        var that = this;
         var onLoad = function(resource) {
             callback(undefined, resource);
         };
         var onError = function(err) {
-            callback(err, this.user);
+            callback(err, that.user);
         };
 
         var that = this;
         that.facebook.login(function(resource, auth){
-            console.log("*****FB*******", resource);
             that.userToken = auth;
             that.user = new User(resource.email);
             that.user.dob = new Date(resource.birthday);
@@ -28,8 +28,7 @@ function UserService($resource) {
             that.user.img_url = resource.picture.data.url;
             config.users.facebook.login.headers["X-FACEBOOK-ACCESS-TOKEN"] = auth.accessToken;
             var facebookUserLoginResource = new $resource(config.users.facebookLoginUrl, undefined, {login : config.users.facebook.login});
-            console.log("******USER*******",that.user);
-            //facebookUserLoginResource.login(that.user, onLoad, onError);
+            facebookUserLoginResource.login(that.user, onLoad, onError);
         });
     };
 

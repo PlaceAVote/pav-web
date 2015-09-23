@@ -196,4 +196,56 @@ describe("User Service", function() {
            });
        });
     });
+    describe("Facebook integration", function(){
+        function MockFacebook() {
+            this.login = function(callback){
+                var mockResource = {
+                    email: "test@test.com",
+                    birthday: "04/01/1990",
+                    first_name: "paul",
+                    last_name: "barber",
+                    picture: {
+                        data: {
+                                  url: "img.com"
+                              }
+                    }
+                };
+                var auth = {
+                    accessToken:  "authT0k3n4000"
+                };
+                callback(mockResource, auth);
+            };
+        };
+        it("calls facebook resource with correct user details", function(done){
+            function mockResource(url, params, methods, options) {
+               this.login = function(user, succeed, error){
+                    expect(user.first_name).to.eql("paul");
+                    expect(user.email).to.eql("test@test.com");
+                    expect(user.last_name).to.eql("barber");
+                    expect(user.img_url).to.eql("img.com");
+                    expect(user.dob).to.eql(new Date("04/01/1990"));
+                    expect(methods.login.headers["X-FACEBOOK-ACCESS-TOKEN"]).to.eql("authT0k3n4000");
+                    done();
+               };
+            };
+            var subject = new UserService(mockResource);
+            subject.facebook = new MockFacebook();
+            subject.loginWithFacebook();
+
+        });
+        it("returns a User Not Defined Error when trying to log in to a user that has not yet created an account", function(done){
+            function mockResource(url, params, methods, options) {
+               this.login = function(user, succeed, error){
+                    error({message: "User Not Found"});
+                    done();
+               };
+            };
+            var subject = new UserService(mockResource);
+            subject.facebook = new MockFacebook();
+            subject.loginWithFacebook(function(err, resource){
+                expect(err.message).to.eql("User Not Found");
+                expect(resource.first_name).to.eql("paul");
+            });
+        });
+    });
 });
