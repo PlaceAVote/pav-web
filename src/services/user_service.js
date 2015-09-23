@@ -2,11 +2,7 @@ var User = require('../models/user.js');
 var config = require('../config/endpoints.js');
 var strftime = require('strftime');
 function UserService($resource, facebookService) {
-    this.facebook = facebookService;
-    var createUserTroughFacebook = function(user, auth) {
-    
-    };
-    
+    this.createdFB = false;
     var loginWithFacebook = function(callback){   
         var that = this;
         var onLoad = function(resource) {
@@ -53,6 +49,22 @@ function UserService($resource, facebookService) {
 		this.user.country_code = additionalInformation.country_code;
 		this.user.dob = strftime('%m/%d/%Y', additionalInformation.dob);
 	};
+
+    var getSaveConfig = function(throughFacebook){
+        console.log(throughFacebook);
+        if(throughFacebook){
+            return {
+                url : config.users.facebookCreateUrl,
+                method: config.users.create
+            }
+        }
+        else {
+            return {
+                url: config.users.create_endpoint,
+                method: config.users.create
+            }
+        }
+    };
     var saveUser = function(callback){
         var that = this;
 
@@ -66,11 +78,12 @@ function UserService($resource, facebookService) {
         if(!this.user){
             return;
         }
-        var saveUser = new $resource(config.users.create_endpoint, undefined, {create : config.users.create});
+        var create_config = getSaveConfig(this.createdFB);
+        var saveUser = new $resource(create_config.url, undefined, {create : create_config.method});
         var toSave = this.user.toBody();
         saveUser.create(toSave, onLoad, onError);
-
     };
+
 
     var login = function(user, callback) {
 

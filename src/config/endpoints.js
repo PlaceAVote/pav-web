@@ -26,7 +26,7 @@ module.exports = {
                                 withCredentials: false
                             }
 
-                }
+                },
+                facebookCreateUrl: 'https://192.168.99.100:8080/user/facebook'
             }
 }
-//PAV-USER-AUTH'
