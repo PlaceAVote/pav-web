@@ -37,7 +37,7 @@ describe("Users", function(){
             image: "image.com",
             dob: new Date("04/01/1990"),
             email: "paul@test.com",
-            auth_token: "auth_token",
+            token: "auth_token",
             topics: []
         };
         expect(subject).to.eql(expected);

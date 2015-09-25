@@ -37,7 +37,7 @@ User.prototype.toBody = function(auth) {
         email: this.email
     };
     if(auth) {
-        body.auth_token = auth;
+        body.token = auth;
     }
     else {
         body.password = this.password;
