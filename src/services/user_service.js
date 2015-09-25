@@ -56,7 +56,6 @@ function UserService($resource, facebookService) {
 	};
 
     var getSaveConfig = function(throughFacebook){
-        console.log(throughFacebook);
         if(throughFacebook){
             return {
                 url : config.users.facebookCreateUrl,
@@ -86,6 +85,7 @@ function UserService($resource, facebookService) {
         var create_config = getSaveConfig(this.createdFB);
         var saveUser = new $resource(create_config.url, undefined, {create : create_config.method});
         var toSave = this.user.toBody(this.createdFB);
+        console.log("NEW FB USER: ", toSave);
         saveUser.create(toSave, onLoad, onError);
     };
 

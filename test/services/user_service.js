@@ -274,5 +274,34 @@ describe("User Service", function() {
                 done();
             });
         });
+        it("create from facebook should only have specific params", function(done){
+            mockResource = function(){
+                this.create = function(data, onLoad, onError){
+                    expect(data.email).to.eql("test@email.com");
+                    expect(data.password).to.eql(undefined);
+                    expect(data.first_name).to.eql("paul");
+                    expect(data.last_name).to.eql("barber");
+                    expect(!!data.dob).to.eql(true);
+                    expect(data.country_code).to.eql("804");
+                    expect(data.topics[0]).to.eql('guns');
+                    expect(data.img_url).to.eql('img.com');
+                    done();
+                };
+            };
+            facebook = new MockFacebook();
+            var subject = new UserService(mockResource, facebook);
+            subject.createUser("test@email.com", "p4SSw0rD!");
+			var additionalInformation = {
+				first_name : "paul",
+				last_name : "barber",
+				country_code: "804"
+			};
+            subject.user.topics = [{name:'guns'}];
+            subject.user.img_url = 'img.com';
+            subject.user.dob = new Date('04/01/1990');
+			subject.addAdditionalInformation(additionalInformation);
+            subject.createdFB = true;
+            subject.saveUser();
+        });
     });
 });
