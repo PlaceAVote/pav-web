@@ -50,6 +50,7 @@ LoginCtrl.prototype.login = function(u, hash) {
     this.user.emailValid = this.emailValidation(email);
     this.user.passwordValid = this.passwordValidation(password);	
     if(this.user.emailValid && this.user.passwordValid) {
+        console.log("valid creds");
         this.userService.login({email: email, password: password}, function(err, response){
             ///this.go(hash);
             if (err) {
