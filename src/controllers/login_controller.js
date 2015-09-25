@@ -14,6 +14,18 @@ function LoginCtrl($scope, $location, userService) {
 	}
 }
 
+LoginCtrl.prototype.loginWithFacebook = function(){
+    var that = this;
+    this.userService.loginWithFacebook(function(err, response){
+        if(err){
+            that.go("/topics");
+        }
+        else {
+            that.go("/feed");
+        }
+    });
+};
+
 LoginCtrl.prototype.go = function (hash) {
  	this.location.path(hash);
 }

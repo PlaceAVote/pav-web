@@ -1,8 +1,30 @@
 var User = require('../models/user.js');
-var config = require('../config/live_endpoints.js');
+var config = require('../config/endpoints.js');
 var strftime = require('strftime');
+function UserService($resource, facebookService) {
+    this.createdFB = false;
+    var loginWithFacebook = function(callback){   
+        var that = this;
+        var onLoad = function(resource) {
+            callback(undefined, resource);
+        };
+        var onError = function(err) {
+            that.createdFB = true;
+            callback(err, that.user);
+        };
 
-function UserService($resource) {
+        facebookService.login(function(resource, auth){
+            that.userToken = auth;
+            that.user = new User(resource.email);
+            that.user.dob = new Date(resource.birthday);
+            that.user.first_name = resource.first_name;
+            that.user.last_name = resource.last_name;
+            that.user.img_url = resource.picture.data.url;
+            config.users.facebook.login.headers["PAV_AUTH_TOKEN"] = auth.accessToken;
+            var facebookUserLoginResource = new $resource(config.users.facebookLoginUrl, undefined, {login : config.users.facebook.login});
+            facebookUserLoginResource.login(that.user.toBody(), onLoad, onError);
+        });
+    };
 
     var createUser = function(username, password) {
 		this.user = new User(username, password);
@@ -28,22 +50,27 @@ function UserService($resource) {
 		this.user.country_code = additionalInformation.country_code;
 		this.user.dob = strftime('%m/%d/%Y', additionalInformation.dob);
 	};
-    
+
+    var getSaveConfig = function(throughFacebook){
+        console.log(throughFacebook);
+        if(throughFacebook){
+            return {
+                url : config.users.facebookCreateUrl,
+                method: config.users.facebook.create
+            }
+        }
+        else {
+            return {
+                url: config.users.create_endpoint,
+                method: config.users.create
+            }
+        }
+    };
     var saveUser = function(callback){
         var that = this;
-        var extractTopicNames = function(topics){
-            var names = [];
-            if(topics){
-                var topicLength = topics.length;
-                for(var i = topicLength-1; i>=0; i--) {
-                    names.push(topics[i].name);
-                };
-            }
-            return names;
-        };
 
         var onLoad = function(user){
-            that.user.setToken(user.token);
+            this.usertoken = user.token;
             callback(undefined, user);
         };
         var onError = function(err){
@@ -52,23 +79,17 @@ function UserService($resource) {
         if(!this.user){
             return;
         }
-        var saveUser = new $resource(config.users.create_endpoint, undefined, {create : config.users.create});
-        var toSave = {
-            first_name: this.user.first_name,
-            last_name: this.user.last_name,
-            country_code: this.user.country_code,
-            password: this.user.password,
-            dob: this.user.dob,
-            topics: extractTopicNames(this.user.topics),
-            email: this.user.email
-        };
+        var create_config = getSaveConfig(this.createdFB);
+        var saveUser = new $resource(create_config.url, undefined, {create : create_config.method});
+        var toSave = this.user.toBody(this.createdFB);
         saveUser.create(toSave, onLoad, onError);
-
     };
+
 
     var login = function(user, callback) {
 
         var onLoad = function(response) {
+            this.usertoken = response.token;
             return callback(undefined, response);
         };
 
@@ -89,7 +110,8 @@ function UserService($resource) {
 		addTopics: addTopics,
 		addAdditionalInformation : addAdditionalInformation,
         saveUser : saveUser,
-        login : login
+        login : login,
+        loginWithFacebook : loginWithFacebook
 	};
 };
 

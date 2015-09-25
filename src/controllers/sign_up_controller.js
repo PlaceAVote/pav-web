@@ -4,13 +4,13 @@ function SignUpCtrl ($scope, $location, userService) {
 	$scope.signup = this;
 	this.userService = userService;
 	this.max = this.maxDate();
-
- 	this.additionalInformation = { 
-	  	"first_name": "",
-	   	"last_name": "",
-	  	"dob": "",
-	 	"country_code": "USA"
-	};
+    var user = this.userService.getUser() || {};
+    this.additionalInformation = {
+        "first_name": user.first_name || "",
+        "last_name": user.last_name || "",
+        "dob": user.dob|| "",
+        "country_code": "USA"
+    };
 	this.country = countryCodes;	
 };
 
@@ -34,6 +34,7 @@ SignUpCtrl.prototype.test = function() {
             }
             else {
                 //move page
+                console.log("YAY YOU SIGNED UP");
             }
         });
     }
