@@ -43,7 +43,7 @@ User.prototype.toBody = function(auth) {
         body.password = this.password;
     }
     if(this.img_url){
-        body.image = this.img_url;
+        body.img_url = this.img_url;
     }
     return body;
 };

@@ -1,6 +1,6 @@
 module.exports = {
     users : {
-                create_endpoint : 'http://pav-user-api-1888417595.us-west-2.elb.amazonaws.com/user',
+                create_endpoint : 'pav-user-api-1888417595.us-west-2.elb.amazonaws.com/user',
                 create : {
                     method : 'PUT',
                     headers: {
@@ -8,7 +8,7 @@ module.exports = {
                     },
                     withCredentials : false
                 },
-                login_endpoint: 'http://pav-user-api-1888417595.us-west-2.elb.amazonwas.com:8080/user/authenticate',
+                login_endpoint: 'pav-user-api-1888417595.us-west-2.elb.amazonwas.com:8080/user/authenticate',
                 login: {
                     method: 'POST',
                     headers: {
@@ -16,7 +16,7 @@ module.exports = {
                     },
                     withCredentials: false
                 },
-                get_endpoint: 'http://pav-user-api-1888417595.us-west-2.elb.amazonwas.com/user/',
+                get_endpoint: 'pav-user-api-1888417595.us-west-2.elb.amazonwas.com/user/',
                 get: {
                     method: 'GET',
                     headers: {
@@ -24,7 +24,7 @@ module.exports = {
                     },
                     withCredentials: false
                 },
-                facebookLoginUrl : 'http://pav-user-api-1888417595.us-west-2.elb.amazonwas.com/user/facebook/authenticate',
+                facebookLoginUrl : 'pav-user-api-1888417595.us-west-2.elb.amazonwas.com/user/facebook/authenticate',
                 facebook: {
                     login : {
                                 method: 'POST',
@@ -41,6 +41,6 @@ module.exports = {
                                 withCredentials: false
                             },
                 },
-                facebookCreateUrl: 'http://pav-user-api-1888417595.us-west-2.elb.amazonwas.com/user/facebook'
+                facebookCreateUrl: 'pav-user-api-1888417595.us-west-2.elb.amazonwas.com/user/facebook'
             }
 }
