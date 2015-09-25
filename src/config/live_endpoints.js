@@ -4,7 +4,8 @@ module.exports = {
                 create : {
                     method : 'PUT',
                     headers: {
-                        'Content-Type' : "application/json"
+                        'Content-Type' : "application/json",
+                        'Accept': 'application/json'
                     },
                     withCredentials : false
                 },
@@ -12,7 +13,8 @@ module.exports = {
                 login: {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
                     },
                     withCredentials: false
                 },
@@ -20,7 +22,8 @@ module.exports = {
                 get: {
                     method: 'GET',
                     headers: {
-                        'Content-Type':'application/json'
+                        'Content-Type':'application/json',
+                        'Accept': 'application/json'
                     },
                     withCredentials: false
                 },
@@ -29,14 +32,16 @@ module.exports = {
                     login : {
                                 method: 'POST',
                                 headers: {
-                                    'Content-Type' : 'application/json'
+                                    'Content-Type' : 'application/json',
+                                    'Accept': 'application/json'
                                 },
                                 withCredentials: false
                             },
                     create: {
                                 method: 'PUT',
                                 headers: {
-                                    'Content-Type':'application/json'
+                                    'Content-Type':'application/json',
+                                    'Accept': 'application/json'
                                 },
                                 withCredentials: false
                             },
