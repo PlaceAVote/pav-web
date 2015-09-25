@@ -222,14 +222,14 @@ describe("User Service", function() {
                     expect(user.first_name).to.eql("paul");
                     expect(user.email).to.eql("test@test.com");
                     expect(user.last_name).to.eql("barber");
-                    expect(user.img_url).to.eql("img.com");
+                    expect(user.image).to.eql("img.com");
                     expect(user.dob).to.eql(new Date("04/01/1990"));
                     expect(methods.login.headers["PAV_AUTH_TOKEN"]).to.eql("authT0k3n4000");
                     done();
                };
             };
-            facebook = new MockFacebook();
-            var subject = new UserService(mockResource, facebook);
+            mockFacebook = new MockFacebook();
+            var subject = new UserService(mockResource, mockFacebook);
             subject.loginWithFacebook();
 
         });
@@ -251,7 +251,7 @@ describe("User Service", function() {
             function mockResource(url, params, methods, options) {
                 this.create = function(body){
                 };
-                expect(url).to.be.eql('https://192.168.99.100:8080/user/facebook');
+                expect(url).to.be.eql('http://192.168.99.100:8080/user/facebook');
                 done();
             };
             facebook = new MockFacebook();
