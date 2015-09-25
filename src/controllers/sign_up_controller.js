@@ -22,8 +22,8 @@ SignUpCtrl.prototype.test = function() {
         that.invalid_user = true;
         console.log("invalid");
     }
-    console.log("stuff");
     else {
+        console.log("stuff");
         this.userService.saveUser(function(err, result){
             if(err) {
                 if(err.status === 409) {
