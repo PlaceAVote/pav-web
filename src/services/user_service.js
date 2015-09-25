@@ -22,7 +22,11 @@ function UserService($resource, facebookService) {
             that.user.img_url = resource.picture.data.url;
             config.users.facebook.login.headers["PAV_AUTH_TOKEN"] = auth.accessToken;
             var facebookUserLoginResource = new $resource(config.users.facebookLoginUrl, undefined, {login : config.users.facebook.login});
-            facebookUserLoginResource.login(that.user.toBody(), onLoad, onError);
+            var creds = {
+                email: that.user.email,
+                token: that.userToken.accessToken
+            }
+            facebookUserLoginResource.login(creds, onLoad, onError);
         });
     };
 

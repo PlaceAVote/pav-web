@@ -219,11 +219,8 @@ describe("User Service", function() {
         it("calls facebook resource with correct user details", function(done){
             function mockResource(url, params, methods, options) {
                this.login = function(user, succeed, error){
-                    expect(user.first_name).to.eql("paul");
                     expect(user.email).to.eql("test@test.com");
-                    expect(user.last_name).to.eql("barber");
-                    expect(user.img_url).to.eql("img.com");
-                    expect(user.dob).to.eql(new Date("04/01/1990"));
+                    expect(user.token).to.eql("authT0k3n4000");
                     expect(methods.login.headers["PAV_AUTH_TOKEN"]).to.eql("authT0k3n4000");
                     done();
                };
