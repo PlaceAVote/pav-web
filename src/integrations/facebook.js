@@ -1,30 +1,18 @@
-Facebook = function(){
+var config = require('../config/endpoints.js');
 
-    login = function(callback){
-        //ideally move this elsewhere to allow global access to FB
+Facebook = function(){
+    var facebook;
+    /**
+     * initialise facebook sdk.  Is registered when service is initialized.
+     */
+    var init = function(){
         window.fbAsyncInit = function() {
             FB.init({
-                appId      : '1686777641544347',
-            xfbml      : true,
-            version    : 'v2.4'
+                appId      : config.facebookAppId,
+                xfbml      : true,
+                version    : 'v2.4'
             });
-            FB.getLoginStatus(function(response) {
-                var auth = response.authResponse;
-                if (response.status === 'connected') {
-                    FB.api('/me', {fields: 'first_name, last_name, picture, email, birthday, hometown'}, function(response) {
-                        callback(response, auth);
-                    });
-                }
-                else {
-                    FB.login(function(response){
-                        var auth = response.authResponse;
-                        FB.api('/me', {fields: 'first_name, last_name, picture, email, birthday, hometown'}, function(response) {
-                            console.log("AUTH", auth);
-                            callback(response, auth);
-                        });
-                    }, {scope: 'email, user_birthday'});
-                }
-            });
+            facebook = FB;
         };
         (function(d, s, id){
             var js, fjs = d.getElementsByTagName(s)[0];
@@ -33,7 +21,29 @@ Facebook = function(){
             js.src = "//connect.facebook.net/en_US/sdk.js";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
-        return this;
+    }();
+
+    /**
+     * Login to facebook. Checks whether the user is logged in, if not ask
+     * user for permissions.  Return user object
+     */
+    login = function(callback){
+        facebook.getLoginStatus(function(response) {
+            var auth = response.authResponse;
+            if (response.status === 'connected') {
+                facebook.api('/me', {fields: 'first_name, last_name, picture, email, birthday, hometown'}, function(response) {
+                    callback(response, auth);
+                });
+            }
+            else {
+                facebook.login(function(response){
+                    var auth = response.authResponse;
+                    facebook.api('/me', {fields: 'first_name, last_name, picture, email, birthday, hometown'}, function(response) {
+                        callback(response, auth);
+                    });
+                }, {scope: 'email, user_birthday'});
+            }
+        });
     };
     return {
         login: login

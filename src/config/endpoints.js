@@ -1,4 +1,5 @@
 module.exports = {
+    facebookAppId: '1686805824874862',
     users : {
                 create_endpoint : 'http://192.168.99.100:8080/user/',
                 create : {
