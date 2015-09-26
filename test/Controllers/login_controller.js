@@ -110,4 +110,24 @@ describe('LoginCtrl', function() {
                subject.loginWithFacebook();
             });
         });
+       describe("failed login", function() {
+        it("sets forgot to false", function(done){
+            var subject = new LoginCtrl();
+            subject.userService = {
+                login : function(params, callback){
+                    callback({status:401});
+                }
+            };
+            var test = function(callback){
+                console.log("hello");
+                subject.login({email: 'paul@test.com', password: 'tesTING123'}, 'destination');
+                callback();
+            }
+            test(function(){
+                console.log(subject);
+                expect(subject.forgot).to.eql(true);
+                done();
+             });
+        });
+       });
 });

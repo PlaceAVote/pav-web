@@ -23,6 +23,7 @@
 			 <label>Password</label>
 			 <input name="password" type="password" ng-class="{'login-error': !login.user.passwordValid}"  ng-model="login.user.password" placeholder="*******" />
 			 <p class="error-message" ng-class="{'show': !login.user.passwordValid}">Password requires at least one digit and one capital letter.</p>
+             <p class="error-message" ng-class="{'show': login.forgot}">Invalid User Credentials</p>
 			 <button ng-click="login.validate(login.user, '/topics');">Create an account</button><button ng-click="login.login(login.user, '/topics');">Sign In</button>
 			 </form>
 			</section>
