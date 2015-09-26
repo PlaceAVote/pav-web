@@ -1,4 +1,5 @@
 module.exports = {
+    facebookAppId: '1686777641544347',
     users : {
                 create_endpoint : 'http://pav-user-api-1888417595.us-west-2.elb.amazonaws.com:8080/user',
                 create : {
