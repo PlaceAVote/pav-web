@@ -44,19 +44,23 @@ LoginCtrl.prototype.validate = function(u, hash) {
 };
 
 LoginCtrl.prototype.login = function(u, hash) {
-    console.log("in login");
+    var that = this;
     var email = u.email;
     var password = u.password;
     this.user.emailValid = this.emailValidation(email);
     this.user.passwordValid = this.passwordValidation(password);	
     if(this.user.emailValid && this.user.passwordValid) {
-        console.log("valid creds");
         this.userService.login({email: email, password: password}, function(err, response){
             ///this.go(hash);
             if (err) {
                 console.log("**ERROR: ", err);
+                if(err.status === 401){
+                    //invalid user credentials
+                    that.forgot = true;
+                }
             } else {
                 console.log("**Response: ", response);
+                that.go("/feed");
             }
         });
     }
