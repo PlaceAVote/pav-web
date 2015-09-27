@@ -1,1 +1,11 @@
-<h1>Hello DAMON!</h1>
+<div class="onboarding-container l-7 m-10 s-12" ng-show="banner.show">
+    <div class='banner'>
+        <span ng-click="banner.hide()">X</span>
+        <span class="user-avatar">
+            <img src={{user.img_url}} />
+        </span>
+        <h2>{{banner.welcome}}</h2>
+        <p>{{banner.message}}</p>
+        <p>{{banner.privacyMessage}}, to change this setting, <span>click here</span></p>
+    </div>
+</div>
