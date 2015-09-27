@@ -31,4 +31,15 @@ describe("Banner", function(){
         var banner = new Banner(user);
         expect(banner.privacyMessage).to.eql("You have chosen to make your profile public");
     });
+    it("defaults to show message", function(){
+        var user = new User();
+        var banner = new Banner(user);
+        expect(banner.show).to.eql(true);
+    });
+    it("hide function change hide setting to false", function(){
+        var user = new User();
+        var banner = new Banner(user);
+        banner.hide();
+        expect(banner.show).to.eql(false);
+    });
 });
