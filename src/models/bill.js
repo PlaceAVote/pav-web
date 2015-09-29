@@ -2,11 +2,12 @@ function Bill(options) {
     if(!options){
         return this;
     }
-    this.topic = options.topic;
-    this.name = options.name;
-    this.comments = options.comments;
-    this.yesVote = options.yesVote;
-    this.noVote = options.noVote;
+    this.subject = options.subject;
+    this.short_title = options.short_title;
+    this.total_comments = options.total_comments;
+    this.yesVote = options.votes.yes;
+    this.noVote = options.votes.no;
+    this.bill_id = options.bill_id;
 }
 
 Bill.prototype.majorityVote = function(){

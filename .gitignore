@@ -6,3 +6,4 @@ dist/*
 *.zip
 pav_ionic/
 .idea/
+coverage/
