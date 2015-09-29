@@ -11,7 +11,7 @@ function Bill(options) {
     this.summary = options.summary;
 }
 
-Bill.prototype.majorityVote = function(){
+Bill.prototype.majorityVote = function() {
     var result = {};
     if(this.yesVote > this.noVote) {
         result.majority = 'yes';
