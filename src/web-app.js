@@ -5,7 +5,7 @@ var LoginController = require('./controllers/login_controller.js');
 var FeedController = require('./controllers/feed_controller.js');
 //services
 var UserService = require('./services/user_service.js');
-
+var BillService = require('./services/bill_service.js');
 //directives
 var mailcheck = require('./directives/mailcheck.js');
 
@@ -44,12 +44,12 @@ app.config(['$routeProvider', function($routeProvider) {
 //services
 app.factory('facebookService', [Facebook]);
 app.factory('userService', ['$resource', 'facebookService', UserService]);
-
+app.factory('billService', ['$resource', BillService]);
 //controllers
 app.controller('TopicRegisterCtrl',['$scope','$location', 'userService', RegisterController]);
 app.controller('SignUpCtrl',['$scope','$location', 'userService', SignUpController]);
 app.controller('LoginCtrl',['$scope','$location', 'userService', LoginController]);
-app.controller('FeedCtrl', ['$scope', '$location', 'userService', FeedController]);
+app.controller('FeedCtrl', ['$scope', '$location', 'userService', 'billService', FeedController]);
 
 //directives
 app.directive('mailcheck', ['$compile','$sce', mailcheck]);

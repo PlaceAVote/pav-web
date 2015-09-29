@@ -8,6 +8,7 @@ function Bill(options) {
     this.yesVote = options.votes.yes;
     this.noVote = options.votes.no;
     this.bill_id = options.bill_id;
+    this.summary = options.summary;
 }
 
 Bill.prototype.majorityVote = function(){
