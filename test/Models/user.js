@@ -2,6 +2,15 @@ var User = require("../../src/models/user.js");
 var expect = require("chai").expect;
 
 describe("Users", function(){
+    it("has default private property equal false", function(){
+        var user = new User();
+        expect(user.private).to.eql(false);
+    });
+    it("sets email and password when supplied", function(){
+        var user = new User("paul", "TEST123");
+        expect(user.email).to.eql("paul");
+        expect(user.password).to.eql("TEST123");
+    });
     it("toBody returns an object with a password if an auth token isn't supplied", function(){
         var user = new User("paul@test.com", "test0606");
         user.dob = new Date("04/01/1990");

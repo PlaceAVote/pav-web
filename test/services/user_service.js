@@ -303,5 +303,17 @@ describe("User Service", function() {
             subject.createdFB = true;
             subject.saveUser();
         });
+        describe("User public perception", function(){
+            it("can be changed to be public", function(){
+                mockResource = function(){};
+                facebook = new MockFacebook();
+                var subject = new UserService();
+                subject.createUser("paul@test.com", "PASwo4rd");
+                subject.makeProfilePublic();
+                expect(subject.user.private).to.eql(true);
+                subject.makeProfilePublic();
+                expect(subject.user.private).to.eql(false);
+            });
+        });
     });
 });

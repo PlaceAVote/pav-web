@@ -55,6 +55,18 @@ function UserService($resource, facebookService) {
 		this.user.dob = strftime('%m/%d/%Y', additionalInformation.dob);
 	};
 
+    var makeProfilePublic = function(){
+        if(!this.user) {
+            return;
+        }
+        if(this.user.private === false){
+            this.user.private = true;
+        }
+        else if(this.user.private === true){
+            this.user.private = false;
+        }
+    };
+
     var getSaveConfig = function(throughFacebook){
         if(throughFacebook){
             return {
@@ -115,7 +127,8 @@ function UserService($resource, facebookService) {
 		addAdditionalInformation : addAdditionalInformation,
         saveUser : saveUser,
         login : login,
-        loginWithFacebook : loginWithFacebook
+        loginWithFacebook : loginWithFacebook,
+        makeProfilePublic: makeProfilePublic
 	};
 };
 

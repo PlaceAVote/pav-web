@@ -2,7 +2,7 @@
 var RegisterController = require('./controllers/register_controller.js');
 var SignUpController = require('./controllers/sign_up_controller.js');
 var LoginController = require('./controllers/login_controller.js');
-
+var FeedController = require('./controllers/feed_controller.js');
 //services
 var UserService = require('./services/user_service.js');
 
@@ -32,6 +32,10 @@ app.config(['$routeProvider', function($routeProvider) {
 			templateUrl: 'partials/user-signup.html',
 			controller: 'SignUpCtrl as signup'
 		})
+        .when('/feed', {
+            templateUrl: 'partials/feed.html',
+            controller: 'FeedCtrl as feed'
+        })
 		.otherwise({
 			redirectTo: '/'
 		})
@@ -45,6 +49,7 @@ app.factory('userService', ['$resource', 'facebookService', UserService]);
 app.controller('TopicRegisterCtrl',['$scope','$location', 'userService', RegisterController]);
 app.controller('SignUpCtrl',['$scope','$location', 'userService', SignUpController]);
 app.controller('LoginCtrl',['$scope','$location', 'userService', LoginController]);
+app.controller('FeedCtrl', ['$scope', '$location', 'userService', FeedController]);
 
 //directives
 app.directive('mailcheck', ['$compile','$sce', mailcheck]);
