@@ -12,7 +12,7 @@ describe("FeedController", function() {
     };
     it("adds banner to scope", function(){
         var scope = {};
-        var subject = new FeedController(scope, {},new mockUserService());
+        var subject = new FeedController(scope, {},new mockUserService(), {getBills : function(){}});
         expect(!!scope.banner).to.eql(true);
     });
 });

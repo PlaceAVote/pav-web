@@ -3,7 +3,7 @@ var Bill = require("../models/bill.js");
 var resource = require("../temp/mockBillResource.js");
 
 function BillService($resource){
-    $resource = resource;
+    $resource = $resource || resource;
     var getBills = function(username, callback) {
         var onLoad = function(result) {
             var bills = [];

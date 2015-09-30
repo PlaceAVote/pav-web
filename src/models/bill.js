@@ -14,11 +14,11 @@ function Bill(options) {
 Bill.prototype.majorityVote = function() {
     var result = {};
     if(this.yesVote > this.noVote) {
-        result.majority = 'yes';
+        result.majority = 'Yes';
         result.percent = Math.round((100 / (this.yesVote + this.noVote)) * this.yesVote);
     }
     else {
-        result.majority = 'no';
+        result.majority = 'No';
         result.percent = Math.round((100 / (this.noVote + this.yesVote)) * this.noVote);
     }
     return result;

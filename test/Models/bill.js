@@ -29,10 +29,10 @@ describe("Bills", function(){
     });
     it("Majority Vote 'Yes'", function(){
         var subject = new Bill({votes:{yes: 75, no: 25}});
-        expect(subject.majorityVote()).to.eql({majority: 'yes', percent: 75});
+        expect(subject.majorityVote()).to.eql({majority: 'Yes', percent: 75});
     });
     it("Majority Vote 'No'", function(){
         var subject = new Bill({votes:{yes: 5, no: 10}});
-        expect(subject.majorityVote()).to.eql({majority: 'no', percent: 67});
+        expect(subject.majorityVote()).to.eql({majority: 'No', percent: 67});
     });
 });

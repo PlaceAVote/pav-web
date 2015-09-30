@@ -15,6 +15,6 @@ FeedController = function($scope, $location, userService, billService) {
             console.log($scope.bills);
         }
     });
-};
+}
 
 module.exports = FeedController;
