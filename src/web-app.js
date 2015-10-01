@@ -22,7 +22,8 @@ var app = angular.module('pavApp', [require('angular-route'), require('angular-a
 app.config(['$routeProvider', function($routeProvider) {
 	$routeProvider
 		.when('/', {
-			templateUrl: 'partials/home.html'
+			templateUrl: 'partials/login.html',
+			controller: 'LoginCtrl as login'
 		})
 		.when('/topics', {
 			templateUrl: 'partials/topics-register.html',

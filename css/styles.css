@@ -969,3 +969,14 @@ input {
     width: 50%; }
   100% {
     width: 100%; } }
+
+.app header {
+  background: #5b7da8;
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%, #5b7da8), color-stop(100%, #746898));
+  background: -webkit-linear-gradient(left, #5b7da8 0%, #746898 100%);
+  background: linear-gradient(to right, #5b7da8 0%, #746898 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5b7da8', endColorstr='#746898', GradientType=1 );
+  height: 40px;
+  width: 100%;
+  position: fixed;
+  top: 0; }
