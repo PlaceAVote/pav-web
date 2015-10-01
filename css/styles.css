@@ -341,7 +341,8 @@ input {
     font-size: 20px;
     font-size: 1.25rem;
     color: #3b3b3b;
-    margin: 24px 0; }
+    margin: 24px 0;
+    line-height: 30px; }
   .login p {
     color: #3b3b3b;
     font-size: 12px;
@@ -375,16 +376,19 @@ input {
       .login button.fb-login:hover {
         background-color: #5a7abf;
         border-color: #3b5998; }
-    .login button.tw-login, .login button.email-login {
+    .login button.tw-login,
+    .login button.email-login {
       border: 1px solid #cccccc;
       background-color: white;
       margin: 10px 0;
       width: calc(50% - 10px); }
       @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
-        .login button.tw-login, .login button.email-login {
+        .login button.tw-login,
+        .login button.email-login {
           font-size: 12px;
           font-size: 0.75rem; } }
-      .login button.tw-login:hover, .login button.email-login:hover {
+      .login button.tw-login:hover,
+      .login button.email-login:hover {
         background-color: #543594;
         color: white;
         border-color: #c2b2e3; }
@@ -403,12 +407,14 @@ input {
     @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
       .login section {
         margin-bottom: 20px; } }
-    .login section.ng-hide-add, .login section.ng-hide-remove {
+    .login section.ng-hide-add,
+    .login section.ng-hide-remove {
       -webkit-transition: all 0.2s ease;
               transition: all 0.2s ease; }
     .login section.ng-hide {
       opacity: 0; }
-    .login section:after, .login section:before {
+    .login section:after,
+    .login section:before {
       bottom: 100%;
       left: 75%;
       border: solid transparent;
@@ -615,6 +621,8 @@ input {
   right: 0;
   max-width: 750px;
   top: 5%;
+  -webkit-transition: all 0.3s ease;
+          transition: all 0.3s ease;
   border-radius: 3px;
   background-color: white;
   border: 1px solid #d6d4e1;
@@ -653,20 +661,11 @@ input {
       .onboarding-container .border {
         height: 7px;
         width: 100%;
-        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#7abcff+0,6769a0+0,7f538e+100 */
-        background: #7abcff;
-        /* Old browsers */
-        /* FF3.6+ */
-        background: -webkit-gradient(linear, left top, right top, color-stop(0%, #7abcff), color-stop(0%, #6769a0), color-stop(100%, #7f538e));
-        /* Chrome,Safari4+ */
-        background: -webkit-linear-gradient(left, #7abcff 0%, #6769a0 0%, #7f538e 100%);
-        /* Chrome10+,Safari5.1+ */
-        /* Opera 11.10+ */
-        /* IE10+ */
-        background: linear-gradient(to right, #7abcff 0%, #6769a0 0%, #7f538e 100%);
-        /* W3C */
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7abcff', endColorstr='#7f538e',GradientType=1 );
-        /* IE6-9 */ } }
+        background: #6769a0;
+        background: -webkit-gradient(linear, left top, right top, color-stop(0%, #6769a0), color-stop(100%, #7f538e));
+        background: -webkit-linear-gradient(left, #6769a0 0%, #7f538e 100%);
+        background: linear-gradient(to right, #6769a0 0%, #7f538e 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6769a0', endColorstr='#7f538e', GradientType=1 ); } }
   @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
     .onboarding-container section {
       padding: 0px 20px; } }
@@ -674,7 +673,8 @@ input {
     color: #3b3b3b;
     font-size: 20px;
     font-family: "whitneymedium", sans-serif;
-    padding: 20px 0px; }
+    padding: 20px 0px;
+    line-height: 30px; }
   .onboarding-container section form label {
     color: #3b3b3b;
     font-size: 12px;
@@ -684,7 +684,22 @@ input {
     @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
       .onboarding-container section form label {
         width: 100%; } }
-    .onboarding-container section form label input, .onboarding-container section form label select {
+    .onboarding-container section form label select {
+      font-family: "whitneymedium", sans-serif;
+      margin-top: 10px;
+      margin-bottom: 15px;
+      width: 100%;
+      background: white;
+      font-size: 12px;
+      height: 30px;
+      padding-left: 10px;
+      -webkit-transition: all 0.2s ease;
+              transition: all 0.2s ease;
+      outline: none;
+      border: 1px solid #cccccc;
+      color: #543594;
+      border-radius: 3px; }
+    .onboarding-container section form label input {
       font-family: "whitneymedium", sans-serif;
       margin-top: 10px;
       margin-bottom: 15px;
@@ -698,18 +713,17 @@ input {
       outline: none;
       border: 1px solid #cccccc;
       border-radius: 3px; }
-      .onboarding-container section form label input.ng-pristine, .onboarding-container section form label select.ng-pristine {
-        color: #cccccc; }
-      .onboarding-container section form label input.ng-dirty, .onboarding-container section form label select.ng-dirty {
+      .onboarding-container section form label input.ng-dirty {
         color: #543594; }
-      .onboarding-container section form label input:focus, .onboarding-container section form label select:focus {
+      .onboarding-container section form label input:focus {
         border: 1px solid #543594; }
     .onboarding-container section form label input[type="date"].ng-pristine {
       background-color: white;
       color: #cccccc; }
     .onboarding-container section form label input[type="date"].ng-dirty {
       color: #543594; }
-  .onboarding-container section form .firstname, .onboarding-container section form .signupdob {
+  .onboarding-container section form .firstname,
+  .onboarding-container section form .signupdob {
     margin-right: 20px; }
   .onboarding-container section form .email-label {
     width: 100%; }
@@ -736,6 +750,19 @@ input {
         margin-bottom: 20px; } }
     .onboarding-container section form button:hover {
       background-color: #b1d384; }
+  .onboarding-container .register-error {
+    height: 0;
+    -webkit-transition: all 0.2s ease;
+            transition: all 0.2s ease;
+    overflow: hidden; }
+    .onboarding-container .register-error.show {
+      height: auto;
+      background: #f19b8e;
+      border-radius: 3px;
+      border: 1px solid #e64a33;
+      color: white;
+      padding: 10px;
+      margin-bottom: 20px; }
 
 .topics {
   margin-top: 30px; }
@@ -775,53 +802,25 @@ input {
   float: left;
   width: calc(33.33% - 20px);
   box-shadow: 0px 2px 15px -2px transparent;
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#87e0fd+0,5b7da8+0,746898+100 */
-  background-position: 100px;
-  background: #87e0fd;
-  /* Old browsers */
-  /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #87e0fd), color-stop(0%, #5b7da8), color-stop(100%, #746898));
-  /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(-45deg, #87e0fd 0%, #5b7da8 0%, #746898 100%);
-  /* Chrome10+,Safari5.1+ */
-  /* Opera 11.10+ */
-  /* IE10+ */
-  background: -webkit-linear-gradient(315deg, #87e0fd 0%, #5b7da8 0%, #746898 100%);
-  background: linear-gradient(135deg, #87e0fd 0%, #5b7da8 0%, #746898 100%);
-  /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#87e0fd', endColorstr='#746898',GradientType=1 );
-  /* IE6-9 fallback on horizontal gradient */ }
+  background: white; }
   .topic-container:hover {
     box-shadow: 0px 2px 15px -2px rgba(0, 0, 0, 0.3); }
   @media screen and (max-device-width: 620px), screen and (max-width: 620px) {
     .topic-container {
       width: calc(50% - 15px); } }
-  .topic-container:nth-child(3n+3) {
+  .topic-container:nth-child(3n+ 3) {
     margin-right: 0px; }
     @media screen and (max-device-width: 620px), screen and (max-width: 620px) {
-      .topic-container:nth-child(3n+3) {
+      .topic-container:nth-child(3n+ 3) {
         margin-right: 30px; } }
   @media screen and (max-device-width: 620px), screen and (max-width: 620px) {
-    .topic-container:nth-child(2n+2) {
+    .topic-container:nth-child(2n+ 2) {
       margin-right: 0px; } }
   .topic-container:before {
     content: "";
     display: block;
     padding-top: 100%;
     /* initial ratio of 1:1*/ }
-  .topic-container .white-block {
-    background-color: white;
-    height: 500px;
-    width: 500px;
-    position: absolute;
-    top: 0%;
-    left: -154px;
-    -webkit-transform: rotate(45deg);
-        -ms-transform: rotate(45deg);
-            transform: rotate(45deg);
-    -webkit-transition: all 0.4s cubic-bezier(0.68, 0.33, 0.04, 0.89);
-            transition: all 0.4s cubic-bezier(0.68, 0.33, 0.04, 0.89);
-    box-shadow: 0 0 75px 40px white; }
   .topic-container .topic {
     position: absolute;
     top: 0;
@@ -830,8 +829,6 @@ input {
     right: 0;
     overflow: hidden; }
     .topic-container .topic p {
-      -webkit-transition: all 0.3s ease;
-              transition: all 0.3s ease;
       color: #3b3b3b;
       font-size: 15px;
       font-size: 0.9375rem;
@@ -877,15 +874,18 @@ input {
           right: 10px;
           width: 20px;
           height: 20px; } }
-  .topic-container.topic-selected .white-block {
-    left: -259%;
-    top: -650px; }
-  .topic-container.topic-selected p {
-    color: white; }
-  .topic-container.topic-selected span {
-    color: white; }
-  .topic-container.topic-selected .topic-tick .icon-check-mark {
-    color: #a5cc71 !important; }
+  .topic-container.topic-selected {
+    background: #5b7da8;
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%, #5b7da8), color-stop(100%, #746898));
+    background: -webkit-linear-gradient(left, #5b7da8 0%, #746898 100%);
+    background: linear-gradient(to right, #5b7da8 0%, #746898 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5b7da8', endColorstr='#746898', GradientType=1 ); }
+    .topic-container.topic-selected p {
+      color: white; }
+    .topic-container.topic-selected span {
+      color: white; }
+    .topic-container.topic-selected .topic-tick .icon-check-mark {
+      color: #a5cc71 !important; }
 
 .topic span {
   -webkit-transition: all 0.3s ease;
@@ -930,16 +930,6 @@ input {
       font-size: 3.75rem;
       padding-top: 20%; } }
 
-.topic-container {
-  -webkit-transform-style: preserve-3d;
-          transform-style: preserve-3d;
-  -webkit-transform: perspective(600) translateZ(0px);
-          transform: perspective(600) translateZ(0px);
-  -webkit-tap-highlight-color: transparent; }
-  .topic-container:active {
-    -webkit-transform: perspective(600) translateZ(-50px);
-            transform: perspective(600) translateZ(-50px); }
-
 .progress-bar {
   width: 200px;
   height: 15px;
@@ -958,19 +948,11 @@ input {
     top: 0;
     width: 50%;
     height: 30px;
-    background: #66689e;
-    /* Old browsers */
-    /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, right top, color-stop(0%, #66689e), color-stop(100%, #725e97));
-    /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(left, #66689e 0%, #725e97 100%);
-    /* Chrome10+,Safari5.1+ */
-    /* Opera 11.10+ */
-    /* IE10+ */
-    background: linear-gradient(to right, #66689e 0%, #725e97 100%);
-    /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#66689e', endColorstr='#725e97',GradientType=1 );
-    /* IE6-9 */ }
+    background: #6769a0;
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%, #6769a0), color-stop(100%, #7f538e));
+    background: -webkit-linear-gradient(left, #6769a0 0%, #7f538e 100%);
+    background: linear-gradient(to right, #6769a0 0%, #7f538e 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6769a0', endColorstr='#7f538e', GradientType=1 ); }
     .progress-bar span.complete {
       width: 100%;
       -webkit-animation: fullbar 2s ease;

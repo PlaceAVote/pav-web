@@ -1,43 +1,38 @@
 .progress-bar {
-	@media screen and (max-device-width: 1020px), screen and (max-width: 1020px) {
-					display: none;
-				}
-	width: 200px;
-	height: 15px;
-	background-color: $greylight;
-	position: absolute;
-	right: 29px;
-	top: 52px;
-	border-radius: 3px;
-	overflow: hidden;
-	span {
-		display: inline-block;
-		position: absolute;
-		top: 0;
-		width: 50%;
-		height: 30px;
-		background: #66689e; /* Old browsers */
-		background: -moz-linear-gradient(left,  #66689e 0%, #725e97 100%); /* FF3.6+ */
-		background: -webkit-gradient(linear, left top, right top, color-stop(0%,#66689e), color-stop(100%,#725e97)); /* Chrome,Safari4+ */
-		background: -webkit-linear-gradient(left,  #66689e 0%,#725e97 100%); /* Chrome10+,Safari5.1+ */
-		background: -o-linear-gradient(left,  #66689e 0%,#725e97 100%); /* Opera 11.10+ */
-		background: -ms-linear-gradient(left,  #66689e 0%,#725e97 100%); /* IE10+ */
-		background: linear-gradient(to right,  #66689e 0%,#725e97 100%); /* W3C */
-		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#66689e', endColorstr='#725e97',GradientType=1 ); /* IE6-9 */
-		&.complete {
-			width: 100%;
-			animation: fullbar 2s ease;
-		}
-	}
+  @media screen and (max-device-width: 1020px), screen and (max-width: 1020px) {
+  display: none;
+  }
+  width: 200px;
+  height: 15px;
+  background-color: $greylight;
+  position: absolute;
+  right: 29px;
+  top: 52px;
+  border-radius: 3px;
+  overflow: hidden;
+
+  span {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 30px;
+    @include linear-gradient(#6769a0, #7f538e);
+
+    &.complete {
+      width: 100%;
+      animation: fullbar 2s ease;
+    }
+  }
 }
 
 @keyframes fullbar {
-	0% {
-		width: 50%;
-	}
+  0% {
+    width: 50%;
+  }
 
-	100% {
-		width: 100%;
-	}
+  100% {
+    width: 100%;
+  }
 }
 

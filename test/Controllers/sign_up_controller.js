@@ -59,4 +59,32 @@ describe("SignUpController", function(){
         expect(subject.additionalInformation.last_name).to.eql("barber");
         expect(subject.additionalInformation.dob).to.eql(new Date("04/01/1990"));
     });
+    it("calls location path to feed when user has been created", function(done){
+        function mockUserService() {
+            var that = this;
+            that.user = {
+                first_name: "paul",
+                last_name:"barber",
+                email:"test@test.com",
+                dob: new Date("04/01/1990")
+            };
+            that.getUser = function() {
+                return that.user;
+            };
+            that.saveUser = function(callback){
+                return callback(undefined);
+            };
+            that.addAdditionalInformation = function() {};
+        }
+        function location() {
+            this.path = function(route){
+                    expect(route).to.eql("/feed");
+                    done();
+                  }
+        };
+        var l = new location();
+        var mockUS = new mockUserService();
+        var subject = new SignUpController(undefined, l, mockUS);
+        subject.test();
+    });
 });
