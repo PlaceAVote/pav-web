@@ -6,6 +6,7 @@ deployment:
     branch: master
     commands: 
       - ". ./scripts/deploy.sh"
+      - ". ./scripts/deploy_site.sh"
 experimental: 
   notify: 
     branches: 
