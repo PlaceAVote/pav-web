@@ -684,7 +684,6 @@ input {
     @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
       .onboarding-container section form label {
         width: 100%; } }
-    .onboarding-container section form label input,
     .onboarding-container section form label select {
       font-family: "whitneymedium", sans-serif;
       margin-top: 10px;
@@ -698,15 +697,27 @@ input {
               transition: all 0.2s ease;
       outline: none;
       border: 1px solid #cccccc;
+      color: #543594;
       border-radius: 3px; }
-      .onboarding-container section form label input.ng-pristine,
-      .onboarding-container section form label select.ng-pristine {
+    .onboarding-container section form label input {
+      font-family: "whitneymedium", sans-serif;
+      margin-top: 10px;
+      margin-bottom: 15px;
+      width: 100%;
+      background: white;
+      font-size: 12px;
+      height: 30px;
+      padding-left: 10px;
+      -webkit-transition: all 0.2s ease;
+              transition: all 0.2s ease;
+      outline: none;
+      border: 1px solid #cccccc;
+      border-radius: 3px; }
+      .onboarding-container section form label input.ng-pristine {
         color: #cccccc; }
-      .onboarding-container section form label input.ng-dirty,
-      .onboarding-container section form label select.ng-dirty {
+      .onboarding-container section form label input.ng-dirty {
         color: #543594; }
-      .onboarding-container section form label input:focus,
-      .onboarding-container section form label select:focus {
+      .onboarding-container section form label input:focus {
         border: 1px solid #543594; }
     .onboarding-container section form label input[type="date"].ng-pristine {
       background-color: white;

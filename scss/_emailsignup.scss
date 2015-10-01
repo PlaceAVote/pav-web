@@ -77,9 +77,22 @@
         font-family: $font-normal;
         display: inline-block;
         width: calc(50% - 12px);
-
-        input,
         select {
+          font-family: $font-normal;
+          margin-top: 10px;
+          margin-bottom: 15px;
+          width: 100%;
+          background: white;
+          font-size: 12px;
+          height: 30px;
+          padding-left: 10px;
+          transition: all 0.2s ease;
+          outline: none;
+          border: 1px solid $grey;
+          color: $purple;
+          border-radius: 3px;
+        }
+        input {
           font-family: $font-normal;
           margin-top: 10px;
           margin-bottom: 15px;
