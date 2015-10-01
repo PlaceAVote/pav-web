@@ -1,9 +1,9 @@
 var Bill = require("../models/bill.js");
 //temporary until endpoint is made
-var resource = require("../temp/mockBillResource.js");
+//var resource = require("../temp/mockBillResource.js");
 
 function BillService($resource){
-    $resource = $resource || resource;
+    $resource = $resource;
     var getBills = function(username, callback) {
         var onLoad = function(result) {
             var bills = [];
