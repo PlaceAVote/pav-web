@@ -84,7 +84,6 @@
     overflow: hidden;
 
     p {
-      transition: all 0.3s ease;
       color: $black;
       @include font-size(15px);
       font-family: $font-normal;

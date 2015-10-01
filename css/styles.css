@@ -803,8 +803,6 @@ input {
     right: 0;
     overflow: hidden; }
     .topic-container .topic p {
-      -webkit-transition: all 0.3s ease;
-              transition: all 0.3s ease;
       color: #3b3b3b;
       font-size: 15px;
       font-size: 0.9375rem;
