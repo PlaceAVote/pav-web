@@ -1,0 +1,9 @@
+.app {
+	header {
+		@include linear-gradient(#5b7da8, #746898);
+		height: 40px;
+		width: 100%;
+		position: fixed;
+		top: 0;
+	}
+}
