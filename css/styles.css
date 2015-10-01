@@ -713,8 +713,6 @@ input {
       outline: none;
       border: 1px solid #cccccc;
       border-radius: 3px; }
-      .onboarding-container section form label input.ng-pristine {
-        color: #cccccc; }
       .onboarding-container section form label input.ng-dirty {
         color: #543594; }
       .onboarding-container section form label input:focus {
