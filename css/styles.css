@@ -776,22 +776,7 @@ input {
   float: left;
   width: calc(33.33% - 20px);
   box-shadow: 0px 2px 15px -2px transparent;
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#87e0fd+0,5b7da8+0,746898+100 */
-  background-position: 100px;
-  background: #87e0fd;
-  /* Old browsers */
-  /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #87e0fd), color-stop(0%, #5b7da8), color-stop(100%, #746898));
-  /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(-45deg, #87e0fd 0%, #5b7da8 0%, #746898 100%);
-  /* Chrome10+,Safari5.1+ */
-  /* Opera 11.10+ */
-  /* IE10+ */
-  background: -webkit-linear-gradient(315deg, #87e0fd 0%, #5b7da8 0%, #746898 100%);
-  background: linear-gradient(135deg, #87e0fd 0%, #5b7da8 0%, #746898 100%);
-  /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#87e0fd', endColorstr='#746898', GradientType=1 );
-  /* IE6-9 fallback on horizontal gradient */ }
+  background: white; }
   .topic-container:hover {
     box-shadow: 0px 2px 15px -2px rgba(0, 0, 0, 0.3); }
   @media screen and (max-device-width: 620px), screen and (max-width: 620px) {
@@ -810,19 +795,6 @@ input {
     display: block;
     padding-top: 100%;
     /* initial ratio of 1:1*/ }
-  .topic-container .white-block {
-    background-color: white;
-    height: 500px;
-    width: 500px;
-    position: absolute;
-    top: 0%;
-    left: -154px;
-    -webkit-transform: rotate(45deg);
-        -ms-transform: rotate(45deg);
-            transform: rotate(45deg);
-    -webkit-transition: all 0.4s cubic-bezier(0.68, 0.33, 0.04, 0.89);
-            transition: all 0.4s cubic-bezier(0.68, 0.33, 0.04, 0.89);
-    box-shadow: 0 0 75px 40px white; }
   .topic-container .topic {
     position: absolute;
     top: 0;
@@ -878,15 +850,18 @@ input {
           right: 10px;
           width: 20px;
           height: 20px; } }
-  .topic-container.topic-selected .white-block {
-    left: -259%;
-    top: -650px; }
-  .topic-container.topic-selected p {
-    color: white; }
-  .topic-container.topic-selected span {
-    color: white; }
-  .topic-container.topic-selected .topic-tick .icon-check-mark {
-    color: #a5cc71 !important; }
+  .topic-container.topic-selected {
+    background: #5b7da8;
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%, #5b7da8), color-stop(100%, #746898));
+    background: -webkit-linear-gradient(left, #5b7da8 0%, #746898 100%);
+    background: linear-gradient(to right, #5b7da8 0%, #746898 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5b7da8', endColorstr='#746898', GradientType=1 ); }
+    .topic-container.topic-selected p {
+      color: white; }
+    .topic-container.topic-selected span {
+      color: white; }
+    .topic-container.topic-selected .topic-tick .icon-check-mark {
+      color: #a5cc71 !important; }
 
 .topic span {
   -webkit-transition: all 0.3s ease;
@@ -930,16 +905,6 @@ input {
       font-size: 60px;
       font-size: 3.75rem;
       padding-top: 20%; } }
-
-.topic-container {
-  -webkit-transform-style: preserve-3d;
-          transform-style: preserve-3d;
-  -webkit-transform: perspective(600) translateZ(0px);
-          transform: perspective(600) translateZ(0px);
-  -webkit-tap-highlight-color: transparent; }
-  .topic-container:active {
-    -webkit-transform: perspective(600) translateZ(-50px);
-            transform: perspective(600) translateZ(-50px); }
 
 .progress-bar {
   width: 200px;
