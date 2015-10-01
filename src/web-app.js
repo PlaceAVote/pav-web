@@ -22,8 +22,7 @@ var app = angular.module('pavApp', [require('angular-route'), require('angular-a
 app.config(['$routeProvider', function($routeProvider) {
 	$routeProvider
 		.when('/', {
-			templateUrl: 'partials/login.html',
-			controller: 'LoginCtrl as login'
+			templateUrl: 'partials/home.html'
 		})
 		.when('/topics', {
 			templateUrl: 'partials/topics-register.html',
@@ -39,7 +38,7 @@ app.config(['$routeProvider', function($routeProvider) {
         })
 		.otherwise({
 			redirectTo: '/'
-		})
+		});
 }]);
 
 //temporary resources
