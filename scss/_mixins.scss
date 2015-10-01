@@ -19,3 +19,9 @@
   background: linear-gradient(to right, $one 0%, $two 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{$one}', endColorstr='#{$two}', GradientType=1 );
 }
+
+@mixin media($width) {
+  @media screen and (max-device-width: $width), screen and (max-width: $width) {
+    @content;
+  }
+}

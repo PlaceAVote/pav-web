@@ -3,14 +3,13 @@
   background-color: white;
   height: 100%;
   overflow: hidden;
-
-  @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
+  @include media(480px){
   min-height: 100%;
   overflow: auto;
   }
 
   .login-footer {
-    @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
+    @include media(480px){
     display: none;
     }
     background-color: white;
@@ -120,8 +119,7 @@
     &.email-login {
       border: 1px solid $grey;
       background-color: white;
-
-      @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
+      @include media(480px){
         @include font-size(12px);
       }
       margin: 10px 0;
@@ -146,7 +144,7 @@
 
   // email signin
   section {
-    @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
+    @include media(480px){
     margin-bottom: 20px;
     }
     opacity: 1;
@@ -260,8 +258,7 @@
       margin-bottom: 0px;
       @include font-size(12px);
       font-family: $font-normal;
-
-      @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
+      @include media(480px){
         @include font-size(12px);
       }
       margin-left: 0;
@@ -298,12 +295,10 @@
   // min-height: 1000px;
   height: 100%;
   padding: 40px 40px;
-
-  @media screen and (max-device-width: 900px), screen and (max-width: 900px) {
+  @include media(900px){
   display: none;
   }
-
-  @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
+  @include media(480px){
   display: none;
   }
 

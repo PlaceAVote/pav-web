@@ -790,20 +790,20 @@ input {
   background: -webkit-linear-gradient(315deg, #87e0fd 0%, #5b7da8 0%, #746898 100%);
   background: linear-gradient(135deg, #87e0fd 0%, #5b7da8 0%, #746898 100%);
   /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#87e0fd', endColorstr='#746898',GradientType=1 );
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#87e0fd', endColorstr='#746898', GradientType=1 );
   /* IE6-9 fallback on horizontal gradient */ }
   .topic-container:hover {
     box-shadow: 0px 2px 15px -2px rgba(0, 0, 0, 0.3); }
   @media screen and (max-device-width: 620px), screen and (max-width: 620px) {
     .topic-container {
       width: calc(50% - 15px); } }
-  .topic-container:nth-child(3n+3) {
+  .topic-container:nth-child(3n+ 3) {
     margin-right: 0px; }
     @media screen and (max-device-width: 620px), screen and (max-width: 620px) {
-      .topic-container:nth-child(3n+3) {
+      .topic-container:nth-child(3n+ 3) {
         margin-right: 30px; } }
   @media screen and (max-device-width: 620px), screen and (max-width: 620px) {
-    .topic-container:nth-child(2n+2) {
+    .topic-container:nth-child(2n+ 2) {
       margin-right: 0px; } }
   .topic-container:before {
     content: "";

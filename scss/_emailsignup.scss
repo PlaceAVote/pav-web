@@ -5,8 +5,7 @@
   right: 0;
   max-width: 750px;
   top: 5%;
-
-  @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
+  @include media(480px){
   top: 0;
   padding: 0;
   background-color: white;
@@ -15,8 +14,7 @@
   border-radius: 3px;
   background-color: white;
   border: 1px solid $widgetborder;
-
-  @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
+  @include media(480px){
   border: none;
   }
   padding: 35px 20px;
@@ -26,7 +24,7 @@
   box-shadow: 0px 2px 4px -2px rgba(0, 0, 0, 0.2);
 
   header {
-    @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
+    @include media(480px){
     background-color: $greylight;
     position: relative;
     height: 100px;
@@ -36,8 +34,7 @@
     img {
       width: 300px;
       padding-bottom: 20px;
-
-      @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
+      @include media(480px){
       position: absolute;
       left: 0;
       right: 0;
@@ -49,16 +46,15 @@
 
   .border {
     height: 0;
-
-    @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
+    @include media(480px){
     height: 7px;
     width: 100%;
-    @include linear-gradient(#6769a0, #7f538e);
+      @include linear-gradient(#6769a0, #7f538e);
     }
   }
 
   section {
-    @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
+    @include media(480px){
   padding: 0px 20px;
     }
 
@@ -71,7 +67,7 @@
 
     form {
       label {
-        @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
+        @include media(480px){
         width: 100%;
         }
         color: $black;
@@ -146,8 +142,7 @@
         border-radius: 5px;
         cursor: pointer;
         outline: none;
-
-        @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
+        @include media(480px){
         margin-bottom: 20px;
         }
 
