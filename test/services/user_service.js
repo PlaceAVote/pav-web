@@ -301,6 +301,9 @@ describe("User Service", function() {
             subject.user.dob = new Date('04/01/1990');
 			subject.addAdditionalInformation(additionalInformation);
             subject.createdFB = true;
+            subject.userToken = {
+                accessToken: "AUTHT0k3n"
+            };
             subject.saveUser();
         });
         describe("User public perception", function(){

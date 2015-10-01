@@ -3,6 +3,7 @@ function SignUpCtrl ($scope, $location, userService) {
 	$scope = $scope || {};
 	$scope.signup = this;
 	this.userService = userService;
+    this.location = $location;
 	this.max = this.maxDate();
     var user = this.userService.getUser() || {};
     this.additionalInformation = {
@@ -12,7 +13,7 @@ function SignUpCtrl ($scope, $location, userService) {
         "country_code": "USA"
     };
 	this.country = countryCodes;	
-};
+}
 
 SignUpCtrl.prototype.test = function() {
     var that = this;
@@ -23,7 +24,6 @@ SignUpCtrl.prototype.test = function() {
         console.log("invalid");
     }
     else {
-        console.log("stuff");
         this.userService.saveUser(function(err, result){
             if(err) {
                 if(err.status === 409) {
@@ -35,7 +35,7 @@ SignUpCtrl.prototype.test = function() {
             }
             else {
                 //move page
-                console.log("YAY YOU SIGNED UP");
+                that.location.path("/feed");
             }
         });
     }

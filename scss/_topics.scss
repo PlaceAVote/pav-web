@@ -1,219 +1,203 @@
-//media query 1226px
-
+// media query 1226px
 .topics {
-	margin-top: 30px;
+  margin-top: 30px;
 
-	button {
-	height:50px;
-	border: 1px solid darken($green, 20%);
-	background-color: $green;
-	line-height: 50px;
-	color: white;
-	@include font-size(18px);
-	text-align: center;
-	font-family: $font-normal;
-	width: 100%;
-	display: inline-block;
-	transition: all 0.2s ease;
-	border-radius: 5px;
-	cursor: pointer;
-	outline: none;
-	@media screen and (max-device-width: 480px), screen and (max-width: 480px) {
-		margin-bottom: 20px;
-	}
-	&:hover {
-		background-color: lighten($green, 5%);
-	}
+  button {
+    height: 50px;
+    border: 1px solid darken($green, 20%);
+    background-color: $green;
+    line-height: 50px;
+    color: white;
+    @include font-size(18px);
+    text-align: center;
+    font-family: $font-normal;
+    width: 100%;
+    display: inline-block;
+    transition: all 0.2s ease;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
 
-}
-}
-.topic-container {
-	overflow:hidden;
-	transition: all 0.2s ease;
-	cursor: pointer;
-	margin-right: 30px;
-	margin-bottom:30px;
-	border-radius: 3px;
-	border: 1px solid $purple;
-	position: relative;
-	float: left;
-    width: calc(33.33% - 20px);
-	-webkit-box-shadow: 0px 2px 15px -2px rgba(0,0,0,0);
-	-moz-box-shadow: 0px 2px 15px -2px rgba(0,0,0,0);
-	box-shadow: 0px 2px 15px -2px rgba(0,0,0,0);
-/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#87e0fd+0,5b7da8+0,746898+100 */
-	background-position:100px ;
-	background: #87e0fd; /* Old browsers */
-	background: -moz-linear-gradient(-45deg,  #87e0fd 0%, #5b7da8 0%, #746898 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#87e0fd), color-stop(0%,#5b7da8), color-stop(100%,#746898)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(-45deg,  #87e0fd 0%,#5b7da8 0%,#746898 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(-45deg,  #87e0fd 0%,#5b7da8 0%,#746898 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(-45deg,  #87e0fd 0%,#5b7da8 0%,#746898 100%); /* IE10+ */
-	background: linear-gradient(135deg,  #87e0fd 0%,#5b7da8 0%,#746898 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#87e0fd', endColorstr='#746898',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-	
+    @include media(480px) {
+    margin-bottom: 20px;
+    }
+
     &:hover {
-		-webkit-box-shadow: 0px 2px 15px -2px rgba(0,0,0,0.3);
-		-moz-box-shadow: 0px 2px 15px -2px rgba(0,0,0,0.3);
-		box-shadow: 0px 2px 15px -2px rgba(0,0,0,0.3);
+      background-color: lighten($green, 5%);
     }
-    @media screen and (max-device-width: 620px), screen and (max-width: 620px) { 
-	 width: calc(50% - 15px);	
-	}
-    &:nth-child(3n+3) {
-    	margin-right: 0px;
-    	@media screen and (max-device-width: 620px), screen and (max-width: 620px) { 
-	 	margin-right: 30px;
-		}
-    }
-    &:nth-child(2n+2) {
-    	@media screen and (max-device-width: 620px), screen and (max-width: 620px) { 
-		margin-right: 0px;
-	}
-    
-    }
-		&:before {
-		content: "";
-		display: block;
-		padding-top: 100%; 	/* initial ratio of 1:1*/
-	}
-	& .white-block {
-		background-color: white;
-	    height: 500px;
-	    width: 500px;
-	    position: absolute;
-	    top: 0%;
-	    left: -154px;
-	    transform: rotate(45deg);
-		transition: all 0.4s cubic-bezier(0.68, 0.33, 0.04, 0.89);
-    	box-shadow: 0 0 75px 40px white;
-	}
-		.topic {
-		position:  absolute;
-		top: 0;
-		left: 0;
-		bottom: 0;
-		right: 0;
-		overflow:hidden;
-
-		p {
-			transition: all 0.3s ease;
-			color: $black;
-			@include font-size(15px);
-			font-family: $font-normal;
-			position: absolute;
-			bottom: 15px;
-			left: 15px;
-			@media screen and (max-device-width: 480px), screen and (max-width: 480px) {
-					@include font-size(12px);
-					bottom: 10px;
-					left: 10px;
-				}
-			@media screen and (max-device-width: 800px), screen and (max-width: 800px) {
-			@include font-size(12px);
-			
-			}
-		}
-		.topic-tick {
-			background-color: white;
-			border: 2px solid $grey;
-			height: 30px;
-			width: 30px;
-			border-radius: 50%;
-			position: absolute;
-			bottom: 15px;
-			right: 15px;
-			& .icon-check-mark {
-				transition: 0.5s ease;
-				color: white;
-				text-align: center;
-				padding-top: 15%;
-				@include font-size(20px);
-				@media screen and (max-device-width: 480px), screen and (max-width: 480px) {
-					padding-top: 20%;
-					@include font-size(12px);
-				}
-			}
-			@media screen and (max-device-width: 480px), screen and (max-width: 480px) {
-				bottom: 7px;
-				right: 10px;
-				width: 20px;
-				height: 20px;
-				}
-		}
-	}
-	&.topic-selected {
-		.white-block {
-		left: -259%;
-	    top: -650px;
-		}
-		p {
-			color: white;
-		}
-		span {
-			color: white;
-		}
-		.topic-tick {
-			& .icon-check-mark {
-				color: $green !important;
-			}
-		}
-	}
+  }
 }
-
-
-//Icons
-.topic {
-	span {
-		transition: all 0.3s ease;
-		text-align: center;
-		display: block;
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		color: $grey;
-		@include font-size(130px);
-    	padding-top: 15%;
-    	@media screen and (max-device-width: 1460px), screen and (max-width: 1460px) {
-    		@include font-size(90px);
-    		padding-top: 25%;
-    	}
-		@media screen and (max-device-width: 1360px), screen and (max-width: 1360px) {
-			@include font-size(70px);
-			padding-top: 25%;
-		}
-
-		@media screen and (max-device-width: 1100px), screen and (max-width: 1100px) {
-			@include font-size(50px);
-			padding-top: 20%;
-		}
-
-		@media screen and (max-device-width: 900px), screen and (max-width: 900px) {
-			@include font-size(80px);
-			padding-top: 25%;
-		}
-		@media screen and (max-device-width: 800px), screen and (max-width: 800px) {
-			@include font-size(60px);
-			padding-top: 25%;
-		}
-		@media screen and (max-device-width: 480px), screen and (max-width: 480px) {
-			@include font-size(60px);
-			padding-top: 20%;
-		}
-	}
-
-}
-
-
 
 .topic-container {
-	transform-style: preserve-3d;
-	transform: perspective(600) translateZ(0px);
-	&:active {
-		transform: perspective(600) translateZ(-50px);
-	}
-	-webkit-tap-highlight-color: rgba(0,0,0,0);
+  overflow: hidden;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  margin-right: 30px;
+  margin-bottom: 30px;
+  border-radius: 3px;
+  border: 1px solid $purple;
+  position: relative;
+  float: left;
+  width: calc(33.33% - 20px);
+  -webkit-box-shadow: 0px 2px 15px -2px rgba(0, 0, 0, 0);
+  -moz-box-shadow: 0px 2px 15px -2px rgba(0, 0, 0, 0);
+  box-shadow: 0px 2px 15px -2px rgba(0, 0, 0, 0);
+  background: white;
+   &:hover {
+    -webkit-box-shadow: 0px 2px 15px -2px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0px 2px 15px -2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 15px -2px rgba(0, 0, 0, 0.3);
+  }
+
+ @include media(620px) {
+  width: calc(50% - 15px);
+  }
+
+  &:nth-child(3n+ 3) {
+    margin-right: 0px;
+
+   @include media(620px) {
+    margin-right: 30px;
+    }
+  }
+
+  &:nth-child(2n+ 2) {
+    @include media(620px) {
+  margin-right: 0px;
+    }
+  }
+
+  &:before {
+    content: "";
+    display: block;
+    padding-top: 100%;
+
+    /* initial ratio of 1:1*/
+  }
+
+  .topic {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    overflow: hidden;
+
+    p {
+      color: $black;
+      @include font-size(15px);
+      font-family: $font-normal;
+      position: absolute;
+      bottom: 15px;
+      left: 15px;
+
+      @include media(480px) {
+        @include font-size(12px);
+      bottom: 10px;
+      left: 10px;
+      }
+
+      @include media(800px) {
+        @include font-size(12px);
+      }
+    }
+
+    .topic-tick {
+      background-color: white;
+      border: 2px solid $grey;
+      height: 30px;
+      width: 30px;
+      border-radius: 50%;
+      position: absolute;
+      bottom: 15px;
+      right: 15px;
+
+      & .icon-check-mark {
+        transition: 0.5s ease;
+        color: white;
+        text-align: center;
+        padding-top: 15%;
+        @include font-size(20px);
+
+       @include media(480px) {
+        padding-top: 20%;
+          @include font-size(12px);
+        }
+      }
+
+      @include media(480px) {
+      bottom: 7px;
+      right: 10px;
+      width: 20px;
+      height: 20px;
+      }
+    }
+  }
+
+  &.topic-selected {
+    @include linear-gradient(#5b7da8, #746898);
+    p {
+      color: white;
+    }
+
+    span {
+      color: white;
+    }
+
+    .topic-tick {
+      & .icon-check-mark {
+        color: $green !important;
+      }
+    }
+  }
 }
+
+// Icons
+.topic {
+  span {
+    transition: all 0.3s ease;
+    text-align: center;
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    color: $grey;
+    @include font-size(130px);
+    padding-top: 15%;
+
+   @include media(1460px) {
+      @include font-size(90px);
+    padding-top: 25%;
+    }
+
+    @include media(1360px) {
+      @include font-size(70px);
+    padding-top: 25%;
+    }
+
+    @include media(1100px) {
+      @include font-size(50px);
+    padding-top: 20%;
+    }
+
+   @include media(900px) {
+      @include font-size(80px);
+    padding-top: 25%;
+    }
+
+   @include media(800px) {
+      @include font-size(60px);
+    padding-top: 25%;
+    }
+
+    @include media(480px) {
+      @include font-size(60px);
+    padding-top: 20%;
+    }
+  }
+}
+
+
 
 
 
