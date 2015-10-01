@@ -28,4 +28,4 @@ echo "Creating Application Version Elasticbeanstalk Instance"
 aws --region ${reg} elasticbeanstalk create-application-version --application-name ${environment} --version-label ${label} --source-bundle S3Bucket=${bucket},S3Key=${file} --auto-create-application
 
 echo "Updating Environment"
-aws --region ${reg} elasticbeanstalk update-environment --environment-name ${environment} --version-label ${label}
+aws --region ${reg} elasticbeanstalk update-environment --environment-name ${application} --version-label ${label}
