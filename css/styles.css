@@ -341,7 +341,8 @@ input {
     font-size: 20px;
     font-size: 1.25rem;
     color: #3b3b3b;
-    margin: 24px 0; }
+    margin: 24px 0;
+    line-height: 30px; }
   .login p {
     color: #3b3b3b;
     font-size: 12px;
@@ -670,7 +671,8 @@ input {
     color: #3b3b3b;
     font-size: 20px;
     font-family: "whitneymedium", sans-serif;
-    padding: 20px 0px; }
+    padding: 20px 0px;
+    line-height: 30px; }
   .onboarding-container section form label {
     color: #3b3b3b;
     font-size: 12px;
