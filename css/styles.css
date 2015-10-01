@@ -375,16 +375,19 @@ input {
       .login button.fb-login:hover {
         background-color: #5a7abf;
         border-color: #3b5998; }
-    .login button.tw-login, .login button.email-login {
+    .login button.tw-login,
+    .login button.email-login {
       border: 1px solid #cccccc;
       background-color: white;
       margin: 10px 0;
       width: calc(50% - 10px); }
       @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
-        .login button.tw-login, .login button.email-login {
+        .login button.tw-login,
+        .login button.email-login {
           font-size: 12px;
           font-size: 0.75rem; } }
-      .login button.tw-login:hover, .login button.email-login:hover {
+      .login button.tw-login:hover,
+      .login button.email-login:hover {
         background-color: #543594;
         color: white;
         border-color: #c2b2e3; }
@@ -403,12 +406,14 @@ input {
     @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
       .login section {
         margin-bottom: 20px; } }
-    .login section.ng-hide-add, .login section.ng-hide-remove {
+    .login section.ng-hide-add,
+    .login section.ng-hide-remove {
       -webkit-transition: all 0.2s ease;
               transition: all 0.2s ease; }
     .login section.ng-hide {
       opacity: 0; }
-    .login section:after, .login section:before {
+    .login section:after,
+    .login section:before {
       bottom: 100%;
       left: 75%;
       border: solid transparent;
@@ -653,20 +658,11 @@ input {
       .onboarding-container .border {
         height: 7px;
         width: 100%;
-        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#7abcff+0,6769a0+0,7f538e+100 */
-        background: #7abcff;
-        /* Old browsers */
-        /* FF3.6+ */
-        background: -webkit-gradient(linear, left top, right top, color-stop(0%, #7abcff), color-stop(0%, #6769a0), color-stop(100%, #7f538e));
-        /* Chrome,Safari4+ */
-        background: -webkit-linear-gradient(left, #7abcff 0%, #6769a0 0%, #7f538e 100%);
-        /* Chrome10+,Safari5.1+ */
-        /* Opera 11.10+ */
-        /* IE10+ */
-        background: linear-gradient(to right, #7abcff 0%, #6769a0 0%, #7f538e 100%);
-        /* W3C */
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7abcff', endColorstr='#7f538e',GradientType=1 );
-        /* IE6-9 */ } }
+        background: #6769a0;
+        background: -webkit-gradient(linear, left top, right top, color-stop(0%, #6769a0), color-stop(100%, #7f538e));
+        background: -webkit-linear-gradient(left, #6769a0 0%, #7f538e 100%);
+        background: linear-gradient(to right, #6769a0 0%, #7f538e 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6769a0', endColorstr='#7f538e', GradientType=1 ); } }
   @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
     .onboarding-container section {
       padding: 0px 20px; } }
@@ -684,7 +680,8 @@ input {
     @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
       .onboarding-container section form label {
         width: 100%; } }
-    .onboarding-container section form label input, .onboarding-container section form label select {
+    .onboarding-container section form label input,
+    .onboarding-container section form label select {
       font-family: "whitneymedium", sans-serif;
       margin-top: 10px;
       margin-bottom: 15px;
@@ -698,18 +695,22 @@ input {
       outline: none;
       border: 1px solid #cccccc;
       border-radius: 3px; }
-      .onboarding-container section form label input.ng-pristine, .onboarding-container section form label select.ng-pristine {
+      .onboarding-container section form label input.ng-pristine,
+      .onboarding-container section form label select.ng-pristine {
         color: #cccccc; }
-      .onboarding-container section form label input.ng-dirty, .onboarding-container section form label select.ng-dirty {
+      .onboarding-container section form label input.ng-dirty,
+      .onboarding-container section form label select.ng-dirty {
         color: #543594; }
-      .onboarding-container section form label input:focus, .onboarding-container section form label select:focus {
+      .onboarding-container section form label input:focus,
+      .onboarding-container section form label select:focus {
         border: 1px solid #543594; }
     .onboarding-container section form label input[type="date"].ng-pristine {
       background-color: white;
       color: #cccccc; }
     .onboarding-container section form label input[type="date"].ng-dirty {
       color: #543594; }
-  .onboarding-container section form .firstname, .onboarding-container section form .signupdob {
+  .onboarding-container section form .firstname,
+  .onboarding-container section form .signupdob {
     margin-right: 20px; }
   .onboarding-container section form .email-label {
     width: 100%; }
@@ -958,19 +959,11 @@ input {
     top: 0;
     width: 50%;
     height: 30px;
-    background: #66689e;
-    /* Old browsers */
-    /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, right top, color-stop(0%, #66689e), color-stop(100%, #725e97));
-    /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(left, #66689e 0%, #725e97 100%);
-    /* Chrome10+,Safari5.1+ */
-    /* Opera 11.10+ */
-    /* IE10+ */
-    background: linear-gradient(to right, #66689e 0%, #725e97 100%);
-    /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#66689e', endColorstr='#725e97',GradientType=1 );
-    /* IE6-9 */ }
+    background: #6769a0;
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%, #6769a0), color-stop(100%, #7f538e));
+    background: -webkit-linear-gradient(left, #6769a0 0%, #7f538e 100%);
+    background: linear-gradient(to right, #6769a0 0%, #7f538e 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6769a0', endColorstr='#7f538e', GradientType=1 ); }
     .progress-bar span.complete {
       width: 100%;
       -webkit-animation: fullbar 2s ease;
