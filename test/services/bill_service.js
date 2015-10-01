@@ -1,7 +1,7 @@
 var BillService = require('../../src/services/bill_service.js');
 var Bill = require('../../src/models/bill.js');
 var expect = require('chai').expect;
-
+var resource = require("../../src/temp/mockBillResource.js");
 describe("Bill Service", function(){
     it("Returns a list of bills", function(done){
         var mockResource = {
@@ -32,7 +32,8 @@ describe("Bill Service", function(){
                       ]);
                   }
         };
-        var subject = new BillService(mockResource);
+        var r = new resource();
+        var subject = new BillService(r);
         var results = subject.getBills("user", function(err, result){
             expect(err).to.eql(undefined);
             expect(result.length).to.eql(2);

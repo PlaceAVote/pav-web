@@ -14,7 +14,8 @@ var angular = require('angular');
 
 //thirdparty integrations
 var Facebook = require('./integrations/facebook.js');
-
+//temporary resources
+var TempBillResource = require('./temp/mockBillResource.js');
 var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource')]);
 
 
@@ -41,10 +42,13 @@ app.config(['$routeProvider', function($routeProvider) {
 		})
 }]);
 
+//temporary resources
+app.factory('tempBillResource', [TempBillResource]);
+
 //services
 app.factory('facebookService', [Facebook]);
 app.factory('userService', ['$resource', 'facebookService', UserService]);
-app.factory('billService', ['$resource', BillService]);
+app.factory('billService', ['tempBillResource', BillService]);
 //controllers
 app.controller('TopicRegisterCtrl',['$scope','$location', 'userService', RegisterController]);
 app.controller('SignUpCtrl',['$scope','$location', 'userService', SignUpController]);
