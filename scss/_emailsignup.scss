@@ -5,6 +5,7 @@
   right: 0;
   max-width: 750px;
   top: 5%;
+  transition: all 0.3s ease;
   @include media(480px){
   top: 0;
   padding: 0;
@@ -151,6 +152,20 @@
           background-color: lighten($green, 5%);
         }
       }
+    }
+  }
+  .register-error {
+    height: 0;
+    transition: all 0.2s ease;
+    overflow: hidden;
+    &.show {
+    height: auto;
+    background: lighten($red, 20%);
+    border-radius: 3px;
+    border: 1px solid $red;
+    color: white;
+    padding: 10px;
+    margin-bottom: 20px;
     }
   }
 }

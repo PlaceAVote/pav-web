@@ -621,6 +621,8 @@ input {
   right: 0;
   max-width: 750px;
   top: 5%;
+  -webkit-transition: all 0.3s ease;
+          transition: all 0.3s ease;
   border-radius: 3px;
   background-color: white;
   border: 1px solid #d6d4e1;
@@ -739,6 +741,19 @@ input {
         margin-bottom: 20px; } }
     .onboarding-container section form button:hover {
       background-color: #b1d384; }
+  .onboarding-container .register-error {
+    height: 0;
+    -webkit-transition: all 0.2s ease;
+            transition: all 0.2s ease;
+    overflow: hidden; }
+    .onboarding-container .register-error.show {
+      height: auto;
+      background: #f19b8e;
+      border-radius: 3px;
+      border: 1px solid #e64a33;
+      color: white;
+      padding: 10px;
+      margin-bottom: 20px; }
 
 .topics {
   margin-top: 30px; }
