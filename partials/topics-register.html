@@ -10,8 +10,7 @@
 	<h2>Welcome to Placeavote!</h2>
 	<p>To get you started, please select the topics that interest you</p>
 	<div class="topics">
-			<div class="topic-container" ng-repeat="interest in register.interests" ng-class="{'topic-selected': interest.selected}" ng-click="register.select(interest.name)"> 
-				<div class="white-block"></div>
+			<div class="topic-container" ng-repeat="interest in register.interests" ng-class="{'topic-selected': interest.selected}" ng-click="register.select(interest.name)">
 				<div class="topic">
 					<span class="{{interest.icon}}"></span>
 					<p>{{interest.name}}</p>

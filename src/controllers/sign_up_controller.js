@@ -13,7 +13,7 @@ function SignUpCtrl ($scope, $location, userService) {
         "country_code": "USA"
     };
 	this.country = countryCodes;	
-};
+}
 
 SignUpCtrl.prototype.test = function() {
     var that = this;
