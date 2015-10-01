@@ -1,0 +1,107 @@
+
+<div class="home" ng-switch on="home.email">
+	<div class="intro">
+		<section ng-switch on="home.mobileemail">		
+			<h1>
+				Democracy is built on <span>real</span> representation
+			</h1>
+			<h2>Placeavote lets you read, debate and vote on every bill before congress. The difference is now your representative knows how to represent you.</h2>
+			<a ng-click="home.mobileemail = false" ng-show="home.mobileemail" class="signup-mobile">Sign Up</a>
+				<div ng-hide="home.mobileemail" class="mobile-email">
+				<form action="//placeavote.us3.list-manage.com/subscribe/post?u=88ef7ecceaeb0c63ba6c4fa76&amp;id=253af5cdb2" method="post" target="_blank" novalidate>
+				<div>
+				<input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+				<input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button">
+				</div>
+				</form>
+				</div>
+			<h3>
+				Available on the web, iOS & Android
+			</h3>
+		</section>
+		<div class="phone">
+		<video autoplay loop poster="img/vidfallback.jpg">
+  		<source src="img/app-vid.mp4" type="video/mp4">
+		</video>
+		<img src="img/phone-wrap.png" />
+		</div>	
+	</div>
+	<div class="home-box">
+	<section>
+		<img src="img/report-problem-circle.png" />
+		<h1>The Problem</h1>
+		<p>Our representatives seem to represent their biggest donors, not us. Our voice is blocked by the money that gets politicians into power.</p>
+	</section>
+	</div>
+	<div class="home-box last">
+	<section>
+		<img src="img/solution-circle.png" />
+		<h1>The Solution</h1>
+		<p>Let's vote representatives into congress who want to listen and act on the voice of their voters. Let's use technology to prioritize the issues we care about and loudly communicate them to those we put in power as our delegates.</p>
+	</section>
+	</div>
+	<div class="l-12 shoutout">
+		<h1>“Politicians run expensive campaigns to try to convince you that they are the best person to represent your interests.  But the more they spend, the more they owe to special interest and lobbyists.  How do we break this cycle? It's easy when you realize that the money they raise is being used to buy the vote that you are giving away for free."</h1>
+		<p>You hold the power, not lobbyists.</p>
+	</div>
+	<div class="l-12 about">
+		<h1>What does Placeavote do?</h1>
+		<div>
+			<section>
+			<h2>Anonymously Vote</h2>
+			<p>We enable you to vote for or against any legislation put in front of congress, no one will know what stance you took on an issue, unless you want them to.</p>
+			</section>
+			<section>
+			<h2>Publically Discuss</h2>
+			<p>Choose to voice your opinions on subject matters, or be safe in the knowledge of keeping total anonymity with your vote, like the good old days.</p>
+			</section>
+		</div>
+	</div>
+	<div class="l-12 sign-up-home" id="signup-section">
+		<div ng-switch-when="false" class="signup-container">
+		<h1>Sign up to get early access to Placeavote</h1>
+		<a ng-click="home.email = true">Sign Up</a>
+		</div>
+		<!-- Begin MailChimp Signup Form -->
+<div ng-switch-when="true" id="mc_embed_signup">
+<form action="//placeavote.us3.list-manage.com/subscribe/post?u=88ef7ecceaeb0c63ba6c4fa76&amp;id=253af5cdb2" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+   <div id="mc_embed_signup_scroll">
+    
+<div class="mc-field-group">
+    <label for="mce-EMAIL">Email Address </label>
+    <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+</div>
+
+<div id="mce-responses">
+<div class="response" id="mce-error-response" style="display:none"></div>
+<div class="response" id="mce-success-response" style="display:none"></div>
+</div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+<div style="position: absolute; left: -5000px; top: -5000px;"><input type="text" name="b_88ef7ecceaeb0c63ba6c4fa76_253af5cdb2" tabindex="-1" value=""></div>
+<input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button">
+</div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+	</div>
+		<footer class="l-12" id="footer">
+	<span style="padding-bottom: 20px;">Placeavote 2015</span>
+	<ul style="display: none;">
+		<li>
+			<a href="#">Sign Up</a>
+		</li>
+
+		<li>
+			<a href="#">Sign In</a>
+		</li>
+
+		<li>
+			<a href="#">Press</a>
+		</li>
+
+		<li>
+			<a href="#">Jobs</a>
+		</li>
+	</ul>
+	</footer>
+</div>

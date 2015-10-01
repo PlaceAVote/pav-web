@@ -1,0 +1,88 @@
+<div class="team">
+<section class="team-wrapper">
+<h1>Our Team</h1>
+<p>Placeavote lets you read, debate and vote on every bill before congress. The difference is now your representative knows how to represent you.</p>
+<div class="team-container">
+	<h1>Founding Team</h1>
+	<section ng-cloak ng-repeat="member in team.founders">
+	<div class="profile-container">
+		<img class="profile" ng-src="{{member.img}}" />
+	</div>
+	<div class="detials-container">
+		<p>{{member.name}}</p>
+		<h2>{{member.role}}</h2>
+		<div class="social">
+		<a ng-show="member.twitter" target="_blank" href="http://www.twitter.com/{{member.twitter}}">
+		<img class="tw-img" src="img/logo-twitter-bird.png" />
+		</a>
+		<a ng-show="member.linkedin" target="_blank" href="http://www.linkedin.com{{member.linkedin}}">
+		<img src="img/logo-linkedin.png" />
+		</a>
+	</div>
+		</div>
+	</section>
+	<h1>Design and Development</h1>
+	<section ng-cloak ng-repeat="member in team.designdev">
+	<div class="profile-container">
+		<img class="profile" ng-src="{{member.img}}" />
+	</div>
+	<div class="detials-container">
+		<p>{{member.name}}</p>
+		<h2>{{member.role}}</h2>
+		<div class="social">
+		<a ng-show="member.twitter" target="_blank" href="http://www.twitter.com/{{member.twitter}}">
+		<img class="tw-img" src="img/logo-twitter-bird.png" />
+		</a>
+		<a ng-show="member.linkedin" target="_blank" href="http://www.linkedin.com{{member.linkedin}}">
+		<img src="img/logo-linkedin.png" />
+		</a>
+	</div>
+		</div>
+	</section>
+
+	<h1>Campaign</h1>
+	<section ng-cloak ng-repeat="member in team.campaign">
+	<div class="profile-container">
+		<img class="profile" ng-src="{{member.img}}" />
+	</div>
+	<div class="detials-container">
+		<p>{{member.name}}</p>
+		<h2>{{member.role}}</h2>
+		<div class="social">
+		<a ng-show="member.twitter" target="_blank" href="http://www.twitter.com/{{member.twitter}}">
+		<img class="tw-img" src="img/logo-twitter-bird.png" />
+		</a>
+		<a ng-show="member.linkedin" target="_blank" href="http://www.linkedin.com{{member.linkedin}}">
+		<img src="img/logo-linkedin.png" />
+		</a>
+	</div>
+		</div>
+	</section>
+</div>
+<footer class="l-12">
+	<span style="padding-bottom: 20px;">Placeavote 2015</span>
+	<ul style="display: none;">
+		<li>
+			<a href="#">Sign Up</a>
+		</li>
+
+		<li>
+			<a href="#">Sign In</a>
+		</li>
+
+		<li>
+			<a href="#">Press</a>
+		</li>
+
+		<li>
+			<a href="#">Jobs</a>
+		</li>
+	</ul>
+	</footer>
+</section>
+<div class="intro">
+</div>
+<div class="lower">
+</div>
+
+</div>
