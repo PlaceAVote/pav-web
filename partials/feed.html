@@ -9,3 +9,16 @@
         <p>{{banner.privacyMessage}}, to change this setting, <span>click here</span></p>
     </div>
 </div>
+
+<div class='bills'>
+    <div ng-repeat="bill in bills">
+        <h3>{{bill.subject}}</h3>
+        <hr />
+        <span class="{{bill.subject}}"></span>
+        <h6>{{bill.short_title}}</h6>
+        <p>{{bill.summary}}</p>
+        <button><span></span>{{bill.total_comments}} comments</button>
+        <button><span></span>{{bill.majorityVote().percent}} &#37; Vote {{bill.majorityVote().majority}}</button>
+        <button>share</button>
+    </div>
+</div>
