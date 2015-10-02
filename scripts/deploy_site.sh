@@ -12,9 +12,9 @@ mv ./package.json ./web/dist/package.json
 label=$(date +%s)
 file="pav-web-site.zip"
 bucket="pav-web-site"
-application="pavWebFront-env"
+environment="pavWebFront-env"
 reg="us-west-2"
-environment="pav-web-front"
+application="pav-web-front"
 
 cd ./web/dist/
 zip -r ${file} ./*
@@ -25,7 +25,7 @@ echo "Uploading zip to S3"
 aws s3api put-object --bucket ${bucket} --key ${file} --body ${file}
 
 echo "Creating Application Version Elasticbeanstalk Instance"
-aws --region ${reg} elasticbeanstalk create-application-version --application-name ${environment} --version-label ${label} --source-bundle S3Bucket=${bucket},S3Key=${file} --auto-create-application
+aws --region ${reg} elasticbeanstalk create-application-version --application-name ${application} --version-label ${label} --source-bundle S3Bucket=${bucket},S3Key=${file} --auto-create-application
 
 echo "Updating Environment"
-aws --region ${reg} elasticbeanstalk update-environment --environment-name ${application} --version-label ${label}
+aws --region ${reg} elasticbeanstalk update-environment --environment-name ${environment} --version-label ${label}
