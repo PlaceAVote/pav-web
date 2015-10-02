@@ -12,8 +12,8 @@
 	</div>
 </header>
 
-<div class="app-wrapper">
-	<div class="app">
+<div class="feed">
+	<div class="feed-body">
 	    <div class="welcome-message" ng-show="banner.show">
 	    	<img src="img/mark_full_color.svg" />
 	        <img src="img/close-widget.png" ng-click="banner.hide()" class="close" />
@@ -23,17 +23,32 @@
 	        <p>{{banner.privacyMessage}}, to change this setting, <span>click here</span></p>
 	        </section>
 	    </div>
-		<div class='bills'>
-		    <div ng-repeat="bill in bills">
+	    <section class="feed-wrapper">
+		<div class='feed-column'>
+		    <div class="bill-container" ng-repeat="bill in bills">
+		    	<div class="bill">
 		        <h3>{{bill.subject}}</h3>
 		        <hr />
-		        <span class="{{bill.subject}}"></span>
-		        <h6>{{bill.short_title}}</h6>
-		        <p>{{bill.summary}}</p>
+			        <div class="bill-summary-container">
+			        <div class="bill-subject">
+			        <span class="{{bill.subject}}"></span>
+			        </div>
+			        <div class="billy-summary">
+			        <h6>{{bill.short_title}}</h6>
+			        <p>{{bill.summary}}</p>
+			        </div>
+			        </div>
+		        </div>
+		        <div class="buttons">
 		        <button><span></span>{{bill.total_comments}} comments</button>
 		        <button><span></span>{{bill.majorityVote().percent}} &#37; Vote {{bill.majorityVote().majority}}</button>
 		        <button>share</button>
+		        </div>
 		    </div>
 		</div>
+		<div class="trending">
+			<h1>TRENDING GLOBALLY</h1>
+		</div>
+		</section>
 	</div>	
 </div>
