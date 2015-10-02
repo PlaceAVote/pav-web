@@ -1,27 +1,39 @@
-<div class="app">
-<header></header>
-<div class="onboarding-container l-7 m-10 s-12" ng-show="banner.show">
-    <div class='banner'>
-        <span ng-click="banner.hide()">X</span>
-        <span class="user-avatar">
-            <img src={{user.img_url}} />
-        </span>
-        <h2>{{banner.welcome}}</h2>
-        <p>{{banner.message}}</p>
-        <p>{{banner.privacyMessage}}, to change this setting, <span>click here</span></p>
-    </div>
-</div>
+<header>
+	<div class="row">
+	<img class="pav-icon" src="img/pav_icon.svg" />
+	<section class="search">	
+		<input type="text" placeholder="Search bills or people..." />
+		<img src="img/search.png" />
+	</section>
+	<section class="notification">
+		<img src="img/notification.svg" />
+		<img class="user-img" ng-src="{{user.img_url}}" />
+	</section>
+	</div>
+</header>
 
-<div class='bills'>
-    <div ng-repeat="bill in bills">
-        <h3>{{bill.subject}}</h3>
-        <hr />
-        <span class="{{bill.subject}}"></span>
-        <h6>{{bill.short_title}}</h6>
-        <p>{{bill.summary}}</p>
-        <button><span></span>{{bill.total_comments}} comments</button>
-        <button><span></span>{{bill.majorityVote().percent}} &#37; Vote {{bill.majorityVote().majority}}</button>
-        <button>share</button>
-    </div>
-</div>
+<div class="app-wrapper">
+	<div class="app">
+	    <div class="welcome-message" ng-show="banner.show">
+	    	<img src="img/mark_full_color.svg" />
+	        <img src="img/close-widget.png" ng-click="banner.hide()" class="close" />
+	       	<section>
+	        <h1>{{banner.welcome}}</h1>
+	        <p>{{banner.message}}</p>
+	        <p>{{banner.privacyMessage}}, to change this setting, <span>click here</span></p>
+	        </section>
+	    </div>
+		<div class='bills'>
+		    <div ng-repeat="bill in bills">
+		        <h3>{{bill.subject}}</h3>
+		        <hr />
+		        <span class="{{bill.subject}}"></span>
+		        <h6>{{bill.short_title}}</h6>
+		        <p>{{bill.summary}}</p>
+		        <button><span></span>{{bill.total_comments}} comments</button>
+		        <button><span></span>{{bill.majorityVote().percent}} &#37; Vote {{bill.majorityVote().majority}}</button>
+		        <button>share</button>
+		    </div>
+		</div>
+	</div>	
 </div>
