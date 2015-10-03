@@ -33,16 +33,16 @@
 			        <div class="bill-subject">
 			        <span class="{{bill.subject}}"></span>
 			        </div>
-			        <div class="billy-summary">
+			        <div class="bill-summary">
 			        <h6>{{bill.short_title}}</h6>
 			        <p>{{bill.summary}}</p>
 			        </div>
 			        </div>
 		        </div>
 		        <div class="buttons">
-		        <button><span></span>{{bill.total_comments}} comments</button>
-		        <button><span></span>{{bill.majorityVote().percent}} &#37; Vote {{bill.majorityVote().majority}}</button>
-		        <button>share</button>
+		        <button><img src="img/comments-icon.png" />{{bill.total_comments}} comments</button>
+		        <button><img src="img/comments-no-icon.png" />{{bill.majorityVote().percent}} &#37; Vote {{bill.majorityVote().majority}}</button>
+		        <button><img src="img/share.png" />share This Bill</button>
 		        </div>
 		    </div>
 		</div>

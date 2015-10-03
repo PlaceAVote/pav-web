@@ -219,9 +219,16 @@ div, input {
   font-style: normal; }
 
 @font-face {
-  font-family: "whitneybook";
-  src: url("../font/whitney-book-bas-webfont.eot");
-  src: url("../font/whitney-book-bas-webfont.eot?#iefix") format("embedded-opentype"), url("../font/whitney-book-bas-webfont.woff2") format("woff2"), url("../font/whitney-book-bas-webfont.woff") format("woff"), url("../font/whitney-book-bas-webfont.ttf") format("truetype"), url("../font/.svg#whitneybook") format("svg");
+  font-family: "whitneybold";
+  src: url("../font/whitney-bold-bas-webfont.eot");
+  src: url("../font/whitney-bold-bas-webfont.eot?#iefix") format("embedded-opentype"), url("../font/whitney-bold-bas-webfont.woff2") format("woff2"), url("../font/whitney-bold-bas-webfont.woff") format("woff"), url("../font/whitney-bold-bas-webfont.ttf") format("truetype"), url("../font/.svg#whitneybold") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: "whitneyboldital";
+  src: url("../font/whitney-boldital-bas-webfont.eot");
+  src: url("../font/whitney-boldital-bas-webfont.eot?#iefix") format("embedded-opentype"), url("../font/whitney-boldital-bas-webfont.woff2") format("woff2"), url("../font/whitney-boldital-bas-webfont.woff") format("woff"), url("../font/whitney-boldital-bas-webfont.ttf") format("truetype"), url("../font/.svg#whitneyboldital") format("svg");
   font-weight: normal;
   font-style: normal; }
 
@@ -1120,13 +1127,47 @@ header {
           padding: 20px;
           background-color: white; }
           .feed .feed-wrapper .feed-column .bill-container .bill h3 {
-            font-size: 14px;
-            font-size: 0.875rem;
-            font-family: "whitneybook", sans-serif;
-            color: #4d6eb3; }
+            font-size: 11px;
+            font-size: 0.6875rem;
+            font-family: "whitneybold", sans-serif;
+            color: #4d6eb3;
+            text-transform: uppercase; }
           .feed .feed-wrapper .feed-column .bill-container .bill hr {
+            margin-top: 18px;
+            margin-bottom: 18px;
             border: none;
             border-bottom: 1px solid #d6d4e1; }
+          .feed .feed-wrapper .feed-column .bill-container .bill .bill-summary-container {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: horizontal;
+            -webkit-box-direction: normal;
+            -webkit-flex-direction: row;
+                -ms-flex-direction: row;
+                    flex-direction: row; }
+            .feed .feed-wrapper .feed-column .bill-container .bill .bill-summary-container .bill-summary {
+              display: -webkit-box;
+              display: -webkit-flex;
+              display: -ms-flexbox;
+              display: flex;
+              -webkit-box-orient: vertical;
+              -webkit-box-direction: normal;
+              -webkit-flex-direction: column;
+                  -ms-flex-direction: column;
+                      flex-direction: column; }
+              .feed .feed-wrapper .feed-column .bill-container .bill .bill-summary-container .bill-summary h6 {
+                font-family: "whitneyboldital", sans-serif;
+                font-size: 14px;
+                font-size: 0.875rem;
+                color: #4d6eb3; }
+              .feed .feed-wrapper .feed-column .bill-container .bill .bill-summary-container .bill-summary p {
+                font-family: "whitneymedium", sans-serif;
+                font-size: 16px;
+                font-size: 1rem;
+                line-height: 22px;
+                color: #3b3b3b; }
         .feed .feed-wrapper .feed-column .bill-container .buttons {
           display: -webkit-box;
           display: -webkit-flex;
@@ -1139,6 +1180,7 @@ header {
                   flex-direction: row;
           width: 100%; }
           .feed .feed-wrapper .feed-column .bill-container .buttons button {
+            outline: none;
             cursor: pointer;
             background-color: #f4f2fe;
             color: #3b3b3b;
@@ -1146,10 +1188,27 @@ header {
             font-size: 12px;
             font-size: 0.75rem;
             border: none;
+            outline: none;
             width: 33.333%;
             border-radius: 0;
             -webkit-transition: all 0.3s ease;
-                    transition: all 0.3s ease; }
+                    transition: all 0.3s ease;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: horizontal;
+            -webkit-box-direction: normal;
+            -webkit-flex-direction: row;
+                -ms-flex-direction: row;
+                    flex-direction: row;
+            -webkit-box-pack: center;
+            -webkit-justify-content: center;
+                -ms-flex-pack: center;
+                    justify-content: center; }
+            .feed .feed-wrapper .feed-column .bill-container .buttons button img {
+              padding-right: 15px;
+              height: 15px; }
             .feed .feed-wrapper .feed-column .bill-container .buttons button:nth-child(1) {
               border: 1px solid #d6d4e1;
               border-top: none;
@@ -1162,7 +1221,7 @@ header {
               border-top: none;
               border-bottom-right-radius: 3px; }
             .feed .feed-wrapper .feed-column .bill-container .buttons button:hover {
-              background-color: #e0dafc; }
+              background-color: #ece9fd; }
     .feed .feed-wrapper .trending {
       width: 40%; }
 
@@ -1199,13 +1258,14 @@ header {
     position: absolute;
     top: 20px;
     right: 20px;
-    height: 15px; }
+    height: 15px;
+    cursor: pointer; }
   .welcome-message section {
     padding-left: 40px; }
     .welcome-message section h1 {
-      font-size: 32px;
-      font-size: 2rem;
-      font-family: "whitneybook", sans-serif;
+      font-size: 28px;
+      font-size: 1.75rem;
+      font-family: "whitneybold", sans-serif;
       color: #3b3b3b;
       padding-bottom: 20px; }
     .welcome-message section p {

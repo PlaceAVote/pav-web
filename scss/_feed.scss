@@ -89,55 +89,97 @@ header {
       width: 60%;
 
       .bill-container {
-      	display: flex;
-      	flex-direction: column;
-      	margin-top: 20px;
-     	margin-right: 20px;
-     	@include shadow();
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px;
+        margin-right: 20px;
+        @include shadow();
+
         .bill {
           @include bill();
+
           h3 {
-          	@include font-size(14px);
-          	font-family: $font-bold;
-          	color: $blue;
+            @include font-size(11px);
+            font-family: $font-bold;
+            color: $blue;
+            text-transform: uppercase;
           }
+
           hr {
-          	border: none;
-          	border-bottom: 1px solid $widgetborder;
+            margin-top:18px;
+            margin-bottom:18px;
+            border: none;
+            border-bottom: 1px solid $widgetborder;
+          }
+          .bill-summary-container {
+            display: flex;
+            flex-direction: row;
+            .bill-subject {
+
+            }
+            .bill-summary {
+              display: flex;
+              flex-direction: column;
+              h6 {
+                font-family: $font-bolditalic;
+                @include font-size(14px);
+                color: $blue;
+              }
+              p {
+                font-family: $font-normal;
+                @include font-size(16px);
+                line-height: 22px;
+                color: $black;
+              }
+            }
           }
         }
+
         .buttons {
-        	display: flex;
-        	flex-direction: row;
-        	width: 100%;
-        	button {
-        	cursor: pointer;
-        	background-color: #f4f2fe;
-        	color: $black;
-        	height: 35px;
-        	@include font-size(12px);
-        	border: none;
-        	width: 33.333%;
- 			border-radius: 0;
- 			transition: all 0.3s ease;
-	 			&:nth-child(1){
-	 				border: 1px solid $widgetborder;
-	 				border-top: none;
-	 				border-bottom-left-radius: 3px;		
-	 			}	
-	 			&:nth-child(2){
-	 				border-top: none;
-	 				border-bottom: 1px solid $widgetborder;
-	 			}
-	 			&:nth-child(3) {
-	 				border: 1px solid $widgetborder;
-	 				border-top: none;
-	 				border-bottom-right-radius: 3px;
-	 			}
-	 			&:hover {
-	 				background-color: darken(#f4f2fe, 5%);
-	 			}
-        	}
+          display: flex;
+          flex-direction: row;
+          width: 100%;
+
+          button {
+            outline: none;
+            cursor: pointer;
+            background-color: #f4f2fe;
+            color: $black;
+            height: 35px;
+            @include font-size(12px);
+            border: none;
+            outline: none;
+            width: 33.333%;
+            border-radius: 0;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            img {
+              padding-right: 15px;
+              height: 15px;
+            }
+            &:nth-child(1) {
+              border: 1px solid $widgetborder;
+              border-top: none;
+              border-bottom-left-radius: 3px;
+            }
+
+            &:nth-child(2) {
+              border-top: none;
+              border-bottom: 1px solid $widgetborder;
+            }
+
+            &:nth-child(3) {
+              border: 1px solid $widgetborder;
+              border-top: none;
+              border-bottom-right-radius: 3px;
+            }
+
+            &:hover {
+              background-color: darken(#f4f2fe, 2%);
+            }
+          }
         }
       }
     }
@@ -167,13 +209,14 @@ header {
     top: 20px;
     right: 20px;
     height: 15px;
+    cursor: pointer;
   }
 
   section {
     padding-left: 40px;
 
     h1 {
-      @include font-size(32px);
+      @include font-size(28px);
       font-family: $font-bold;
       color: $black;
       padding-bottom: 20px;

@@ -15,12 +15,15 @@
 
 @include font-face(whitneymediumital, whitney-mediumital-bas-webfont) ;
 
-@include font-face(whitneybook, whitney-book-bas-webfont) ;
+@include font-face(whitneybold, whitney-bold-bas-webfont) ;
+
+@include font-face(whitneyboldital, whitney-boldital-bas-webfont) ;
 
 @include font-face(whitneylight, whitney-light-bas-webfont) ;
 
 @include font-face(whitneylight_italic, whitney-lightital-bas-webfont) ;
-$font-bold: 'whitneybook', sans-serif;
+$font-bold: 'whitneybold', sans-serif;
+$font-bolditalic: 'whitneyboldital', sans-serif;
 $font-normal: 'whitneymedium', sans-serif;
 $font-normalitalic: 'whitneymediumital', sans-serif;
 $font-light: 'whitneylight', sans-serif;
