@@ -1,20 +1,34 @@
 var Banner = require('../models/banner.js');
 
-FeedController = function($scope, $location, userService, billService) {
-    $scope = $scope || {};
-    $location = $location || {};
+FeedController = function($scope, $location, userService, billService, trendService) {
+    this.$scope = $scope || {};
+    this.$location = $location || {};
+    this.trendService = trendService;
+    this.billService = billService;
     var user = userService.getUser();
     if(!user){
         $location.path('/');
     }
     $scope.user = user;
     $scope.banner = new Banner(user);
-    billService.getBills(user.email, function(err, response){
+    this.getBills(user.email, function(err, response){
         if(!err){
             $scope.bills = response;
-            console.log($scope.bills);
         }
     });
+    this.getTrends(function(err, response){
+      if(!err){
+        $scope.trends = response;
+      }
+    });
 }
+
+FeedController.prototype.getTrends = function(callback){
+  this.trendService.getTrends(callback);
+};
+
+FeedController.prototype.getBills = function(username, callback){
+  this.billService.getBills(username, callback);
+};
 
 module.exports = FeedController;

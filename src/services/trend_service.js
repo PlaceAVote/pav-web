@@ -1,6 +1,6 @@
 var Bill = require("../models/bill.js");
 var Comment = require("../models/comment.js");
-function TrendService(resource){
+function TrendService(tempTrendResource){
   var getTrends = function(callback){
     var onLoad = function(result){
       for(var i = 0; i < result.length; i++){
@@ -18,7 +18,7 @@ function TrendService(resource){
     var onError = function(err){
       callback(err);
     };
-    resource.get(undefined, onLoad, onError);
+    tempTrendResource.get(undefined, onLoad, onError);
   }
   return {
     getTrends: getTrends
