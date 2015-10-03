@@ -32,8 +32,7 @@ describe("Bill Service", function(){
                       ]);
                   }
         };
-        var r = new resource();
-        var subject = new BillService(r);
+        var subject = new BillService(mockResource);
         var results = subject.getBills("user", function(err, result){
             expect(err).to.eql(undefined);
             expect(result.length).to.eql(2);
