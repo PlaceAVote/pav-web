@@ -11,7 +11,7 @@ function LoginCtrl($scope, $location, userService) {
 		emailValid: true,
 		password: '',
 		passwordValid: true
-	}
+	};
 }
 
 LoginCtrl.prototype.loginWithFacebook = function(){
@@ -28,7 +28,7 @@ LoginCtrl.prototype.loginWithFacebook = function(){
 
 LoginCtrl.prototype.go = function (hash) {
  	this.location.path(hash);
-}
+};
 	
 
 LoginCtrl.prototype.validate = function(u, hash) {
