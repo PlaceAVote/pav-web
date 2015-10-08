@@ -21,6 +21,7 @@ body::selection { color: $purple; background: lighten($purple, 20%); }
 .wrapper {
 	top: 0;
 	position: absolute;
+	width: 100%;
 	&.ng-leave, &.ng-enter {
 		transition: all 0.25s ease;
 	}

@@ -20,7 +20,7 @@ this.interests = [
 RegisterController.prototype.go = function(hash) {
 	this.userService.addTopics(this.getSelected());
 	this.location.path(hash);
-}
+};
 
 RegisterController.prototype.select = function(name) {
 	var interest = this.getInterest(name);
@@ -28,7 +28,7 @@ RegisterController.prototype.select = function(name) {
 		interest.select();
 	}
 	
-}
+};
 
 RegisterController.prototype.getSelected = function(){
 	var interests = [];

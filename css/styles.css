@@ -212,23 +212,37 @@ div, input {
   font-style: normal; }
 
 @font-face {
-  font-family: "whitneybook";
-  src: url("../font/whitney-book-bas-webfont.eot");
-  src: url("../font/whitney-book-bas-webfont.eot?#iefix") format("embedded-opentype"), url("../font/whitney-book-bas-webfont.woff2") format("woff2"), url("../font/whitney-book-bas-webfont.woff") format("woff"), url("../font/whitney-book-bas-webfont.ttf") format("truetype"), url("../font/.svg#whitneybook") format("svg");
+  font-family: "whitneymediumital";
+  src: url("../font/whitney-mediumital-bas-webfont.eot");
+  src: url("../font/whitney-mediumital-bas-webfont.eot?#iefix") format("embedded-opentype"), url("../font/whitney-mediumital-bas-webfont.woff2") format("woff2"), url("../font/whitney-mediumital-bas-webfont.woff") format("woff"), url("../font/whitney-mediumital-bas-webfont.ttf") format("truetype"), url("../font/.svg#whitneymediumital") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: "whitneybold";
+  src: url("../font/whitney-bold-bas-webfont.eot");
+  src: url("../font/whitney-bold-bas-webfont.eot?#iefix") format("embedded-opentype"), url("../font/whitney-bold-bas-webfont.woff2") format("woff2"), url("../font/whitney-bold-bas-webfont.woff") format("woff"), url("../font/whitney-bold-bas-webfont.ttf") format("truetype"), url("../font/.svg#whitneybold") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: "whitneyboldital";
+  src: url("../font/whitney-boldital-bas-webfont.eot");
+  src: url("../font/whitney-boldital-bas-webfont.eot?#iefix") format("embedded-opentype"), url("../font/whitney-boldital-bas-webfont.woff2") format("woff2"), url("../font/whitney-boldital-bas-webfont.woff") format("woff"), url("../font/whitney-boldital-bas-webfont.ttf") format("truetype"), url("../font/.svg#whitneyboldital") format("svg");
   font-weight: normal;
   font-style: normal; }
 
 @font-face {
   font-family: "whitneylight";
-  src: url("../font/whitney-lightital-bas-webfont.eot");
-  src: url("../font/whitney-lightital-bas-webfont.eot?#iefix") format("embedded-opentype"), url("../font/whitney-lightital-bas-webfont.woff2") format("woff2"), url("../font/whitney-lightital-bas-webfont.woff") format("woff"), url("../font/whitney-lightital-bas-webfont.ttf") format("truetype"), url("../font/.svg#whitneylight") format("svg");
+  src: url("../font/whitney-light-bas-webfont.eot");
+  src: url("../font/whitney-light-bas-webfont.eot?#iefix") format("embedded-opentype"), url("../font/whitney-light-bas-webfont.woff2") format("woff2"), url("../font/whitney-light-bas-webfont.woff") format("woff"), url("../font/whitney-light-bas-webfont.ttf") format("truetype"), url("../font/.svg#whitneylight") format("svg");
   font-weight: normal;
   font-style: normal; }
 
 @font-face {
   font-family: "whitneylight_italic";
-  src: url("../font/whitney-light-bas-webfont.eot");
-  src: url("../font/whitney-light-bas-webfont.eot?#iefix") format("embedded-opentype"), url("../font/whitney-light-bas-webfont.woff2") format("woff2"), url("../font/whitney-light-bas-webfont.woff") format("woff"), url("../font/whitney-light-bas-webfont.ttf") format("truetype"), url("../font/.svg#whitneylight_italic") format("svg");
+  src: url("../font/whitney-lightital-bas-webfont.eot");
+  src: url("../font/whitney-lightital-bas-webfont.eot?#iefix") format("embedded-opentype"), url("../font/whitney-lightital-bas-webfont.woff2") format("woff2"), url("../font/whitney-lightital-bas-webfont.woff") format("woff"), url("../font/whitney-lightital-bas-webfont.ttf") format("truetype"), url("../font/.svg#whitneylight_italic") format("svg");
   font-weight: normal;
   font-style: normal; }
 
@@ -256,7 +270,8 @@ body::selection {
 
 .wrapper {
   top: 0;
-  position: absolute; }
+  position: absolute;
+  width: 100%; }
   .wrapper.ng-leave, .wrapper.ng-enter {
     -webkit-transition: all 0.25s ease;
             transition: all 0.25s ease; }
@@ -970,13 +985,292 @@ input {
   100% {
     width: 100%; } }
 
-.app header {
-  background: #5b7da8;
-  background: -webkit-gradient(linear, left top, right top, color-stop(0%, #5b7da8), color-stop(100%, #746898));
-  background: -webkit-linear-gradient(left, #5b7da8 0%, #746898 100%);
-  background: linear-gradient(to right, #5b7da8 0%, #746898 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5b7da8', endColorstr='#746898', GradientType=1 );
-  height: 40px;
+header {
+  background: #564a88;
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%, #564a88), color-stop(100%, #445a95));
+  background: -webkit-linear-gradient(left, #564a88 0%, #445a95 100%);
+  background: linear-gradient(to right, #564a88 0%, #445a95 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#564a88', endColorstr='#445a95', GradientType=1 );
+  z-index: 9999;
+  height: 50px;
   width: 100%;
   position: fixed;
-  top: 0; }
+  top: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-bottom: 1px solid #2a385f;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2); }
+  header .row {
+    max-width: 1200px;
+    width: 100%;
+    height: 30px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+            justify-content: space-between; }
+    header .row img.pav-icon {
+      height: 30px; }
+    header .row section.search {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: column;
+          -ms-flex-direction: column;
+              flex-direction: column;
+      max-width: 400px;
+      width: 100%;
+      height: 30px;
+      position: relative; }
+      header .row section.search input {
+        width: 100%;
+        height: 26px;
+        border-radius: 5px;
+        border: none;
+        outline: none;
+        background-color: white;
+        color: #3b3b3b;
+        font-size: 12px;
+        font-size: 0.75rem;
+        padding-left: 10px; }
+      header .row section.search img {
+        position: absolute;
+        top: 6px;
+        right: 10px;
+        height: 16px; }
+    header .row section.notification img {
+      height: 30px; }
+    header .row section.notification img.user-img {
+      height: 30px;
+      border-radius: 5px;
+      padding-left: 10px; }
+
+.feed {
+  padding-top: 70px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center; }
+  .feed .feed-body {
+    width: 100%;
+    max-width: 1200px; }
+  .feed .feed-wrapper {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    width: 100%; }
+    .feed .feed-wrapper .feed-column {
+      width: 60%; }
+      .feed .feed-wrapper .feed-column .bill-container {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+                flex-direction: column;
+        margin-top: 20px;
+        margin-right: 20px;
+        box-shadow: 0px 2px 4px -2px rgba(0, 0, 0, 0.2); }
+        .feed .feed-wrapper .feed-column .bill-container .bill {
+          border-top-left-radius: 3px;
+          border-top-right-radius: 3px;
+          height: auto;
+          border: 1px solid #d6d4e1;
+          padding: 20px;
+          background-color: white; }
+          .feed .feed-wrapper .feed-column .bill-container .bill h3 {
+            font-size: 11px;
+            font-size: 0.6875rem;
+            font-family: "whitneybold", sans-serif;
+            color: #4d6eb3;
+            text-transform: uppercase; }
+          .feed .feed-wrapper .feed-column .bill-container .bill hr {
+            margin-top: 18px;
+            margin-bottom: 18px;
+            border: none;
+            border-bottom: 1px solid #d6d4e1; }
+          .feed .feed-wrapper .feed-column .bill-container .bill .bill-summary-container {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: horizontal;
+            -webkit-box-direction: normal;
+            -webkit-flex-direction: row;
+                -ms-flex-direction: row;
+                    flex-direction: row; }
+            .feed .feed-wrapper .feed-column .bill-container .bill .bill-summary-container .bill-summary {
+              display: -webkit-box;
+              display: -webkit-flex;
+              display: -ms-flexbox;
+              display: flex;
+              -webkit-box-orient: vertical;
+              -webkit-box-direction: normal;
+              -webkit-flex-direction: column;
+                  -ms-flex-direction: column;
+                      flex-direction: column; }
+              .feed .feed-wrapper .feed-column .bill-container .bill .bill-summary-container .bill-summary h6 {
+                font-family: "whitneyboldital", sans-serif;
+                font-size: 14px;
+                font-size: 0.875rem;
+                color: #4d6eb3; }
+              .feed .feed-wrapper .feed-column .bill-container .bill .bill-summary-container .bill-summary p {
+                font-family: "whitneymedium", sans-serif;
+                font-size: 16px;
+                font-size: 1rem;
+                line-height: 22px;
+                color: #3b3b3b; }
+        .feed .feed-wrapper .feed-column .bill-container .buttons {
+          display: -webkit-box;
+          display: -webkit-flex;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-orient: horizontal;
+          -webkit-box-direction: normal;
+          -webkit-flex-direction: row;
+              -ms-flex-direction: row;
+                  flex-direction: row;
+          width: 100%; }
+          .feed .feed-wrapper .feed-column .bill-container .buttons button {
+            outline: none;
+            cursor: pointer;
+            background-color: #f4f2fe;
+            color: #3b3b3b;
+            height: 35px;
+            font-size: 12px;
+            font-size: 0.75rem;
+            border: none;
+            outline: none;
+            width: 33.333%;
+            border-radius: 0;
+            -webkit-transition: all 0.3s ease;
+                    transition: all 0.3s ease;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: horizontal;
+            -webkit-box-direction: normal;
+            -webkit-flex-direction: row;
+                -ms-flex-direction: row;
+                    flex-direction: row;
+            -webkit-box-pack: center;
+            -webkit-justify-content: center;
+                -ms-flex-pack: center;
+                    justify-content: center; }
+            .feed .feed-wrapper .feed-column .bill-container .buttons button img {
+              padding-right: 15px;
+              height: 15px; }
+            .feed .feed-wrapper .feed-column .bill-container .buttons button:nth-child(1) {
+              border: 1px solid #d6d4e1;
+              border-top: none;
+              border-bottom-left-radius: 3px; }
+            .feed .feed-wrapper .feed-column .bill-container .buttons button:nth-child(2) {
+              border-top: none;
+              border-bottom: 1px solid #d6d4e1; }
+            .feed .feed-wrapper .feed-column .bill-container .buttons button:nth-child(3) {
+              border: 1px solid #d6d4e1;
+              border-top: none;
+              border-bottom-right-radius: 3px; }
+            .feed .feed-wrapper .feed-column .bill-container .buttons button:hover {
+              background-color: #ece9fd; }
+    .feed .feed-wrapper .trending {
+      width: 40%; }
+
+.welcome-message {
+  border-radius: 3px;
+  height: auto;
+  border: 1px solid #d6d4e1;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0px 2px 4px -2px rgba(0, 0, 0, 0.2);
+  padding: 40px;
+  width: 100%;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row; }
+  .welcome-message img {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    height: 100px;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center; }
+  .welcome-message img.close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    height: 15px;
+    cursor: pointer; }
+  .welcome-message section {
+    padding-left: 40px; }
+    .welcome-message section h1 {
+      font-size: 28px;
+      font-size: 1.75rem;
+      font-family: "whitneybold", sans-serif;
+      color: #3b3b3b;
+      padding-bottom: 20px; }
+    .welcome-message section p {
+      font-size: 14px;
+      font-size: 0.875rem;
+      font-family: "whitneymedium", sans-serif;
+      color: #3b3b3b;
+      line-height: 24px; }

@@ -25,3 +25,34 @@
     @content;
   }
 }
+
+@mixin max-width(){
+  max-width: 1200px;
+}
+
+@mixin box() {
+  border-radius: 3px;
+  height: auto;
+  border: 1px solid $widgetborder;
+  padding: 20px;
+  background-color: white;
+  -webkit-box-shadow: 0px 2px 4px -2px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 2px 4px -2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 2px 4px -2px rgba(0, 0, 0, 0.2);
+}
+
+@mixin shadow() {
+   -webkit-box-shadow: 0px 2px 4px -2px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 2px 4px -2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 2px 4px -2px rgba(0, 0, 0, 0.2); 
+}
+
+@mixin bill() {
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  height: auto;
+  border: 1px solid $widgetborder;
+  padding: 20px;
+  background-color: white;
+
+}

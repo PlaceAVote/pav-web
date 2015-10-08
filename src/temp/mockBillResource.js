@@ -15,7 +15,67 @@ function TempBillResource(){
                 },
                 {
                     "type": "bill",
-        "subject": "Guns",
+        "subject": "Religion",
+        "bill_id": "gu1-123",
+        "total_comments": "80",
+        "short_title": "Shooting people for the sake of it",
+        "votes": {
+            "yes": 100,
+            "no": 78
+        },
+        "summary": "a bill about medicare access and chip reauthorization"
+                },
+            {
+                    "type": "bill",
+        "subject": "Economics",
+        "bill_id": "gu1-123",
+        "total_comments": "80",
+        "short_title": "Shooting people for the sake of it",
+        "votes": {
+            "yes": 100,
+            "no": 78
+        },
+        "summary": "a bill about medicare access and chip reauthorization"
+                },
+                {
+                    "type": "bill",
+        "subject": "Defense",
+        "bill_id": "gu1-123",
+        "total_comments": "80",
+        "short_title": "Shooting people for the sake of it",
+        "votes": {
+            "yes": 100,
+            "no": 78
+        },
+        "summary": "a bill about medicare access and chip reauthorization"
+                },
+                {
+                    "type": "bill",
+        "subject": "Gun Rights",
+        "bill_id": "gu1-123",
+        "total_comments": "80",
+        "short_title": "Shooting people for the sake of it",
+        "votes": {
+            "yes": 100,
+            "no": 78
+        },
+        "summary": "a bill about medicare access and chip reauthorization"
+                },
+                {
+                    "type": "bill",
+        "subject": "Technology",
+        "bill_id": "gu1-123",
+        "total_comments": "80",
+        "short_title": "Shooting people for the sake of it",
+        "votes": {
+            "yes": 100,
+            "no": 78
+        },
+        "summary": "a bill about medicare access and chip reauthorization"
+                },
+                {
+                    "type": "bill",
+        "subject": "Social Interest",
         "bill_id": "gu1-123",
         "total_comments": "80",
         "short_title": "Shooting people for the sake of it",
@@ -26,10 +86,10 @@ function TempBillResource(){
         "summary": "a bill about medicare access and chip reauthorization"
                 }
         ]);
-    }
+    };
     return {
         get: get
-    }
-};
+    };
+}
 
 module.exports = TempBillResource;

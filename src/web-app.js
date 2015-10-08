@@ -6,17 +6,23 @@ var FeedController = require('./controllers/feed_controller.js');
 //services
 var UserService = require('./services/user_service.js');
 var BillService = require('./services/bill_service.js');
-//directives
-var mailcheck = require('./directives/mailcheck.js');
+var TrendService = require('./services/trend_service.js');
 
 //dependencies
 var angular = require('angular');
+
+//directives
+var mailcheck = require('./directives/mailcheck.js');
+var pavDirectives = require('./directives/directives.js');
+
 
 //thirdparty integrations
 var Facebook = require('./integrations/facebook.js');
 //temporary resources
 var TempBillResource = require('./temp/mockBillResource.js');
-var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource')]);
+var TempTrendResource = require('./temp/mockTrendResource.js');
+
+var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), 'pavDirectives']);
 
 
 app.config(['$routeProvider', function($routeProvider) {
@@ -44,16 +50,18 @@ app.config(['$routeProvider', function($routeProvider) {
 
 //temporary resources
 app.factory('tempBillResource', [TempBillResource]);
+app.factory('tempTrendResource', [TempTrendResource]);
 
 //services
 app.factory('facebookService', [Facebook]);
 app.factory('userService', ['$resource', 'facebookService', UserService]);
 app.factory('billService', ['tempBillResource', BillService]);
+app.factory('trendService', ['tempTrendResource', TrendService]);
 //controllers
 app.controller('TopicRegisterCtrl',['$scope','$location', 'userService', RegisterController]);
 app.controller('SignUpCtrl',['$scope','$location', 'userService', SignUpController]);
 app.controller('LoginCtrl',['$scope','$location', 'userService', LoginController]);
-app.controller('FeedCtrl', ['$scope', '$location', 'userService', 'billService', FeedController]);
+app.controller('FeedCtrl', ['$scope', '$location', 'userService', 'billService', 'trendService', FeedController]);
 
 //directives
 app.directive('mailcheck', ['$compile','$sce', mailcheck]);

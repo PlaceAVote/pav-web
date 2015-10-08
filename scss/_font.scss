@@ -11,11 +11,20 @@
     font-style: normal;	
 	}
 }
-@include font-face(whitneymedium, whitney-medium-bas-webfont);
-@include font-face(whitneybook, whitney-book-bas-webfont);
-@include font-face(whitneylight, whitney-lightital-bas-webfont);
-@include font-face(whitneylight_italic, whitney-light-bas-webfont);
+@include font-face(whitneymedium, whitney-medium-bas-webfont) ;
 
+@include font-face(whitneymediumital, whitney-mediumital-bas-webfont) ;
+
+@include font-face(whitneybold, whitney-bold-bas-webfont) ;
+
+@include font-face(whitneyboldital, whitney-boldital-bas-webfont) ;
+
+@include font-face(whitneylight, whitney-light-bas-webfont) ;
+
+@include font-face(whitneylight_italic, whitney-lightital-bas-webfont) ;
+$font-bold: 'whitneybold', sans-serif;
+$font-bolditalic: 'whitneyboldital', sans-serif;
 $font-normal: 'whitneymedium', sans-serif;
+$font-normalitalic: 'whitneymediumital', sans-serif;
 $font-light: 'whitneylight', sans-serif;
 $font-italic: 'whitneylight_italic', sans-serif;
