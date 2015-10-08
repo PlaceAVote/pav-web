@@ -7,11 +7,14 @@ var FeedController = require('./controllers/feed_controller.js');
 var UserService = require('./services/user_service.js');
 var BillService = require('./services/bill_service.js');
 var TrendService = require('./services/trend_service.js');
-//directives
-var mailcheck = require('./directives/mailcheck.js');
 
 //dependencies
 var angular = require('angular');
+
+//directives
+var mailcheck = require('./directives/mailcheck.js');
+var pavDirectives = require('./directives/directives.js');
+
 
 //thirdparty integrations
 var Facebook = require('./integrations/facebook.js');
@@ -19,7 +22,7 @@ var Facebook = require('./integrations/facebook.js');
 var TempBillResource = require('./temp/mockBillResource.js');
 var TempTrendResource = require('./temp/mockTrendResource.js');
 
-var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource')]);
+var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), 'pavDirectives']);
 
 
 app.config(['$routeProvider', function($routeProvider) {
