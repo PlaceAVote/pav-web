@@ -28,7 +28,7 @@ describe("SignUpController", function(){
                 done();
              };
              this.addAdditionalInformation = function() {
-             
+
              };
              this.getUser = function() {
                 return {

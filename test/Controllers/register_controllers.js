@@ -30,12 +30,12 @@ describe("RegisterController", function() {
 		it("selects the correct interest based upon name", function() {
 			var subject = new RegisterController({},{});
 			subject.interests = [new Interest('test', '.test')];
-			expect(subject.getInterest('test').name).to.eql('test');		
-		}); 	
+			expect(subject.getInterest('test').name).to.eql('test');
+		});
 		it("returns undefined if interest can't be found", function() {
 			var subject = new RegisterController({},{});
 			expect(!!subject.getInterest('test')).to.be.false;
-		}); 
+		});
 		it("calls select on the selected interest", function() {
 			var called = false;
 			var subject = new RegisterController({});
@@ -65,7 +65,7 @@ describe("RegisterController", function() {
 			var interest = subject.getSelected();
 			expect(interest.length).to.eql(2);
 			expect(interest[0].name).to.eql('Drugs');
-			expect(interest[1].name).to.eql('Religion');		
+			expect(interest[1].name).to.eql('Religion');
 		});
 	});
 });
