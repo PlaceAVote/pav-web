@@ -1,3 +1,4 @@
+var format = require('util').format;
 var ENACTEDSIGNED = 'enacted-signed';
 
 function Bill(data) {
@@ -15,7 +16,9 @@ Bill.prototype.getStatusClass = function() {
 };
 
 Bill.prototype.getTitle = function() {
-  return this.billData.short_title;
+  var t = this.billData.bill_type.toUpperCase();
+  var c = this.billData.congress;
+  return format('%s. %s: %s', t, c, this.billData.short_title);
 };
 
 module.exports = Bill;

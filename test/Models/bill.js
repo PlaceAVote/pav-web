@@ -24,7 +24,7 @@ describe('Bill Model', function(){
       var subject = new Bill(billData);
       expect(subject.billData).to.eql(billData);
       var result = subject.getTitle();
-      expect(result).to.eql('Medicare Access and CHIP Reauthorization Act of 2015');
+      expect(result).to.eql('HR. 114: Medicare Access and CHIP Reauthorization Act of 2015');
     });
   });
 });
