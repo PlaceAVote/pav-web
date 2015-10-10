@@ -68,7 +68,7 @@ describe("Bill Service", function(){
    });
    it('creates resource with correct params', function(done){
     function mockResource(url, params, method) {
-      expect(url).to.eql('http://pav-congress-api-196217309.us-west-2.elb.amazonaws.com:8080/bills/');
+      expect(url).to.eql('http://pav-congress-api-196217309.us-west-2.elb.amazonaws.com:8080/bills/100');
       expect(params).to.eql('100');
       expect(method.getById.method).to.eql('GET');
       this.getById = function(body, onLoad, onError){

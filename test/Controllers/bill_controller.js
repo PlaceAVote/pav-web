@@ -9,7 +9,7 @@ describe('BillController', function(){
   };
   it('gets id from url', function(){
     var mockBillService = {
-      getById: function(id, callback){
+      getBill: function(id, callback){
         callback('Error');
       },
     };
@@ -18,7 +18,7 @@ describe('BillController', function(){
   });
   it('assigns this to scope.bill', function(){
     var mockBillService = {
-      getById: function(id, callback){
+      getBill: function(id, callback){
         callback('Error');
       },
     };
@@ -30,7 +30,7 @@ describe('BillController', function(){
       id: 10,
     });
     var mockBillService = {
-      getById: function(id, callback){
+      getBill: function(id, callback){
         callback(undefined, bill);
       },
     };
@@ -41,7 +41,7 @@ describe('BillController', function(){
   });
   it('sets scope.error to true if callback has error', function(done){
     var mockBillService = {
-      getById: function(id, callback){
+      getBill: function(id, callback){
         callback('Error');
       },
     };

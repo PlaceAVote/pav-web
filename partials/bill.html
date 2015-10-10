@@ -4,7 +4,10 @@
 		<section class="bill-timeline">
 
 		</section>
-
+    <div class='status'>
+      <h1>{{bill.body.getTitle()}}<h1>
+          <span class="{{bill.body.getStatusClass()}}"></span>
+    </div>
 		<div class="top-comment favor">
 			<h1></h1>
 			<hr />
@@ -28,23 +31,22 @@
 			<p></p>
 			</div>
 		</div>
-
 		<div class="bill-sponsor">
-			<h1></h1>
+      <h1></h1>
 			<hr />
 			<div class="senator-img">
 				<img src="" />
 			</div>
 			<div class="bill-sponsor-info">
-				<h2></h2>
-				<h3></h3>
+        <h2>{{bill.body.billData.sponsor.name}}</h2>
+        <h3>{{bill.body.billData.sponsor.title}}</h3>
 			</div>
 		</div>
 
 		<div class="bill-description">
 			<h1></h1>
 			<hr />
-			<p></p>
+      <p>{{bill.body.billData.summary}}</p>
 		</div>
 
 		<div class="bill-comments">

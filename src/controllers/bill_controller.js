@@ -12,12 +12,13 @@ BillController.prototype.Identify = function(routeParams) {
 
 BillController.prototype.getBill = function(id) {
   var that = this;
-  this.billService.getById(id, function(err, result) {
+  this.billService.getBill(id, function(err, result) {
     if(err){
       that.error = true;
     }
     else {
       that.body = result;
+      console.log(result);
     }
   });
 };

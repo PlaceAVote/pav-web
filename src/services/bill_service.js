@@ -28,7 +28,8 @@ function BillService(tempBillResource, $resource){
       var onError = function(err){
         return callback(err);
       };
-      var resource = new $resource(config.bills.getById.endpoint, id,  {getById: config.bills.getById.method});
+      var url = config.bills.getById.endpoint + id;
+      var resource = new $resource(url, id,  {getById: config.bills.getById.method});
       resource.getById(undefined, onLoad, onError);
     };
 
