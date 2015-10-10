@@ -61,7 +61,7 @@ app.factory('tempTrendResource', [TempTrendResource]);
 //services
 app.factory('facebookService', [Facebook]);
 app.factory('userService', ['$resource', 'facebookService', UserService]);
-app.factory('billService', ['tempBillResource', BillService]);
+app.factory('billService', ['tempBillResource', '$resource', BillService]);
 app.factory('trendService', ['tempTrendResource', TrendService]);
 //controllers
 app.controller('TopicRegisterCtrl',['$scope','$location', 'userService', RegisterController]);

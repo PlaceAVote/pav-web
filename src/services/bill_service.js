@@ -1,13 +1,14 @@
-var Bill = require("../models/bill_summary.js");
-//temporary until endpoint is made
-//var resource = require("../temp/mockBillResource.js");
+var BillSummary = require('../models/bill_summary.js');
+var Bill = require('../models/bill.js');
+var config = require('../config/live_endpoints.js');
 
-function BillService(tempBillResource){
+
+function BillService(tempBillResource, $resource){
     var getBills = function(username, callback) {
         var onLoad = function(result) {
             var bills = [];
             for(r in result){
-                bills.push(new Bill(result[r]));
+                bills.push(new BillSummary(result[r]));
             };
             callback(undefined, bills);
         };
@@ -17,8 +18,23 @@ function BillService(tempBillResource){
         var results = tempBillResource.get(undefined, onLoad, onError);
     };
 
+    var getBill = function(id, callback) {
+      if(!id){
+        return callback({message: 'Error: No Id Provided'});
+      }
+      var onLoad = function(result){
+        return callback(undefined, new Bill(result));
+      };
+      var onError = function(err){
+        return callback(err);
+      };
+      var resource = new $resource(config.bills.getById.endpoint, id,  {getById: config.bills.getById.method});
+      resource.getById(undefined, onLoad, onError);
+    };
+
     return {
-        getBills: getBills
+      getBills: getBills,
+      getBill: getBill,
     }
 }
 
