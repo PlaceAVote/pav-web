@@ -24,4 +24,8 @@ Bill.prototype.majorityVote = function() {
     return result;
 };
 
+Bill.prototype.goToPage = function (location) {
+  location.path('bill/' + this.bill_id);
+};
+
 module.exports = Bill;

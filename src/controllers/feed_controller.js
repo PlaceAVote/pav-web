@@ -2,7 +2,7 @@ var Banner = require('../models/banner.js');
 
 FeedController = function($scope, $location, userService, billService, trendService) {
     this.$scope = $scope || {};
-    this.$location = $location || {};
+    $scope.$location = $location || {};
     this.trendService = trendService;
     this.billService = billService;
     var user = userService.getUser();

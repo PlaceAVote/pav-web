@@ -15,7 +15,7 @@
 		<div class='feed-column'>
 		    <div class="bill-container" ng-repeat="bill in bills">
 		    	<div class="bill">
-		        <h3>{{bill.subject}}</h3>
+		        <h3 ng-click='bill.goToPage($parent.$location)'>{{bill.subject}}</h3>
 		        <hr />
 			        <div class="bill-summary-container">
 			        <div class="bill-subject">
@@ -38,5 +38,5 @@
 			<h1>TRENDING GLOBALLY</h1>
 		</div>
 		</section>
-	</div>	
+	</div>
 </div>
