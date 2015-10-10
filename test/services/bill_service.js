@@ -1,5 +1,5 @@
 var BillService = require('../../src/services/bill_service.js');
-var Bill = require('../../src/models/bill.js');
+var Bill = require('../../src/models/bill_summary.js');
 var expect = require('chai').expect;
 var resource = require("../../src/temp/mockBillResource.js");
 describe("Bill Service", function(){

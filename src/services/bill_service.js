@@ -1,4 +1,4 @@
-var Bill = require("../models/bill.js");
+var Bill = require("../models/bill_summary.js");
 //temporary until endpoint is made
 //var resource = require("../temp/mockBillResource.js");
 

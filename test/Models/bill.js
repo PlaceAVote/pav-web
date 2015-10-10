@@ -1,4 +1,4 @@
-var Bill = require("../../src/models/bill.js");
+var Bill = require("../../src/models/bill_summary.js");
 var expect = require("chai").expect;
 
 describe("Bills", function(){

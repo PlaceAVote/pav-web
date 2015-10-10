@@ -1,6 +1,6 @@
 var TrendService = require('../../src/services/trend_service.js');
 var expect = require('chai').expect;
-var Bill = require('../../src/models/bill.js');
+var Bill = require('../../src/models/bill_summary.js');
 var Comment = require("../../src/models/comment.js");
 
 describe("Trend Service", function(){

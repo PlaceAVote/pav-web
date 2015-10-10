@@ -1,4 +1,4 @@
-var Bill = require("../models/bill.js");
+var Bill = require("../models/bill_summary.js");
 var Comment = require("../models/comment.js");
 function TrendService(tempTrendResource){
   var getTrends = function(callback){
