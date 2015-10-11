@@ -117,7 +117,7 @@
 
     h1 {
       padding-top: 22px;
-      padding-bottom: 60px;
+      padding-bottom: 40px;
       @include media(700px){
       padding-bottom: 22px;
       text-align: center;
@@ -127,38 +127,59 @@
       @include font-size(30px);
     }
 
-    .featured {
+    .press-kit-container {
       @include media(700px){
-      padding-bottom: 22px;
+    padding-bottom: 22px;
       }
 
       h2 {
+        font-family: $font-light;
         @include font-size(14px);
         padding-bottom: 20px;
       }
 
-      a {
-        text-decoration: none;
-
-        img {
-          vertical-align: middle;
-          padding-right: 5px;
-          padding-bottom: 10px;
-          height: 20px;
-          display: inline-block;
+      .download-container {
+        display: flex;
+        flex-direction: row;
+        background: white;
+        border-radius: 3px;
+        border: 1px solid $grey;
+        padding: 25px;
+        margin-right: 20px;
+        align-items: center;
+        @include media(700px){
+        margin-right: 0;
         }
-      }
 
-      &.contact {
+        p {
+          padding: 0;
+          text-align: left;
+          color: $black;
+          margin-bottom: 10px;
+          @include font-size(14px);
+        }
+
         a {
+          @include font-size(14px);
+          font-weight: bold;
           color: $blue;
           text-decoration: none;
-          padding-bottom: 20px;
-          display: block;
+        }
+
+        .style-guide {
+          width: 110px;
+          padding-left: 10px;
+          display: flex;
+          justify-content: center;
           @include media(700px){
-          display: block;
+          padding-left: 40px;
+          max-width: 80px;
           width: 100%;
-          text-align: center;
+          }
+
+          img {
+            // display: flex;
+            max-width: 100%;
           }
         }
       }
@@ -171,12 +192,15 @@
     @include media(700px){
     width: 100%;
     }
-    background: white;
-    border-radius: 3px;
-    border: 1px solid $grey;
-    padding: 40px;
-    @include media(600px){
-    padding: 10px;
+
+    .press-body {
+      background: white;
+      border-radius: 3px;
+      border: 1px solid $grey;
+      padding: 25px;
+      @include media(600px){
+      padding: 10px;
+      }
     }
 
     h1 {
@@ -202,35 +226,6 @@
       font-weight: bold;
       color: $blue;
       text-decoration: none;
-    }
-  }
-
-  .dl-container {
-    border-radius: 5px;
-    border: 1px solid $grey;
-
-    .l-3,
-    .l-9 {
-      vertical-align: middle;
-      display: inline-block;
-      float: none;
-      padding: 20px;
-    }
-
-    div h2 {
-      @include font-size(12px);
-      padding-bottom: 15px;
-    }
-
-    div a {
-      text-decoration: none;
-      color: $blue;
-      @include font-size(12px);
-    }
-
-    div img {
-      height: 40px;
-      float:right;
     }
   }
 }
@@ -298,4 +293,65 @@ footer {
 
 .lower {
   height: auto;
+}
+
+.press-body {
+  column-count: 2;
+  column-gap: 20px;
+  column-fill: auto;
+  @include media(700px){
+  column-count: 1;
+  }
+
+  section {
+    display: inline-block;
+    width: 100%;
+
+    .quote {
+      display: flex;
+      flex-direction: column;
+      p {
+        text-align: left;
+        padding: 20px;
+        margin: 0;
+      }
+      a {
+        align-self: flex-end;
+        font-family: $font-light;
+        @include font-size(14px);
+        padding: 0px 20px 20px;
+      }
+      color: $black;
+      background: #f7f7f7;
+      border-bottom: 1px solid $grey;
+    }
+
+    div {
+      display: flex;
+      align-self: center;
+
+      img {
+        margin: auto;
+        padding: 20px;
+        max-width: 150px;
+        max-height: 50px;
+      }
+    }
+  }
+}
+
+.press-wrapper .press-container {
+  h1 {
+    padding-top: 20px;
+    color: white;
+    font-family: $font-light;
+    @include font-size(28px);
+    @include media(700px){
+    padding-top: 0px;
+    padding-bottom: 15px;
+    text-align: center;
+    color: $black;
+      @include font-size(18px);
+    }
+  }
 }
