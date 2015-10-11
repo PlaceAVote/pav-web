@@ -24,9 +24,10 @@ brand usage guidelines</p>
 				<p>
 			{{article.quote}}
 				</p>
+				<a ng-show="article.link" href="{{article.link}}" target="_blank" alt="{{article.title}}">Read article</a>
 			</div>
 			<div>
-				<a href=""><img ng-src="{{article.img}}" /></a>
+				<img ng-src="{{article.img}}" />
 			</div>
 		</section>
 	</div>
