@@ -1,14 +1,38 @@
 <header-nav></header-nav>
 <div class="app">
 	<div class="app-body">
-		<section class="bill-timeline">
-
+		<h1 class="bill-title">{{bill.body.getTitle()}}</h1>
+		<section class="bill-timeline {{bill.body.getStatusClass()}}">
+		<div class="bill-timeline-bar"><span></span></div>
+		<ul>
+			<li>
+				<img src="img/bills/introduced.svg" />
+				<p>Bill Introduced</p>
+				<span></span>
+			</li>
+			<li>
+				<img src="img/bills/committee.svg" />
+				<p>Reported by Committee</p>
+				<span></span>			
+			</li>
+			<li>
+				<img src="img/bills/passed-house.svg" />
+				<p>Passed House</p>
+				<span></span>
+			</li>
+			<li>
+				<img src="img/bills/passed-senate.svg" />
+				<p>Passed Senate</p>
+				<span></span>			
+			</li>
+			<li>
+				<img src="img/bills/enacted.svg" />
+				<p>Enacted</p>
+				<span></span>		
+			</li>
+		</ul>
 		</section>
-    <div class='status'>
-      <h1>{{bill.body.getTitle()}}<h1>
-          <span class="{{bill.body.getStatusClass()}}"></span>
-    </div>
-		<div class="top-comment favor">
+    	<div class="top-comment favor">
 			<h1></h1>
 			<hr />
 			<div class="user-img-border">

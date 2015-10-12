@@ -1001,6 +1001,15 @@ input {
       -ms-flex-align: center;
           align-items: center; }
   .app .app-body {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
     width: 100%;
     max-width: 1200px; }
 
@@ -1275,3 +1284,81 @@ header {
       height: 30px;
       border-radius: 5px;
       padding-left: 10px; }
+
+h1.bill-title {
+  text-align: center;
+  font-size: 30px;
+  font-size: 1.875rem;
+  font-family: "whitneylight", sans-serif;
+  margin-bottom: 30px;
+  margin-top: 70px; }
+
+.bill-timeline {
+  margin-bottom: 80px;
+  -webkit-align-self: center;
+      -ms-flex-item-align: center;
+          align-self: center;
+  max-width: 500px;
+  width: 100%;
+  position: relative; }
+  .bill-timeline .bill-timeline-bar {
+    position: absolute;
+    bottom: -15px;
+    margin: 0px auto;
+    width: calc(100% - 88px);
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: #3b3b3b; }
+  .bill-timeline ul {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+            flex-direction: row; }
+    .bill-timeline ul li {
+      width: 20%;
+      height: 100px;
+      position: relative;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: column;
+          -ms-flex-direction: column;
+              flex-direction: column; }
+      .bill-timeline ul li img {
+        max-height: 50px;
+        max-width: 74px;
+        -webkit-align-self: center;
+            -ms-flex-item-align: center;
+                align-self: center;
+        padding: 0px 20px; }
+      .bill-timeline ul li p {
+        text-align: center;
+        position: absolute;
+        bottom: 13px;
+        margin: 0px auto;
+        left: 0;
+        right: 0;
+        font-size: 12px;
+        font-size: 0.75rem;
+        font-family: "whitneylight", sans-serif; }
+      .bill-timeline ul li span {
+        background-color: white;
+        border-radius: 50%;
+        height: 9px;
+        width: 9px;
+        border: 3px solid #3b3b3b;
+        display: block;
+        position: absolute;
+        bottom: -20px;
+        margin: 0 auto;
+        left: 0;
+        right: 0; }

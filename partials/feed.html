@@ -22,7 +22,7 @@
 			        <span class="{{bill.subject}}"></span>
 			        </div>
 			        <div class="bill-summary">
-			        <h6>{{bill.short_title}}</h6>
+			        <h6 ng-click='bill.goToPage($parent.$location)'>{{bill.short_title}}</h6>
 			        <p>{{bill.summary}}</p>
 			        </div>
 			        </div>
