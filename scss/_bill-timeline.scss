@@ -1,3 +1,50 @@
+span {
+	&.enacted-signed {
+		width: 100%;
+	}
+	&.passed-senate {
+		width: 75%;
+	}
+	&.passed-house {
+		width: 50%;
+	}
+	&.committee {
+		width: 25%;
+	}
+	&.bill-introduced {
+		width: 0;
+	}
+}
+
+.bill-timeline {
+	&.passed-senate {
+		li:nth-child(5) {
+			img, p {opacity: 0.2;}
+			span {border-color: lighten($black, 45%);}
+		}
+	}
+	&.passed-house {
+		li:nth-child(n+4) {
+			img, p {opacity: 0.2;}
+			span {border-color: lighten($black, 45%);}
+		}	
+	}
+	&.committee {
+		li:nth-child(n+3) {
+			img, p {opacity: 0.2;}
+			span {border-color: lighten($black, 45%);}
+		}	
+	}
+	&.bill-introduced {
+		li:nth-child(n+2) {
+			img, p {opacity: 0.2;}
+			span {border-color: lighten($black, 45%);}
+		}	
+	}
+
+}
+
+
 h1.bill-title {
 		text-align: center;
 		@include font-size(30px);
@@ -5,6 +52,7 @@ h1.bill-title {
 		margin-bottom: 30px;
 		margin-top: 70px
 }
+
 .bill-timeline {
 	margin-bottom: 80px;
 	align-self: center;
@@ -19,7 +67,12 @@ h1.bill-title {
 	    left: 0;
 	    right: 0;
 	    height: 5px;
-		background: $black;
+		background: transparentize($black, 0.8);
+		span {
+			position: absolute;
+			background-color: $black;
+			height: 5px;
+		}
 	}
 	ul {
 		display: flex;

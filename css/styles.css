@@ -1285,6 +1285,45 @@ header {
       border-radius: 5px;
       padding-left: 10px; }
 
+span.enacted-signed {
+  width: 100%; }
+
+span.passed-senate {
+  width: 75%; }
+
+span.passed-house {
+  width: 50%; }
+
+span.committee {
+  width: 25%; }
+
+span.bill-introduced {
+  width: 0; }
+
+.bill-timeline.passed-senate li:nth-child(5) img, .bill-timeline.passed-senate li:nth-child(5) p {
+  opacity: 0.2; }
+
+.bill-timeline.passed-senate li:nth-child(5) span {
+  border-color: #aeaeae; }
+
+.bill-timeline.passed-house li:nth-child(n+4) img, .bill-timeline.passed-house li:nth-child(n+4) p {
+  opacity: 0.2; }
+
+.bill-timeline.passed-house li:nth-child(n+4) span {
+  border-color: #aeaeae; }
+
+.bill-timeline.committee li:nth-child(n+3) img, .bill-timeline.committee li:nth-child(n+3) p {
+  opacity: 0.2; }
+
+.bill-timeline.committee li:nth-child(n+3) span {
+  border-color: #aeaeae; }
+
+.bill-timeline.bill-introduced li:nth-child(n+2) img, .bill-timeline.bill-introduced li:nth-child(n+2) p {
+  opacity: 0.2; }
+
+.bill-timeline.bill-introduced li:nth-child(n+2) span {
+  border-color: #aeaeae; }
+
 h1.bill-title {
   text-align: center;
   font-size: 30px;
@@ -1309,7 +1348,11 @@ h1.bill-title {
     left: 0;
     right: 0;
     height: 5px;
-    background: #3b3b3b; }
+    background: rgba(59, 59, 59, 0.2); }
+    .bill-timeline .bill-timeline-bar span {
+      position: absolute;
+      background-color: #3b3b3b;
+      height: 5px; }
   .bill-timeline ul {
     display: -webkit-box;
     display: -webkit-flex;

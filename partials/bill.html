@@ -3,7 +3,7 @@
 	<div class="app-body">
 		<h1 class="bill-title">{{bill.body.getTitle()}}</h1>
 		<section class="bill-timeline {{bill.body.getStatusClass()}}">
-		<div class="bill-timeline-bar"><span></span></div>
+		<div class="bill-timeline-bar"><span class="{{bill.body.getStatusClass()}}"></span></div>
 		<ul>
 			<li>
 				<img src="img/bills/introduced.svg" />
