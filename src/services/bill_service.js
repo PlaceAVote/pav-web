@@ -1,5 +1,6 @@
 var BillSummary = require('../models/bill_summary.js');
 var Bill = require('../models/bill.js');
+var Comment = require('../models/comment.js');
 var config = require('../config/live_endpoints.js');
 
 
@@ -33,10 +34,24 @@ function BillService(tempBillResource, $resource){
       resource.getById(undefined, onLoad, onError);
     };
 
+    var getTopComment = function(id, callback){
+      if(!id){
+        return callback({message: 'Id Must Be Defined'});
+      }
+      var onLoad = function(result){
+        return callback(undefined, new Comment(result));
+      }
+      var onError = function(err){
+        return callback(err);
+      }
+      tempBillResource.getTopComment(undefined, onLoad, onError);
+    };
+
     return {
       getBills: getBills,
       getBill: getBill,
-    }
+      getTopComment: getTopComment,
+    };
 }
 
 

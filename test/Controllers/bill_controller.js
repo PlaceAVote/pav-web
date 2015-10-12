@@ -1,6 +1,7 @@
 var expect = require('chai').expect;
 var BillController = require('../../src/controllers/bill_controller.js');
 var Bill = require('../../src/models/bill.js');
+var Comment = require('../../src/models/comment.js');
 
 describe('BillController', function(){
   var scope = {};
@@ -12,6 +13,9 @@ describe('BillController', function(){
       getBill: function(id, callback){
         callback('Error');
       },
+      getTopComment: function(id, callback){
+        callback(undefined, 'comment');
+      },
     };
     var billController = new BillController(undefined, routeParams, mockBillService);
     expect(billController.id).to.eql('100');
@@ -20,6 +24,9 @@ describe('BillController', function(){
     var mockBillService = {
       getBill: function(id, callback){
         callback('Error');
+      },
+      getTopComment: function(id, callback){
+        callback(undefined, 'comment');
       },
     };
     var billController = new BillController(scope, routeParams, mockBillService);
@@ -33,6 +40,9 @@ describe('BillController', function(){
       getBill: function(id, callback){
         callback(undefined, bill);
       },
+      getTopComment: function(id, callback){
+        callback(undefined, 'comment');
+      },
     };
     var billController = new BillController(scope, routeParams, mockBillService);
     billController.getBill('100');
@@ -44,11 +54,51 @@ describe('BillController', function(){
       getBill: function(id, callback){
         callback('Error');
       },
+      getTopComment: function(id, callback){
+        callback(undefined, 'comment');
+      },
     };
     var billController = new BillController(scope, routeParams, mockBillService);
     billController.getBill('100');
     expect(scope.bill.error).to.eql(true);
     done();
+  });
+  describe('Get Comment For Bill', function(){
+    it('sets topComment attribute', function(done){
+      var comment = new Comment({
+        id: 10,
+      });
+      var mockBillService = {
+        getBill: function(id, callback){
+          callback('Error');
+        },
+        getTopComment: function(id, callback){
+          callback(undefined, comment);
+        },
+      };
+      var billController = new BillController(scope, routeParams, mockBillService);
+      billController.getTopComment('100');
+      expect(scope.bill.topComment).to.eql(comment);
+      done();
+    });
+    it('set topCommentError to be true when server returns error', function(done){
+      var comment = new Comment({
+        id: 10,
+      });
+      var mockBillService = {
+        getBill: function(id, callback){
+          callback('Error');
+        },
+        getTopComment: function(id, callback){
+          callback('Error');
+        },
+      };
+      var billController = new BillController(scope, routeParams, mockBillService);
+      billController.getTopComment('100');
+      expect(scope.bill.topComment).to.eql(undefined);
+      expect(scope.bill.topCommentError).to.eql(true);
+      done();
+    });
   });
 });
 

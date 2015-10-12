@@ -1,4 +1,4 @@
-function TempBillResource(){    
+function TempBillResource(){
     var get = function(object, onLoad, onError) {
         onLoad([
                 {
@@ -87,8 +87,23 @@ function TempBillResource(){
                 }
         ]);
     };
+
+    var getTopComment = function(params, onLoad, onError){
+      onLoad(
+      {
+        "type": "comment",
+        "user_name": "Paul Barber",
+        "comment": "this is a comment blah ablah blash",
+        "replies": 80,
+        "subject": "Guns",
+        "upvotes": 100,
+      }
+      );
+    };
+
     return {
-        get: get
+        get: get,
+        getTopComment: getTopComment,
     };
 }
 
