@@ -36,7 +36,7 @@ gulp.task('website-sass', function() {
 	.pipe(gulp.dest('./web/dist/css'));
 });
 
-gulp.task('website-autoPrefix', function() {
+gulp.task('website-autoPrefix', ['website-sass'], function() {
 return gulp.src('./web/dist/css/styles.css')
 			.pipe(autoprefix())
 			.pipe(minifycss())
@@ -91,7 +91,7 @@ gulp.task('watch-website',  ['website-sass', 'index-html', 'website-fonts', 'bro
 	gulp.watch(['./web/dist/css/*.css'], ['website-autoPrefix']);
 });
 
-gulp.task('build-site', ['website-sass', 'index-html', 'website-fonts', 'browserify-website', 'website-imgs', 'website-html', 'download-folder'],function() {
+gulp.task('build-site', ['index-html', 'website-fonts', 'browserify-website', 'website-imgs', 'website-html', 'download-folder', 'website-autoPrefix'],function() {
 	return gulp.src('./web/dist/js/app.js')
 	    .pipe(minify())
 	    .pipe(gulp.dest('./web/dist/js'));
