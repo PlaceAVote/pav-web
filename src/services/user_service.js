@@ -2,7 +2,7 @@ var User = require('../models/user.js');
 var config = require('../config/live_endpoints.js');
 var strftime = require('strftime');
 
-function UserService($resource, facebookService) {
+function UserService($resource, facebookService, authService) {
     this.createdFB = false;
     var loginWithFacebook = function(callback){
         var that = this;
@@ -15,17 +15,17 @@ function UserService($resource, facebookService) {
         };
 
         facebookService.login(function(resource, auth){
-            that.userToken = auth;
+            authService.setAuth(auth);
             that.user = new User(resource.email);
             that.user.dob = new Date(resource.birthday);
             that.user.first_name = resource.first_name;
             that.user.last_name = resource.last_name;
             that.user.img_url = resource.picture.data.url;
-            config.methods.post.headers["PAV_AUTH_TOKEN"] = auth.accessToken;
+            config.methods.post.headers["PAV_AUTH_TOKEN"] = authService.getAccessToken();
             var facebookUserLoginResource = new $resource(config.users.facebookLoginUrl, undefined, {login : config.methods.post});
             var creds = {
                 email: that.user.email,
-                token: that.userToken.accessToken
+                token: authService.getAccessToken(),
             }
             facebookUserLoginResource.login(creds, onLoad, onError);
         });

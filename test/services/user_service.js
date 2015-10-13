@@ -2,6 +2,7 @@ var UserService = require("../../src/services/user_service.js");
 var Interest = require("../../src/models/interest.js");
 var strftime = require("strftime");
 var expect = require("chai").expect;
+var AuthService = require("../../src/services/auth_service.js");
 
 describe("User Service", function() {
 	describe("Create User", function(){
@@ -218,16 +219,18 @@ describe("User Service", function() {
         };
         it("calls facebook resource with correct user details", function(done){
             function mockResource(url, params, methods, options) {
+              this.methods = methods;
                this.login = function(user, succeed, error){
                     expect(user.email).to.eql("test@test.com");
-                    expect(user.token).to.eql("authT0k3n4000");
                     expect(methods.login.headers["PAV_AUTH_TOKEN"]).to.eql("authT0k3n4000");
                     done();
                };
             };
             mockFacebook = new MockFacebook();
-            var subject = new UserService(mockResource, mockFacebook);
-            subject.loginWithFacebook();
+            authService = new AuthService();
+            authService.setAuth({accessToken: 'TOKEN'});
+            var subject = new UserService(mockResource, mockFacebook, authService);
+            subject.loginWithFacebook(function(err, result){});
 
         });
         it("returns a User Not Defined Error when trying to log in to a user that has not yet created an account", function(done){
@@ -238,7 +241,9 @@ describe("User Service", function() {
                };
             };
             facebook = new MockFacebook();
-            var subject = new UserService(mockResource, facebook);
+            authService = new AuthService();
+            authService.setAuth({accessToken: 'TOKEN'});
+            var subject = new UserService(mockResource, mockFacebook, authService);
             subject.loginWithFacebook(function(err, resource){
                 expect(err.message).to.eql("User Not Found");
                 expect(resource.first_name).to.eql("paul");
@@ -251,7 +256,9 @@ describe("User Service", function() {
                 }
             };
             facebook = new MockFacebook();
-            var subject = new UserService(mockResource, facebook);
+            authService = new AuthService();
+            authService.setAuth({accessToken: 'TOKEN'});
+            var subject = new UserService(mockResource, mockFacebook, authService);
             subject.loginWithFacebook(function(err, resource){
                 expect(subject.createdFB).to.eql(true);
                 done();
