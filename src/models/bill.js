@@ -1,5 +1,10 @@
 var format = require('util').format;
+
 var ENACTEDSIGNED = 'enacted-signed';
+var PASSEDSENATE = 'passed-senate';
+var PASSEDHOUSE = 'passed-house';
+var COMMITTEE = 'committee';
+var BILLINTRODUCTED = 'bill-introduced';
 
 function Bill(data) {
   this.billData = data;
