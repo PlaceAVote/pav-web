@@ -3,7 +3,6 @@ node_modules
 .DS_Store
 dist/*
 *.log
-*.zip
 pav_ionic/
 .idea/
 coverage/
