@@ -1,79 +1,77 @@
 function LoginCtrl($scope, $location, userService) {
-	$scope = $scope || {};
-	this.userService = userService;
-	$scope.login = this;
-	this.location = $location;
-	this.forgot = false;
-	this.passwordSent = false;
+  $scope = $scope || {};
+  this.userService = userService;
+  $scope.login = this;
+  this.location = $location;
+  this.forgot = false;
+  this.passwordSent = false;
 
-	this.user = {
-		email: '',
-		emailValid: true,
-		password: '',
-		passwordValid: true
-	};
+  this.user = {
+    email: '',
+    emailValid: true,
+    password: '',
+    passwordValid: true
+  };
 }
 
 LoginCtrl.prototype.loginWithFacebook = function(){
-    var that = this;
-    this.userService.loginWithFacebook(function(err, response){
-        if(err){
-            that.go("/topics");
-        }
-        else {
-            that.go("/feed");
-        }
-    });
+  var that = this;
+  this.userService.loginWithFacebook(function(err, response){
+    if(err){
+      that.go("/topics");
+    }
+    else {
+      that.go("/feed");
+    }
+  });
 };
 
 LoginCtrl.prototype.go = function (hash) {
- 	this.location.path(hash);
+  this.location.path(hash);
 };
-	
+
 
 LoginCtrl.prototype.validate = function(u, hash) {
-	var email = u.email;
-	var password = u.password;
-	this.user.emailValid = this.emailValidation(email);
-	this.user.passwordValid = this.passwordValidation(password);	
-	if(this.user.emailValid && this.user.passwordValid) {
-		this.userService.createUser(email, password);
-		this.go(hash);		
-	} 
+  var email = u.email;
+  var password = u.password;
+  this.user.emailValid = this.emailValidation(email);
+  this.user.passwordValid = this.passwordValidation(password);
+  if(this.user.emailValid && this.user.passwordValid) {
+    this.userService.createUser(email, password);
+    this.go(hash);
+  }
 
 };
 
 LoginCtrl.prototype.login = function(u, hash) {
-    var that = this;
-    var email = u.email;
-    var password = u.password;
-    this.user.emailValid = this.emailValidation(email);
-    this.user.passwordValid = this.passwordValidation(password);	
-    if(this.user.emailValid && this.user.passwordValid) {
-        this.userService.login({email: email, password: password}, function(err, response){
-            ///this.go(hash);
-            if (err) {
-                console.log("**ERROR: ", err);
-                if(err.status === 401){
-                    //invalid user credentials
-                    that.forgot = true;
-                }
-            } else {
-                console.log("**Response: ", response);
-                that.go("/feed");
-            }
-        });
-    }
+  var that = this;
+  var email = u.email;
+  var password = u.password;
+  this.user.emailValid = this.emailValidation(email);
+  this.user.passwordValid = this.passwordValidation(password);
+  if(this.user.emailValid && this.user.passwordValid) {
+    this.userService.login({email: email, password: password}, function(err, response){
+      if (err) {
+        console.log("**ERROR: ", err);
+        if(err.status === 401){
+          that.forgot = true;
+        }
+      } else {
+        console.log("**Response: ", response);
+        that.go("/feed");
+      }
+    });
+  }
 };
 
 LoginCtrl.prototype.emailValidation = function(email) {
-	var e = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-	return e.test(email);
+  var e = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+  return e.test(email);
 };
 
 LoginCtrl.prototype.passwordValidation = function(password) {
-	var p = /^(?=.*\d)(?=.*[A-Z])(?!.*[^a-zA-Z0-9@#$^+=])(.{8,15})$/;
-	return p.test(password);
+  var p = /^(?=.*\d)(?=.*[A-Z])(?!.*[^a-zA-Z0-9@#$^+=])(.{8,15})$/;
+  return p.test(password);
 };
 
 module.exports = LoginCtrl;

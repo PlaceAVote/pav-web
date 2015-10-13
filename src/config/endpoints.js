@@ -1,51 +1,49 @@
+var CONGRESS = 'http://pav-congress-api-196217309.us-west-2.elb.amazonaws.com:8080';
+var USER = 'http://pav-user-api-1888417595.us-west-2.elb.amazonaws.com:8080';
+
 module.exports = {
-    facebookAppId: '1686805824874862',
-    users : {
-                create_endpoint : 'http://192.168.99.100:8080/user/',
-                create : {
-                    method : 'PUT',
-                    headers: {
-                        'Content-Type' : "application/json",
-                        'Accept': 'application/json'
-                    },
-                    withCredentials : false
-                },
-                login_endpoint: 'http://192.168.99.100:8080/user/authenticate',
-                login: {
-                           method: 'POST',
-                           headers: {
-                                'Content-Type': 'application/json',
-                                'Accept': 'application/json'
-                           },
-                           withCredentials: false
-                },
-                get_endpoint: 'http://192.168.99.100:8080/user/',
-                get: {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type':'application/json',
-                        'Accept': 'application/json'
-                    }
-                },
-                facebookLoginUrl : 'http://192.168.99.100:8080/user/facebook/authenticate',
-                facebook: {
-                    login : {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type' : 'application/json',
-                                    'Accept': 'application/json'
-                                },
-                                withCredentials: false
-                            },
-                    create: {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type':'application/json',
-                                    'Accept': 'application/json'
-                                },
-                                withCredentials: false
-                            },
-                },
-                facebookCreateUrl: 'http://192.168.99.100:8080/user/facebook'
-            }
+  facebookAppId: '1686805824874862',
+  methods: {
+    get: {
+      method: 'GET',
+      headers: {
+        'Content-Type' : "application/json",
+        'Accept': 'application/json',
+      },
+      withCredentials: false,
+    },
+    put: {
+      method: 'PUT',
+      headers: {
+        'Content-Type' : "application/json",
+        'Accept': 'application/json',
+      },
+      withCredentials: false,
+    },
+    post: {
+      method: 'POST',
+      headers: {
+        'Content-Type' : "application/json",
+        'Accept': 'application/json',
+      },
+      withCredentials: false,
+    },
+  },
+  bills: {
+    comments: {
+      endpoint: function(id) {
+        return CONGRESS + '/bills/' + id + '/comments'
+      },
+    },
+    getById:{
+      endpoint: CONGRESS + '/bills/',
+    },
+  },
+  users : {
+    endpoint : USER + '/user',
+    login_endpoint: USER + '/user/authenticate',
+    facebookLoginUrl : USER + '/user/facebook/authenticate',
+    facebookCreateUrl: USER + '/user/facebook',
+  },
 }
+

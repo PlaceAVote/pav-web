@@ -1,7 +1,7 @@
 var BillSummary = require('../models/bill_summary.js');
 var Bill = require('../models/bill.js');
 var Comment = require('../models/comment.js');
-var config = require('../config/live_endpoints.js');
+var config = require('../config/endpoints.js');
 
 
 function BillService(tempBillResource, $resource){
@@ -30,7 +30,7 @@ function BillService(tempBillResource, $resource){
         return callback(err);
       };
       var url = config.bills.getById.endpoint + id;
-      var resource = new $resource(url, id,  {getById: config.bills.getById.method});
+      var resource = new $resource(url, id,  {getById: config.methods.get});
       resource.getById(undefined, onLoad, onError);
     };
 

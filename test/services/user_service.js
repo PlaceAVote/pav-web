@@ -244,23 +244,6 @@ describe("User Service", function() {
                 expect(resource.first_name).to.eql("paul");
             });
         });
-        xit("uses facebook param if user has been created via fb", function(done) {
-            function mockResource(url, params, methods, options) {
-                this.create = function(body){
-                };
-                expect(url).to.be.eql('http://192.168.99.100:8080/user/facebook');
-                done();
-            };
-            facebook = new MockFacebook();
-            var subject = new UserService(mockResource, facebook);
-            subject.user = {
-                name: 'test',
-                toBody: function(){
-                }
-            };
-            subject.createdFB = true;
-            subject.saveUser();
-        });
         it("onError sets created via facebook bool", function(done){
             function mockResource(url, params, methods, options) {
                 this.login = function(data, onLoad, onError){

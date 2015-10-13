@@ -12,8 +12,8 @@ describe("Configs", function() {
             expect(config.users.login).to.eql(live_config.users.login);
         })
         it("user should have a create_endpoint", function(){
-            expect(!!config.users.create_endpoint).to.eql(true);
-            expect(!!live_config.users.create_endpoint).to.eql(true);
+            expect(!!config.users.endpoint).to.eql(true);
+            expect(!!live_config.users.endpoint).to.eql(true);
         });
         it("users should have a login endpoint", function(){
             expect(!!config.users.login_endpoint).to.eql(true);
