@@ -121,33 +121,33 @@ describe("Bill Service", function(){
       });
     });
     it('Returns a comment from the server', function(done){
-      var expected = {
+      var expected = [{
         "type": "comment",
         "user_name": "Paul Barber",
         "comment": "this is a comment blah ablah blash",
         "replies": 80,
         "subject": "Guns",
         "upvotes": 100,
-      };
-      var mockResource = {
-        getTopComment: function(object, onLoad, onError){
+      }];
+      function mockResource(){
+        this.getComments = function(object, onLoad, onError){
           onLoad(expected);
         }
-      };
-      var subject = new BillService(mockResource);
+      }
+      var subject = new BillService(undefined, mockResource);
       subject.getTopComment('serverId', function(err, resource){
         expect(err).to.eql(undefined);
-        expect(resource).to.eql(new Comment(expected));
+        expect(resource).to.eql(new Comment(expected[0]));
         done();
       });
     });
     it('Returns an Error when server returns an error', function(done){
-      var mockResource = {
-        getTopComment: function(object, onLoad, onError){
+      function mockResource() {
+        this.getComments = function(object, onLoad, onError){
           onError({message: 'Server Error'});
         }
-      };
-      var subject = new BillService(mockResource);
+      }
+      var subject = new BillService({}, mockResource);
       subject.getTopComment('serverId', function(err, resource){
         expect(err).to.not.eql(undefined);
         expect(err).to.eql({message: 'Server Error'});

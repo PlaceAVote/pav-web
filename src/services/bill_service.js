@@ -38,13 +38,18 @@ function BillService(tempBillResource, $resource){
       if(!id){
         return callback({message: 'Id Must Be Defined'});
       }
-      var onLoad = function(result){
-        return callback(undefined, new Comment(result));
+      var onLoad = function(results){
+        console.log(results);
+        var top = results[0];
+        console.log(top);
+        return callback(undefined, new Comment(top));
       }
       var onError = function(err){
         return callback(err);
       }
-      tempBillResource.getTopComment(undefined, onLoad, onError);
+      var url = config.bills.comments.endpoint(id);
+      var resource = new $resource(url, id,  {getComments: config.methods.get});
+      resource.getComments(undefined, onLoad, onError);
     };
 
     return {
