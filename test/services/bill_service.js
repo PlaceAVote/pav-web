@@ -1,6 +1,7 @@
 var BillService = require('../../src/services/bill_service.js');
 var Bill = require('../../src/models/bill_summary.js');
 var Comment = require('../../src/models/comment.js');
+var AuthService = require("../../src/services/auth_service.js");
 
 var expect = require('chai').expect;
 var resource = require("../../src/temp/mockBillResource.js");
@@ -77,7 +78,8 @@ describe("Bill Service", function(){
         }
         done();
       }
-      var subject = new BillService({}, mockResource);
+      var authService = new AuthService();
+      var subject = new BillService({}, mockResource, authService);
       subject.getBill('100', function(err, result) {
       });
     });
@@ -87,7 +89,8 @@ describe("Bill Service", function(){
           onError('Error: A Server Error Occured');
         }
       }
-      var subject = new BillService({}, mockResource);
+      var authService = new AuthService();
+      var subject = new BillService({}, mockResource, authService);
       subject.getBill('100', function(err, result) {
         expect('Error: A Server Error Occured');
         expect(result).to.eql(undefined);
@@ -101,7 +104,8 @@ describe("Bill Service", function(){
           onLoad(data);
         }
       }
-      var subject = new BillService({}, mockResource);
+      var authService = new AuthService();
+      var subject = new BillService({}, mockResource, authService);
       subject.getBill('100', function(err, result) {
         expect(undefined);
         expect(result).to.not.eql(undefined);

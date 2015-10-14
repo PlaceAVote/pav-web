@@ -4,7 +4,7 @@ var Comment = require('../models/comment.js');
 var config = require('../config/endpoints.js');
 
 
-function BillService(tempBillResource, $resource){
+function BillService(tempBillResource, $resource, authService){
     var getBills = function(username, callback) {
         var onLoad = function(result) {
             var bills = [];
@@ -30,6 +30,7 @@ function BillService(tempBillResource, $resource){
         return callback(err);
       };
       var url = config.bills.getById.endpoint + id;
+      config.methods.get.headers['PAV_AUTH_TOKEN'] = authService.getAccessToken();
       var resource = new $resource(url, id,  {getById: config.methods.get});
       resource.getById(undefined, onLoad, onError);
     };
