@@ -29,6 +29,11 @@ module.exports = {
       withCredentials: false,
     },
   },
+  legislator: {
+    getById: {
+      endpoint: CONGRESS + '/legislators/',
+    },
+  },
   bills: {
     comments: {
       endpoint: function(id) {
