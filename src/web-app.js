@@ -10,6 +10,7 @@ var UserService = require('./services/user_service.js');
 var BillService = require('./services/bill_service.js');
 var TrendService = require('./services/trend_service.js');
 var AuthService = require('./services/auth_service.js');
+var LegislatorService = require('./services/legislator_service.js');
 
 //dependencies
 var angular = require('angular');
@@ -65,11 +66,13 @@ app.factory('authService', [AuthService]);
 app.factory('userService', ['$resource', 'facebookService', 'authService', UserService]);
 app.factory('billService', ['tempBillResource', '$resource', 'authService', BillService]);
 app.factory('trendService', ['tempTrendResource', TrendService]);
+app.factory('legislationService', ['$resource', 'authService', LegislatorService]);
+
 //controllers
 app.controller('TopicRegisterCtrl',['$scope','$location', 'userService', RegisterController]);
 app.controller('SignUpCtrl',['$scope','$location', 'userService', SignUpController]);
 app.controller('LoginCtrl',['$scope','$location', 'userService', LoginController]);
 app.controller('FeedCtrl', ['$scope', '$location', 'userService', 'billService', 'trendService', FeedController]);
-app.controller('BillCtrl', ['$scope', '$routeParams', 'billService', BillController]);
+app.controller('BillCtrl', ['$scope', '$routeParams', 'billService', 'legislationService', BillController]);
 //directives
 app.directive('mailcheck', ['$compile','$sce', mailcheck]);
