@@ -12,6 +12,8 @@ function Comment(options) {
   this.parent_id = options.parent_id;
   this.replies = [];
   this.buildChildren(options);
+  //img_placeholder until img is returned with comments call
+  this.img_url = 'http://i159.photobucket.com/albums/t154/MYU701/LOST/unreality/JohnLocke-orange-2.jpg'
 }
 
 Comment.prototype.buildChildren = function(comment) {
