@@ -162,7 +162,7 @@ describe("Bill Service", function(){
       subject.getTopComment('serverId', function(err, resource){
         expect(err).to.eql(undefined);
         console.log(resource);
-        //expect(resource).to.eql(new Comment(expected.comments[0]));
+        expect(resource).to.eql(new Comment(expected.comments[0]));
         done();
       });
     });
