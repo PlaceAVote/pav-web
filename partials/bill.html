@@ -59,11 +59,11 @@
       <h1></h1>
 			<hr />
 			<div class="senator-img">
-				<img src="" />
+        <img src="{{bill.legislator.getImageUrl()}}" />
 			</div>
 			<div class="bill-sponsor-info">
         <h2>{{bill.body.billData.sponsor.name}}</h2>
-        <h3>{{bill.body.billData.sponsor.title}}</h3>
+        <h3>{{bill.legislator.properties.current_term.party}}</h3>
 			</div>
 		</div>
 

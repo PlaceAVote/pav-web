@@ -48,7 +48,7 @@ BillController.prototype.getBill = function(id) {
     }
     else {
       that.body = result;
-      that.getLegislator(result.sponsor);
+      that.getLegislator(result.billData.sponsor);
     }
   });
 };
