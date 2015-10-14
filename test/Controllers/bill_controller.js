@@ -30,7 +30,12 @@ describe('BillController', function(){
         callback(undefined, 'comment');
       },
     };
-    var billController = new BillController(scope, routeParams, mockBillService);
+    var mockLegislationService = {
+      getById: function(id, callback){
+        callback('Error');
+      },
+    };
+    var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService);
     expect(scope.bill.id).to.eql('100');
   });
   it('sets scope.body to result of BillService callback', function(done){
@@ -48,7 +53,12 @@ describe('BillController', function(){
         callback(undefined, 'comment');
       },
     };
-    var billController = new BillController(scope, routeParams, mockBillService);
+    var mockLegislationService = {
+      getById: function(id, callback){
+        callback('Error');
+      },
+    };
+    var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService);
     billController.getBill('100');
     expect(scope.bill.body).to.eql(bill);
     done();
