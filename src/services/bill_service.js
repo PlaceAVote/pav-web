@@ -41,7 +41,7 @@ function BillService(tempBillResource, $resource, authService){
       }
       var onLoad = function(results){
         console.log(results);
-        var top = results[0];
+        var top = results.comments[0];
         console.log(top);
         return callback(undefined, new Comment(top));
       }

@@ -1,40 +1,140 @@
 var expect = require("chai").expect;
 var Comment = require("../../src/models/comment.js");
-
+var comment =  {
+  "author": "tony@pl.com",
+  "bill_id": "hr2-114",
+  "body": "comment 2 here",
+  "has_children": true,
+  "id": "comments:9e9b0180-c5ab-4806-a8b5-ee37b9867626",
+  "parent_id": null,
+  "replies": [
+    {
+      "author": "tony@pl.com",
+      "bill_id": "hr2-114",
+      "body": "Reply to comment 2",
+      "has_children": false,
+      "id": "comments:1e97cac2-30df-46f2-80c8-5ed4a36feb46",
+      "parent_id": "comments:9e9b0180-c5ab-4806-a8b5-ee37b9867626",
+      "replies": [],
+      "score": "2",
+      "timestamp": "1444764060968",
+    },
+  ],
+  "score": 100,
+  "timestamp": 1444764009809,
+};
 describe("comment model", function(){
-  it("comment to have a user_name property", function(){
+  it("comment to have a author property", function(){
     var options = {
-      user_name: "Paul Barber"
+      author: "Paul Barber"
     };
     var subject = new Comment(options);
-    expect(subject.user_name).to.eql("Paul Barber");
+    expect(subject.author).to.eql("Paul Barber");
   });
-  it("comment to have a comment property", function(){
+  it("comment to have a body property", function(){
     var options = {
-      comment: "To ammend the act so it makes sense"
+      body: "To ammend the act so it makes sense"
     };
     var subject = new Comment(options);
-    expect(subject.comment).to.eql("To ammend the act so it makes sense");
+    expect(subject.body).to.eql("To ammend the act so it makes sense");
   });
-  it("comment to have a replies property", function(){
+  it("comment to have a has_children property", function(){
     var options = {
-      replies: 5
+      has_children: true
     };
     var subject = new Comment(options);
-    expect(subject.replies).to.eql(5);
+    expect(subject.has_children).to.eql(true);
   });
   it("comment to have a subject property", function(){
     var options = {
-      subject: "Some Bill"
+      bill_id: "Some Bill"
     };
     var subject = new Comment(options);
-    expect(subject.subject).to.eql("Some Bill");
+    expect(subject.bill_id).to.eql("Some Bill");
   });
   it("comment to have a upvotes property", function(){
     var options = {
-      upvotes: 3
+      score: 3
     };
     var subject = new Comment(options);
-    expect(subject.upvotes).to.eql(3);
+    expect(subject.score).to.eql(3);
+  });
+  it("comment to have a timestamp property", function(){
+    var options = {
+      timestamp: 1444764009809
+    };
+    var subject = new Comment(options);
+    expect(subject.timestamp).to.eql(1444764009809);
+  });
+  it("comment to have a id property", function(){
+    var options = {
+      id: 1444764009809
+    };
+    var subject = new Comment(options);
+    expect(subject.id).to.eql(1444764009809);
+  });
+  it("comment to have a parent id property", function(){
+    var options = {
+      parent_id: 1444764009809
+    };
+    var subject = new Comment(options);
+    expect(subject.parent_id).to.eql(1444764009809);
+  });
+  it("buildChildren recursively builds children", function(){
+    var subject = new Comment();
+    var child = {
+      "author": "tony@pl.com",
+      "bill_id": "hr2-114",
+      "body": "Reply to comment 2",
+      "has_children": true,
+      "id": "comments:1e97cac2-30df-46f2-80c8-5ed4a36feb46",
+      "parent_id": "comments:9e9b0180-c5ab-4806-a8b5-ee37b9867626",
+      "replies": [
+        {
+          "author": "tony@pl.com",
+          "bill_id": "gun-crime-1",
+          "body": "Reply to comment 2",
+          "has_children": false,
+          "id": "comments:1e97cac2-30df-46f2-80c8-5ed4a36feb46",
+          "parent_id": "comments:9e9b0180-c5ab-4806-a8b5-ee37b9867626",
+          "replies": [],
+          "score": "2",
+          "timestamp": "1444764060968",
+        }
+      ],
+      "score": "2",
+      "timestamp": "1444764060968",
+    }
+    subject.buildChildren(child);
+    expect(subject.replies[0].bill_id).to.eql('gun-crime-1');
+    expect(subject.replies[0].replies.length).to.eql(0);
+  });
+  it("buildChildren recursively builds children", function(){
+    var comment = {
+      "author": "tony@pl.com",
+      "bill_id": "hr2-114",
+      "body": "Reply to comment 2",
+      "has_children": true,
+      "id": "comments:1e97cac2-30df-46f2-80c8-5ed4a36feb46",
+      "parent_id": "comments:9e9b0180-c5ab-4806-a8b5-ee37b9867626",
+      "replies": [
+        {
+          "author": "tony@pl.com",
+          "bill_id": "gun-crime-1",
+          "body": "Reply to comment 2",
+          "has_children": false,
+          "id": "comments:1e97cac2-30df-46f2-80c8-5ed4a36feb46",
+          "parent_id": "comments:9e9b0180-c5ab-4806-a8b5-ee37b9867626",
+          "replies": [],
+          "score": "2",
+          "timestamp": "1444764060968",
+        }
+      ],
+      "score": "2",
+      "timestamp": "1444764060968",
+    };
+    var subject = new Comment(comment);
+    expect(subject.replies[0].bill_id).to.eql('gun-crime-1');
+    expect(subject.replies[0].replies.length).to.eql(0);
   });
 });
