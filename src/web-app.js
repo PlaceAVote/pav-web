@@ -9,6 +9,7 @@ var BillController = require('./controllers/bill_controller.js');
 var UserService = require('./services/user_service.js');
 var BillService = require('./services/bill_service.js');
 var TrendService = require('./services/trend_service.js');
+var AuthService = require('./services/auth_service.js');
 
 //dependencies
 var angular = require('angular');
@@ -60,8 +61,9 @@ app.factory('tempTrendResource', [TempTrendResource]);
 
 //services
 app.factory('facebookService', [Facebook]);
-app.factory('userService', ['$resource', 'facebookService', UserService]);
-app.factory('billService', ['tempBillResource', '$resource', BillService]);
+app.factory('authService', [AuthService]);
+app.factory('userService', ['$resource', 'facebookService', 'authService', UserService]);
+app.factory('billService', ['tempBillResource', '$resource', 'authService', BillService]);
 app.factory('trendService', ['tempTrendResource', TrendService]);
 //controllers
 app.controller('TopicRegisterCtrl',['$scope','$location', 'userService', RegisterController]);
