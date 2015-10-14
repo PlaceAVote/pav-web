@@ -80,7 +80,7 @@ function UserService($resource, facebookService, authService) {
         var that = this;
 
         var onLoad = function(user){
-            this.usertoken = user.token;
+            authService.setAuth(user.token);
             callback(undefined, user);
         };
         var onError = function(err){
@@ -90,11 +90,9 @@ function UserService($resource, facebookService, authService) {
             return;
         }
         var url = getSaveConfig(this.createdFB);
+        config.methods.put.headers["PAV_AUTH_TOKEN"] = authService.getAccessToken();
         var saveUser = new $resource(url, undefined, {create : config.methods.put});
-        var token;
-        if(this.userToken){
-            token = this.userToken.accessToken;
-        }
+        var token = authService.getAccessToken();
         var toSave = this.user.toBody(token);
         saveUser.create(toSave, onLoad, onError);
     };
