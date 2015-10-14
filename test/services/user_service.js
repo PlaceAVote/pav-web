@@ -167,7 +167,8 @@ describe("User Service", function() {
           done();
         };
       };
-      var subject = UserService(mockResource);
+      var authService = new AuthService();
+      var subject = new UserService(mockResource, undefined, authService);
       subject.login({
         email: 'paul',
         password: 'TEST555'
@@ -179,7 +180,8 @@ describe("User Service", function() {
           succeed({token : '000001', first_name: 'paul'});
         };
       };
-      var subject = UserService(mockResource);
+      var authService = new AuthService();
+      var subject = new UserService(mockResource, undefined, authService);
       subject.login({email: 'paul', password: 'passWO3rd'}, function(err, resource) {
         expect(err).to.eql(undefined);
         expect(!!resource).to.eql(true);
@@ -192,7 +194,8 @@ describe("User Service", function() {
           error({message: 'Server Error'});
         };
       };
-      var subject = UserService(mockResource);
+      var authService = new AuthService();
+      var subject = new UserService(mockResource, undefined, authService);
       subject.login({email: 'paul', password: 'passWO3rd'}, function(err, resource) {
         expect(err).to.eql({message: 'Server Error'});
         expect(!!resource).to.eql(false);

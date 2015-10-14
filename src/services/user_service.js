@@ -101,7 +101,7 @@ function UserService($resource, facebookService, authService) {
     var login = function(user, callback) {
 
         var onLoad = function(response) {
-            this.usertoken = response.token;
+            authService.setAuth(user.token);
             return callback(undefined, response);
         };
 
@@ -112,6 +112,7 @@ function UserService($resource, facebookService, authService) {
         if(!user || !user.email || !user.password) {
             return callback({message: "User has no password or username"});
         }
+        config.methods.post.headers["PAV_AUTH_TOKEN"] = authService.getAccessToken();
         var loginResource = new $resource(config.users.login_endpoint, undefined, {login : config.methods.post});
         loginResource.login(user, onLoad, onError);
     }
