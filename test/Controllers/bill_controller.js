@@ -2,6 +2,7 @@ var expect = require('chai').expect;
 var BillController = require('../../src/controllers/bill_controller.js');
 var Bill = require('../../src/models/bill.js');
 var Comment = require('../../src/models/comment.js');
+var Legislator = require('../../src/models/legislator.js');
 
 describe('BillController', function(){
   var scope = {};
@@ -35,6 +36,9 @@ describe('BillController', function(){
   it('sets scope.body to result of BillService callback', function(done){
     var bill = new Bill({
       id: 10,
+      sponsor: {
+        thomas_id: '99'
+      },
     });
     var mockBillService = {
       getBill: function(id, callback){
@@ -98,6 +102,46 @@ describe('BillController', function(){
       expect(scope.bill.topComment).to.eql(undefined);
       expect(scope.bill.topCommentError).to.eql(true);
       done();
+    });
+  });
+  describe('Get Legislator', function(){
+    it('set legislator from returned service result', function(){
+      var legislationJSON = require('../fixtures/legislator.js');
+      var mockBillService = {
+        getBill: function(id, callback){
+          callback('Error');
+        },
+        getTopComment: function(id, callback){
+          callback('Error');
+        },
+      };
+      var mockLegislationService = {
+        getById: function(id, callback){
+          callback(undefined, new Legislator(legislationJSON));
+        },
+      };
+      var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService) ;
+      billController.getLegislator({thomas_id: '10'});
+      expect(scope.bill.legislator.properties).to.eql(legislationJSON);
+    });
+    it('set legislation error to true is service returns error', function(){
+      var mockBillService = {
+        getBill: function(id, callback){
+          callback('Error');
+        },
+        getTopComment: function(id, callback){
+          callback('Error');
+        },
+      };
+      var mockLegislationService = {
+        getById: function(id, callback){
+          callback('Error');
+        },
+      };
+      var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService) ;
+      billController.getLegislator({thomas_id: '10'});
+      expect(scope.bill.legislator).to.eql(undefined);
+      expect(scope.bill.legislatorError).to.eql(true);
     });
   });
 });
