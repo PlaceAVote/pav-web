@@ -42,7 +42,7 @@ function TeamCtrl($scope, $location) {
   		img: 'img/profile-imgs/gary-brown.jpg',
   		name: 'Gary Brown',
   		role: 'Lead UX Designer',
-  		twitter: false,
+  		twitter: 'garybrowntown',
   		linkedin: false
   	},
        {
