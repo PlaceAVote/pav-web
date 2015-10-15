@@ -12,16 +12,16 @@ describe('Current Vote', function() {
   it('creates an empty currentvote', function(){
     var subject = new CurrentVote();
     expect(subject.id).to.eql(undefined);
-    expect(subject.yes).to.eql(undefined);
-    expect(subject.no).to.eql(undefined);
+    expect(subject.yes).to.eql(0);
+    expect(subject.no).to.eql(0);
   });
   it('doesnt assign percentage if yes or no arent defined', function(){
     var subject = new CurrentVote('id', 10);
     expect(subject.yes).to.eql(10);
-    expect(subject.no).to.eql(undefined);
+    expect(subject.no).to.eql(0);
     subject.getPercentage();
-    expect(subject.noPercentage).to.eql(undefined);
-    expect(subject.yesPercentage).to.eql(undefined);
+    expect(subject.noPercentage).to.eql(0);
+    expect(subject.yesPercentage).to.eql(100);
   });
   it('assign percentage if yes or no are defined', function(){
     var subject = new CurrentVote('id', 10, 40);
