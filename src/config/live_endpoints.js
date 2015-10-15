@@ -37,7 +37,7 @@ module.exports = {
   },
   votes: {
     getForBill: {
-      endpoint: VOTES + '/vote/count/',
+      endpoint: VOTES + '/vote/count?bill-id=',
     },
   },
   bills: {
