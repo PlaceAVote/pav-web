@@ -15,11 +15,10 @@ describe('Current Vote', function() {
     expect(subject.yes).to.eql(0);
     expect(subject.no).to.eql(0);
   });
-  it('doesnt assign percentage if yes or no arent defined', function(){
+  it('takes into consideration on option being 0', function(){
     var subject = new CurrentVote('id', 10);
     expect(subject.yes).to.eql(10);
     expect(subject.no).to.eql(0);
-    subject.getPercentage();
     expect(subject.noPercentage).to.eql(0);
     expect(subject.yesPercentage).to.eql(100);
   });
@@ -27,9 +26,15 @@ describe('Current Vote', function() {
     var subject = new CurrentVote('id', 10, 40);
     expect(subject.yes).to.eql(10);
     expect(subject.no).to.eql(40);
-    subject.getPercentage();
     expect(subject.noPercentage).to.eql(80);
     expect(subject.yesPercentage).to.eql(20);
+  });
+  it('when undefined percentage is 0', function(){
+    var subject = new CurrentVote();
+    expect(subject.yes).to.eql(0);
+    expect(subject.no).to.eql(0);
+    expect(subject.noPercentage).to.eql(0);
+    expect(subject.yesPercentage).to.eql(0);
   });
 
 });
