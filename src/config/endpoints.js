@@ -1,5 +1,6 @@
 var CONGRESS = 'http://pav-congress-api-196217309.us-west-2.elb.amazonaws.com:8080';
 var USER = 'http://pav-user-api-1888417595.us-west-2.elb.amazonaws.com:8080';
+var VOTES = 'http://pav-vote-api-2107571587.us-west-2.elb.amazonaws.com:8080';
 
 module.exports = {
   facebookAppId: '1686805824874862',
@@ -32,6 +33,11 @@ module.exports = {
   legislator: {
     getById: {
       endpoint: CONGRESS + '/legislators/',
+    },
+  },
+  votes: {
+    getForBill: {
+      endpoint: VOTES + '/vote/count/',
     },
   },
   bills: {
