@@ -1,15 +1,28 @@
-function BillController($scope, $routeParams, billService, legislatorService) {
+function BillController($scope, $routeParams, billService, legislatorService, voteService) {
   $scope = $scope || {};
   $scope.bill = this;
   this.billService = billService;
   this.legislatorService = legislatorService;
+  this.voteService = voteService;
   this.Identify($routeParams);
   this.getBill(this.id);
   this.getTopComment(this.id);
+  this.getVotes(this.id);
 }
 
 BillController.prototype.Identify = function(routeParams) {
   this.id = routeParams.id;
+};
+
+BillController.prototype.getVotes = function(id) {
+  var that = this;
+  this.voteService.getVotesForBill(id, function(err, result){
+    if(err) {
+      that.voteError = true;
+    } else {
+      that.currentVotes = result;
+    }
+  });
 };
 
 BillController.prototype.getTopComment = function(id){
