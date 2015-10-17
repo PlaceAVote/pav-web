@@ -1,5 +1,4 @@
 module.exports = {
-  {
     "total": 0,
     "for-comment": {
       "comment_id": "string",
@@ -19,6 +18,5 @@ module.exports = {
       "parent_id": "string",
       "has_children": true
     },
-  },
 };
 
