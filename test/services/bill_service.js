@@ -118,51 +118,26 @@ describe("Bill Service", function(){
     it('returns an error if bill id is undefined', function(done){
       var mockResource = require('../../src/temp/mockBillResource.js');
       var subject = new BillService(mockResource);
-      subject.getTopComment(undefined, function(err, resource){
+      subject.getTopComments(undefined, function(err, resource){
         expect(err).to.not.eql(undefined);
         expect(err).to.eql({message: 'Id Must Be Defined'});
         done();
       });
     });
-    it('Returns a comment from the server', function(done){
-      var expected = {
-        "total": 1,
-        "comments": [
-          {
-            "author": "tony@pl.com",
-            "bill_id": "hr2-114",
-            "body": "comment 2 here",
-            "has_children": true,
-            "id": "comments:9e9b0180-c5ab-4806-a8b5-ee37b9867626",
-            "parent_id": null,
-            "replies": [
-              {
-                "author": "tony@pl.com",
-                "bill_id": "hr2-114",
-                "body": "Reply to comment 2",
-                "has_children": false,
-                "id": "comments:1e97cac2-30df-46f2-80c8-5ed4a36feb46",
-                "parent_id": "comments:9e9b0180-c5ab-4806-a8b5-ee37b9867626",
-                "replies": [],
-                "score": "2",
-                "timestamp": "1444764060968",
-              },
-            ],
-            "score": 100,
-            "timestamp": 1444764009809,
-          }
-        ]
-      };
+    it('Gets top Comments from the server', function(done){
+      var expected = require('../fixtures/top_comments.js');
       function mockResource(){
         this.getComments = function(object, onLoad, onError){
           onLoad(expected);
         }
       }
-      var subject = new BillService(undefined, mockResource);
-      subject.getTopComment('serverId', function(err, resource){
+      var authService = new AuthService();
+      var subject = new BillService(undefined, mockResource, authService);
+      subject.getTopComments('serverId', function(err, resource){
         expect(err).to.eql(undefined);
         console.log(resource);
-        expect(resource).to.eql(new Comment(expected.comments[0]));
+        expect(resource.forComment).to.eql(new Comment(expected['for-comment']));
+        expect(resource.againstComment).to.eql(new Comment(expected['against-comment']));
         done();
       });
     });
@@ -172,8 +147,9 @@ describe("Bill Service", function(){
           onError({message: 'Server Error'});
         }
       }
-      var subject = new BillService({}, mockResource);
-      subject.getTopComment('serverId', function(err, resource){
+      var authService = new AuthService();
+      var subject = new BillService(undefined, mockResource, authService);
+      subject.getTopComments('serverId', function(err, resource){
         expect(err).to.not.eql(undefined);
         expect(err).to.eql({message: 'Server Error'});
         expect(resource).to.eql(undefined);
