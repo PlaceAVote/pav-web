@@ -141,6 +141,26 @@ describe("Bill Service", function(){
         done();
       });
     });
+    it('checks params of top comments', function(done) {
+      var expected = require('../fixtures/top_comments.js');
+      function mockResource(url, params, method){
+        expect(url).to.eql('http://pav-congress-api-196217309.us-west-2.elb.amazonaws.com:8080/bills/serverId/topcomments');
+        expect(params).to.eql('serverId');
+        expect(method.getComments.method).to.eql('GET');
+        expect(method.getComments.headers['PAV_AUTH_TOKEN']).to.eql('TOKEN');
+        done();
+      }
+      mockResource.prototype.getComments = function(object, onLoad, onError){
+          onLoad(expected);
+      }
+      var authService = new AuthService();
+      authService.getAccessToken = function(){
+        return 'TOKEN';
+      };
+      var subject = new BillService(undefined, mockResource, authService);
+      subject.getTopComments('serverId', function(err, resource){
+      });
+    });
     it('Returns an Error when server returns an error', function(done){
       function mockResource() {
         this.getComments = function(object, onLoad, onError){
