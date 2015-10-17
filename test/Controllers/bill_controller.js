@@ -337,6 +337,40 @@ describe('BillController', function(){
       expect(scope.bill.userVoted).to.eql(true);
       done();
     });
+    it('vote modal changes state when called', function(){
+      var mockBillService = {
+        getBill: function(id, callback){
+          var bill = new Bill({
+            id: 100,
+            sponsor: {
+              thomas_id: '99'
+            },
+          });
+          return callback(undefined, bill);
+        },
+        getTopComments: function(id, callback){
+          callback('Error');
+        },
+      };
+      var mockLegislationService = {
+        getById: function(id, callback){
+          callback('Error');
+        },
+      };
+      var mockVoteService = {
+        getVotesForBill: function(id, callback){
+          callback('ERROR!');
+        },
+        voteOnBill: function(id, vote, callback){
+        },
+      };
+      var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService);
+      expect(scope.bill.showVote).to.eql(undefined);
+      billController.showVoteModel();
+      expect(scope.bill.showVote).to.eql(true);
+      billController.showVoteModel();
+      expect(scope.bill.showVote).to.eql(false);
+    });
   });
 });
 

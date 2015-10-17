@@ -10,6 +10,16 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
   this.getVotes(this.id);
 }
 
+BillController.prototype.showVoteModel = function(){
+  if(!this.showVote) {
+    this.showVote = true;
+  }
+  else {
+    this.showVote = false;
+  }
+  return this.showVote;
+};
+
 BillController.prototype.Identify = function(routeParams) {
   this.id = routeParams.id;
 };
