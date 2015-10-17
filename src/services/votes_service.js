@@ -31,6 +31,7 @@ function VotesService($resource, authService, userService) {
     }
     var url = config.votes.voteOnBill.endpoint;
     config.methods.put.headers['PAV_AUTH_TOKEN'] = authService.getAccessToken();
+    config.methods.put.transformResponse = [];
     var resource = new $resource(url, undefined, {voteOnBill: config.methods.put});
     var body = {
       'bill-id': billId,

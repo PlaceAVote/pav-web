@@ -79,12 +79,30 @@
 		<div class="bill-stats">
 		</div>
 
-		<div class="vote-widget">
-		</div>
+    <div class="vote-widget">
+      <button ng-click="bill.showVoteModel(true)"> Vote In Favor </button>
+      <button ng-click="bill.showVoteModel(false)"> Vote Against </button>
+      <section ng-show='bill.showVote'>
+        <h2>Please confirm your vote</h2>
 
-		<div class="current-vote-stats">
+        <div ng-show='bill.vote'class='for-vote-modal'>
+          <span>Are you sure you want to vote in favor of this bill?</span>
+          <button ng-click="bill.voteOnBill()"> Vote In Favor </button>
+          <button ng-click="bill.hideVoteModal()"> I'm not ready yet </button>
+        </div>
+
+        <div ng-hide='bill.vote'class='against-vote-modal'>
+          <span>Are you sure you want to vote against this bill?</span>
+          <button ng-click="bill.voteOnBill()"> Vote against Bill </button>
+          <button ng-click="bill.hideVoteModal()"> I'm not ready yet </button>
+        </div>
+      </section>
+    </div>
+
+    <div class="current-vote-stats">
       <span>{{bill.currentVotes.yesPercentage}} &#37;</span>
       <span>{{bill.currentVotes.noPercentage}} &#37;</span>
-		</div>
-	</div>
+    </div>
+
+  </div>
 </div>

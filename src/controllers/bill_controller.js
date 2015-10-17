@@ -10,14 +10,14 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
   this.getVotes(this.id);
 }
 
-BillController.prototype.showVoteModel = function(){
-  if(!this.showVote) {
+BillController.prototype.showVoteModel = function(vote){
+    this.vote = vote;
     this.showVote = true;
-  }
-  else {
-    this.showVote = false;
-  }
-  return this.showVote;
+};
+
+BillController.prototype.hideVoteModal = function(){
+  this.vote = undefined;
+  this.showVote = false;
 };
 
 BillController.prototype.Identify = function(routeParams) {
@@ -28,21 +28,28 @@ BillController.prototype.getVotes = function(id) {
   var that = this;
   this.voteService.getVotesForBill(id, function(err, result){
     if(err) {
-      that.voteError = true;
+        that.voteError = true;
     } else {
       that.currentVotes = result;
     }
   });
 };
 
-BillController.prototype.voteOnBill = function(vote) {
+BillController.prototype.voteOnBill = function() {
   var that = this;
-  this.voteService.voteOnBill(this.id, vote, function(err, result) {
+  this.voteService.voteOnBill(this.id, this.vote, function(err, result) {
     if(err) {
-      that.voteFailed = true;
+      if(err.status && err.status === 409){
+        that.userAlreadyVoted = true;
+      }
+      else {
+        that.voteFailed = true;
+      }
+      console.log(err);
     }
     else {
       that.userVoted = true;
+      console.log('true');
     }
   });
 };
