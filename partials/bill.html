@@ -33,26 +33,26 @@
 		</ul>
 		</section>
     	<div class="top-comment favor">
-			<h1></h1>
+			<h1>Top Comment Opposed<h1>
 			<hr />
 			<div class="user-img-border">
-				<img src="" />
+        <img src="{{bill.forComment.img_url}}" />
 			</div>
 			<div class="comment">
-			<h2></h2> <section><span>123</span><img src=""><img src="" /></section>
-			<p></p>
+        <h2>{{bill.againstComment.author}}</h2> <section><span>{{bill.againstComment.score}}</span><img src=""><img src="" /></section>
+        <p>{{bill.againstComment.body}}</p>
 			</div>
 		</div>
 
 		<div class="top-comment opposed">
-			<h1>Top Comments In Favor</h1>
+			<h1>Top Comment In Favor</h1>
 			<hr />
 			<div class="user-img-border">
-        <img src="{{bill.topComment.img_url}}" />
+        <img src="{{bill.forComment.img_url}}" />
 			</div>
 			<div class="comment">
-        <h2>{{bill.topComment.author}}</h2> <section><span>{{bill.topComment.score}}</span><img src=""><img src="" /></section>
-        <p>{{bill.topComment.body}}</p>
+        <h2>{{bill.forComment.author}}</h2> <section><span>{{bill.forComment.score}}</span><img src=""><img src="" /></section>
+        <p>{{bill.forComment.body}}</p>
 			</div>
 		</div>
 		<div class="bill-sponsor">
