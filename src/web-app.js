@@ -68,7 +68,7 @@ app.factory('userService', ['$resource', 'facebookService', 'authService', UserS
 app.factory('billService', ['tempBillResource', '$resource', 'authService', BillService]);
 app.factory('trendService', ['tempTrendResource', TrendService]);
 app.factory('legislationService', ['$resource', 'authService', LegislatorService]);
-app.factory('voteService', ['$resource', 'authService', VoteService]);
+app.factory('voteService', ['$resource', 'authService', 'userService', VoteService]);
 
 //controllers
 app.controller('TopicRegisterCtrl',['$scope','$location', 'userService', RegisterController]);

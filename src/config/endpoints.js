@@ -39,6 +39,9 @@ module.exports = {
     getForBill: {
       endpoint: VOTES + '/vote/count?bill-id=',
     },
+    voteOnBill: {
+      endpoint: VOTES + '/vote'
+    },
   },
   bills: {
     comments: {
