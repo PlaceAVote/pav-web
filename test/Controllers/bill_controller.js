@@ -299,7 +299,7 @@ describe('BillController', function() {
       billController.vote = true;
       billController.voteOnBill();
       expect(scope.bill.userAlreadyVoted).to.eql(true);
-      expect(scope.bill.userVoted).to.eql(undefined);
+      expect(scope.bill.userVoted).to.eql(true);
       done();
     });
     it('sets user voted when server returns true', function(done){
@@ -407,6 +407,82 @@ describe('BillController', function() {
       billController.hideVoteModal();
       expect(scope.bill.showVote).to.eql(false);
       expect(scope.bill.vote).to.eql(undefined);
+    });
+    it('show modal doesnt change state of vote after the vote has been processed', function(){
+      var mockBillService = {
+        getBill: function(id, callback){
+          var bill = new Bill({
+            id: 100,
+            sponsor: {
+              thomas_id: '99'
+            },
+          });
+          return callback(undefined, bill);
+        },
+        getTopComments: function(id, callback){
+          callback('Error');
+        },
+      };
+      var mockLegislationService = {
+        getById: function(id, callback){
+          callback('Error');
+        },
+      };
+      var mockVoteService = {
+        getVotesForBill: function(id, callback){
+          callback('ERROR!');
+        },
+        voteOnBill: function(id, vote, callback){
+        },
+      };
+      var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService);
+      expect(scope.bill.showVote).to.eql(undefined);
+      expect(scope.bill.userVoted).to.eql(undefined);
+      billController.showVoteModel(false);
+      expect(scope.bill.showVote).to.eql(true);
+      expect(scope.bill.vote).to.eql(false);
+      billController.userVoted = true;
+      expect(scope.bill.showVote).to.eql(true);
+      expect(scope.bill.vote).to.eql(false);
+    });
+    it('hide modal only changes vote state when user has not voted', function(){
+      var mockBillService = {
+        getBill: function(id, callback){
+          var bill = new Bill({
+            id: 100,
+            sponsor: {
+              thomas_id: '99'
+            },
+          });
+          return callback(undefined, bill);
+        },
+        getTopComments: function(id, callback){
+          callback('Error');
+        },
+      };
+      var mockLegislationService = {
+        getById: function(id, callback){
+          callback('Error');
+        },
+      };
+      var mockVoteService = {
+        getVotesForBill: function(id, callback){
+          callback('ERROR!');
+        },
+        voteOnBill: function(id, vote, callback){
+        },
+      };
+      var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService);
+      expect(scope.bill.showVote).to.eql(undefined);
+      expect(scope.bill.userVoted).to.eql(undefined);
+      expect(scope.bill.vote).to.eql(undefined);
+      billController.showVoteModel(false);
+      expect(scope.bill.showVote).to.eql(true);
+      expect(scope.bill.vote).to.eql(false);
+      billController.userVoted = true;
+      billController.hideVoteModal();
+      expect(scope.bill.showVote).to.eql(false);
+      expect(scope.bill.vote).to.eql(false);
     });
   });
 });

@@ -84,17 +84,27 @@
       <button ng-click="bill.showVoteModel(false)"> Vote Against </button>
       <section ng-show='bill.showVote'>
         <h2>Please confirm your vote</h2>
+        <div ng-hide='bill.userVoted'>
 
-        <div ng-show='bill.vote'class='for-vote-modal'>
-          <span>Are you sure you want to vote in favor of this bill?</span>
-          <button ng-click="bill.voteOnBill()"> Vote In Favor </button>
-          <button ng-click="bill.hideVoteModal()"> I'm not ready yet </button>
+          <div ng-show='bill.vote'class='for-vote-modal'>
+            <span>Are you sure you want to vote in favor of this bill?</span>
+            <button ng-click="bill.voteOnBill()"> Vote In Favor </button>
+            <button ng-click="bill.hideVoteModal()"> I'm not ready yet </button>
+          </div>
+
+          <div ng-hide='bill.vote'class='against-vote-modal'>
+            <span>Are you sure you want to vote against this bill?</span>
+            <button ng-click="bill.voteOnBill()"> Vote against Bill </button>
+            <button ng-click="bill.hideVoteModal()"> I'm not ready yet </button>
+          </div>
         </div>
 
-        <div ng-hide='bill.vote'class='against-vote-modal'>
-          <span>Are you sure you want to vote against this bill?</span>
-          <button ng-click="bill.voteOnBill()"> Vote against Bill </button>
+        <div ng-show='bill.userVoted' class='user-voted-modal'>
+          <h1>Vote Confirmed</h1>
+          <p>Congratulations, you have just cast your vote on:
+          <span>{{bill.body.getTitle()}}</span>
           <button ng-click="bill.hideVoteModal()"> I'm not ready yet </button>
+          </p>
         </div>
       </section>
     </div>

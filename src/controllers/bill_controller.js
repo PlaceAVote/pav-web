@@ -11,12 +11,16 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
 }
 
 BillController.prototype.showVoteModel = function(vote){
-    this.vote = vote;
+    if (!this.userVoted) {
+      this.vote = vote;
+    }
     this.showVote = true;
 };
 
 BillController.prototype.hideVoteModal = function(){
-  this.vote = undefined;
+  if (!this.userVoted) {
+    this.vote = undefined;
+  }
   this.showVote = false;
 };
 
@@ -45,14 +49,17 @@ BillController.prototype.voteOnBill = function() {
       else {
         that.voteFailed = true;
       }
-      console.log(err);
+      that.voteConfirmed();
     }
     else {
-      that.userVoted = true;
-      console.log('true');
+      that.voteConfirmed();
     }
   });
 };
+
+BillController.prototype.voteConfirmed = function() {
+  this.userVoted = true;
+}
 
 BillController.prototype.getTopComments = function(id){
   var that = this;
