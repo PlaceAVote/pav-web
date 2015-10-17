@@ -4,6 +4,7 @@ var Bill = require('../../src/models/bill.js');
 var Comment = require('../../src/models/comment.js');
 var Legislator = require('../../src/models/legislator.js');
 var CurrentVote = require('../../src/models/current_vote.js');
+var topCommentsFixtures = require('../fixtures/top_comments.js');
 
 describe('BillController', function(){
   var scope = {};
@@ -15,8 +16,12 @@ describe('BillController', function(){
       getBill: function(id, callback){
         callback('Error');
       },
-      getTopComment: function(id, callback){
-        callback(undefined, 'comment');
+      getTopComments: function(id, callback){
+        var result = {
+          forComment: new Comment(topCommentsFixtures['for-comment']),
+          againstComment: new Comment(topCommentsFixtures['against-comment']),
+        }
+        callback(undefined, result);
       },
     };
     var mockVoteService = {
@@ -32,8 +37,12 @@ describe('BillController', function(){
       getBill: function(id, callback){
         callback('Error');
       },
-      getTopComment: function(id, callback){
-        callback(undefined, 'comment');
+      getTopComments: function(id, callback){
+        var result = {
+          forComment: new Comment(topCommentsFixtures['for-comment']),
+          againstComment: new Comment(topCommentsFixtures['against-comment']),
+        }
+        callback(undefined, result);
       },
     };
     var mockLegislationService = {
@@ -60,8 +69,12 @@ describe('BillController', function(){
       getBill: function(id, callback){
         callback(undefined, bill);
       },
-      getTopComment: function(id, callback){
-        callback(undefined, 'comment');
+      getTopComments: function(id, callback){
+        var result = {
+          forComment: new Comment(topCommentsFixtures['for-comment']),
+          againstComment: new Comment(topCommentsFixtures['against-comment']),
+        }
+        callback(undefined, result);
       },
     };
     var mockLegislationService = {
@@ -84,8 +97,12 @@ describe('BillController', function(){
       getBill: function(id, callback){
         callback('Error');
       },
-      getTopComment: function(id, callback){
-        callback(undefined, 'comment');
+      getTopComments: function(id, callback){
+        var result = {
+          forComment: new Comment(topCommentsFixtures['for-comment']),
+          againstComment: new Comment(topCommentsFixtures['against-comment']),
+        }
+        callback(undefined, result);
       },
     };
     var mockVoteService = {
@@ -100,15 +117,16 @@ describe('BillController', function(){
   });
   describe('Get Comment For Bill', function(){
     it('sets topComment attribute', function(done){
-      var comment = new Comment({
-        id: 10,
-      });
       var mockBillService = {
         getBill: function(id, callback){
           callback('Error');
         },
-        getTopComment: function(id, callback){
-          callback(undefined, comment);
+        getTopComments: function(id, callback){
+        var result = {
+          forComment: new Comment(topCommentsFixtures['for-comment']),
+          againstComment: new Comment(topCommentsFixtures['against-comment']),
+        }
+        callback(undefined, result);
         },
       };
       var mockVoteService = {
@@ -117,8 +135,10 @@ describe('BillController', function(){
         },
       };
       var billController = new BillController(scope, routeParams, mockBillService, undefined, mockVoteService);
-      billController.getTopComment('100');
-      expect(scope.bill.topComment).to.eql(comment);
+      billController.getTopComments('100');
+      console.log(scope.bill);
+      expect(scope.bill.forComment).to.eql(new Comment(topCommentsFixtures['for-comment']));
+      expect(scope.bill.againstComment).to.eql(new Comment(topCommentsFixtures['against-comment']));
       done();
     });
     it('set topCommentError to be true when server returns error', function(done){
@@ -129,7 +149,7 @@ describe('BillController', function(){
         getBill: function(id, callback){
           callback('Error');
         },
-        getTopComment: function(id, callback){
+        getTopComments: function(id, callback){
           callback('Error');
         },
       };
@@ -139,8 +159,8 @@ describe('BillController', function(){
         },
       };
       var billController = new BillController(scope, routeParams, mockBillService, undefined, mockVoteService);
-      billController.getTopComment('100');
-      expect(scope.bill.topComment).to.eql(undefined);
+      billController.getTopComments('100');
+      expect(scope.bill.forComment).to.eql(undefined);
       expect(scope.bill.topCommentError).to.eql(true);
       done();
     });
@@ -152,7 +172,7 @@ describe('BillController', function(){
         getBill: function(id, callback){
           callback('Error');
         },
-        getTopComment: function(id, callback){
+        getTopComments: function(id, callback){
           callback('Error');
         },
       };
@@ -175,7 +195,7 @@ describe('BillController', function(){
         getBill: function(id, callback){
           callback('Error');
         },
-        getTopComment: function(id, callback){
+        getTopComments: function(id, callback){
           callback('Error');
         },
       };
@@ -201,7 +221,7 @@ describe('BillController', function(){
         getBill: function(id, callback){
           callback('Error');
         },
-        getTopComment: function(id, callback){
+        getTopComments: function(id, callback){
           callback('Error');
         },
       };
@@ -226,7 +246,7 @@ describe('BillController', function(){
         getBill: function(id, callback){
           callback('Error');
         },
-        getTopComment: function(id, callback){
+        getTopComments: function(id, callback){
           callback('Error');
         },
       };

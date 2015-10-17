@@ -6,7 +6,7 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
   this.voteService = voteService;
   this.Identify($routeParams);
   this.getBill(this.id);
-  this.getTopComment(this.id);
+  this.getTopComments(this.id);
   this.getVotes(this.id);
 }
 
@@ -25,14 +25,15 @@ BillController.prototype.getVotes = function(id) {
   });
 };
 
-BillController.prototype.getTopComment = function(id){
+BillController.prototype.getTopComments = function(id){
   var that = this;
-  this.billService.getTopComment(id, function(err, result){
+  this.billService.getTopComments(id, function(err, result){
     if(err){
       that.topCommentError = true;
     }
     else {
-      that.topComment = result;
+      that.forComment = result.forComment;
+      that.againstComment = result.againstComment;
     }
   });
 };
