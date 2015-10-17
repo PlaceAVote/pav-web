@@ -25,6 +25,18 @@ BillController.prototype.getVotes = function(id) {
   });
 };
 
+BillController.prototype.voteOnBill = function(vote) {
+  var that = this;
+  this.voteService.voteOnBill(this.id, vote, function(err, result) {
+    if(err) {
+      that.voteFailed = true;
+    }
+    else {
+      that.userVoted = true;
+    }
+  });
+};
+
 BillController.prototype.getTopComments = function(id){
   var that = this;
   this.billService.getTopComments(id, function(err, result){
