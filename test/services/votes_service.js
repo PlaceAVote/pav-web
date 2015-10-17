@@ -107,7 +107,7 @@ describe('Vote Service', function(){
       var userService = {
         getUser: function(){
           var user = new User();
-          user.id = "007";
+          user.email = "paul@testing.com";
           return user;
         }
       }
@@ -120,14 +120,14 @@ describe('Vote Service', function(){
       }
       mockResource.prototype.voteOnBill = function(object, onLoad, onError) {
         expect(object['bill-id']).to.eql('hr2-114');
-        expect(object.user).to.eql('007');
+        expect(object.user).to.eql('paul@testing.com');
         expect(object.vote).to.eql(true);
         done();
       };
       var userService = {
         getUser: function(){
           var user = new User();
-          user.id = "007";
+          user.email = "paul@testing.com";
           return user;
         }
       }
@@ -144,7 +144,7 @@ describe('Vote Service', function(){
       var userService = {
         getUser: function(){
           var user = new User();
-          user.id = "007";
+          user.email = "paul@testing.com";
           return user;
         }
       }
@@ -164,7 +164,7 @@ describe('Vote Service', function(){
       var userService = {
         getUser: function(){
           var user = new User();
-          user.id = "007";
+          user.email = "paul@testing.com";
           return user;
         }
       }

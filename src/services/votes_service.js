@@ -26,7 +26,7 @@ function VotesService($resource, authService, userService) {
       return callback({message: 'No Vote Cast'});
     }
     var user = userService.getUser();
-    if(!user) {
+    if(!user || !user.email) {
       return callback({message: 'User is not specified'});
     }
     var url = config.votes.voteOnBill.endpoint;
@@ -34,7 +34,7 @@ function VotesService($resource, authService, userService) {
     var resource = new $resource(url, undefined, {voteOnBill: config.methods.put});
     var body = {
       'bill-id': billId,
-      user: user.id,
+      user: user.email,
       vote: vote
     };
     var onError = function(err) {
