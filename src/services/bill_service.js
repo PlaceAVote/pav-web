@@ -4,7 +4,7 @@ var Comment = require('../models/comment.js');
 var config = require('../config/endpoints.js');
 
 
-function BillService(tempBillResource, $resource, authService){
+function BillService(tempBillResource, $resource, authService, userService) {
     var getBills = function(username, callback) {
         var onLoad = function(result) {
             var bills = [];
@@ -85,8 +85,13 @@ function BillService(tempBillResource, $resource, authService){
       if(!id){
         return callback({message: 'Bill Id is required to post a comment on a bill'});
       }
-      if(!comment || !comment.author || !comment.body) {
+      if(!comment) {
        return callback({message: 'A Comment is required to post'});
+      }
+      var postBody = {
+        bill_id: id,
+        author: userService.getUser().email,
+        body: comment,
       }
       var url = config.bills.postComment.endpoint(id);
       config.methods.put.headers['PAV_AUTH_TOKEN'] = authService.getAccesToken();
@@ -99,7 +104,7 @@ function BillService(tempBillResource, $resource, authService){
        var comment = new Comment(response);
        return callback(undefined, comment);
       };
-      resource.postComment(comment, onLoad, onError);
+      resource.postComment(postBody, onLoad, onError);
     };
 
     return {

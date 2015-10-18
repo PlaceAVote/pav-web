@@ -278,8 +278,15 @@ describe("Bill Service", function(){
           return "TOKEN";
         },
       }
-      var subject = new BillService(undefined, mockResource, authService);
-      subject.postComment('ID', {author: 'CARLTON', body: 'HELLO DAMON!'}, function(err, resource){
+      userService = {
+        getUser: function() {
+          return {
+            email: 'paul@test.com',
+          };
+        },
+      };
+      var subject = new BillService(undefined, mockResource, authService, userService);
+      subject.postComment('ID', 'HELLO DAMON!', function(err, resource){
       });
     });
     it('calls postComment and returns error', function(done) {
@@ -293,14 +300,21 @@ describe("Bill Service", function(){
           return "TOKEN";
         },
       }
-      var subject = new BillService(undefined, mockResource, authService);
-      subject.postComment('ID', {author: 'CARLTON', body: 'HELLO DAMON!'}, function(err, resource){
+      userService = {
+        getUser: function() {
+          return {
+            email: 'paul@test.com',
+          };
+        },
+      };
+      var subject = new BillService(undefined, mockResource, authService, userService);
+      subject.postComment('ID', 'HELLO DAMON!', function(err, resource){
         expect(err).to.eql('Error');
         done();
       });
     });
     it('calls postComment and returns new comment', function(done) {
-      var comment =  {author: 'CARLTON', body: 'HELLO DAMON!'};
+      var comment =  {bill_id: 'ID',author: 'paul@test.com', body: 'HELLO DAMON!'};
       function mockResource(url, params, method){
       }
       mockResource.prototype.postComment = function(object, onLoad, onError){
@@ -311,9 +325,16 @@ describe("Bill Service", function(){
         getAccesToken: function() {
           return "TOKEN";
         },
-      }
-      var subject = new BillService(undefined, mockResource, authService);
-      subject.postComment('ID', comment, function(err, resource){
+      };
+      userService = {
+        getUser: function() {
+          return {
+            email: 'paul@test.com',
+          };
+        },
+      };
+      var subject = new BillService(undefined, mockResource, authService, userService);
+      subject.postComment('ID', 'HELLO DAMON!', function(err, resource){
         expect(err).to.eql(undefined);
         expect(resource).to.be.instanceOf(Comment);
         done();

@@ -122,11 +122,11 @@ describe('BillController', function() {
           callback('Error');
         },
         getTopComments: function(id, callback){
-        var result = {
-          forComment: new Comment(topCommentsFixtures['for-comment']),
-          againstComment: new Comment(topCommentsFixtures['against-comment']),
-        }
-        callback(undefined, result);
+          var result = {
+            forComment: new Comment(topCommentsFixtures['for-comment']),
+            againstComment: new Comment(topCommentsFixtures['against-comment']),
+          }
+          callback(undefined, result);
         },
       };
       var mockVoteService = {
@@ -136,7 +136,6 @@ describe('BillController', function() {
       };
       var billController = new BillController(scope, routeParams, mockBillService, undefined, mockVoteService);
       billController.getTopComments('100');
-      console.log(scope.bill);
       expect(scope.bill.forComment).to.eql(new Comment(topCommentsFixtures['for-comment']));
       expect(scope.bill.againstComment).to.eql(new Comment(topCommentsFixtures['against-comment']));
       done();

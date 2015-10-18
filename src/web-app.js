@@ -65,7 +65,7 @@ app.factory('tempTrendResource', [TempTrendResource]);
 app.factory('facebookService', [Facebook]);
 app.factory('authService', [AuthService]);
 app.factory('userService', ['$resource', 'facebookService', 'authService', UserService]);
-app.factory('billService', ['tempBillResource', '$resource', 'authService', BillService]);
+app.factory('billService', ['tempBillResource', '$resource', 'authService', 'userService', BillService]);
 app.factory('trendService', ['tempTrendResource', TrendService]);
 app.factory('legislationService', ['$resource', 'authService', LegislatorService]);
 app.factory('voteService', ['$resource', 'authService', 'userService', VoteService]);
