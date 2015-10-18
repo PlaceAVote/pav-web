@@ -1,6 +1,7 @@
 function BillController($scope, $routeParams, billService, legislatorService, voteService) {
   $scope = $scope || {};
   $scope.bill = this;
+  this.from = 0;
   this.billService = billService;
   this.legislatorService = legislatorService;
   this.voteService = voteService;
@@ -97,7 +98,6 @@ BillController.prototype.getTopComments = function(id){
       that.topCommentError = true;
     }
     else {
-      console.log(result);
       that.forComment = result.forComment;
       that.againstComment = result.againstComment;
     }
@@ -123,7 +123,7 @@ BillController.prototype.getLegislator = function(legislator){
 BillController.prototype.getBill = function(id) {
   var that = this;
   this.billService.getBill(id, function(err, result) {
-    if(err){
+    if (err) {
       that.error = true;
     }
     else {
@@ -132,6 +132,19 @@ BillController.prototype.getBill = function(id) {
     }
   });
 };
+
+BillController.prototype.getComments = function(){
+  var that = this;
+  this.billService.getComments(this.id, this.from,function(err, result) {
+    if (err) {
+      that.allCommentError = true;
+    }
+    else if (result) {
+      that.comments = result;
+      that.from = that.from + 10;
+    }
+  });
+}
 
 module.exports = BillController;
 

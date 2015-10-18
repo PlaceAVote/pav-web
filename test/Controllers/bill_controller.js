@@ -615,6 +615,69 @@ describe('BillController', function() {
       billController.generateCommentCard(com);
       expect(billController.commentCard).to.eql(undefined);
     });
+    it('get comments sets all comment error to true if error from server', function(){
+      var mockBillService = {
+        getBill: function(id, callback){
+          callback('Error');
+        },
+        getTopComments: function(id, callback){
+          callback('Error');
+        },
+        getComments: function(id, from, callback) {
+          callback('Error');
+        }
+      };
+      var mockLegislationService = {
+        getById: function(id, callback){
+          callback('Error');
+        },
+      };
+      var mockVoteService = {
+        getVotesForBill: function(id, callback){
+          callback('Error');
+        },
+        voteOnBill: function(id, vote, callback){
+          callback('Error');
+        },
+      };
+      var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService);
+      console.log(billController);
+      billController.getComments();
+      expect(billController.allCommentError).to.eql(true);
+    });
+    it('On Success Adds Comments to Scope and Increases from by 10', function(){
+      var mockBillService = {
+        getBill: function(id, callback){
+          callback('Error');
+        },
+        getTopComments: function(id, callback){
+          callback('Error');
+        },
+        getComments: function(id, from, callback) {
+          callback(undefined, [new Comment({id: 1}), new Comment({id: 2})]);
+        }
+      };
+      var mockLegislationService = {
+        getById: function(id, callback){
+          callback('Error');
+        },
+      };
+      var mockVoteService = {
+        getVotesForBill: function(id, callback){
+          callback('Error');
+        },
+        voteOnBill: function(id, vote, callback){
+          callback('Error');
+        },
+      };
+      var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService);
+      expect(billController.from).to.eql(0);
+      billController.getComments();
+      expect(billController.comments.length).to.eql(2);
+      expect(billController.comments[0].id).to.eql(1);
+      expect(billController.from).to.eql(10);
+      expect(billController.comments[1].id).to.eql(2);
+    });
   });
 });
 
