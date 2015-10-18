@@ -45,8 +45,8 @@ module.exports = {
   },
   bills: {
     comments: {
-      endpoint: function(id) {
-        return CONGRESS + '/bills/' + id + '/comments'
+      endpoint: function(id, from) {
+        return CONGRESS + '/bills/' + id + '/comments' + '?from=' + from
       },
     },
     topComments: {

@@ -56,10 +56,37 @@ function BillService(tempBillResource, $resource, authService){
       resource.getComments(undefined, onLoad, onError);
     };
 
+    var getComments = function(id, from, callback) {
+        if(!id) {
+          return callback({message: 'Id Must Be Defined'});
+        }
+        if(!from){
+          from = 0;
+        }
+        var url = config.bills.comments.endpoint(id, from);
+        config.methods.get.headers['PAV_AUTH_TOKEN'] = authService.getAccessToken();
+        var resource = new $resource(url, undefined, {getComments: config.methods.get});
+
+        var onError = function(err) {
+          return callback(err);
+        };
+        var onLoad = function(response) {
+          var results = [];
+          var comments = response.comments;
+          var commentLength = comments.length;
+          for (var i = 0; i < commentLength; i++) {
+            results.push(new Comment(comments[i]));
+          }
+          return callback(undefined, results);
+        };
+        resource.getComments(undefined, onLoad, onError);
+    };
+
     return {
       getBills: getBills,
       getBill: getBill,
       getTopComments: getTopComments,
+      getComments: getComments,
     };
 }
 

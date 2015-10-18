@@ -177,4 +177,72 @@ describe("Bill Service", function(){
       });
     });
   });
+  describe('Get Comments For Bill', function(done) {
+    it('returns an error if bill id is undefined', function(done){
+      var mockResource = require('../../src/temp/mockBillResource.js');
+      var subject = new BillService(mockResource);
+      subject.getComments(undefined, undefined, function(err, resource){
+        expect(err).to.not.eql(undefined);
+        expect(err).to.eql({message: 'Id Must Be Defined'});
+        done();
+      });
+    });
+    it('Calls Resource with correct params', function(done) {
+      var expected = require('../fixtures/comments.js');
+      function mockResource(url, params, method){
+        expect(url).to.eql('http://pav-congress-api-196217309.us-west-2.elb.amazonaws.com:8080/bills/serverId/comments?from=0');
+        expect(params).to.eql(undefined);
+        expect(method.getComments.method).to.eql('GET');
+        expect(method.getComments.headers['PAV_AUTH_TOKEN']).to.eql('TOKEN');
+        done();
+      }
+      mockResource.prototype.getComments = function(object, onLoad, onError){
+      }
+      var authService = new AuthService();
+      authService.getAccessToken = function(){
+        return 'TOKEN';
+      };
+      var subject = new BillService(undefined, mockResource, authService);
+      subject.getComments('serverId', undefined, function(err, resource){
+      });
+    });
+    it('Calls get Comment and returns error', function(done) {
+      var expected = require('../fixtures/comments.js');
+      function mockResource(url, params, method){
+      }
+      mockResource.prototype.getComments = function(object, onLoad, onError){
+          onError('ERROR');
+      }
+      var authService = new AuthService();
+      authService.getAccessToken = function(){
+        return 'TOKEN';
+      };
+      var subject = new BillService(undefined, mockResource, authService);
+      subject.getComments('serverId', undefined, function(err, resource){
+        expect(err).to.not.eql(undefined);
+        expect(err).to.eql('ERROR');
+        done();
+      });
+    });
+    it('Returns a List of Comments', function(done) {
+      var expected = require('../fixtures/comments.js');
+      function mockResource(url, params, method){
+      }
+      mockResource.prototype.getComments = function(object, onLoad, onError){
+          onLoad(expected);
+      }
+      var authService = new AuthService();
+      authService.getAccessToken = function(){
+        return 'TOKEN';
+      };
+      var subject = new BillService(undefined, mockResource, authService);
+      subject.getComments('serverId', undefined, function(err, resource){
+        expect(err).to.eql(undefined);
+        expect(resource.length).to.eql(1);
+        expect(resource[0].author).to.eql('tony@pl.com');
+        expect(resource[0].replies[0].parent_id).to.eql('comments:9e9b0180-c5ab-4806-a8b5-ee37b9867626');
+        done();
+      });
+    });
+  });
 });
