@@ -73,7 +73,18 @@
       <p>{{bill.body.billData.summary}}</p>
 		</div>
 
-		<div class="bill-comments">
+    <div class="bill-comments" ng-show='bill.comments.length > 0'>
+      <h2>COMMENTS</h2>
+      <hr />
+      <div class='comment' ng-repeat='comment in bill.comments'>
+        <img src='{{comment.img_url}}'>
+        <span>{{comment.score}}</span>
+        <span>like</span>
+        <span>dislike</span>
+        <span>reply</span>
+        <h3>{{comment.author}}</h3>
+        <p>{{comment.body}}<p>
+      </div>
 		</div>
 
 		<div class="bill-stats">

@@ -9,6 +9,7 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
   this.getBill(this.id);
   this.getTopComments(this.id);
   this.getVotes(this.id);
+  this.getComments();
   this.voteModal = {};
 }
 
@@ -135,6 +136,9 @@ BillController.prototype.getBill = function(id) {
 
 BillController.prototype.getComments = function(){
   var that = this;
+  if(!this.billService || !this.billService.getComments) {
+    return;
+  }
   this.billService.getComments(this.id, this.from,function(err, result) {
     if (err) {
       that.allCommentError = true;

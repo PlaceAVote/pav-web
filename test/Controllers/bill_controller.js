@@ -641,7 +641,6 @@ describe('BillController', function() {
         },
       };
       var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService);
-      console.log(billController);
       billController.getComments();
       expect(billController.allCommentError).to.eql(true);
     });
@@ -671,8 +670,6 @@ describe('BillController', function() {
         },
       };
       var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService);
-      expect(billController.from).to.eql(0);
-      billController.getComments();
       expect(billController.comments.length).to.eql(2);
       expect(billController.comments[0].id).to.eql(1);
       expect(billController.from).to.eql(10);
