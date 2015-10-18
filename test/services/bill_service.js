@@ -265,7 +265,7 @@ describe("Bill Service", function(){
     });
     it('calls resource with the correct params', function(done) {
       function mockResource(url, params, method){
-        expect(url).to.eql('http://pav-congress-api-196217309.us-west-2.elb.amazonaws.com:8080/bills/ID/comments');
+        expect(url).to.eql('http://pav-congress-api-196217309.us-west-2.elb.amazonaws.com:8080/bills/comments');
         expect(params).to.eql(undefined);
         expect(method.postComment.method).to.eql('PUT');
         expect(method.postComment.headers['PAV_AUTH_TOKEN']).to.eql('TOKEN');
@@ -274,7 +274,7 @@ describe("Bill Service", function(){
       mockResource.prototype.postComment = function(object, onLoad, onError){
       }
       authService = {
-        getAccesToken: function() {
+        getAccessToken: function() {
           return "TOKEN";
         },
       }
@@ -296,7 +296,7 @@ describe("Bill Service", function(){
         onError('Error');
       }
       authService = {
-        getAccesToken: function() {
+        getAccessToken: function() {
           return "TOKEN";
         },
       }
@@ -322,7 +322,7 @@ describe("Bill Service", function(){
         onLoad('Error');
       }
       authService = {
-        getAccesToken: function() {
+        getAccessToken: function() {
           return "TOKEN";
         },
       };

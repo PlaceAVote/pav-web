@@ -73,11 +73,11 @@
       <p>{{bill.body.billData.summary}}</p>
 		</div>
 
-    <div class="bill-comments" ng-show='bill.comments.length > 0'>
+    <div class="bill-comments">
       <h2>COMMENTS</h2>
       <hr />
       <div class='comment' ng-repeat='comment in bill.comments'>
-        <img src='{{comment.img_url}}'>
+        <img src='{{comment.img_url}}' />
         <span>{{comment.score}}</span>
         <span>like</span>
         <span>dislike</span>
@@ -85,6 +85,9 @@
         <h3>{{comment.author}}</h3>
         <p>{{comment.body}}<p>
       </div>
+      <hr />
+      <input type='text' name='commentOnBillBox' ng-model='bill.commentBody' placeholder='Write your comment here'></input>
+      <button ng-click='bill.postComment()'>Submit</button>
 		</div>
 
 		<div class="bill-stats">
@@ -110,7 +113,7 @@
             <div class='againt-comment'>
               <p>{{bills.commentCard.status}}</p>
               <hr />
-              <img src='{{bills.commentCard.img_url}}'></img>
+              <img src='{{bills.commentCard.img_url}}' />
               <p>{{bills.commentCard.author}}</p>
               <span>{{bills.commendCard.score}}</span><span></span><span></span>
               <p>{{bills.commendCard.body}}</p>

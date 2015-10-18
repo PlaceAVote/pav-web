@@ -7,7 +7,6 @@ function AuthService() {
     if(!auth) {
       return;
     }
-
     return auth.accessToken;
   };
 

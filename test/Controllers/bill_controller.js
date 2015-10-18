@@ -675,5 +675,75 @@ describe('BillController', function() {
       expect(billController.comments[1].id).to.eql(2);
     });
   });
+  describe('Post Comment On Bill', function(){
+    it('sets postCommentError to true when fails', function(){
+      var mockBillService = {
+        getBill: function(id, callback){
+          callback('Error');
+        },
+        getTopComments: function(id, callback){
+          callback('Error');
+        },
+        getComments: function(id, from, callback) {
+          callback('Error');
+        },
+        postComment: function(id, comment, callback) {
+          callback('Error');
+        },
+      };
+      var mockLegislationService = {
+        getById: function(id, callback){
+          callback('Error');
+        },
+      };
+      var mockVoteService = {
+        getVotesForBill: function(id, callback){
+          callback('Error');
+        },
+        voteOnBill: function(id, vote, callback){
+          callback('Error');
+        },
+      };
+      var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService);
+      billController.postComment();
+      expect(billController.postCommentError).to.eql(true);
+    });
+    it('clears message state and adds added message to comments list', function(){
+      var mockBillService = {
+        getBill: function(id, callback){
+          callback('Error');
+        },
+        getTopComments: function(id, callback){
+          callback('Error');
+        },
+        getComments: function(id, from, callback) {
+          callback(undefined, []);
+        },
+        postComment: function(id, comment, callback) {
+          var c = new Comment();
+          c.id = 1;
+          return callback(undefined, c);
+        },
+      };
+      var mockLegislationService = {
+        getById: function(id, callback){
+          callback('Error');
+        },
+      };
+      var mockVoteService = {
+        getVotesForBill: function(id, callback){
+          callback('Error');
+        },
+        voteOnBill: function(id, vote, callback){
+          callback('Error');
+        },
+      };
+      var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService);
+      billController.postComment();
+      expect(billController.commentBody).to.eql(undefined);
+      expect(billController.comments.length).to.eql(1);
+      expect(billController.comments[0].id).to.eql(1);
+    });
+  });
 });
 

@@ -88,13 +88,17 @@ function BillService(tempBillResource, $resource, authService, userService) {
       if(!comment) {
        return callback({message: 'A Comment is required to post'});
       }
+      var user = userService.getUser();
+      if(!user || !user.email) {
+        return callback({message: 'Login Required'});
+      }
       var postBody = {
         bill_id: id,
-        author: userService.getUser().email,
+        author: user.email,
         body: comment,
       }
-      var url = config.bills.postComment.endpoint(id);
-      config.methods.put.headers['PAV_AUTH_TOKEN'] = authService.getAccesToken();
+      var url = config.bills.postComment.endpoint;
+      config.methods.put.headers['PAV_AUTH_TOKEN'] = authService.getAccessToken();
       var resource = new $resource(url, undefined, {postComment: config.methods.put});
 
       var onError = function(err) {

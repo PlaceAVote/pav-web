@@ -50,9 +50,7 @@ module.exports = {
       },
     },
     postComment: {
-      endpoint: function(id) {
-        return CONGRESS + '/bills/' + id + '/comments'
-      },
+      endpoint: CONGRESS + '/bills/comments',
     },
     topComments: {
       endpoint: function(id) {
