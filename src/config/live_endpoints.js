@@ -49,6 +49,11 @@ module.exports = {
         return CONGRESS + '/bills/' + id + '/comments' + '?from=' + from
       },
     },
+    postComment: {
+      endpoint: function(id) {
+        return CONGRESS + '/bills/' + id + '/comments'
+      },
+    },
     topComments: {
       endpoint: function(id) {
         return CONGRESS + '/bills/' + id + '/topcomments';

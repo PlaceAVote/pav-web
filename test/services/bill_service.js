@@ -135,7 +135,6 @@ describe("Bill Service", function(){
       var subject = new BillService(undefined, mockResource, authService);
       subject.getTopComments('serverId', function(err, resource){
         expect(err).to.eql(undefined);
-        console.log(resource);
         expect(resource.forComment).to.eql(new Comment(expected['for-comment']));
         expect(resource.againstComment).to.eql(new Comment(expected['against-comment']));
         done();
@@ -151,7 +150,7 @@ describe("Bill Service", function(){
         done();
       }
       mockResource.prototype.getComments = function(object, onLoad, onError){
-          onLoad(expected);
+        onLoad(expected);
       }
       var authService = new AuthService();
       authService.getAccessToken = function(){
@@ -211,7 +210,7 @@ describe("Bill Service", function(){
       function mockResource(url, params, method){
       }
       mockResource.prototype.getComments = function(object, onLoad, onError){
-          onError('ERROR');
+        onError('ERROR');
       }
       var authService = new AuthService();
       authService.getAccessToken = function(){
@@ -229,7 +228,7 @@ describe("Bill Service", function(){
       function mockResource(url, params, method){
       }
       mockResource.prototype.getComments = function(object, onLoad, onError){
-          onLoad(expected);
+        onLoad(expected);
       }
       var authService = new AuthService();
       authService.getAccessToken = function(){
@@ -241,6 +240,82 @@ describe("Bill Service", function(){
         expect(resource.length).to.eql(1);
         expect(resource[0].author).to.eql('tony@pl.com');
         expect(resource[0].replies[0].parent_id).to.eql('comments:9e9b0180-c5ab-4806-a8b5-ee37b9867626');
+        done();
+      });
+    });
+    it('returns an error if bill id is undefined', function(done) {
+      var mockResource = require('../../src/temp/mockBillResource.js');
+      var subject = new BillService(mockResource);
+      subject.postComment(undefined, undefined, function(err, resource){
+        expect(err).to.not.eql(undefined);
+        expect(err).to.eql({message: 'Bill Id is required to post a comment on a bill'});
+        done();
+      });
+    });
+  });
+  describe('Post Comment', function(){
+    it('returns an error if bill id is undefined', function(done) {
+      var mockResource = require('../../src/temp/mockBillResource.js');
+      var subject = new BillService(mockResource);
+      subject.postComment('ID', undefined, function(err, resource){
+        expect(err).to.not.eql(undefined);
+        expect(err).to.eql({message: 'A Comment is required to post'});
+        done();
+      });
+    });
+    it('calls resource with the correct params', function(done) {
+      function mockResource(url, params, method){
+        expect(url).to.eql('http://pav-congress-api-196217309.us-west-2.elb.amazonaws.com:8080/bills/ID/comments');
+        expect(params).to.eql(undefined);
+        expect(method.postComment.method).to.eql('PUT');
+        expect(method.postComment.headers['PAV_AUTH_TOKEN']).to.eql('TOKEN');
+        done();
+      }
+      mockResource.prototype.postComment = function(object, onLoad, onError){
+      }
+      authService = {
+        getAccesToken: function() {
+          return "TOKEN";
+        },
+      }
+      var subject = new BillService(undefined, mockResource, authService);
+      subject.postComment('ID', {author: 'CARLTON', body: 'HELLO DAMON!'}, function(err, resource){
+      });
+    });
+    it('calls postComment and returns error', function(done) {
+      function mockResource(url, params, method){
+      }
+      mockResource.prototype.postComment = function(object, onLoad, onError){
+        onError('Error');
+      }
+      authService = {
+        getAccesToken: function() {
+          return "TOKEN";
+        },
+      }
+      var subject = new BillService(undefined, mockResource, authService);
+      subject.postComment('ID', {author: 'CARLTON', body: 'HELLO DAMON!'}, function(err, resource){
+        expect(err).to.eql('Error');
+        done();
+      });
+    });
+    it('calls postComment and returns new comment', function(done) {
+      var comment =  {author: 'CARLTON', body: 'HELLO DAMON!'};
+      function mockResource(url, params, method){
+      }
+      mockResource.prototype.postComment = function(object, onLoad, onError){
+        expect(object).to.eql(comment);
+        onLoad('Error');
+      }
+      authService = {
+        getAccesToken: function() {
+          return "TOKEN";
+        },
+      }
+      var subject = new BillService(undefined, mockResource, authService);
+      subject.postComment('ID', comment, function(err, resource){
+        expect(err).to.eql(undefined);
+        expect(resource).to.be.instanceOf(Comment);
         done();
       });
     });

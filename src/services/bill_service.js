@@ -40,7 +40,6 @@ function BillService(tempBillResource, $resource, authService){
         return callback({message: 'Id Must Be Defined'});
       }
       var onLoad = function(results){
-        console.log(results);
         var result = {
           forComment: new Comment(results['for-comment']),
           againstComment: new Comment(results['against-comment']),
@@ -82,11 +81,33 @@ function BillService(tempBillResource, $resource, authService){
         resource.getComments(undefined, onLoad, onError);
     };
 
+    var postComment = function(id, comment, callback) {
+      if(!id){
+        return callback({message: 'Bill Id is required to post a comment on a bill'});
+      }
+      if(!comment || !comment.author || !comment.body) {
+       return callback({message: 'A Comment is required to post'});
+      }
+      var url = config.bills.postComment.endpoint(id);
+      config.methods.put.headers['PAV_AUTH_TOKEN'] = authService.getAccesToken();
+      var resource = new $resource(url, undefined, {postComment: config.methods.put});
+
+      var onError = function(err) {
+       return callback(err);
+      };
+      var onLoad = function(response) {
+       var comment = new Comment(response);
+       return callback(undefined, comment);
+      };
+      resource.postComment(comment, onLoad, onError);
+    };
+
     return {
       getBills: getBills,
       getBill: getBill,
       getTopComments: getTopComments,
       getComments: getComments,
+      postComment: postComment
     };
 }
 
