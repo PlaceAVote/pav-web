@@ -84,27 +84,29 @@
       <button ng-click="bill.showVoteModel(false)"> Vote Against </button>
       <section ng-show='bill.showVote'>
         <h2>Please confirm your vote</h2>
-        <div ng-hide='bill.userVoted'>
-
-          <div ng-show='bill.vote'class='for-vote-modal'>
-            <span>Are you sure you want to vote in favor of this bill?</span>
-            <button ng-click="bill.voteOnBill()"> Vote In Favor </button>
+        <div ng-hide='bill.userVoted' class='vote-modal'>
+            <span>{{bill.voteModal.message}}</span>
+            <button ng-click="bill.voteOnBill()">{{bill.voteModal.button}}</button>
             <button ng-click="bill.hideVoteModal()"> I'm not ready yet </button>
-          </div>
-
-          <div ng-hide='bill.vote'class='against-vote-modal'>
-            <span>Are you sure you want to vote against this bill?</span>
-            <button ng-click="bill.voteOnBill()"> Vote against Bill </button>
-            <button ng-click="bill.hideVoteModal()"> I'm not ready yet </button>
-          </div>
         </div>
 
         <div ng-show='bill.userVoted' class='user-voted-modal'>
           <h1>Vote Confirmed</h1>
           <p>Congratulations, you have just cast your vote on:
           <span>{{bill.body.getTitle()}}</span>
-          <button ng-click="bill.hideVoteModal()"> I'm not ready yet </button>
           </p>
+          <section ng-show="bill.commentCard.set">
+            <div class='againt-comment'>
+              <p>{{bills.commentCard.status}}</p>
+              <hr />
+              <img src='{{bills.commentCard.img_url}}'></img>
+              <p>{{bills.commentCard.author}}</p>
+              <span>{{bills.commendCard.score}}</span><span></span><span></span>
+              <p>{{bills.commendCard.body}}</p>
+              <button> Reply to Comment </button>
+              <button ng-click="bill.hideVoteModal()"> I'm not ready yet </button>
+            </div>
+          </section>
         </div>
       </section>
     </div>

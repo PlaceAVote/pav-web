@@ -8,11 +8,20 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
   this.getBill(this.id);
   this.getTopComments(this.id);
   this.getVotes(this.id);
+  this.voteModal = {};
 }
 
 BillController.prototype.showVoteModel = function(vote){
     if (!this.userVoted) {
       this.vote = vote;
+      if(vote){
+        this.voteModal.message = "Are you sure you want to vote in favor of this bill";
+        this.voteModal.button = "Vote in Favor";
+      }
+      else{
+        this.voteModal.message = "Are you sure you want to vote against this bill";
+        this.voteModal.button = "Vote Against";
+      }
     }
     this.showVote = true;
 };
@@ -59,7 +68,27 @@ BillController.prototype.voteOnBill = function() {
 
 BillController.prototype.voteConfirmed = function() {
   this.userVoted = true;
-}
+  if (this.vote) {
+    this.generateCommentCard(this.forComment);
+  }
+  else if (this.vote) {
+    this.generateCommentCard(this.againstComment);
+  }
+};
+
+BillController.prototype.generateCommentCard = function(comment){
+  if(!comment || !comment.author) {
+    return;
+  }
+  this.commentCard = {
+    author: comment.author,
+    body: comment.body,
+    id: comment.id,
+    status: comment.author.toUpperCase() + " DISAGREES, HE THINKS:",
+    score: comment.score,
+    set: true,
+  };
+};
 
 BillController.prototype.getTopComments = function(id){
   var that = this;
@@ -68,6 +97,7 @@ BillController.prototype.getTopComments = function(id){
       that.topCommentError = true;
     }
     else {
+      console.log(result);
       that.forComment = result.forComment;
       that.againstComment = result.againstComment;
     }
