@@ -6,7 +6,7 @@ describe('AuthService', function(){
     var subject = new AuthService();
     expect(subject.getAccessToken()).to.eql(undefined);
     subject.setAuth('TOKEN');
-    expect(subject.getAccessToken()).to.eql('TOKEN');
+    expect(subject.getAccessToken()).to.eql('PAV_AUTH_TOKEN TOKEN');
   });
   it('gets facebook token', function(){
     var subject = new AuthService();

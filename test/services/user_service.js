@@ -228,7 +228,7 @@ describe("User Service", function() {
         this.methods = methods;
         this.login = function(user, succeed, error){
           expect(user.email).to.eql("test@test.com");
-          expect(methods.login.headers["PAV_AUTH_TOKEN"]).to.eql("authT0k3n4000");
+          expect(methods.login.headers["Authorization"]).to.eql("authT0k3n4000");
           done();
         };
       };

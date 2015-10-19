@@ -7,7 +7,7 @@ function VotesService($resource, authService, userService) {
       return callback({message: 'Bill Id not specified'});
     }
     var url = config.votes.getForBill.endpoint + billId;
-    config.methods.get.headers['PAV_AUTH_TOKEN'] = authService.getAccessToken();
+    config.methods.get.headers['Authorization'] = authService.getAccessToken();
     var resource = new $resource(url, billId, {getForBill: config.methods.get});
     var onError = function(err){
       return callback(err);
@@ -30,7 +30,7 @@ function VotesService($resource, authService, userService) {
       return callback({message: 'User is not specified'});
     }
     var url = config.votes.voteOnBill.endpoint;
-    config.methods.put.headers['PAV_AUTH_TOKEN'] = authService.getAccessToken();
+    config.methods.put.headers['Authorization'] = authService.getAccessToken();
     config.methods.put.transformResponse = [];
     var resource = new $resource(url, undefined, {voteOnBill: config.methods.put});
     var body = {

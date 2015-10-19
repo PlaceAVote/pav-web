@@ -30,7 +30,7 @@ function BillService(tempBillResource, $resource, authService, userService) {
         return callback(err);
       };
       var url = config.bills.getById.endpoint + id;
-      config.methods.get.headers['PAV_AUTH_TOKEN'] = authService.getAccessToken();
+      config.methods.get.headers['Authorization'] = authService.getAccessToken();
       var resource = new $resource(url, id,  {getById: config.methods.get});
       resource.getById(undefined, onLoad, onError);
     };
@@ -40,6 +40,7 @@ function BillService(tempBillResource, $resource, authService, userService) {
         return callback({message: 'Id Must Be Defined'});
       }
       var onLoad = function(results){
+        console.log(results);
         var result = {
           forComment: new Comment(results['for-comment']),
           againstComment: new Comment(results['against-comment']),
@@ -50,7 +51,7 @@ function BillService(tempBillResource, $resource, authService, userService) {
         return callback(err);
       }
       var url = config.bills.topComments.endpoint(id);
-      config.methods.get.headers['PAV_AUTH_TOKEN'] = authService.getAccessToken();
+      config.methods.get.headers['Authorization'] = authService.getAccessToken();
       var resource = new $resource(url, id,  {getComments: config.methods.get});
       resource.getComments(undefined, onLoad, onError);
     };
@@ -63,7 +64,7 @@ function BillService(tempBillResource, $resource, authService, userService) {
           from = 0;
         }
         var url = config.bills.comments.endpoint(id, from);
-        config.methods.get.headers['PAV_AUTH_TOKEN'] = authService.getAccessToken();
+        config.methods.get.headers['Authorization'] = authService.getAccessToken();
         var resource = new $resource(url, undefined, {getComments: config.methods.get});
 
         var onError = function(err) {
@@ -98,7 +99,7 @@ function BillService(tempBillResource, $resource, authService, userService) {
         body: comment,
       }
       var url = config.bills.postComment.endpoint;
-      config.methods.put.headers['PAV_AUTH_TOKEN'] = authService.getAccessToken();
+      config.methods.put.headers['Authorization'] = authService.getAccessToken();
       var resource = new $resource(url, undefined, {postComment: config.methods.put});
 
       var onError = function(err) {

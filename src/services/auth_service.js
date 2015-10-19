@@ -18,7 +18,10 @@ function AuthService() {
   };
 
   var getAccessToken = function() {
-    return auth;
+    if (!auth) {
+      return;
+    }
+    return 'PAV_AUTH_TOKEN ' + auth;
   };
 
   return {

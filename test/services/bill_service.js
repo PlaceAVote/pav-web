@@ -146,7 +146,7 @@ describe("Bill Service", function(){
         expect(url).to.eql('http://pav-congress-api-196217309.us-west-2.elb.amazonaws.com:8080/bills/serverId/topcomments');
         expect(params).to.eql('serverId');
         expect(method.getComments.method).to.eql('GET');
-        expect(method.getComments.headers['PAV_AUTH_TOKEN']).to.eql('TOKEN');
+        expect(method.getComments.headers['Authorization']).to.eql('TOKEN');
         done();
       }
       mockResource.prototype.getComments = function(object, onLoad, onError){
@@ -192,7 +192,7 @@ describe("Bill Service", function(){
         expect(url).to.eql('http://pav-congress-api-196217309.us-west-2.elb.amazonaws.com:8080/bills/serverId/comments?from=0');
         expect(params).to.eql(undefined);
         expect(method.getComments.method).to.eql('GET');
-        expect(method.getComments.headers['PAV_AUTH_TOKEN']).to.eql('TOKEN');
+        expect(method.getComments.headers['Authorization']).to.eql('TOKEN');
         done();
       }
       mockResource.prototype.getComments = function(object, onLoad, onError){
@@ -268,7 +268,7 @@ describe("Bill Service", function(){
         expect(url).to.eql('http://pav-congress-api-196217309.us-west-2.elb.amazonaws.com:8080/bills/comments');
         expect(params).to.eql(undefined);
         expect(method.postComment.method).to.eql('PUT');
-        expect(method.postComment.headers['PAV_AUTH_TOKEN']).to.eql('TOKEN');
+        expect(method.postComment.headers['Authorization']).to.eql('TOKEN');
         done();
       }
       mockResource.prototype.postComment = function(object, onLoad, onError){

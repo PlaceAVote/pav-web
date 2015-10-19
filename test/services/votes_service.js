@@ -21,7 +21,7 @@ describe('Vote Service', function(){
       function mockResource(url, params, method){
         expect(url).to.eql('http://pav-vote-api-2107571587.us-west-2.elb.amazonaws.com:8080/vote/count?bill-id=hr2-114');
         expect(params).to.eql('hr2-114');
-        expect(method.getForBill.headers['PAV_AUTH_TOKEN']).to.eql('TOKEN');
+        expect(method.getForBill.headers['Authorization']).to.eql('TOKEN');
         expect(method.getForBill.method).to.eql('GET');
         done();
       }
@@ -98,7 +98,7 @@ describe('Vote Service', function(){
       function mockResource(url, params, method){
         expect(url).to.eql('http://pav-vote-api-2107571587.us-west-2.elb.amazonaws.com:8080/vote');
         expect(params).to.eql(undefined);
-        expect(method.voteOnBill.headers['PAV_AUTH_TOKEN']).to.eql('TOKEN');
+        expect(method.voteOnBill.headers['Authorization']).to.eql('TOKEN');
         expect(method.voteOnBill.method).to.eql('PUT');
         done();
       }

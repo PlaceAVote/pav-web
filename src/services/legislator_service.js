@@ -12,7 +12,7 @@ function LegislatorService($resource, authService){
     var onError = function(err) {
       return callback(err);
     };
-    config.methods.get.headers['PAV_AUTH_TOKEN'] = authService.getAccessToken();
+    config.methods.get.headers['Authorization'] = authService.getAccessToken();
     var url = config.legislator.getById.endpoint + id;
     var resource = new $resource(url, id, {getById : config.methods.get});
     resource.getById(undefined, onLoad, onError);

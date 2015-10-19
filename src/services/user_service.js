@@ -22,7 +22,7 @@ function UserService($resource, facebookService, authService) {
             that.user.first_name = resource.first_name;
             that.user.last_name = resource.last_name;
             that.user.img_url = resource.picture.data.url;
-            config.methods.post.headers["PAV_AUTH_TOKEN"] = authService.getFacebookAccessToken();
+            config.methods.post.headers["Authorization"] = authService.getFacebookAccessToken();
             var facebookUserLoginResource = new $resource(config.users.facebookLoginUrl, undefined, {login : config.methods.post});
             var creds = {
                 email: that.user.email,
@@ -91,7 +91,7 @@ function UserService($resource, facebookService, authService) {
             return;
         }
         var url = getSaveConfig(this.createdFB);
-        config.methods.put.headers["PAV_AUTH_TOKEN"] = authService.getAccessToken();
+        config.methods.put.headers["Authorization"] = authService.getAccessToken();
         var saveUser = new $resource(url, undefined, {create : config.methods.put});
         var token = authService.getFacebookAccessToken();
         var toSave = this.user.toBody(token);
@@ -113,7 +113,7 @@ function UserService($resource, facebookService, authService) {
         if(!user || !user.email || !user.password) {
             return callback({message: "User has no password or username"});
         }
-        config.methods.post.headers["PAV_AUTH_TOKEN"] = authService.getAccessToken();
+        config.methods.post.headers["Authorization"] = authService.getAccessToken();
         var loginResource = new $resource(config.users.login_endpoint, undefined, {login : config.methods.post});
         loginResource.login(user, onLoad, onError);
     }
