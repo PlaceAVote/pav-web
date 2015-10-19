@@ -29,4 +29,16 @@ Comment.prototype.buildChildren = function(comment) {
   }
 };
 
+Comment.prototype.reply = function(billId, service) {
+  var that = this;
+  service.reply(this.reply, billId, this.id, function(err, response) {
+    if(err) {
+      that.replyFailed = true;
+    }
+    else if(response) {
+      that.replies.push(response);
+    }
+  });
+};
+
 module.exports = Comment;
