@@ -43,6 +43,13 @@ module.exports = {
       endpoint: VOTES + '/vote'
     },
   },
+  comments: {
+    reply: {
+      endpoint: function(id) {
+        return CONGRESS + '/comments/' + id + 'reply'
+      },
+    },
+  },
   bills: {
     comments: {
       endpoint: function(id, from) {
