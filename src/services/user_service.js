@@ -7,6 +7,7 @@ function UserService($resource, facebookService, authService) {
     var loginWithFacebook = function(callback){
         var that = this;
         var onLoad = function(resource) {
+            authService.setAuth(resource.token);
             callback(undefined, resource);
         };
         var onError = function(err) {
@@ -15,17 +16,17 @@ function UserService($resource, facebookService, authService) {
         };
 
         facebookService.login(function(resource, auth){
-            authService.setAuth(auth);
+            authService.setFacebookAuth(auth);
             that.user = new User(resource.email);
             that.user.dob = new Date(resource.birthday);
             that.user.first_name = resource.first_name;
             that.user.last_name = resource.last_name;
             that.user.img_url = resource.picture.data.url;
-            config.methods.post.headers["PAV_AUTH_TOKEN"] = authService.getAccessToken();
+            config.methods.post.headers["PAV_AUTH_TOKEN"] = authService.getFacebookAccessToken();
             var facebookUserLoginResource = new $resource(config.users.facebookLoginUrl, undefined, {login : config.methods.post});
             var creds = {
                 email: that.user.email,
-                token: authService.getAccessToken(),
+                token: authService.getFacebookAccessToken(),
             }
             facebookUserLoginResource.login(creds, onLoad, onError);
         });
@@ -92,7 +93,7 @@ function UserService($resource, facebookService, authService) {
         var url = getSaveConfig(this.createdFB);
         config.methods.put.headers["PAV_AUTH_TOKEN"] = authService.getAccessToken();
         var saveUser = new $resource(url, undefined, {create : config.methods.put});
-        var token = authService.getAccessToken();
+        var token = authService.getFacebookAccessToken();
         var toSave = this.user.toBody(token);
         saveUser.create(toSave, onLoad, onError);
     };

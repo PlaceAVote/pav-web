@@ -286,7 +286,7 @@ describe("User Service", function() {
       };
       facebook = new MockFacebook();
       authService = new AuthService();
-      authService.setAuth({accessToken: 'hello'});
+      authService.setFacebookAuth({accessToken: 'hello'});
       var subject = new UserService(mockResource, facebook, authService);
       subject.createUser("test@email.com", "p4SSw0rD!");
       var additionalInformation = {
