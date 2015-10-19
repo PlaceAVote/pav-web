@@ -29,6 +29,15 @@ Comment.prototype.buildChildren = function(comment) {
   }
 };
 
+
+Comment.prototype.showReplyInput = function() {
+ this.replyInput = true;
+};
+
+Comment.prototype.hideReplyInput = function() {
+ this.replyInput = false;
+};
+
 Comment.prototype.reply = function(billId, service) {
   var that = this;
   service.reply(this.reply, billId, this.id, function(err, response) {
