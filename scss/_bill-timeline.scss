@@ -1,21 +1,57 @@
 span {
 	&.enacted-signed {
 		width: 100%;
+		animation: enacted 2s ease;
 	}
 	&.passed-senate {
 		width: 75%;
+		animation: senate 2s ease;
 	}
 	&.passed-house {
 		width: 50%;
+		animation: house 2s ease;
 	}
 	&.committee {
 		width: 25%;
+		animation: committee 2s ease;
 	}
 	&.bill-introduced {
 		width: 0;
 	}
 }
 
+@keyframes enacted {
+	0% {
+		width: 0%;
+	}
+	100% {
+		width: 100%;
+	}
+}
+@keyframes senate {
+	0% {
+		width: 0%;
+	}
+	100% {
+		width: 75%;
+	}
+}
+@keyframes house {
+	0% {
+		width: 0%;
+	}
+	100% {
+		width: 50%;
+	}
+}
+@keyframes committee {
+	0% {
+		width: 0%;
+	}
+	100% {
+		width: 25%;
+	}
+}
 .bill-timeline {
 	&.passed-senate {
 		li:nth-child(5) {

@@ -291,6 +291,33 @@ body::selection {
 input {
   -webkit-appearance: none; }
 
+.card {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  border-radius: 3px;
+  height: auto;
+  border: 1px solid #d6d4e1;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0px 2px 4px -2px rgba(0, 0, 0, 0.2); }
+  .card .row-layout {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+            flex-direction: row; }
+
 .login-wrapper {
   position: relative;
   background-color: white;
@@ -1286,19 +1313,75 @@ header {
       padding-left: 10px; }
 
 span.enacted-signed {
-  width: 100%; }
+  width: 100%;
+  -webkit-animation: enacted 2s ease;
+          animation: enacted 2s ease; }
 
 span.passed-senate {
-  width: 75%; }
+  width: 75%;
+  -webkit-animation: senate 2s ease;
+          animation: senate 2s ease; }
 
 span.passed-house {
-  width: 50%; }
+  width: 50%;
+  -webkit-animation: house 2s ease;
+          animation: house 2s ease; }
 
 span.committee {
-  width: 25%; }
+  width: 25%;
+  -webkit-animation: committee 2s ease;
+          animation: committee 2s ease; }
 
 span.bill-introduced {
   width: 0; }
+
+@-webkit-keyframes enacted {
+  0% {
+    width: 0%; }
+  100% {
+    width: 100%; } }
+
+@keyframes enacted {
+  0% {
+    width: 0%; }
+  100% {
+    width: 100%; } }
+
+@-webkit-keyframes senate {
+  0% {
+    width: 0%; }
+  100% {
+    width: 75%; } }
+
+@keyframes senate {
+  0% {
+    width: 0%; }
+  100% {
+    width: 75%; } }
+
+@-webkit-keyframes house {
+  0% {
+    width: 0%; }
+  100% {
+    width: 50%; } }
+
+@keyframes house {
+  0% {
+    width: 0%; }
+  100% {
+    width: 50%; } }
+
+@-webkit-keyframes committee {
+  0% {
+    width: 0%; }
+  100% {
+    width: 25%; } }
+
+@keyframes committee {
+  0% {
+    width: 0%; }
+  100% {
+    width: 25%; } }
 
 .bill-timeline.passed-senate li:nth-child(5) img, .bill-timeline.passed-senate li:nth-child(5) p {
   opacity: 0.2; }
@@ -1405,3 +1488,141 @@ h1.bill-title {
         margin: 0 auto;
         left: 0;
         right: 0; }
+
+.top-comments {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between; }
+  .top-comments .card {
+    width: calc(50% - 10px); }
+
+.top-comment-body {
+  margin-top: 8px;
+  margin-left: 10px;
+  width: 100%;
+  position: relative; }
+  .top-comment-body h2 {
+    color: #e64a33;
+    font-size: 14px;
+    font-size: 0.875rem; }
+  .top-comment-body p {
+    color: #3b3b3b;
+    font-size: 14px;
+    font-size: 0.875rem;
+    margin-top: 10px; }
+  .top-comment-body section {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center; }
+    .top-comment-body section span {
+      font-size: 12px;
+      font-size: 0.75rem;
+      font-family: "whitneybold", sans-serif;
+      color: #a5cc71;
+      line-height: 15px; }
+      .top-comment-body section span.opposed {
+        color: #e64a33; }
+    .top-comment-body section img {
+      width: 13px;
+      height: 13px;
+      padding-left: 10px; }
+
+.bill-spec {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  padding-top: 20px; }
+  .bill-spec .bill-sponsor {
+    width: 40%;
+    margin-right: 20px; }
+  .bill-spec .bill-description {
+    width: 60%; }
+
+.user-img-border {
+  border: 1px solid #E8E7EE;
+  border-radius: 3px;
+  max-width: 55px;
+  padding: 2px; }
+  .user-img-border img {
+    width: 100%;
+    vertical-align: top;
+    border-radius: 2px; }
+
+.card h1 {
+  font-size: 11px;
+  font-size: 0.6875rem;
+  font-family: "whitneybold", sans-serif;
+  color: #4d6eb3;
+  text-transform: uppercase; }
+
+.card hr {
+  margin-top: 13px;
+  margin-bottom: 7px;
+  border: none;
+  border-bottom: 1px solid #d6d4e1;
+  width: 100%; }
+
+.card.bill-sponsor {
+  height: 190px; }
+  .card.bill-sponsor .senator-img {
+    margin-top: 13px; }
+    .card.bill-sponsor .senator-img img {
+      border-radius: 3px;
+      width: 80px;
+      border: 1px solid #cccccc; }
+  .card.bill-sponsor .bill-sponsor-info {
+    margin-top: 13px;
+    margin-left: 13px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center; }
+    .card.bill-sponsor .bill-sponsor-info h2 {
+      font-size: 14px;
+      font-size: 0.875rem;
+      margin-top: 28px;
+      margin-bottom: 10px;
+      color: #e64a33;
+      font-family: "whitneybold", sans-serif; }
+    .card.bill-sponsor .bill-sponsor-info h3 {
+      font-size: 14px;
+      font-size: 0.875rem;
+      color: #3b3b3b; }

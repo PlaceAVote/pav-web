@@ -32,32 +32,42 @@
 			</li>
 		</ul>
 		</section>
-    	<div class="top-comment favor">
-			<h1>Top Comment Opposed<h1>
-			<hr />
-			<div class="user-img-border">
-        <img src="{{bill.forComment.img_url}}" />
-			</div>
-			<div class="comment">
-        <h2>{{bill.againstComment.author}}</h2> <section><span>{{bill.againstComment.score}}</span><img src=""><img src="" /></section>
-        <p>{{bill.againstComment.body}}</p>
-			</div>
-		</div>
+    <section class="top-comments">
 
-		<div class="top-comment opposed">
-			<h1>Top Comment In Favor</h1>
+  		<div class="card">
+  			<h1>Top Comment In Favor</h1>
+  			<hr />
+        <aside class="row-layout">
+  			<div class="user-img-border">
+          <img src="{{bill.forComment.img_url}}" />
+  			</div>
+  			<div class="top-comment-body">
+          <h2>{{bill.forComment.author}}</h2> <section><span>{{bill.forComment.score}}</span><img src="img/card/thumb-up.png"><img src="img/card/thumb-down.png" /></section>
+          <p>{{bill.forComment.body}}</p>
+  			</div>
+        </aside>
+  		</div>
+      
+      <div class="card">
+        <h1>Top Comment Opposed</h1>
+        <hr />
+        <aside class="row-layout">
+          <div class="user-img-border">
+            <img ng-src="{{bill.forComment.img_url}}" />
+          </div>
+          <div class="top-comment-body">
+            <h2>{{bill.againstComment.author}}</h2> <section class="opposed"><span>{{bill.againstComment.score}}</span><img src="img/card/thumb-up.png"><img src="img/card/thumb-down.png" /></section>
+            <p>{{bill.againstComment.body}}</p>
+          </div>
+        </aside>
+      </div>
+
+    </section>
+    <section class="bill-spec">
+		<div class="card bill-sponsor">
+      <h1>Bill Sponsor</h1>
 			<hr />
-			<div class="user-img-border">
-        <img src="{{bill.forComment.img_url}}" />
-			</div>
-			<div class="comment">
-        <h2>{{bill.forComment.author}}</h2> <section><span>{{bill.forComment.score}}</span><img src=""><img src="" /></section>
-        <p>{{bill.forComment.body}}</p>
-			</div>
-		</div>
-		<div class="bill-sponsor">
-      <h1></h1>
-			<hr />
+      <aside class="row-layout">
 			<div class="senator-img">
         <img src="{{bill.legislator.getImageUrl()}}" />
 			</div>
@@ -65,15 +75,16 @@
         <h2>{{bill.body.billData.sponsor.name}}</h2>
         <h3>{{bill.legislator.properties.current_term.party}}</h3>
 			</div>
+      </aside>
 		</div>
 
-		<div class="bill-description">
-			<h1></h1>
+		<div class="card bill-description">
+			<h1>Bill Summary</h1>
 			<hr />
       <p>{{bill.body.billData.summary}}</p>
 		</div>
-
-    <div class="bill-comments">
+    </section>
+    <div class="card bill-comments">
       <h2>COMMENTS</h2>
       <hr />
       <div class='comment' ng-repeat='comment in bill.comments'>
@@ -90,10 +101,10 @@
       <button ng-click='bill.postComment()'>Submit</button>
 		</div>
 
-		<div class="bill-stats">
+		<div class="card bill-stats">
 		</div>
 
-    <div class="vote-widget">
+    <div class="card vote-widget">
       <button ng-click="bill.showVoteModel(true)"> Vote In Favor </button>
       <button ng-click="bill.showVoteModel(false)"> Vote Against </button>
       <section ng-show='bill.showVote'>

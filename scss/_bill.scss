@@ -1,0 +1,120 @@
+.top-comments {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	.card {
+		width: calc(50% - 10px);
+	}
+}
+
+.top-comment-body {
+		margin-top: 8px;
+		margin-left:10px;
+		width: 100%;
+		position: relative;
+	h2 {
+		color: $red;
+		@include font-size(14px);
+	}
+	p {
+		color: $black;
+		@include font-size(14px);
+		margin-top: 10px;
+	}
+	section {
+		position: absolute;
+		right: 0px;
+		top: 0px;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		span {
+		 @include font-size(12px);
+     	 font-family: $font-bold;
+     	 color: $green;
+     	 &.opposed {
+     	 color: $red;
+     	 }
+     	 line-height: 15px;
+		}
+		img {
+			width: 13px;
+			height: 13px;
+			padding-left:10px;
+		}
+	}
+}
+
+.bill-spec {
+ display: flex;
+ flex-direction: row;
+ padding-top: 20px;
+ 	.bill-sponsor {
+ 		width: 40%;
+ 		margin-right: 20px;
+ 	}
+ 	.bill-description {
+ 		width: 60%;
+ 	}
+}
+
+.user-img-border {
+	border: 1px solid $greylight;
+	border-radius: 3px;
+	max-width: 55px;
+	padding: 2px;
+	// overflow: hidden;
+	img {
+		width: 100%;
+		vertical-align: top;
+		border-radius: 2px;
+	}
+}
+
+.card {
+	h1 {
+		 @include font-size(11px);
+          font-family: $font-bold;
+          color: $blue;
+          text-transform: uppercase;
+	}
+    hr {
+          margin-top: 13px;
+		  margin-bottom: 7px;
+          border: none;
+          border-bottom: 1px solid $widgetborder;
+          width: 100%;
+    }
+}
+
+.card {
+	&.bill-sponsor {
+	height: 190px;
+		.senator-img {
+			margin-top: 13px;
+			img {
+				border-radius: 3px;
+				width: 80px;
+				border: 1px solid $grey;
+			}
+		}
+		.bill-sponsor-info {
+			margin-top: 13px;
+			margin-left: 13px;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			h2 {
+				@include font-size(14px);
+				margin-top:28px;
+				margin-bottom: 10px;
+				color: $red;
+				font-family: $font-bold;
+			}
+			h3 {
+				@include font-size(14px);
+				color: $black;
+			}
+		}
+	}
+}
