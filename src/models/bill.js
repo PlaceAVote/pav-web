@@ -15,8 +15,15 @@ Bill.prototype.getStatusClass = function() {
   var status = this.billData.status;
   switch (status) {
     case 'ENACTED:SIGNED':
-      return ENACTEDSIGNED
-      break;
+      return ENACTEDSIGNED;
+    case 'INTRODUCED':
+      return BILLINTRODUCTED;
+    case 'REPORTED':
+      return COMMITTEE;
+    case 'CONFERENCE:PASSED:HOUSE':
+      return PASSEDHOUSE;
+    case 'CONFERENCE:PASSED:SENATE':
+      return PASSEDSENATE;
   }
 };
 
