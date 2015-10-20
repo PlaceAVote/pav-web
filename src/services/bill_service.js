@@ -40,7 +40,6 @@ function BillService(tempBillResource, $resource, authService, userService) {
         return callback({message: 'Id Must Be Defined'});
       }
       var onLoad = function(results){
-        console.log(results);
         var result = {
           forComment: new Comment(results['for-comment']),
           againstComment: new Comment(results['against-comment']),

@@ -70,7 +70,7 @@ function CommentService($resource, userService, authService) {
     }
     var url = config.comments.dislike.endpoint(commentId);
     config.methods.post.headers['Autherization'] = authService.getAccessToken();
-    var resource = new $resource(url, undefined, {like: config.methods.post});
+    var resource = new $resource(url, undefined, {dislike: config.methods.post});
     var body = {
       author: user.email
     };

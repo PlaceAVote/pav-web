@@ -1,8 +1,11 @@
-function BillController($scope, $routeParams, billService, legislatorService, voteService) {
+function BillController($scope, $routeParams, billService, legislatorService, voteService, commentService, $location) {
   $scope = $scope || {};
   $scope.bill = this;
+  $scope.commentService = commentService;
+  this.location = $location;
   this.from = 0;
   this.commentBody;
+  this.commentService = commentService;
   this.billService = billService;
   this.legislatorService = legislatorService;
   this.voteService = voteService;
@@ -57,6 +60,9 @@ BillController.prototype.voteOnBill = function() {
     if(err) {
       if(err.status && err.status === 409){
         that.userAlreadyVoted = true;
+      }
+      else if(err.message === 'User is not specified') {
+        that.location.path('/');
       }
       else {
         that.voteFailed = true;
@@ -160,6 +166,9 @@ BillController.prototype.postComment = function() {
     if(err) {
       console.log(err);
       that.postCommentError = true;
+      if(err.message === 'Login Required') {
+        that.location.path('/');
+      }
     }
     else if(result) {
       that.comments.push(result);

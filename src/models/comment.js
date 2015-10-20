@@ -8,7 +8,7 @@ function Comment(options) {
   this.bill_id = options.bill_id;
   this.score = options.score;
   this.timestamp = options.timestamp;
-  this.id = options.id;
+  this.id = options.id || options.comment_id;
   this.parent_id = options.parent_id;
   this.replies = [];
   this.buildChildren(options);
@@ -58,6 +58,7 @@ Comment.prototype.like = function(service) {
     }
     else if(response) {
       that.liked = true;
+      that.score++;
     }
   });
 };

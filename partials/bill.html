@@ -42,12 +42,11 @@
           <img src="{{bill.forComment.img_url}}" />
   			</div>
   			<div class="top-comment-body">
-          <h2>{{bill.forComment.author}}</h2> <section><span>{{bill.forComment.score}}</span><img src="img/card/thumb-up.png"><img src="img/card/thumb-down.png" /></section>
+          <h2>{{bill.forComment.author}}</h2> <section><span>{{bill.forComment.score}}</span><img ng-click="bill.forComment.like(bill.commentService)"src="img/card/thumb-up.png"><img src="img/card/thumb-down.png" ng-click="bill.forComment.dislike(bill.commentService)"/></section>
           <p>{{bill.forComment.body}}</p>
   			</div>
         </aside>
   		</div>
-      
       <div class="card">
         <h1>Top Comment Opposed</h1>
         <hr />
@@ -56,7 +55,7 @@
             <img ng-src="{{bill.forComment.img_url}}" />
           </div>
           <div class="top-comment-body">
-            <h2>{{bill.againstComment.author}}</h2> <section class="opposed"><span>{{bill.againstComment.score}}</span><img src="img/card/thumb-up.png"><img src="img/card/thumb-down.png" /></section>
+            <h2>{{bill.againstComment.author}}</h2> <section class="opposed"><span>{{bill.againstComment.score}}</span><img src="img/card/thumb-up.png" ng-click="bill.againstComment.like(bill.commentService)"><img src="img/card/thumb-down.png" ng-click="bill.againstComment.dislike(bill.commentService)"/></section>
             <p>{{bill.againstComment.body}}</p>
           </div>
         </aside>
@@ -90,8 +89,8 @@
       <div class='comment' ng-repeat='comment in bill.comments'>
         <img src='{{comment.img_url}}' />
         <span>{{comment.score}}</span>
-        <span>like</span>
-        <span>dislike</span>
+        <span ng-click="comment.like($parent.commentService)">like</span>
+        <span ng-click="comment.dislike($parent.commentService)">dislike</span>
         <span>reply</span>
         <h3>{{comment.author}}</h3>
         <p>{{comment.body}}<p>
