@@ -32,10 +32,36 @@ function CommentService($resource, userService, authService) {
       return callback(undefined, new Comment(response));
     };
     resource.reply(body, onLoad, onError);
-  }
+  };
+
+  var like = function(commentId, callback) {
+    if (!commentId) {
+      return callback('No Comment Id');
+    }
+    var user = userService.getUser();
+    if (!user || !user.email) {
+      return callback('No User Defined');
+    }
+    var url = config.comments.like.endpoint(commentId);
+    config.methods.post.headers['Autherization'] = authService.getAccessToken();
+    var resource = new $resource(url, undefined, {like: config.methods.post});
+    var body = {
+      author: user.email
+    };
+
+    var onError = function(err) {
+      return callback(err);
+    };
+
+    var onLoad = function(response) {
+      return callback(undefined, true);
+    };
+    resource.like(body, onLoad, onError);
+  };
 
   return {
     reply: reply,
+    like: like,
   };
 }
 
