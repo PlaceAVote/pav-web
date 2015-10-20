@@ -50,4 +50,30 @@ Comment.prototype.reply = function(billId, service) {
   });
 };
 
+Comment.prototype.like = function(service) {
+  var that = this;
+  service.like(this.id, function(err, response) {
+    if(err) {
+      that.likeFailed = true;
+    }
+    else if(response) {
+      that.liked = true;
+    }
+  });
+};
+
+
+Comment.prototype.dislike = function(service) {
+  var that = this;
+  service.dislike(this.id, function(err, response) {
+    if(err) {
+      that.dislikeFailed = true;
+    }
+    else if(response) {
+      that.disliked = true;
+    }
+  });
+};
+
 module.exports = Comment;
+
