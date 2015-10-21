@@ -60,7 +60,6 @@ Comment.prototype.like = function(service) {
     else if(response) {
       console.log(response);
       that.liked = true;
-      that.score++;
     }
   });
 };

@@ -1,12 +1,13 @@
 function BillController($scope, $routeParams, billService, legislatorService, voteService, commentService, $location, authService) {
+  this.Authenticate();
   $scope = $scope || {};
   var accessToken = authService.getAccessToken();
   if (!accessToken) {
     $location.path('/');
   }
-  console.log(accessToken);
   $scope.bill = this;
   $scope.commentService = commentService;
+  this.authService = authService;
   this.location = $location;
   this.from = 0;
   this.commentBody;
@@ -21,6 +22,15 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
   this.getComments();
   this.voteModal = {};
 }
+
+BillController.prototype.Authenticate = function() {
+  if(this.authService && this.authService.getAccessToken) {
+    var token = this.authService.getAccessToken();
+    if (!token) {
+      this.location.path('/');
+    }
+  }
+};
 
 BillController.prototype.showVoteModel = function(vote){
     if (!this.userVoted) {
@@ -131,7 +141,7 @@ BillController.prototype.getLegislator = function(legislator){
       that.legislator = result;
     }
   });
-}
+};
 
 BillController.prototype.getBill = function(id) {
   var that = this;
