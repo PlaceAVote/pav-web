@@ -1,4 +1,9 @@
-function BillController($scope, $routeParams, billService, legislatorService, voteService, commentService, $location) {
+function BillController($scope, $routeParams, billService, legislatorService, voteService, commentService, $location, authService) {
+  var token = authService.getAccessToken();
+  if (!token) {
+    $location.path('/');
+  }
+
   $scope = $scope || {};
   $scope.bill = this;
   $scope.commentService = commentService;
@@ -126,7 +131,7 @@ BillController.prototype.getLegislator = function(legislator){
       that.legislator = result;
     }
   });
-}
+};
 
 BillController.prototype.getBill = function(id) {
   var that = this;
