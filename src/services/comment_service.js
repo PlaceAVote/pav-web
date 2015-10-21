@@ -22,7 +22,7 @@ function CommentService($resource, userService, authService) {
       author: author.email,
       body: comment,
     };
-    config.methods.put.headers['Autherization'] = authService.getAccessToken();
+    config.methods.put.headers['Authorization'] = authService.getAccessToken();
     var url = config.comments.reply.endpoint(parentId);
     var resource = new $resource(url, undefined, {reply: config.methods.put});
     var onError = function(err) {
@@ -43,7 +43,7 @@ function CommentService($resource, userService, authService) {
       return callback('No User Defined');
     }
     var url = config.comments.like.endpoint(commentId);
-    config.methods.post.headers['Autherization'] = authService.getAccessToken();
+    config.methods.post.headers['Authorization'] = authService.getAccessToken();
     var resource = new $resource(url, undefined, {like: config.methods.post});
     var body = {
       author: user.email
@@ -69,7 +69,7 @@ function CommentService($resource, userService, authService) {
       return callback('No User Defined');
     }
     var url = config.comments.dislike.endpoint(commentId);
-    config.methods.post.headers['Autherization'] = authService.getAccessToken();
+    config.methods.post.headers['Authorization'] = authService.getAccessToken();
     var resource = new $resource(url, undefined, {dislike: config.methods.post});
     var body = {
       author: user.email

@@ -54,9 +54,11 @@ Comment.prototype.like = function(service) {
   var that = this;
   service.like(this.id, function(err, response) {
     if(err) {
+      console.log(err);
       that.likeFailed = true;
     }
     else if(response) {
+      console.log(response);
       that.liked = true;
       that.score++;
     }

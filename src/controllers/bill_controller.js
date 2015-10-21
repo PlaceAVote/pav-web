@@ -1,5 +1,10 @@
-function BillController($scope, $routeParams, billService, legislatorService, voteService, commentService, $location) {
+function BillController($scope, $routeParams, billService, legislatorService, voteService, commentService, $location, authService) {
   $scope = $scope || {};
+  var accessToken = authService.getAccessToken();
+  if (!accessToken) {
+    $location.path('/');
+  }
+  console.log(accessToken);
   $scope.bill = this;
   $scope.commentService = commentService;
   this.location = $location;
