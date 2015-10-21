@@ -75,7 +75,7 @@ describe('Comment Service', function() {
       function mockResource(url, params, method){
         expect(url).to.eql('http://pav-congress-api-196217309.us-west-2.elb.amazonaws.com:8080/comments/hw3/reply');
         expect(params).to.eql(undefined);
-        expect(method.reply.headers.Autherization).to.eql('PAV_AUTH_TOKEN TOKEN');
+        expect(method.reply.headers.Authorization).to.eql('PAV_AUTH_TOKEN TOKEN');
         done();
       }
       mockResource.prototype.reply = function(object, onLoad, onError) {
@@ -166,7 +166,7 @@ describe('Comment Service', function() {
       function  mockResource(url, params, method) {
         expect(url).to.eql('http://pav-congress-api-196217309.us-west-2.elb.amazonaws.com:8080/comments/CommentID/like');
         expect(params).to.eql(undefined);
-        expect(method.like.headers.Autherization).to.eql('PAV_AUTH_TOKEN TOKEN');
+        expect(method.like.headers.Authorization).to.eql('PAV_AUTH_TOKEN TOKEN');
         this.like = function(body, onLoad, onError) {
           expect(body).to.eql({author: 'test@test.com'});
           done();
@@ -240,7 +240,7 @@ describe('Comment Service', function() {
       function  mockResource(url, params, method) {
         expect(url).to.eql('http://pav-congress-api-196217309.us-west-2.elb.amazonaws.com:8080/comments/CommentID/dislike');
         expect(params).to.eql(undefined);
-        expect(method.dislike.headers.Autherization).to.eql('PAV_AUTH_TOKEN TOKEN');
+        expect(method.dislike.headers.Authorization).to.eql('PAV_AUTH_TOKEN TOKEN');
         this.dislike = function(body, onLoad, onError) {
           expect(body).to.eql({author: 'test@test.com'});
           done();

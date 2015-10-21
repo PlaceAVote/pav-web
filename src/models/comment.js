@@ -58,7 +58,6 @@ Comment.prototype.like = function(service) {
     }
     else if(response) {
       that.liked = true;
-      that.score++;
     }
   });
 };
