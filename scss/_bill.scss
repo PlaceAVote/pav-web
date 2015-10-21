@@ -48,7 +48,8 @@
 .bill-spec {
  display: flex;
  flex-direction: row;
- padding-top: 20px;
+ margin-top: 20px;
+ margin-bottom: 20px;
  	.bill-sponsor {
  		width: 40%;
  		margin-right: 20px;
@@ -56,6 +57,13 @@
  	.bill-description {
  		width: 60%;
  	}
+}
+
+.bill-description {
+	p {
+		@include font-size(14px);
+		color: $black;
+	}
 }
 
 .user-img-border {
@@ -89,9 +97,10 @@
 
 .card {
 	&.bill-sponsor {
-	height: 190px;
+		flex-grow: 1;
+		align-content: stretch;
 		.senator-img {
-			margin-top: 13px;
+			// margin-top: 13px;
 			img {
 				border-radius: 3px;
 				width: 80px;
@@ -99,6 +108,7 @@
 			}
 		}
 		.bill-sponsor-info {
+			align-content: stretch;
 			margin-top: 13px;
 			margin-left: 13px;
 			display: flex;
@@ -106,7 +116,7 @@
 			justify-content: center;
 			h2 {
 				@include font-size(14px);
-				margin-top:28px;
+				// margin-top:28px;
 				margin-bottom: 10px;
 				color: $red;
 				font-family: $font-bold;
