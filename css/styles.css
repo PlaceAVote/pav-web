@@ -251,8 +251,9 @@ body, html, div, .wrapper {
 
 body {
   background-color: #e8e7ee;
-  font-family: "whitneymedium", sans-serif;
-  position: relative; }
+  font-family: "whitneylight", sans-serif;
+  position: relative;
+  line-height: 1.5; }
 
 body::-moz-selection {
   color: #543594;
@@ -305,6 +306,9 @@ input {
   height: auto;
   border: 1px solid #d6d4e1;
   padding: 20px;
+  -webkit-flex-shrink: 0;
+      -ms-flex-negative: 0;
+          flex-shrink: 0;
   background-color: white;
   box-shadow: 0px 2px 4px -2px rgba(0, 0, 0, 0.2); }
   .card .row-layout {
@@ -1502,6 +1506,12 @@ h1.bill-title {
         left: 0;
         right: 0; }
 
+.row-layout.comment {
+  margin-top: 20px;
+  margin-bottom: 10px; }
+  .row-layout.comment .top-comment-body {
+    margin-top: 0; }
+
 .top-comments {
   display: -webkit-box;
   display: -webkit-flex;
@@ -1579,7 +1589,7 @@ h1.bill-title {
     width: 40%;
     margin-right: 20px; }
   .bill-spec .bill-description {
-    width: 60%; }
+    width: calc(60% - 20px); }
 
 .bill-description p {
   font-size: 14px;
@@ -1651,3 +1661,64 @@ h1.bill-title {
       font-size: 14px;
       font-size: 0.875rem;
       color: #3b3b3b; }
+
+.bill-comments.card {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  box-shadow: none;
+  border-bottom: none;
+  -webkit-transition: all 0.2s ease;
+          transition: all 0.2s ease; }
+
+.card.comment-create {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  margin-bottom: 20px;
+  background-color: #f4f2fe;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row; }
+  .card.comment-create form {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    width: 100%; }
+  .card.comment-create img {
+    height: 30px;
+    width: 30px;
+    margin: 0 40px 0 20px; }
+  .card.comment-create input {
+    width: 100%;
+    outline: none;
+    border-radius: 3px;
+    border: 1px solid #cccccc;
+    color: #3b3b3b;
+    font-size: 14px;
+    font-size: 0.875rem;
+    padding: 5px 10px 5px 20px;
+    -webkit-transition: all 0.3s ease;
+            transition: all 0.3s ease; }
+    .card.comment-create input:focus {
+      border-color: #4d6eb3; }
+
+.comment {
+  -webkit-transition: all 0.3s ease;
+          transition: all 0.3s ease; }
+
+.comment.ng-enter {
+  opacity: 0; }
+
+.comment.ng-enter.ng-enter-acitve {
+  opacity: 1; }

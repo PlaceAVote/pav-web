@@ -83,22 +83,28 @@
       <p>A nicely formatted and shorter version would be nice but for now we must deal with this static shite. Bonjourno matey.</p>
 		</div>
     </section>
+
+
     <div class="card bill-comments">
       <h1>COMMENTS</h1>
       <hr />
-      <div class='comment' ng-repeat='comment in bill.comments'>
-        <img src='{{comment.img_url}}' />
-        <span>{{comment.score}}</span>
-        <span ng-click="comment.like($parent.commentService)">like</span>
-        <span ng-click="comment.dislike($parent.commentService)">dislike</span>
-        <span>reply</span>
-        <h3>{{comment.author}}</h3>
-        <p>{{comment.body}}<p>
-      </div>
-      <hr />
-      <input type='text' name='commentOnBillBox' ng-model='bill.commentBody' placeholder='Write your comment here'></input>
-      <button ng-click='bill.postComment()'>Submit</button>
+
+       <aside class="row-layout comment" ng-repeat='comment in bill.comments'>
+        <div class="user-img-border">
+          <img src='{{comment.img_url}}' />
+        </div>
+        <div class="top-comment-body">
+          <h2>{{comment.author}}</h2> <section><span>{{comment.score}}</span><img ng-click="comment.like($parent.commentService)"src="img/card/thumb-up.png"><img src="img/card/thumb-down.png" ng-click="comment.dislike($parent.commentService)"/></section>
+          <p>{{comment.body}}</p>
+        </div>
+        </aside>
 		</div>
+      <div class="comment-create card">
+      <form ng-submit="bill.postComment()">
+      <img src="img/comments/user.png" />
+      <input type='text' name='commentOnBillBox' ng-model='bill.commentBody' placeholder='Write your comment here'></input>
+      </form>
+      </div>
 
 		<div class="card bill-stats">
 		</div>
