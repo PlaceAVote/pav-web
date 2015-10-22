@@ -53,8 +53,7 @@ div, input {
 
 /*  COLUMN SETUP  */
 .col {
-  display: block;
-  float: left; }
+  display: block; }
 
 .col:first-child {
   margin-left: 0; }
@@ -75,127 +74,91 @@ div, input {
 
 /*  GRID OF TWELVE  */
 .l-12 {
-  float: left;
   width: 100%; }
 
 .l-11 {
-  float: left;
   width: 91.63%; }
 
 .l-10 {
-  float: left;
   width: 83.3%; }
 
 .l-9 {
-  float: left;
   width: 74.97%; }
 
 .l-8 {
-  float: left;
   width: 66.64%; }
 
 .l-7 {
-  float: left;
   width: 58.31%; }
 
 .l-6 {
-  float: left;
   width: 50%; }
 
 .l-5 {
-  float: left;
   width: 41.65%; }
 
 .l-4 {
-  float: left;
   width: 33.33%; }
 
 .l-3 {
-  float: left;
   width: 25%; }
 
 .l-2 {
-  float: left;
   width: 16.66%; }
 
 .l-1 {
-  float: left;
   width: 8.33%; }
 
 @media screen and (max-device-width: 900px), screen and (max-width: 900px) {
   .m-12 {
-    float: left;
     width: 100%; }
   .m-11 {
-    float: left;
     width: 91.63%; }
   .m-10 {
-    float: left;
     width: 83.3%; }
   .m-9 {
-    float: left;
     width: 74.97%; }
   .m-8 {
-    float: left;
     width: 66.64%; }
   .m-7 {
-    float: left;
     width: 58.31%; }
   .m-6 {
-    float: left;
     width: 50%; }
   .m-5 {
-    float: left;
     width: 41.65%; }
   .m-4 {
-    float: left;
     width: 33.33%; }
   .m-3 {
-    float: left;
     width: 25%; }
   .m-2 {
-    float: left;
     width: 16.66%; }
   .m-1 {
-    float: left;
     width: 8.33%; } }
 
 @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
   .s-12 {
-    float: left;
     width: 100%; }
   .s-11 {
-    float: left;
     width: 91.63%; }
   .s-10 {
-    float: left;
     width: 83.3%; }
   .s-9 {
-    float: left;
     width: 74.97%; }
   .s-8 {
-    float: left;
     width: 66.64%; }
   .s-7 {
-    float: left;
     width: 58.31%; }
   .s-6 {
-    float: left;
     width: 50%; }
   .s-5 {
-    float: left;
     width: 41.65%; }
   .s-4 {
-    float: left;
     width: 33.33%; }
   .s-3 {
-    float: left;
     width: 25%; }
   .s-2 {
-    float: left;
     width: 16.66%; }
   .s-1 {
-    float: left;
     width: 8.33%; } }
 
 .right {
@@ -246,7 +209,10 @@ div, input {
   font-weight: normal;
   font-style: normal; }
 
-body, html, div, .wrapper {
+body,
+html,
+div,
+.wrapper {
   height: 100%; }
 
 body {
@@ -269,11 +235,34 @@ body::selection {
 .visible {
   opacity: 1; }
 
+.row {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row; }
+
+.col {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column; }
+
 .wrapper {
   top: 0;
   position: absolute;
   width: 100%; }
-  .wrapper.ng-leave, .wrapper.ng-enter {
+  .wrapper.ng-leave,
+  .wrapper.ng-enter {
     -webkit-transition: all 0.25s ease;
             transition: all 0.25s ease; }
   .wrapper.ng-leave {
@@ -324,6 +313,38 @@ input {
     -webkit-align-content: stretch;
         -ms-flex-line-pack: stretch;
             align-content: stretch; }
+
+.btn-green {
+  background: #afc970;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #afc970), color-stop(100%, #bbd67b));
+  background: -webkit-linear-gradient(top, #afc970 0%, #bbd67b 100%);
+  background: linear-gradient(to bottom, #afc970 0%, #bbd67b 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#afc970', endColorstr='#bbd67b', GradientType=0 );
+  border: 1px solid #9fb66c;
+  border-radius: 3px;
+  color: white;
+  height: 46px;
+  line-height: 46px;
+  font-size: 14px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  outline: none; }
+
+.btn-red {
+  background: #e74c35;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #e74c35), color-stop(100%, #ec533d));
+  background: -webkit-linear-gradient(top, #e74c35 0%, #ec533d 100%);
+  background: linear-gradient(to bottom, #e74c35 0%, #ec533d 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e74c35', endColorstr='#ec533d', GradientType=0 );
+  border: 1px solid #bf4734;
+  border-radius: 3px;
+  color: white;
+  height: 46px;
+  line-height: 46px;
+  font-size: 14px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  outline: none; }
 
 .login-wrapper {
   position: relative;
@@ -1722,3 +1743,45 @@ h1.bill-title {
 
 .comment.ng-enter.ng-enter-acitve {
   opacity: 1; }
+
+.bill-stats {
+  margin-right: 20px;
+  margin-bottom: 20px; }
+
+.current-vote-stats {
+  margin-bottom: 20px; }
+  .current-vote-stats hr {
+    margin-bottom: 20px; }
+  .current-vote-stats h2, .current-vote-stats p {
+    text-align: center; }
+  .current-vote-stats div:nth-child(1) p {
+    color: #a5cc71;
+    font-family: "whitneybold", sans-serif; }
+  .current-vote-stats div:nth-child(2) p {
+    color: #e64a33;
+    font-family: "whitneybold", sans-serif; }
+
+.vote-widget {
+  margin-bottom: 20px; }
+  .vote-widget hr {
+    margin-bottom: 20px; }
+  .vote-widget button:nth-child(1) {
+    margin-right: 10px; }
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center; }
+  .modal div.card {
+    max-width: 400px; }

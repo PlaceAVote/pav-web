@@ -106,21 +106,53 @@
       </form>
       </div>
 
-		<div class="card bill-stats">
-		</div>
 
+<section class="row l-12">
+		<div class="card bill-stats l-6">
+    <h1>Statistics</h1>
+    <hr />
+		</div>
+    <div class="col l-6">
     <div class="card vote-widget">
-      <button ng-click="bill.showVoteModel(true)"> Vote In Favor </button>
-      <button ng-click="bill.showVoteModel(false)"> Vote Against </button>
-      <section ng-show='bill.showVote'>
+    <h1>Vote Now</h1>
+    <hr />
+    <aside class="row">
+      <button class="btn-green l-6" ng-click="bill.showVoteModel(true)"> Vote In Favor </button>
+      <button class="btn-red l-6" ng-click="bill.showVoteModel(false)"> Vote Against </button>
+      </aside>
+    </div>
+    
+    <div class="card current-vote-stats">
+    <h1>Current Voting</h1>
+    <hr />
+      <aside class="row">
+      <div class="l-6">
+      <h2>IN FAVOR:</h2>
+      <p>{{bill.currentVotes.yesPercentage}} &#37;</p>
+      </div>
+      <div class="l-6">
+      <h2>OPPOSED:</h2>
+      <p>{{bill.currentVotes.noPercentage}} &#37;</p>
+      </div>
+      </aside>
+    </div>
+  </section>
+
+
+
+   <section class="modal" ng-show='bill.showVote'>
+       <div class="card">
         <h2>Please confirm your vote</h2>
         <div ng-hide='bill.userVoted' class='vote-modal'>
             <span>{{bill.voteModal.message}}</span>
             <button ng-click="bill.voteOnBill()">{{bill.voteModal.button}}</button>
             <button ng-click="bill.hideVoteModal()"> I'm not ready yet </button>
         </div>
+   </section>
 
-        <div ng-show='bill.userVoted' class='user-voted-modal'>
+
+   <div ng-show='bill.userVoted' class="modal">
+    <div class="card">
           <h1>Vote Confirmed</h1>
           <p>Congratulations, you have just cast your vote on:
           <span>{{bill.body.getTitle()}}</span>
@@ -138,13 +170,7 @@
             </div>
           </section>
         </div>
-      </section>
     </div>
-
-    <div class="current-vote-stats">
-      <span>{{bill.currentVotes.yesPercentage}} &#37;</span>
-      <span>{{bill.currentVotes.noPercentage}} &#37;</span>
-    </div>
-
+  </div>
   </div>
 </div>
