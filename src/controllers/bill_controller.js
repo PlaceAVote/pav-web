@@ -1,10 +1,10 @@
 function BillController($scope, $routeParams, billService, legislatorService, voteService, commentService, $location, authService) {
-  this.Authenticate();
   $scope = $scope || {};
   $scope.bill = this;
   $scope.commentService = commentService;
   this.authService = authService;
   this.location = $location;
+  this.Authenticate();
   this.from = 0;
   this.commentBody;
   this.commentService = commentService;
