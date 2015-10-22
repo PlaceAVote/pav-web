@@ -1,10 +1,6 @@
 function BillController($scope, $routeParams, billService, legislatorService, voteService, commentService, $location, authService) {
   this.Authenticate();
   $scope = $scope || {};
-  var accessToken = authService.getAccessToken();
-  if (!accessToken) {
-    $location.path('/');
-  }
   $scope.bill = this;
   $scope.commentService = commentService;
   this.authService = authService;
