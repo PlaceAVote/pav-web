@@ -1,0 +1,176 @@
+<header-nav></header-nav>
+<div class="app">
+	<div class="app-body">
+		<h1 class="bill-title">{{bill.body.getTitle()}}</h1>
+		<section class="bill-timeline {{bill.body.getStatusClass()}}">
+		<div class="bill-timeline-bar"><span class="{{bill.body.getStatusClass()}}"></span></div>
+		<ul>
+			<li>
+				<img src="img/bills/introduced.svg" />
+				<p>Bill Introduced</p>
+				<span></span>
+			</li>
+			<li>
+				<img src="img/bills/committee.svg" />
+				<p>Reported by Committee</p>
+				<span></span>
+			</li>
+			<li>
+				<img src="img/bills/passed-house.svg" />
+				<p>Passed House</p>
+				<span></span>
+			</li>
+			<li>
+				<img src="img/bills/passed-senate.svg" />
+				<p>Passed Senate</p>
+				<span></span>
+			</li>
+			<li>
+				<img src="img/bills/enacted.svg" />
+				<p>Enacted</p>
+				<span></span>
+			</li>
+		</ul>
+		</section>
+    <section class="top-comments">
+
+  		<div class="card">
+  			<h1>Top Comment In Favor</h1>
+  			<hr />
+        <aside class="row-layout">
+  			<div class="user-img-border">
+          <img src="{{bill.forComment.img_url}}" />
+  			</div>
+  			<div class="top-comment-body">
+          <h2>{{bill.forComment.author}}</h2> <section><span>{{bill.forComment.score}}</span><img ng-click="bill.forComment.like(bill.commentService)"src="img/card/thumb-up.png"><img src="img/card/thumb-down.png" ng-click="bill.forComment.dislike(bill.commentService)"/></section>
+          <p>{{bill.forComment.body}}</p>
+  			</div>
+        </aside>
+  		</div>
+      <div class="card">
+        <h1>Top Comment Opposed</h1>
+        <hr />
+        <aside class="row-layout">
+          <div class="user-img-border">
+            <img ng-src="{{bill.forComment.img_url}}" />
+          </div>
+          <div class="top-comment-body">
+            <h2>{{bill.againstComment.author}}</h2> <section class="opposed"><span>{{bill.againstComment.score}}</span><img src="img/card/thumb-up.png" ng-click="bill.againstComment.like(bill.commentService)"><img src="img/card/thumb-down.png" ng-click="bill.againstComment.dislike(bill.commentService)"/></section>
+            <p>{{bill.againstComment.body}}</p>
+          </div>
+        </aside>
+      </div>
+
+    </section>
+    <section class="bill-spec">
+		<div class="card bill-sponsor">
+      <h1>Bill Sponsor</h1>
+			<hr />
+      <aside class="row-layout">
+			<div class="senator-img">
+        <img src="{{bill.legislator.getImageUrl()}}" />
+			</div>
+			<div class="bill-sponsor-info">
+        <h2>{{bill.body.billData.sponsor.name}}</h2>
+        <h3>{{bill.legislator.properties.current_term.party}}</h3>
+			</div>
+      </aside>
+		</div>
+
+		<div class="card bill-description">
+			<h1>Bill Summary</h1>
+			<hr />
+      <p>A nicely formatted and shorter version would be nice but for now we must deal with this static shite. Bonjourno matey.</p>
+		</div>
+    </section>
+
+
+    <div class="card bill-comments">
+      <h1>COMMENTS</h1>
+      <hr />
+
+       <aside class="row-layout comment" ng-repeat='comment in bill.comments'>
+        <div class="user-img-border">
+          <img src='{{comment.img_url}}' />
+        </div>
+        <div class="top-comment-body">
+          <h2>{{comment.author}}</h2> <section><span>{{comment.score}}</span><img ng-click="comment.like($parent.commentService)"src="img/card/thumb-up.png"><img src="img/card/thumb-down.png" ng-click="comment.dislike($parent.commentService)"/></section>
+          <p>{{comment.body}}</p>
+        </div>
+        </aside>
+		</div>
+      <div class="comment-create card">
+      <form ng-submit="bill.postComment()">
+      <img src="img/comments/user.png" />
+      <input type='text' name='commentOnBillBox' ng-model='bill.commentBody' placeholder='Write your comment here'></input>
+      </form>
+      </div>
+
+
+<section class="row l-12">
+		<div class="card bill-stats l-6">
+    <h1>Statistics</h1>
+    <hr />
+		</div>
+    <div class="col l-6">
+    <div class="card vote-widget">
+    <h1>Vote Now</h1>
+    <hr />
+    <aside class="row">
+      <button class="btn-green l-6" ng-click="bill.showVoteModel(true)"> Vote In Favor </button>
+      <button class="btn-red l-6" ng-click="bill.showVoteModel(false)"> Vote Against </button>
+      </aside>
+    </div>
+    
+    <div class="card current-vote-stats">
+    <h1>Current Voting</h1>
+    <hr />
+      <aside class="row">
+      <div class="l-6">
+      <h2>IN FAVOR:</h2>
+      <p>{{bill.currentVotes.yesPercentage}} &#37;</p>
+      </div>
+      <div class="l-6">
+      <h2>OPPOSED:</h2>
+      <p>{{bill.currentVotes.noPercentage}} &#37;</p>
+      </div>
+      </aside>
+    </div>
+  </section>
+
+
+
+   <section class="modal" ng-show='bill.showVote'>
+       <div class="card">
+        <h2>Please confirm your vote</h2>
+        <div ng-hide='bill.userVoted' class='vote-modal'>
+            <span>{{bill.voteModal.message}}</span>
+            <button ng-click="bill.voteOnBill()">{{bill.voteModal.button}}</button>
+            <button ng-click="bill.hideVoteModal()"> I'm not ready yet </button>
+        </div>
+   </section>
+
+
+   <div ng-show='bill.userVoted' class="modal">
+    <div class="card">
+          <h1>Vote Confirmed</h1>
+          <p>Congratulations, you have just cast your vote on:
+          <span>{{bill.body.getTitle()}}</span>
+          </p>
+          <section ng-show="bill.commentCard.set">
+            <div class='againt-comment'>
+              <p>{{bills.commentCard.status}}</p>
+              <hr />
+              <img src='{{bills.commentCard.img_url}}' />
+              <p>{{bills.commentCard.author}}</p>
+              <span>{{bills.commendCard.score}}</span><span></span><span></span>
+              <p>{{bills.commendCard.body}}</p>
+              <button> Reply to Comment </button>
+              <button ng-click="bill.hideVoteModal()"> I'm not ready yet </button>
+            </div>
+          </section>
+        </div>
+    </div>
+  </div>
+  </div>
+</div>

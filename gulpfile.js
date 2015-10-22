@@ -117,7 +117,7 @@ return gulp.src('./scss/*.scss')
 	.pipe(gulp.dest('./css'));
 });
 
-gulp.task('autoPrefix', ['compileSass'], function() {
+gulp.task('autoPrefix', function() {
 return gulp.src('css/styles.css')
 			.pipe(autoprefix())
 			.pipe(gulp.dest('css'));

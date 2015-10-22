@@ -8,7 +8,7 @@ describe('LoginCtrl', function() {
 			subject.user.email = "anthony.com";
 			expect(subject.emailValidation(subject.user.email)).to.be.false;
 		});
-	
+
 		it('Should return true if valid', function() {
 			var scope = {};
 			var subject = new LoginCtrl(scope);
@@ -43,7 +43,7 @@ describe('LoginCtrl', function() {
 				createUser : function(){
 					created = true;
 				}
-			};			
+			};
 			subject.location = {
 				path : function() {
 					changed = true;
@@ -70,7 +70,7 @@ describe('LoginCtrl', function() {
 				createUser : function(){
 					created = true;
 				}
-			};	
+			};
 			subject.location = {
 				path : function() {
 					changed = true;

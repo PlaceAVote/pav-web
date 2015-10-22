@@ -1,11 +1,13 @@
 var User = require('../models/user.js');
 var config = require('../config/live_endpoints.js');
 var strftime = require('strftime');
-function UserService($resource, facebookService) {
+
+function UserService($resource, facebookService, authService) {
     this.createdFB = false;
-    var loginWithFacebook = function(callback){   
+    var loginWithFacebook = function(callback){
         var that = this;
         var onLoad = function(resource) {
+            authService.setAuth(resource.token);
             callback(undefined, resource);
         };
         var onError = function(err) {
@@ -14,17 +16,17 @@ function UserService($resource, facebookService) {
         };
 
         facebookService.login(function(resource, auth){
-            that.userToken = auth;
+            authService.setFacebookAuth(auth);
             that.user = new User(resource.email);
             that.user.dob = new Date(resource.birthday);
             that.user.first_name = resource.first_name;
             that.user.last_name = resource.last_name;
             that.user.img_url = resource.picture.data.url;
-            config.users.facebook.login.headers["PAV_AUTH_TOKEN"] = auth.accessToken;
-            var facebookUserLoginResource = new $resource(config.users.facebookLoginUrl, undefined, {login : config.users.facebook.login});
+            config.methods.post.headers["Authorization"] = authService.getFacebookAccessToken();
+            var facebookUserLoginResource = new $resource(config.users.facebookLoginUrl, undefined, {login : config.methods.post});
             var creds = {
                 email: that.user.email,
-                token: that.userToken.accessToken
+                token: authService.getFacebookAccessToken(),
             }
             facebookUserLoginResource.login(creds, onLoad, onError);
         });
@@ -68,24 +70,18 @@ function UserService($resource, facebookService) {
     };
 
     var getSaveConfig = function(throughFacebook){
-        if(throughFacebook){
-            return {
-                url : config.users.facebookCreateUrl,
-                method: config.users.facebook.create
-            }
-        }
-        else {
-            return {
-                url: config.users.create_endpoint,
-                method: config.users.create
-            }
-        }
+      if(throughFacebook){
+        return config.users.facebookCreateUrl;
+      }
+      else {
+        return config.users.endpoint;
+      }
     };
     var saveUser = function(callback){
         var that = this;
 
         var onLoad = function(user){
-            this.usertoken = user.token;
+            authService.setAuth(user.token);
             callback(undefined, user);
         };
         var onError = function(err){
@@ -94,14 +90,11 @@ function UserService($resource, facebookService) {
         if(!this.user){
             return;
         }
-        var create_config = getSaveConfig(this.createdFB);
-        var saveUser = new $resource(create_config.url, undefined, {create : create_config.method});
-        var token;
-        if(this.userToken){
-            token = this.userToken.accessToken;
-        }
+        var url = getSaveConfig(this.createdFB);
+        config.methods.put.headers["Authorization"] = authService.getAccessToken();
+        var saveUser = new $resource(url, undefined, {create : config.methods.put});
+        var token = authService.getFacebookAccessToken();
         var toSave = this.user.toBody(token);
-        console.log("NEW FB USER: ", toSave);
         saveUser.create(toSave, onLoad, onError);
     };
 
@@ -109,7 +102,7 @@ function UserService($resource, facebookService) {
     var login = function(user, callback) {
 
         var onLoad = function(response) {
-            this.usertoken = response.token;
+            authService.setAuth(user.token);
             return callback(undefined, response);
         };
 
@@ -120,7 +113,8 @@ function UserService($resource, facebookService) {
         if(!user || !user.email || !user.password) {
             return callback({message: "User has no password or username"});
         }
-        var loginResource = new $resource(config.users.login_endpoint, undefined, {login : config.users.login});
+        config.methods.post.headers["Authorization"] = authService.getAccessToken();
+        var loginResource = new $resource(config.users.login_endpoint, undefined, {login : config.methods.post});
         loginResource.login(user, onLoad, onError);
     }
 
@@ -137,3 +131,4 @@ function UserService($resource, facebookService) {
 };
 
 module.exports = UserService;
+

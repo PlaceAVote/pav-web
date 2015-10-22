@@ -1,38 +1,66 @@
-var Bill = require("../../src/models/bill.js");
-var expect = require("chai").expect;
+var billData = require('../fixtures/bill.js');
+var expect = require('chai').expect;
+var Bill = require('../../src/models/bill.js');
 
-describe("Bills", function(){
-    it("Has Topic property", function(){
-        var subject = new Bill({subject:"Guns", votes:{}});
-        expect(subject.subject).to.eql("Guns");
+describe('Bill Model', function(){
+  it('is built from bill data', function(){
+   var subject = new Bill(billData);
+   expect(subject.billData).to.eql(billData);
+  });
+  it('bill data is undefined when no data given', function(){
+   var subject = new Bill();
+   expect(subject.billData).to.eql(undefined);
+  });
+  describe('GetStatus', function(){
+    it('changes status into class', function(){
+      var subject = new Bill(billData);
+      expect(subject.billData).to.eql(billData);
+      var result = subject.getStatusClass();
+      expect(result).to.eql('enacted-signed');
     });
-    it("Has Name Property", function(){
-        var subject = new Bill({votes:{},short_title: "H.R. 1013: Regulate Marijuana Like Alcohol Act"});
-        expect(subject.short_title).to.eql("H.R. 1013: Regulate Marijuana Like Alcohol Act");
+    it('change css class to introduced status', function(){
+      var billData = {
+        status: 'INTRODUCED'
+      }
+      var subject = new Bill(billData);
+      expect(subject.billData).to.eql(billData);
+      var result = subject.getStatusClass();
+      expect(result).to.eql('bill-introduced');
     });
-    it("Doesn't set options when undefined", function(){
-        var subject = new Bill();
-        expect(subject.name).to.eql(undefined);
+    it('change css class to reported status', function(){
+      var billData = {
+        status: 'REPORTED'
+      }
+      var subject = new Bill(billData);
+      expect(subject.billData).to.eql(billData);
+      var result = subject.getStatusClass();
+      expect(result).to.eql('committee');
     });
-    it("Has Comments", function(){
-        var options = {votes:{}, total_comments: 80};
-        var subject = new Bill(options);
-        expect(subject.total_comments).to.eql(80);
+    it('change css class to passed house status', function(){
+      var billData = {
+        status: 'CONFERENCE:PASSED:HOUSE'
+      }
+      var subject = new Bill(billData);
+      expect(subject.billData).to.eql(billData);
+      var result = subject.getStatusClass();
+      expect(result).to.eql('passed-house');
     });
-    it("Has a Yes Vote", function(){
-        var subject = new Bill({votes: {yes: 10}});
-        expect(subject.yesVote).to.eql(10);
+    it('change css class to passed senate status', function(){
+      var billData = {
+        status: 'CONFERENCE:PASSED:SENATE'
+      }
+      var subject = new Bill(billData);
+      expect(subject.billData).to.eql(billData);
+      var result = subject.getStatusClass();
+      expect(result).to.eql('passed-senate');
     });
-    it("Has a No Vote", function(){
-        var subject = new Bill({votes: {no:10}});
-        expect(subject.noVote).to.eql(10);
+  });
+  describe('Get Title', function(){
+    it('returns the short title', function(){
+      var subject = new Bill(billData);
+      expect(subject.billData).to.eql(billData);
+      var result = subject.getTitle();
+      expect(result).to.eql('HR. 114: Medicare Access and CHIP Reauthorization Act of 2015');
     });
-    it("Majority Vote 'Yes'", function(){
-        var subject = new Bill({votes:{yes: 75, no: 25}});
-        expect(subject.majorityVote()).to.eql({majority: 'Yes', percent: 75});
-    });
-    it("Majority Vote 'No'", function(){
-        var subject = new Bill({votes:{yes: 5, no: 10}});
-        expect(subject.majorityVote()).to.eql({majority: 'No', percent: 67});
-    });
+  });
 });

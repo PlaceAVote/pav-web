@@ -1,10 +1,10 @@
 <header-nav></header-nav>
 
-<div class="feed">
-	<div class="feed-body">
-	    <div class="welcome-message" ng-show="banner.show">
-	    	<img src="img/mark_full_color.svg" />
+<div class="app">
+	<div class="app-body">
+	    <div class="card welcome-message" ng-show="banner.show">
 	        <img src="img/close-widget.png" ng-click="banner.hide()" class="close" />
+	        <img src="img/mark_full_color.svg" />
 	       	<section>
 	        <h1>{{banner.welcome}}</h1>
 	        <p>{{banner.message}}</p>
@@ -15,14 +15,14 @@
 		<div class='feed-column'>
 		    <div class="bill-container" ng-repeat="bill in bills">
 		    	<div class="bill">
-		        <h3>{{bill.subject}}</h3>
+		        <h3 ng-click='bill.goToPage($parent.$location)'>{{bill.subject}}</h3>
 		        <hr />
 			        <div class="bill-summary-container">
 			        <div class="bill-subject">
 			        <span class="{{bill.subject}}"></span>
 			        </div>
 			        <div class="bill-summary">
-			        <h6>{{bill.short_title}}</h6>
+			        <h6 ng-click='bill.goToPage($parent.$location)'>{{bill.short_title}}</h6>
 			        <p>{{bill.summary}}</p>
 			        </div>
 			        </div>
@@ -38,5 +38,5 @@
 			<h1>TRENDING GLOBALLY</h1>
 		</div>
 		</section>
-	</div>	
+	</div>
 </div>
