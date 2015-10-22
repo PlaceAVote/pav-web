@@ -684,6 +684,17 @@ input {
       .mailcheckshow a:last-child:hover {
         background-color: #f19b8e; }
 
+.login-fix {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row; }
+
 .onboarding-container {
   position: absolute;
   margin: 0px auto 40px auto;
@@ -708,18 +719,18 @@ input {
   @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
     .onboarding-container {
       border: none; } }
-  .onboarding-container header {
+  .onboarding-container .ob-header {
     border-bottom: 1px solid #d6d4e1; }
     @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
-      .onboarding-container header {
+      .onboarding-container .ob-header {
         background-color: #E8E7EE;
         position: relative;
         height: 100px; } }
-    .onboarding-container header img {
+    .onboarding-container .ob-header img {
       width: 300px;
       padding-bottom: 20px; }
       @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
-        .onboarding-container header img {
+        .onboarding-container .ob-header img {
           position: absolute;
           left: 0;
           right: 0;
