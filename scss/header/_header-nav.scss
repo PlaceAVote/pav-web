@@ -1,4 +1,14 @@
 header {
+  transition: all 0.2s ease;
+  &.ng-hide-remove {
+    top: -55px;
+  }
+
+  &.ng-enter.ng-enter-active {
+    opacity: 0.2;
+    top: 10px;
+  }
+
   @include linear-gradient(#564a88, #445a95);
   z-index: 9999;
   height: 50px;
