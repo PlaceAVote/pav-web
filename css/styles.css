@@ -273,7 +273,8 @@ input {
   font-size: 14px;
   font-size: 0.875rem;
   cursor: pointer;
-  outline: none; }
+  outline: none;
+  position: relative; }
 
 .btn-red {
   background: #e74c35;
@@ -289,7 +290,14 @@ input {
   font-size: 14px;
   font-size: 0.875rem;
   cursor: pointer;
-  outline: none; }
+  outline: none;
+  position: relative; }
+
+.btn-red span, .btn-green span {
+  position: absolute;
+  left: 34px;
+  font-size: 23px;
+  top: 12px; }
 
 .card {
   display: -webkit-box;
