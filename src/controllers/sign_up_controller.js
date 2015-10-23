@@ -17,8 +17,10 @@ function SignUpCtrl ($scope, $location, userService) {
 
 SignUpCtrl.prototype.test = function() {
     var that = this;
+    console.log('testing');
     this.userService.addAdditionalInformation(this.additionalInformation);
     var user = this.userService.getUser();
+    console.log(user);
     if(!user) {
         that.invalid_user = true;
         console.log("invalid");
@@ -28,13 +30,16 @@ SignUpCtrl.prototype.test = function() {
             if(err) {
                 if(err.status === 409) {
                     that.user_exists_error = true;
+                    console.log('error');
                 }
                 else {
                 that.error = true;
+                    console.log('error two');
                 }
             }
             else {
                 //move page
+                console.log(result);
                 that.location.path("/feed");
             }
         });

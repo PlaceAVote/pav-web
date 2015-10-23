@@ -15,8 +15,13 @@ this.interests = [
 	new Interest('Economics', 'icon-money'),
 	new Interest('Social Interest','icon-police')
 ];
-
+this.progressComplete = false;
 }
+
+RegisterController.prototype.topicsSubmit = function() {
+	this.userService.addTopics(this.getSelected());
+};
+
 RegisterController.prototype.go = function(hash) {
 	this.userService.addTopics(this.getSelected());
 	this.location.path(hash);

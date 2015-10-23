@@ -38,13 +38,8 @@ app.config(['$routeProvider', function($routeProvider) {
 			templateUrl: 'partials/login.html',
 			controller: 'LoginCtrl as login'
 		})
-		.when('/topics', {
-			templateUrl: 'partials/topics-register.html',
-			controller: 'TopicRegisterCtrl as topicsRegister'
-		})
-		.when('/user-signup', {
-			templateUrl: 'partials/user-signup.html',
-			controller: 'SignUpCtrl as signup'
+		.when('/onboarding', {
+			templateUrl: 'partials/onboarding.html',
 		})
     .when('/feed', {
       templateUrl: 'partials/feed.html',
