@@ -17,7 +17,6 @@ function SignUpCtrl ($scope, $location, userService) {
 
 SignUpCtrl.prototype.test = function() {
     var that = this;
-    console.log('testing');
     this.userService.addAdditionalInformation(this.additionalInformation);
     var user = this.userService.getUser();
     console.log(user);
@@ -34,7 +33,7 @@ SignUpCtrl.prototype.test = function() {
                 }
                 else {
                 that.error = true;
-                    console.log('error two');
+                    console.log(err.status);
                 }
             }
             else {
