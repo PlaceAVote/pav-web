@@ -323,8 +323,9 @@ input {
   border: 1px solid #9fb66c;
   border-radius: 3px;
   color: white;
+  text-shadow: 1px 1px 1px #6B6B6B;
   height: 46px;
-  line-height: 46px;
+  line-height: 40px;
   font-size: 14px;
   font-size: 0.875rem;
   cursor: pointer;
@@ -339,8 +340,9 @@ input {
   border: 1px solid #bf4734;
   border-radius: 3px;
   color: white;
+  text-shadow: 1px 1px 1px #6B6B6B;
   height: 46px;
-  line-height: 46px;
+  line-height: 40px;
   font-size: 14px;
   font-size: 0.875rem;
   cursor: pointer;
