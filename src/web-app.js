@@ -79,6 +79,6 @@ app.controller('SignUpCtrl',['$scope','$location', 'userService', SignUpControll
 app.controller('LoginCtrl',['$scope','$location', 'userService', LoginController]);
 app.controller('FeedCtrl', ['$scope', '$location', 'userService', 'billService', 'trendService', FeedController]);
 app.controller('BillCtrl', ['$scope', '$routeParams', 'billService', 'legislationService', 'voteService', 'commentService', '$location', 'authService', BillController]);
-app.controller('HeaderCtrl', ['$scope', '$location', 'userService', HeaderController]);
+app.controller('HeaderCtrl', ['$scope', '$location', 'authService', HeaderController]);
 //directives
 app.directive('mailcheck', ['$compile','$sce', mailcheck]);
