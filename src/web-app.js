@@ -4,6 +4,7 @@ var SignUpController = require('./controllers/sign_up_controller.js');
 var LoginController = require('./controllers/login_controller.js');
 var FeedController = require('./controllers/feed_controller.js');
 var BillController = require('./controllers/bill_controller.js');
+var HeaderController = require('./controllers/header_controller.js');
 
 //services
 var UserService = require('./services/user_service.js');
@@ -37,13 +38,8 @@ app.config(['$routeProvider', function($routeProvider) {
 			templateUrl: 'partials/login.html',
 			controller: 'LoginCtrl as login'
 		})
-		.when('/topics', {
-			templateUrl: 'partials/topics-register.html',
-			controller: 'TopicRegisterCtrl as topicsRegister'
-		})
-		.when('/user-signup', {
-			templateUrl: 'partials/user-signup.html',
-			controller: 'SignUpCtrl as signup'
+		.when('/onboarding', {
+			templateUrl: 'partials/onboarding.html',
 		})
     .when('/feed', {
       templateUrl: 'partials/feed.html',
@@ -78,5 +74,6 @@ app.controller('SignUpCtrl',['$scope','$location', 'userService', SignUpControll
 app.controller('LoginCtrl',['$scope','$location', 'userService', LoginController]);
 app.controller('FeedCtrl', ['$scope', '$location', 'userService', 'billService', 'trendService', FeedController]);
 app.controller('BillCtrl', ['$scope', '$routeParams', 'billService', 'legislationService', 'voteService', 'commentService', '$location', 'authService', BillController]);
+app.controller('HeaderCtrl', ['$scope', '$location', 'authService', HeaderController]);
 //directives
 app.directive('mailcheck', ['$compile','$sce', mailcheck]);

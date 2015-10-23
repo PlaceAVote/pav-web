@@ -1,12 +1,29 @@
 <div class="onboarding-container l-7 m-10 s-12">
-		<div class="ob-header">
-			<img src="img/pav-logo-color.png" />
-			<span class="progress-bar">
-				<span class="complete"></span>
-			</span>
-		</div>
-		<div class="border"></div>
-		<section>
+	<div class="ob-header" ng-controller="TopicRegisterCtrl as topicsRegister">
+		<img ng-click="register.userService.getTopics()" src="img/pav-logo-color.png" />
+		<span class="progress-bar">
+			<span ng-class="{'complete': register.userService.getTopics()}"></span>
+		</span>
+	</div>
+	<div class="border"></div>
+	<section ng-controller="TopicRegisterCtrl as topicsRegister" ng-hide="register.userService.getTopics()">
+	<h2>Welcome to Placeavote!</h2>
+	<p>To get you started, please select the topics that interest you</p>
+	<div class="topics">
+			<div class="topic-container" ng-repeat="interest in register.interests" ng-class="{'topic-selected': interest.selected}" ng-click="register.select(interest.name)">
+				<div class="topic">
+					<span class="{{interest.icon}}"></span>
+					<p>{{interest.name}}</p>
+					<div class="topic-tick"><div class="icon-check-mark"></div></div>
+				</div>
+			</div>
+	<button ng-click="register.topicsSubmit()">Continue</button>
+	</div>
+	</section>
+
+
+
+	<section ng-controller="SignUpCtrl as signup" ng-show="signup.userService.getTopics()">
 		<h2>We just need a few more details and then you'll be ready to go.</h2>
 		<form>
 		<label class="firstname">First Name
@@ -35,4 +52,4 @@
 		</form>
         </section>
 
-	</div>
+</div>

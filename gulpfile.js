@@ -148,7 +148,7 @@ gulp.task('ionicise', function(){
 });
 
 gulp.task('watchFiles', function() {
-	gulp.watch('scss/*.scss', ['compileSass']);
+	gulp.watch('scss/**/*.scss', ['compileSass']);
 	gulp.watch('css/*.css', ['autoPrefix']);
 	gulp.watch(['src/**/*.js', 'src/*.js'], ['browserify-web']);
 	gulp.watch('partials/*.html');

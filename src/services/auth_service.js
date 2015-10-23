@@ -24,7 +24,16 @@ function AuthService() {
     return 'PAV_AUTH_TOKEN ' + auth;
   };
 
+  var loggedInStatus = function() {
+    if(!auth) {
+      return false;
+    } else if (auth) {
+      return true;
+    }
+  };
+
   return {
+    loggedInStatus: loggedInStatus,
     setAuth: setAuth,
     getAccessToken: getAccessToken,
     setFacebookAuth: setFacebookAuth,

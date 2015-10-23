@@ -27,7 +27,7 @@ function UserService($resource, facebookService, authService) {
             var creds = {
                 email: that.user.email,
                 token: authService.getFacebookAccessToken(),
-            }
+            };
             facebookUserLoginResource.login(creds, onLoad, onError);
         });
     };
@@ -46,6 +46,10 @@ function UserService($resource, facebookService, authService) {
 		}
 		this.user.topics = topics;
 	};
+
+    var getTopics = function() {
+        return this.user.topics;
+    };
 
 	var addAdditionalInformation = function(additionalInformation){
 		if(!this.user){
@@ -108,7 +112,7 @@ function UserService($resource, facebookService, authService) {
 
         var onError = function(err) {
             return callback(err);
-        }
+        };
 
         if(!user || !user.email || !user.password) {
             return callback({message: "User has no password or username"});
@@ -116,19 +120,20 @@ function UserService($resource, facebookService, authService) {
         config.methods.post.headers["Authorization"] = authService.getAccessToken();
         var loginResource = new $resource(config.users.login_endpoint, undefined, {login : config.methods.post});
         loginResource.login(user, onLoad, onError);
-    }
+    };
 
 	return {
 		createUser : createUser,
 		getUser : getUser,
-		addTopics: addTopics,
+        getTopics : getTopics,
+		addTopics : addTopics,
 		addAdditionalInformation : addAdditionalInformation,
         saveUser : saveUser,
         login : login,
         loginWithFacebook : loginWithFacebook,
         makeProfilePublic: makeProfilePublic
 	};
-};
+}
 
 module.exports = UserService;
 

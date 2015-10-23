@@ -1,4 +1,14 @@
 .onboarding-container {
+  section.ng-hide {
+    opacity: 0;
+  }
+ section.ng-hide-remove {
+  opacity: 0;
+ }
+ section {
+  transition: all 0.3s ease;
+  opacity: 1;
+ }
   position: absolute;
   margin: 0px auto 40px auto;
   left: 0;
