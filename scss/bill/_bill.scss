@@ -11,9 +11,16 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-
+  @include media(850px) {
+    flex-direction: column;
+    width: 100%;
+  }
   .card {
     width: calc(50% - 10px);
+    @include media(850px) {
+      width: 100%;
+      margin-bottom: 20px;
+    }
   }
 }
 
@@ -66,14 +73,26 @@
   flex-direction: row;
   margin-top: 20px;
   margin-bottom: 20px;
+  @include media(850px) {
+    flex-direction: column;
+    margin-top: 0;
+  }
 
   .bill-sponsor {
     width: 40%;
     margin-right: 20px;
+    @include media(850px) {
+      width: 100%;
+      margin-right: 0;
+      margin-bottom: 20px;
+    }
   }
 
   .bill-description {
     width: calc(60% - 20px);
+    @include media(850px) {
+      width: 100%;
+    }
   }
 }
 
@@ -212,9 +231,18 @@
   opacity: 1;
 }
 
+.bill-stats-vote {
+  @include media(850px) {
+    flex-direction: column;
+  }
+}
+
 .bill-stats {
   margin-right: 20px;
   margin-bottom: 20px;
+  @include media(850px) {
+    margin-right: 0;
+  }
 }
 
 .current-vote-stats {

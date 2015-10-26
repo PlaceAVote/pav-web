@@ -221,6 +221,38 @@ body {
   position: relative;
   line-height: 1.5; }
 
+.app {
+  padding-top: 70px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center; }
+  .app .app-body {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    width: 100%;
+    max-width: 1200px; }
+    @media screen and (max-device-width: 1200px), screen and (max-width: 1200px) {
+      .app .app-body {
+        padding-right: 20px;
+        padding-left: 20px; } }
+
 *::-moz-selection {
   color: white;
   background: #8767c8; }
@@ -1077,34 +1109,6 @@ input {
   100% {
     width: 100%; } }
 
-.app {
-  padding-top: 70px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center; }
-  .app .app-body {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    width: 100%;
-    max-width: 1200px; }
-
 .feed-wrapper {
   display: -webkit-box;
   display: -webkit-flex;
@@ -1353,6 +1357,10 @@ header {
     -webkit-justify-content: space-between;
         -ms-flex-pack: justify;
             justify-content: space-between; }
+    @media screen and (max-device-width: 1200px), screen and (max-width: 1200px) {
+      header .row {
+        padding-left: 20px;
+        padding-right: 20px; } }
     header .row img.pav-icon {
       height: 30px; }
     header .row section.search {
@@ -1593,8 +1601,20 @@ h1.bill-title {
   -webkit-justify-content: space-between;
       -ms-flex-pack: justify;
           justify-content: space-between; }
+  @media screen and (max-device-width: 850px), screen and (max-width: 850px) {
+    .top-comments {
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: column;
+          -ms-flex-direction: column;
+              flex-direction: column;
+      width: 100%; } }
   .top-comments .card {
     width: calc(50% - 10px); }
+    @media screen and (max-device-width: 850px), screen and (max-width: 850px) {
+      .top-comments .card {
+        width: 100%;
+        margin-bottom: 20px; } }
 
 .top-comment-body {
   margin-top: 8px;
@@ -1652,11 +1672,27 @@ h1.bill-title {
           flex-direction: row;
   margin-top: 20px;
   margin-bottom: 20px; }
+  @media screen and (max-device-width: 850px), screen and (max-width: 850px) {
+    .bill-spec {
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: column;
+          -ms-flex-direction: column;
+              flex-direction: column;
+      margin-top: 0; } }
   .bill-spec .bill-sponsor {
     width: 40%;
     margin-right: 20px; }
+    @media screen and (max-device-width: 850px), screen and (max-width: 850px) {
+      .bill-spec .bill-sponsor {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 20px; } }
   .bill-spec .bill-description {
     width: calc(60% - 20px); }
+    @media screen and (max-device-width: 850px), screen and (max-width: 850px) {
+      .bill-spec .bill-description {
+        width: 100%; } }
 
 .bill-description p {
   font-size: 14px;
@@ -1790,9 +1826,20 @@ h1.bill-title {
 .comment.ng-enter.ng-enter-acitve {
   opacity: 1; }
 
+@media screen and (max-device-width: 850px), screen and (max-width: 850px) {
+  .bill-stats-vote {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column; } }
+
 .bill-stats {
   margin-right: 20px;
   margin-bottom: 20px; }
+  @media screen and (max-device-width: 850px), screen and (max-width: 850px) {
+    .bill-stats {
+      margin-right: 0; } }
 
 .current-vote-stats {
   margin-bottom: 20px; }
