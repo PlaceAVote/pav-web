@@ -13,12 +13,12 @@ body {
 }
 
 *::-moz-selection {
-  color: $purple;
+  color: white;
   background: lighten($purple, 20%);
 }
 
 *::selection {
-  color: $purple;
+  color: white;
   background: lighten($purple, 20%);
 }
 

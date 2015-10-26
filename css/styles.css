@@ -222,11 +222,11 @@ body {
   line-height: 1.5; }
 
 *::-moz-selection {
-  color: #543594;
+  color: white;
   background: #8767c8; }
 
 *::selection {
-  color: #543594;
+  color: white;
   background: #8767c8; }
 
 .vanish {
@@ -260,43 +260,53 @@ input {
   -webkit-appearance: none; }
 
 .btn-green {
-  background: #afc970;
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #afc970), color-stop(100%, #bbd67b));
-  background: -webkit-linear-gradient(top, #afc970 0%, #bbd67b 100%);
-  background: linear-gradient(to bottom, #afc970 0%, #bbd67b 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#afc970', endColorstr='#bbd67b', GradientType=0 );
+  background: #a5cc71;
   border: 1px solid #9fb66c;
   border-radius: 3px;
   color: white;
   height: 46px;
-  line-height: 46px;
+  line-height: 44px;
   font-size: 14px;
   font-size: 0.875rem;
   cursor: pointer;
   outline: none;
-  position: relative; }
+  position: relative;
+  text-shadow: 0px 1px 1px rgba(59, 59, 59, 0.4);
+  -webkit-transition: all 0.3s ease;
+          transition: all 0.3s ease; }
+  .btn-green:hover {
+    background: #afd180; }
+    .btn-green:hover span {
+      text-shadow: 0px 3px 5px rgba(59, 59, 59, 0.2); }
 
 .btn-red {
-  background: #e74c35;
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #e74c35), color-stop(100%, #ec533d));
-  background: -webkit-linear-gradient(top, #e74c35 0%, #ec533d 100%);
-  background: linear-gradient(to bottom, #e74c35 0%, #ec533d 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e74c35', endColorstr='#ec533d', GradientType=0 );
+  background: #e64a33;
   border: 1px solid #bf4734;
   border-radius: 3px;
   color: white;
   height: 46px;
-  line-height: 46px;
+  line-height: 44px;
   font-size: 14px;
   font-size: 0.875rem;
   cursor: pointer;
   outline: none;
-  position: relative; }
+  position: relative;
+  text-shadow: 0px 1px 1px rgba(59, 59, 59, 0.4);
+  -webkit-transition: all 0.3s ease;
+          transition: all 0.3s ease; }
+  .btn-red:hover {
+    background: #e85a45; }
+    .btn-red:hover span {
+      text-shadow: 0px 3px 5px rgba(59, 59, 59, 0.2); }
 
 .btn-red span, .btn-green span {
+  -webkit-transition: all 0.3s ease;
+          transition: all 0.3s ease;
+  line-height: 0;
   position: absolute;
   left: 34px;
   font-size: 23px;
+  font-size: 1.4375rem;
   top: 12px; }
 
 .card {
