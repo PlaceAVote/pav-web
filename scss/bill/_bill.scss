@@ -11,15 +11,16 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  @include media(850px) {
-    flex-direction: column;
-    width: 100%;
+  @include media(850px){
+  flex-direction: column;
+  width: 100%;
   }
+
   .card {
     width: calc(50% - 10px);
-    @include media(850px) {
-      width: 100%;
-      margin-bottom: 20px;
+    @include media(850px){
+    width: 100%;
+    margin-bottom: 20px;
     }
   }
 }
@@ -73,25 +74,25 @@
   flex-direction: row;
   margin-top: 20px;
   margin-bottom: 20px;
-  @include media(850px) {
-    flex-direction: column;
-    margin-top: 0;
+  @include media(850px){
+  flex-direction: column;
+  margin-top: 0;
   }
 
   .bill-sponsor {
     width: 40%;
     margin-right: 20px;
-    @include media(850px) {
-      width: 100%;
-      margin-right: 0;
-      margin-bottom: 20px;
+    @include media(850px){
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 20px;
     }
   }
 
   .bill-description {
     width: calc(60% - 20px);
-    @include media(850px) {
-      width: 100%;
+    @include media(850px){
+    width: 100%;
     }
   }
 }
@@ -232,7 +233,7 @@
 }
 
 .bill-stats-vote {
-  @include media(850px) {
+  @include media(850px){
     flex-direction: column;
   }
 }
@@ -240,53 +241,75 @@
 .bill-stats {
   margin-right: 20px;
   margin-bottom: 20px;
-  @include media(850px) {
-    margin-right: 0;
+  @include media(850px){
+  margin-right: 0;
+  width: 100%;
   }
 }
 
 .current-vote-stats {
-	margin-bottom: 20px;
-	hr {
-		margin-bottom: 20px;
-	}
-	h2, p {
-		text-align:center;
-	}
-	div:nth-child(1) {
-	p {
-		color: $green;
-		font-family:$font-bold;
-		}
-	}
-	div:nth-child(2) {
-	p {
-		color: $red;
-		font-family: $font-bold;
-	}
-	}
+  margin-bottom: 20px;
+
+  hr {
+    margin-bottom: 20px;
+  }
+
+  h2,
+  p {
+    text-align: center;
+  }
+
+  div:nth-child(1) {
+    p {
+      color: $green;
+      font-family: $font-bold;
+    }
+  }
+
+  div:nth-child(2) {
+    p {
+      color: $red;
+      font-family: $font-bold;
+    }
+  }
 }
+
 .vote-widget {
   margin-bottom: 20px;
+
   hr {
-  	margin-bottom: 20px;
+    margin-bottom: 20px;
   }
+
   button:nth-child(1) {
-  	margin-right: 10px;
+    margin-right: 10px;
+  }
+  aside.row {
+    @include media(560px) {
+      flex-direction: column;
+      .btn-green, .btn-red {
+        width: 100%;
+      }
+      .btn-green {
+        margin-bottom: 20px;
+      }
+    }
   }
 }
 
 .modal {
-	position: fixed;
-	top: 0;
-	left: 0;
-	height: 100%;
-	width: 100%;
-	background-color: rgba(0,0,0,0.4);
-	display: flex;
-	justify-content: center;
-	div.card {
-		max-width: 400px;
-		// height
-	}
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  div.card {
+    max-width: 400px;
+    justify-content: center;
+    align-items: center;
+  }
 }
