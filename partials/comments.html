@@ -5,7 +5,7 @@
   <div class="top-comment-body">
     <h2>{{comment.author}}</h2> <section><span>{{comment.score}}</span><img ng-click="comment.like($parent.commentService)"src="img/card/thumb-up.png"><img src="img/card/thumb-down.png" ng-click="comment.dislike($parent.commentService)"/><span>reply</span></section>
     <p>{{comment.body}}</p>
-    <div ng-show='comment.replies.length > 0'>
+    <div ng-show='comment.replies.length > 0 && comment.deep < 2'>
       <div ng-hide='comment.showChildren '>
         <button ng-click='comment.show()'>Show Replies {{comment.replies.length}}</button>
       </div>

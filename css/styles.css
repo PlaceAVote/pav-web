@@ -1607,6 +1607,9 @@ h1.bill-title {
   .row-layout.comment .top-comment-body {
     margin-top: 0; }
 
+.comment-reply {
+  padding-left: 30px; }
+
 .top-comments {
   display: -webkit-box;
   display: -webkit-flex;
