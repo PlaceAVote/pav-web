@@ -357,9 +357,9 @@ input {
   line-height: 0;
   position: absolute;
   left: 34px;
-  font-size: 23px;
-  font-size: 1.4375rem;
-  top: 12px; }
+  font-size: 17px;
+  font-size: 1.0625rem;
+  top: 15px; }
 
 .card {
   display: -webkit-box;
