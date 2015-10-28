@@ -219,7 +219,8 @@ body {
   background-color: #e8e7ee;
   font-family: "whitneylight", sans-serif;
   position: relative;
-  line-height: 1.5; }
+  line-height: 1.5;
+  color: #3b3b3b; }
 
 .app {
   padding-top: 70px;
@@ -297,9 +298,9 @@ input {
   border-radius: 3px;
   color: white;
   height: 46px;
-  line-height: 44px;
-  font-size: 14px;
-  font-size: 0.875rem;
+  line-height: 42px;
+  font-size: 12px;
+  font-size: 0.75rem;
   cursor: pointer;
   outline: none;
   position: relative;
@@ -311,15 +312,35 @@ input {
     .btn-green:hover span {
       text-shadow: 0px 3px 5px rgba(59, 59, 59, 0.2); }
 
+.btn-blue {
+  background: #4d6eb3;
+  border: 1px solid #1f2c48;
+  border-radius: 3px;
+  color: white;
+  height: 46px;
+  line-height: 42px;
+  font-size: 12px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  text-shadow: 0px 1px 1px rgba(59, 59, 59, 0.4);
+  -webkit-transition: all 0.3s ease;
+          transition: all 0.3s ease; }
+  .btn-blue:hover {
+    background: #5b7ab9; }
+    .btn-blue:hover span {
+      text-shadow: 0px 3px 5px rgba(59, 59, 59, 0.2); }
+
 .btn-red {
   background: #e64a33;
   border: 1px solid #bf4734;
   border-radius: 3px;
   color: white;
   height: 46px;
-  line-height: 44px;
-  font-size: 14px;
-  font-size: 0.875rem;
+  line-height: 42px;
+  font-size: 12px;
+  font-size: 0.75rem;
   cursor: pointer;
   outline: none;
   position: relative;
@@ -333,33 +354,37 @@ input {
 
 .btn-grey {
   background: #e3e3e3;
-  border: 1px solid #B7B7B7;
+  border: 1px solid #c7c7c7;
   border-radius: 3px;
-  color: #696868;
+  color: #939191;
   height: 46px;
-  line-height: 44px;
-  font-size: 14px;
-  font-size: 0.875rem;
+  line-height: 42px;
+  font-size: 12px;
+  font-size: 0.75rem;
   cursor: pointer;
   outline: none;
   position: relative;
-  text-shadow: 0px 1px 1px rgba(59, 59, 59, 0.1);
-  -webkit-transition: all 0.3s ease;
-          transition: all 0.3s ease; }
-  .btn-grey:hover {
-    background: #ededed; }
-    .btn-grey:hover span {
-      text-shadow: 0px 3px 5px rgba(59, 59, 59, 0.2); }
-
-.btn-red span, .btn-green span {
+  text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.6);
   -webkit-transition: all 0.3s ease;
           transition: all 0.3s ease;
-  line-height: 0;
-  position: absolute;
-  left: 34px;
-  font-size: 17px;
-  font-size: 1.0625rem;
-  top: 15px; }
+  box-shadow: inset 0px 0px 9px 1px rgba(255, 255, 255, 0.2); }
+  .btn-grey:hover {
+    background: #ededed; }
+
+.btn-red, .btn-green, .btn-blue {
+  box-shadow: inset 0px 0px 9px 1px rgba(255, 255, 255, 0.1); }
+  .btn-red span, .btn-green span, .btn-blue span {
+    -webkit-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+    line-height: 0;
+    position: absolute;
+    left: 20px;
+    font-size: 14px;
+    font-size: 0.875rem;
+    top: 15px; }
+
+button {
+  font-family: "whitneylight", sans-serif; }
 
 .card {
   display: -webkit-box;
@@ -1650,35 +1675,6 @@ h1.bill-title {
     font-size: 14px;
     font-size: 0.875rem;
     margin-top: 10px; }
-  .top-comment-body section {
-    position: absolute;
-    right: 0px;
-    top: 0px;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: row;
-        -ms-flex-direction: row;
-            flex-direction: row;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-        -ms-flex-pack: center;
-            justify-content: center; }
-    .top-comment-body section span {
-      font-size: 12px;
-      font-size: 0.75rem;
-      font-family: "whitneybold", sans-serif;
-      color: #a5cc71;
-      line-height: 15px; }
-      .top-comment-body section span.opposed {
-        color: #e64a33; }
-    .top-comment-body section img {
-      width: 13px;
-      height: 13px;
-      padding-left: 10px; }
 
 .bill-spec {
   display: -webkit-box;
@@ -1895,6 +1891,27 @@ h1.bill-title {
       .vote-widget aside.row .btn-green {
         margin-bottom: 20px; } }
 
+.card.vote-confirm {
+  opacity: 1;
+  -webkit-transition: 0.3s ease;
+          transition: 0.3s ease; }
+  .card.vote-confirm.ng-hide {
+    opacity: 0; }
+  .card.vote-confirm.ng-hide-remove {
+    opacity: 0; }
+
+.card.vote-confirmed {
+  -webkit-transition-delay: 1.5s;
+          transition-delay: 1.5s;
+  opacity: 1;
+  -webkit-transition: 0.3s ease;
+          transition: 0.3s ease; }
+  .card.vote-confirmed.ng-hide {
+    opacity: 0; }
+  .card.vote-confirmed.ng-hide-remove {
+    display: none;
+    opacity: 0; }
+
 .modal {
   opacity: 1;
   -webkit-transition: opacity 0.3s ease;
@@ -1922,8 +1939,13 @@ h1.bill-title {
     .modal.ng-hide .card {
       opacity: 0; }
   .modal.ng-hide-remove {
-    opacity: 0;
     opacity: 0; }
+  .modal img.logo-modal {
+    margin-top: 20px;
+    height: 80px;
+    -webkit-align-self: center;
+        -ms-flex-item-align: center;
+            align-self: center; }
   .modal div.card {
     position: relative;
     -webkit-transition: opacity 0.3s ease;
@@ -1957,6 +1979,18 @@ h1.bill-title {
       margin-top: 20px;
       margin-bottom: 5px;
       color: #3b3b3b; }
+    .modal div.card h3 {
+      font-size: 34px;
+      font-size: 2.125rem;
+      color: #543594;
+      font-family: "whitneybold", sans-serif; }
+    .modal div.card p {
+      font-size: 14px;
+      font-size: 0.875rem; }
+    .modal div.card h4 {
+      font-size: 16px;
+      font-size: 1rem;
+      font-family: "whitneymedium", sans-serif; }
     .modal div.card .vote-modal {
       width: 100%; }
       .modal div.card .vote-modal p {
@@ -1966,10 +2000,12 @@ h1.bill-title {
         font-size: 0.875rem;
         margin-bottom: 40px; }
     .modal div.card .row {
+      width: 100%;
       -webkit-box-pack: justify;
       -webkit-justify-content: space-between;
           -ms-flex-pack: justify;
               justify-content: space-between; }
+      .modal div.card .row .btn-blue,
       .modal div.card .row .btn-green,
       .modal div.card .row .btn-red,
       .modal div.card .row .btn-grey {
@@ -1978,3 +2014,37 @@ h1.bill-title {
         margin-right: 15px; }
       .modal div.card .row button:nth-child(2) {
         margin-left: 15px; }
+
+.vote-confirmed .card {
+  margin-top: 40px;
+  margin-bottom: 30px; }
+
+section.comment-vote {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center; }
+  section.comment-vote span {
+    font-size: 12px;
+    font-size: 0.75rem;
+    font-family: "whitneybold", sans-serif;
+    color: #a5cc71;
+    line-height: 15px; }
+    section.comment-vote span.opposed {
+      color: #e64a33; }
+  section.comment-vote img {
+    width: 13px;
+    height: 13px;
+    padding-left: 10px; }
