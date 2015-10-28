@@ -41,7 +41,7 @@
           <img src="{{bill.forComment.img_url}}" />
   			</div>
   			<div class="top-comment-body">
-          <h2>{{bill.forComment.author}}</h2> <section><span>{{bill.forComment.score}}</span><img ng-click="bill.forComment.like(bill.commentService)"src="img/card/thumb-up.png"><img src="img/card/thumb-down.png" ng-click="bill.forComment.dislike(bill.commentService)"/></section>
+          <h2>{{bill.forComment.author}}</h2> <section class="comment-vote"><span>{{bill.forComment.score}}</span><img ng-click="bill.forComment.like(bill.commentService)"src="img/card/thumb-up.png"><img src="img/card/thumb-down.png" ng-click="bill.forComment.dislike(bill.commentService)"/></section>
           <p>{{bill.forComment.body}}</p>
   			</div>
         </aside>
@@ -54,7 +54,7 @@
             <img ng-src="{{bill.forComment.img_url}}" />
           </div>
           <div class="top-comment-body">
-            <h2>{{bill.againstComment.author}}</h2> <section class="opposed"><span>{{bill.againstComment.score}}</span><img src="img/card/thumb-up.png" ng-click="bill.againstComment.like(bill.commentService)"><img src="img/card/thumb-down.png" ng-click="bill.againstComment.dislike(bill.commentService)"/></section>
+            <h2>{{bill.againstComment.author}}</h2> <section class="comment-vote opposed"><span>{{bill.againstComment.score}}</span><img src="img/card/thumb-up.png" ng-click="bill.againstComment.like(bill.commentService)"><img src="img/card/thumb-down.png" ng-click="bill.againstComment.dislike(bill.commentService)"/></section>
             <p>{{bill.againstComment.body}}</p>
           </div>
         </aside>
@@ -87,7 +87,7 @@
     <div class="card bill-comments">
       <h1>COMMENTS</h1>
       <hr />
-          <comments comments='bill.comments'></comments>
+      <comments comments='bill.comments'></comments>
 		</div>
 
     <div class="comment-create card">
@@ -108,8 +108,8 @@
     <h1>Vote Now</h1>
     <hr />
     <aside class="row">
-      <button class="btn-green l-6" ng-click="bill.showVoteModel(true)"><span class="icon-arrow-up"></span> Vote In Favor </button>
-      <button class="btn-red l-6" ng-click="bill.showVoteModel(false)"><span class="icon-arrow-down"></span> Vote Against </button>
+      <button class="btn-green l-6" ng-click="bill.showVoteModal(true)"><span class="icon-arrow-up"></span> Vote In Favor </button>
+      <button class="btn-red l-6" ng-click="bill.showVoteModal(false)"><span class="icon-arrow-down"></span> Vote Against </button>
       </aside>
     </div>
 
@@ -132,7 +132,7 @@
 
 
    <section class="modal" ng-show='bill.showVote' >
-       <div class="card" ng-hide='bill.userVoted' >
+       <div class="card vote-confirm" ng-hide='bill.userVoted' >
        <img ng-click="bill.hideVoteModal()" class="close" src="img/close-widget-black.png" />
         <h2>Please confirm your vote</h2>
         <div class='vote-modal'>
@@ -142,25 +142,31 @@
             <button class="btn-grey" ng-click="bill.hideVoteModal()"> I'm not ready yet </button>
             </div>
         </div>
-
-    <div class="card" ng-show='bill.userVoted'>
+        </div>
+    <div class="card vote-confirmed" ng-show='bill.userVoted'>
           <img ng-click="bill.hideVoteModal()" class="close" src="img/close-widget-black.png" />
-          <h1>Vote Confirmed</h1>
-          <p>Congratulations, you have just cast your vote on:
-          <span>{{bill.body.getTitle()}}</span>
-          </p>
-          <section ng-show="bill.commentCard.set">
-            <div class='againt-comment'>
-              <p>{{bills.commentCard.status}}</p>
+          <img class="logo-modal" src="img/mark_full_color.svg" />
+          <h3>Vote Confirmed</h3>
+          <p>Congratulations, you have just cast your vote on:</p>
+          <h4>{{bill.body.getTitle()}}</h4>
+          <div class="card" ng-show="bill.commentCard.set">
+              <h1>{{bill.commentCard.status}}</h1>
               <hr />
-              <img src='{{bills.commentCard.img_url}}' />
-              <p>{{bills.commentCard.author}}</p>
-              <span>{{bills.commendCard.score}}</span><span></span><span></span>
-              <p>{{bills.commendCard.body}}</p>
-              <button> Reply to Comment </button>
-              <button class="btn-grey" ng-click="bill.hideVoteModal()"> I'm not ready yet </button>
-            </div>
-          </section>
+              <aside class="row-layout">
+              <div class="user-img-border">
+              <img src='{{bill.commentCard.img_url}}' />
+              </div>
+              <div class="top-comment-body">
+              <h2>{{bill.commentCard.author}}</h2>
+              <section class="comment-vote"><span>{{bill.commentCard.score}}</span><img ng-click="bill.commentCard.like(bill.commentService)"src="img/card/thumb-up.png"><img src="img/card/thumb-down.png" ng-click="bill.commentCard.dislike(bill.commentService)"/></section>
+              <p>{{bill.commentCard.body}}</p>
+              </div>
+              </aside>
+          </div>
+          <div class="row">
+           <button class="btn-blue"><span class="icon-reply"></span> Reply to Comment </button>
+           <button class="btn-grey" ng-click="bill.hideVoteModal()"> I'm not ready yet </button>
+          </div>
         </div>
     </section>
   </div>

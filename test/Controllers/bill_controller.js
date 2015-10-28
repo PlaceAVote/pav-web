@@ -367,12 +367,12 @@ describe('BillController', function() {
       };
       var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService);
       expect(scope.bill.showVote).to.eql(undefined);
-      billController.showVoteModel(true);
+      billController.showVoteModal(true);
       expect(scope.bill.showVote).to.eql(true);
       expect(scope.bill.voteModal.message).to.eql('Are you sure you want to vote in favor of this bill');
       expect(scope.bill.voteModal.button).to.eql('Vote in Favor');
       expect(scope.bill.vote).to.eql(true);
-      billController.showVoteModel(false);
+      billController.showVoteModal(false);
       expect(scope.bill.voteModal.message).to.eql('Are you sure you want to vote against this bill');
       expect(scope.bill.voteModal.button).to.eql('Vote Against');
       expect(scope.bill.showVote).to.eql(true);
@@ -440,7 +440,7 @@ describe('BillController', function() {
       var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService);
       expect(scope.bill.showVote).to.eql(undefined);
       expect(scope.bill.userVoted).to.eql(undefined);
-      billController.showVoteModel(false);
+      billController.showVoteModal(false);
       expect(scope.bill.showVote).to.eql(true);
       expect(scope.bill.vote).to.eql(false);
       billController.userVoted = true;
@@ -478,7 +478,7 @@ describe('BillController', function() {
       expect(scope.bill.showVote).to.eql(undefined);
       expect(scope.bill.userVoted).to.eql(undefined);
       expect(scope.bill.vote).to.eql(undefined);
-      billController.showVoteModel(false);
+      billController.showVoteModal(false);
       expect(scope.bill.showVote).to.eql(true);
       expect(scope.bill.vote).to.eql(false);
       billController.userVoted = true;
@@ -570,7 +570,12 @@ describe('BillController', function() {
         status: 'PAUL BARBER DISAGREES, HE THINKS:',
         id: '007',
       };
-      expect(billController.commentCard).to.eql(expected);
+      expect(billController.commentCard.author).to.eql(expected.author);
+      expect(billController.commentCard.body).to.eql(expected.body);
+      expect(billController.commentCard.set).to.eql(expected.set);
+      expect(billController.commentCard.score).to.eql(expected.score);
+      expect(billController.commentCard.status).to.eql(expected.status);
+      expect(billController.commentCard.id).to.eql(expected.id);
     });
     it('returns undefined if the comment has no author', function(){
       var mockBillService = {

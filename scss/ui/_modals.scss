@@ -1,0 +1,136 @@
+.card.vote-confirm {
+  opacity: 1;
+  transition: 0.3s ease;
+  &.ng-hide {
+    opacity: 0;
+  }
+  &.ng-hide-remove {
+    opacity: 0;
+  }
+}
+
+.card.vote-confirmed {
+  transition-delay: 1.5s;
+  opacity: 1;
+  transition: 0.3s ease;
+  &.ng-hide {
+   opacity: 0;
+  }
+  &.ng-hide-remove {
+    display: none;
+    opacity: 0;
+  }
+}
+
+.modal {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+
+  &.ng-hide {
+    opacity: 0;
+
+    .card {
+      opacity: 0;
+    }
+  }
+
+  &.ng-hide-remove {
+    opacity: 0;
+  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  align-items: center;
+  display: flex;
+  justify-content: center;
+
+  img.logo-modal {
+    margin-top:20px;
+    height: 80px;
+    align-self: center;
+  }
+
+  div.card {
+    position: relative;
+    transition: opacity 0.3s ease;
+    opacity: 1;
+    transition-delay: 0.1s;
+    max-width: calc(100% - 40px);
+    min-width: 500px;
+    @include media(600px){
+    min-width: calc(100% - 20px);
+    }
+    justify-content: center;
+    align-items: center;
+
+    img.close {
+      position: absolute;
+      width: 20px;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+    }
+
+    h2 {
+      text-align: center;
+      @include font-size(34px);
+      margin-top: 20px;
+      margin-bottom: 5px;
+      color: $black;
+    }
+
+    h3 {
+      @include font-size(34px);
+      color: $purple;
+      font-family: $font-bold;
+    }
+
+    p {
+      @include font-size(14px);
+    }
+
+    h4 {
+      @include font-size(16px);
+      font-family: $font-normal;
+    }
+
+    .vote-modal {
+      p {
+        color: $black;
+        text-align: center;
+        @include font-size(14px);
+        margin-bottom: 40px;
+      }
+      width: 100%;
+    }
+    .row {
+      width: 100%;
+      justify-content: space-between;
+      .btn-blue,
+      .btn-green,
+      .btn-red,
+      .btn-grey {
+        width: 100%;
+      }
+
+      button:nth-child(1) {
+        margin-right: 15px;
+      }
+
+      button:nth-child(2) {
+        margin-left: 15px;
+      }
+    }
+  }
+}
+
+.vote-confirmed {
+    .card {
+      margin-top: 40px;
+      margin-bottom: 30px;
+    }
+}
+
