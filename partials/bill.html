@@ -106,18 +106,18 @@
       </div>
 
 
-<section class="row l-12">
+<section class="row bill-stats-vote l-12">
 		<div class="card bill-stats l-6">
     <h1>Statistics</h1>
     <hr />
 		</div>
-    <div class="col l-6">
+    <div class="col m-12 l-6">
     <div class="card vote-widget">
     <h1>Vote Now</h1>
     <hr />
     <aside class="row">
-      <button class="btn-green l-6" ng-click="bill.showVoteModel(true)"> Vote In Favor </button>
-      <button class="btn-red l-6" ng-click="bill.showVoteModel(false)"> Vote Against </button>
+      <button class="btn-green l-6" ng-click="bill.showVoteModel(true)"><span class="icon-arrow-up"></span> Vote In Favor </button>
+      <button class="btn-red l-6" ng-click="bill.showVoteModel(false)"><span class="icon-arrow-down"></span> Vote Against </button>
       </aside>
     </div>
     
@@ -139,19 +139,20 @@
 
 
 
-   <section class="modal" ng-show='bill.showVote'>
-       <div class="card">
+   <section class="modal" ng-show='bill.showVote' >
+       <div class="card" ng-hide='bill.userVoted' >
+       <img ng-click="bill.hideVoteModal()" class="close" src="img/close-widget-black.png" />
         <h2>Please confirm your vote</h2>
-        <div ng-hide='bill.userVoted' class='vote-modal'>
-            <span>{{bill.voteModal.message}}</span>
-            <button ng-click="bill.voteOnBill()">{{bill.voteModal.button}}</button>
-            <button ng-click="bill.hideVoteModal()"> I'm not ready yet </button>
+        <div class='vote-modal'>
+            <p>{{bill.voteModal.message}}</p>
+            <div class="row">
+            <button ng-class="bill.voteModal.colour" ng-click="bill.voteOnBill()"><span class="{{bill.voteModal.icon}}"></span>{{bill.voteModal.button}}</button>
+            <button class="btn-grey" ng-click="bill.hideVoteModal()"> I'm not ready yet </button>
+            </div>
         </div>
-   </section>
 
-
-   <div ng-show='bill.userVoted' class="modal">
-    <div class="card">
+    <div class="card" ng-show='bill.userVoted'>
+          <img ng-click="bill.hideVoteModal()" class="close" src="img/close-widget-black.png" />
           <h1>Vote Confirmed</h1>
           <p>Congratulations, you have just cast your vote on:
           <span>{{bill.body.getTitle()}}</span>
@@ -165,11 +166,11 @@
               <span>{{bills.commendCard.score}}</span><span></span><span></span>
               <p>{{bills.commendCard.body}}</p>
               <button> Reply to Comment </button>
-              <button ng-click="bill.hideVoteModal()"> I'm not ready yet </button>
+              <button class="btn-grey" ng-click="bill.hideVoteModal()"> I'm not ready yet </button>
             </div>
           </section>
         </div>
-    </div>
+    </section>
   </div>
   </div>
 </div>

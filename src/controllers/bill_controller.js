@@ -34,10 +34,14 @@ BillController.prototype.showVoteModel = function(vote){
       if(vote){
         this.voteModal.message = "Are you sure you want to vote in favor of this bill";
         this.voteModal.button = "Vote in Favor";
+        this.voteModal.colour = "btn-green";
+        this.voteModal.icon = "icon-arrow-up";
       }
       else{
         this.voteModal.message = "Are you sure you want to vote against this bill";
         this.voteModal.button = "Vote Against";
+        this.voteModal.colour = "btn-red";
+        this.voteModal.icon = "icon-arrow-down";
       }
     }
     this.showVote = true;

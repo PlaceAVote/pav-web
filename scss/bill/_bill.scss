@@ -11,9 +11,17 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  @include media(850px){
+  flex-direction: column;
+  width: 100%;
+  }
 
   .card {
     width: calc(50% - 10px);
+    @include media(850px){
+    width: 100%;
+    margin-bottom: 20px;
+    }
   }
 }
 
@@ -66,14 +74,26 @@
   flex-direction: row;
   margin-top: 20px;
   margin-bottom: 20px;
+  @include media(850px){
+  flex-direction: column;
+  margin-top: 0;
+  }
 
   .bill-sponsor {
     width: 40%;
     margin-right: 20px;
+    @include media(850px){
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 20px;
+    }
   }
 
   .bill-description {
     width: calc(60% - 20px);
+    @include media(850px){
+    width: 100%;
+    }
   }
 }
 
@@ -212,53 +232,156 @@
   opacity: 1;
 }
 
+.bill-stats-vote {
+  @include media(850px){
+    flex-direction: column;
+  }
+}
+
 .bill-stats {
   margin-right: 20px;
   margin-bottom: 20px;
+  @include media(850px){
+  margin-right: 0;
+  width: 100%;
+  }
 }
 
 .current-vote-stats {
-	margin-bottom: 20px;
-	hr {
-		margin-bottom: 20px;
-	}
-	h2, p {
-		text-align:center;
-	}
-	div:nth-child(1) {
-	p {
-		color: $green;
-		font-family:$font-bold;
-		}
-	}
-	div:nth-child(2) {
-	p {
-		color: $red;
-		font-family: $font-bold;
-	}
-	}
+  margin-bottom: 20px;
+
+  hr {
+    margin-bottom: 20px;
+  }
+
+  h2,
+  p {
+    text-align: center;
+  }
+
+  div:nth-child(1) {
+    p {
+      color: $green;
+      font-family: $font-bold;
+    }
+  }
+
+  div:nth-child(2) {
+    p {
+      color: $red;
+      font-family: $font-bold;
+    }
+  }
 }
+
 .vote-widget {
   margin-bottom: 20px;
+
   hr {
-  	margin-bottom: 20px;
+    margin-bottom: 20px;
   }
+
   button:nth-child(1) {
-  	margin-right: 10px;
+    margin-right: 10px;
+  }
+
+  aside.row {
+    @include media(560px){
+  flex-direction: column;
+
+      .btn-green,
+      .btn-red {
+        width: 100%;
+      }
+
+      .btn-green {
+        margin-bottom: 20px;
+      }
+    }
   }
 }
 
 .modal {
-	position: fixed;
-	top: 0;
-	left: 0;
-	height: 100%;
-	width: 100%;
-	background-color: rgba(0,0,0,0.4);
-	display: flex;
-	justify-content: center;
-	div.card {
-		max-width: 400px;
-		// height
-	}
+  opacity: 1;
+  transition: opacity 0.3s ease;
+
+  &.ng-hide {
+    opacity: 0;
+
+    .card {
+      opacity: 0;
+    }
+  }
+
+  &.ng-hide-remove {
+    opacity: 0;
+    opacity: 0;
+  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  align-items: center;
+  display: flex;
+  justify-content: center;
+
+  div.card {
+    position: relative;
+    transition: opacity 0.3s ease;
+    opacity: 1;
+    transition-delay: 0.1s;
+    max-width: calc(100% - 40px);
+    min-width: 500px;
+    @include media(600px){
+    min-width: calc(100% - 20px);
+    }
+    justify-content: center;
+    align-items: center;
+
+    img.close {
+      position: absolute;
+      width: 20px;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+    }
+
+    h2 {
+      text-align: center;
+      @include font-size(34px);
+      margin-top: 20px;
+      margin-bottom: 5px;
+      color: $black;
+    }
+
+    .vote-modal {
+      p {
+        color: $black;
+        text-align: center;
+        @include font-size(14px);
+        margin-bottom: 40px;
+      }
+      width: 100%;
+    }
+
+    .row {
+      justify-content: space-between;
+
+      .btn-green,
+      .btn-red,
+      .btn-grey {
+        width: 100%;
+      }
+
+      button:nth-child(1) {
+        margin-right: 15px;
+      }
+
+      button:nth-child(2) {
+        margin-left: 15px;
+      }
+    }
+  }
 }

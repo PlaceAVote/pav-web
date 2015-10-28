@@ -12,13 +12,31 @@ body {
   line-height: 1.5;
 }
 
+.app {
+  padding-top: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .app-body {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    @include max-width();
+    @include media(1200px) {
+      padding-right: 20px;
+      padding-left: 20px;
+    }
+  }
+}
+
+
 *::-moz-selection {
-  color: $purple;
+  color: white;
   background: lighten($purple, 20%);
 }
 
 *::selection {
-  color: $purple;
+  color: white;
   background: lighten($purple, 20%);
 }
 

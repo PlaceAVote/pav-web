@@ -1,16 +1,4 @@
-.app {
-  padding-top: 70px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 
-  .app-body {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    @include max-width();
-  }
-}
 
 .feed-wrapper {
   display: flex;
