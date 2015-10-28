@@ -10,8 +10,29 @@
   border-radius: 3px;
   color: white;
   height: 46px;
-  line-height: 44px;
-  @include font-size(14px);
+  line-height: 42px;
+  @include font-size(12px);
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  text-shadow: 0px 1px 1px transparentize($black, 0.6);
+  transition: all 0.3s ease;
+}
+
+.btn-blue {
+  background: $blue;
+    &:hover {
+      background: lighten($blue, 4%);
+    span {
+      text-shadow: 0px 3px 5px transparentize($black, 0.8);
+    }
+  }
+  border: 1px solid darken($blue, 30%);
+  border-radius: 3px;
+  color: white;
+  height: 46px;
+  line-height: 42px;
+  @include font-size(12px);
   cursor: pointer;
   outline: none;
   position: relative;
@@ -31,8 +52,8 @@
   border-radius: 3px;
   color: white;
   height: 46px;
-  line-height: 44px;
-  @include font-size(14px);
+  line-height: 42px;
+  @include font-size(12px);
   cursor: pointer;
   outline: none;
   position: relative;
@@ -43,30 +64,33 @@
   background: #e3e3e3;
   &:hover {
     background: lighten(#e3e3e3, 4%);
-    span {
-      text-shadow: 0px 3px 5px transparentize($black, 0.8);
-    }
   }
-  border: 1px solid #B7B7B7;
+  border: 1px solid #c7c7c7;
   border-radius: 3px;
-  color: #696868;
+  color: #939191;
   height: 46px;
-  line-height: 44px;
-  @include font-size(14px);
+  line-height: 42px;
+  @include font-size(12px);
   cursor: pointer;
   outline: none;
   position: relative;
-  text-shadow: 0px 1px 1px transparentize($black, 0.9);
+  text-shadow: 0px 1px 0px transparentize(white, 0.4);
   transition: all 0.3s ease;
+  box-shadow: inset 0px 0px 9px 1px rgba(255,255,255,0.2);
 }
 
-.btn-red, .btn-green {
+.btn-red, .btn-green, .btn-blue {
+  box-shadow: inset 0px 0px 9px 1px rgba(255,255,255,0.1);
     span {
     transition: all 0.3s ease;
     line-height: 0;
     position: absolute;
-    left: 34px;
-    @include font-size(17px);
+    left: 20px;
+    @include font-size(14px);
     top: 15px;
   }
+}
+
+button {
+  font-family: $font-light;
 }

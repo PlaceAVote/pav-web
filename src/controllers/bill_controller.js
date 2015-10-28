@@ -28,7 +28,7 @@ BillController.prototype.Authenticate = function() {
   }
 };
 
-BillController.prototype.showVoteModel = function(vote){
+BillController.prototype.showVoteModal = function(vote){
     if (!this.userVoted) {
       this.vote = vote;
       if(vote){
