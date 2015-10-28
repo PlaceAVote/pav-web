@@ -29,6 +29,13 @@ Comment.prototype.buildChildren = function(comment) {
   }
 };
 
+Comment.prototype.show = function() {
+  this.showChildren = true;
+};
+
+Comment.prototype.hide = function() {
+  this.showChildren = false;
+};
 
 Comment.prototype.showReplyInput = function() {
  this.replyInput = true;

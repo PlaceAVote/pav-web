@@ -21,7 +21,8 @@ var angular = require('angular');
 //directives
 var mailcheck = require('./directives/mailcheck.js');
 var pavDirectives = require('./directives/directives.js');
-
+var commentsDirective = require('./directives/comments.js');
+var commentDirective = require('./directives/comment.js');
 
 //thirdparty integrations
 var Facebook = require('./integrations/facebook.js');
@@ -77,3 +78,5 @@ app.controller('BillCtrl', ['$scope', '$routeParams', 'billService', 'legislatio
 app.controller('HeaderCtrl', ['$scope', '$location', 'authService', HeaderController]);
 //directives
 app.directive('mailcheck', ['$compile','$sce', mailcheck]);
+app.directive('comment', ['$compile', commentDirective]);
+app.directive('comments', [commentsDirective]);
