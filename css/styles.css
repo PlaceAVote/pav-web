@@ -2048,3 +2048,97 @@ section.comment-vote {
     width: 13px;
     height: 13px;
     padding-left: 10px; }
+
+.loaded {
+  opacity: 1;
+  -webkit-transition-delay: 0.2s;
+          transition-delay: 0.2s;
+  -webkit-transition: all 0.2s ease;
+          transition: all 0.2s ease; }
+  .loaded.ng-hide-remove {
+    opacity: 0; }
+
+.pre-loader.ng-hide {
+  width: 1px;
+  height: 1px;
+  opacity: 0; }
+
+.pre-loader {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-self: center;
+      -ms-flex-item-align: center;
+          align-self: center;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 50px;
+  height: 50px;
+  margin-top: 50px;
+  -webkit-transition: all 0.2s ease;
+          transition: all 0.2s ease;
+  opacity: 1; }
+
+.pre-loader hr {
+  border: 0;
+  margin: 0;
+  width: 40%;
+  height: 40%;
+  position: absolute;
+  border-radius: 50%;
+  -webkit-animation: spin 2s ease infinite;
+          animation: spin 2s ease infinite; }
+
+.pre-loader :first-child {
+  background: rgba(84, 53, 148, 0.5);
+  -webkit-animation-delay: -1.5s;
+          animation-delay: -1.5s; }
+
+.pre-loader :nth-child(2) {
+  background: rgba(84, 53, 148, 0.5);
+  -webkit-animation-delay: -1s;
+          animation-delay: -1s; }
+
+.pre-loader :nth-child(3) {
+  background: rgba(84, 53, 148, 0.5);
+  -webkit-animation-delay: -0.5s;
+          animation-delay: -0.5s; }
+
+.pre-loader :last-child {
+  background: rgba(84, 53, 148, 0.5); }
+
+@-webkit-keyframes spin {
+  0%,
+  100% {
+    -webkit-transform: translate(0);
+            transform: translate(0); }
+  25% {
+    -webkit-transform: translate(160%);
+            transform: translate(160%); }
+  50% {
+    -webkit-transform: translate(160%, 160%);
+            transform: translate(160%, 160%); }
+  75% {
+    -webkit-transform: translate(0, 160%);
+            transform: translate(0, 160%); } }
+
+@keyframes spin {
+  0%,
+  100% {
+    -webkit-transform: translate(0);
+            transform: translate(0); }
+  25% {
+    -webkit-transform: translate(160%);
+            transform: translate(160%); }
+  50% {
+    -webkit-transform: translate(160%, 160%);
+            transform: translate(160%, 160%); }
+  75% {
+    -webkit-transform: translate(0, 160%);
+            transform: translate(0, 160%); } }
