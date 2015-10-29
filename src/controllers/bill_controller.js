@@ -122,7 +122,7 @@ BillController.prototype.getTopComments = function(id){
     }
     else {
       that.forComment = result.forComment;
-      that.againstComment = result.againstComment;
+      that.againstComment = result.againstComment;      
     }
   });
 };
