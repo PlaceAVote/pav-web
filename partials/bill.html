@@ -32,11 +32,11 @@
 		</ul>
 		</section>
     <section class="top-comments">
-
   		<div class="card">
   			<h1>Top Comment In Favor</h1>
   			<hr />
-        <aside class="row-layout">
+        <div class="pre-loader" ng-hide="bill.forComment.author"><hr /><hr /><hr /><hr /></div>
+        <aside class="row-layout loaded" ng-show="bill.forComment.author">
   			<div class="user-img-border">
           <img src="{{bill.forComment.img_url}}" />
   			</div>
@@ -49,7 +49,8 @@
       <div class="card">
         <h1>Top Comment Opposed</h1>
         <hr />
-        <aside class="row-layout">
+        <div class="pre-loader" ng-hide="bill.forComment.author"><hr /><hr /><hr /><hr /></div>
+        <aside class="row-layout loaded" ng-show="bill.forComment.author">
           <div class="user-img-border">
             <img ng-src="{{bill.forComment.img_url}}" />
           </div>
@@ -65,9 +66,10 @@
 		<div class="card bill-sponsor">
       <h1>Bill Sponsor</h1>
 			<hr />
-      <aside class="row-layout">
+      <div class="pre-loader" ng-hide="bill.body.billData.sponsor.name"><hr /><hr /><hr /><hr /></div>
+      <aside class="row-layout loaded" ng-show="bill.body.billData.sponsor.name">
 			<div class="senator-img">
-        <img src="{{bill.legislator.getImageUrl()}}" />
+        <img ng-src="{{bill.legislator.getImageUrl()}}" />
 			</div>
 			<div class="bill-sponsor-info">
         <h2>{{bill.body.billData.sponsor.name}}</h2>
