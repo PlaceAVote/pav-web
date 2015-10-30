@@ -74,7 +74,9 @@ function BillService(tempBillResource, $resource, authService, userService) {
           var comments = response.comments;
           var commentLength = comments.length;
           for (var i = 0; i < commentLength; i++) {
-            results.push(new Comment(comments[i]));
+            var comment = new Comment(comments[i])
+            Comment.buildChildren(comment);
+            results.push(comment);
           }
           return callback(undefined, results);
         };

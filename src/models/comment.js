@@ -10,23 +10,28 @@ function Comment(options) {
   this.timestamp = options.timestamp;
   this.id = options.id || options.comment_id;
   this.parent_id = options.parent_id;
+  this.jsonReplies = options.replies;
   this.replies = [];
-  this.buildChildren(options);
   this.deep = 0;
   //img_placeholder until img is returned with comments call
   this.img_url = 'http://i159.photobucket.com/albums/t154/MYU701/LOST/unreality/JohnLocke-orange-2.jpg'
 }
 
-Comment.prototype.buildChildren = function(comment) {
-  if(!this.replies) {
-    this.replies = [];
+Comment.buildChildren = function(comment, deep) {
+  if(!deep) {
+    deep = 0;
   }
-  if(!comment.has_children || !comment.replies) {
+  comment.deep = deep;
+  if(!comment.replies) {
+    comment.replies = [];
+  }
+  if(!comment.has_children) {
     return;
   }
-  for(var i = 0; i < comment.replies.length; i++){
-    this.buildChildren(comment.replies[i]);
-    this.replies.push(new Comment(comment.replies[i]));
+  for(var i = 0; i < comment.jsonReplies.length; i++){
+    var child = new Comment(comment.jsonReplies[i]);
+    Comment.buildChildren(child, deep+1);
+    comment.replies.push(child);
   }
 };
 
