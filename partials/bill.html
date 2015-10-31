@@ -1,36 +1,37 @@
 <div class="app">
 	<div class="app-body">
-		<h1 class="bill-title">{{bill.body.getTitle()}}</h1>
-		<section class="bill-timeline {{bill.body.getStatusClass()}}">
-		<div class="bill-timeline-bar"><span class="{{bill.body.getStatusClass()}}"></span></div>
-		<ul>
-			<li>
-				<img src="img/bills/introduced.svg" />
-				<p>Bill Introduced</p>
-				<span></span>
-			</li>
-			<li>
-				<img src="img/bills/committee.svg" />
-				<p>Reported by Committee</p>
-				<span></span>
-			</li>
-			<li>
-				<img src="img/bills/passed-house.svg" />
-				<p>Passed House</p>
-				<span></span>
-			</li>
-			<li>
-				<img src="img/bills/passed-senate.svg" />
-				<p>Passed Senate</p>
-				<span></span>
-			</li>
-			<li>
-				<img src="img/bills/enacted.svg" />
-				<p>Enacted</p>
-				<span></span>
-			</li>
-		</ul>
-		</section>
+            		<h1 class="bill-title">{{bill.body.getTitle()}}</h1>
+                <section class="bill-timeline {{bill.body.getStatusClass()}}">
+            		<ul>
+            			<li>
+            				<img src="img/bills/introduced.svg" />
+            				<p>Bill Introduced</p>
+            				<span></span>
+            			</li>
+            			<li>
+            				<img src="img/bills/committee.svg" />
+            				<p>Reported by Committee</p>
+            				<span></span>
+            			</li>
+            			<li>
+            				<img src="img/bills/passed-house.svg" />
+            				<p>Passed House</p>
+            				<span></span>
+            			</li>
+            			<li>
+            				<img src="img/bills/passed-senate.svg" />
+            				<p>Passed Senate</p>
+            				<span></span>
+            			</li>
+            			<li>
+            				<img src="img/bills/enacted.svg" />
+            				<p>Enacted</p>
+            				<span></span>
+            			</li>
+            		</ul>
+                <div  class="bill-timeline-bar"><span class="{{bill.body.getStatusClass()}}"></span></div>
+            		</section>
+           
     <section class="top-comments">
   		<div class="card">
   			<h1>Top Comment In Favor</h1>
