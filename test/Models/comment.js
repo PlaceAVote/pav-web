@@ -81,7 +81,6 @@ describe("comment model", function(){
     expect(subject.parent_id).to.eql(1444764009809);
   });
   it("buildChildren recursively builds children", function(){
-    var subject = new Comment();
     var child = {
       "author": "tony@pl.com",
       "bill_id": "hr2-114",
@@ -105,7 +104,8 @@ describe("comment model", function(){
       "score": "2",
       "timestamp": "1444764060968",
     }
-    subject.buildChildren(child);
+    var subject = new Comment(child);
+    Comment.buildChildren(subject);
     expect(subject.replies[0].bill_id).to.eql('gun-crime-1');
     expect(subject.replies[0].replies.length).to.eql(0);
   });
@@ -134,8 +134,66 @@ describe("comment model", function(){
       "timestamp": "1444764060968",
     };
     var subject = new Comment(comment);
+    Comment.buildChildren(subject);
     expect(subject.replies[0].bill_id).to.eql('gun-crime-1');
     expect(subject.replies[0].replies.length).to.eql(0);
+  });
+  it("builds children with depth counter", function(){
+    var comment = {
+      "author": "tony@pl.com",
+      "bill_id": "hr2-114",
+      "body": "Reply to comment 2",
+      "has_children": true,
+      "id": "comments:1e97cac2-30df-46f2-80c8-5ed4a36feb46",
+      "parent_id": "comments:9e9b0180-c5ab-4806-a8b5-ee37b9867626",
+      "replies": [
+        {
+          "author": "tony@pl.com",
+          "bill_id": "gun-crime-1",
+          "body": "Reply to comment 2",
+          "has_children": true,
+          "id": "comments:1e97cac2-30df-46f2-80c8-5ed4a36feb46",
+          "parent_id": "comments:9e9b0180-c5ab-4806-a8b5-ee37b9867626",
+          "replies": [
+            {
+              "author": "tony@pl.com",
+              "bill_id": "gun-crime-1",
+              "body": "Reply to comment 2",
+              "has_children": false,
+              "id": "comments:1e97cac2-30df-46f2-80c8-5ed4a36feb46",
+              "parent_id": "comments:9e9b0180-c5ab-4806-a8b5-ee37b9867626",
+              "replies": [],
+              "score": "2",
+              "timestamp": "1444764060968",
+            }
+          ],
+          "score": "2",
+          "timestamp": "1444764060968",
+        },
+        {
+            "author": "tony@pl.com",
+            "bill_id": "gun-crime-1",
+            "body": "Reply to comment 2",
+            "has_children": false,
+            "id": "comments:1e97cac2-30df-46f2-80c8-5ed4a36feb46",
+            "parent_id": "comments:9e9b0180-c5ab-4806-a8b5-ee37b9867626",
+            "replies": [],
+            "score": "2",
+            "timestamp": "1444764060968",
+        }
+      ],
+      "score": "2",
+      "timestamp": "1444764060968",
+    };
+    var subject = new Comment(comment);
+    Comment.buildChildren(subject);
+    expect(subject.deep).to.eql(0);
+    expect(subject.replies.length).to.eql(2);
+    expect(subject.replies[0].bill_id).to.eql('gun-crime-1');
+    expect(subject.replies[0].deep).to.eql(1);
+    expect(subject.replies[1].deep).to.eql(1);
+    expect(subject.replies[0].replies.length).to.eql(1);
+    expect(subject.replies[0].replies[0].deep).to.eql(2);
   });
   describe('Reply', function() {
     it('sets error replyFailed to true is reply fails', function() {
@@ -203,9 +261,8 @@ describe("comment model", function(){
       };
       subject.reply(undefined, service);
       expect(subject.replyFailed).to.eql(undefined);
-      expect(subject.replies.length).to.eql(2);
-      console.log(subject.replies);
-      expect(subject.replies[1].bill_id).to.eql('hr2-114');
+      expect(subject.replies.length).to.eql(1);
+      expect(subject.replies[0].bill_id).to.eql('hr2-114');
     });
   });
   describe('Like', function() {

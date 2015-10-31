@@ -1,3 +1,5 @@
+var Comment = require('../models/comment.js');
+
 function BillController($scope, $routeParams, billService, legislatorService, voteService, commentService, $location, authService) {
   $scope = $scope || {};
   $scope.bill = this;
@@ -95,23 +97,18 @@ BillController.prototype.voteConfirmed = function() {
   if (this.vote) {
     this.generateCommentCard(this.forComment);
   }
-  else if (this.vote) {
+  else if (!this.vote) {
     this.generateCommentCard(this.againstComment);
   }
 };
 
-BillController.prototype.generateCommentCard = function(comment){
+BillController.prototype.generateCommentCard = function(comment) {
   if(!comment || !comment.author) {
     return;
   }
-  this.commentCard = {
-    author: comment.author,
-    body: comment.body,
-    id: comment.id,
-    status: comment.author.toUpperCase() + " DISAGREES, HE THINKS:",
-    score: comment.score,
-    set: true,
-  };
+  this.commentCard = new Comment(comment);
+  this.commentCard.set = true;
+  this.commentCard.status = comment.author.toUpperCase() + " DISAGREES, HE THINKS:";
 };
 
 BillController.prototype.getTopComments = function(id){

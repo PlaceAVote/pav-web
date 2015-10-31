@@ -570,7 +570,12 @@ describe('BillController', function() {
         status: 'PAUL BARBER DISAGREES, HE THINKS:',
         id: '007',
       };
-      expect(billController.commentCard).to.eql(expected);
+      expect(billController.commentCard.author).to.eql(expected.author);
+      expect(billController.commentCard.body).to.eql(expected.body);
+      expect(billController.commentCard.set).to.eql(expected.set);
+      expect(billController.commentCard.score).to.eql(expected.score);
+      expect(billController.commentCard.status).to.eql(expected.status);
+      expect(billController.commentCard.id).to.eql(expected.id);
     });
     it('returns undefined if the comment has no author', function(){
       var mockBillService = {

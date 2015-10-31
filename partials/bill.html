@@ -89,23 +89,15 @@
     <div class="card bill-comments">
       <h1>COMMENTS</h1>
       <hr />
-
-       <aside class="row-layout comment" ng-repeat='comment in bill.comments'>
-        <div class="user-img-border">
-          <img src='{{comment.img_url}}' />
-        </div>
-        <div class="top-comment-body">
-          <h2>{{comment.author}}</h2> <section class="comment-vote"><span>{{comment.score}}</span><img ng-click="comment.like($parent.commentService)"src="img/card/thumb-up.png"><img src="img/card/thumb-down.png" ng-click="comment.dislike($parent.commentService)"/></section>
-          <p>{{comment.body}}</p>
-        </div>
-        </aside>
+      <comments comments='bill.comments'></comments>
 		</div>
-      <div class="comment-create card">
+
+    <div class="comment-create card">
       <form ng-submit="bill.postComment()">
-      <img src="img/comments/user.png" />
-      <input type='text' name='commentOnBillBox' ng-model='bill.commentBody' placeholder='Write your comment here'></input>
+        <img src="img/comments/user.png" />
+        <input type='text' name='commentOnBillBox' ng-model='bill.commentBody' placeholder='Write your comment here'></input>
       </form>
-      </div>
+    </div>
 
 
 <section class="row bill-stats-vote l-12">
@@ -122,7 +114,7 @@
       <button class="btn-red l-6" ng-click="bill.showVoteModal(false)"><span class="icon-arrow-down"></span> Vote Against </button>
       </aside>
     </div>
-    
+
     <div class="card current-vote-stats">
     <h1>Current Voting</h1>
     <hr />
@@ -160,16 +152,16 @@
           <p>Congratulations, you have just cast your vote on:</p>
           <h4>{{bill.body.getTitle()}}</h4>
           <div class="card" ng-show="bill.commentCard.set">
-              <h1>{{bills.commentCard.status}}</h1>
+              <h1>{{bill.commentCard.status}}</h1>
               <hr />
               <aside class="row-layout">
               <div class="user-img-border">
-              <img src='{{bills.commentCard.img_url}}' />
+              <img src='{{bill.commentCard.img_url}}' />
               </div>
               <div class="top-comment-body">
-              <h2>{{bills.commentCard.author}}</h2>
-              <section class="comment-vote"><span>{{bills.commendCard.score}}</span><img ng-click="bill.forComment.like(bill.commentService)"src="img/card/thumb-up.png"><img src="img/card/thumb-down.png" ng-click="bill.forComment.dislike(bill.commentService)"/></section>
-              <p>{{bills.commendCard.body}}</p>
+              <h2>{{bill.commentCard.author}}</h2>
+              <section class="comment-vote"><span>{{bill.commentCard.score}}</span><img ng-click="bill.commentCard.like(bill.commentService)"src="img/card/thumb-up.png"><img src="img/card/thumb-down.png" ng-click="bill.commentCard.dislike(bill.commentService)"/></section>
+              <p>{{bill.commentCard.body}}</p>
               </div>
               </aside>
           </div>
