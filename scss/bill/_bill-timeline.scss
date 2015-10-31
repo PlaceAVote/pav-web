@@ -84,6 +84,9 @@ span {
 h1.bill-title {
 		text-align: center;
 		@include font-size(30px);
+		@include media(560px) {
+			@include font-size(22px);
+		}
 		font-family: $font-light;
 		margin-bottom: 30px;
 		margin-top: 70px
@@ -93,6 +96,9 @@ h1.bill-title {
 	margin-bottom: 80px;
 	align-self: center;
 	max-width: 500px;
+	@include media(560px) {
+		max-width: 320px;
+	}
 	width: 100%;
 	position: relative;
 	.bill-timeline-bar {
@@ -100,6 +106,9 @@ h1.bill-title {
 	    bottom: -15px;
 	    margin: 0px auto;
 	    width: calc(100% - 88px);
+	    @include media(560px) {
+	    	width: calc(100% - 55px);
+	    }
 	    left: 0;
 	    right: 0;
 	    height: 5px;
@@ -111,8 +120,26 @@ h1.bill-title {
 		}
 	}
 	ul {
-		display: flex;
-		flex-direction: row;
+	    margin: 0;
+	    padding: 0;
+	    display: -webkit-box;
+	    display: -moz-box;
+	    display: -webkit-flex;
+	    display: -ms-flexbox;
+	    display: flex;
+	    -webkit-box-lines: multiple;
+	    -moz-box-lines: multiple;
+	    -o-box-lines: multiple;
+	    -webkit-flex-wrap: wrap;
+	    -ms-flex-wrap: wrap;
+	    flex-wrap: wrap;
+	    -webkit-box-orient: horizontal;
+	    -moz-box-orient: horizontal;
+	    -o-box-orient: horizontal;
+	    -webkit-flex-direction: row;
+	    -ms-flex-direction: row;
+	    flex-direction: row;
+	    flex-shrink: 0;
 		li {
 			width: 20%;
 			height: 100px;
@@ -124,6 +151,12 @@ h1.bill-title {
 				max-width: 74px;
 				align-self: center;
 				padding: 0px 20px;
+				@include media(560px) {
+					max-height: 20px;
+					max-width: 30px;
+					align-self: center;
+					padding: 0px 20px;
+				}
 			}
 			p {
 				text-align: center;
