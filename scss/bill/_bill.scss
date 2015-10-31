@@ -7,8 +7,15 @@
   }
 }
 
+.reply-container {
+ flex: 1;
+ flex-shrink: 0;
+}
+
 .comment-reply {
   padding-left:30px;
+  flex-shrink: 0;
+  flex: 1;
 }
 
 .top-comments {
@@ -35,7 +42,7 @@
   margin-left: 10px;
   width: 100%;
   position: relative;
-
+  // flex-shrink: 0;
   h2 {
     color: $red;
     @include font-size(14px);
@@ -162,6 +169,17 @@
     border-bottom: none;
     transition: all 0.2s ease;
   }
+  .comment-container {
+    flex: 1;
+    // display: inline-block;
+  }
+}
+
+.comments-container {
+  display: flex;
+  flex-shrink: 0;
+  flex-grow: 1;
+  flex-wrap: wrap;
 }
 
 .card.comment-create {
@@ -200,8 +218,19 @@
   }
 }
 
-.comment {
+.comment-container {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.row-layout.comment {
   transition: all 0.3s ease;
+  display: flex;
+  flex-direction: row;
+  flex-shrink: 0;
+  flex-grow: 1;
+  // background: red;
 }
 
 .comment.ng-enter {
