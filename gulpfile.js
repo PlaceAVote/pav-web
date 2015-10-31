@@ -117,7 +117,7 @@ return gulp.src('./scss/*.scss')
 	.pipe(gulp.dest('./css'));
 });
 
-gulp.task('autoPrefix', function() {
+gulp.task('autoPrefix', ['compileSass'] , function() {
 return gulp.src('css/styles.css')
 			.pipe(autoprefix())
 			.pipe(gulp.dest('css'));
@@ -148,8 +148,7 @@ gulp.task('ionicise', function(){
 });
 
 gulp.task('watchFiles', function() {
-	gulp.watch('scss/**/*.scss', ['compileSass']);
-	gulp.watch('css/*.css', ['autoPrefix']);
+	gulp.watch('scss/**/**/*', ['autoPrefix']);
 	gulp.watch(['src/**/*.js', 'src/*.js'], ['browserify-web']);
 	gulp.watch('partials/*.html');
 });
@@ -159,4 +158,4 @@ gulp.task('watchIonic', function() {
 	gulp.watch(['src/**/*_ionic.js', 'src/*_ionic.js', 'src/ionic-app.js', 'partials/*_ionic.html'], ['ionicise']);
 });
 
-gulp.task('default', ['watchFiles', 'browserify-web']);
+gulp.task('default', ['autoPrefix', 'watchFiles', 'browserify-web']);

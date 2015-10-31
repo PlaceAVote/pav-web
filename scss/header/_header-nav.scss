@@ -35,12 +35,15 @@ header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-
+    flex-shrin: 0;
     img.pav-icon {
       height: 30px;
     }
 
     section.search {
+      @include media(560px) {
+        display: none;
+      }
       display: flex;
       justify-content: center;
       flex-direction: column;
