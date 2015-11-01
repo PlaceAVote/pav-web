@@ -1,17 +1,26 @@
-<aside clas='row-layout comment'>
-  <div class="user-img-border">
-    <img src='{{comment.img_url}}' />
-  </div>
-  <div class="top-comment-body">
-    <h2>{{comment.author}}</h2> <section><span>{{comment.score}}</span><img ng-click="comment.like($parent.commentService)"src="img/card/thumb-up.png"><img src="img/card/thumb-down.png" ng-click="comment.dislike($parent.commentService)"/><span>reply</span></section>
-    <p>{{comment.body}}</p>
-    <div ng-show='comment.replies.length > 0 && comment.deep < 2'>
-      <div ng-hide='comment.showChildren '>
-        <button ng-click='comment.show()'>Show Replies {{comment.replies.length}}</button>
-      </div>
-      <div ng-show='comment.showChildren'>
-        <button ng-click='comment.hide()'>Hide Replies</button>
-      </div>
-    </div>
-  </div>
-</aside>
+<div class="comment-container">
+
+        <section class="comment">
+          <div class="user-img-border">
+            <img src='{{comment.img_url}}' />
+          </div>
+
+            <div class="top-comment-body">
+          
+            <h2>{{comment.author}}</h2> 
+
+            <section class="comment-vote"><span>{{comment.score}}</span><img ng-click="comment.like($parent.commentService)"src="img/card/thumb-up.png"><img src="img/card/thumb-down.png" ng-click="comment.dislike($parent.commentService)"/><span class="reply-btn">reply</span></section>
+
+
+            <p>{{comment.body}}</p>
+           
+            </div>
+        </section>
+
+        <div ng-show='comment.replies.length > 0 && comment.deep < 2'>
+            <button class="reply-show-hide" ng-hide='comment.showChildren' ng-click='comment.show()'>Show Replies {{comment.replies.length}}</button>
+            <button class="reply-show-hide" ng-show='comment.showChildren' ng-click='comment.hide()'>Hide Replies</button>
+        </div>
+
+
+</div>
