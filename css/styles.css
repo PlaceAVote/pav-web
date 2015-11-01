@@ -1155,30 +1155,11 @@ button {
     width: 100%; } }
 
 .feed-wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-      -ms-flex-direction: row;
-          flex-direction: row;
   width: 100%; }
   .feed-wrapper .feed-column {
-    width: 60%; }
+    width: 100%; }
     .feed-wrapper .feed-column .bill-container {
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: -ms-flexbox;
-      display: flex;
-      -webkit-box-orient: vertical;
-      -webkit-box-direction: normal;
-      -webkit-flex-direction: column;
-          -ms-flex-direction: column;
-              flex-direction: column;
       margin-top: 20px;
-      margin-right: 20px;
       box-shadow: 0px 2px 4px -2px rgba(0, 0, 0, 0.2); }
       .feed-wrapper .feed-column .bill-container .bill {
         border-top-left-radius: 3px;
@@ -1241,15 +1222,19 @@ button {
         -webkit-flex-direction: row;
             -ms-flex-direction: row;
                 flex-direction: row;
-        width: 100%; }
+        width: 100%;
+        -webkit-flex-shrink: 0;
+            -ms-flex-negative: 0;
+                flex-shrink: 0; }
         .feed-wrapper .feed-column .bill-container .buttons button {
           outline: none;
           cursor: pointer;
           background-color: #f4f2fe;
           color: #3b3b3b;
           height: 35px;
-          font-size: 12px;
-          font-size: 0.75rem;
+          font-family: "whitneymedium", sans-serif;
+          font-size: 10px;
+          font-size: 0.625rem;
           border: none;
           outline: none;
           width: 33.333%;
@@ -1268,10 +1253,14 @@ button {
           -webkit-box-pack: center;
           -webkit-justify-content: center;
               -ms-flex-pack: center;
-                  justify-content: center; }
+                  justify-content: center;
+          position: relative;
+          padding-left: 30px; }
           .feed-wrapper .feed-column .bill-container .buttons button img {
-            padding-right: 15px;
-            height: 15px; }
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            height: 12px; }
           .feed-wrapper .feed-column .bill-container .buttons button:nth-child(1) {
             border: 1px solid #d6d4e1;
             border-top: none;
@@ -1311,12 +1300,18 @@ button {
   -webkit-flex-shrink: 0;
       -ms-flex-negative: 0;
           flex-shrink: 0; }
+  @media screen and (max-device-width: 560px), screen and (max-width: 560px) {
+    .card.welcome-message {
+      padding: 20px; } }
   .card.welcome-message img {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
     height: 100px; }
+    @media screen and (max-device-width: 560px), screen and (max-width: 560px) {
+      .card.welcome-message img {
+        display: none; } }
   .card.welcome-message img.close {
     position: absolute;
     top: 20px;
@@ -1334,6 +1329,9 @@ button {
     -webkit-flex-direction: column;
         -ms-flex-direction: column;
             flex-direction: column; }
+    @media screen and (max-device-width: 560px), screen and (max-width: 560px) {
+      .card.welcome-message section {
+        padding-left: 0; } }
     .card.welcome-message section h1 {
       font-size: 28px;
       font-size: 1.75rem;
