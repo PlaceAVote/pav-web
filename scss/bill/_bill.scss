@@ -7,7 +7,6 @@
   }
 }
 
-
 .top-comments {
   flex-shrink: 0;
   display: flex;
@@ -32,6 +31,7 @@
   margin-left: 10px;
   width: 100%;
   position: relative;
+
   // flex-shrink: 0;
   h2 {
     color: $red;
@@ -86,6 +86,7 @@
   border-radius: 3px;
   max-width: 55px;
   padding: 2px;
+
   img {
     width: 100%;
     vertical-align: top;
@@ -149,15 +150,6 @@
   }
 }
 
-
-
-// .comments-container {
-//   display: flex;
-//   flex-shrink: 0;
-//   flex-grow: 1;
-//   flex-wrap: wrap;
-// }
-
 .card.comment-create {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
@@ -172,10 +164,16 @@
     width: 100%;
   }
 
-  img {
-    height: 30px;
-    width: 30px;
-    margin: 0 40px 0 20px;
+  .gen-user-img {
+      height: 30px;
+      width: 30px;
+      margin: 5px 40px 0 20px;
+      @include media(560px) {
+        margin: 5px 20px 0 0;
+      }
+    img {
+      width: 100%;
+    }
   }
 
   input {
@@ -194,13 +192,13 @@
   }
 }
 
-
 .row-layout.comment {
   transition: all 0.3s ease;
   display: flex;
   flex-direction: row;
   flex-shrink: 0;
   flex-grow: 1;
+
   // background: red;
 }
 

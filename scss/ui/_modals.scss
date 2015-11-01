@@ -1,3 +1,8 @@
+.vote-confirmed-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .card.vote-confirm {
   opacity: 1;
   transition: 0.3s ease;
@@ -51,9 +56,13 @@
     margin-top:20px;
     height: 80px;
     align-self: center;
+    @include media(560px) {
+      height: 40px;
+    }
   }
 
   div.card {
+    display: block;
     position: relative;
     transition: opacity 0.3s ease;
     opacity: 1;
@@ -61,7 +70,7 @@
     max-width: calc(100% - 40px);
     min-width: 500px;
     @include media(600px){
-    min-width: calc(100% - 20px);
+    min-width: calc(100% - 10px);
     }
     justify-content: center;
     align-items: center;
@@ -74,9 +83,12 @@
       cursor: pointer;
     }
 
-    h2 {
+    h5 {
       text-align: center;
       @include font-size(34px);
+      @include media(560px) {
+        @include font-size(20px);
+      }
       margin-top: 20px;
       margin-bottom: 5px;
       color: $black;
@@ -84,17 +96,23 @@
 
     h3 {
       @include font-size(34px);
+      @include media(560px) {
+        @include font-size(20px);
+      }
       color: $purple;
       font-family: $font-bold;
+      text-align: center;
     }
 
     p {
       @include font-size(14px);
+      text-align: center;
     }
 
     h4 {
       @include font-size(16px);
       font-family: $font-normal;
+      text-align: center;
     }
 
     .vote-modal {
@@ -103,6 +121,9 @@
         text-align: center;
         @include font-size(14px);
         margin-bottom: 40px;
+        @include media(560px) {
+          margin-bottom: 15px;
+        }
       }
       width: 100%;
     }
@@ -128,7 +149,14 @@
 }
 
 .vote-confirmed {
-    .card {
+    .card.comment-preview {
+      @include media(560px) {
+        margin-top: 10px;
+        min-width: 100%;
+      }
+      p {
+        text-align: left;
+      }
       margin-top: 40px;
       margin-bottom: 30px;
     }

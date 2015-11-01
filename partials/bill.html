@@ -97,7 +97,9 @@
 
     <div class="comment-create card">
       <form ng-submit="bill.postComment()">
+        <div class="gen-user-img">
         <img src="img/comments/user.png" />
+        </div>
         <input type='text' name='commentOnBillBox' ng-model='bill.commentBody' placeholder='Write your comment here'></input>
       </form>
     </div>
@@ -139,7 +141,7 @@
    <section class="modal" ng-show='bill.showVote' >
        <div class="card vote-confirm" ng-hide='bill.userVoted' >
        <img ng-click="bill.hideVoteModal()" class="close" src="img/close-widget-black.png" />
-        <h2>Please confirm your vote</h2>
+        <h5>Please confirm your vote</h5>
         <div class='vote-modal'>
             <p>{{bill.voteModal.message}}</p>
             <div class="row">
@@ -150,11 +152,13 @@
         </div>
     <div class="card vote-confirmed" ng-show='bill.userVoted'>
           <img ng-click="bill.hideVoteModal()" class="close" src="img/close-widget-black.png" />
+          <div class="vote-confirmed-header">
           <img class="logo-modal" src="img/mark_full_color.svg" />
           <h3>Vote Confirmed</h3>
           <p>Congratulations, you have just cast your vote on:</p>
           <h4>{{bill.body.getTitle()}}</h4>
-          <div class="card" ng-show="bill.commentCard.set">
+          </div>
+          <div class="card comment-preview" ng-show="bill.commentCard.set">
               <h1>{{bill.commentCard.status}}</h1>
               <hr />
               <aside class="row-layout">

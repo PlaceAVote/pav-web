@@ -1,11 +1,20 @@
 .comment-container {
+  transition: all 0.1s ease;
+  &.ng-hide {
+    opacity: 0;
+    height: 0;
+  }
+  &.ng-hide-remove {
+    opacity: 0;
+    height: 0;
+    // transition-delay: 0.3s;
+  }
   .comment {
     display: flex;
     flex-direction: row;
     margin-bottom: 20px;
     .profile-img {
       width: 50px;
-
       img {
         width: 100%;
       }
@@ -28,6 +37,11 @@
   padding-left: 25px;
 }
 
+.reply-btn-container {
+  height:37px;
+  overflow: hidden;
+}
+
 .reply-show-hide {
   cursor: pointer;
   width: 100%;
@@ -37,7 +51,7 @@
   border-radius: 3px;
   border: 1px solid $greylight;
   margin-bottom: 10px;
-  transition: all 0.3s ease;
+  transition: all 0.1s ease;
   &:hover {
     background: lighten($greylight, 10%);
   }

@@ -1155,30 +1155,11 @@ button {
     width: 100%; } }
 
 .feed-wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-      -ms-flex-direction: row;
-          flex-direction: row;
   width: 100%; }
   .feed-wrapper .feed-column {
-    width: 60%; }
+    width: 100%; }
     .feed-wrapper .feed-column .bill-container {
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: -ms-flexbox;
-      display: flex;
-      -webkit-box-orient: vertical;
-      -webkit-box-direction: normal;
-      -webkit-flex-direction: column;
-          -ms-flex-direction: column;
-              flex-direction: column;
       margin-top: 20px;
-      margin-right: 20px;
       box-shadow: 0px 2px 4px -2px rgba(0, 0, 0, 0.2); }
       .feed-wrapper .feed-column .bill-container .bill {
         border-top-left-radius: 3px;
@@ -1241,15 +1222,19 @@ button {
         -webkit-flex-direction: row;
             -ms-flex-direction: row;
                 flex-direction: row;
-        width: 100%; }
+        width: 100%;
+        -webkit-flex-shrink: 0;
+            -ms-flex-negative: 0;
+                flex-shrink: 0; }
         .feed-wrapper .feed-column .bill-container .buttons button {
           outline: none;
           cursor: pointer;
           background-color: #f4f2fe;
           color: #3b3b3b;
           height: 35px;
-          font-size: 12px;
-          font-size: 0.75rem;
+          font-family: "whitneymedium", sans-serif;
+          font-size: 10px;
+          font-size: 0.625rem;
           border: none;
           outline: none;
           width: 33.333%;
@@ -1268,10 +1253,14 @@ button {
           -webkit-box-pack: center;
           -webkit-justify-content: center;
               -ms-flex-pack: center;
-                  justify-content: center; }
+                  justify-content: center;
+          position: relative;
+          padding-left: 30px; }
           .feed-wrapper .feed-column .bill-container .buttons button img {
-            padding-right: 15px;
-            height: 15px; }
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            height: 12px; }
           .feed-wrapper .feed-column .bill-container .buttons button:nth-child(1) {
             border: 1px solid #d6d4e1;
             border-top: none;
@@ -1311,12 +1300,18 @@ button {
   -webkit-flex-shrink: 0;
       -ms-flex-negative: 0;
           flex-shrink: 0; }
+  @media screen and (max-device-width: 560px), screen and (max-width: 560px) {
+    .card.welcome-message {
+      padding: 20px; } }
   .card.welcome-message img {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
     height: 100px; }
+    @media screen and (max-device-width: 560px), screen and (max-width: 560px) {
+      .card.welcome-message img {
+        display: none; } }
   .card.welcome-message img.close {
     position: absolute;
     top: 20px;
@@ -1334,6 +1329,9 @@ button {
     -webkit-flex-direction: column;
         -ms-flex-direction: column;
             flex-direction: column; }
+    @media screen and (max-device-width: 560px), screen and (max-width: 560px) {
+      .card.welcome-message section {
+        padding-left: 0; } }
     .card.welcome-message section h1 {
       font-size: 28px;
       font-size: 1.75rem;
@@ -1666,7 +1664,7 @@ h1.bill-title {
         margin: 0 auto;
         left: 0;
         right: 0;
-        z-index: 9999; }
+        z-index: 9000; }
 
 .row-layout.comment {
   margin-top: 20px;
@@ -1854,10 +1852,15 @@ h1.bill-title {
         -ms-flex-direction: row;
             flex-direction: row;
     width: 100%; }
-  .card.comment-create img {
+  .card.comment-create .gen-user-img {
     height: 30px;
     width: 30px;
-    margin: 0 40px 0 20px; }
+    margin: 5px 40px 0 20px; }
+    @media screen and (max-device-width: 560px), screen and (max-width: 560px) {
+      .card.comment-create .gen-user-img {
+        margin: 5px 20px 0 0; } }
+    .card.comment-create .gen-user-img img {
+      width: 100%; }
   .card.comment-create input {
     width: 100%;
     outline: none;
@@ -1947,6 +1950,21 @@ h1.bill-title {
       .vote-widget aside.row .btn-green {
         margin-bottom: 20px; } }
 
+.vote-confirmed-header {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center; }
+
 .card.vote-confirm {
   opacity: 1;
   -webkit-transition: 0.3s ease;
@@ -2002,7 +2020,11 @@ h1.bill-title {
     -webkit-align-self: center;
         -ms-flex-item-align: center;
             align-self: center; }
+    @media screen and (max-device-width: 560px), screen and (max-width: 560px) {
+      .modal img.logo-modal {
+        height: 40px; } }
   .modal div.card {
+    display: block;
     position: relative;
     -webkit-transition: opacity 0.3s ease;
             transition: opacity 0.3s ease;
@@ -2021,32 +2043,43 @@ h1.bill-title {
             align-items: center; }
     @media screen and (max-device-width: 600px), screen and (max-width: 600px) {
       .modal div.card {
-        min-width: calc(100% - 20px); } }
+        min-width: calc(100% - 10px); } }
     .modal div.card img.close {
       position: absolute;
       width: 20px;
       top: 20px;
       right: 20px;
       cursor: pointer; }
-    .modal div.card h2 {
+    .modal div.card h5 {
       text-align: center;
       font-size: 34px;
       font-size: 2.125rem;
       margin-top: 20px;
       margin-bottom: 5px;
       color: #3b3b3b; }
+      @media screen and (max-device-width: 560px), screen and (max-width: 560px) {
+        .modal div.card h5 {
+          font-size: 20px;
+          font-size: 1.25rem; } }
     .modal div.card h3 {
       font-size: 34px;
       font-size: 2.125rem;
       color: #543594;
-      font-family: "whitneybold", sans-serif; }
+      font-family: "whitneybold", sans-serif;
+      text-align: center; }
+      @media screen and (max-device-width: 560px), screen and (max-width: 560px) {
+        .modal div.card h3 {
+          font-size: 20px;
+          font-size: 1.25rem; } }
     .modal div.card p {
       font-size: 14px;
-      font-size: 0.875rem; }
+      font-size: 0.875rem;
+      text-align: center; }
     .modal div.card h4 {
       font-size: 16px;
       font-size: 1rem;
-      font-family: "whitneymedium", sans-serif; }
+      font-family: "whitneymedium", sans-serif;
+      text-align: center; }
     .modal div.card .vote-modal {
       width: 100%; }
       .modal div.card .vote-modal p {
@@ -2055,6 +2088,9 @@ h1.bill-title {
         font-size: 14px;
         font-size: 0.875rem;
         margin-bottom: 40px; }
+        @media screen and (max-device-width: 560px), screen and (max-width: 560px) {
+          .modal div.card .vote-modal p {
+            margin-bottom: 15px; } }
     .modal div.card .row {
       width: 100%;
       -webkit-box-pack: justify;
@@ -2071,9 +2107,15 @@ h1.bill-title {
       .modal div.card .row button:nth-child(2) {
         margin-left: 15px; }
 
-.vote-confirmed .card {
+.vote-confirmed .card.comment-preview {
   margin-top: 40px;
   margin-bottom: 30px; }
+  @media screen and (max-device-width: 560px), screen and (max-width: 560px) {
+    .vote-confirmed .card.comment-preview {
+      margin-top: 10px;
+      min-width: 100%; } }
+  .vote-confirmed .card.comment-preview p {
+    text-align: left; }
 
 section.comment-vote {
   position: absolute;
@@ -2101,7 +2143,7 @@ section.comment-vote {
     section.comment-vote span.opposed {
       color: #e64a33; }
   section.comment-vote img {
-    curosor: pointer;
+    cursor: pointer;
     width: 13px;
     height: 13px;
     padding-left: 10px; }
@@ -2209,21 +2251,30 @@ section.comment-vote {
     -webkit-transform: translate(0, 160%);
             transform: translate(0, 160%); } }
 
-.comment-container .comment {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  margin-bottom: 20px; }
-  .comment-container .comment .profile-img {
-    width: 50px; }
-    .comment-container .comment .profile-img img {
-      width: 100%; }
+.comment-container {
+  -webkit-transition: all 0.1s ease;
+          transition: all 0.1s ease; }
+  .comment-container.ng-hide {
+    opacity: 0;
+    height: 0; }
+  .comment-container.ng-hide-remove {
+    opacity: 0;
+    height: 0; }
+  .comment-container .comment {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    margin-bottom: 20px; }
+    .comment-container .comment .profile-img {
+      width: 50px; }
+      .comment-container .comment .profile-img img {
+        width: 100%; }
 
 .bill-comments.card {
   border-bottom-right-radius: 0;
@@ -2237,6 +2288,10 @@ section.comment-vote {
 .comment-reply {
   padding-left: 25px; }
 
+.reply-btn-container {
+  height: 37px;
+  overflow: hidden; }
+
 .reply-show-hide {
   cursor: pointer;
   width: 100%;
@@ -2246,7 +2301,80 @@ section.comment-vote {
   border-radius: 3px;
   border: 1px solid #E8E7EE;
   margin-bottom: 10px;
-  -webkit-transition: all 0.3s ease;
-          transition: all 0.3s ease; }
+  -webkit-transition: all 0.1s ease;
+          transition: all 0.1s ease; }
   .reply-show-hide:hover {
     background: white; }
+
+@font-face {
+  font-family: "pav";
+  src: url("../font/pav.eot");
+  src: url("../font/pav.eot?#iefix") format("embedded-opentype"), url("../font/pav.woff") format("woff"), url("../font/pav.ttf") format("truetype"), url("../font/pav.svg#pav") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+[data-icon]:before {
+  font-family: "pav" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  font-family: "pav" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+.icon-facebook:before {
+  content: "a"; }
+
+.icon-exclamation:before {
+  content: "b"; }
+
+.icon-building:before {
+  content: "c"; }
+
+.icon-gun:before {
+  content: "d"; }
+
+.icon-ipad:before {
+  content: "e"; }
+
+.icon-money:before {
+  content: "f"; }
+
+.icon-police:before {
+  content: "g"; }
+
+.icon-religion:before {
+  content: "h"; }
+
+.icon-smoking-area:before {
+  content: "i"; }
+
+.icon-tank:before {
+  content: "j"; }
+
+.icon-check-mark:before {
+  content: "k"; }
+
+.icon-arrow-down:before {
+  content: "l"; }
+
+.icon-arrow-up:before {
+  content: "m"; }
+
+.icon-reply:before {
+  content: "n"; }
