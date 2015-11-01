@@ -18,8 +18,19 @@
     }
 
     img {
+      curosor: pointer;
       width: 13px;
       height: 13px;
       padding-left: 10px;
+    }
+    .reply-btn {
+      color: $blue;
+      text-transform: uppercase;
+      margin-left: 10px;
+      cursor: pointer;
+      transition: all 0.3 ease;
+      &:hover {
+        color: lighten($blue, 10%);
+      }
     }
   }

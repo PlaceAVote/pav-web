@@ -1,0 +1,44 @@
+.comment-container {
+  .comment {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+    .profile-img {
+      width: 50px;
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.bill-comments {
+  &.card {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    box-shadow: none;
+    border-bottom: none;
+    transition: all 0.2s ease;
+    display: block !important;
+  }
+}
+
+.comment-reply {
+  padding-left: 25px;
+}
+
+.reply-show-hide {
+  cursor: pointer;
+  width: 100%;
+  color: darken($grey, 15%);
+  text-transform: uppercase;
+  background: $greylight;
+  border-radius: 3px;
+  border: 1px solid $greylight;
+  margin-bottom: 10px;
+  transition: all 0.3s ease;
+  &:hover {
+    background: lighten($greylight, 10%);
+  }
+}

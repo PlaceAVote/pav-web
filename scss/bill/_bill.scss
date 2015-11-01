@@ -7,16 +7,6 @@
   }
 }
 
-.reply-container {
- flex: 1;
- flex-shrink: 0;
-}
-
-.comment-reply {
-  padding-left:30px;
-  flex-shrink: 0;
-  flex: 1;
-}
 
 .top-comments {
   flex-shrink: 0;
@@ -96,8 +86,6 @@
   border-radius: 3px;
   max-width: 55px;
   padding: 2px;
-
-  // overflow: hidden;
   img {
     width: 100%;
     vertical-align: top;
@@ -161,26 +149,14 @@
   }
 }
 
-.bill-comments {
-  &.card {
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-    box-shadow: none;
-    border-bottom: none;
-    transition: all 0.2s ease;
-  }
-  .comment-container {
-    flex: 1;
-    // display: inline-block;
-  }
-}
 
-.comments-container {
-  display: flex;
-  flex-shrink: 0;
-  flex-grow: 1;
-  flex-wrap: wrap;
-}
+
+// .comments-container {
+//   display: flex;
+//   flex-shrink: 0;
+//   flex-grow: 1;
+//   flex-wrap: wrap;
+// }
 
 .card.comment-create {
   border-top-left-radius: 0;
@@ -218,11 +194,6 @@
   }
 }
 
-.comment-container {
-  display: flex;
-  flex-direction: column;
-  flex-shrink: 0;
-}
 
 .row-layout.comment {
   transition: all 0.3s ease;
