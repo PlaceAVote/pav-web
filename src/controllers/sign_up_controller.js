@@ -3,7 +3,7 @@ function SignUpCtrl ($scope, $location, userService) {
 	$scope = $scope || {};
 	$scope.signup = this;
 	this.userService = userService;
-    this.location = $location;
+  this.location = $location;
 	this.max = this.maxDate();
     var user = this.userService.getUser() || {};
     this.additionalInformation = {
@@ -12,7 +12,7 @@ function SignUpCtrl ($scope, $location, userService) {
         "dob": user.dob|| "",
         "country_code": "USA"
     };
-	this.country = countryCodes;	
+	this.country = countryCodes;
 }
 
 SignUpCtrl.prototype.test = function() {
@@ -59,11 +59,11 @@ SignUpCtrl.prototype.maxDate = function() {
 	else {
 		month = month.toString();
 	}
-	if(day<=9) {  	
+	if(day<=9) {
 		day = '0' + day.toString();
 	}
 	else {
-		day = day.toString();   	
+		day = day.toString();
 	}
 	year = year.toString();
 	return year + "-" + month + "-" + day;
