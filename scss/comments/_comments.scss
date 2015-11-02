@@ -40,9 +40,11 @@
 .reply-btn-container {
   height:37px;
   overflow: hidden;
+  outline: none;
 }
 
 .reply-show-hide {
+  outline: none;
   cursor: pointer;
   width: 100%;
   color: darken($grey, 15%);
