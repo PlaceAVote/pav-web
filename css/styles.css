@@ -2291,9 +2291,11 @@ section.comment-vote {
 
 .reply-btn-container {
   height: 37px;
-  overflow: hidden; }
+  overflow: hidden;
+  outline: none; }
 
 .reply-show-hide {
+  outline: none;
   cursor: pointer;
   width: 100%;
   color: #a6a6a6;
