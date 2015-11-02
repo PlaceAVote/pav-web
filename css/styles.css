@@ -1406,7 +1406,8 @@ header {
         padding-left: 20px;
         padding-right: 20px; } }
     header .row img.pav-icon {
-      height: 30px; }
+      height: 30px;
+      cursor: pointer; }
     header .row section.search {
       display: -webkit-box;
       display: -webkit-flex;
