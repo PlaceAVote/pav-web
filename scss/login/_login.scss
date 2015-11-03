@@ -30,7 +30,7 @@
         height: 40px;
         @include font-size(11px);
         line-height: 39px;
-        font-family: $font-normal;
+        @include medium();
         padding: 0px 20px;
         transition: all 0.2s ease;
 
@@ -48,7 +48,7 @@
   margin: 0 auto;
   left: 0;
   right: 0;
-  font-family: $font-normal;
+  @include medium();
   height: 100%;
   background: white;
   text-align: center;
@@ -95,7 +95,7 @@
     outline: none;
     transition: all 0.2s ease;
     position: relative;
-    font-family: $font-normal;
+    @include medium();
 
     &.fb-login {
       background-color: $fbblue;
@@ -258,7 +258,7 @@
       margin-right: 0px;
       margin-bottom: 0px;
       @include font-size(12px);
-      font-family: $font-normal;
+      @include medium();
       @include media(480px){
         @include font-size(12px);
       }

@@ -15,7 +15,7 @@
 
         h3 {
           @include font-size(11px);
-          font-family: $font-bold;
+          @include bold();
           color: $blue;
           text-transform: uppercase;
           cursor: pointer;
@@ -40,14 +40,14 @@
             flex-direction: column;
 
             h6 {
-              font-family: $font-bolditalic;
+              @include medium(italic);
               @include font-size(14px);
               color: $blue;
               cursor: pointer;
             }
 
             p {
-              font-family: $font-normal;
+             @include medium();
               @include font-size(16px);
               line-height: 22px;
               color: $black;
@@ -68,7 +68,7 @@
           background-color: #f4f2fe;
           color: $black;
           height: 35px;
-          font-family: $font-normal;
+          @include medium();
           @include font-size(10px);
           border: none;
           outline: none;
@@ -156,14 +156,14 @@
     h1 {
       @include font-size(28px);
       text-transform: none;
-      font-family: $font-bold;
+      @include bold();
       color: $black;
       padding-bottom: 20px;
     }
 
     p {
       @include font-size(14px);
-      font-family: $font-normal;
+      @include medium();
       color: $black;
       line-height: 24px;
     }
