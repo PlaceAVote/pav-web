@@ -30,7 +30,7 @@
           text-decoration: none;
           color: white;
           padding: 10px;
-          font-family: $font-light;
+          @include light();
         }
       }
     }
@@ -90,24 +90,24 @@
 
       h1 {
         @include font-size(40px);
-        font-family: $font-normal;
+        @include medium();
         line-height: 45px;
         padding-bottom: 30px;
 
         span {
-          font-family: $font-normalitalic;
+          @include medium(italic);
         }
       }
 
       h2 {
         @include font-size(18px);
         line-height: 20px;
-        font-family: $font-light;
+        @include light();
         padding-bottom: 20px;
       }
 
       h3 {
-        font-family: $font-light;
+        @include light();
         @include font-size(11px);
       }
     }
@@ -169,13 +169,13 @@
       h1 {
         @include font-size(24px);
         padding-bottom: 40px;
-        font-family: $font-bold;
+        @include bold();
       }
 
       p {
         @include font-size(22px);
         padding-bottom: 40px;
-        font-family: $font-light;
+        @include light();
         line-height: 28px;
       }
     }
@@ -194,7 +194,7 @@
       align-self: center;
       text-align: center;
       color: white;
-      font-family: $font-normalitalic;
+      @include light(italic);
       @include font-size(20px);
       line-height: 24px;
     }
@@ -209,7 +209,7 @@
       color: $black;
       text-align: center;
       @include font-size(30px);
-      font-family: $font-light;
+      @include light();
 
       @media screen and (max-device-width: 900px), screen and (max-width: 900px) {
       padding: 50px 20px;
@@ -253,7 +253,7 @@
           color: $black;
           text-align: center;
           @include font-size(22px);
-          font-family: $font-normal;
+          @include medium();
           padding-bottom: 20px;
         }
 
@@ -262,7 +262,7 @@
           text-align: center;
           @include font-size(18px);
           line-height: 24px;
-          font-family: $font-light;
+          @include light();
         }
       }
     }
@@ -278,7 +278,7 @@
     align-items: center;
 
     h1 {
-      font-family: $font-light;
+      @include light();
       text-align: center;
       padding: 50px;
       @include font-size(28px);
@@ -299,7 +299,7 @@
       color: white;
       font-size: 18px;
       text-align: center;
-      font-family: $font-light;
+      @include light();
       width: 30%;
 
       @media screen and (max-device-width: 900px), screen and (max-width: 900px) {
@@ -343,7 +343,7 @@
       top: 25px;
       left: 40px;
       color: $black;
-      font-family: $font-light;
+      @include light();
       @include font-size(14px);
 
       // margin-right: auto;
@@ -371,7 +371,7 @@
         a {
           text-decoration: none;
           color: $black;
-          font-family: $font-light;
+          @include light();
           @include font-size(14px);
         }
       }

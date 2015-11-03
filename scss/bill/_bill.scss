@@ -97,7 +97,7 @@
 .card {
   h1 {
     @include font-size(11px);
-    font-family: $font-bold;
+    @include bold();
     color: $blue;
     text-transform: uppercase;
   }
@@ -139,7 +139,7 @@
         // margin-top:28px;
         margin-bottom: 10px;
         color: $red;
-        font-family: $font-bold;
+        @include bold();
       }
 
       h3 {
@@ -240,14 +240,14 @@
   div:nth-child(1) {
     p {
       color: $green;
-      font-family: $font-bold;
+      @include bold();
     }
   }
 
   div:nth-child(2) {
     p {
       color: $red;
-      font-family: $font-bold;
+      @include bold();
     }
   }
 }

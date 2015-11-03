@@ -72,7 +72,7 @@
     h2 {
       color: $black;
       font-size: 20px;
-      font-family: $font-normal;
+     @include medium();
       padding: 20px 0px;
       line-height: 30px;
     }
@@ -84,11 +84,11 @@
         }
         color: $black;
         font-size: 12px;
-        font-family: $font-normal;
+        @include medium();
         display: inline-block;
         width: calc(50% - 12px);
         select {
-          font-family: $font-normal;
+          @include medium();
           margin-top: 10px;
           margin-bottom: 15px;
           width: 100%;
@@ -103,7 +103,7 @@
           border-radius: 3px;
         }
         input {
-          font-family: $font-normal;
+          @include medium();
           margin-top: 10px;
           margin-bottom: 15px;
           width: 100%;
@@ -160,7 +160,7 @@
         color: white;
         font-size: 18px;
         text-align: center;
-        font-family: $font-normal;
+        @include medium();
         width: 100%;
         display: inline-block;
         transition: all 0.2s ease;

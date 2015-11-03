@@ -127,7 +127,7 @@ h1.bill-title{
     @include media(560px){
       @include font-size(22px);
     }
-    font-family: $font-light;
+    @include light();
   }
 
 .bill-timeline {
@@ -213,7 +213,7 @@ h1.bill-title{
         left: 0;
         right: 0;
         @include font-size(12px);
-        font-family: $font-light;
+        @include light();
       }
 
       span {
