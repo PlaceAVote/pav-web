@@ -13,6 +13,9 @@ describe('BillController', function() {
   };
   it('gets id from url', function(){
     var mockBillService = {
+      getBillVotes: function(id, callback){
+        callback('Error');
+      },
       getBill: function(id, callback){
         callback('Error');
       },
@@ -20,7 +23,7 @@ describe('BillController', function() {
         var result = {
           forComment: new Comment(topCommentsFixtures['for-comment']),
           againstComment: new Comment(topCommentsFixtures['against-comment']),
-        }
+        };
         callback(undefined, result);
       },
     };
@@ -32,8 +35,12 @@ describe('BillController', function() {
     var billController = new BillController(undefined, routeParams, mockBillService, undefined, mockVoteService);
     expect(billController.id).to.eql('100');
   });
+
   it('assigns this to scope.bill', function(){
     var mockBillService = {
+      getBillVotes: function(id, callback){
+        callback('Error');
+      },
       getBill: function(id, callback){
         callback('Error');
       },
@@ -41,7 +48,7 @@ describe('BillController', function() {
         var result = {
           forComment: new Comment(topCommentsFixtures['for-comment']),
           againstComment: new Comment(topCommentsFixtures['against-comment']),
-        }
+        };
         callback(undefined, result);
       },
     };
@@ -66,6 +73,9 @@ describe('BillController', function() {
       },
     });
     var mockBillService = {
+      getBillVotes: function(id, callback){
+        callback('Error');
+      },
       getBill: function(id, callback){
         callback(undefined, bill);
       },
@@ -94,6 +104,9 @@ describe('BillController', function() {
   });
   it('sets scope.error to true if callback has error', function(done){
     var mockBillService = {
+      getBillVotes: function(id, callback){
+        callback('Error');
+      },
       getBill: function(id, callback){
         callback('Error');
       },
@@ -118,6 +131,9 @@ describe('BillController', function() {
   describe('Get Comment For Bill', function(){
     it('sets topComment attribute', function(done){
       var mockBillService = {
+      getBillVotes: function(id, callback){
+        callback('Error');
+      },
         getBill: function(id, callback){
           callback('Error');
         },
@@ -145,6 +161,9 @@ describe('BillController', function() {
         id: 10,
       });
       var mockBillService = {
+      getBillVotes: function(id, callback){
+        callback('Error');
+      },
         getBill: function(id, callback){
           callback('Error');
         },
@@ -168,6 +187,9 @@ describe('BillController', function() {
     it('set legislator from returned service result', function(){
       var legislationJSON = require('../fixtures/legislator.js');
       var mockBillService = {
+      getBillVotes: function(id, callback){
+        callback('Error');
+      },
         getBill: function(id, callback){
           callback('Error');
         },
@@ -191,6 +213,9 @@ describe('BillController', function() {
     });
     it('set legislation error to true is service returns error', function(){
       var mockBillService = {
+        getBillVotes: function(id, callback){
+        callback('Error');
+      },
         getBill: function(id, callback){
           callback('Error');
         },
@@ -217,6 +242,9 @@ describe('BillController', function() {
   describe('Get Current Vote', function(){
     it('gets the current vote for a bill', function(){
       var mockBillService = {
+      getBillVotes: function(id, callback){
+        callback('Error');
+      },
         getBill: function(id, callback){
           callback('Error');
         },
@@ -242,6 +270,9 @@ describe('BillController', function() {
     });
     it('sets error when server returns error', function(){
       var mockBillService = {
+        getBillVotes: function(id, callback){
+        callback('Error');
+      },
         getBill: function(id, callback){
           callback('Error');
         },
@@ -266,6 +297,9 @@ describe('BillController', function() {
     });
     it('sets error when server returns error', function(done){
       var mockBillService = {
+      getBillVotes: function(id, callback){
+        callback('Error');
+      },
         getBill: function(id, callback){
           var bill = new Bill({
             id: 100,
@@ -303,6 +337,9 @@ describe('BillController', function() {
     });
     it('sets user voted when server returns true', function(done){
       var mockBillService = {
+      getBillVotes: function(id, callback){
+        callback('Error');
+      },
         getBill: function(id, callback){
           var bill = new Bill({
             id: 100,
@@ -340,6 +377,9 @@ describe('BillController', function() {
     });
     it('vote modal changes state when called', function(){
       var mockBillService = {
+      getBillVotes: function(id, callback){
+        callback('Error');
+      },
         getBill: function(id, callback){
           var bill = new Bill({
             id: 100,
@@ -379,6 +419,9 @@ describe('BillController', function() {
     });
     it('hide modal and reset vote state', function(){
       var mockBillService = {
+      getBillVotes: function(id, callback){
+        callback('Error');
+      },
         getBill: function(id, callback){
           var bill = new Bill({
             id: 100,
@@ -412,6 +455,9 @@ describe('BillController', function() {
     });
     it('show modal doesnt change state of vote after the vote has been processed', function(){
       var mockBillService = {
+      getBillVotes: function(id, callback){
+        callback('Error');
+      },
         getBill: function(id, callback){
           var bill = new Bill({
             id: 100,
@@ -449,6 +495,9 @@ describe('BillController', function() {
     });
     it('hide modal only changes vote state when user has not voted', function(){
       var mockBillService = {
+      getBillVotes: function(id, callback){
+        callback('Error');
+      },
         getBill: function(id, callback){
           var bill = new Bill({
             id: 100,
@@ -488,6 +537,9 @@ describe('BillController', function() {
     });
     it('does not set comment card if comment is not defined', function(){
       var mockBillService = {
+      getBillVotes: function(id, callback){
+        callback('Error');
+      },
         getBill: function(id, callback){
           var bill = new Bill({
             id: 100,
@@ -523,6 +575,9 @@ describe('BillController', function() {
     });
     it('sets commentcards properties based on comment', function(){
       var mockBillService = {
+      getBillVotes: function(id, callback){
+        callback('Error');
+      },
         getBill: function(id, callback){
           var bill = new Bill({
             id: 100,
@@ -579,6 +634,9 @@ describe('BillController', function() {
     });
     it('returns undefined if the comment has no author', function(){
       var mockBillService = {
+      getBillVotes: function(id, callback){
+        callback('Error');
+      },
         getBill: function(id, callback){
           var bill = new Bill({
             id: 100,
@@ -621,6 +679,9 @@ describe('BillController', function() {
     });
     it('get comments sets all comment error to true if error from server', function(){
       var mockBillService = {
+      getBillVotes: function(id, callback){
+        callback('Error');
+      },
         getBill: function(id, callback){
           callback('Error');
         },
@@ -650,6 +711,9 @@ describe('BillController', function() {
     });
     it('On Success Adds Comments to Scope and Increases from by 10', function(){
       var mockBillService = {
+      getBillVotes: function(id, callback){
+        callback('Error');
+      },
         getBill: function(id, callback){
           callback('Error');
         },
@@ -683,6 +747,9 @@ describe('BillController', function() {
   describe('Post Comment On Bill', function(){
     it('sets postCommentError to true when fails', function(){
       var mockBillService = {
+      getBillVotes: function(id, callback){
+        callback('Error');
+      },
         getBill: function(id, callback){
           callback('Error');
         },
@@ -715,6 +782,9 @@ describe('BillController', function() {
     });
     it('clears message state and adds added message to comments list', function(){
       var mockBillService = {
+      getBillVotes: function(id, callback){
+        callback('Error');
+      },
         getBill: function(id, callback){
           callback('Error');
         },
