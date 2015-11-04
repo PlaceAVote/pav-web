@@ -13,6 +13,15 @@ module.exports = {
       },
       withCredentials: false,
     },
+    getArray: {
+      method: 'GET',
+      isArray: true,
+      headers: {
+        'Content-Type' : "application/json",
+        'Accept': 'application/json',
+      },
+      withCredentials: false,
+    },
     put: {
       method: 'PUT',
       headers: {
@@ -42,6 +51,9 @@ module.exports = {
     voteOnBill: {
       endpoint: VOTES + '/vote'
     },
+    voteRecords: {
+      endpoint: VOTES + '/vote/bill/'
+    }
   },
   comments: {
     reply: {

@@ -19,6 +19,22 @@ function BillService(tempBillResource, $resource, authService, userService) {
         var results = tempBillResource.get(undefined, onLoad, onError);
     };
 
+    var getBillVotes = function(id, callback) {
+      if(!id) {
+        return callback({message: 'Error: No Id Provided'});
+      }
+      var onLoad = function(result){
+        return callback(undefined, console.log(result));
+      };
+      var onError = function(err){
+        return callback(err);
+      };
+      var url = config.votes.voteRecords.endpoint + id;
+      config.methods.get.headers['Authorization'] = authService.getAccessToken();
+      var resource = new $resource(url, id,  {getBillVotes: config.methods.get, getBillVotes: config.methods.getArray});
+      resource.getBillVotes(undefined, onLoad, onError);      
+    };
+
     var getBill = function(id, callback) {
       if(!id){
         return callback({message: 'Error: No Id Provided'});
@@ -114,6 +130,7 @@ function BillService(tempBillResource, $resource, authService, userService) {
     };
 
     return {
+      getBillVotes: getBillVotes,
       getBills: getBills,
       getBill: getBill,
       getTopComments: getTopComments,
