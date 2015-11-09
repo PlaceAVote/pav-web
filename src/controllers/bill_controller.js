@@ -117,10 +117,11 @@ BillController.prototype.getTopComments = function(id){
   this.billService.getTopComments(id, function(err, result){
     if(err){
       that.topCommentError = true;
+      console.error('WUT');
     }
     else {
       that.forComment = result.forComment;
-      that.againstComment = result.againstComment;      
+      that.againstComment = result.againstComment;
     }
   });
 };
