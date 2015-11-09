@@ -167,48 +167,6 @@ div, input {
 .left {
   float: left; }
 
-@font-face {
-  font-family: "whitneymedium";
-  src: url("../font/whitney-medium-bas-webfont.eot");
-  src: url("../font/whitney-medium-bas-webfont.eot?#iefix") format("embedded-opentype"), url("../font/whitney-medium-bas-webfont.woff2") format("woff2"), url("../font/whitney-medium-bas-webfont.woff") format("woff"), url("../font/whitney-medium-bas-webfont.ttf") format("truetype"), url("../font/.svg#whitneymedium") format("svg");
-  font-weight: normal;
-  font-style: normal; }
-
-@font-face {
-  font-family: "whitneymediumital";
-  src: url("../font/whitney-mediumital-bas-webfont.eot");
-  src: url("../font/whitney-mediumital-bas-webfont.eot?#iefix") format("embedded-opentype"), url("../font/whitney-mediumital-bas-webfont.woff2") format("woff2"), url("../font/whitney-mediumital-bas-webfont.woff") format("woff"), url("../font/whitney-mediumital-bas-webfont.ttf") format("truetype"), url("../font/.svg#whitneymediumital") format("svg");
-  font-weight: normal;
-  font-style: normal; }
-
-@font-face {
-  font-family: "whitneybold";
-  src: url("../font/whitney-bold-bas-webfont.eot");
-  src: url("../font/whitney-bold-bas-webfont.eot?#iefix") format("embedded-opentype"), url("../font/whitney-bold-bas-webfont.woff2") format("woff2"), url("../font/whitney-bold-bas-webfont.woff") format("woff"), url("../font/whitney-bold-bas-webfont.ttf") format("truetype"), url("../font/.svg#whitneybold") format("svg");
-  font-weight: normal;
-  font-style: normal; }
-
-@font-face {
-  font-family: "whitneyboldital";
-  src: url("../font/whitney-boldital-bas-webfont.eot");
-  src: url("../font/whitney-boldital-bas-webfont.eot?#iefix") format("embedded-opentype"), url("../font/whitney-boldital-bas-webfont.woff2") format("woff2"), url("../font/whitney-boldital-bas-webfont.woff") format("woff"), url("../font/whitney-boldital-bas-webfont.ttf") format("truetype"), url("../font/.svg#whitneyboldital") format("svg");
-  font-weight: normal;
-  font-style: normal; }
-
-@font-face {
-  font-family: "whitneylight";
-  src: url("../font/whitney-light-bas-webfont.eot");
-  src: url("../font/whitney-light-bas-webfont.eot?#iefix") format("embedded-opentype"), url("../font/whitney-light-bas-webfont.woff2") format("woff2"), url("../font/whitney-light-bas-webfont.woff") format("woff"), url("../font/whitney-light-bas-webfont.ttf") format("truetype"), url("../font/.svg#whitneylight") format("svg");
-  font-weight: normal;
-  font-style: normal; }
-
-@font-face {
-  font-family: "whitneylight_italic";
-  src: url("../font/whitney-lightital-bas-webfont.eot");
-  src: url("../font/whitney-lightital-bas-webfont.eot?#iefix") format("embedded-opentype"), url("../font/whitney-lightital-bas-webfont.woff2") format("woff2"), url("../font/whitney-lightital-bas-webfont.woff") format("woff"), url("../font/whitney-lightital-bas-webfont.ttf") format("truetype"), url("../font/.svg#whitneylight_italic") format("svg");
-  font-weight: normal;
-  font-style: normal; }
-
 body,
 html,
 div,
@@ -217,7 +175,7 @@ div,
 
 body {
   background-color: #e8e7ee;
-  font-family: "whitneylight", sans-serif;
+  font-family: "Whitney SSm A", "Whitney SSm B";
   position: relative;
   line-height: 1.5;
   color: #3b3b3b; }
@@ -384,7 +342,8 @@ input {
     top: 15px; }
 
 button {
-  font-family: "whitneylight", sans-serif; }
+  font-style: normal;
+  font-weight: 400; }
 
 .card {
   display: -webkit-box;
@@ -471,7 +430,8 @@ button {
       font-size: 11px;
       font-size: 0.6875rem;
       line-height: 39px;
-      font-family: "whitneymedium", sans-serif;
+      font-style: normal;
+      font-weight: 500;
       padding: 0px 20px;
       -webkit-transition: all 0.2s ease;
               transition: all 0.2s ease; }
@@ -484,7 +444,8 @@ button {
   margin: 0 auto;
   left: 0;
   right: 0;
-  font-family: "whitneymedium", sans-serif;
+  font-style: normal;
+  font-weight: 500;
   height: 100%;
   background: white;
   text-align: center;
@@ -526,7 +487,8 @@ button {
     -webkit-transition: all 0.2s ease;
             transition: all 0.2s ease;
     position: relative;
-    font-family: "whitneymedium", sans-serif; }
+    font-style: normal;
+    font-weight: 500; }
     .login button.fb-login {
       background-color: #3b5998;
       color: white;
@@ -650,7 +612,8 @@ button {
       margin-bottom: 0px;
       font-size: 12px;
       font-size: 0.75rem;
-      font-family: "whitneymedium", sans-serif;
+      font-style: normal;
+      font-weight: 500;
       margin-left: 0;
       border-radius: 0px;
       border-bottom-left-radius: 3px;
@@ -856,20 +819,23 @@ button {
   .onboarding-container section h2 {
     color: #3b3b3b;
     font-size: 20px;
-    font-family: "whitneymedium", sans-serif;
+    font-style: normal;
+    font-weight: 500;
     padding: 20px 0px;
     line-height: 30px; }
   .onboarding-container section form label {
     color: #3b3b3b;
     font-size: 12px;
-    font-family: "whitneymedium", sans-serif;
+    font-style: normal;
+    font-weight: 500;
     display: inline-block;
     width: calc(50% - 12px); }
     @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
       .onboarding-container section form label {
         width: 100%; } }
     .onboarding-container section form label select {
-      font-family: "whitneymedium", sans-serif;
+      font-style: normal;
+      font-weight: 500;
       margin-top: 10px;
       margin-bottom: 15px;
       width: 100%;
@@ -884,7 +850,8 @@ button {
       color: #543594;
       border-radius: 3px; }
     .onboarding-container section form label input {
-      font-family: "whitneymedium", sans-serif;
+      font-style: normal;
+      font-weight: 500;
       margin-top: 10px;
       margin-bottom: 15px;
       width: 100%;
@@ -921,7 +888,8 @@ button {
     color: white;
     font-size: 18px;
     text-align: center;
-    font-family: "whitneymedium", sans-serif;
+    font-style: normal;
+    font-weight: 500;
     width: 100%;
     display: inline-block;
     -webkit-transition: all 0.2s ease;
@@ -959,7 +927,8 @@ button {
     font-size: 18px;
     font-size: 1.125rem;
     text-align: center;
-    font-family: "whitneymedium", sans-serif;
+    font-style: normal;
+    font-weight: 500;
     width: 100%;
     display: inline-block;
     -webkit-transition: all 0.2s ease;
@@ -1016,7 +985,8 @@ button {
       color: #3b3b3b;
       font-size: 15px;
       font-size: 0.9375rem;
-      font-family: "whitneymedium", sans-serif;
+      font-style: normal;
+      font-weight: 500;
       position: absolute;
       bottom: 15px;
       left: 15px; }
@@ -1171,7 +1141,8 @@ button {
         .feed-wrapper .feed-column .bill-container .bill h3 {
           font-size: 11px;
           font-size: 0.6875rem;
-          font-family: "whitneybold", sans-serif;
+          font-style: normal;
+          font-weight: 700;
           color: #4d6eb3;
           text-transform: uppercase;
           cursor: pointer; }
@@ -1201,13 +1172,15 @@ button {
                 -ms-flex-direction: column;
                     flex-direction: column; }
             .feed-wrapper .feed-column .bill-container .bill .bill-summary-container .bill-summary h6 {
-              font-family: "whitneyboldital", sans-serif;
+              font-style: italic;
+              font-weight: 500;
               font-size: 14px;
               font-size: 0.875rem;
               color: #4d6eb3;
               cursor: pointer; }
             .feed-wrapper .feed-column .bill-container .bill .bill-summary-container .bill-summary p {
-              font-family: "whitneymedium", sans-serif;
+              font-style: normal;
+              font-weight: 500;
               font-size: 16px;
               font-size: 1rem;
               line-height: 22px;
@@ -1232,7 +1205,8 @@ button {
           background-color: #f4f2fe;
           color: #3b3b3b;
           height: 35px;
-          font-family: "whitneymedium", sans-serif;
+          font-style: normal;
+          font-weight: 500;
           font-size: 10px;
           font-size: 0.625rem;
           border: none;
@@ -1336,13 +1310,15 @@ button {
       font-size: 28px;
       font-size: 1.75rem;
       text-transform: none;
-      font-family: "whitneybold", sans-serif;
+      font-style: normal;
+      font-weight: 700;
       color: #3b3b3b;
       padding-bottom: 20px; }
     .card.welcome-message section p {
       font-size: 14px;
       font-size: 0.875rem;
-      font-family: "whitneymedium", sans-serif;
+      font-style: normal;
+      font-weight: 500;
       color: #3b3b3b;
       line-height: 24px; }
 
@@ -1560,7 +1536,8 @@ h1.bill-title {
   margin-bottom: 30px;
   font-size: 30px;
   font-size: 1.875rem;
-  font-family: "whitneylight", sans-serif; }
+  font-style: normal;
+  font-weight: 400; }
   @media screen and (max-device-width: 560px), screen and (max-width: 560px) {
     h1.bill-title {
       font-size: 22px;
@@ -1652,7 +1629,8 @@ h1.bill-title {
         right: 0;
         font-size: 12px;
         font-size: 0.75rem;
-        font-family: "whitneylight", sans-serif; }
+        font-style: normal;
+        font-weight: 400; }
       .bill-timeline ul li span {
         background-color: white;
         border-radius: 50%;
@@ -1775,7 +1753,8 @@ h1.bill-title {
 .card h1 {
   font-size: 11px;
   font-size: 0.6875rem;
-  font-family: "whitneybold", sans-serif;
+  font-style: normal;
+  font-weight: 700;
   color: #4d6eb3;
   text-transform: uppercase; }
 
@@ -1822,7 +1801,8 @@ h1.bill-title {
       font-size: 0.875rem;
       margin-bottom: 10px;
       color: #e64a33;
-      font-family: "whitneybold", sans-serif; }
+      font-style: normal;
+      font-weight: 700; }
     .card.bill-sponsor .bill-sponsor-info h3 {
       font-size: 14px;
       font-size: 0.875rem;
@@ -1927,10 +1907,12 @@ h1.bill-title {
     text-align: center; }
   .current-vote-stats div:nth-child(1) p {
     color: #a5cc71;
-    font-family: "whitneybold", sans-serif; }
+    font-style: normal;
+    font-weight: 700; }
   .current-vote-stats div:nth-child(2) p {
     color: #e64a33;
-    font-family: "whitneybold", sans-serif; }
+    font-style: normal;
+    font-weight: 700; }
 
 .vote-widget {
   margin-bottom: 20px; }
@@ -2066,7 +2048,8 @@ h1.bill-title {
       font-size: 34px;
       font-size: 2.125rem;
       color: #543594;
-      font-family: "whitneybold", sans-serif;
+      font-style: normal;
+      font-weight: 700;
       text-align: center; }
       @media screen and (max-device-width: 560px), screen and (max-width: 560px) {
         .modal div.card h3 {
@@ -2079,7 +2062,8 @@ h1.bill-title {
     .modal div.card h4 {
       font-size: 16px;
       font-size: 1rem;
-      font-family: "whitneymedium", sans-serif;
+      font-style: normal;
+      font-weight: 500;
       text-align: center; }
     .modal div.card .vote-modal {
       width: 100%; }
@@ -2138,7 +2122,8 @@ section.comment-vote {
   section.comment-vote span {
     font-size: 12px;
     font-size: 0.75rem;
-    font-family: "whitneybold", sans-serif;
+    font-style: normal;
+    font-weight: 700;
     color: #a5cc71;
     line-height: 15px; }
     section.comment-vote span.opposed {

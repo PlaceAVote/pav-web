@@ -11,7 +11,10 @@ var gulp = require('gulp'),
 	maps = require('gulp-sourcemaps'),
 	minify = require('gulp-minify'),
 	autoprefix = require('gulp-autoprefixer'),
-	browserSync = require('browser-sync').create();
+	browserSync = require('browser-sync').create(),
+	imagemin = require('gulp-imagemin'), //image optimiser
+	pngquant = require('imagemin-pngquant'), //png optimiser to work with imagemin
+	mozjpeg = require('imagemin-mozjpeg');
 	
 
  
@@ -146,6 +149,25 @@ gulp.task('ionicise', function(){
 	.pipe(source('mobile-app.js'))
 	.pipe(gulp.dest('pav_ionic/www/dist/js'));
 });
+
+
+gulp.task('img-shrink', ['jpg-shrink'], function () {
+    return gulp.src(['./img_raw/**/*.png','./img_raw/**/*.svg','./img_raw/**/*.ico'])
+        .pipe(imagemin({
+            progressive: false,
+            svgoPlugins: [{removeViewBox: false}],
+            use: [pngquant()]
+        }))
+        .pipe(gulp.dest('./img'));
+});
+
+
+gulp.task('jpg-shrink', function() {
+	return gulp.src(['./img_raw/**/*.jpeg', './img_raw/**/*.jpg'])
+        .pipe(mozjpeg({quality: '75'})())
+        .pipe(gulp.dest('./img'));
+	});
+
 
 gulp.task('watchFiles', function() {
 	gulp.watch('scss/**/**/*', ['autoPrefix']);

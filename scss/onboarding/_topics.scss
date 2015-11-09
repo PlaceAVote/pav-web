@@ -10,7 +10,7 @@
     color: white;
     @include font-size(18px);
     text-align: center;
-    font-family: $font-normal;
+    @include medium();
     width: 100%;
     display: inline-block;
     transition: all 0.2s ease;
@@ -86,7 +86,7 @@
     p {
       color: $black;
       @include font-size(15px);
-      font-family: $font-normal;
+      @include medium();
       position: absolute;
       bottom: 15px;
       left: 15px;

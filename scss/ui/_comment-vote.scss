@@ -8,7 +8,7 @@
 
     span {
       @include font-size(12px);
-      font-family: $font-bold;
+     @include bold();
       color: $green;
 
       &.opposed {
