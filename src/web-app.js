@@ -1,3 +1,6 @@
+//lib
+var d3 = require('d3');
+
 //controllers
 var RegisterController = require('./controllers/register_controller.js');
 var SignUpController = require('./controllers/sign_up_controller.js');
@@ -23,7 +26,7 @@ var mailcheck = require('./directives/mailcheck.js');
 var pavDirectives = require('./directives/directives.js');
 var commentsDirective = require('./directives/comments.js');
 var commentDirective = require('./directives/comment.js');
-
+// var statusChart = require('./directives/statuschart.js');
 //thirdparty integrations
 var Facebook = require('./integrations/facebook.js');
 //temporary resources
@@ -80,3 +83,4 @@ app.controller('HeaderCtrl', ['$scope', '$location', 'authService', HeaderContro
 app.directive('mailcheck', ['$compile','$sce', mailcheck]);
 app.directive('comment', ['$compile', commentDirective]);
 app.directive('comments', [commentsDirective]);
+// app.directive('statusChart', [statusChart]);

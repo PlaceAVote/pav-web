@@ -20,7 +20,6 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
   this.getBillVotes(this.id);
   this.getComments();
   this.voteModal = {};
-  this.stats = [];
 }
 
 BillController.prototype.Authenticate = function() {
@@ -163,8 +162,8 @@ BillController.prototype.getBillVotes = function(id) {
       that.error = true;
     }
     else {
-      this.stats = result;
-      console.log(this.stats);
+      that.stats = result;
+      // console.log(this.stats);
     }
   });
 };
