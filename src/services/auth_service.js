@@ -8,7 +8,6 @@ function AuthService() {
 
   var setAuth = function(token) {
    auth = token;
-   console.log(auth);
   };
 
   var getFacebookAccessToken = function() {

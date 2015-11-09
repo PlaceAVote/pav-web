@@ -25,17 +25,13 @@ function VotesService($resource, authService, userService) {
     if(typeof(vote) != 'boolean') {
       return callback({message: 'No Vote Cast'});
     }
-    var user = userService.getUser();
-    if(!user || !user.email) {
-      return callback({message: 'User is not specified'});
-    }
+
     var url = config.votes.voteOnBill.endpoint;
     config.methods.put.headers['Authorization'] = authService.getAccessToken();
     config.methods.put.transformResponse = [];
     var resource = new $resource(url, undefined, {voteOnBill: config.methods.put});
     var body = {
       'bill-id': billId,
-      user: user.email,
       vote: vote
     };
     var onError = function(err) {
