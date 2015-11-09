@@ -1,14 +1,15 @@
 var Banner = require('../models/banner.js');
 
-FeedController = function($scope, $location, userService, billService, trendService) {
+FeedController = function($scope, $location, userService, billService, trendService, authService) {
     this.$scope = $scope || {};
     $scope.$location = $location || {};
     this.trendService = trendService;
     this.billService = billService;
-    var user = userService.getUser();
-    if(!user){
+    var token = authService.getAccessToken();
+    if(!token){
         $location.path('/');
     }
+    var user = {};
     $scope.user = user;
     $scope.banner = new Banner(user);
     this.getBills(user.email, function(err, response){

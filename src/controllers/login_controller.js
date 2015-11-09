@@ -18,7 +18,7 @@ LoginCtrl.prototype.loginWithFacebook = function(){
   var that = this;
   this.userService.loginWithFacebook(function(err, response){
     if(err){
-      that.go("/topics");
+      that.go("/onboarding");
     }
     else {
       that.go("/feed");
@@ -52,12 +52,10 @@ LoginCtrl.prototype.login = function(u, hash) {
   if(this.user.emailValid && this.user.passwordValid) {
     this.userService.login({email: email, password: password}, function(err, response){
       if (err) {
-        console.log("**ERROR: ", err);
         if(err.status === 401){
           that.forgot = true;
         }
       } else {
-        console.log("**Response: ", response);
         that.go("/feed");
       }
     });

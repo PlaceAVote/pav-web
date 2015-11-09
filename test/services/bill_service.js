@@ -71,7 +71,7 @@ describe("Bill Service", function(){
     });
     it('creates resource with correct params', function(done){
       function mockResource(url, params, method) {
-        expect(url).to.eql('http://pav-congress-api-196217309.us-west-2.elb.amazonaws.com:8080/bills/100');
+        expect(url).to.eql('http://pav-congress-api-515379972.us-east-1.elb.amazonaws.com:8080/bills/100');
         expect(params).to.eql('100');
         expect(method.getById.method).to.eql('GET');
         this.getById = function(body, onLoad, onError){
@@ -143,7 +143,7 @@ describe("Bill Service", function(){
     it('checks params of top comments', function(done) {
       var expected = require('../fixtures/top_comments.js');
       function mockResource(url, params, method){
-        expect(url).to.eql('http://pav-congress-api-196217309.us-west-2.elb.amazonaws.com:8080/bills/serverId/topcomments');
+        expect(url).to.eql('http://pav-congress-api-515379972.us-east-1.elb.amazonaws.com:8080/bills/serverId/topcomments');
         expect(params).to.eql('serverId');
         expect(method.getComments.method).to.eql('GET');
         expect(method.getComments.headers['Authorization']).to.eql('TOKEN');
@@ -189,7 +189,7 @@ describe("Bill Service", function(){
     it('Calls Resource with correct params', function(done) {
       var expected = require('../fixtures/comments.js');
       function mockResource(url, params, method){
-        expect(url).to.eql('http://pav-congress-api-196217309.us-west-2.elb.amazonaws.com:8080/bills/serverId/comments?from=0');
+        expect(url).to.eql('http://pav-congress-api-515379972.us-east-1.elb.amazonaws.com:8080/bills/serverId/comments?from=0');
         expect(params).to.eql(undefined);
         expect(method.getComments.method).to.eql('GET');
         expect(method.getComments.headers['Authorization']).to.eql('TOKEN');
@@ -265,7 +265,7 @@ describe("Bill Service", function(){
     });
     it('calls resource with the correct params', function(done) {
       function mockResource(url, params, method){
-        expect(url).to.eql('http://pav-congress-api-196217309.us-west-2.elb.amazonaws.com:8080/bills/comments');
+        expect(url).to.eql('http://pav-congress-api-515379972.us-east-1.elb.amazonaws.com:8080/bills/comments');
         expect(params).to.eql(undefined);
         expect(method.postComment.method).to.eql('PUT');
         expect(method.postComment.headers['Authorization']).to.eql('TOKEN');

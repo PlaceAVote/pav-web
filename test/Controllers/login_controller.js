@@ -91,7 +91,7 @@ describe('LoginCtrl', function() {
                    }
                 };
                subject.go = function(hash){
-                expect(hash).to.eql("/topics");
+                expect(hash).to.eql("/onboarding");
                 done();
                };
                subject.loginWithFacebook();
@@ -119,7 +119,6 @@ describe('LoginCtrl', function() {
                 }
             };
             var test = function(callback){
-                console.log("hello");
                 subject.login({email: 'paul@test.com', password: 'tesTING123'}, 'destination');
                 callback();
             }
