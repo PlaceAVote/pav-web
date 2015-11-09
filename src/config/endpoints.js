@@ -1,4 +1,4 @@
-var CONGRESS = 'http://pav-congress-api-196217309.us-west-2.elb.amazonaws.com:8080';
+var CONGRESS = 'http://pav-congress-api-515379972.us-east-1.elb.amazonaws.com:8080';
 var USER = 'http://pav-user-api-924234322.us-east-1.elb.amazonaws.com:8080';
 var VOTES = 'http://pav-vote-api-1303687856.us-east-1.elb.amazonaws.com:8080';
 
