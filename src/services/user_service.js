@@ -22,11 +22,12 @@ function UserService($resource, facebookService, authService) {
             that.user.first_name = resource.first_name;
             that.user.last_name = resource.last_name;
             that.user.img_url = resource.picture.data.url;
-            config.methods.post.headers["Authorization"] = authService.getFacebookAccessToken();
+            var authToken = authService.getFacebookAccessToken();
+            config.methods.post.headers["Authorization"] = authToken;
             var facebookUserLoginResource = new $resource(config.users.facebookLoginUrl, undefined, {login : config.methods.post});
             var creds = {
                 email: that.user.email,
-                token: authService.getFacebookAccessToken(),
+                token: authToken,
             };
             facebookUserLoginResource.login(creds, onLoad, onError);
         });
@@ -106,7 +107,7 @@ function UserService($resource, facebookService, authService) {
     var login = function(user, callback) {
 
         var onLoad = function(response) {
-            authService.setAuth(user.token);
+            authService.setAuth(response.token);
             return callback(undefined, response);
         };
 

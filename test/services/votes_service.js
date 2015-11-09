@@ -19,7 +19,7 @@ describe('Vote Service', function(){
     });
     it('calls resource with correct params', function(done) {
       function mockResource(url, params, method){
-        expect(url).to.eql('http://pav-vote-api-2107571587.us-west-2.elb.amazonaws.com:8080/vote/count?bill-id=hr2-114');
+        expect(url).to.eql('http://pav-vote-api-1303687856.us-east-1.elb.amazonaws.com:8080/vote/count?bill-id=hr2-114');
         expect(params).to.eql('hr2-114');
         expect(method.getForBill.headers['Authorization']).to.eql('TOKEN');
         expect(method.getForBill.method).to.eql('GET');
@@ -82,21 +82,9 @@ describe('Vote Service', function(){
         done();
       });
     });
-    it('returns error if current user isnt defined', function(done){
-      var userService = {
-        getUser: function(){
-          return;
-        }
-      }
-      var subject = new VotesService(undefined, undefined, userService);
-      subject.voteOnBill('hr12-114', false, function(err, resource) {
-        expect(err).to.eql({message: 'User is not specified'});
-        done();
-      });
-    });
     it('calls resource with correct params', function(done) {
       function mockResource(url, params, method){
-        expect(url).to.eql('http://pav-vote-api-2107571587.us-west-2.elb.amazonaws.com:8080/vote');
+        expect(url).to.eql('http://pav-vote-api-1303687856.us-east-1.elb.amazonaws.com:8080/vote');
         expect(params).to.eql(undefined);
         expect(method.voteOnBill.headers['Authorization']).to.eql('TOKEN');
         expect(method.voteOnBill.method).to.eql('PUT');
@@ -120,7 +108,6 @@ describe('Vote Service', function(){
       }
       mockResource.prototype.voteOnBill = function(object, onLoad, onError) {
         expect(object['bill-id']).to.eql('hr2-114');
-        expect(object.user).to.eql('paul@testing.com');
         expect(object.vote).to.eql(true);
         done();
       };
