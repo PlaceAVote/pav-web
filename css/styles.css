@@ -2366,3 +2366,15 @@ section.comment-vote {
 
 .icon-reply:before {
   content: "n"; }
+
+path.opposed_line {
+  fill: none;
+  stroke: #e64a33; }
+
+path.for_line {
+  fill: none;
+  stroke: #a5cc71; }
+
+path.domain {
+  stroke: #798796;
+  fill: none; }

@@ -8,23 +8,39 @@
   .directive('statusChart', function() {
 			  	function link(scope, el){
 
+
 scope.$watch('data', function(newValue, oldValue) {
+var vote_for = 0;
+var vote_against = 0;
                 if (newValue)
                     console.log(newValue);
-            		var parseDate = d3.time.format("%d-%b-%y").parse;
+            			
+            		  // var parseDate = d3.time.format("%d-%b-%y").parse;
                       var data = newValue;
 
                 	  data.forEach(function(d) {
 					        d.created_at = new Date(d.created_at * 1000);
-					        d.created_at = parseDate(d.created_at);
-					        d.vote = +d.vote;
+					        // d.created_at = parseDate(d.created_at);
+					        // d.vote = +d.vote;
+					        // d.vote_total++;
+					        if (d.vote) {
+					        	vote_for++;
+					        	d['for'] = vote_for;
+					        	d['against'] = vote_against;
+					        } else if (!d.vote) {
+					        	vote_against++;
+					        	d['against'] = vote_against;
+					        	d['for'] = vote_for;
+					        } 
 					    });
 
 
 
+                	 //sort out margins
 
-					var margin = {top: 30, right: 20, bottom: 30, left: 50},
-					    width = 600 - margin.left - margin.right,
+					var margin = {top: 30, right: 20, bottom: 30, left: 10},
+						per_width = el[0].clientWidth,
+					    width = per_width - margin.left - margin.right,
 					    height = 270 - margin.top - margin.bottom;
 
 					var svg = d3.select(el[0])
@@ -46,19 +62,27 @@ scope.$watch('data', function(newValue, oldValue) {
 					    .orient("left").ticks(5);
 
 					// Define the line
-					var valueline = d3.svg.line()
+					var for_line = d3.svg.line()
 					    .x(function(d) { return x(d.created_at); })
-					    .y(function(d) { return y(d.vote); });
+					    .y(function(d) { return y(d['for']); });
+
+					var against_line = d3.svg.line()
+					    .x(function(d) { return x(d.created_at); })
+					    .y(function(d) { return y(d['against']); });
 
 
 					    // Scale the range of the data
 					    x.domain(d3.extent(data, function(d) { return d.created_at; }));
-					    y.domain([0, d3.max(data, function(d) { return d.vote; })]);
+					    y.domain([0, d3.max(data, function(d) { return d['for']; })]);
 
 					    // Add the valueline path.
 					    svg.append("path")
-					        .attr("class", "line")
-					        .attr("d", valueline(data));
+					        .attr("class", "for_line")
+					        .attr("d", for_line(data));
+
+					    svg.append("path")
+					        .attr("class", "opposed_line")
+					        .attr("d", against_line(data));
 
 					    // Add the X Axis
 					    svg.append("g")
