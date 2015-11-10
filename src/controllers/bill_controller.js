@@ -100,6 +100,7 @@ BillController.prototype.voteConfirmed = function() {
   else if (!this.vote) {
     this.generateCommentCard(this.againstComment);
   }
+  this.getVotes(this.id);
 };
 
 BillController.prototype.generateCommentCard = function(comment) {
@@ -116,7 +117,6 @@ BillController.prototype.getTopComments = function(id){
   this.billService.getTopComments(id, function(err, result){
     if(err){
       that.topCommentError = true;
-      console.error('WUT');
     }
     else {
       that.forComment = result.forComment;

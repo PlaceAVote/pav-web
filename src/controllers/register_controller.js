@@ -32,7 +32,7 @@ RegisterController.prototype.select = function(name) {
 	if (interest) {
 		interest.select();
 	}
-	
+
 };
 
 RegisterController.prototype.getSelected = function(){
