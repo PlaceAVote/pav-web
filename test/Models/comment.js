@@ -269,7 +269,8 @@ describe("comment model", function(){
     it('Sets LikeError to true is service returns error', function(done) {
       var subject = new Comment(comment);
       var service = {
-        like: function(object, callback) {
+        like: function(object, billId, callback) {
+           expect(billId).to.eql('hr2-114');
            expect(object).to.eql('comments:9e9b0180-c5ab-4806-a8b5-ee37b9867626');
            return callback('Error');
         },
@@ -281,7 +282,7 @@ describe("comment model", function(){
     it('Sets Liked to true is service returns error', function() {
       var subject = new Comment(comment);
       var service = {
-        like: function(object, callback) {
+        like: function(object, billId, callback) {
            expect(object).to.eql('comments:9e9b0180-c5ab-4806-a8b5-ee37b9867626');
            return callback(undefined, true);
         },
@@ -294,7 +295,7 @@ describe("comment model", function(){
     it('Sets DisLikeError to true is service returns error', function(done) {
       var subject = new Comment(comment);
       var service = {
-        dislike: function(object, callback) {
+        dislike: function(object, billId ,callback) {
            expect(object).to.eql('comments:9e9b0180-c5ab-4806-a8b5-ee37b9867626');
            return callback('Error');
         },
@@ -306,7 +307,7 @@ describe("comment model", function(){
     it('Sets Disliked to true is service returns error', function() {
       var subject = new Comment(comment);
       var service = {
-        dislike: function(object, callback) {
+        dislike: function(object, billId, callback) {
            expect(object).to.eql('comments:9e9b0180-c5ab-4806-a8b5-ee37b9867626');
            return callback(undefined, true);
         },

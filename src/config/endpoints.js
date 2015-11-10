@@ -46,16 +46,19 @@ module.exports = {
   comments: {
     reply: {
       endpoint: function(id) {
+        id = id.trim();
         return CONGRESS + '/comments/' + id + '/reply'
       },
     },
     like: {
       endpoint: function(id) {
+        id = id.trim();
         return CONGRESS + '/comments/' + id + '/like'
       }
     },
     dislike: {
       endpoint: function(id) {
+        id = id.trim();
         return CONGRESS + '/comments/' + id + '/dislike'
       }
     },
