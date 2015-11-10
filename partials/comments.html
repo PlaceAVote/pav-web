@@ -2,18 +2,19 @@
 
         <section class="comment">
           <div class="user-img-border">
-            <img src='{{comment.img_url}}' />
+            <img src='{{comment.author_img_url}}' />
           </div>
 
             <div class="top-comment-body">
 
             <h2>{{comment.author}}</h2>
 
-            <section class="comment-vote"><span>{{comment.score}}</span><img ng-click="comment.like($parent.commentService)"src="img/card/thumb-up.png"><img src="img/card/thumb-down.png" ng-click="comment.dislike($parent.commentService)"/><span class="reply-btn" ng-click="comment.showReplyInput()">reply</span></section>
+            <section class="comment-vote"><span>{{comment.score}}</span><img ng-click="comment.like(commentService)"src="img/card/thumb-up.png"><img src="img/card/thumb-down.png" ng-click="comment.dislike(commentService)"/><span class="reply-btn" ng-click="comment.showReplyInput()">reply</span></section>
 
             <p>{{comment.body}}</p>
-
-            <input type="text" placeholder="Reply"ng-show="comment.replyInput" ng-model="comment.reply"></input><span class="reply-btn" ng-click="comment.reply($parent.id, $parent.commentService)">Reply</span><button ng-click="comment.hideReplyInput()">Cancel</span>
+            <div ng-show="comment.replyInput">
+            <input type="text" placeholder="Reply" ng-model="comment.replyText"></input><span class="reply-btn" ng-click="comment.reply(comment.bill_id, commentService)">Reply</span><span class="reply-btn" ng-click="comment.hideReplyInput()">Cancel</span>
+            </div>
             </div>
         </section>
 
