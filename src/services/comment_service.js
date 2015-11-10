@@ -17,17 +17,13 @@ function CommentService($resource, userService, authService) {
       bill_id: billId,
       body: comment,
     };
-    console.log('PARENT', parentId);
-    console.log('BODY', body);
     config.methods.put.headers['Authorization'] = authService.getAccessToken();
     var url = config.comments.reply.endpoint(parentId);
-    console.log('URL', url);
     var resource = new $resource(url, undefined, {reply: config.methods.put});
     var onError = function(err) {
       return callback(err);
     };
     var onLoad = function(response) {
-      console.log('RESPONSE', response);
       return callback(undefined, new Comment(response));
     };
     resource.reply(body, onLoad, onError);

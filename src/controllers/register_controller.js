@@ -42,7 +42,7 @@ RegisterController.prototype.getSelected = function(){
 		if(this.interests[i].selected) {
 			interests.push(this.interests[i]);
 		}
-	}	
+	}
 	return interests;
 };
 

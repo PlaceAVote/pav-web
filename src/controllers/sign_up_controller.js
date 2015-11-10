@@ -19,26 +19,21 @@ SignUpCtrl.prototype.test = function() {
     var that = this;
     this.userService.addAdditionalInformation(this.additionalInformation);
     var user = this.userService.getUser();
-    console.log(user);
     if(!user) {
         that.invalid_user = true;
-        console.log("invalid");
     }
     else {
         this.userService.saveUser(function(err, result){
             if(err) {
                 if(err.status === 409) {
                     that.user_exists_error = true;
-                    console.log('error');
                 }
                 else {
                 that.error = true;
-                    console.log(err.status);
                 }
             }
             else {
                 //move page
-                console.log(result);
                 that.location.path("/feed");
             }
         });
