@@ -31,7 +31,7 @@
             		</ul>
                 <div  class="bill-timeline-bar"><span class="{{bill.body.getStatusClass()}}"></span></div>
             		</section>
-           
+
     <section class="top-comments">
   		<div class="card">
   			<h1>Top Comment In Favor</h1>
@@ -90,9 +90,9 @@
     <div class="card bill-comments">
       <h1>COMMENTS</h1>
       <hr />
-      
+
       <comments comments='bill.comments'></comments>
-      
+
 		</div>
 
     <div class="comment-create card">
@@ -173,7 +173,10 @@
               </aside>
           </div>
           <div class="row">
-           <button class="btn-blue"><span class="icon-reply"></span> Reply to Comment </button>
+            <div ng-show="bill.commentCard.replyInput">
+            <input type="text" placeholder="Reply" ng-model="bill.commentCard.replyText"></input><span ng-click="bill.commentCard.reply(bill.id, bill.commentService)">Reply</span>
+            </div>
+           <button class="btn-blue" ng-click="bill.commentCard.showReplyInput()"><span class="icon-reply"></span> Reply to Comment </button>
            <button class="btn-grey" ng-click="bill.hideVoteModal()"> I'm not ready yet </button>
           </div>
         </div>

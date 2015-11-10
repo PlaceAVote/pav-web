@@ -61,8 +61,8 @@ Comment.prototype.reply = function(billId, service) {
     else if(response) {
       response.deep = that.deep + 1;
       that.replies.push(response);
-      that.hideReplyInput();
     }
+    that.hideReplyInput();
   });
 };
 
