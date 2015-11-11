@@ -43,6 +43,8 @@ var vote_against = 0;
 					    width = per_width - margin.left - margin.right,
 					    height = 270 - margin.top - margin.bottom;
 
+
+
 					var svg = d3.select(el[0])
 					    .append("svg")
 					        .attr("width", width + margin.left + margin.right)
@@ -94,8 +96,40 @@ var vote_against = 0;
 					    svg.append("g")
 					        .attr("class", "y axis")
 					        .call(yAxis);
-					            
 
+
+
+					d3.select(window).on('resize', resize); 
+
+					function resize() {
+						console.log(el[0].clientWidth);
+					// update width
+						width = el[0].clientWidth;
+						width = width - margin.left - margin.right;
+
+						// reset x range
+						x.range([0, width]);
+						xAxis = d3.svg.axis().scale(x)
+					    .orient("bottom").ticks(5);
+		
+				   		 d3.select(svg.node().parentNode)
+				        .style('width', (width + margin.left + margin.right) + 'px');
+
+				        svg.select('.for_line')
+       					.attr("d", for_line(data));
+					  	 svg.select('.opposed_line')
+       					.attr("d", against_line(data));
+
+       					svg.select('.x.axis')
+       					 .attr("transform", "translate(0," + height + ")")
+ 						 .call(xAxis);
+
+
+       					
+ 
+
+					            
+					}
             });
         
 // do {
