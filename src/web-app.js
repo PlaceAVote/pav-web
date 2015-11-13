@@ -81,6 +81,6 @@ app.controller('BillCtrl', ['$scope', '$routeParams', 'billService', 'legislatio
 app.controller('HeaderCtrl', ['$scope', '$location', 'authService', HeaderController]);
 //directives
 app.directive('mailcheck', ['$compile','$sce', mailcheck]);
-app.directive('comment', ['$compile', commentDirective]);
+app.directive('comment', ['$compile', 'commentService', commentDirective]);
 app.directive('comments', [commentsDirective]);
 // app.directive('statusChart', [statusChart]);

@@ -19,7 +19,7 @@ describe('Vote Service', function(){
     });
     it('calls resource with correct params', function(done) {
       function mockResource(url, params, method){
-        expect(url).to.eql('http://pav-vote-api-1303687856.us-east-1.elb.amazonaws.com:8080/vote/count?bill-id=hr2-114');
+        expect(url).to.eql('http://pav-vote-api-143877429.us-east-1.elb.amazonaws.com:8080/vote/count?bill-id=hr2-114');
         expect(params).to.eql('hr2-114');
         expect(method.getForBill.headers['Authorization']).to.eql('TOKEN');
         expect(method.getForBill.method).to.eql('GET');
@@ -84,7 +84,7 @@ describe('Vote Service', function(){
     });
     it('calls resource with correct params', function(done) {
       function mockResource(url, params, method){
-        expect(url).to.eql('http://pav-vote-api-1303687856.us-east-1.elb.amazonaws.com:8080/vote');
+        expect(url).to.eql('http://pav-vote-api-143877429.us-east-1.elb.amazonaws.com:8080/vote');
         expect(params).to.eql(undefined);
         expect(method.voteOnBill.headers['Authorization']).to.eql('TOKEN');
         expect(method.voteOnBill.method).to.eql('PUT');
@@ -107,7 +107,6 @@ describe('Vote Service', function(){
       function mockResource(url, params, method){
       }
       mockResource.prototype.voteOnBill = function(object, onLoad, onError) {
-        expect(object['bill-id']).to.eql('hr2-114');
         expect(object.vote).to.eql(true);
         done();
       };

@@ -37,40 +37,6 @@ describe('Comment Service', function() {
         done();
       });
     });
-    it('Returns a User not Defined Error when no User is Available', function(done) {
-      function mockResource(url, params, method){
-      }
-      mockResource.prototype.reply = function(object, onLoad, onError) {
-      };
-      var userService = {
-        getUser: function() {
-          return;
-        },
-      };
-      var subject = new CommentService(mockResource, userService, authService);
-      subject.reply('Witty Retort', 'hr2-114', 'hr3', function(err, resource) {
-        expect(err).to.eql('No User Defined');
-        done();
-      });
-    });
-    it('Returns a User not Defined Error when no User is Available', function(done) {
-      function mockResource(url, params, method){
-      }
-      mockResource.prototype.reply = function(object, onLoad, onError) {
-      };
-      var userService = {
-        getUser: function() {
-          return {
-            email: '',
-          };
-        },
-      };
-      var subject = new CommentService(mockResource, userService, authService);
-      subject.reply('Witty Retort', 'hr2-114', 'hr3', function(err, resource) {
-        expect(err).to.eql('No User Defined');
-        done();
-      });
-    });
     it('Calls Resource function with correct params', function(done) {
       function mockResource(url, params, method){
         expect(url).to.eql('http://pav-congress-api-515379972.us-east-1.elb.amazonaws.com:8080/comments/hw3/reply');
@@ -88,7 +54,6 @@ describe('Comment Service', function() {
       var expected = {
         bill_id: 'hr2-114',
         body: 'Witty Retort',
-        author: 'test@test.com',
       };
       function mockResource(url, params, method){
       }
@@ -131,7 +96,7 @@ describe('Comment Service', function() {
   describe('Like', function() {
     it('Takes a Comment Id', function(done) {
       var subject = new CommentService();
-      subject.like(undefined, function(err, result) {
+      subject.like(undefined, 'billId', function(err, result) {
         expect(err).to.eql('No Comment Id');
         done();
       });
@@ -143,22 +108,15 @@ describe('Comment Service', function() {
         },
       };
       var subject = new CommentService(undefined, userService);
-      subject.like('CommentID', function(err, result) {
-        expect(err).to.eql('No User Defined');
+      subject.like('CommentID', undefined, function(err, result) {
+        expect(err).to.eql('No Bill Defined');
         done();
       });
     });
     it('Returns Error if user email is not defined', function(done) {
-      var userService = {
-        getUser: function() {
-          return {
-            email: ''
-          };
-        },
-      };
       var subject = new CommentService(undefined, userService);
-      subject.like('CommentID', function(err, result) {
-        expect(err).to.eql('No User Defined');
+      subject.like('CommentID', '', function(err, result) {
+        expect(err).to.eql('No Bill Defined');
         done();
       });
     });
@@ -168,12 +126,12 @@ describe('Comment Service', function() {
         expect(params).to.eql(undefined);
         expect(method.like.headers.Authorization).to.eql('PAV_AUTH_TOKEN TOKEN');
         this.like = function(body, onLoad, onError) {
-          expect(body).to.eql({author: 'test@test.com'});
+          expect(body).to.eql({bill_id: 'billId'});
           done();
         }
       }
       var subject = new CommentService(mockResource, userService, authService);
-      subject.like('CommentID', function(err, result) {
+      subject.like('CommentID', 'billId', function(err, result) {
       });
     });
     it('Returns Error when server returns error', function(done) {
@@ -183,7 +141,7 @@ describe('Comment Service', function() {
         }
       }
       var subject = new CommentService(mockResource, userService, authService);
-      subject.like('CommentID', function(err, result) {
+      subject.like('CommentID', 'billId', function(err, result) {
         expect(err).to.eql('Error');
         done();
       });
@@ -195,7 +153,7 @@ describe('Comment Service', function() {
         }
       }
       var subject = new CommentService(mockResource, userService, authService);
-      subject.like('CommentID', function(err, result) {
+      subject.like('CommentID', 'bill-id', function(err, result) {
         expect(err).to.eql(undefined);
         expect(result).to.eql(true);
         done();
@@ -205,34 +163,22 @@ describe('Comment Service', function() {
   describe('Dislike', function() {
     it('Takes a Comment Id', function(done) {
       var subject = new CommentService();
-      subject.dislike(undefined, function(err, result) {
+      subject.dislike(undefined, 'billId', function(err, result) {
         expect(err).to.eql('No Comment Id');
         done();
       });
     });
-    it('Returns Error if user is not defined', function(done) {
-      var userService = {
-        getUser: function() {
-          return;
-        },
-      };
-      var subject = new CommentService(undefined, userService);
-      subject.dislike('CommentID', function(err, result) {
-        expect(err).to.eql('No User Defined');
+    it('Returns Error if billId is not defined', function(done) {
+      var subject = new CommentService(undefined, undefined, userService);
+      subject.dislike('CommentID', undefined,  function(err, result) {
+        expect(err).to.eql('No Bill Defined');
         done();
       });
     });
     it('Returns Error if user email is not defined', function(done) {
-      var userService = {
-        getUser: function() {
-          return {
-            email: ''
-          };
-        },
-      };
       var subject = new CommentService(undefined, userService);
-      subject.dislike('CommentID', function(err, result) {
-        expect(err).to.eql('No User Defined');
+      subject.dislike('CommentID', '', function(err, result) {
+        expect(err).to.eql('No Bill Defined');
         done();
       });
     });
@@ -242,12 +188,12 @@ describe('Comment Service', function() {
         expect(params).to.eql(undefined);
         expect(method.dislike.headers.Authorization).to.eql('PAV_AUTH_TOKEN TOKEN');
         this.dislike = function(body, onLoad, onError) {
-          expect(body).to.eql({author: 'test@test.com'});
+          expect(body).to.eql({bill_id: 'bill'});
           done();
         }
       }
       var subject = new CommentService(mockResource, userService, authService);
-      subject.dislike('CommentID', function(err, result) {
+      subject.dislike('CommentID', 'bill', function(err, result) {
       });
     });
     it('Returns Error when server returns error', function(done) {
@@ -257,7 +203,7 @@ describe('Comment Service', function() {
         }
       }
       var subject = new CommentService(mockResource, userService, authService);
-      subject.dislike('CommentID', function(err, result) {
+      subject.dislike('CommentID', 'bill', function(err, result) {
         expect(err).to.eql('Error');
         done();
       });
@@ -269,7 +215,7 @@ describe('Comment Service', function() {
         }
       }
       var subject = new CommentService(mockResource, userService, authService);
-      subject.dislike('CommentID', function(err, result) {
+      subject.dislike('CommentID', 'billId', function(err, result) {
         expect(err).to.eql(undefined);
         expect(result).to.eql(true);
         done();
