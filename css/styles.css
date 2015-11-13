@@ -2376,5 +2376,25 @@ path.for_line {
   stroke: #a5cc71; }
 
 path.domain {
-  stroke: #798796;
+  stroke: none;
   fill: none; }
+
+.y.axis .domain {
+  stroke: none; }
+
+.x.axis .tick text, .y.axis .tick text {
+  font-size: 12px;
+  fill: #798796;
+  font-style: normal;
+  font-weight: 500; }
+
+.y.axis .tick text {
+  padding-right: 10px; }
+
+.y.axis .tick line {
+  stroke: #798796;
+  stroke-dasharray: 6; }
+
+.y.axis .tick .baseline {
+  stroke: #fca393;
+  stroke-dasharray: none; }

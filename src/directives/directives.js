@@ -14,15 +14,10 @@ var vote_for = 0;
 var vote_against = 0;
                 if (newValue)
                     console.log(newValue);
-            			
-            		  // var parseDate = d3.time.format("%d-%b-%y").parse;
                       var data = newValue;
 
                 	  data.forEach(function(d) {
 					        d.created_at = new Date(d.created_at * 1000);
-					        // d.created_at = parseDate(d.created_at);
-					        // d.vote = +d.vote;
-					        // d.vote_total++;
 					        if (d.vote) {
 					        	vote_for++;
 					        	d['for'] = vote_for;
@@ -38,7 +33,7 @@ var vote_against = 0;
 
                 	 //sort out margins
 
-					var margin = {top: 30, right: 20, bottom: 30, left: 10},
+					var margin = {top: 30, right: 10, bottom: 20, left: 20},
 						per_width = el[0].clientWidth,
 					    width = per_width - margin.left - margin.right,
 					    height = 270 - margin.top - margin.bottom;
@@ -58,10 +53,12 @@ var vote_against = 0;
 
 										// Define the axes
 					var xAxis = d3.svg.axis().scale(x)
-					    .orient("bottom").ticks(5);
+					    .orient("bottom").ticks(5)
+					    .outerTickSize(0);
 
 					var yAxis = d3.svg.axis().scale(y)
-					    .orient("left").ticks(5);
+					    .orient("left").ticks(4)
+					    .innerTickSize(-width);
 
 					// Define the line
 					var for_line = d3.svg.line()
@@ -77,14 +74,7 @@ var vote_against = 0;
 					    x.domain(d3.extent(data, function(d) { return d.created_at; }));
 					    y.domain([0, d3.max(data, function(d) { return d['for']; })]);
 
-					    // Add the valueline path.
-					    svg.append("path")
-					        .attr("class", "for_line")
-					        .attr("d", for_line(data));
 
-					    svg.append("path")
-					        .attr("class", "opposed_line")
-					        .attr("d", against_line(data));
 
 					    // Add the X Axis
 					    svg.append("g")
@@ -97,7 +87,20 @@ var vote_against = 0;
 					        .attr("class", "y axis")
 					        .call(yAxis);
 
+					     					    // Add the valueline path.
+					    svg.append("path")
+					        .attr("class", "for_line")
+					        .attr("d", for_line(data));
 
+					    svg.append("path")
+					        .attr("class", "opposed_line")
+					        .attr("d", against_line(data));
+
+					    svg.selectAll(".y.axis .tick text")
+					    	.attr("x", "-10");
+
+					   svg.select('.y.axis .tick line')
+					   		.attr("class", "baseline");
 
 					d3.select(window).on('resize', resize); 
 
@@ -111,7 +114,12 @@ var vote_against = 0;
 						x.range([0, width]);
 						xAxis = d3.svg.axis().scale(x)
 					    .orient("bottom").ticks(5);
+
+					   	yAxis = d3.svg.axis().scale(y)
+					    .orient("left").ticks(4)
+					    .innerTickSize(-width);
 		
+
 				   		 d3.select(svg.node().parentNode)
 				        .style('width', (width + margin.left + margin.right) + 'px');
 
@@ -124,6 +132,13 @@ var vote_against = 0;
        					 .attr("transform", "translate(0," + height + ")")
  						 .call(xAxis);
 
+ 						svg.select('.y.axis')
+ 						.call(yAxis);
+
+						    svg.selectAll(".y.axis .tick text")
+					    	.attr("x", "-10");
+ 						
+
 
        					
  
@@ -132,35 +147,6 @@ var vote_against = 0;
 					}
             });
         
-// do {
-// 	console.log(scope.data);    
-// }
-// while (scope.data !== undefined);
-			  		// console.log(scope.data);
-			  		// if(scope.data !== undefined) {
-			  		// var data = scope.data;
-			  		// console.log('test');
-			  		// console.log(data);
-
-
-
-					//   		// Set the dimensions of the canvas / graph
-
-
-					// // Parse the date / time
-					
-
-					// // Set the ranges
-
-
-
-					// Adds the svg canvas
-
-
-					// // Get the data
-		
-
-					// });
 				}
   	
   	return {
