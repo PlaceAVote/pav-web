@@ -78,28 +78,18 @@ BillController.prototype.voteOnBill = function() {
       if(err.status && err.status === 409){
         that.userAlreadyVoted = true;
       }
-      else if(err.message === 'User is not specified') {
-        that.location.path('/');
-      }
       else {
         that.voteFailed = true;
       }
-      that.voteConfirmed();
     }
-    else {
-      that.voteConfirmed();
-    }
+    that.voteConfirmed();
   });
 };
 
 BillController.prototype.voteConfirmed = function() {
   this.userVoted = true;
-  if (this.vote) {
-    this.generateCommentCard(this.forComment);
-  }
-  else if (!this.vote) {
-    this.generateCommentCard(this.againstComment);
-  }
+  var vote = this.vote ? this.forComment : this.againstComment;
+  this.generateCommentCard(vote);
   this.getVotes(this.id);
 };
 
@@ -115,12 +105,15 @@ BillController.prototype.generateCommentCard = function(comment) {
 BillController.prototype.getTopComments = function(id){
   var that = this;
   this.billService.getTopComments(id, function(err, result){
+    that.topLoaded = true;
     if(err){
       that.topCommentError = true;
     }
     else {
       that.forComment = result.forComment;
       that.againstComment = result.againstComment;
+      that.noForComment = that.forComment.id ? true : false;
+      that.noAgainstComment = that.againstComment.id ? true : false;
     }
   });
 };
