@@ -15,9 +15,9 @@ var gulp = require('gulp'),
 	imagemin = require('gulp-imagemin'), //image optimiser
 	pngquant = require('imagemin-pngquant'), //png optimiser to work with imagemin
 	mozjpeg = require('imagemin-mozjpeg');
-	
 
- 
+
+
 gulp.task('compress', function() {
   return gulp.src('./web/dist/js/app.js')
     .pipe(minify())
@@ -28,7 +28,7 @@ gulp.task('live-config', function() {
     gulp.src(['./src/config/live_endpoints.js'])
 	.pipe(rename('endpoints.js'))
 	.pipe(gulp.dest('./src/config/'));
-}); 
+});
 
 // Website
 
@@ -107,7 +107,7 @@ gulp.task('browser-sync', function() {
             baseDir: "./"
         }
     });
-    gulp.watch(["*.html", "css/*.css", "dist/js/*.js"]).on("change", browserSync.reload);
+    gulp.watch(["partials/*.html","*.html", "css/*.css", "dist/js/*.js"]).on("change", browserSync.reload);
 });
 
 
