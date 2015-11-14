@@ -1,7 +1,9 @@
 var BillService = require('../../src/services/bill_service.js');
 var Bill = require('../../src/models/bill_summary.js');
 var Comment = require('../../src/models/comment.js');
-var AuthService = require("../../src/services/auth_service.js");
+var AuthService = require('../../src/services/auth_service.js');
+var mockLocal = require('../mocks/local_storage.js');
+var authOptions = { window : {localStorage: new mockLocal() }};
 
 var expect = require('chai').expect;
 var resource = require("../../src/temp/mockBillResource.js");
@@ -78,7 +80,7 @@ describe("Bill Service", function(){
         }
         done();
       }
-      var authService = new AuthService();
+      var authService = new AuthService(authOptions);
       var subject = new BillService({}, mockResource, authService);
       subject.getBill('100', function(err, result) {
       });
@@ -89,7 +91,7 @@ describe("Bill Service", function(){
           onError('Error: A Server Error Occured');
         }
       }
-      var authService = new AuthService();
+      var authService = new AuthService(authOptions);
       var subject = new BillService({}, mockResource, authService);
       subject.getBill('100', function(err, result) {
         expect('Error: A Server Error Occured');
@@ -104,7 +106,7 @@ describe("Bill Service", function(){
           onLoad(data);
         }
       }
-      var authService = new AuthService();
+      var authService = new AuthService(authOptions);
       var subject = new BillService({}, mockResource, authService);
       subject.getBill('100', function(err, result) {
         expect(undefined);
@@ -131,7 +133,7 @@ describe("Bill Service", function(){
           onLoad(expected);
         }
       }
-      var authService = new AuthService();
+      var authService = new AuthService(authOptions);
       var subject = new BillService(undefined, mockResource, authService);
       subject.getTopComments('serverId', function(err, resource){
         expect(err).to.eql(undefined);
@@ -152,7 +154,7 @@ describe("Bill Service", function(){
       mockResource.prototype.getComments = function(object, onLoad, onError){
         onLoad(expected);
       }
-      var authService = new AuthService();
+      var authService = new AuthService(authOptions);
       authService.getAccessToken = function(){
         return 'TOKEN';
       };
@@ -166,7 +168,7 @@ describe("Bill Service", function(){
           onError({message: 'Server Error'});
         }
       }
-      var authService = new AuthService();
+      var authService = new AuthService(authOptions);
       var subject = new BillService(undefined, mockResource, authService);
       subject.getTopComments('serverId', function(err, resource){
         expect(err).to.not.eql(undefined);
@@ -197,7 +199,7 @@ describe("Bill Service", function(){
       }
       mockResource.prototype.getComments = function(object, onLoad, onError){
       }
-      var authService = new AuthService();
+      var authService = new AuthService(authOptions);
       authService.getAccessToken = function(){
         return 'TOKEN';
       };
@@ -212,7 +214,7 @@ describe("Bill Service", function(){
       mockResource.prototype.getComments = function(object, onLoad, onError){
         onError('ERROR');
       }
-      var authService = new AuthService();
+      var authService = new AuthService(authOptions);
       authService.getAccessToken = function(){
         return 'TOKEN';
       };
@@ -230,7 +232,7 @@ describe("Bill Service", function(){
       mockResource.prototype.getComments = function(object, onLoad, onError){
         onLoad(expected);
       }
-      var authService = new AuthService();
+      var authService = new AuthService(authOptions);
       authService.getAccessToken = function(){
         return 'TOKEN';
       };
