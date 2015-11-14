@@ -1,6 +1,7 @@
-function LoginCtrl($scope, $location, userService) {
+function LoginCtrl($scope, $location, userService, authService) {
   $scope = $scope || {};
   this.userService = userService;
+  this.authService = authService;
   $scope.login = this;
   this.location = $location;
   this.forgot = false;
@@ -12,7 +13,14 @@ function LoginCtrl($scope, $location, userService) {
     password: '',
     passwordValid: true
   };
+  this.auth();
 }
+
+LoginCtrl.prototype.auth = function() {
+  if(this.authService.loggedInStatus()){
+    this.go('/feed');
+  }
+};
 
 LoginCtrl.prototype.loginWithFacebook = function(){
   var that = this;
