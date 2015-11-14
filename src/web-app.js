@@ -72,7 +72,7 @@ app.factory('voteService', ['$resource', 'authService', 'userService', VoteServi
 //controllers
 app.controller('TopicRegisterCtrl',['$scope','$location', 'userService', RegisterController]);
 app.controller('SignUpCtrl',['$scope','$location', 'userService', SignUpController]);
-app.controller('LoginCtrl',['$scope','$location', 'userService', LoginController]);
+app.controller('LoginCtrl',['$scope','$location', 'userService', 'authService', LoginController]);
 app.controller('FeedCtrl', ['$scope', '$location', 'userService', 'billService', 'trendService', 'authService', FeedController]);
 app.controller('BillCtrl', ['$scope', '$routeParams', 'billService', 'legislationService', 'voteService', 'commentService', '$location', 'authService', BillController]);
 app.controller('HeaderCtrl', ['$scope', '$location', 'authService', HeaderController]);

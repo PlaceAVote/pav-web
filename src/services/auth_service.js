@@ -1,13 +1,17 @@
-function AuthService() {
+function AuthService(options) {
+  options = options || {};
+  var w = options.window || window;
   var auth;
   var facebookAuth;
+  var storage = w.localStorage || {};
 
   var setFacebookAuth = function(token){
     facebookAuth = token;
   };
 
   var setAuth = function(token) {
-   auth = token;
+   auth = 'PAV_AUTH_TOKEN ' + token;
+   storage.setItem('pav', auth);
   };
 
   var getFacebookAccessToken = function() {
@@ -17,14 +21,19 @@ function AuthService() {
     return facebookAuth.accessToken;
   };
 
+  var getTokenFromLocalStorage = function() {
+    return storage.getItem('pav');
+  };
+
   var getAccessToken = function() {
     if (!auth) {
-      return;
+      return getTokenFromLocalStorage();
     }
-    return 'PAV_AUTH_TOKEN ' + auth;
+    return auth;
   };
 
   var loggedInStatus = function() {
+    auth = getTokenFromLocalStorage();
     if(!auth) {
       return false;
     } else if (auth) {

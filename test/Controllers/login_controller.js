@@ -1,17 +1,22 @@
 var LoginCtrl = require("../../src/controllers/login_controller.js");
 var expect = require("chai").expect;
+var authService = {
+  loggedInStatus: function(){
+    return false;
+  }
+};
 describe('LoginCtrl', function() {
 
 		it('Should make sure the email fail if not valid', function() {
 			var scope = {};
-			var subject = new LoginCtrl(scope);
+			var subject = new LoginCtrl(scope, {}, {}, authService);
 			subject.user.email = "anthony.com";
 			expect(subject.emailValidation(subject.user.email)).to.be.false;
 		});
 
 		it('Should return true if valid', function() {
 			var scope = {};
-			var subject = new LoginCtrl(scope);
+			var subject = new LoginCtrl(scope, {}, {}, authService);
 			subject.user.email = "anthony.test1@test.com";
 			expect(subject.emailValidation(subject.user.email)).to.be.true;
 		});
@@ -19,13 +24,13 @@ describe('LoginCtrl', function() {
 
 		it('Should make sure the password fails client side validation', function() {
 			var scope = {};
-			var subject = new LoginCtrl(scope);
+			var subject = new LoginCtrl(scope, {}, {}, authService);
 			expect(subject.passwordValidation("password")).to.be.false;
 		});
 
 		it('Should return true is password is valid', function() {
 			var scope = {};
-			var subject = new LoginCtrl(scope);
+			var subject = new LoginCtrl(scope, {}, {}, authService);
 			expect(subject.passwordValidation("p455worD")).to.be.true;
 		});
 
@@ -34,7 +39,7 @@ describe('LoginCtrl', function() {
 			var changed = false;
 			var created = false;
 			var scope = {};
-			var subject = new LoginCtrl(scope);
+			var subject = new LoginCtrl(scope, {}, {}, authService);
 			var user = {
 				email : "anthonyemail.com",
 				password : "password"
@@ -61,7 +66,7 @@ describe('LoginCtrl', function() {
 			var created = false;
 			var changed = false;
 			var scope = {};
-			var subject = new LoginCtrl(scope);
+			var subject = new LoginCtrl(scope, {}, {}, authService);
 			var user = {
 				email : "testing.test1@test.com",
 				password : "p34swOrD1"
@@ -84,7 +89,7 @@ describe('LoginCtrl', function() {
 		});
         describe("Facebook login", function(){
             it("should call go with 'topics' if user is undefined", function(done){
-                var subject = new LoginCtrl();
+                var subject = new LoginCtrl({}, {}, {}, authService);
                 subject.userService = {
                    loginWithFacebook : function(callback){
                       callback({message:"User Not Found"});
@@ -97,7 +102,7 @@ describe('LoginCtrl', function() {
                subject.loginWithFacebook();
             });
             it("should call go with 'feed' if no errors", function(done){
-                var subject = new LoginCtrl();
+                var subject = new LoginCtrl({}, {}, {}, authService);
                 subject.userService = {
                    loginWithFacebook : function(callback){
                       callback();
@@ -112,7 +117,7 @@ describe('LoginCtrl', function() {
         });
        describe("failed login", function() {
         it("sets forgot to false", function(done){
-            var subject = new LoginCtrl();
+            var subject = new LoginCtrl({}, {}, {}, authService);
             subject.userService = {
                 login : function(params, callback){
                     callback({status:401});

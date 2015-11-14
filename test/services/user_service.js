@@ -3,6 +3,8 @@ var Interest = require("../../src/models/interest.js");
 var strftime = require("strftime");
 var expect = require("chai").expect;
 var AuthService = require("../../src/services/auth_service.js");
+var mockLocal = require('../mocks/local_storage.js');
+var authOptions = { window: {localStorage: new mockLocal() }};
 
 describe("User Service", function() {
   describe("Create User", function(){
@@ -90,7 +92,7 @@ describe("User Service", function() {
           done();
         };
       }
-      authService = new AuthService();
+      authService = new AuthService(authOptions);
       var subject = new UserService(mockResource, undefined, authService);
       subject.createUser("test@email.com", "p4SSw0rD!");
       var additionalInformation = {
@@ -108,7 +110,7 @@ describe("User Service", function() {
           succeed(user);
         };
       };
-      var authService = new AuthService();
+      authService = new AuthService(authOptions);
       var subject = new UserService(mockResource, undefined, authService);
       subject.createUser("test@email.com", "p4SSw0rD!");
       var additionalInformation = {
@@ -133,7 +135,7 @@ describe("User Service", function() {
           error("Create User Failed");
         };
       };
-      var authService = new AuthService();
+      var authService = new AuthService(authOptions);
       var subject = new UserService(mockResource, undefined, authService);
       subject.createUser("test@email.com", "p4SSw0rD!");
       var additionalInformation = {
@@ -167,7 +169,7 @@ describe("User Service", function() {
           done();
         };
       };
-      var authService = new AuthService();
+      var authService = new AuthService(authOptions);
       var subject = new UserService(mockResource, undefined, authService);
       subject.login({
         email: 'paul',
@@ -180,7 +182,7 @@ describe("User Service", function() {
           succeed({token : '000001', first_name: 'paul'});
         };
       };
-      var authService = new AuthService();
+      var authService = new AuthService(authOptions);
       var subject = new UserService(mockResource, undefined, authService);
       subject.login({email: 'paul', password: 'passWO3rd'}, function(err, resource) {
         expect(err).to.eql(undefined);
@@ -194,7 +196,7 @@ describe("User Service", function() {
           error({message: 'Server Error'});
         };
       };
-      var authService = new AuthService();
+      var authService = new AuthService(authOptions);
       var subject = new UserService(mockResource, undefined, authService);
       subject.login({email: 'paul', password: 'passWO3rd'}, function(err, resource) {
         expect(err).to.eql({message: 'Server Error'});
@@ -233,7 +235,7 @@ describe("User Service", function() {
         };
       };
       mockFacebook = new MockFacebook();
-      authService = new AuthService();
+      authService = new AuthService(authOptions);
       authService.setAuth({accessToken: 'TOKEN'});
       var subject = new UserService(mockResource, mockFacebook, authService);
       subject.loginWithFacebook(function(err, result){});
@@ -247,7 +249,7 @@ describe("User Service", function() {
         };
       };
       facebook = new MockFacebook();
-      authService = new AuthService();
+      authService = new AuthService(authOptions);
       authService.setAuth({accessToken: 'TOKEN'});
       var subject = new UserService(mockResource, mockFacebook, authService);
       subject.loginWithFacebook(function(err, resource){
@@ -262,7 +264,7 @@ describe("User Service", function() {
         }
       };
       facebook = new MockFacebook();
-      authService = new AuthService();
+      authService = new AuthService(authOptions);
       authService.setAuth({accessToken: 'TOKEN'});
       var subject = new UserService(mockResource, mockFacebook, authService);
       subject.loginWithFacebook(function(err, resource){
@@ -285,7 +287,7 @@ describe("User Service", function() {
         };
       };
       facebook = new MockFacebook();
-      authService = new AuthService();
+      authService = new AuthService(authOptions);
       authService.setFacebookAuth({accessToken: 'hello'});
       var subject = new UserService(mockResource, facebook, authService);
       subject.createUser("test@email.com", "p4SSw0rD!");
