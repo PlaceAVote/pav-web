@@ -6,6 +6,7 @@ echo "-- Building Web-app..."
 
 gulp live-config
 gulp browserify-web
+gulp autoPrefix
 
 echo "-- Deploying to environment..."
 
