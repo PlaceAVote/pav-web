@@ -171,7 +171,6 @@
               <p>{{bill.commentCard.body}}</p>
               </div>
               </aside>
-          </div>
           <div class="row">
             <div ng-show="bill.commentCard.replyInput">
             <input type="text" placeholder="Reply" ng-model="bill.commentCard.replyText"></input><span ng-click="bill.commentCard.reply(bill.id, bill.commentService)">Reply</span>
@@ -180,6 +179,7 @@
            <button class="btn-grey" ng-click="bill.hideVoteModal()"> I'm not ready yet </button>
           </div>
         </div>
+          </div>
     </section>
   </div>
   </div>

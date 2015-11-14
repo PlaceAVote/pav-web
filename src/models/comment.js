@@ -13,8 +13,7 @@ function Comment(options) {
   this.jsonReplies = options.replies;
   this.replies = [];
   this.deep = 0;
-  //img_placeholder until img is returned with comments call
-  this.author_img_url = options.author_img_url;
+  this.author_img_url = options.author_img_url || 'img/comments/user.png';
 }
 
 Comment.buildChildren = function(comment, deep) {
