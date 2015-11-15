@@ -319,5 +319,83 @@ describe("User Service", function() {
       });
     });
   });
+  describe('Get User Profile', function() {
+    var authService = {
+      getAccessToken: function() {
+        return 'PAV_AUTH_TOKEN CHOUNDFLKAND:ND'
+      }
+    };
+    it('returns error if user has no access token', function(done) {
+      var auth = {
+        getAccessToken: function() {
+          return undefined;
+        }
+      };
+      var subject = new UserService(undefined, undefined, auth);
+      subject.getUserProfile(function(err, result) {
+        expect(err.status).to.eql(401);
+        expect(err.message).to.eql('No Auth Token');
+        expect(result).to.eql(undefined);
+        done();
+      });
+    });
+    it('calls get resource with correct params', function(done) {
+      function mockResource(url, params, method, options) {
+        this.getProfile = function(){};
+        expect(url).to.eql('http://pav-user-api-924234322.us-east-1.elb.amazonaws.com:8080/user');
+        expect(params).to.eql(undefined);
+        expect(method.getProfile.headers['Authorization']).to.eql('PAV_AUTH_TOKEN CHOUNDFLKAND:ND');
+        expect(method.getProfile.method).to.eql('GET');
+        done();
+      };
+      var subject = new UserService(mockResource, undefined, authService);
+      subject.getUserProfile(function(err, result) {
+      });
+    });
+    it('returns an error from server', function(done) {
+      function mockResource() {
+      }
+      mockResource.prototype.getProfile = function(body, onLoad, onError){
+          return onError({status: 401});
+      }
+      var subject = new UserService(mockResource, undefined, authService);
+      subject.getUserProfile(function(err, result) {
+        expect(err).to.eql({status:401});
+        done();
+      });
+    });
+    it('returns user from server', function(done) {
+      var user = {email: 'test@test.com', first_name: 'Paul', last_name: 'Barber', dob: '04/01/1990', country_code: '', topics: ['Arts']};
+      function mockResource() {
+      }
+      mockResource.prototype.getProfile = function(body, onLoad, onError){
+          return onLoad(user);
+      }
+      var subject = new UserService(mockResource, undefined, authService);
+      subject.getUserProfile(function(err, result) {
+        expect(err).to.eql(undefined);
+        expect(result.email).to.eql(user.email);
+        expect(result.loadedFromServer).to.eql(true);
+        done();
+      });
+    });
+    it('doesnt call server if user is defined and was loaded from server', function(done) {
+      var serverCalls = 0;
+      function mockResource() {
+      }
+      mockResource.prototype.getProfile = function(body, onLoad, onError){
+        serverCalls++;
+        onLoad(user);
+      }
+      var subject = new UserService(mockResource, undefined, authService);
+      subject.user = {loadedFromServer: true};
+      subject.getUserProfile(function(err, result) {
+        expect(err).to.eql(undefined);
+        expect(result.loadedFromServer).to.eql(true);
+        expect(serverCalls).to.eql(0);
+        done();
+      });
+    });
+  });
 });
 
