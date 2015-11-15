@@ -124,15 +124,15 @@ function UserService($resource, facebookService, authService) {
     };
 
 	return {
-		createUser : createUser,
-		getUser : getUser,
-        getTopics : getTopics,
-		addTopics : addTopics,
-		addAdditionalInformation : addAdditionalInformation,
-        saveUser : saveUser,
-        login : login,
-        loginWithFacebook : loginWithFacebook,
-        makeProfilePublic: makeProfilePublic
+    createUser : createUser,
+    getUser : getUser,
+    getTopics : getTopics,
+    addTopics : addTopics,
+    addAdditionalInformation : addAdditionalInformation,
+    saveUser : saveUser,
+    login : login,
+    loginWithFacebook : loginWithFacebook,
+    makeProfilePublic: makeProfilePublic
 	};
 }
 
