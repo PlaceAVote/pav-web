@@ -123,6 +123,27 @@ function UserService($resource, facebookService, authService) {
         loginResource.login(user, onLoad, onError);
     };
 
+    var getUserProfile = function(callback) {
+      var token = authService.getAccessToken();
+      if(!token) {
+        callback({status: 401, message: 'No Auth Token'});
+        return;
+      }
+      if (this.user && this.user.loadedFromServer) {
+        return callback(undefined, this.user);
+      }
+      config.methods.get.headers["Authorization"] = token;
+      var profileResource = new $resource(config.users.endpoint, undefined, {getProfile: config.methods.get});
+      var onError = function(err){
+       return callback(err);
+      }
+      var onLoad = function(result) {
+        this.user = User.createFromJson(result);
+        return callback(undefined, this.user);
+      }
+      profileResource.getProfile(undefined, onLoad, onError);
+    };
+
 	return {
     createUser : createUser,
     getUser : getUser,
@@ -132,7 +153,8 @@ function UserService($resource, facebookService, authService) {
     saveUser : saveUser,
     login : login,
     loginWithFacebook : loginWithFacebook,
-    makeProfilePublic: makeProfilePublic
+    makeProfilePublic: makeProfilePublic,
+    getUserProfile: getUserProfile,
 	};
 }
 

@@ -6,9 +6,25 @@ function User(email, password) {
 	this.last_name;
 	this.dob;
 	this.country_code;
-    this.img_url;
-    this.private = false;
+  this.img_url;
+  this.private = false;
 }
+
+User.createFromJson = function(json){
+  json = json || {};
+  var user = new User();
+  user.email = json.email;
+  user.password = json.password;
+  user.topics = json.topics;
+  user.first_name = json.first_name;
+  user.last_name = json.last_name;
+  user.dob = json.dob;
+  user.country_code = json.country_code;
+  user.img_url = json.img_url;
+  this.private = json.private;
+  user.loadedFromServer = true;
+  return user;
+};
 
 User.prototype.setToken = function(token) {
     this.token = token;
