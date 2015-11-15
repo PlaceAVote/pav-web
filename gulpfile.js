@@ -129,13 +129,15 @@ var gulp = require('gulp'),
     .bundle()
     .pipe(source('app.js'))
     .pipe(gulp.dest('dist/js'));
-    return gulp.src('dist/js/app.js')
-    .pipe(uglify())
-    .pipe(minify())
-    .pipe(gulp.dest('dist/js'));
 
   });
 
+  gulp.task('app-min', function(){
+    gulp.src('dist/js/app.js')
+    .pipe(uglify())
+    .pipe(minify())
+    .pipe(gulp.dest('dist/js'));
+  });
 
   gulp.task('ionicise', function(){
     gulp.src(['img/*'])
