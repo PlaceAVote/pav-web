@@ -14,8 +14,7 @@ var gulp = require('gulp'),
   browserSync = require('browser-sync').create(),
   imagemin = require('gulp-imagemin'), //image optimiser
   pngquant = require('imagemin-pngquant'), //png optimiser to work with imagemin
-  mozjpeg = require('imagemin-mozjpeg'),
-  gzip = require('gulp-gzip');
+  mozjpeg = require('imagemin-mozjpeg');
 
   gulp.task('compress', function() {
     return gulp.src('./web/dist/js/app.js')
