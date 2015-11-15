@@ -14,6 +14,11 @@ describe("FeedController", function() {
            user.first_name = "Paul";
            return user;
         }
+        this.getUserProfile = function(callback) {
+           var user = new User("paul@test.com", "pas$WORD");
+           user.first_name = "Paul";
+           return callback(undefined, user);
+        }
     };
     function mockBillService(){
       this.getBills = function(username, callback){
