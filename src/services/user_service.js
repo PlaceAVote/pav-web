@@ -1,5 +1,5 @@
 var User = require('../models/user.js');
-var config = require('../config/live_endpoints.js');
+var config = require('../config/endpoints.js');
 var strftime = require('strftime');
 
 function UserService($resource, facebookService, authService) {
@@ -144,6 +144,25 @@ function UserService($resource, facebookService, authService) {
       profileResource.getProfile(undefined, onLoad, onError);
     };
 
+    var getUserFromId = function(id, callback) {
+      if(!id) {
+        return callback({message: 'Must Supply User Id'});
+      }
+      var token = authService.getAccessToken();
+      if(!token) {
+        return callback({status: 401, message: 'No Auth Token'});
+      };
+      var url = config.users.profile.fromId(id);
+      var resource = new $resource(url, undefined, {getProfile: config.methods.get});
+      var onError = function(err) {
+        return callback(err);
+      };
+      var onLoad = function(result) {
+        return callback(undefined, User.createFromJson(result));
+      };
+      resource.getProfile(undefined, onLoad, onError);
+    };
+
 	return {
     createUser : createUser,
     getUser : getUser,
@@ -155,6 +174,7 @@ function UserService($resource, facebookService, authService) {
     loginWithFacebook : loginWithFacebook,
     makeProfilePublic: makeProfilePublic,
     getUserProfile: getUserProfile,
+    getUserFromId: getUserFromId,
 	};
 }
 
