@@ -5,6 +5,7 @@ var expect = require("chai").expect;
 var AuthService = require("../../src/services/auth_service.js");
 var mockLocal = require('../mocks/local_storage.js');
 var authOptions = { window: {localStorage: new mockLocal() }};
+var User = require('../../src/models/user.js');
 
 describe("User Service", function() {
   describe("Create User", function(){
@@ -393,6 +394,79 @@ describe("User Service", function() {
         expect(err).to.eql(undefined);
         expect(result.loadedFromServer).to.eql(true);
         expect(serverCalls).to.eql(0);
+        done();
+      });
+    });
+  });
+  describe('Get a specified users profile', function() {
+    it('returns an error with status 401 if the authToken is not  defined', function(done) {
+      var authService = {
+        getAccessToken: function() {}
+      };
+      var subject = new UserService(undefined, undefined, authService);
+      var id = 301;
+      subject.getUserFromId(id, function(err, result) {
+        expect(err.status).to.eql(401);
+        done();
+      });
+    });
+    it('returns an error if no id is present in request', function(done) {
+    var subject = new UserService(undefined, undefined, authService);
+    subject.getUserFromId(undefined, function(err, result) {
+      expect(err.message).to.eql('Must Supply User Id');
+      done();
+    });
+    });
+    it('passes the right info to resource constructor', function(done) {
+      function mres(url, params, method, options){
+        this.getProfile = function(){};
+        expect(url).to.eql('http://pav-user-api-924234322.us-east-1.elb.amazonaws.com:8080/user/203hr3r3/profile');
+        expect(params).to.eql(undefined);
+        expect(method.getProfile.headers['Authorization']).to.eql('PAV_AUTH_TOKEN CHOUNDFLKAND:ND');
+        expect(method.getProfile.method).to.eql('GET');
+        done();
+      }
+      var subject = new UserService(mres, undefined, authService);
+      var userId = '203hr3r3';
+      subject.getUserFromId(userId, function(err, result){});
+    });
+    it('returns error from server', function(done) {
+      function mres(){
+        this.getProfile = function(params, onLoad, onError){
+          expect(params).to.eql(undefined);
+          onError({status:401, message: 'Not Auth'});
+        }
+      }
+      var subject = new UserService(mres, undefined, authService);
+      var userId = '203hr3r3';
+      subject.getUserFromId(userId, function(err, result){
+        expect(err).to.eql({status:401, message: 'Not Auth'});
+        done();
+      });
+    });
+    it('returns a user from server', function(done) {
+      var user = {
+        email: 'test@test.com',
+        first_name: 'paul',
+        last_name: 'barber',
+        dob: '04/01/1990',
+        country_code: 'USA',
+        topics: ['GUNS'],
+        following: true,
+        total_followers:102,
+        total_following:480,
+      };
+      function mres(){
+        this.getProfile = function(params, onLoad, onError){
+          expect(params).to.eql(undefined);
+          onLoad(user);
+        }
+      }
+      var subject = new UserService(mres, undefined, authService);
+      var userId = '203hr3r3';
+      subject.getUserFromId(userId, function(err, result){
+        expect(err).to.eql(undefined);
+        expect(result).to.eql(User.createFromJson(user));
         done();
       });
     });
