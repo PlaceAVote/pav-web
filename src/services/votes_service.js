@@ -31,7 +31,7 @@ function VotesService($resource, authService, userService) {
     config.methods.put.transformResponse = [];
     var resource = new $resource(url, undefined, {voteOnBill: config.methods.put});
     var body = {
-      'bill-id': billId,
+      'bill_id': billId,
       vote: vote
     };
     var onError = function(err) {

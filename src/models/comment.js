@@ -13,8 +13,7 @@ function Comment(options) {
   this.jsonReplies = options.replies;
   this.replies = [];
   this.deep = 0;
-  //img_placeholder until img is returned with comments call
-  this.img_url = 'http://i159.photobucket.com/albums/t154/MYU701/LOST/unreality/JohnLocke-orange-2.jpg'
+  this.author_img_url = options.author_img_url || 'img/comments/user.png';
 }
 
 Comment.buildChildren = function(comment, deep) {
@@ -49,30 +48,32 @@ Comment.prototype.showReplyInput = function() {
 
 Comment.prototype.hideReplyInput = function() {
  this.replyInput = false;
+ this.replyText = undefined;
 };
 
 Comment.prototype.reply = function(billId, service) {
   var that = this;
-  service.reply(this.reply, billId, this.id, function(err, response) {
+  service.reply(this.replyText, billId, this.id, function(err, response) {
     if(err) {
       that.replyFailed = true;
     }
     else if(response) {
+      response.deep = that.deep + 1;
       that.replies.push(response);
     }
+    that.hideReplyInput();
   });
 };
 
 Comment.prototype.like = function(service) {
   var that = this;
-  service.like(this.id, function(err, response) {
+  service.like(this.id, this.bill_id, function(err, response) {
     if(err) {
-      console.log(err);
       that.likeFailed = true;
     }
     else if(response) {
-      console.log(response);
       that.liked = true;
+      that.score++;
     }
   });
 };
@@ -80,12 +81,13 @@ Comment.prototype.like = function(service) {
 
 Comment.prototype.dislike = function(service) {
   var that = this;
-  service.dislike(this.id, function(err, response) {
+  service.dislike(this.id, this.bill_id, function(err, response) {
     if(err) {
       that.dislikeFailed = true;
     }
     else if(response) {
       that.disliked = true;
+      that.score--;
     }
   });
 };

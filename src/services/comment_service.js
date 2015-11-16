@@ -13,13 +13,8 @@ function CommentService($resource, userService, authService) {
     if(!parentId) {
      return callback('No Parent Id');
     }
-    var author = userService.getUser();
-    if(!author || !author.email) {
-     return callback('No User Defined');
-    }
     var body = {
       bill_id: billId,
-      author: author.email,
       body: comment,
     };
     config.methods.put.headers['Authorization'] = authService.getAccessToken();
@@ -34,19 +29,18 @@ function CommentService($resource, userService, authService) {
     resource.reply(body, onLoad, onError);
   };
 
-  var like = function(commentId, callback) {
+  var like = function(commentId, billId, callback) {
     if (!commentId) {
       return callback('No Comment Id');
     }
-    var user = userService.getUser();
-    if (!user || !user.email) {
-      return callback('No User Defined');
+    if (!billId) {
+      return callback('No Bill Defined');
     }
     var url = config.comments.like.endpoint(commentId);
     config.methods.post.headers['Authorization'] = authService.getAccessToken();
     var resource = new $resource(url, undefined, {like: config.methods.post});
     var body = {
-      author: user.email
+      bill_id: billId,
     };
 
     var onError = function(err) {
@@ -60,19 +54,18 @@ function CommentService($resource, userService, authService) {
   };
 
 
-  var dislike = function(commentId, callback) {
+  var dislike = function(commentId, billId, callback) {
     if (!commentId) {
       return callback('No Comment Id');
     }
-    var user = userService.getUser();
-    if (!user || !user.email) {
-      return callback('No User Defined');
+    if (!billId) {
+      return callback('No Bill Defined');
     }
     var url = config.comments.dislike.endpoint(commentId);
     config.methods.post.headers['Authorization'] = authService.getAccessToken();
     var resource = new $resource(url, undefined, {dislike: config.methods.post});
     var body = {
-      author: user.email
+      bill_id: billId,
     };
 
     var onError = function(err) {
