@@ -342,7 +342,7 @@ describe("User Service", function() {
     it('calls get resource with correct params', function(done) {
       function mockResource(url, params, method, options) {
         this.getProfile = function(){};
-        expect(url).to.eql('http://pav-user-api-924234322.us-east-1.elb.amazonaws.com:8080/user');
+        expect(url).to.eql('http://pav-user-api-924234322.us-east-1.elb.amazonaws.com:8080/user/me/profile');
         expect(params).to.eql(undefined);
         expect(method.getProfile.headers['Authorization']).to.eql('PAV_AUTH_TOKEN CHOUNDFLKAND:ND');
         expect(method.getProfile.method).to.eql('GET');

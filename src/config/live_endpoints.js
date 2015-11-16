@@ -80,6 +80,9 @@ module.exports = {
   },
   users : {
     endpoint : USER + '/user',
+    profile: {
+      me : USER + '/user/me/profile'
+    },
     login_endpoint: USER + '/user/authenticate',
     facebookLoginUrl : USER + '/user/facebook/authenticate',
     facebookCreateUrl: USER + '/user/facebook',
