@@ -7,3 +7,4 @@ pav_ionic/
 .idea/
 coverage/
 web/dist/*
+css/style.css

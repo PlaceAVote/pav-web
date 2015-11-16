@@ -21,68 +21,6 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
   this.getComments();
   this.voteModal = {};
   this.stats = {};
-//   this.stats =   [
-//   {
-//     "vote": false,
-//     "created_at": 1444435200
-//   },
-//     {
-//     "vote": false,
-//     "created_at": 1444521600
-//   },
-//     {
-//     "vote": true,
-//   "created_at": 1444608000
-//   },
-//     {
-//     "vote": true,
-//  "created_at": 1444694400
-//   },
-//     {
-//     "vote": false,
-//  "created_at": 1444780800
-//   },
-//     {
-//     "vote": true,
-//  "created_at": 1444867200
-//   },
-//     {
-//     "vote": false,
-//  "created_at": 1444953600
-//   },
-//     {
-//     "vote": true,
-//  "created_at": 1445040000
-//   },
-//       {
-//     "vote": false,
-// "created_at":  1445126400
-//   },
-//       {
-//     "vote": true,
-// "created_at": 1445326400
-//   },
-//       {
-//     "vote": true,
-// "created_at": 1445426400
-//   },
-//       {
-//     "vote": false,
-//  "created_at":1445445400
-//   },
-//       {
-//     "vote": false,
-// "created_at":1445526400
-//   },
-//       {
-//     "vote": true,
-// "created_at":1445511232
-//   },
-//       {
-//     "vote": true,
-//   "created_at":1445612300
-//   }
-//   ];
 }
 
 BillController.prototype.Authenticate = function() {
