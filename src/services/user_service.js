@@ -133,7 +133,7 @@ function UserService($resource, facebookService, authService) {
         return callback(undefined, this.user);
       }
       config.methods.get.headers["Authorization"] = token;
-      var profileResource = new $resource(config.users.endpoint, undefined, {getProfile: config.methods.get});
+      var profileResource = new $resource(config.users.profile.me, undefined, {getProfile: config.methods.get});
       var onError = function(err){
        return callback(err);
       }
