@@ -158,14 +158,12 @@ BillController.prototype.getBill = function(id) {
 
 BillController.prototype.getBillVotes = function(id) {
   var that = this;
-  console.log('bill id: ' + id);
   this.billService.getBillVotes(id, function(err, result) {
     if (err) {
       that.error = true;
     }
     else {
       that.stats = result;
-      console.log(this.stats);
     }
   });
 };

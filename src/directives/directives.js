@@ -51,6 +51,7 @@
 
                  if (newValue)
                  var data = newValue;
+             
                  data.forEach(function(d) {
                      d.created_at = new Date(d.created_at);
                  });

@@ -31,7 +31,6 @@ function BillService(tempBillResource, $resource, authService, userService) {
       };
       var url = config.votes.voteRecords.endpoint + id;
       config.methods.getArray.headers['Authorization'] = authService.getAccessToken();
-      console.log(authService.getAccessToken());
       var resource = new $resource(url, undefined,  {getBillVotes: config.methods.getArray});
       resource.getBillVotes(undefined, onLoad, onError);      
     };
