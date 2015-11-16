@@ -106,13 +106,8 @@ function BillService(tempBillResource, $resource, authService, userService) {
       if(!comment) {
        return callback({message: 'A Comment is required to post'});
       }
-      var user = userService.getUser();
-      if(!user || !user.email) {
-        return callback({message: 'Login Required'});
-      }
       var postBody = {
         bill_id: id,
-        author: user.email,
         body: comment,
       }
       var url = config.bills.postComment.endpoint;

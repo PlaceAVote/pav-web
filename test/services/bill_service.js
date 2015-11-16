@@ -316,7 +316,7 @@ describe("Bill Service", function(){
       });
     });
     it('calls postComment and returns new comment', function(done) {
-      var comment =  {bill_id: 'ID',author: 'paul@test.com', body: 'HELLO DAMON!'};
+      var comment =  {bill_id: 'ID', body: 'HELLO DAMON!'};
       function mockResource(url, params, method){
       }
       mockResource.prototype.postComment = function(object, onLoad, onError){
@@ -326,13 +326,6 @@ describe("Bill Service", function(){
       authService = {
         getAccessToken: function() {
           return "TOKEN";
-        },
-      };
-      userService = {
-        getUser: function() {
-          return {
-            email: 'paul@test.com',
-          };
         },
       };
       var subject = new BillService(undefined, mockResource, authService, userService);
