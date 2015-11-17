@@ -13,6 +13,11 @@
     display: flex;
     flex-direction: row;
     margin-bottom: 20px;
+    .user-img-border {
+      @include media(480px) {
+        width:46px;
+      }
+    }
     .top-comment-body {
       margin-top: 0;
     }
@@ -38,6 +43,9 @@
 
 .comment-reply {
   padding-left: 60px;
+    @include media(480px) {
+       padding-left:15px;
+    }
 }
 
 .reply-btn-container {
@@ -51,6 +59,9 @@
   outline: none;
   cursor: pointer;
   width: calc(100% - 60px);
+    @include media(480px) {
+        width: calc(100% - 15px);
+    }
   position: absolute;
   right: 0;
   color: darken($grey, 15%);
@@ -85,6 +96,15 @@
       width: 200px;
       padding: 7px 40px;
       text-align: center;
+      @include media(500px) {
+        padding: 0;
+        display: inline-block;
+        height: 30px;
+        line-height: 31px;
+        width: 50px;
+        margin-left:4px;
+        margin-right:0;
+      }
     }
   }
 }
