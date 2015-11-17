@@ -1,0 +1,52 @@
+path.opposed_line {
+	fill: none;
+	stroke: $red;
+}
+
+path.for_line {
+	fill: none;
+	stroke: $green;
+}
+
+path.domain {
+    stroke: none;
+    fill: none;
+}
+
+.y.axis {
+	.domain {
+		stroke: none;
+	}
+}
+
+.x.axis, .y.axis {
+	.tick {
+		text {
+			font-size: 12px;
+			fill: #798796;
+			@include medium();
+		}
+	}
+}
+
+.y.axis {
+	.tick {
+		text {
+	padding-right: 10px;
+		}
+	}
+}
+
+.y.axis {
+	.tick {
+		line {
+			stroke: #798796;
+			stroke-dasharray: 6;
+		}
+
+		.baseline {
+			stroke: #fca393;
+			stroke-dasharray: none;
+		}
+	}
+}

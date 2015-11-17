@@ -12,14 +12,19 @@
             <section class="comment-vote"><span>{{comment.score}}</span><img ng-click="comment.like(commentService)"src="img/card/thumb-up.png"><img src="img/card/thumb-down.png" ng-click="comment.dislike(commentService)"/><span class="reply-btn" ng-click="comment.showReplyInput()">reply</span></section>
 
             <p>{{comment.body}}</p>
-            <div ng-show="comment.replyInput">
-            <input type="text" placeholder="Reply" ng-model="comment.replyText"></input><span class="reply-btn" ng-click="comment.reply(comment.bill_id, commentService)">Reply</span><span class="reply-btn" ng-click="comment.hideReplyInput()">Cancel</span>
+            <div class="reply-comment" ng-show="comment.replyInput">
+            <textarea type="text" placeholder="Reply" ng-model="comment.replyText"></textarea>
+            <div class="reply-actions">
+             <span class="btn-blank" ng-click="comment.hideReplyInput()">CANCEL</span>
+            <span class="btn-green" ng-click="comment.reply(comment.bill_id, commentService)">POST</span>
+           
+            </div>
             </div>
             </div>
         </section>
 
         <div class="reply-btn-container" ng-show='comment.replies.length > 0 && comment.deep < 2'>
-            <button class="reply-show-hide" ng-hide='comment.showChildren' ng-click='comment.show()'>Show Replies {{comment.replies.length}}</button>
+            <button class="reply-show-hide" ng-hide='comment.showChildren' ng-click='comment.show()'>{{comment.replies.length}} Replies</button>
             <button class="reply-show-hide" ng-show='comment.showChildren' ng-click='comment.hide()'>Hide Replies</button>
         </div>
 

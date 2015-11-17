@@ -13,6 +13,14 @@
     display: flex;
     flex-direction: row;
     margin-bottom: 20px;
+    .user-img-border {
+      @include media(480px) {
+        width:46px;
+      }
+    }
+    .top-comment-body {
+      margin-top: 0;
+    }
     .profile-img {
       width: 50px;
       img {
@@ -34,27 +42,69 @@
 }
 
 .comment-reply {
-  padding-left: 25px;
+  padding-left: 60px;
+    @include media(480px) {
+       padding-left:15px;
+    }
 }
 
 .reply-btn-container {
   height:37px;
   overflow: hidden;
   outline: none;
+  position: relative;
 }
 
 .reply-show-hide {
   outline: none;
   cursor: pointer;
-  width: 100%;
+  width: calc(100% - 60px);
+    @include media(480px) {
+        width: calc(100% - 15px);
+    }
+  position: absolute;
+  right: 0;
   color: darken($grey, 15%);
-  text-transform: uppercase;
-  background: $greylight;
+  background: lighten($greylight, 5%);
   border-radius: 3px;
-  border: 1px solid $greylight;
+  border: 1px solid lighten($greylight,3%);
   margin-bottom: 10px;
   transition: all 0.1s ease;
   &:hover {
     background: lighten($greylight, 10%);
+  }
+}
+
+.reply-comment {
+  margin-top: 10px;
+  width: 100%;
+  textarea {
+    width: 100%;
+    height: 40px;
+    outline: none;
+    border: 1px solid $greylight;
+    border-radius: 3px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding:5px;
+    color: $black;
+    box-sizing: border-box;
+  }
+  .reply-actions {
+    float: right;
+    .btn-green, .btn-blank {
+      width: 200px;
+      padding: 7px 40px;
+      text-align: center;
+      @include media(500px) {
+        padding: 0;
+        display: inline-block;
+        height: 30px;
+        line-height: 31px;
+        width: 50px;
+        margin-left:4px;
+        margin-right:0;
+      }
+    }
   }
 }

@@ -8,4 +8,3 @@ module.exports = function() {
     template: "<comment ng-repeat='comment in comments' comment='comment'></comment>",
   };
 };
-

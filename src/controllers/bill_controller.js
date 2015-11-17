@@ -17,8 +17,10 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
   this.getBill(this.id);
   this.getTopComments(this.id);
   this.getVotes(this.id);
+  this.getBillVotes(this.id);
   this.getComments();
   this.voteModal = {};
+  this.stats = {};
 }
 
 BillController.prototype.Authenticate = function() {
@@ -143,6 +145,18 @@ BillController.prototype.getBill = function(id) {
     else {
       that.body = result;
       that.getLegislator(result.billData.sponsor);
+    }
+  });
+};
+
+BillController.prototype.getBillVotes = function(id) {
+  var that = this;
+  this.billService.getBillVotes(id, function(err, result) {
+    if (err) {
+      that.error = true;
+    }
+    else {
+      that.stats = result;
     }
   });
 };

@@ -178,4 +178,4 @@ var gulp = require('gulp'),
     gulp.watch(['src/**/*_ionic.js', 'src/*_ionic.js', 'src/ionic-app.js', 'partials/*_ionic.html'], ['ionicise']);
   });
 
-  gulp.task('default', ['autoPrefix', 'watchFiles', 'browserify-web', 'app-min']);
+  gulp.task('default', ['autoPrefix', 'watchFiles', 'browserify-web']);
