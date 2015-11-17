@@ -12,8 +12,13 @@
             <section class="comment-vote"><span>{{comment.score}}</span><img ng-click="comment.like(commentService)"src="img/card/thumb-up.png"><img src="img/card/thumb-down.png" ng-click="comment.dislike(commentService)"/><span class="reply-btn" ng-click="comment.showReplyInput()">reply</span></section>
 
             <p>{{comment.body}}</p>
-            <div ng-show="comment.replyInput">
-            <input type="text" placeholder="Reply" ng-model="comment.replyText"></input><span class="reply-btn" ng-click="comment.reply(comment.bill_id, commentService)">Reply</span><span class="reply-btn" ng-click="comment.hideReplyInput()">Cancel</span>
+            <div class="reply-comment" ng-show="comment.replyInput">
+            <textarea type="text" placeholder="Reply" ng-model="comment.replyText"></textarea>
+            <div class="reply-actions">
+             <span class="btn-blank" ng-click="comment.hideReplyInput()">CANCEL</span>
+            <span class="btn-green" ng-click="comment.reply(comment.bill_id, commentService)">POST</span>
+           
+            </div>
             </div>
             </div>
         </section>

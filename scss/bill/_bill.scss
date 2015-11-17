@@ -35,12 +35,12 @@
   // flex-shrink: 0;
   h2 {
     color: $red;
-    @include font-size(14px);
+    @include font-size(12px);
   }
 
   p {
     color: $black;
-    @include font-size(14px);
+    @include font-size(12px);
     margin-top: 10px;
   }
 }
