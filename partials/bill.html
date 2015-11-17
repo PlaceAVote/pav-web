@@ -32,7 +32,7 @@
                 <div  class="bill-timeline-bar"><span class="{{bill.body.getStatusClass()}}"></span></div>
             		</section>
 
-    <section class="top-comments">
+    <section class="top-comments" ng-show="bill.forComment.author">
   		<div class="card">
   			<h1>Top Comment In Favor</h1>
   			<hr />
@@ -92,13 +92,11 @@
 		</div>
     </section>
 
-<!--  -->
     <div class="card bill-comments">
       <h1>COMMENTS</h1>
       <hr />
-
-      <comments comments='bill.comments'></comments>
-
+    <div class="pre-loader" ng-hide="bill.comments"></div>
+      <comments ng-show="bill.comments" comments='bill.comments'></comments>
 		</div>
 
     <div class="comment-create card">
