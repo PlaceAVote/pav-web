@@ -96,7 +96,10 @@ module.exports = {
   users : {
     endpoint : USER + '/user',
     profile: {
-      me : USER + '/user/me/profile'
+      me : USER + '/user/me/profile',
+      fromId: function(id) {
+        return USER + '/user/' + id + '/profile'
+      },
     },
     login_endpoint: USER + '/user/authenticate',
     facebookLoginUrl : USER + '/user/facebook/authenticate',

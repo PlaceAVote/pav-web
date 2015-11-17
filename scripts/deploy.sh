@@ -30,3 +30,10 @@ aws --region ${reg} elasticbeanstalk create-application-version --application-na
 
 echo "Updating Environment"
 aws --region ${reg} elasticbeanstalk update-environment --environment-name ${application} --version-label ${label}
+
+echo "Deploying to Convox"
+curl -Ls https://install.convox.com/linux.zip > /tmp/convox.zip
+sudo unzip /tmp/convox.zip -d /usr/local/bin
+convox login convox-pav-dev-629155429.us-east-1.elb.amazonaws.com --password DjJRSfKPKmAsZRlEsjDNDNCxBCjNtQ
+convox deploy
+echo "Deployed to Convox"

@@ -21,6 +21,9 @@ User.createFromJson = function(json){
   user.dob = json.dob;
   user.country_code = json.country_code;
   user.img_url = json.img_url;
+  user.following = json.following;
+  user.total_followers = json.total_followers;
+  user.total_following = json.total_following;
   this.private = json.private;
   user.loadedFromServer = true;
   return user;
