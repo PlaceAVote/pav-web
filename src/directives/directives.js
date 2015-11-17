@@ -49,8 +49,8 @@
                  var vote_for = 0,
                      vote_against = 0;
 
-                 if (newValue)
-                 var data = newValue;
+                 if (newValue) {
+                 data = newValue;
              
                  data.forEach(function(d) {
                      d.created_at = new Date(d.created_at);
@@ -196,6 +196,7 @@
                          .attr("x", "-10");
 
                  }
+             }
              });
 
          }

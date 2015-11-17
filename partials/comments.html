@@ -19,7 +19,7 @@
         </section>
 
         <div class="reply-btn-container" ng-show='comment.replies.length > 0 && comment.deep < 2'>
-            <button class="reply-show-hide" ng-hide='comment.showChildren' ng-click='comment.show()'>Show Replies {{comment.replies.length}}</button>
+            <button class="reply-show-hide" ng-hide='comment.showChildren' ng-click='comment.show()'>{{comment.replies.length}} Replies</button>
             <button class="reply-show-hide" ng-show='comment.showChildren' ng-click='comment.hide()'>Hide Replies</button>
         </div>
 
