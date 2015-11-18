@@ -12,7 +12,7 @@ var options = {
 describe('AuthService', function(){
   it('gets auth token', function(){
     var subject = new AuthService(undefined, options);
-    expect(subject.getAccessToken()).to.eql(undefined);
+    expect(subject.getAccessToken()).to.eql('PAV_AUTH_TOKEN undefined');
     subject.setAuth('TOKEN');
     expect(subject.getAccessToken()).to.eql('PAV_AUTH_TOKEN TOKEN');
   });
@@ -30,11 +30,11 @@ describe('Stores Token in Browser', function(){
     };
     var subject = new AuthService(undefined, options);
     subject.setAuth('TOKEN');
-    expect(local.storage[0]).to.eql(expectStoredToken);
+    expect(local.storage[0]).to.eql({pav: 'TOKEN'});
   });
   it('gets local storage when auth is null', function() {
     local.storage = [];
-    local.storage.push({'pav': 'PAV_AUTH_TOKEN TOKEN'});
+    local.storage.push({'pav': 'TOKEN'});
     var subject = new AuthService(undefined, options);
     var token = subject.getAccessToken();
     expect(token).to.eql('PAV_AUTH_TOKEN TOKEN');
@@ -44,7 +44,7 @@ describe('Stores Token in Browser', function(){
     local.storage = [];
     var subject = new AuthService(undefined, options);
     var token = subject.getAccessToken();
-    expect(token).to.eql(undefined);
+    expect(token).to.eql('PAV_AUTH_TOKEN undefined');
     local.storage = [];
   });
 });
@@ -75,7 +75,7 @@ describe('ValidateToken', function(){
     });
   });
   it('calls correct endpoint', function(done) {
-    options.window.localStorage.storage = [{'pav': 'PAV_AUTH_TOKEN TOKEN'}];
+    options.window.localStorage.storage = [{'pav': 'TOKEN'}];
     function mockResource(url, params, method){
       expect(url).to.eql('http://pav-user-api-924234322.us-east-1.elb.amazonaws.com:8080/user/token/validate?token=PAV_AUTH_TOKEN TOKEN');
       expect(params).to.eql(undefined);
@@ -104,7 +104,7 @@ describe('ValidateToken', function(){
     });
   });
   it('returns true when server response with 200', function(done) {
-    options.window.localStorage.storage = [{'pav': 'PAV_AUTH_TOKEN TOKEN'}];
+    options.window.localStorage.storage = [{'pav': 'TOKEN'}];
     function mockResource(url, params, method){
     }
     mockResource.prototype.authorize = function(params, onLoad, onError){

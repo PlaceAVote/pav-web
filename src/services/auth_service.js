@@ -12,7 +12,7 @@ function AuthService($resource, options) {
   };
 
   var setAuth = function(token) {
-   auth = 'PAV_AUTH_TOKEN ' + token;
+   auth = token;
    storage.setItem('pav', auth);
   };
 
@@ -31,12 +31,12 @@ function AuthService($resource, options) {
     if (!auth) {
       auth = getTokenFromLocalStorage();
     }
-    return auth;
+    return 'PAV_AUTH_TOKEN ' +  auth;
   };
 
   var loggedInStatus = function() {
     auth = getAccessToken();
-    if(!auth) {
+    if(auth === 'PAV_AUTH_TOKEN undefined') {
       return false;
     } else if (auth) {
       return true;
