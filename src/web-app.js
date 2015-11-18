@@ -1,6 +1,3 @@
-//lib
-var d3 = require('d3');
-
 //controllers
 var RegisterController = require('./controllers/register_controller.js');
 var SignUpController = require('./controllers/sign_up_controller.js');

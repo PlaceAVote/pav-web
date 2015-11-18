@@ -1,4 +1,6 @@
- angular.module('pavDirectives', []).
+var isArray = require('../utils/is_array.js');
+
+angular.module('pavDirectives', []).
  directive('headerNav', function() {
          return {
              restrict: 'E',
@@ -7,8 +9,12 @@
      })
      .directive('statusChart', function() {
          function link(scope, el) {
-
-
+            //moved this here so it was in scope.
+           //TODO it should be injected in. to do so, you may have
+           //to make a service that simply exposes d3.  At least then
+           //it can be reused. p.s. if you can think of a better solution
+           //do that.
+            var d3 = require('d3');
              scope.$watch('data', function(newValue, oldValue) {
                  var sortBy = (function() {
 
@@ -49,9 +55,8 @@
                  var vote_for = 0,
                      vote_against = 0;
 
-                 if (newValue) {
+                 if (isArray(newValue)) {
                  data = newValue;
-             
                  data.forEach(function(d) {
                      d.created_at = new Date(d.created_at);
                  });
