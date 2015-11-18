@@ -28,15 +28,19 @@ function AuthService($resource, options) {
   };
 
   var getAccessToken = function() {
+    return 'PAV_AUTH_TOKEN ' +  getRawAccessToken();
+  };
+
+  var getRawAccessToken = function() {
     if (!auth) {
       auth = getTokenFromLocalStorage();
     }
-    return 'PAV_AUTH_TOKEN ' +  auth;
+    return auth;
   };
 
   var loggedInStatus = function() {
-    auth = getAccessToken();
-    if(auth === 'PAV_AUTH_TOKEN undefined') {
+    auth = getRawAccessToken();
+    if(!auth) {
       return false;
     } else if (auth) {
       return true;
