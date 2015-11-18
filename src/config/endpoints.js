@@ -1,9 +1,7 @@
-var CONGRESS = 'http://pav-congress-api-515379972.us-east-1.elb.amazonaws.com:8080';
-var USER = 'http://pav-user-api-924234322.us-east-1.elb.amazonaws.com:8080';
-var VOTES = 'http://pav-vote-api-143877429.us-east-1.elb.amazonaws.com:8080';
+var urls = require('./urls.js');
 
 module.exports = {
-  facebookAppId: '1686805824874862',
+  facebookAppId: urls.FACEBOOKAPPID,
   methods: {
     get: {
       method: 'GET',
@@ -41,69 +39,69 @@ module.exports = {
   },
   legislator: {
     getById: {
-      endpoint: CONGRESS + '/legislators/',
+      endpoint: urls.CONGRESS + '/legislators/',
     },
   },
   votes: {
     getForBill: {
-      endpoint: VOTES + '/vote/count?bill-id=',
+      endpoint: urls.VOTES + '/vote/count?bill-id=',
     },
     voteOnBill: {
-      endpoint: VOTES + '/vote'
+      endpoint: urls.VOTES + '/vote'
     },
     voteRecords: {
-      endpoint: VOTES + '/vote/bill/'
+      endpoint: urls.VOTES + '/vote/bill/'
     }
   },
   comments: {
     reply: {
       endpoint: function(id) {
         id = id.trim();
-        return CONGRESS + '/comments/' + id + '/reply'
+        return urls.CONGRESS + '/comments/' + id + '/reply'
       },
     },
     like: {
       endpoint: function(id) {
         id = id.trim();
-        return CONGRESS + '/comments/' + id + '/like'
+        return urls.CONGRESS + '/comments/' + id + '/like'
       }
     },
     dislike: {
       endpoint: function(id) {
         id = id.trim();
-        return CONGRESS + '/comments/' + id + '/dislike'
+        return urls.CONGRESS + '/comments/' + id + '/dislike'
       }
     },
   },
   bills: {
     comments: {
       endpoint: function(id, from) {
-        return CONGRESS + '/bills/' + id + '/comments' + '?from=' + from
+        return urls.CONGRESS + '/bills/' + id + '/comments' + '?from=' + from
       },
     },
     postComment: {
-      endpoint: CONGRESS + '/bills/comments',
+      endpoint: urls.CONGRESS + '/bills/comments',
     },
     topComments: {
       endpoint: function(id) {
-        return CONGRESS + '/bills/' + id + '/topcomments';
+        return urls.CONGRESS + '/bills/' + id + '/topcomments';
       },
     },
     getById: {
-      endpoint: CONGRESS + '/bills/',
+      endpoint: urls.CONGRESS + '/bills/',
     },
   },
   users : {
-    endpoint : USER + '/user',
+    endpoint : urls.USER + '/user',
     profile: {
-      me : USER + '/user/me/profile',
+      me : urls.USER + '/user/me/profile',
       fromId: function(id) {
-        return USER + '/user/' + id + '/profile'
+        return urls.USER + '/user/' + id + '/profile'
       },
     },
-    login_endpoint: USER + '/user/authenticate',
-    facebookLoginUrl : USER + '/user/facebook/authenticate',
-    facebookCreateUrl: USER + '/user/facebook',
+    login_endpoint: urls.USER + '/user/authenticate',
+    facebookLoginUrl : urls.USER + '/user/facebook/authenticate',
+    facebookCreateUrl: urls.USER + '/user/facebook',
   },
 }
 
