@@ -89,7 +89,7 @@ describe('ValidateToken', function(){
       done();
     });
   });
-  it('returns false if theres a server error', function(done) {
+  it('returns false if theres a server error and removes key from local storage', function(done) {
     options.window.localStorage.storage = [{'pav': 'PAV_AUTH_TOKEN TOKEN'}];
     function mockResource(url, params, method){
     }
@@ -99,6 +99,7 @@ describe('ValidateToken', function(){
     var subject = new AuthService(mockResource, options);
     subject.validateToken(function(result) {
       expect(result).to.eql(false);
+      expect(options.window.localStorage.storage).to.eql([]);
       done();
     });
   });
