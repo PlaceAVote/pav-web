@@ -23,8 +23,8 @@ var gulp = require('gulp'),
   });
 
   gulp.task('live-config', function() {
-    gulp.src(['./src/config/live_endpoints.js'])
-    .pipe(rename('endpoints.js'))
+    gulp.src(['./src/config/live_urls.js'])
+    .pipe(rename('urls.js'))
     .pipe(gulp.dest('./src/config/'));
   });
 
