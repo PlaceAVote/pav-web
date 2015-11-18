@@ -29,10 +29,10 @@ LoginCtrl.prototype.loginWithFacebook = function(){
   var that = this;
   this.userService.loginWithFacebook(function(err, response){
     if(err){
-      that.go("/onboarding");
+      that.location.path("/onboarding");
     }
     else {
-      that.go("/feed");
+      that.location.path("/feed");
     }
   });
 };
@@ -62,7 +62,7 @@ LoginCtrl.prototype.login = function(u, hash) {
           that.forgot = true;
         }
       } else {
-        that.go("/feed");
+        that.location.path("/feed");
       }
     });
   }
