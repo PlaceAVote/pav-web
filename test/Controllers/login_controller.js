@@ -1,8 +1,8 @@
 var LoginCtrl = require("../../src/controllers/login_controller.js");
 var expect = require("chai").expect;
 var authService = {
-  loggedInStatus: function(){
-    return false;
+  validateToken: function(callback){
+    return callback(false);
   }
 };
 describe('LoginCtrl', function() {

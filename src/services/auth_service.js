@@ -52,11 +52,11 @@ function AuthService($resource, options) {
     var url = config.users.authorize + auth;
     config.methods.get.transformResponse = [];
     var authResource = new $resource(url, undefined, {authorize: config.methods.get});
-    var onError = function(){
-      callback(false);
+    var onError = function(err){
+      return callback(false);
     }
     var onLoad = function(){
-      callback(true);
+      return callback(true);
     }
     authResource.authorize(undefined, onLoad, onError);
   };

@@ -4,8 +4,8 @@ var User = require('../../src/models/user.js');
 
 describe("FeedController", function() {
     function mockAuthService(){
-      this.getAccessToken = function() {
-        return "token";
+      this.validateToken = function(callback) {
+        return callback(true);
       }
     };
     function mockUserService(){
