@@ -65,5 +65,56 @@ describe('logged in status', function(){
     expect(subject.loggedInStatus()).to.eql(true);
   });
 });
+describe('ValidateToken', function(){
+  it('returns a false result when no token', function(done) {
+    options.window.localStorage.storage = [];
+    var subject = new AuthService(options);
+    subject.validateToken(function(result) {
+      expect(result).to.eql(false);
+      done();
+    });
+  });
+  it('calls correct endpoint', function(done) {
+    options.window.localStorage.storage = [{'pav': 'PAV_AUTH_TOKEN TOKEN'}];
+    function mockResource(url, params, method){
+      expect(url).to.eql('http://pav-user-api-924234322.us-east-1.elb.amazonaws.com:8080/user/token/validate?token=PAV_AUTH_TOKEN TOKEN');
+      expect(params).to.eql(undefined);
+      expect(method.authorize.method).to.eql('GET');
+      done();
+    }
+    mockResource.prototype.authorize = function(){};
+    var subject = new AuthService(options, mockResource);
+    subject.validateToken(function(result) {
+      expect(result).to.eql(false);
+      done();
+    });
+  });
+  it('returns false if theres a server error', function(done) {
+    options.window.localStorage.storage = [{'pav': 'PAV_AUTH_TOKEN TOKEN'}];
+    function mockResource(url, params, method){
+    }
+    mockResource.prototype.authorize = function(params, onLoad, onError){
+      onError({status: 401});
+    };
+    var subject = new AuthService(options, mockResource);
+    subject.validateToken(function(result) {
+      expect(result).to.eql(false);
+      done();
+    });
+  });
+  it('returns true when server response with 200', function(done) {
+    options.window.localStorage.storage = [{'pav': 'PAV_AUTH_TOKEN TOKEN'}];
+    function mockResource(url, params, method){
+    }
+    mockResource.prototype.authorize = function(params, onLoad, onError){
+      onLoad({status: 200});
+    };
+    var subject = new AuthService(options, mockResource);
+    subject.validateToken(function(result) {
+      expect(result).to.eql(true);
+      done();
+    });
+  });
+});
 
 

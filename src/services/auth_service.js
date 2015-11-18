@@ -1,4 +1,6 @@
-function AuthService(options) {
+var config = require('../config/endpoints.js');
+
+function AuthService(options, $resource) {
   options = options || {};
   var w = options.window || window;
   var auth;
@@ -27,18 +29,36 @@ function AuthService(options) {
 
   var getAccessToken = function() {
     if (!auth) {
-      return getTokenFromLocalStorage();
+      auth = getTokenFromLocalStorage();
     }
     return auth;
   };
 
   var loggedInStatus = function() {
-    auth = getTokenFromLocalStorage();
+    auth = getAccessToken();
     if(!auth) {
       return false;
     } else if (auth) {
       return true;
     }
+  };
+
+  var validateToken = function(callback) {
+    var token = loggedInStatus();
+    if(!token){
+      callback(token);
+      return;
+    }
+    var url = config.users.authorize + auth;
+    config.methods.get.transformResponse = [];
+    var authResource = new $resource(url, undefined, {authorize: config.methods.get});
+    var onError = function(){
+      callback(false);
+    }
+    var onLoad = function(){
+      callback(true);
+    }
+    authResource.authorize(undefined, onLoad, onError);
   };
 
   return {
@@ -47,6 +67,7 @@ function AuthService(options) {
     getAccessToken: getAccessToken,
     setFacebookAuth: setFacebookAuth,
     getFacebookAccessToken: getFacebookAccessToken,
+    validateToken: validateToken,
   };
 }
 

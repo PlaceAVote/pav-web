@@ -93,6 +93,7 @@ module.exports = {
   },
   users : {
     endpoint : urls.USER + '/user',
+    authorize: urls.USER + '/user/token/validate?token=',
     profile: {
       me : urls.USER + '/user/me/profile',
       fromId: function(id) {
