@@ -11,13 +11,13 @@ var options = {
 
 describe('AuthService', function(){
   it('gets auth token', function(){
-    var subject = new AuthService(options);
+    var subject = new AuthService(undefined, options);
     expect(subject.getAccessToken()).to.eql(undefined);
     subject.setAuth('TOKEN');
     expect(subject.getAccessToken()).to.eql('PAV_AUTH_TOKEN TOKEN');
   });
   it('gets facebook token', function(){
-    var subject = new AuthService(options);
+    var subject = new AuthService(undefined, options);
     expect(subject.getFacebookAccessToken()).to.eql(undefined);
     subject.setFacebookAuth({accessToken: 'TOKEN'});
     expect(subject.getFacebookAccessToken()).to.eql('TOKEN');
@@ -28,21 +28,21 @@ describe('Stores Token in Browser', function(){
     var expectStoredToken = {
       pav: 'PAV_AUTH_TOKEN TOKEN'
     };
-    var subject = new AuthService(options);
+    var subject = new AuthService(undefined, options);
     subject.setAuth('TOKEN');
     expect(local.storage[0]).to.eql(expectStoredToken);
   });
   it('gets local storage when auth is null', function() {
     local.storage = [];
     local.storage.push({'pav': 'PAV_AUTH_TOKEN TOKEN'});
-    var subject = new AuthService(options);
+    var subject = new AuthService(undefined, options);
     var token = subject.getAccessToken();
     expect(token).to.eql('PAV_AUTH_TOKEN TOKEN');
     local.storage = [];
   });
   it('returns undefined if theres nothing in local storage', function() {
     local.storage = [];
-    var subject = new AuthService(options);
+    var subject = new AuthService(undefined, options);
     var token = subject.getAccessToken();
     expect(token).to.eql(undefined);
     local.storage = [];
@@ -50,25 +50,25 @@ describe('Stores Token in Browser', function(){
 });
 describe('logged in status', function(){
   it('returns true if there is auth', function(){
-    var subject = new AuthService(options);
+    var subject = new AuthService(undefined, options);
     subject.setAuth('TOKEN');
     expect(subject.loggedInStatus()).to.eql(true);
   });
   it('returns false if there is no auth', function(){
     options.window.localStorage.storage = [];
-    var subject = new AuthService(options);
+    var subject = new AuthService(undefined, options);
     expect(subject.loggedInStatus()).to.eql(false);
   });
   it('returns true if there is in local storage', function(){
     options.window.localStorage.storage = [{'pav': 'TOKEN'}];
-    var subject = new AuthService(options);
+    var subject = new AuthService(undefined, options);
     expect(subject.loggedInStatus()).to.eql(true);
   });
 });
 describe('ValidateToken', function(){
   it('returns a false result when no token', function(done) {
     options.window.localStorage.storage = [];
-    var subject = new AuthService(options);
+    var subject = new AuthService(undefined, options);
     subject.validateToken(function(result) {
       expect(result).to.eql(false);
       done();
@@ -83,7 +83,7 @@ describe('ValidateToken', function(){
       done();
     }
     mockResource.prototype.authorize = function(){};
-    var subject = new AuthService(options, mockResource);
+    var subject = new AuthService(mockResource, options);
     subject.validateToken(function(result) {
       expect(result).to.eql(false);
       done();
@@ -96,7 +96,7 @@ describe('ValidateToken', function(){
     mockResource.prototype.authorize = function(params, onLoad, onError){
       onError({status: 401});
     };
-    var subject = new AuthService(options, mockResource);
+    var subject = new AuthService(mockResource, options);
     subject.validateToken(function(result) {
       expect(result).to.eql(false);
       done();
@@ -109,7 +109,7 @@ describe('ValidateToken', function(){
     mockResource.prototype.authorize = function(params, onLoad, onError){
       onLoad({status: 200});
     };
-    var subject = new AuthService(options, mockResource);
+    var subject = new AuthService(mockResource, options);
     subject.validateToken(function(result) {
       expect(result).to.eql(true);
       done();

@@ -1,6 +1,6 @@
 var config = require('../config/endpoints.js');
 
-function AuthService(options, $resource) {
+function AuthService($resource, options) {
   options = options || {};
   var w = options.window || window;
   var auth;

@@ -93,7 +93,7 @@ describe("User Service", function() {
           done();
         };
       }
-      authService = new AuthService(authOptions);
+      authService = new AuthService(undefined, authOptions);
       var subject = new UserService(mockResource, undefined, authService);
       subject.createUser("test@email.com", "p4SSw0rD!");
       var additionalInformation = {
@@ -111,7 +111,7 @@ describe("User Service", function() {
           succeed(user);
         };
       };
-      authService = new AuthService(authOptions);
+      authService = new AuthService(undefined, authOptions);
       var subject = new UserService(mockResource, undefined, authService);
       subject.createUser("test@email.com", "p4SSw0rD!");
       var additionalInformation = {
@@ -136,7 +136,7 @@ describe("User Service", function() {
           error("Create User Failed");
         };
       };
-      var authService = new AuthService(authOptions);
+      var authService = new AuthService(undefined, authOptions);
       var subject = new UserService(mockResource, undefined, authService);
       subject.createUser("test@email.com", "p4SSw0rD!");
       var additionalInformation = {
@@ -170,7 +170,7 @@ describe("User Service", function() {
           done();
         };
       };
-      var authService = new AuthService(authOptions);
+      var authService = new AuthService(undefined, authOptions);
       var subject = new UserService(mockResource, undefined, authService);
       subject.login({
         email: 'paul',
@@ -183,7 +183,7 @@ describe("User Service", function() {
           succeed({token : '000001', first_name: 'paul'});
         };
       };
-      var authService = new AuthService(authOptions);
+      var authService = new AuthService(undefined, authOptions);
       var subject = new UserService(mockResource, undefined, authService);
       subject.login({email: 'paul', password: 'passWO3rd'}, function(err, resource) {
         expect(err).to.eql(undefined);
@@ -197,7 +197,7 @@ describe("User Service", function() {
           error({message: 'Server Error'});
         };
       };
-      var authService = new AuthService(authOptions);
+      var authService = new AuthService(undefined, authOptions);
       var subject = new UserService(mockResource, undefined, authService);
       subject.login({email: 'paul', password: 'passWO3rd'}, function(err, resource) {
         expect(err).to.eql({message: 'Server Error'});
@@ -236,7 +236,7 @@ describe("User Service", function() {
         };
       };
       mockFacebook = new MockFacebook();
-      authService = new AuthService(authOptions);
+      authService = new AuthService(undefined, authOptions);
       authService.setAuth({accessToken: 'TOKEN'});
       var subject = new UserService(mockResource, mockFacebook, authService);
       subject.loginWithFacebook(function(err, result){});
@@ -250,7 +250,7 @@ describe("User Service", function() {
         };
       };
       facebook = new MockFacebook();
-      authService = new AuthService(authOptions);
+      authService = new AuthService(undefined, authOptions);
       authService.setAuth({accessToken: 'TOKEN'});
       var subject = new UserService(mockResource, mockFacebook, authService);
       subject.loginWithFacebook(function(err, resource){
@@ -265,7 +265,7 @@ describe("User Service", function() {
         }
       };
       facebook = new MockFacebook();
-      authService = new AuthService(authOptions);
+      authService = new AuthService(undefined, authOptions);
       authService.setAuth({accessToken: 'TOKEN'});
       var subject = new UserService(mockResource, mockFacebook, authService);
       subject.loginWithFacebook(function(err, resource){
@@ -288,7 +288,7 @@ describe("User Service", function() {
         };
       };
       facebook = new MockFacebook();
-      authService = new AuthService(authOptions);
+      authService = new AuthService(undefined, authOptions);
       authService.setFacebookAuth({accessToken: 'hello'});
       var subject = new UserService(mockResource, facebook, authService);
       subject.createUser("test@email.com", "p4SSw0rD!");
