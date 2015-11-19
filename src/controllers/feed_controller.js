@@ -6,10 +6,11 @@ FeedController = function($scope, $location, userService, billService, trendServ
     this.trendService = trendService;
     this.billService = billService;
     this.userService = userService;
-    var token = authService.getAccessToken();
-    if(!token){
+    authService.validateToken(function(result){
+      if(!result) {
         $location.path('/');
-    }
+      }
+    });
     this.getBills('notyet@implemented.com', function(err, response) {
         if(!err){
             $scope.bills = response;

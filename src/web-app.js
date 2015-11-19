@@ -61,7 +61,7 @@ app.factory('tempTrendResource', [TempTrendResource]);
 
 //services
 app.factory('facebookService', [Facebook]);
-app.factory('authService', [AuthService]);
+app.factory('authService', ['$resource', AuthService]);
 app.factory('userService', ['$resource', 'facebookService', 'authService', UserService]);
 app.factory('billService', ['tempBillResource', '$resource', 'authService', 'userService', BillService]);
 app.factory('trendService', ['tempTrendResource', TrendService]);

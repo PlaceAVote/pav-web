@@ -132,8 +132,8 @@ function UserService($resource, facebookService, authService) {
       if (this.user && this.user.loadedFromServer) {
         return callback(undefined, this.user);
       }
-      config.methods.get.headers["Authorization"] = token;
-      var profileResource = new $resource(config.users.profile.me, undefined, {getProfile: config.methods.get});
+     config.methods.get.headers["Authorization"] = token;
+     var profileResource = new $resource(config.users.profile.me, undefined, {getProfile: config.methods.get});
       var onError = function(err){
        return callback(err);
       }

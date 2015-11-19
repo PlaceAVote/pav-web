@@ -80,7 +80,7 @@ describe("Bill Service", function(){
         }
         done();
       }
-      var authService = new AuthService(authOptions);
+      var authService = new AuthService(undefined, authOptions);
       var subject = new BillService({}, mockResource, authService);
       subject.getBill('100', function(err, result) {
       });
@@ -91,7 +91,7 @@ describe("Bill Service", function(){
           onError('Error: A Server Error Occured');
         }
       }
-      var authService = new AuthService(authOptions);
+      var authService = new AuthService(undefined, authOptions);
       var subject = new BillService({}, mockResource, authService);
       subject.getBill('100', function(err, result) {
         expect('Error: A Server Error Occured');
@@ -106,7 +106,7 @@ describe("Bill Service", function(){
           onLoad(data);
         }
       }
-      var authService = new AuthService(authOptions);
+      var authService = new AuthService(undefined, authOptions);
       var subject = new BillService({}, mockResource, authService);
       subject.getBill('100', function(err, result) {
         expect(undefined);
@@ -133,7 +133,7 @@ describe("Bill Service", function(){
           onLoad(expected);
         }
       }
-      var authService = new AuthService(authOptions);
+      var authService = new AuthService(undefined, authOptions);
       var subject = new BillService(undefined, mockResource, authService);
       subject.getTopComments('serverId', function(err, resource){
         expect(err).to.eql(undefined);
@@ -154,7 +154,7 @@ describe("Bill Service", function(){
       mockResource.prototype.getComments = function(object, onLoad, onError){
         onLoad(expected);
       }
-      var authService = new AuthService(authOptions);
+      var authService = new AuthService(undefined, authOptions);
       authService.getAccessToken = function(){
         return 'TOKEN';
       };
@@ -168,7 +168,7 @@ describe("Bill Service", function(){
           onError({message: 'Server Error'});
         }
       }
-      var authService = new AuthService(authOptions);
+      var authService = new AuthService(undefined, authOptions);
       var subject = new BillService(undefined, mockResource, authService);
       subject.getTopComments('serverId', function(err, resource){
         expect(err).to.not.eql(undefined);
@@ -199,7 +199,7 @@ describe("Bill Service", function(){
       }
       mockResource.prototype.getComments = function(object, onLoad, onError){
       }
-      var authService = new AuthService(authOptions);
+      var authService = new AuthService(undefined, authOptions);
       authService.getAccessToken = function(){
         return 'TOKEN';
       };
@@ -214,7 +214,7 @@ describe("Bill Service", function(){
       mockResource.prototype.getComments = function(object, onLoad, onError){
         onError('ERROR');
       }
-      var authService = new AuthService(authOptions);
+      var authService = new AuthService(undefined, authOptions);
       authService.getAccessToken = function(){
         return 'TOKEN';
       };
@@ -232,7 +232,7 @@ describe("Bill Service", function(){
       mockResource.prototype.getComments = function(object, onLoad, onError){
         onLoad(expected);
       }
-      var authService = new AuthService(authOptions);
+      var authService = new AuthService(undefined, authOptions);
       authService.getAccessToken = function(){
         return 'TOKEN';
       };

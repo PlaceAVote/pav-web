@@ -6,7 +6,7 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
   $scope.commentService = commentService;
   this.authService = authService;
   this.location = $location;
-  this.Authenticate();
+  this.authenticate();
   this.from = 0;
   this.commentBody;
   this.commentService = commentService;
@@ -23,13 +23,12 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
   this.stats = {};
 }
 
-BillController.prototype.Authenticate = function() {
-  if(this.authService && this.authService.getAccessToken) {
-    var token = this.authService.getAccessToken();
-    if (!token) {
-      this.location.path('/');
+BillController.prototype.authenticate = function() {
+  this.authService.validateToken(function(result) {
+    if (!result) {
+      that.location.path('/');
     }
-  }
+  });
 };
 
 BillController.prototype.showVoteModal = function(vote){
@@ -184,7 +183,6 @@ BillController.prototype.postComment = function() {
   };
   this.billService.postComment(this.id, this.commentBody, function(err, result) {
     if(err) {
-      console.log(err);
       that.postCommentError = true;
       if(err.message === 'Login Required') {
         that.location.path('/');

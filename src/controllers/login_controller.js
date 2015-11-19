@@ -17,27 +17,25 @@ function LoginCtrl($scope, $location, userService, authService) {
 }
 
 LoginCtrl.prototype.auth = function() {
-  if(this.authService.loggedInStatus()){
-    this.go('/feed');
-  }
+  var that = this;
+  this.authService.validateToken(function(result){
+    if(result) {
+      that.location.path('/feed');
+    }
+  });
 };
 
 LoginCtrl.prototype.loginWithFacebook = function(){
   var that = this;
   this.userService.loginWithFacebook(function(err, response){
     if(err){
-      that.go("/onboarding");
+      that.location.path("/onboarding");
     }
     else {
-      that.go("/feed");
+      that.location.path("/feed");
     }
   });
 };
-
-LoginCtrl.prototype.go = function (hash) {
-  this.location.path(hash);
-};
-
 
 LoginCtrl.prototype.validate = function(u, hash) {
   var email = u.email;
@@ -46,7 +44,7 @@ LoginCtrl.prototype.validate = function(u, hash) {
   this.user.passwordValid = this.passwordValidation(password);
   if(this.user.emailValid && this.user.passwordValid) {
     this.userService.createUser(email, password);
-    this.go(hash);
+    this.location.path(hash);
   }
 
 };
@@ -64,7 +62,7 @@ LoginCtrl.prototype.login = function(u, hash) {
           that.forgot = true;
         }
       } else {
-        that.go("/feed");
+        that.location.path("/feed");
       }
     });
   }

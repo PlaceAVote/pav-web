@@ -20,6 +20,15 @@ module.exports = {
       },
       withCredentials: false,
     },
+    getStatus: {
+      method: 'GET',
+      transformResponse: [],
+      headers: {
+        'Content-Type' : "application/json",
+        'Accept': 'application/json',
+      },
+      withCredentials: false,
+    },
     put: {
       method: 'PUT',
       headers: {
@@ -93,6 +102,7 @@ module.exports = {
   },
   users : {
     endpoint : urls.USER + '/user',
+    authorize: urls.USER + '/user/token/validate?token=',
     profile: {
       me : urls.USER + '/user/me/profile',
       fromId: function(id) {
