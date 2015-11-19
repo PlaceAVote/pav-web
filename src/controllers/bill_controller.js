@@ -183,7 +183,6 @@ BillController.prototype.postComment = function() {
   };
   this.billService.postComment(this.id, this.commentBody, function(err, result) {
     if(err) {
-      console.log(err);
       that.postCommentError = true;
       if(err.message === 'Login Required') {
         that.location.path('/');

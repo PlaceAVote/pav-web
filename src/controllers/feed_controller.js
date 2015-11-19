@@ -7,7 +7,6 @@ FeedController = function($scope, $location, userService, billService, trendServ
     this.billService = billService;
     this.userService = userService;
     authService.validateToken(function(result){
-      console.log(result);
       if(!result) {
         $location.path('/');
       }

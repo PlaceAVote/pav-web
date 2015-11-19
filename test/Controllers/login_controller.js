@@ -136,7 +136,6 @@ describe('LoginCtrl', function() {
                 callback();
             }
             test(function(){
-                console.log(subject);
                 expect(subject.forgot).to.eql(true);
                 done();
              });

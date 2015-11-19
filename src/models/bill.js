@@ -8,7 +8,6 @@ var BILLINTRODUCTED = 'bill-introduced';
 
 function Bill(data) {
   this.billData = data;
-
 }
 
 Bill.prototype.getStatusClass = function() {
