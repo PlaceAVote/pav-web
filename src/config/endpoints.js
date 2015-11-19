@@ -20,6 +20,15 @@ module.exports = {
       },
       withCredentials: false,
     },
+    getStatus: {
+      method: 'GET',
+      transformResponse: [],
+      headers: {
+        'Content-Type' : "application/json",
+        'Accept': 'application/json',
+      },
+      withCredentials: false,
+    },
     put: {
       method: 'PUT',
       headers: {
