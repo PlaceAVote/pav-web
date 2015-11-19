@@ -54,8 +54,7 @@ function AuthService($resource, options) {
       return;
     }
     var url = config.users.authorize + auth;
-    config.methods.get.transformResponse = [];
-    var authResource = new $resource(url, undefined, {authorize: config.methods.get});
+    var authResource = new $resource(url, undefined, {authorize: config.methods.getStatus});
     var onError = function(err){
       storage.removeItem('pav');
       return callback(false);

@@ -24,9 +24,9 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
 }
 
 BillController.prototype.authenticate = function() {
-  this.authService.validateToken(function(result){
-    if(!result) {
-      $location.path('/');
+  this.authService.validateToken(function(result) {
+    if (!result) {
+      that.location.path('/');
     }
   });
 };
