@@ -1,5 +1,9 @@
 function AuthorizeController(){}///
-//js comments
+/**
+ ** autherize the current session.
+ ** @constructor
+ ** @param {object} options - options contians 'autherizer', 'location', 'success' and 'error'
+**/
 AuthorizeController.authorize = function(options){
   var options = options || {};
   options.authorizer.validateToken(function(result){
