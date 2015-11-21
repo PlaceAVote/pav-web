@@ -1,7 +1,9 @@
+var AuthorizeController = require('./autherize_controller.js');
+
 function LoginCtrl($scope, $location, userService, authService) {
+  AuthorizeController.authorize({success: '/feed', authorizer: authService, location: $location});
   $scope = $scope || {};
   this.userService = userService;
-  this.authService = authService;
   $scope.login = this;
   this.location = $location;
   this.forgot = false;
@@ -13,17 +15,7 @@ function LoginCtrl($scope, $location, userService, authService) {
     password: '',
     passwordValid: true
   };
-  this.auth();
 }
-
-LoginCtrl.prototype.auth = function() {
-  var that = this;
-  this.authService.validateToken(function(result){
-    if(result) {
-      that.location.path('/feed');
-    }
-  });
-};
 
 LoginCtrl.prototype.loginWithFacebook = function(){
   var that = this;

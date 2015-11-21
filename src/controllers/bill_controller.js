@@ -1,12 +1,12 @@
 var Comment = require('../models/comment.js');
-
+var AuthorizeController = require('./autherize_controller.js');
 function BillController($scope, $routeParams, billService, legislatorService, voteService, commentService, $location, authService) {
+  AuthorizeController.authorize({error: '/', authorizer: authService, location: $location});
   $scope = $scope || {};
   $scope.bill = this;
   $scope.commentService = commentService;
   this.authService = authService;
   this.location = $location;
-  this.authenticate();
   this.from = 0;
   this.commentBody;
   this.commentService = commentService;
@@ -22,14 +22,6 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
   this.voteModal = {};
   this.stats = {};
 }
-
-BillController.prototype.authenticate = function() {
-  this.authService.validateToken(function(result) {
-    if (!result) {
-      that.location.path('/');
-    }
-  });
-};
 
 BillController.prototype.showVoteModal = function(vote){
     if (!this.userVoted) {

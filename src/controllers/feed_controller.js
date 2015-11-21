@@ -1,16 +1,13 @@
 var Banner = require('../models/banner.js');
+var AuthorizeController = require('./autherize_controller.js');
 
 FeedController = function($scope, $location, userService, billService, trendService, authService) {
+    AuthorizeController.authorize({error: '/', authorizer: authService, location: $location});
     this.$scope = $scope || {};
     $scope.$location = $location || {};
     this.trendService = trendService;
     this.billService = billService;
     this.userService = userService;
-    authService.validateToken(function(result){
-      if(!result) {
-        $location.path('/');
-      }
-    });
     this.getBills('notyet@implemented.com', function(err, response) {
         if(!err){
             $scope.bills = response;
