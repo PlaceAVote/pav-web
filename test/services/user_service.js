@@ -471,5 +471,51 @@ describe("User Service", function() {
       });
     });
   });
+  describe('UserProfile Timeline', function() {
+    it('returns error if no id is supplied', function(done) {
+      var subject = new UserService();
+      subject.getUserTimeline(undefined, function(err, result){
+        expect(err.message).to.eql('Id is required');
+        done();
+      });
+    });
+    it('passes correct params to resource', function(done) {
+      function userResource(url, params, method) {
+        expect(url).to.eql('http://pav-user-api-924234322.us-east-1.elb.amazonaws.com:8080/user/me/timeline');
+        expect(params).to.eql(undefined);
+        expect(method.getTimeline.headers['Authorization']).to.eql('PAV_AUTH_TOKEN 000001');
+        this.getTimeline = function(){};
+        done();
+      }
+      var subject = new UserService(userResource, undefined, authService);
+      subject.getUserTimeline('me', function(err, response){});
+    });
+    it('returns an error from server', function(done) {
+      function userResource(url, params, method) {
+        this.getTimeline = function(params, onLoad, onError){
+          return onError('Error');
+        };
+      }
+      var subject = new UserService(userResource, undefined, authService);
+      subject.getUserTimeline('me', function(err, response){
+        expect(err.message).to.eql('Server Error');
+        expect(response).to.eql(undefined);
+        done();
+      });
+    });
+    it('returns an array of the same length as returned from server', function(done) {
+      function userResource(url, params, method) {
+        this.getTimeline = function(params, onLoad, onError){
+          return onLoad(['a','b','c']);
+        };
+      }
+      var subject = new UserService(userResource, undefined, authService);
+      subject.getUserTimeline('me', function(err, response){
+        expect(err).to.eql(undefined);
+        expect(response.length).to.eql(3);
+        done();
+      });
+    });
+  });
 });
 

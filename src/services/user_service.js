@@ -163,6 +163,22 @@ function UserService($resource, facebookService, authService) {
       resource.getProfile(undefined, onLoad, onError);
     };
 
+    var getUserTimeline = function(id, callback) {
+      if (!id) {
+        return callback({message: 'Id is required'});
+      }
+      var url = config.users.timeline(id);
+      config.methods.getArray.headers['Authorization'] = authService.getAccessToken();
+      var timelineResource = new $resource(url, undefined, {getTimeline: config.methods.getArray});
+      var onError = function(error) {
+        return callback({message: 'Server Error', error: error});
+      };
+      var onLoad = function(response) {
+        return callback(undefined, response);
+      };
+      timelineResource.getTimeline(undefined, onLoad, onError);
+    };
+
 	return {
     createUser : createUser,
     getUser : getUser,
@@ -175,6 +191,7 @@ function UserService($resource, facebookService, authService) {
     makeProfilePublic: makeProfilePublic,
     getUserProfile: getUserProfile,
     getUserFromId: getUserFromId,
+    getUserTimeline: getUserTimeline,
 	};
 }
 

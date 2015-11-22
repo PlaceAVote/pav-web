@@ -109,6 +109,9 @@ module.exports = {
         return urls.USER + '/user/' + id + '/profile'
       },
     },
+    timeline: function(id) {
+      return urls.USER + '/user/' + id + '/timeline'
+    },
     login_endpoint: urls.USER + '/user/authenticate',
     facebookLoginUrl : urls.USER + '/user/facebook/authenticate',
     facebookCreateUrl: urls.USER + '/user/facebook',
