@@ -1,13 +1,13 @@
 <header ng-controller="HeaderCtrl as header" ng-show="header.authService.loggedInStatus()">
 	<div class="row">
 	<img ng-click="header.go('/feed')" class="pav-icon" src="img/pav_icon.svg" />
-	<section class="search">	
+	<section class="search">
 		<input type="text" placeholder="Search bills or people..." />
 		<img src="img/search.png" />
 	</section>
 	<section class="notification">
 		<img style="cursor: pointer;" src="img/notification.svg" />
-		<img class="user-img" ng-hide="user.img_url" src="img/header/generic-user.png" />
+		<img ng-click="header.go('/profile')" class="user-img" ng-hide="user.img_url" src="img/header/generic-user.png" />
 		<img class="user-img" ng-show="user.img_url" ng-src="{{user.img_url}}" />
 	</section>
 	</div>
