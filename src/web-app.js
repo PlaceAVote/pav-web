@@ -80,7 +80,7 @@ app.controller('LoginCtrl',['$scope','$location', 'userService', 'authService', 
 app.controller('FeedCtrl', ['$scope', '$location', 'userService', 'billService', 'trendService', 'authService', FeedController]);
 app.controller('BillCtrl', ['$scope', '$routeParams', 'billService', 'legislationService', 'voteService', 'commentService', '$location', 'authService', BillController]);
 app.controller('HeaderCtrl', ['$scope', '$location', 'authService', HeaderController]);
-app.controller('ProfileCtrl', [ProfileController]);
+app.controller('ProfileCtrl', ['$scope', '$location', 'authService', 'userService', ProfileController]);
 //directives
 app.directive('mailcheck', ['$compile','$sce', mailcheck]);
 app.directive('comment', ['$compile', 'commentService', commentDirective]);
