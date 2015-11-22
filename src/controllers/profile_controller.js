@@ -7,15 +7,28 @@ function ProfileController($scope, $location, authService, userService) {
   this.location = $location;
   this.authService = authService;
   this.userService = userService;
-  this.populateProfile();
+  this.populate();
 }
+
+ProfileController.prototype.populate = function() {
+  this.populateProfile();
+  this.populateTimeline();
+};
 
 ProfileController.prototype.populateProfile = function() {
   var that = this;
   this.userService.getUserProfile(function(err, result) {
     if (!err) {
       that.user = result;
-      console.log(result);
+    }
+  });
+};
+
+ProfileController.prototype.populateTimeline = function() {
+  var that = this;
+  this.userService.getUserTimeline(function(err, result) {
+    if (!err) {
+      that.timeline = result;
     }
   });
 };
