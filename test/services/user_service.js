@@ -333,7 +333,7 @@ describe("User Service", function() {
         }
       };
       var subject = new UserService(undefined, undefined, auth);
-      subject.getUserProfile(function(err, result) {
+      subject.getUserProfile('id', function(err, result) {
         expect(err.status).to.eql(401);
         expect(err.message).to.eql('No Auth Token');
         expect(result).to.eql(undefined);
@@ -350,7 +350,7 @@ describe("User Service", function() {
         done();
       };
       var subject = new UserService(mockResource, undefined, authService);
-      subject.getUserProfile(function(err, result) {
+      subject.getUserProfile('me', function(err, result) {
       });
     });
     it('returns an error from server', function(done) {
@@ -360,7 +360,7 @@ describe("User Service", function() {
           return onError({status: 401});
       }
       var subject = new UserService(mockResource, undefined, authService);
-      subject.getUserProfile(function(err, result) {
+      subject.getUserProfile('id', function(err, result) {
         expect(err).to.eql({status:401});
         done();
       });
@@ -373,7 +373,7 @@ describe("User Service", function() {
           return onLoad(user);
       }
       var subject = new UserService(mockResource, undefined, authService);
-      subject.getUserProfile(function(err, result) {
+      subject.getUserProfile('id', function(err, result) {
         expect(err).to.eql(undefined);
         expect(result.email).to.eql(user.email);
         expect(result.loadedFromServer).to.eql(true);
@@ -390,7 +390,7 @@ describe("User Service", function() {
       }
       var subject = new UserService(mockResource, undefined, authService);
       subject.user = {loadedFromServer: true};
-      subject.getUserProfile(function(err, result) {
+      subject.getUserProfile('id', function(err, result) {
         expect(err).to.eql(undefined);
         expect(result.loadedFromServer).to.eql(true);
         expect(serverCalls).to.eql(0);
@@ -506,7 +506,7 @@ describe("User Service", function() {
     it('returns an array of the same length as returned from server', function(done) {
       function userResource(url, params, method) {
         this.getTimeline = function(params, onLoad, onError){
-          return onLoad(['a','b','c']);
+          return onLoad({results:['a','b','c']});
         };
       }
       var subject = new UserService(userResource, undefined, authService);

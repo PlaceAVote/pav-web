@@ -14,7 +14,7 @@ describe("FeedController", function() {
            user.first_name = "Paul";
            return user;
         }
-        this.getUserProfile = function(callback) {
+        this.getUserProfile = function(id, callback) {
            var user = new User("paul@test.com", "pas$WORD");
            user.first_name = "Paul";
            return callback(undefined, user);

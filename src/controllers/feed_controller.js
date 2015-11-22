@@ -33,7 +33,7 @@ FeedController = function($scope, $location, userService, billService, trendServ
 }
 
 FeedController.prototype.getUserProfile = function(callback) {
-  this.userService.getUserProfile(callback);
+  this.userService.getUserProfile('me', callback);
 };
 
 FeedController.prototype.getTrends = function(callback) {

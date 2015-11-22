@@ -18,7 +18,7 @@ ProfileController.prototype.populate = function() {
 
 ProfileController.prototype.populateProfile = function() {
   var that = this;
-  this.userService.getUserProfile(function(err, result) {
+  this.userService.getUserProfile(this.id, function(err, result) {
     if (!err) {
       that.user = result;
     }
