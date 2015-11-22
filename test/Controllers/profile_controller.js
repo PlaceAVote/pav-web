@@ -10,6 +10,9 @@ describe('Populate Profile', function() {
       return callback(true);
     }
   };
+  var routeParams = {
+      id: 'me'
+  };
   it('calls all populate methods', function(done) {
     var getUserCalled = false;
     var getTimeline = false;
@@ -21,7 +24,7 @@ describe('Populate Profile', function() {
         getTimeline = true;
       },
     };
-      var subject = new ProfileController(undefined, location, authService, userService);
+      var subject = new ProfileController(undefined, location, routeParams, authService, userService);
       expect(getUserCalled).to.eql(true);
       expect(getTimeline).to.eql(true);
       done();
