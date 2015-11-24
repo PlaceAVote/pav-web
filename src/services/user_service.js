@@ -238,8 +238,8 @@ function UserService($resource, facebookService, authService) {
       else {
         url = config.users.unfollow;
       }
-      config.methods.getStatus.headers['Authorization'] = authService.getAccessToken();
-      var resource = new $resource(url, undefined, {execute: config.methods.getStatus});
+      config.methods.putNoBody.headers['Authorization'] = authService.getAccessToken();
+      var resource = new $resource(url, undefined, {execute: config.methods.putNoBody});
       var onError = function(err) {
         return callback({message: 'Server Error', error: err});
       };

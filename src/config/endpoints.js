@@ -37,6 +37,15 @@ module.exports = {
       },
       withCredentials: false,
     },
+    putNoBody: {
+      method: 'PUT',
+      transformResponse: [],
+      headers: {
+        'Content-Type' : "application/json",
+        'Accept': 'application/json',
+      },
+      withCredentials: false,
+    },
     post: {
       method: 'POST',
       headers: {
