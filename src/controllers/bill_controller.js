@@ -1,12 +1,12 @@
 var Comment = require('../models/comment.js');
-
+var AuthorizeController = require('./autherize_controller.js');
 function BillController($scope, $routeParams, billService, legislatorService, voteService, commentService, $location, authService) {
+  AuthorizeController.authorize({error: '/', authorizer: authService, location: $location});
   $scope = $scope || {};
   $scope.bill = this;
   $scope.commentService = commentService;
   this.authService = authService;
   this.location = $location;
-  this.Authenticate();
   this.from = 0;
   this.commentBody;
   this.commentService = commentService;
@@ -22,15 +22,6 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
   this.voteModal = {};
   this.stats = {};
 }
-
-BillController.prototype.Authenticate = function() {
-  if(this.authService && this.authService.getAccessToken) {
-    var token = this.authService.getAccessToken();
-    if (!token) {
-      this.location.path('/');
-    }
-  }
-};
 
 BillController.prototype.showVoteModal = function(vote){
     if (!this.userVoted) {
@@ -184,7 +175,6 @@ BillController.prototype.postComment = function() {
   };
   this.billService.postComment(this.id, this.commentBody, function(err, result) {
     if(err) {
-      console.log(err);
       that.postCommentError = true;
       if(err.message === 'Login Required') {
         that.location.path('/');

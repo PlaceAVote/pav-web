@@ -4,8 +4,8 @@ var User = require('../../src/models/user.js');
 
 describe("FeedController", function() {
     function mockAuthService(){
-      this.getAccessToken = function() {
-        return "token";
+      this.validateToken = function(callback) {
+        return callback(true);
       }
     };
     function mockUserService(){
@@ -14,7 +14,7 @@ describe("FeedController", function() {
            user.first_name = "Paul";
            return user;
         }
-        this.getUserProfile = function(callback) {
+        this.getUserProfile = function(id, callback) {
            var user = new User("paul@test.com", "pas$WORD");
            user.first_name = "Paul";
            return callback(undefined, user);

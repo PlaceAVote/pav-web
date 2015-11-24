@@ -1,4 +1,6 @@
-function AuthService(options) {
+var config = require('../config/endpoints.js');
+
+function AuthService($resource, options) {
   options = options || {};
   var w = options.window || window;
   var auth;
@@ -10,7 +12,7 @@ function AuthService(options) {
   };
 
   var setAuth = function(token) {
-   auth = 'PAV_AUTH_TOKEN ' + token;
+   auth = token;
    storage.setItem('pav', auth);
   };
 
@@ -26,19 +28,41 @@ function AuthService(options) {
   };
 
   var getAccessToken = function() {
+    return 'PAV_AUTH_TOKEN ' +  getRawAccessToken();
+  };
+
+  var getRawAccessToken = function() {
     if (!auth) {
-      return getTokenFromLocalStorage();
+      auth = getTokenFromLocalStorage();
     }
     return auth;
   };
 
   var loggedInStatus = function() {
-    auth = getTokenFromLocalStorage();
+    auth = getRawAccessToken();
     if(!auth) {
       return false;
     } else if (auth) {
       return true;
     }
+  };
+
+  var validateToken = function(callback) {
+    var token = loggedInStatus();
+    if(!token){
+      callback(token);
+      return;
+    }
+    var url = config.users.authorize + auth;
+    var authResource = new $resource(url, undefined, {authorize: config.methods.getStatus});
+    var onError = function(err){
+      storage.removeItem('pav');
+      return callback(false);
+    }
+    var onLoad = function(){
+      return callback(true);
+    }
+    authResource.authorize(undefined, onLoad, onError);
   };
 
   return {
@@ -47,6 +71,7 @@ function AuthService(options) {
     getAccessToken: getAccessToken,
     setFacebookAuth: setFacebookAuth,
     getFacebookAccessToken: getFacebookAccessToken,
+    validateToken: validateToken,
   };
 }
 

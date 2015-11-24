@@ -32,7 +32,7 @@ function BillService(tempBillResource, $resource, authService, userService) {
       var url = config.votes.voteRecords.endpoint + id;
       config.methods.getArray.headers['Authorization'] = authService.getAccessToken();
       var resource = new $resource(url, undefined,  {getBillVotes: config.methods.getArray});
-      resource.getBillVotes(undefined, onLoad, onError);      
+      resource.getBillVotes(undefined, onLoad, onError);
     };
 
     var getBill = function(id, callback) {

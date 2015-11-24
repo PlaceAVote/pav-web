@@ -8,7 +8,6 @@ var BILLINTRODUCTED = 'bill-introduced';
 
 function Bill(data) {
   this.billData = data;
-
 }
 
 Bill.prototype.getStatusClass = function() {
@@ -28,9 +27,13 @@ Bill.prototype.getStatusClass = function() {
 };
 
 Bill.prototype.getTitle = function() {
+  if (!this.billData && !this.billData.bill_type) {
+    return;
+  }
   var t = this.billData.bill_type.toUpperCase();
   var c = this.billData.congress;
-  return format('%s. %s: %s', t, c, this.billData.short_title);
+  var title = this.billData.short_title || this.billData.official_title || '';
+  return format('%s. %s: %s', t, c, title);
 };
 
 module.exports = Bill;

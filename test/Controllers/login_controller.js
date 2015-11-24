@@ -1,8 +1,8 @@
 var LoginCtrl = require("../../src/controllers/login_controller.js");
 var expect = require("chai").expect;
 var authService = {
-  loggedInStatus: function(){
-    return false;
+  validateToken: function(callback){
+    return callback(false);
   }
 };
 describe('LoginCtrl', function() {
@@ -89,30 +89,38 @@ describe('LoginCtrl', function() {
 		});
         describe("Facebook login", function(){
             it("should call go with 'topics' if user is undefined", function(done){
-                var subject = new LoginCtrl({}, {}, {}, authService);
-                subject.userService = {
-                   loginWithFacebook : function(callback){
-                      callback({message:"User Not Found"});
-                   }
-                };
-               subject.go = function(hash){
+              var location = {
+                path: function(dest){
+                  expect(dest).to.eql('/onboarding');
+                  done();
+                }
+              };
+              var subject = new LoginCtrl({}, location, {}, authService);
+              subject.userService = {
+                loginWithFacebook : function(callback){
+                  callback({message:"User Not Found"});
+                }
+              };
+              subject.go = function(hash){
                 expect(hash).to.eql("/onboarding");
                 done();
-               };
-               subject.loginWithFacebook();
+              };
+              subject.loginWithFacebook();
             });
             it("should call go with 'feed' if no errors", function(done){
-                var subject = new LoginCtrl({}, {}, {}, authService);
-                subject.userService = {
-                   loginWithFacebook : function(callback){
-                      callback();
-                   }
-                };
-               subject.go = function(hash){
-                expect(hash).to.eql("/feed");
-                done();
-               };
-               subject.loginWithFacebook();
+              var location = {
+                path: function(dest){
+                  expect(dest).to.eql('/feed');
+                  done();
+                }
+              };
+              var subject = new LoginCtrl({}, location, {}, authService);
+              subject.userService = {
+                loginWithFacebook : function(callback){
+                  callback();
+                }
+              };
+              subject.loginWithFacebook();
             });
         });
        describe("failed login", function() {
@@ -128,7 +136,6 @@ describe('LoginCtrl', function() {
                 callback();
             }
             test(function(){
-                console.log(subject);
                 expect(subject.forgot).to.eql(true);
                 done();
              });

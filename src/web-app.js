@@ -5,7 +5,7 @@ var LoginController = require('./controllers/login_controller.js');
 var FeedController = require('./controllers/feed_controller.js');
 var BillController = require('./controllers/bill_controller.js');
 var HeaderController = require('./controllers/header_controller.js');
-
+var ProfileController = require('./controllers/profile_controller.js');
 //services
 var UserService = require('./services/user_service.js');
 var BillService = require('./services/bill_service.js');
@@ -50,6 +50,10 @@ app.config(['$routeProvider', function($routeProvider) {
       templateUrl: 'partials/bill.html',
       controller: 'BillCtrl as bill'
     })
+    .when('/profile/:id', {
+      templateUrl: 'partials/profile.html',
+      controller: 'ProfileCtrl as profile'
+    })
     .otherwise({
       redirectTo: '/'
     });
@@ -61,7 +65,7 @@ app.factory('tempTrendResource', [TempTrendResource]);
 
 //services
 app.factory('facebookService', [Facebook]);
-app.factory('authService', [AuthService]);
+app.factory('authService', ['$resource', AuthService]);
 app.factory('userService', ['$resource', 'facebookService', 'authService', UserService]);
 app.factory('billService', ['tempBillResource', '$resource', 'authService', 'userService', BillService]);
 app.factory('trendService', ['tempTrendResource', TrendService]);
@@ -76,6 +80,7 @@ app.controller('LoginCtrl',['$scope','$location', 'userService', 'authService', 
 app.controller('FeedCtrl', ['$scope', '$location', 'userService', 'billService', 'trendService', 'authService', FeedController]);
 app.controller('BillCtrl', ['$scope', '$routeParams', 'billService', 'legislationService', 'voteService', 'commentService', '$location', 'authService', BillController]);
 app.controller('HeaderCtrl', ['$scope', '$location', 'authService', HeaderController]);
+app.controller('ProfileCtrl', ['$scope', '$location', '$routeParams', 'authService', 'userService', ProfileController]);
 //directives
 app.directive('mailcheck', ['$compile','$sce', mailcheck]);
 app.directive('comment', ['$compile', 'commentService', commentDirective]);
