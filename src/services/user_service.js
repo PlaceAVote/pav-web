@@ -191,6 +191,26 @@ function UserService($resource, facebookService, authService) {
       timelineResource.getTimeline(undefined, onLoad, onError);
     };
 
+    var getFollowers = function(id, callback) {
+      if (!id) {
+        return callback({message: 'Id is required'});
+      }
+      var url = config.users.followers(id);
+      config.methods.getArray.headers['Authorization'] = authService.getAccessToken();
+      var followersResource = new $resource(url, undefined, {getFollowers: config.methods.getArray});
+      var onError = function(error) {
+        return callback({message: 'Server Error', error: error});
+      };
+      var onLoad = function(response) {
+        var users = [];
+        for(var i = 0; i < response.length; i++) {
+          users.push(User.createFromJson(response[i]));
+        }
+        return callback(undefined, users);
+      };
+      followersResource.getFollowers(undefined, onLoad, onError);
+    };
+
 	return {
     createUser : createUser,
     getUser : getUser,
@@ -204,6 +224,7 @@ function UserService($resource, facebookService, authService) {
     getUserProfile: getUserProfile,
     getUserFromId: getUserFromId,
     getUserTimeline: getUserTimeline,
+    getFollowers: getFollowers,
 	};
 }
 

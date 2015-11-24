@@ -111,6 +111,9 @@ module.exports = {
     timeline: function(id) {
       return urls.USER + '/user/' + id + '/timeline'
     },
+    followers: function(id) {
+      return urls.USER + '/user/' + id + '/followers'
+    },
     login_endpoint: urls.USER + '/user/authenticate',
     facebookLoginUrl : urls.USER + '/user/facebook/authenticate',
     facebookCreateUrl: urls.USER + '/user/facebook',

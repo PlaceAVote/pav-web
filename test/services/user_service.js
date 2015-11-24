@@ -551,5 +551,66 @@ describe("User Service", function() {
       });
     });
   });
+  describe('User Followers', function() {
+    it('returns error if no id is supplied', function(done) {
+      var subject = new UserService();
+      subject.getFollowers(undefined, function(err, result){
+        expect(err.message).to.eql('Id is required');
+        done();
+      });
+    });
+    it('passes correct params to resource', function(done) {
+      function userResource(url, params, method) {
+        expect(url).to.eql('http://pav-user-api-924234322.us-east-1.elb.amazonaws.com:8080/user/me/followers');
+        expect(params).to.eql(undefined);
+        expect(method.getFollowers.headers['Authorization']).to.eql('PAV_AUTH_TOKEN 000001');
+        this.getFollowers = function(){};
+        done();
+      }
+      var subject = new UserService(userResource, undefined, authService);
+      subject.getFollowers('me', function(err, response){});
+    });
+    it('returns an error from server', function(done) {
+      function userResource(url, params, method) {
+        this.getFollowers = function(params, onLoad, onError){
+          return onError('Error');
+        };
+      }
+      var subject = new UserService(userResource, undefined, authService);
+      subject.getFollowers('me', function(err, response){
+        expect(err.message).to.eql('Server Error');
+        expect(response).to.eql(undefined);
+        done();
+      });
+    });
+    it('returns a list of users from the server', function(done){
+      function userResource(url, params, method) {
+        this.getFollowers = function(params, onLoad, onError){
+          var users = [
+            {
+              user_id: '1',
+              first_name: 'paul',
+              last_name: 'barber',
+              img_ur: 'catmeme'
+            },
+            {
+              user_id: '2',
+              first_name: 'anth',
+              last_name: 'oneil',
+              img_ur: 'cutedogpic'
+            },
+          ];
+          return onLoad(users);
+        };
+      }
+      var subject = new UserService(userResource, undefined, authService);
+      subject.getFollowers('me', function(err, response){
+        expect(err).to.eql(undefined);
+        expect(response.length).to.eql(2);
+        expect(response[0].user_id).to.eql('1');
+        done();
+      });
+    });
+  });
 });
 
