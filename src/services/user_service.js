@@ -211,6 +211,26 @@ function UserService($resource, facebookService, authService) {
       followersResource.getFollowers(undefined, onLoad, onError);
     };
 
+    var getFollowing = function(id, callback) {
+      if (!id) {
+        return callback({message: 'Id is required'});
+      }
+      var url = config.users.following(id);
+      config.methods.getArray.headers['Authorization'] = authService.getAccessToken();
+      var followersResource = new $resource(url, undefined, {getFollowing: config.methods.getArray});
+      var onError = function(error) {
+        return callback({message: 'Server Error', error: error});
+      };
+      var onLoad = function(response) {
+        var users = [];
+        for(var i = 0; i < response.length; i++) {
+          users.push(User.createFromJson(response[i]));
+        }
+        return callback(undefined, users);
+      };
+      followersResource.getFollowing(undefined, onLoad, onError);
+    };
+
 	return {
     createUser : createUser,
     getUser : getUser,
@@ -225,6 +245,7 @@ function UserService($resource, facebookService, authService) {
     getUserFromId: getUserFromId,
     getUserTimeline: getUserTimeline,
     getFollowers: getFollowers,
+    getFollowing: getFollowing,
 	};
 }
 

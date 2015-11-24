@@ -114,6 +114,9 @@ module.exports = {
     followers: function(id) {
       return urls.USER + '/user/' + id + '/followers'
     },
+    following: function(id) {
+      return urls.USER + '/user/' + id + '/following'
+    },
     login_endpoint: urls.USER + '/user/authenticate',
     facebookLoginUrl : urls.USER + '/user/facebook/authenticate',
     facebookCreateUrl: urls.USER + '/user/facebook',
