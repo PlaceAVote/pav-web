@@ -108,3 +108,11 @@
     }
   }
 }
+
+.score-none {
+  display: none !important;
+}
+
+.score-down {
+  color: $red !important;
+}

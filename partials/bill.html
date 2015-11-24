@@ -59,7 +59,7 @@
             <img ng-src="{{bill.forComment.img_url}}" />
           </div>
           <div class="top-comment-body" ng-hide="bill.noAgainstComment">
-            <h2>{{bill.againstComment.author}}</h2> <section class="comment-vote opposed"><span>{{bill.againstComment.score}}</span><img src="img/card/thumb-up.png" ng-click="bill.againstComment.like(bill.commentService)"><img src="img/card/thumb-down.png" ng-click="bill.againstComment.dislike(bill.commentService)"/></section>
+            <h2>{{bill.againstComment.author}}</h2> <section class="comment-vote opposed"><span ng-class="{'red': bill.againstComment.score < 0}">{{bill.againstComment.score}}</span><img src="img/card/thumb-up.png" ng-click="bill.againstComment.like(bill.commentService)"><img src="img/card/thumb-down.png" ng-click="bill.againstComment.dislike(bill.commentService)"/></section>
             <p>{{bill.againstComment.body}}</p>
           </div>
           <div class="top-comment-body" ng-show="bill.noAgainstComment">
