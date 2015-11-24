@@ -21,6 +21,7 @@ var comment =  {
     },
   ],
   "score": 100,
+  "scored": false,
   "timestamp": 1444764009809,
 };
 describe("comment model", function(){
