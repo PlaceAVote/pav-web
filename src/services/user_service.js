@@ -1,6 +1,7 @@
 var User = require('../models/user.js');
 var config = require('../config/endpoints.js');
 var strftime = require('strftime');
+var TimelineResponseFactory = require('../factories/timeline_response_factory.js');
 
 function UserService($resource, facebookService, authService) {
     this.createdFB = false;
@@ -176,7 +177,16 @@ function UserService($resource, facebookService, authService) {
         return callback({message: 'Server Error', error: error});
       };
       var onLoad = function(response) {
-        return callback(undefined, response.results);
+        try{
+          var results = {
+            next_page : response['next-page'],
+            timeline: TimelineResponseFactory.getResponses(response.results)
+          }
+          return callback(undefined, results);
+        }
+        catch(e) {
+          return callback(e);
+        }
       };
       timelineResource.getTimeline(undefined, onLoad, onError);
     };

@@ -506,13 +506,47 @@ describe("User Service", function() {
     it('returns an array of the same length as returned from server', function(done) {
       function userResource(url, params, method) {
         this.getTimeline = function(params, onLoad, onError){
-          return onLoad({results:['a','b','c']});
+          var r = {results: [
+            {
+              type: 'comment'
+            },
+            {
+              type: 'dislikecomment'
+            },
+            {
+              type: 'likecomment'
+            }
+          ]}
+          r['next-page'] = 1;
+          return onLoad(r);
         };
       }
       var subject = new UserService(userResource, undefined, authService);
       subject.getUserTimeline('me', function(err, response){
         expect(err).to.eql(undefined);
-        expect(response.length).to.eql(3);
+        expect(response.next_page).to.eql(1);
+        expect(response.timeline.length).to.eql(3);
+        done();
+      });
+    });
+    it('returns onError when factory fails', function(done) {
+      function userResource(url, params, method) {
+        this.getTimeline = function(params, onLoad, onError){
+          var r = {results: [
+            {
+              type: 'comment'
+            },
+            {
+              type: 'cat'
+            },
+          ]}
+          r['next-page'] = 1;
+          return onLoad(r);
+        };
+      }
+      var subject = new UserService(userResource, undefined, authService);
+      subject.getUserTimeline('me', function(err, response){
+        expect(err.message).to.eql('Type Not Supported');
         done();
       });
     });
