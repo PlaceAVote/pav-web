@@ -266,7 +266,7 @@ describe("comment model", function(){
     });
   });
   describe('Like', function() {
-    it('Sets LikeError to true is service returns error', function(done) {
+    it('Sets LikeError to true if service returns error', function(done) {
       var subject = new Comment(comment);
       var service = {
         like: function(object, billId, callback) {
@@ -279,7 +279,7 @@ describe("comment model", function(){
       expect(subject.likeFailed).to.eql(true);
       done();
     });
-    it('Sets Liked to true is service returns error', function() {
+    it('Sets Liked to true if service returns error', function() {
       var subject = new Comment(comment);
       var service = {
         like: function(object, billId, callback) {
@@ -292,7 +292,7 @@ describe("comment model", function(){
     });
   });
   describe('Dislike', function() {
-    it('Sets DisLikeError to true is service returns error', function(done) {
+    it('Sets DisLikeError to true if service returns error', function(done) {
       var subject = new Comment(comment);
       var service = {
         dislike: function(object, billId ,callback) {
@@ -304,7 +304,7 @@ describe("comment model", function(){
       expect(subject.dislikeFailed).to.eql(true);
       done();
     });
-    it('Sets Disliked to true is service returns error', function() {
+    it('Sets Disliked to true if service returns error', function() {
       var subject = new Comment(comment);
       var service = {
         dislike: function(object, billId, callback) {
@@ -314,6 +314,24 @@ describe("comment model", function(){
       };
       subject.dislike(service);
       expect(subject.disliked).to.eql(true);
+    });
+    it('only calls service if user has already voted', function() {
+      serviceCalled = false;
+      comment.scored = true;
+      var subject = new Comment(comment);
+      var service = {
+        dislike: function(object, billId, callback) {
+           serviceCalled = true;
+           return callback(undefined, true);
+        },
+        like: function(object, billId, callback) {
+           serviceCalled = true;
+           return callback(undefined, true);
+        },
+      };
+      subject.dislike(service);
+      subject.like(service);
+      expect(serviceCalled).to.eql(false);
     });
   });
 });
