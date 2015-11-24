@@ -1,16 +1,19 @@
 path.opposed_line {
 	fill: none;
 	stroke: $red;
+	stroke-width: 2;
 }
 
 path.for_line {
 	fill: none;
 	stroke: $green;
+	stroke-width: 2;
 }
 
 path.domain {
     stroke: none;
     fill: none;
+	stroke-width: 2;
 }
 
 .y.axis {
