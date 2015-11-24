@@ -231,6 +231,19 @@ function UserService($resource, facebookService, authService) {
       followersResource.getFollowing(undefined, onLoad, onError);
     };
 
+    var follow = function(callback) {
+      var url = config.users.follow;
+      config.methods.getStatus.headers['Authorization'] = authService.getAccessToken();
+      var resource = new $resource(url, undefined, {follow: config.methods.getStatus});
+      var onError = function(err) {
+        return callback({message: 'Server Error', error: err});
+      };
+      var onLoad = function(result) {
+        return callback(undefined, true);
+      };
+      resource.follow(undefined, onLoad, onError);
+    };
+
 	return {
     createUser : createUser,
     getUser : getUser,
@@ -246,6 +259,7 @@ function UserService($resource, facebookService, authService) {
     getUserTimeline: getUserTimeline,
     getFollowers: getFollowers,
     getFollowing: getFollowing,
+    follow: follow,
 	};
 }
 
