@@ -676,10 +676,10 @@ describe("User Service", function() {
   describe('Follow', function(){
     it('has correct params', function(done){
       function followResource(url, params, method) {
-        this.follow = function(){};
+        this.execute = function(){};
         expect(url).to.eql('http://pav-user-api-924234322.us-east-1.elb.amazonaws.com:8080/user/follow');
         expect(params).to.eql(undefined);
-        expect(method.follow.headers['Authorization']).to.eql('PAV_AUTH_TOKEN 000001');
+        expect(method.execute.headers['Authorization']).to.eql('PAV_AUTH_TOKEN 000001');
         done();
       };
       var subject = new UserService(followResource, undefined, authService);
@@ -687,7 +687,7 @@ describe("User Service", function() {
     });
     it('returns error from server', function(done) {
       function followResource(url, params, method) {
-        this.follow = function(body, onLoad, onError){
+        this.execute = function(body, onLoad, onError){
           onError('ERROR');
         };
       };
@@ -701,12 +701,52 @@ describe("User Service", function() {
     });
     it('returns success from server', function(done) {
       function followResource(url, params, method) {
-        this.follow = function(body, onLoad, onError){
+        this.execute = function(body, onLoad, onError){
           onLoad(true);
         };
       };
       var subject = new UserService(followResource, undefined, authService);
       subject.follow(function(err, response){
+        expect(err).to.eql(undefined);
+        expect(response).to.eql(true);
+        done();
+      });
+    });
+  });
+  describe('Unfollow', function(){
+    it('has correct params', function(done){
+      function followResource(url, params, method) {
+        this.execute = function(){};
+        expect(url).to.eql('http://pav-user-api-924234322.us-east-1.elb.amazonaws.com:8080/user/unfollow');
+        expect(params).to.eql(undefined);
+        expect(method.execute.headers['Authorization']).to.eql('PAV_AUTH_TOKEN 000001');
+        done();
+      };
+      var subject = new UserService(followResource, undefined, authService);
+      subject.unfollow(function(err, response){});
+    });
+    it('returns error from server', function(done) {
+      function followResource(url, params, method) {
+        this.execute = function(body, onLoad, onError){
+          onError('ERROR');
+        };
+      };
+      var subject = new UserService(followResource, undefined, authService);
+      subject.unfollow(function(err, response){
+        expect(err.message).to.eql('Server Error');
+        expect(err.error).to.eql('ERROR');
+        expect(response).to.eql(undefined);
+        done();
+      });
+    });
+    it('returns success from server', function(done) {
+      function followResource(url, params, method) {
+        this.execute = function(body, onLoad, onError){
+          onLoad(true);
+        };
+      };
+      var subject = new UserService(followResource, undefined, authService);
+      subject.unfollow(function(err, response){
         expect(err).to.eql(undefined);
         expect(response).to.eql(true);
         done();

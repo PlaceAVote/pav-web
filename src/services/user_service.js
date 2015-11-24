@@ -230,18 +230,31 @@ function UserService($resource, facebookService, authService) {
       };
       followersResource.getFollowing(undefined, onLoad, onError);
     };
-
-    var follow = function(callback) {
-      var url = config.users.follow;
+    var followInternal = function(follow, callback) {
+      var url;
+      if(follow) {
+        url = config.users.follow;
+      }
+      else {
+        url = config.users.unfollow;
+      }
       config.methods.getStatus.headers['Authorization'] = authService.getAccessToken();
-      var resource = new $resource(url, undefined, {follow: config.methods.getStatus});
+      var resource = new $resource(url, undefined, {execute: config.methods.getStatus});
       var onError = function(err) {
         return callback({message: 'Server Error', error: err});
       };
       var onLoad = function(result) {
         return callback(undefined, true);
       };
-      resource.follow(undefined, onLoad, onError);
+      resource.execute(undefined, onLoad, onError);
+    };
+
+    var follow = function(callback) {
+      followInternal(true, callback);
+    };
+
+    var unfollow = function(callback) {
+      followInternal(false, callback);
     };
 
 	return {
@@ -260,6 +273,7 @@ function UserService($resource, facebookService, authService) {
     getFollowers: getFollowers,
     getFollowing: getFollowing,
     follow: follow,
+    unfollow: unfollow,
 	};
 }
 
