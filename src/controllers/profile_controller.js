@@ -14,6 +14,8 @@ function ProfileController($scope, $location, $routeParams, authService, userSer
 ProfileController.prototype.populate = function() {
   this.populateProfile();
   this.populateTimeline();
+  this.populateFollowers();
+  this.populateFollowing();
 };
 
 ProfileController.prototype.populateProfile = function() {
@@ -30,6 +32,24 @@ ProfileController.prototype.populateTimeline = function() {
   this.userService.getUserTimeline(this.id, function(err, result) {
     if (!err) {
       that.timeline = result;
+    }
+  });
+};
+
+ProfileController.prototype.populateFollowers = function() {
+  var that = this;
+  this.userService.getFollowers(this.id, function(err, result) {
+    if (!err) {
+      that.followers = result;
+    }
+  });
+};
+
+ProfileController.prototype.populateFollowing = function() {
+  var that = this;
+  this.userService.getFollowing(this.id, function(err, result) {
+    if (!err) {
+      that.following = result;
     }
   });
 };
