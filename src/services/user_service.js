@@ -1,6 +1,7 @@
 var User = require('../models/user.js');
 var config = require('../config/endpoints.js');
 var strftime = require('strftime');
+var TimelineResponseFactory = require('../factories/timeline_response_factory.js');
 
 function UserService($resource, facebookService, authService) {
     this.createdFB = false;
@@ -123,7 +124,7 @@ function UserService($resource, facebookService, authService) {
         loginResource.login(user, onLoad, onError);
     };
 
-    var getUserProfile = function(callback) {
+    var getUserProfile = function(id, callback) {
       var token = authService.getAccessToken();
       if(!token) {
         callback({status: 401, message: 'No Auth Token'});
@@ -132,8 +133,10 @@ function UserService($resource, facebookService, authService) {
       if (this.user && this.user.loadedFromServer) {
         return callback(undefined, this.user);
       }
+
+     var url = config.users.profile.fromId(id);
      config.methods.get.headers["Authorization"] = token;
-     var profileResource = new $resource(config.users.profile.me, undefined, {getProfile: config.methods.get});
+     var profileResource = new $resource(url, undefined, {getProfile: config.methods.get});
       var onError = function(err){
        return callback(err);
       }
@@ -163,6 +166,97 @@ function UserService($resource, facebookService, authService) {
       resource.getProfile(undefined, onLoad, onError);
     };
 
+    var getUserTimeline = function(id, callback) {
+      if (!id) {
+        return callback({message: 'Id is required'});
+      }
+      var url = config.users.timeline(id);
+      config.methods.get.headers['Authorization'] = authService.getAccessToken();
+      var timelineResource = new $resource(url, undefined, {getTimeline: config.methods.get});
+      var onError = function(error) {
+        return callback({message: 'Server Error', error: error});
+      };
+      var onLoad = function(response) {
+        try{
+          var results = {
+            next_page : response['next-page'],
+            timeline: TimelineResponseFactory.getResponses(response.results)
+          }
+          return callback(undefined, results);
+        }
+        catch(e) {
+          return callback(e);
+        }
+      };
+      timelineResource.getTimeline(undefined, onLoad, onError);
+    };
+
+    var getFollowers = function(id, callback) {
+      if (!id) {
+        return callback({message: 'Id is required'});
+      }
+      var url = config.users.followers(id);
+      config.methods.getArray.headers['Authorization'] = authService.getAccessToken();
+      var followersResource = new $resource(url, undefined, {getFollowers: config.methods.getArray});
+      var onError = function(error) {
+        return callback({message: 'Server Error', error: error});
+      };
+      var onLoad = function(response) {
+        var users = [];
+        for(var i = 0; i < response.length; i++) {
+          users.push(User.createFromJson(response[i]));
+        }
+        return callback(undefined, users);
+      };
+      followersResource.getFollowers(undefined, onLoad, onError);
+    };
+
+    var getFollowing = function(id, callback) {
+      if (!id) {
+        return callback({message: 'Id is required'});
+      }
+      var url = config.users.following(id);
+      config.methods.getArray.headers['Authorization'] = authService.getAccessToken();
+      var followersResource = new $resource(url, undefined, {getFollowing: config.methods.getArray});
+      var onError = function(error) {
+        return callback({message: 'Server Error', error: error});
+      };
+      var onLoad = function(response) {
+        var users = [];
+        for(var i = 0; i < response.length; i++) {
+          users.push(User.createFromJson(response[i]));
+        }
+        return callback(undefined, users);
+      };
+      followersResource.getFollowing(undefined, onLoad, onError);
+    };
+    var followInternal = function(follow, callback) {
+      var url;
+      if(follow) {
+        url = config.users.follow;
+      }
+      else {
+        url = config.users.unfollow;
+      }
+      config.methods.putNoBody.headers['Authorization'] = authService.getAccessToken();
+      var resource = new $resource(url, undefined, {execute: config.methods.putNoBody});
+      var onError = function(err) {
+        return callback({message: 'Server Error', error: err});
+      };
+      var onLoad = function(result) {
+        return callback(undefined, true);
+      };
+      resource.execute(undefined, onLoad, onError);
+    };
+
+    var follow = function(callback) {
+      followInternal(true, callback);
+    };
+
+    var unfollow = function(callback) {
+      followInternal(false, callback);
+    };
+
 	return {
     createUser : createUser,
     getUser : getUser,
@@ -175,6 +269,11 @@ function UserService($resource, facebookService, authService) {
     makeProfilePublic: makeProfilePublic,
     getUserProfile: getUserProfile,
     getUserFromId: getUserFromId,
+    getUserTimeline: getUserTimeline,
+    getFollowers: getFollowers,
+    getFollowing: getFollowing,
+    follow: follow,
+    unfollow: unfollow,
 	};
 }
 

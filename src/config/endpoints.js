@@ -37,6 +37,15 @@ module.exports = {
       },
       withCredentials: false,
     },
+    putNoBody: {
+      method: 'PUT',
+      transformResponse: [],
+      headers: {
+        'Content-Type' : "application/json",
+        'Accept': 'application/json',
+      },
+      withCredentials: false,
+    },
     post: {
       method: 'POST',
       headers: {
@@ -104,11 +113,21 @@ module.exports = {
     endpoint : urls.USER + '/user',
     authorize: urls.USER + '/user/token/validate?token=',
     profile: {
-      me : urls.USER + '/user/me/profile',
       fromId: function(id) {
         return urls.USER + '/user/' + id + '/profile'
       },
     },
+    timeline: function(id) {
+      return urls.USER + '/user/' + id + '/timeline'
+    },
+    followers: function(id) {
+      return urls.USER + '/user/' + id + '/followers'
+    },
+    following: function(id) {
+      return urls.USER + '/user/' + id + '/following'
+    },
+    follow: urls.USER + '/user/follow',
+    unfollow: urls.USER + '/user/unfollow',
     login_endpoint: urls.USER + '/user/authenticate',
     facebookLoginUrl : urls.USER + '/user/facebook/authenticate',
     facebookCreateUrl: urls.USER + '/user/facebook',
