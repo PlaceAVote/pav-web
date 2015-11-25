@@ -68,7 +68,7 @@ ProfileController.prototype.follow = function() {
   if (!this.isNotMe()) {
     return;
   }
-  this.userService.follow(function(err, response) {
+  this.userService.follow(this.id, function(err, response) {
     if (!err) {
       that.user.following = true;
     }
@@ -80,7 +80,7 @@ ProfileController.prototype.unfollow = function() {
   if (!this.isNotMe()) {
     return;
   }
-  this.userService.unfollow(function(err, response) {
+  this.userService.unfollow(this.id, function(err, response) {
     if(!err) {
       that.user.following = false;
     }
