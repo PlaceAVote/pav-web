@@ -63,5 +63,29 @@ ProfileController.prototype.isNotMe = function() {
   }
 };
 
+ProfileController.prototype.follow = function() {
+  var that = this;
+  if (!this.isNotMe()) {
+    return;
+  }
+  this.userService.follow(function(err, response) {
+    if (!err) {
+      that.user.following = true;
+    }
+  });
+};
+
+ProfileController.prototype.unfollow = function() {
+  var that = this;
+  if (!this.isNotMe()) {
+    return;
+  }
+  this.userService.unfollow(function(err, response) {
+    if(!err) {
+      that.user.following = false;
+    }
+  });
+};
+
 module.exports = ProfileController;
 
