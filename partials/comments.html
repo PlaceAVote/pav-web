@@ -7,7 +7,7 @@
 
             <div class="top-comment-body">
 
-            <h2>{{comment.author}}</h2>
+            <h2>{{comment.author_first_name}}</h2>
 
             <section class="comment-vote"><span  ng-class="{'score-down': comment.score < 0, 'score-none': comment.score == 0}">{{comment.score}}</span><img ng-click="comment.like(commentService)"src="img/card/thumb-up.png"><img src="img/card/thumb-down.png" ng-click="comment.dislike(commentService)"/><span class="reply-btn" ng-click="comment.showReplyInput()">reply</span></section>
 
