@@ -54,5 +54,14 @@ ProfileController.prototype.populateFollowing = function() {
   });
 };
 
+ProfileController.prototype.isNotMe = function() {
+  if (this.id == 'me') {
+    return false;
+  }
+  else {
+    return true;
+  }
+};
+
 module.exports = ProfileController;
 
