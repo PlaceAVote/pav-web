@@ -1,3 +1,11 @@
 <div>
-<banner user="profile.user" profile="profile" />
+  <banner user="profile.user" profile="profile"></banner>
+
+  <div class="profile-folowers">
+    <div class="profile-follower" ng-repeat="follower in profile.following">
+      <img src="{{follower.img_url}}" alt="{{follower.first_name}}">
+      <span>{{follower.first_name}} {{follower.last_name}}</span>
+      <!-- TODO: Don't have how many followers yet returned from db -->
+    </div>
+  </div>
 </div>
