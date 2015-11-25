@@ -21,6 +21,7 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
   this.getComments();
   this.voteModal = {};
   this.stats = {};
+  this.readmore = false;
 }
 
 BillController.prototype.showVoteModal = function(vote){

@@ -59,7 +59,7 @@
             <img ng-src="{{bill.forComment.img_url}}" />
           </div>
           <div class="top-comment-body" ng-hide="bill.noAgainstComment">
-            <h2>{{bill.againstComment.author}}</h2> <section class="comment-vote opposed"><span>{{bill.againstComment.score}}</span><img src="img/card/thumb-up.png" ng-click="bill.againstComment.like(bill.commentService)"><img src="img/card/thumb-down.png" ng-click="bill.againstComment.dislike(bill.commentService)"/></section>
+            <h2>{{bill.againstComment.author}}</h2> <section class="comment-vote opposed"><span ng-class="{'red': bill.againstComment.score < 0}">{{bill.againstComment.score}}</span><img src="img/card/thumb-up.png" ng-click="bill.againstComment.like(bill.commentService)"><img src="img/card/thumb-down.png" ng-click="bill.againstComment.dislike(bill.commentService)"/></section>
             <p>{{bill.againstComment.body}}</p>
           </div>
           <div class="top-comment-body" ng-show="bill.noAgainstComment">
@@ -73,7 +73,7 @@
 		<div class="card bill-sponsor">
       <h1>Bill Sponsor</h1>
 			<hr />
-      <div class="pre-loader" ng-hide="bill.body.billData.sponsor.name"><hr /><hr /><hr /><hr /></div>
+      <div class="pre-loader" ng-hide="bill.body.billData.sponsor.name"></div>
       <aside class="row-layout loaded" ng-show="bill.body.billData.sponsor.name">
 			<div class="senator-img">
         <img ng-src="{{bill.legislator.getImageUrl()}}" />
@@ -88,7 +88,10 @@
 		<div class="card bill-description">
 			<h1>Bill Summary</h1>
 			<hr />
-      <p>A nicely formatted and shorter version would be nice but for now we must deal with this static shite. Bonjourno matey.</p>
+      <p>{{bill.body.billData.summary}}</p>
+      <div ng-click="bill.readmore = true" class="readmore">
+        <p>Read More</p>
+      </div>
 		</div>
     </section>
 
@@ -185,6 +188,16 @@
           </div>
         </div>
           </div>
+    </section>
+
+    <section class="modal" ng-show="bill.readmore">
+        <div class="card full-description">
+        <img ng-click="bill.readmore = false" class="close" src="img/close-widget-black.png" />
+        <h1>{{bill.body.getTitle()}}</h1>
+        <section>
+        <p>{{bill.body.billData.summary}}</p>
+        </section>
+        </div>
     </section>
   </div>
   </div>
