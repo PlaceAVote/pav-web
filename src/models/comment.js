@@ -71,13 +71,14 @@ Comment.prototype.like = function(service) {
   if (this.scored) {
     return;
   }
+  this.score++;
+  this.scored = true;
   service.like(this.id, this.bill_id, function(err, response) {
     if(err) {
       that.likeFailed = true;
     }
     else if(response) {
       that.liked = true;
-      that.score++;
     }
   });
 };
@@ -88,13 +89,14 @@ Comment.prototype.dislike = function(service) {
   if (this.scored) {
     return;
   }
+  this.scored = true;
+  that.score--;
   service.dislike(this.id, this.bill_id, function(err, response) {
     if (err) {
       that.dislikeFailed = true;
     }
     else if(response) {
       that.disliked = true;
-      that.score--;
     }
   });
 };
