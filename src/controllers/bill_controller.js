@@ -106,8 +106,8 @@ BillController.prototype.getTopComments = function(id){
     else {
       that.forComment = result.forComment;
       that.againstComment = result.againstComment;
-      that.noForComment = that.forComment.id ? true : false;
-      that.noAgainstComment = that.againstComment.id ? true : false;
+      that.hasForComment = that.forComment.id ? true : false;
+      that.hasAgainstComment = that.againstComment.id ? true : false;
     }
   });
 };

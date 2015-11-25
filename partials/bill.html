@@ -39,10 +39,10 @@
         <div class="pre-loader" ng-hide="bill.topLoaded"><hr /><hr /><hr /><hr /></div>
         <aside class="row-layout loaded" ng-show="bill.forComment.author">
   			<div class="user-img-border">
-          <img src="{{bill.forComment.img_url}}" />
+          <img src="{{bill.forComment.author_img_url}}" />
   			</div>
-  			<div class="top-comment-body" ng-hide="bill.noForComment">
-          <h2>{{bill.forComment.author}}</h2> <section class="comment-vote"><span>{{bill.forComment.score}}</span><img ng-click="bill.forComment.like(bill.commentService)"src="img/card/thumb-up.png"><img src="img/card/thumb-down.png" ng-click="bill.forComment.dislike(bill.commentService)"/></section>
+  			<div class="top-comment-body" ng-show="bill.hasForComment">
+          <h2>{{bill.forComment.author_first_name}}</h2> <section class="comment-vote"><span>{{bill.forComment.score}}</span><img ng-click="bill.forComment.like(bill.commentService)"src="img/card/thumb-up.png"><img src="img/card/thumb-down.png" ng-click="bill.forComment.dislike(bill.commentService)"/></section>
           <p>{{bill.forComment.body}}</p>
   			</div>
         <div ng-show="bill.noForComment">
@@ -54,12 +54,12 @@
         <h1>Top Comment Opposed</h1>
         <hr />
         <div class="pre-loader" ng-hide="bill.topLoaded"><hr /><hr /><hr /><hr /></div>
-        <aside class="row-layout loaded" ng-show="bill.forComment.author">
+        <aside class="row-layout loaded" ng-show="bill.againstComment.author">
           <div class="user-img-border">
-            <img ng-src="{{bill.forComment.img_url}}" />
+            <img ng-src="{{bill.againstComment.author_img_url}}" />
           </div>
-          <div class="top-comment-body" ng-hide="bill.noAgainstComment">
-            <h2>{{bill.againstComment.author}}</h2> <section class="comment-vote opposed"><span ng-class="{'red': bill.againstComment.score < 0}">{{bill.againstComment.score}}</span><img src="img/card/thumb-up.png" ng-click="bill.againstComment.like(bill.commentService)"><img src="img/card/thumb-down.png" ng-click="bill.againstComment.dislike(bill.commentService)"/></section>
+          <div class="top-comment-body" ng-show="bill.hasAgainstComment">
+            <h2>{{bill.againstComment.author_first_name}}</h2> <section class="comment-vote opposed"><span ng-class="{'red': bill.againstComment.score < 0}">{{bill.againstComment.score}}</span><img src="img/card/thumb-up.png" ng-click="bill.againstComment.like(bill.commentService)"><img src="img/card/thumb-down.png" ng-click="bill.againstComment.dislike(bill.commentService)"/></section>
             <p>{{bill.againstComment.body}}</p>
           </div>
           <div class="top-comment-body" ng-show="bill.noAgainstComment">

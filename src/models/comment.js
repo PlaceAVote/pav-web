@@ -3,6 +3,8 @@ function Comment(options) {
     return;
   };
   this.author = options.author;
+  this.author_first_name = options.author_first_name;
+  this.author_last_name = options.author_last_name;
   this.body = options.body;
   this.has_children = options.has_children;
   this.bill_id = options.bill_id;
@@ -71,13 +73,14 @@ Comment.prototype.like = function(service) {
   if (this.scored) {
     return;
   }
+  this.score++;
+  this.scored = true;
   service.like(this.id, this.bill_id, function(err, response) {
     if(err) {
       that.likeFailed = true;
     }
     else if(response) {
       that.liked = true;
-      that.score++;
     }
   });
 };
@@ -88,13 +91,14 @@ Comment.prototype.dislike = function(service) {
   if (this.scored) {
     return;
   }
+  this.scored = true;
+  that.score--;
   service.dislike(this.id, this.bill_id, function(err, response) {
     if (err) {
       that.dislikeFailed = true;
     }
     else if(response) {
       that.disliked = true;
-      that.score--;
     }
   });
 };
