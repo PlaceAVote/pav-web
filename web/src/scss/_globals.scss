@@ -8,7 +8,7 @@ div,
 
 body {
   background-color: $bgcolor;
-  font-family: $font-normal;
+  font-family: $font;
   position: relative;
 }
 
@@ -206,7 +206,7 @@ nav {
         color: white;
         padding: 0 10px;
         line-height: 21px;
-        font-family: $font-light;
+        font-weight: $font-light;
       }
     }
   }

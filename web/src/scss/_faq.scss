@@ -30,7 +30,7 @@
           text-decoration: none;
           color: white;
           padding: 10px;
-          font-family: $font-light;
+          font-weight: $font-light;
         }
       }
     }
@@ -87,14 +87,14 @@
     color: white;
     text-align: center;
     margin-bottom: 40px;
-    font-family: $font-normal;
+    font-weight: $font-normal;
   }
 
   p {
     @include font-size(20px);
     line-height: 24px;
     color: white;
-    font-family: $font-light;
+    font-weight: $font-light;
     text-align: center;
     padding: 0px 20%;
     @include media(812px){
@@ -152,7 +152,7 @@
         color: $black;
         margin: 0px;
         text-align: left;
-        font-family: $font-normal;
+        font-weight: $font-normal;
         @include font-size(14px);
         line-height: 20px;
       }
@@ -161,7 +161,7 @@
     .answer {
       p {
         color: #767676;
-        font-family: $font-normal;
+        font-weight: $font-normal;
         @include font-size(14px);
         line-height: 20px;
         text-align: left;
@@ -197,7 +197,7 @@
       top: 25px;
       left: 40px;
       color: $black;
-      font-family: $font-light;
+      font-weight: $font-light;
       @include font-size(14px);
 
       // margin-right: auto;
@@ -225,7 +225,7 @@
         a {
           text-decoration: none;
           color: $black;
-          font-family: $font-light;
+          font-weight: $font-light;
           @include font-size(14px);
         }
       }
