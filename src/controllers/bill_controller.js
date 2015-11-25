@@ -188,5 +188,21 @@ BillController.prototype.postComment = function() {
   });
 };
 
+// BillController.prototype.commentLike = function() {
+//   var that = this;
+//   console.log('hello');
+//   if(this.comment.liked) {
+//     console.log('liked')
+//     this.commentService.revokeLike();
+//   } else 
+//   if(this.comment.disliked) {
+//     this.commentService.revokeDislike();
+//   }
+//   else {
+//     this.comentService.like();
+//   }
+// };
+
+
 module.exports = BillController;
 

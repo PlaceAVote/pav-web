@@ -17,6 +17,8 @@ function Comment(options) {
   this.deep = 0;
   this.author_img_url = options.author_img_url || 'img/comments/user.png';
   this.scored = options.scored;
+  this.liked = options.liked;
+  this.disliked = options.disliked;
 }
 
 Comment.buildChildren = function(comment, deep) {
@@ -70,6 +72,16 @@ Comment.prototype.reply = function(billId, service) {
 
 Comment.prototype.like = function(service) {
   var that = this;
+  if (this.liked) {
+      service.revokeLike(this.id, this.bill_id, function(err, response) {
+      if(err) {
+        that.likeFailed = true;
+      }
+      else if(response) {
+        that.liked = false;
+      }
+    });
+  }
   if (this.scored) {
     return;
   }
@@ -102,6 +114,9 @@ Comment.prototype.dislike = function(service) {
     }
   });
 };
+
+
+
 
 module.exports = Comment;
 

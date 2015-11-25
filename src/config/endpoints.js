@@ -29,6 +29,14 @@ module.exports = {
       },
       withCredentials: false,
     },
+    del: {
+      method: 'DELETE',
+      headers: {
+        'Content-Type' : "application/json",
+        'Accept': 'application/json',
+      },
+      withCredentials: false,
+    },
     put: {
       method: 'PUT',
       headers: {
