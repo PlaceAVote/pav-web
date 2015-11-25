@@ -23,6 +23,7 @@ var mailcheck = require('./directives/mailcheck.js');
 var pavDirectives = require('./directives/directives.js');
 var commentsDirective = require('./directives/comments.js');
 var commentDirective = require('./directives/comment.js');
+var bannerDirective = require('./directives/banner.js');
 // var statusChart = require('./directives/statuschart.js');
 //thirdparty integrations
 var Facebook = require('./integrations/facebook.js');
@@ -85,4 +86,5 @@ app.controller('ProfileCtrl', ['$scope', '$location', '$routeParams', 'authServi
 app.directive('mailcheck', ['$compile','$sce', mailcheck]);
 app.directive('comment', ['$compile', 'commentService', commentDirective]);
 app.directive('comments', [commentsDirective]);
+app.directive('banner', [bannerDirective]);
 // app.directive('statusChart', [statusChart]);
