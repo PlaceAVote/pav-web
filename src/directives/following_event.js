@@ -7,7 +7,7 @@ module.exports = function($location) {
       event: '=',
       user: '=',
     },
-    templateUrl: 'partials/timeline_following_event.html',
+    templateUrl: 'partials/following_event.html',
     link: function(scope) {
       scope.location = $location;
     },
