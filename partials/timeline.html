@@ -4,8 +4,15 @@
       <div ng-switch-when="followinguser">
         <following event="event" user="profile.user"></following>
       </div>
-      <div ng-switch-when="likecomment">
+      <div ng-switch-when="followeduser">
+        <followed event="event" user="profile.user"></followed>
+      </div>
+      <div class="timeline-likeComment" ng-switch-when="likecomment">
         <span>{{profile.user.first_name}} {{profile.user.lastname}}</span> upvoted the following comment,
+        <comment comment="event.comment"></comment>
+      </div>
+      <div class="timeline-dislikeComment" ng-switch-when="dislikecomment">
+        <span>{{profile.user.first_name}} {{profile.user.lastname}}</span> downvoted the following comment,
         <comment comment="event.comment"></comment>
       </div>
     </div>

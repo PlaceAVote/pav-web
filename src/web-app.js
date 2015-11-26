@@ -25,7 +25,8 @@ var commentsDirective = require('./directives/comments.js');
 var commentDirective = require('./directives/comment.js');
 var bannerDirective = require('./directives/banner.js');
 var timelineDirective = require('./directives/timeline.js');
-var timelineFollowingEventDirective = require('./directives/timeline_following_event.js');
+var timelineFollowingEventDirective = require('./directives/following_event.js');
+var timelineFollowedEventDirective = require('./directives/followed_event.js');
 // var statusChart = require('./directives/statuschart.js');
 //thirdparty integrations
 var Facebook = require('./integrations/facebook.js');
@@ -91,4 +92,6 @@ app.directive('comments', [commentsDirective]);
 app.directive('banner', [bannerDirective]);
 app.directive('timeline', [timelineDirective]);
 app.directive('following', ['$location', timelineFollowingEventDirective]);
+app.directive('followed', ['$location', timelineFollowedEventDirective]);
 // app.directive('statusChart', [statusChart]);
+
