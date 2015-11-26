@@ -1,6 +1,9 @@
 <div class="profile-timeline">
   <div class="timeline-events" ng-repeat="event in timeline">
     <div ng-switch on="event.type">
+      <div ng-switch-when="vote">
+        <vote event="event" user="profile.user"></vote>
+      </div>
       <div ng-switch-when="followinguser">
         <following event="event" user="profile.user"></following>
       </div>
