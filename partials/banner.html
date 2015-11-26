@@ -1,24 +1,36 @@
 <div class="profile-banner">
-  <img src={{user.img_url}} alt="user profile picture"/>
-
-  <div class="user-title">
-    <h1>{{user.first_name }} {{user.last_name}}</h1>
-    <span><!-- geo location icon --></span>
-    <h3>{{user.country_code}}</h3>
+  <div class="row" style="background:#ff0;">
+    <div class="col l-2">
+      <img src={{user.img_url}} class="profile-picture" alt="Profile Picture"/>
+    </div>
+    <div class="col l-2">
+      <div class="user-title">
+           <h1>{{user.first_name }} {{user.last_name}}</h1>
+             <span><!-- geo location icon --></span>
+              <h3>{{user.country_code}}</h3>
+         </div>
+    </div>
   </div>
-
-  <div class="total-followers">
-    <h2>{{user.total_followers}}</h2>
-    <h3>Followers</h3>
-  </div>
-
-  <div class="total-following">
-    <h2>{{user.total_following}}</h2>
-    <h3>Following</h3>
-  </div>
-
-  <div class="follow-me" ng-show="profile.isNotMe()">
-    <button ng-show="following" ng-click="profile.follow()">Follow</button>
-    <button ng-hide="following" ng-click="profile.unfollow()">Unfollow</button>
+  <div class="profile-info">
+      <div class="row">
+           <div class="col l-2">
+              <div class="total-followers">
+                <h2>{{user.total_followers}}</h2>
+                <h3>Followers</h3>
+              </div>
+        </div>
+        <div class="col l-2">
+          <div class="total-following">
+            <h2>{{user.total_following}}</h2>
+            <h3>Following</h3>
+        </div>
+        </div>
+        <div class="col l-2">
+          <div class="follow-me" ng-show="profile.isNotMe()">
+            <button ng-show="following" ng-click="profile.follow()">Follow</button>
+            <button ng-hide="following" ng-click="profile.unfollow()">Unfollow</button>
+          </div>
+        </div>
+      </div>
   </div>
 </div>
