@@ -10,4 +10,11 @@ function VoteEvent(options) {
   this.bill_title = options.bill_title;
 }
 
+VoteEvent.prototype.loadBill = function(location) {
+  if(!location || !location.path) {
+    return;
+  }
+  location.path(bill_id);
+};
+
 module.exports = VoteEvent;
