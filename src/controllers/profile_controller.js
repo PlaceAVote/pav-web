@@ -11,6 +11,13 @@ function ProfileController($scope, $location, $routeParams, authService, userSer
   this.populate();
 }
 
+ProfileController.prototype.loadProfile = function(id){
+  if (!id) {
+    return;
+  }
+  this.location.path('/profile/' + id);
+};
+
 ProfileController.prototype.populate = function() {
   this.populateProfile();
   this.populateTimeline();
@@ -32,6 +39,7 @@ ProfileController.prototype.populateTimeline = function() {
   this.userService.getUserTimeline(this.id, function(err, result) {
     if (!err) {
       that.timeline = result;
+      console.log(that.timeline);
     }
   });
 };

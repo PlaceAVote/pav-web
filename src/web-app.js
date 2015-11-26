@@ -24,6 +24,8 @@ var pavDirectives = require('./directives/directives.js');
 var commentsDirective = require('./directives/comments.js');
 var commentDirective = require('./directives/comment.js');
 var bannerDirective = require('./directives/banner.js');
+var timelineDirective = require('./directives/timeline.js');
+var timelineFollowingEventDirective = require('./directives/timeline_following_event.js');
 // var statusChart = require('./directives/statuschart.js');
 //thirdparty integrations
 var Facebook = require('./integrations/facebook.js');
@@ -87,4 +89,6 @@ app.directive('mailcheck', ['$compile','$sce', mailcheck]);
 app.directive('comment', ['$compile', 'commentService', commentDirective]);
 app.directive('comments', [commentsDirective]);
 app.directive('banner', [bannerDirective]);
+app.directive('timeline', [timelineDirective]);
+app.directive('following', ['$location', timelineFollowingEventDirective]);
 // app.directive('statusChart', [statusChart]);
