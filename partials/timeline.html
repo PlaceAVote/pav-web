@@ -18,6 +18,10 @@
         <span>{{profile.user.first_name}} {{profile.user.lastname}}</span> downvoted the following comment,
         <comment comment="event.comment"></comment>
       </div>
+      <div class="timeline-comment" ng-switch-when="comment">
+        <span>{{profile.user.first_name}} {{profile.user.lastname}}</span> in {{event.bill_id}}: {{event.bill_title}},
+        <comment comment="event"></comment>
+      </div>
     </div>
   </div>
 </div>
