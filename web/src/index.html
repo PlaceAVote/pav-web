@@ -40,8 +40,12 @@ content="Placeavote lets you read, debate and vote on every bill before congress
 	<nav ng-cloak sticky-nav id="nav" >
 		<a href="#/"><img class="logo-white" src="img/logo-white.png" /></a>
 		<a href="#/"><img class="logo-color" src="img/pav-logo-color.png" /></a>
-
-		<ul ng-class="{'open': !menu.menu}">
+		<ul>
+			<li><a class="btn-signup" href="#">Sign Up</a></li>
+			<li><a class="btn-signin" href="#">Sign In</a></li>
+			<li><a href="#">Contact</a></li>
+		</ul>
+		<!-- <ul ng-class="{'open': !menu.menu}">
 			<li>
 				<a ng-click="menu.mobile()" href="#/team">Team</a>
 			</li>
@@ -54,7 +58,7 @@ content="Placeavote lets you read, debate and vote on every bill before congress
 			<li>
 				<a ng-click="menu.mobile()" href="#/contact">Contact</a>
 			</li>
-		</ul>
+		</ul> -->
 	</nav>
 	<div ng-view ng-cloak autoscroll="true">
 	</div>
