@@ -17,11 +17,27 @@
       line-height: 15px;
     }
 
-    img {
+    i.thumbs {
       cursor: pointer;
-      width: 13px;
-      height: 13px;
+      @include font-size(13px);
+      color: $grey;
       padding-left: 10px;
+      height: 15px;
+      text-align: center;
+      width: 15px;
+      transition: all 0.1s ease;
+      line-height: 15px;
+      &:active {
+        font-size: 9px;
+      }
+
+      &.icon-thumbs-up:hover {
+        color: $green;
+      }
+
+      &.icon-thumbs-down:hover {
+        color: $red;
+      }
     }
     .reply-btn {
       color: $blue;
