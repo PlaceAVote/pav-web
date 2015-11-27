@@ -1,36 +1,30 @@
-<div class="profile-banner">
-  <div class="row" style="background:#ff0;">
-    <div class="col l-2">
-      <img src={{user.img_url}} class="profile-picture" alt="Profile Picture"/>
+<section class="profile">
+  <div class="profile-header" style="background:#ff0;">
+      <div class="app-row info">
+        <div class="row-layout">
+          <!-- insert a link on image to refresh profile page -->
+          <img src={{user.img_url}} class="profile-picture" alt="Profile Picture"/>
+          <!-- end link -->
+          <div class="user-title">
+               <h1>{{user.first_name }} {{user.last_name}}</h1>
+                <span><!-- geo location icon --></span>
+                <h3>{{user.country_code}}</h3>
+            </div>
+        </div>
+      </div>
     </div>
-    <div class="col l-2">
-      <div class="user-title">
-           <h1>{{user.first_name }} {{user.last_name}}</h1>
-             <span><!-- geo location icon --></span>
-              <h3>{{user.country_code}}</h3>
-         </div>
-    </div>
-  </div>
-  <div class="profile-info">
-      <div class="row">
-           <div class="col l-2">
-              <div class="total-followers">
-                <h2>{{user.total_followers}}</h2>
+  <div class="profile-follow">
+         <div class="stats total-followers">
+                <span>{{user.total_followers}}</span>
                 <h3>Followers</h3>
               </div>
-        </div>
-        <div class="col l-2">
-          <div class="total-following">
-            <h2>{{user.total_following}}</h2>
+          <div class="stats total-following">
+            <span>{{user.total_following}}</span>
             <h3>Following</h3>
         </div>
-        </div>
-        <div class="col l-2">
           <div class="follow-me" ng-show="profile.isNotMe()">
             <button ng-show="following" ng-click="profile.follow()">Follow</button>
             <button ng-hide="following" ng-click="profile.unfollow()">Unfollow</button>
           </div>
-        </div>
-      </div>
   </div>
-</div>
+</section>
