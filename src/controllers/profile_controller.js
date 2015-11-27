@@ -11,6 +11,13 @@ function ProfileController($scope, $location, $routeParams, authService, userSer
   this.populate();
 }
 
+ProfileController.prototype.loadProfile = function(id){
+  if (!id) {
+    return;
+  }
+  this.location.path('/profile/' + id);
+};
+
 ProfileController.prototype.populate = function() {
   this.populateProfile();
   this.populateTimeline();
