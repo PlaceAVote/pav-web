@@ -30,12 +30,20 @@ module.exports = {
       withCredentials: false,
     },
     del: {
-      method: 'DELETE',
-      headers: {
-        'Content-Type' : "application/json",
-        'Accept': 'application/json',
-      },
-      withCredentials: false,
+      delete: function(id, token) {
+        req = {
+          method: 'DELETE',
+          data: id,
+          isArray: false,
+          headers: {
+            'Content-Type' : "application/json",
+            'Accept': 'application/json',
+            'Authorization' : token,
+          },
+          withCredentials: false,
+          };
+        return req;
+      }
     },
     put: {
       method: 'PUT',

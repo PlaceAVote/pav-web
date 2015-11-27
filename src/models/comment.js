@@ -73,12 +73,27 @@ Comment.prototype.reply = function(billId, service) {
 Comment.prototype.like = function(service) {
   var that = this;
   if (this.liked) {
-      service.revokeLike(this.id, this.bill_id, function(err, response) {
+      service.revoke(this.id, this.bill_id, 'like', function(err, response) {
       if(err) {
         that.likeFailed = true;
       }
       else if(response) {
         that.liked = false;
+        that.scored = false;
+        that.score--;
+        return;
+      }
+    });
+  }
+  if (this.disliked) {
+    service.revoke(this.id, this.bill_id,'dislike', function(err, response) {
+      if(err) {
+        that.dislikeFailed = true;
+      }
+      else if(response) {
+        that.disliked = false;
+        that.scored = false;
+        that.score++;
       }
     });
   }
@@ -100,6 +115,31 @@ Comment.prototype.like = function(service) {
 
 Comment.prototype.dislike = function(service) {
   var that = this;
+    if (this.disliked) {
+    service.revoke(this.id, this.bill_id,'dislike', function(err, response) {
+      if(err) {
+        that.dislikeFailed = true;
+      }
+      else if(response) {
+        that.disliked = false;
+        that.scored = false;
+        that.score++;
+        return;
+      }
+    });
+  }
+    if (this.liked) {
+      service.revoke(this.id, this.bill_id, 'like', function(err, response) {
+      if(err) {
+        that.likeFailed = true;
+      }
+      else if(response) {
+        that.liked = false;
+        that.scored = false;
+        that.score--;
+      }
+    });
+  }
   if (this.scored) {
     return;
   }
