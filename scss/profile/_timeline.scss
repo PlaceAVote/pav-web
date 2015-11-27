@@ -11,7 +11,7 @@
 		border-radius: 3px;
 		display: flex;
 		box-sizing: border-box;
-		height: calc(100em - 200px);
+		min-height: calc(100% - 200px);
 		border: 1px solid $widgetborder;
 		}
 
