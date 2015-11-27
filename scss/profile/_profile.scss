@@ -62,28 +62,7 @@
 	}
 
 }
-.profile-timeline {
-	.timeline-events {
-	height:auto;
-	flex-shrink: 0;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	@include media(850px){
-	flex-direction: row;
-	}
-		  .card {
-		    margin-bottom: 20px;
-		    margin-right:20px;
-		    span {
-		    	margin-bottom:20px;
-		    }
-		    .comment-container .comment {
-		    	margin-bottom:0;
-		    }
-  		   }
-	}
-}
+
 .profile-followers {
 	h2 {margin-top:10px;}
 }
