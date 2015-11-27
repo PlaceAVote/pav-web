@@ -1,13 +1,27 @@
-<div>
-  <banner user="profile.user" profile="profile"></banner>
-
-  <timeline timeline="profile.timeline.timeline" profile="profile"></timeline>
-
-  <div class="profile-folowers">
-    <div class="profile-follower" ng-repeat="follower in profile.following">
-      <img src="{{follower.img_url}}" alt="{{follower.first_name}}">
-      <span>{{follower.first_name}} {{follower.last_name}}</span>
-      <!-- TODO: Don't have how many followers yet returned from db -->
+<banner user="profile.user" profile="profile"></banner>
+<div class="app">
+	<div class="app-body">
+		<div class="row">
+  			<div class="col m-12 l-8">
+          <timeline timeline="profile.timeline.timeline" profile="profile"></timeline>
+        </div>
+      <div class="col m-12 l-4">
+      	<div class="card">
+      		<h1>Followers</h1>
+        	<hr />
+          <div class="profile-followers">
+            <div class="comment-container" ng-repeat="follower in profile.following">
+              <section class="comment">
+              <img src="{{follower.img_url}}" class="user-img-border" alt="{{follower.first_name}}">
+              <div class="top-comment-body">
+              <h2>{{follower.first_name}} {{follower.last_name}}</h2>
+              <!-- TODO: Don't have how many followers yet returned from db -->
+            </div>
+            </section>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

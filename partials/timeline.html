@@ -1,27 +1,42 @@
 <div class="profile-timeline">
-  <div class="timeline-events" ng-repeat="event in timeline">
-    <div ng-switch on="event.type">
-      <div ng-switch-when="vote">
-        <vote event="event" user="profile.user"></vote>
-      </div>
-      <div ng-switch-when="followinguser">
-        <following event="event" user="profile.user"></following>
-      </div>
-      <div ng-switch-when="followeduser">
-        <followed event="event" user="profile.user"></followed>
-      </div>
-      <div class="timeline-likeComment" ng-switch-when="likecomment">
-        <span>{{profile.user.first_name}} {{profile.user.lastname}}</span> upvoted the following comment,
-        <comment comment="event.comment"></comment>
-      </div>
-      <div class="timeline-dislikeComment" ng-switch-when="dislikecomment">
-        <span>{{profile.user.first_name}} {{profile.user.lastname}}</span> downvoted the following comment,
-        <comment comment="event.comment"></comment>
-      </div>
-      <div class="timeline-comment" ng-switch-when="comment">
-        <span>{{profile.user.first_name}} {{profile.user.lastname}}</span> in {{event.bill_id}}: {{event.bill_title}},
-        <comment comment="event"></comment>
-      </div>
-    </div>
-  </div>
+       <aside>
+       </aside>
+       <section>
+          <div class="timeline-events" ng-repeat="event in timeline" ng-switch on="event.type">
+                  <!-- Vote -->
+                  <div ng-switch-when="vote">
+                    <vote event="event" user="profile.user"></vote>
+                  </div>
+                  <!-- follow -->
+                  <div ng-switch-when="followinguser">
+                    <following event="event" user="profile.user"></following>
+                  </div>
+                  <!-- followed -->
+                  <div ng-switch-when="followeduser">
+                    <followed event="event" user="profile.user"></followed>
+                  </div>
+                  <!-- comment liked -->
+                  <div class="timeline-likeComment event-card" ng-switch-when="likecomment">
+                  <div class="event-icon event-icon-like">
+                  <i class="icon-thumbs-up"></i>
+                   </div> 
+                    <span><a>{{profile.user.first_name}} {{profile.user.lastname}}</a> upvoted a comment:</span>
+                    <comment comment="event.comment"></comment>
+                  </div>
+                  <!-- comment disliked -->
+                  <div class="timeline-dislikeComment event-card" ng-switch-when="dislikecomment">
+                    <div class="event-icon event-icon-dislike">
+                    <i class="icon-thumbs-down"></i>
+                    </div>
+                    <span><a>{{profile.user.first_name}} {{profile.user.lastname}}</a> downvoted a comment:</span>
+                    <comment comment="event.comment"></comment>
+                  </div>
+                  <!-- comment post -->
+                  <div class="timeline-comment event-card" ng-switch-when="comment">
+                   <span><a>{{profile.user.first_name}} {{profile.user.lastname}}</a> in {{event.bill_id}}: {{event.bill_title}},</span>
+                    <comment comment="event"></comment>
+                  </div>
+
+          </div>
+       </section>
 </div>
