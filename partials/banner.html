@@ -1,19 +1,21 @@
 <section class="profile">
   <div class="profile-header">
-      <div class="app-row info">
-        <div class="row-layout">
+   
+       <div class="row"> 
           <!-- insert a link on image to refresh profile page -->
-          <img src={{user.img_url}} class="profile-picture" alt="Profile Picture"/>
+          <img ng-src="{{user.img_url}}" class="profile-picture" alt="Profile Picture"/>
           <!-- end link -->
-          <div class="user-title">
+            <div class="user-title">
                <h1>{{user.first_name }} {{user.last_name}}</h1>
                 <span><!-- geo location icon --></span>
                 <h3><i class="icon-loc"></i>{{user.country_code}}</h3>
             </div>
         </div>
-      </div>
-    </div>
+  </div>
+    
+   
   <div class="profile-follow">
+      <div class="row">
          <div class="stats total-followers">
                 <span>{{user.total_followers}}</span>
                 <h3>Followers</h3>
@@ -26,5 +28,6 @@
             <button ng-show="following" ng-click="profile.follow()">Follow</button>
             <button ng-hide="following" ng-click="profile.unfollow()">Unfollow</button>
           </div>
+      </div>
   </div>
 </section>

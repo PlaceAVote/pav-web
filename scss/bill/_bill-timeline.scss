@@ -24,6 +24,143 @@ span {
   }
 }
 
+.bill-timeline ul li {
+  color: $grey;
+  span {
+    border-color: $grey;
+  }
+}
+
+.bill-timeline.enacted-signed ul li {
+  animation: fader 1s ease forwards;
+  span {
+    animation: point 1s ease forwards;
+  }
+  &:nth-child(2) {
+    animation-delay: 0.4s;
+    span {
+      animation-delay: 0.4s;
+    }
+  }
+  &:nth-child(3) {
+    animation-delay: 0.7s;
+    span {
+      animation-delay: 0.7s;
+    }
+  }
+  &:nth-child(4) {
+    animation-delay: 1s;
+    span {
+      animation-delay: 1s;
+    }
+  }
+  &:nth-child(5) {
+    animation-delay: 1.4s;
+    span {
+      animation-delay: 1.4s;
+    }
+  }
+}
+
+.bill-timeline.passed-senate ul li {  
+  &:nth-child(1) {
+    animation: fader 1s ease forwards;
+    span {
+      animation: point 1s ease forwards;
+    }
+  }  
+  &:nth-child(2) {
+    animation: fader 1s ease forwards;
+    animation-delay: 0.4s;
+    span {
+      animation: point 1s ease forwards;
+      animation-delay: 0.4s;
+    }
+  }
+  &:nth-child(3) {
+    animation: fader 1s ease forwards;
+    animation-delay: 1s;
+    span {
+      animation: point 1s ease forwards;
+      animation-delay: 1s;
+    }
+  }
+  &:nth-child(4) {
+    animation: fader 1s ease forwards;
+    animation-delay: 1.5s;
+    span {
+      animation: point 1s ease forwards;
+      animation-delay: 1.5s;
+    }
+  }
+}
+
+.bill-timeline.passed-house ul li {  
+  &:nth-child(1) {
+    animation: fader 1s ease forwards;
+    span {
+      animation: point 1s ease forwards;
+    }
+  }  
+  &:nth-child(2) {
+    animation: fader 1s ease forwards;
+    animation-delay: 0.7s;
+    span {
+      animation: point 1s ease forwards;
+      animation-delay: 0.7s;
+    }
+  }
+  &:nth-child(3) {
+    animation: fader 1s ease forwards;
+    animation-delay: 1.8s;
+    span {
+      animation: point 1s ease forwards;
+      animation-delay: 1.8s;
+    }
+  }
+}
+
+.bill-timeline.committee ul li {  
+  &:nth-child(1) {
+    animation: fader 1s ease forwards;
+    span {
+      animation: point 1s ease forwards;
+    }
+  }  
+  &:nth-child(2) {
+    animation: fader 1s ease forwards;
+    animation-delay: 1.8s;
+    span {
+      animation: point 1s ease forwards;
+      animation-delay: 1.8s;
+    }
+  }
+}
+
+@keyframes point {
+  0% {
+    transform: scale(1,1);
+    border-color: $grey;
+  }
+  50% {
+    transform: scale(1.5,1.5);
+    border-color: $black;
+  }
+  100% {
+    transform: scale(1,1);
+    border-color: $black;
+  }
+}
+
+@keyframes fader {
+  0% {
+    color:$grey;
+  }
+  100% {
+    color:$black;
+  }
+}
+
 @keyframes enacted {
   0% {
     width: 0%;
@@ -119,7 +256,9 @@ span {
 }
 
 h1.bill-title{
-	flex-shrink: 0;
+	  flex-shrink: 0;
+    display: inline-block;
+    min-height:45px;
     text-align: center;
     margin-top: 70px;
     margin-bottom: 30px;
@@ -144,7 +283,7 @@ h1.bill-title{
     position: absolute;
     bottom: -15px;
     margin: 0px auto;
-    width: calc(100% - 88px);
+    width: calc(100% - 90px);
     @include media(560px){
     width: calc(100% - 55px);
     }
@@ -161,27 +300,9 @@ h1.bill-title{
   }
 
   ul {
-    // margin: 0;
-    // padding: 0;
-    // display: -webkit-box;
-    // display: -moz-box;
-    // display: -webkit-flex;
-    // display: -ms-flexbox;
     display: flex;
     flex-shrink: 0;
-
-    // -webkit-box-lines: multiple;
-    // -moz-box-lines: multiple;
-    // -o-box-lines: multiple;
-    // -webkit-flex-wrap: wrap;
-    // -ms-flex-wrap: wrap;
     flex-wrap: wrap;
-
-    // -webkit-box-orient: horizontal;
-    // -moz-box-orient: horizontal;
-    // -o-box-orient: horizontal;
-    // -webkit-flex-direction: row;
-    // -ms-flex-direction: row;
     flex-direction: row;
 
     li {
@@ -192,16 +313,17 @@ h1.bill-title{
       flex-direction: column;
       flex-shrink: 0;
 
-      img {
+      i {
         max-height: 50px;
         max-width: 74px;
         align-self: center;
-        padding: 0px 20px;
+        @include font-size(44px);
         @include media(560px){
         max-height: 20px;
+        @include font-size(20px);
         max-width: 30px;
         align-self: center;
-        padding: 0px 20px;
+       
         }
       }
 
@@ -219,12 +341,12 @@ h1.bill-title{
       span {
         background-color: white;
         border-radius: 50%;
-        height: 9px;
-        width: 9px;
-        border: 3px solid $black;
+        height: 12px;
+        width: 12px;
+        border: 3px solid $grey;
         display: block;
         position: absolute;
-        bottom: -20px;
+        bottom: -19px;
         margin: 0 auto;
         left: 0;
         right: 0;
