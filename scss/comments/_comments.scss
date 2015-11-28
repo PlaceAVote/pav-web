@@ -98,14 +98,13 @@
     float: right;
     .btn-green, .btn-blank {
       width: 200px;
-      padding: 7px 40px;
       text-align: center;
+      height: 30px !important;
+      line-height: 30px !important;
+      width: 100px;
       @include media(500px) {
         padding: 0;
         display: inline-block;
-        height: 30px;
-        line-height: 31px;
-        width: 50px;
         margin-left:4px;
         margin-right:0;
       }
