@@ -118,8 +118,24 @@
 
 .score-down {
   color: $red !important;
+  animation: scored 1s ease;
 }
 
 .score-up {
   color: $green !important;
+  animation: scored 1s ease;
+}
+
+@keyframes scored {
+  0% {
+    color: $grey;
+    transform: scale(1,1);
+  }
+  50% {
+    color: $green;
+    transform: scale(1.2,1.2);
+  }
+  100% {
+    transform: scale(1,1);
+  }
 }
