@@ -5,7 +5,12 @@
           <div class="timeline-events" ng-repeat="event in timeline" ng-switch on="event.type">
                   <!-- Vote -->
                   <div ng-switch-when="vote">
+                    <div class="event-card event-vote">
+                    <div class="event-icon event-icon-vote">
+                      <i class="icon-logo"></i>
+                    </div>
                     <vote event="event" user="profile.user"></vote>
+                    </div>
                   </div>
                   <!-- follow -->
                   <div ng-switch-when="followinguser">

@@ -42,6 +42,13 @@
 				  	display: inline-block;
 				  	padding-bottom: 20px;
 				  }
+				  &.event-vote {
+				  	@include font-size(12px);
+				  	padding-bottom: 20px;
+				  	span {
+				  		padding-bottom: 0;
+				  	}
+				  }
 				  .comment-container {
 				  	// display: block;
 				  	width: 100%;
@@ -93,6 +100,12 @@
 	}
 	&-vote {
 		background-color: $purple;
+		i {
+			padding-top:4px;
+			line-height: 1 !important;
+			@include font-size(26px);
+
+		}
 	}
 	i {
 		color: white;
