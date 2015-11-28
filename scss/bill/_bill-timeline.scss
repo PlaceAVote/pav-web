@@ -283,7 +283,7 @@ h1.bill-title{
     position: absolute;
     bottom: -15px;
     margin: 0px auto;
-    width: calc(100% - 88px);
+    width: calc(100% - 90px);
     @include media(560px){
     width: calc(100% - 55px);
     }

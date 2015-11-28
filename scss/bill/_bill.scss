@@ -92,6 +92,8 @@
   border: 1px solid $greylight;
   border-radius: 3px;
   max-width: 55px;
+  display: inline-table;
+  flex-shrink: 0;
   padding: 2px;
 
   img {
