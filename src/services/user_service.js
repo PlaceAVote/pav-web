@@ -230,14 +230,12 @@ function UserService($resource, facebookService, authService) {
       };
       followersResource.getFollowing(undefined, onLoad, onError);
     };
-    var followInternal = function(follow, callback) {
-      var url;
-      if(follow) {
-        url = config.users.follow;
+
+    var follow = function(id, callback) {
+      if (!id) {
+        return callback({message:'Id is Required'});
       }
-      else {
-        url = config.users.unfollow;
-      }
+      var url = config.users.follow;
       config.methods.putNoBody.headers['Authorization'] = authService.getAccessToken();
       var resource = new $resource(url, undefined, {execute: config.methods.putNoBody});
       var onError = function(err) {
@@ -246,15 +244,29 @@ function UserService($resource, facebookService, authService) {
       var onLoad = function(result) {
         return callback(undefined, true);
       };
-      resource.execute(undefined, onLoad, onError);
+      var body = {
+        "user_id": id,
+      }
+      resource.execute(body, onLoad, onError);
     };
 
-    var follow = function(callback) {
-      followInternal(true, callback);
-    };
-
-    var unfollow = function(callback) {
-      followInternal(false, callback);
+    var unfollow = function(id, callback) {
+      if (!id) {
+        return callback({message:'Id is Required'});
+      }
+      var url = config.users.unfollow;
+      var body = {
+        "user_id": id,
+      }
+      var resource = new $resource(url, undefined, {execute: config.methods.del.delete(body, authService.getAccessToken())});
+      var onError = function(err) {
+        return callback({message: 'Server Error', error: err});
+      };
+      var onLoad = function(result) {
+        console.log(result);
+        return callback(undefined, true);
+      };
+      resource.execute(body, onLoad, onError);
     };
 
 	return {

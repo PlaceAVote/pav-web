@@ -674,7 +674,14 @@ describe("User Service", function() {
     });
   });
   describe('Follow', function(){
-    it('has correct params', function(done){
+    it('needs id', function(done){
+      var subject = new UserService(undefined, undefined, authService);
+      subject.follow(undefined, function(err, response){
+        expect(err.message).to.eql('Id is Required');
+        done();
+      });
+    });
+    it('has correct params', function (done){
       function followResource(url, params, method) {
         this.execute = function(){};
         expect(url).to.eql('http://pav-user-api-924234322.us-east-1.elb.amazonaws.com:8080/user/follow');
@@ -683,7 +690,7 @@ describe("User Service", function() {
         done();
       };
       var subject = new UserService(followResource, undefined, authService);
-      subject.follow(function(err, response){});
+      subject.follow('id', function(err, response){});
     });
     it('returns error from server', function(done) {
       function followResource(url, params, method) {
@@ -692,7 +699,7 @@ describe("User Service", function() {
         };
       };
       var subject = new UserService(followResource, undefined, authService);
-      subject.follow(function(err, response){
+      subject.follow('id', function(err, response){
         expect(err.message).to.eql('Server Error');
         expect(err.error).to.eql('ERROR');
         expect(response).to.eql(undefined);
@@ -706,7 +713,7 @@ describe("User Service", function() {
         };
       };
       var subject = new UserService(followResource, undefined, authService);
-      subject.follow(function(err, response){
+      subject.follow('id', function(err, response){
         expect(err).to.eql(undefined);
         expect(response).to.eql(true);
         done();
@@ -714,16 +721,24 @@ describe("User Service", function() {
     });
   });
   describe('Unfollow', function(){
+    it('needs id', function(done){
+      var subject = new UserService(undefined, undefined, authService);
+      subject.follow(undefined, function(err, response){
+        expect(err.message).to.eql('Id is Required');
+        done();
+      });
+    });
     it('has correct params', function(done){
       function followResource(url, params, method) {
-        this.execute = function(){};
+        this.execute = function(state){
+        };
         expect(url).to.eql('http://pav-user-api-924234322.us-east-1.elb.amazonaws.com:8080/user/unfollow');
         expect(params).to.eql(undefined);
         expect(method.execute.headers['Authorization']).to.eql('PAV_AUTH_TOKEN 000001');
         done();
       };
       var subject = new UserService(followResource, undefined, authService);
-      subject.unfollow(function(err, response){});
+      subject.unfollow('id', function(err, response){});
     });
     it('returns error from server', function(done) {
       function followResource(url, params, method) {
@@ -732,7 +747,7 @@ describe("User Service", function() {
         };
       };
       var subject = new UserService(followResource, undefined, authService);
-      subject.unfollow(function(err, response){
+      subject.unfollow('id', function(err, response){
         expect(err.message).to.eql('Server Error');
         expect(err.error).to.eql('ERROR');
         expect(response).to.eql(undefined);
@@ -746,7 +761,7 @@ describe("User Service", function() {
         };
       };
       var subject = new UserService(followResource, undefined, authService);
-      subject.unfollow(function(err, response){
+      subject.unfollow('id', function(err, response){
         expect(err).to.eql(undefined);
         expect(response).to.eql(true);
         done();
