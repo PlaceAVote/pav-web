@@ -1,0 +1,96 @@
+.profile {
+	.profile-bg {
+		max-height:300px;
+	}
+	.profile-header {
+  		height: 300px;
+  		padding: 20px;
+  		position: relative;
+  	.row {
+  		
+  		margin: 0 auto;
+  		left: 0;
+  		right: 0;
+  		bottom: 0;
+  		position: absolute;
+  		width: 100%;
+  		max-width: 1200px;
+  		@include media(600px) {
+  			padding: 20px;
+  		}
+  	}
+	.profile-picture {
+		background: $greylight;
+		position: absolute;
+		left: 0px;
+		bottom: -100px;
+		width:160px;
+		height:160px;
+		border:2px solid $white;
+		box-shadow: 0px 0px 1px 1px rgba(0,0,0,0.2);
+		border-radius:3px;
+		@include media(600px){
+			position: static;
+			width: 80px;
+			height: 80px;
+			display: block;
+			}
+		}
+	.user-title {
+		display:flex;
+		margin-left: 210px;
+		margin-bottom: 7px;
+		flex-direction: column;
+		justify-content: flex-end;
+		color: $white;
+		text-align: left;
+		@include media(600px) {
+			margin-left: 20px;
+			justify-content: flex-start;
+		}
+	}
+		h1 {
+			@include font-size(26px);
+			text-shadow: 0 2px 2px rgba(0,0,0, 0.5);
+			margin-bottom: 0;
+			@include bold();
+			@include media(600px) {
+				@include font-size(18px);
+			}
+		}
+		h3 {
+			text-shadow: 0 2px 2px rgba(0,0,0, 0.5);
+			@include light();
+			@include font-size(14px);
+			i {
+				margin-right: 5px;
+				@include font-size(12px);
+			}
+		}
+
+	}
+	.profile-follow {
+		display: flex;
+		justify-content: center;
+		background:$white;
+	    @include shadow();
+	    border-top:1px solid $greylight;
+	    .row {
+	    	max-width: 1200px;
+	    	width: 100%;
+	    	padding:20px 0px 20px 210px;
+	    	@include media(600px) {
+	    		padding: 20px;
+	    	}
+	    }
+	    .stats {
+	    	margin-right: 40px;
+	    	span {font-weight:$font-bold;}
+	    }
+	}
+
+}
+
+.profile-followers {
+	h2 {margin-top:10px;}
+}

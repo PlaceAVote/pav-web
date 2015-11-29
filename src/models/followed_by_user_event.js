@@ -7,4 +7,11 @@ function FollowedByUserEvent(options){
   this.first_name = options.first_name;
 }
 
+FollowedByUserEvent.prototype.loadProfile = function(id, location) {
+  if (!id || !location || !location.path) {
+    return;
+  }
+  location.path('/profile/' + id);
+};
+
 module.exports = FollowedByUserEvent;

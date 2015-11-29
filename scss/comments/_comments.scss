@@ -16,6 +16,7 @@
     .user-img-border {
       @include media(480px) {
         width:46px;
+        // height: 40px;
       }
     }
     .top-comment-body {
@@ -79,6 +80,7 @@
   margin-top: 10px;
   width: 100%;
   textarea {
+    resize: none;
     width: 100%;
     height: 40px;
     outline: none;
@@ -86,22 +88,24 @@
     border-radius: 3px;
     margin-top: 5px;
     margin-bottom: 5px;
-    padding:5px;
+    padding:10px;
+    font-family:$font-normal;
+    @include medium();
     color: $black;
     box-sizing: border-box;
+    @include font-size(10px);
   }
   .reply-actions {
     float: right;
     .btn-green, .btn-blank {
       width: 200px;
-      padding: 7px 40px;
       text-align: center;
+      height: 30px !important;
+      line-height: 30px !important;
+      width: 100px;
       @include media(500px) {
         padding: 0;
         display: inline-block;
-        height: 30px;
-        line-height: 31px;
-        width: 50px;
         margin-left:4px;
         margin-right:0;
       }
@@ -109,10 +113,3 @@
   }
 }
 
-.score-none {
-  color: $grey !important;
-}
-
-.score-down {
-  color: $red !important;
-}

@@ -93,7 +93,7 @@ BillController.prototype.generateCommentCard = function(comment) {
   }
   this.commentCard = new Comment(comment);
   this.commentCard.set = true;
-  this.commentCard.status = comment.author.toUpperCase() + " DISAGREES, HE THINKS:";
+  this.commentCard.status = comment.author_first_name.toUpperCase() + " DISAGREES:";
 };
 
 BillController.prototype.getTopComments = function(id){
@@ -187,6 +187,22 @@ BillController.prototype.postComment = function() {
     }
   });
 };
+
+// BillController.prototype.commentLike = function() {
+//   var that = this;
+//   console.log('hello');
+//   if(this.comment.liked) {
+//     console.log('liked')
+//     this.commentService.revokeLike();
+//   } else 
+//   if(this.comment.disliked) {
+//     this.commentService.revokeDislike();
+//   }
+//   else {
+//     this.comentService.like();
+//   }
+// };
+
 
 module.exports = BillController;
 

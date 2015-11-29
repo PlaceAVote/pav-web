@@ -1,0 +1,59 @@
+<div class="profile-timeline">
+       <aside>
+       </aside>
+       <section>
+          <div class="timeline-events" ng-repeat="event in timeline" ng-switch on="event.type">
+                  <!-- Vote -->
+                  <div ng-switch-when="vote">
+                    <span class="time-stamp">timestamp</span>
+                    <div class="event-card event-vote">
+                    <div class="event-icon event-icon-vote">
+                      <i class="icon-logo"></i>
+                    </div>
+                    <vote event="event" user="profile.user"></vote>
+                    </div>
+                  </div>
+                  <!-- follow -->
+                  <div ng-switch-when="followinguser">
+                  <span class="time-stamp">timestamp</span>
+                    <following event="event" user="profile.user"></following>
+                  </div>
+                  <!-- followed -->
+                  <div ng-switch-when="followeduser">
+                  <span class="time-stamp">timestamp</span>
+                    <followed event="event" user="profile.user"></followed>
+                  </div>
+                  <!-- comment liked -->
+                  <div class="timeline-likeComment" ng-switch-when="likecomment">
+                  <span class="time-stamp">timestamp</span>
+                  <div class="event-card">
+                  <div class="event-icon event-icon-like">
+                   <i class="icon-thumbs-up"></i>
+                   </div> 
+                    <span class="event-label"><a>{{profile.user.first_name}} {{profile.user.lastname}}</a> upvoted a comment:</span>
+                    <comment comment="event.comment"></comment>
+                    </div>
+                  </div>
+                  <!-- comment disliked -->
+                  <div class="timeline-dislikeComment" ng-switch-when="dislikecomment">
+                    <span class="time-stamp">timestamp</span>
+                    <div class="event-card">
+                    <div class="event-icon event-icon-dislike">
+                    <i class="icon-thumbs-down"></i>
+                    </div>
+                    <span class="event-label"><a>{{profile.user.first_name}} {{profile.user.lastname}}</a> downvoted a comment:</span>
+                    <comment comment="event.comment"></comment>
+                    </div>
+                  </div>
+                  <!-- comment post -->
+                  <div class="timeline-comment" ng-switch-when="comment">
+                  <span class="time-stamp">timestamp</span>
+                  <div class="event-card">
+                   <span class="event-label"><a>{{profile.user.first_name}} {{profile.user.lastname}}</a> in {{event.bill_id}}: {{event.bill_title}},</span>
+                    <comment comment="event"></comment>
+                    </div>
+                  </div>
+
+          </div>
+       </section>
+</div>
