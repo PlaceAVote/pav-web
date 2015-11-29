@@ -170,19 +170,20 @@
               <h1>{{bill.commentCard.status}}</h1>
               <hr />
               <aside class="row-layout">
-              <div class="user-img-border">
-              <img src='{{bill.commentCard.img_url}}' />
-              </div>
+        <div class="user-img-border">
+          <img src="{{bill.forComment.author_img_url}}" />
+        </div>
               <div class="top-comment-body">
-              <h2>{{bill.commentCard.author}}</h2>
-              <section class="comment-vote"><span>{{bill.commentCard.score}}</span><img ng-click="bill.commentCard.like(bill.commentService)"src="img/card/thumb-up.png"><img src="img/card/thumb-down.png" ng-click="bill.commentCard.dislike(bill.commentService)"/></section>
+              <h2>{{bill.commentCard.author_first_name}}</h2>
+            <section class="comment-vote"><span>{{bill.forComment.score}}</span><i class="icon-thumbs-up thumbs" ng-click="bill.forComment.like(bill.commentService)"></i><i class="icon-thumbs-down thumbs" ng-click="bill.forComment.dislike(bill.commentService)"></i></section>
               <p>{{bill.commentCard.body}}</p>
               </div>
               </aside>
-          <div class="row">
-            <div ng-show="bill.commentCard.replyInput">
-            <input type="text" placeholder="Reply" ng-model="bill.commentCard.replyText"></input><span ng-click="bill.commentCard.reply(bill.id, bill.commentService)">Reply</span>
+            <div class="reply-comment" ng-show="bill.commentCard.replyInput">
+            <textarea type="text" placeholder="Reply" ng-model="bill.commentCard.replyText"></textarea><span ng-click="bill.commentCard.reply(bill.id, bill.commentService)" class="btn-green btn-modal">POST</span>
             </div>
+          <div class="row reply-modal">
+
            <button class="btn-blue" ng-click="bill.commentCard.showReplyInput()"><span class="icon-reply"></span> Reply to Comment </button>
            <button class="btn-grey" ng-click="bill.hideVoteModal()"> I'm not ready yet </button>
           </div>

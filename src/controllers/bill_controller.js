@@ -93,7 +93,7 @@ BillController.prototype.generateCommentCard = function(comment) {
   }
   this.commentCard = new Comment(comment);
   this.commentCard.set = true;
-  this.commentCard.status = comment.author.toUpperCase() + " DISAGREES, HE THINKS:";
+  this.commentCard.status = comment.author_first_name.toUpperCase() + " DISAGREES:";
 };
 
 BillController.prototype.getTopComments = function(id){

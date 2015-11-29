@@ -320,7 +320,7 @@ h1.bill-title{
         @include font-size(44px);
         @include media(560px){
         max-height: 20px;
-        @include font-size(20px);
+        @include font-size(36px);
         max-width: 30px;
         align-self: center;
        
@@ -336,6 +336,9 @@ h1.bill-title{
         right: 0;
         @include font-size(12px);
         @include light();
+        @include media(560px) {
+          @include font-size(10px);
+        }
       }
 
       span {
