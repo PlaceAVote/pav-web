@@ -255,18 +255,17 @@ function UserService($resource, facebookService, authService) {
         return callback({message:'Id is Required'});
       }
       var url = config.users.unfollow;
-      //TODO change to del!
-      config.methods.putNoBody.headers['Authorization'] = authService.getAccessToken();
-      var resource = new $resource(url, undefined, {execute: config.methods.putNoBody});
+      var body = {
+        "user_id": id,
+      }
+      var resource = new $resource(url, undefined, {execute: config.methods.del.delete(body, authService.getAccessToken())});
       var onError = function(err) {
         return callback({message: 'Server Error', error: err});
       };
       var onLoad = function(result) {
+        console.log(result);
         return callback(undefined, true);
       };
-      var body = {
-        "user_id": id,
-      }
       resource.execute(body, onLoad, onError);
     };
 

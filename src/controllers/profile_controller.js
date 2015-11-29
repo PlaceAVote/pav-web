@@ -77,7 +77,8 @@ ProfileController.prototype.follow = function() {
   }
   this.userService.follow(this.id, function(err, response) {
     if (!err) {
-      that.user.following = true;
+      that.user.following = false;
+      that.populate();
     }
   });
 };
@@ -89,7 +90,8 @@ ProfileController.prototype.unfollow = function() {
   }
   this.userService.unfollow(this.id, function(err, response) {
     if(!err) {
-      that.user.following = false;
+      that.user.following = true;
+      that.populate();
     }
   });
 };
