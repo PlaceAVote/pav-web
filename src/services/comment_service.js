@@ -29,6 +29,32 @@ function CommentService($resource, userService, authService) {
     resource.reply(body, onLoad, onError);
   };
 
+  var revoke = function(commentId, billId, kind, callback) {
+    if (!commentId) {
+      return callback('No Comment Id');
+    }
+    if (!billId) {
+      return callback('No Bill Defined');
+    }
+
+    var url = config.comments[kind].endpoint(commentId);
+    var body = {
+      bill_id: billId,
+    };
+    var resource = new $resource(url, undefined, {revoke: config.methods.del.delete(body, authService.getAccessToken())});
+
+    var onError = function(err) {
+      return callback(err);
+    };
+
+    var onLoad = function(response) {
+      return callback(undefined, true);
+    };
+    resource.revoke(onLoad, onError);
+  };
+
+
+
   var like = function(commentId, billId, callback) {
     if (!commentId) {
       return callback('No Comment Id');
@@ -79,6 +105,7 @@ function CommentService($resource, userService, authService) {
   };
 
   return {
+    revoke: revoke,
     reply: reply,
     like: like,
     dislike: dislike,

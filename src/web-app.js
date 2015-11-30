@@ -5,7 +5,7 @@ var LoginController = require('./controllers/login_controller.js');
 var FeedController = require('./controllers/feed_controller.js');
 var BillController = require('./controllers/bill_controller.js');
 var HeaderController = require('./controllers/header_controller.js');
-
+var ProfileController = require('./controllers/profile_controller.js');
 //services
 var UserService = require('./services/user_service.js');
 var BillService = require('./services/bill_service.js');
@@ -23,6 +23,11 @@ var mailcheck = require('./directives/mailcheck.js');
 var pavDirectives = require('./directives/directives.js');
 var commentsDirective = require('./directives/comments.js');
 var commentDirective = require('./directives/comment.js');
+var bannerDirective = require('./directives/banner.js');
+var timelineDirective = require('./directives/timeline.js');
+var timelineFollowingEventDirective = require('./directives/following_event.js');
+var timelineFollowedEventDirective = require('./directives/followed_event.js');
+var voteEventDirective = require('./directives/vote_event.js');
 // var statusChart = require('./directives/statuschart.js');
 //thirdparty integrations
 var Facebook = require('./integrations/facebook.js');
@@ -50,6 +55,10 @@ app.config(['$routeProvider', function($routeProvider) {
       templateUrl: 'partials/bill.html',
       controller: 'BillCtrl as bill'
     })
+    .when('/profile/:id', {
+      templateUrl: 'partials/profile.html',
+      controller: 'ProfileCtrl as profile'
+    })
     .otherwise({
       redirectTo: '/'
     });
@@ -76,8 +85,15 @@ app.controller('LoginCtrl',['$scope','$location', 'userService', 'authService', 
 app.controller('FeedCtrl', ['$scope', '$location', 'userService', 'billService', 'trendService', 'authService', FeedController]);
 app.controller('BillCtrl', ['$scope', '$routeParams', 'billService', 'legislationService', 'voteService', 'commentService', '$location', 'authService', BillController]);
 app.controller('HeaderCtrl', ['$scope', '$location', 'authService', HeaderController]);
+app.controller('ProfileCtrl', ['$scope', '$location', '$routeParams', 'authService', 'userService', ProfileController]);
 //directives
 app.directive('mailcheck', ['$compile','$sce', mailcheck]);
 app.directive('comment', ['$compile', 'commentService', commentDirective]);
 app.directive('comments', [commentsDirective]);
+app.directive('banner', [bannerDirective]);
+app.directive('timeline', [timelineDirective]);
+app.directive('following', ['$location', timelineFollowingEventDirective]);
+app.directive('followed', ['$location', timelineFollowedEventDirective]);
+app.directive('vote', ['$location', voteEventDirective]);
 // app.directive('statusChart', [statusChart]);
+

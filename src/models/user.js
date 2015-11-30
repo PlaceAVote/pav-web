@@ -20,10 +20,11 @@ User.createFromJson = function(json){
   user.last_name = json.last_name;
   user.dob = json.dob;
   user.country_code = json.country_code;
-  user.img_url = json.img_url;
+  user.img_url = json.img_url || 'img/comments/user.png';
   user.following = json.following;
   user.total_followers = json.total_followers;
   user.total_following = json.total_following;
+  user.user_id = json.user_id;
   this.private = json.private;
   user.loadedFromServer = true;
   return user;

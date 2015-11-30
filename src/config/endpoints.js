@@ -29,8 +29,33 @@ module.exports = {
       },
       withCredentials: false,
     },
+    del: {
+      delete: function(id, token) {
+        req = {
+          method: 'DELETE',
+          data: id,
+          isArray: false,
+          headers: {
+            'Content-Type' : "application/json",
+            'Accept': 'application/json',
+            'Authorization' : token,
+          },
+          withCredentials: false,
+          };
+        return req;
+      }
+    },
     put: {
       method: 'PUT',
+      headers: {
+        'Content-Type' : "application/json",
+        'Accept': 'application/json',
+      },
+      withCredentials: false,
+    },
+    putNoBody: {
+      method: 'PUT',
+      transformResponse: [],
       headers: {
         'Content-Type' : "application/json",
         'Accept': 'application/json',
@@ -104,11 +129,21 @@ module.exports = {
     endpoint : urls.USER + '/user',
     authorize: urls.USER + '/user/token/validate?token=',
     profile: {
-      me : urls.USER + '/user/me/profile',
       fromId: function(id) {
         return urls.USER + '/user/' + id + '/profile'
       },
     },
+    timeline: function(id) {
+      return urls.USER + '/user/' + id + '/timeline'
+    },
+    followers: function(id) {
+      return urls.USER + '/user/' + id + '/followers'
+    },
+    following: function(id) {
+      return urls.USER + '/user/' + id + '/following'
+    },
+    follow: urls.USER + '/user/follow',
+    unfollow: urls.USER + '/user/unfollow',
     login_endpoint: urls.USER + '/user/authenticate',
     facebookLoginUrl : urls.USER + '/user/facebook/authenticate',
     facebookCreateUrl: urls.USER + '/user/facebook',

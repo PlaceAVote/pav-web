@@ -1,12 +1,12 @@
 .login-wrapper {
   position: relative;
-  background-color: white;
+  // background-color: white;
   height: 100%;
-  overflow: hidden;
-  @include media(480px){
-  min-height: 100%;
-  overflow: auto;
-  }
+  // overflow: hidden;
+  // @include media(480px){
+  // min-height: 100%;
+  // overflow: auto;
+  // }
 
   .login-footer {
     @include media(480px){
@@ -50,7 +50,7 @@
   right: 0;
   @include medium();
   height: 100%;
-  background: white;
+  // background: white;
   text-align: center;
   max-width: 400px;
   padding: 40px 40px 0px 40px;
@@ -419,10 +419,10 @@
   }
 }
 
-.login-fix {
-  display: flex;
-  flex-direction: row;
-}
+// .login-fix {
+//   display: flex;
+//   flex-direction: row;
+// }
 
 
 

@@ -3,6 +3,8 @@ function Comment(options) {
     return;
   };
   this.author = options.author;
+  this.author_first_name = options.author_first_name;
+  this.author_last_name = options.author_last_name;
   this.body = options.body;
   this.has_children = options.has_children;
   this.bill_id = options.bill_id;
@@ -14,6 +16,9 @@ function Comment(options) {
   this.replies = [];
   this.deep = 0;
   this.author_img_url = options.author_img_url || 'img/comments/user.png';
+  this.scored = options.scored;
+  this.liked = options.liked;
+  this.disliked = options.disliked;
 }
 
 Comment.buildChildren = function(comment, deep) {
@@ -67,13 +72,42 @@ Comment.prototype.reply = function(billId, service) {
 
 Comment.prototype.like = function(service) {
   var that = this;
+  if (this.liked) {
+      service.revoke(this.id, this.bill_id, 'like', function(err, response) {
+      if(err) {
+        that.likeFailed = true;
+      }
+      else if(response) {
+        that.liked = false;
+        that.scored = false;
+        that.score--;
+        return;
+      }
+    });
+  }
+  if (this.disliked) {
+    service.revoke(this.id, this.bill_id,'dislike', function(err, response) {
+      if(err) {
+        that.dislikeFailed = true;
+      }
+      else if(response) {
+        that.disliked = false;
+        that.scored = false;
+        that.score++;
+      }
+    });
+  }
+  if (this.scored) {
+    return;
+  }
+  this.score++;
+  this.scored = true;
   service.like(this.id, this.bill_id, function(err, response) {
     if(err) {
       that.likeFailed = true;
     }
     else if(response) {
       that.liked = true;
-      that.score++;
     }
   });
 };
@@ -81,16 +115,48 @@ Comment.prototype.like = function(service) {
 
 Comment.prototype.dislike = function(service) {
   var that = this;
+    if (this.disliked) {
+    service.revoke(this.id, this.bill_id,'dislike', function(err, response) {
+      if(err) {
+        that.dislikeFailed = true;
+      }
+      else if(response) {
+        that.disliked = false;
+        that.scored = false;
+        that.score++;
+        return;
+      }
+    });
+  }
+    if (this.liked) {
+      service.revoke(this.id, this.bill_id, 'like', function(err, response) {
+      if(err) {
+        that.likeFailed = true;
+      }
+      else if(response) {
+        that.liked = false;
+        that.scored = false;
+        that.score--;
+      }
+    });
+  }
+  if (this.scored) {
+    return;
+  }
+  this.scored = true;
+  that.score--;
   service.dislike(this.id, this.bill_id, function(err, response) {
-    if(err) {
+    if (err) {
       that.dislikeFailed = true;
     }
     else if(response) {
       that.disliked = true;
-      that.score--;
     }
   });
 };
+
+
+
 
 module.exports = Comment;
 

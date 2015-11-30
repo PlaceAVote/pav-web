@@ -17,11 +17,16 @@
       line-height: 15px;
     }
 
-    img {
+    i.thumbs {
       cursor: pointer;
-      width: 13px;
-      height: 13px;
-      padding-left: 10px;
+      @include font-size(13px);
+      color: $grey;
+      margin-left: 10px;
+      height: 15px;
+      text-align: center;
+      width: 15px;
+      transition: all 0.1s ease;
+      line-height: 15px;
     }
     .reply-btn {
       color: $blue;
@@ -34,3 +39,51 @@
       }
     }
   }
+
+.score-none {
+  color: $grey !important;
+}
+
+.score-down {
+  color: $red !important;
+  animation: score-down 0.8s ease;
+}
+
+.score-up {
+  color: $green !important;
+  animation: score-up 0.5s ease;
+}
+
+@keyframes score-up {
+  0% {
+    color: $grey;
+    transform: scale(1,1);
+  }
+  30% {
+    color: $green;
+    transform: scale(1.5,1.5);
+  }
+  70% {
+    transform: scale(1.5,1.5);
+  }
+  100% {
+    transform: scale(1,1);
+  }
+}
+
+@keyframes score-down {
+  0% {
+    color: $grey;
+    transform: scale(1,1);
+  }
+  30% {
+    color: $red;
+    transform: scale(1.5,1.5);
+  }
+  70% {
+    transform: scale(1.5,1.5);
+  }
+  100% {
+    transform: scale(1,1);
+  }
+}

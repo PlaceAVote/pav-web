@@ -21,6 +21,7 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
   this.getComments();
   this.voteModal = {};
   this.stats = {};
+  this.readmore = false;
 }
 
 BillController.prototype.showVoteModal = function(vote){
@@ -92,7 +93,7 @@ BillController.prototype.generateCommentCard = function(comment) {
   }
   this.commentCard = new Comment(comment);
   this.commentCard.set = true;
-  this.commentCard.status = comment.author.toUpperCase() + " DISAGREES, HE THINKS:";
+  this.commentCard.status = comment.author_first_name.toUpperCase() + " DISAGREES:";
 };
 
 BillController.prototype.getTopComments = function(id){
@@ -105,8 +106,8 @@ BillController.prototype.getTopComments = function(id){
     else {
       that.forComment = result.forComment;
       that.againstComment = result.againstComment;
-      that.noForComment = that.forComment.id ? true : false;
-      that.noAgainstComment = that.againstComment.id ? true : false;
+      that.hasForComment = that.forComment.id ? true : false;
+      that.hasAgainstComment = that.againstComment.id ? true : false;
     }
   });
 };
@@ -186,6 +187,22 @@ BillController.prototype.postComment = function() {
     }
   });
 };
+
+// BillController.prototype.commentLike = function() {
+//   var that = this;
+//   console.log('hello');
+//   if(this.comment.liked) {
+//     console.log('liked')
+//     this.commentService.revokeLike();
+//   } else 
+//   if(this.comment.disliked) {
+//     this.commentService.revokeDislike();
+//   }
+//   else {
+//     this.comentService.like();
+//   }
+// };
+
 
 module.exports = BillController;
 
