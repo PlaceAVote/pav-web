@@ -17,13 +17,13 @@
             <div class="reply-actions">
              <span class="btn-blank" ng-click="comment.hideReplyInput()">CANCEL</span>
             <span class="btn-green" ng-click="comment.reply(comment.bill_id, commentService)">POST</span>
-           
+
             </div>
             </div>
             </div>
         </section>
 
-        <div class="reply-btn-container" ng-show='comment.replies.length > 0 && comment.deep < 2'>
+        <div class="reply-btn-container" ng-show='comment.replies.length > 0'>
             <button class="reply-show-hide" ng-hide='comment.showChildren' ng-click='comment.show()'>{{comment.replies.length}} Replies</button>
             <button class="reply-show-hide" ng-show='comment.showChildren' ng-click='comment.hide()'>Hide Replies</button>
         </div>
