@@ -1,46 +1,45 @@
 <div class="l-12">
-	<div class="l-12 m-12 s-12 login-wrapper">
-		<section class="s-12  login">
-			<div class="s-6">
-			<div class="logo-wrap"><a href="/#/"><img src="../img/pav-logo-color.png" /></a></div>
-		</div>
-			<ul>
-				<li>Sign In</li>
-				<li>Sign Up</li>
-			</ul>
-			<section class="s-12">
-				<h1>Welcome back! Sign in below</h1>
-			 <form name="emailForm">
-			 <label>Email</label>
-			 <input id="email" name="email" type="text" mailcheck ng-class="{'login-error': !login.user.emailValid}" ng-model="login.user.email" placeholder="yourname@example.com" required/>
-			  <p class="error-message" ng-class="{'show': !login.user.emailValid}">Email address is invalid, please try again.</p>
-			 <label>Password (contains one digit and one capital letter)</label>
-			 <input name="password" type="password" ng-class="{'login-error': !login.user.passwordValid}"  ng-model="login.user.password" placeholder="*******" />
-			 <p class="error-message" ng-class="{'show': !login.user.passwordValid}">Password requires at least one digit and one capital letter.</p>
-             <p class="error-message" ng-class="{'show': login.forgot}">Invalid User Credentials</p>
-			 <button ng-click="login.validate(login.user, '/onboarding');">Create an account</button>
-			
-			<button ng-click="login.login(login.user, '/topics');">Sign In</button>
-			 </form>
-			 <p><a href="">Forgot your password? Click here</a></p>
-			</section>
-			 <br />
-			 <p>Or</p>
-			 <br />
-			 <button class="fb-login" ng-click="login.loginWithFacebook()"><span class="icon-facebook"></span>Sign in with Facebook</button>
-		</section>
-
-<div class="login-footer">		
-<ul>
-			<li>
-				FAQ
-			</li>
-			<li>
-				Press Kit
-			</li>
-			<li>
-				Jobs
-			</li>
-		</ul>
-		</div>
-	</div>
+    <div class="l-12 m-12 s-12 login-wrapper">
+        <section class="login">
+            <div class="s-12 login-spacing">
+                <div class="logo-wrap">
+                    <a href="/#/"><img src="../img/pav-logo-color.png" /></a>
+                </div>
+                <ul>
+                    <li><a href=""><strong>Sign In</strong></a></li>
+                    <li><a href="">Sign Up</a></li>
+                </ul>
+            </div>
+            <section class="s-12">
+                <h1>Welcome back! Sign in below</h1>
+                <form name="emailForm">
+                    <label>Email</label>
+                    <input id="email" name="email" type="text" mailcheck ng-class="{'login-error': !login.user.emailValid}" ng-model="login.user.email" placeholder="yourname@example.com" required/>
+                    <p class="error-message" ng-class="{'show': !login.user.emailValid}">Email address is invalid, please try again.</p>
+                    <label>Password (contains one digit and one capital letter)</label>
+                    <input name="password" type="password" ng-class="{'login-error': !login.user.passwordValid}" ng-model="login.user.password" placeholder="*******" />
+                    <p class="error-message" ng-class="{'show': !login.user.passwordValid}">Password requires at least one digit and one capital letter.</p>
+                    <p class="error-message" ng-class="{'show': login.forgot}">Invalid User Credentials</p>
+                    <!-- <button ng-click="login.validate(login.user, '/onboarding');">Create an account</button> -->
+                    <button ng-click="login.login(login.user, '/topics');">Sign In</button>
+                </form>
+                <div class="s-12 forgot">
+                    <p><a href="">Forgot your password? Click here</a></p>
+                </div>
+            </section>
+            <button class="fb-login" ng-click="login.loginWithFacebook()"><span class="icon-facebook"></span>Sign in with Facebook</button>
+        </section>
+        <div class="login-footer">
+            <ul>
+                <li>
+                    FAQ
+                </li>
+                <li>
+                    Press Kit
+                </li>
+                <li>
+                    Jobs
+                </li>
+            </ul>
+        </div>
+    </div>
