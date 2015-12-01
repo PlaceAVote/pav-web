@@ -343,7 +343,7 @@ describe("User Service", function() {
     it('calls get resource with correct params', function(done) {
       function mockResource(url, params, method, options) {
         this.getProfile = function(){};
-        expect(url).to.eql('http://pav-user-api-924234322.us-east-1.elb.amazonaws.com:8080/user/me/profile');
+        expect(url).to.contain('/user/me/profile');
         expect(params).to.eql(undefined);
         expect(method.getProfile.headers['Authorization']).to.eql('PAV_AUTH_TOKEN CHOUNDFLKAND:ND');
         expect(method.getProfile.method).to.eql('GET');
@@ -420,7 +420,7 @@ describe("User Service", function() {
     it('passes the right info to resource constructor', function(done) {
       function mres(url, params, method, options){
         this.getProfile = function(){};
-        expect(url).to.eql('http://pav-user-api-924234322.us-east-1.elb.amazonaws.com:8080/user/203hr3r3/profile');
+        expect(url).to.contain('/user/203hr3r3/profile');
         expect(params).to.eql(undefined);
         expect(method.getProfile.headers['Authorization']).to.eql('PAV_AUTH_TOKEN CHOUNDFLKAND:ND');
         expect(method.getProfile.method).to.eql('GET');
@@ -481,7 +481,7 @@ describe("User Service", function() {
     });
     it('passes correct params to resource', function(done) {
       function userResource(url, params, method) {
-        expect(url).to.eql('http://pav-user-api-924234322.us-east-1.elb.amazonaws.com:8080/user/me/timeline');
+        expect(url).to.contain('/user/me/timeline');
         expect(params).to.eql(undefined);
         expect(method.getTimeline.headers['Authorization']).to.eql('PAV_AUTH_TOKEN 000001');
         this.getTimeline = function(){};
@@ -561,7 +561,7 @@ describe("User Service", function() {
     });
     it('passes correct params to resource', function(done) {
       function userResource(url, params, method) {
-        expect(url).to.eql('http://pav-user-api-924234322.us-east-1.elb.amazonaws.com:8080/user/me/followers');
+        expect(url).to.contain('/user/me/followers');
         expect(params).to.eql(undefined);
         expect(method.getFollowers.headers['Authorization']).to.eql('PAV_AUTH_TOKEN 000001');
         this.getFollowers = function(){};
@@ -622,7 +622,7 @@ describe("User Service", function() {
     });
     it('passes correct params to resource', function(done) {
       function userResource(url, params, method) {
-        expect(url).to.eql('http://pav-user-api-924234322.us-east-1.elb.amazonaws.com:8080/user/007/following');
+        expect(url).to.contain('/user/007/following');
         expect(params).to.eql(undefined);
         expect(method.getFollowing.headers['Authorization']).to.eql('PAV_AUTH_TOKEN 000001');
         this.getFollowing = function(){};
@@ -684,7 +684,7 @@ describe("User Service", function() {
     it('has correct params', function (done){
       function followResource(url, params, method) {
         this.execute = function(){};
-        expect(url).to.eql('http://pav-user-api-924234322.us-east-1.elb.amazonaws.com:8080/user/follow');
+        expect(url).to.contain('/user/follow');
         expect(params).to.eql(undefined);
         expect(method.execute.headers['Authorization']).to.eql('PAV_AUTH_TOKEN 000001');
         done();
@@ -732,7 +732,7 @@ describe("User Service", function() {
       function followResource(url, params, method) {
         this.execute = function(state){
         };
-        expect(url).to.eql('http://pav-user-api-924234322.us-east-1.elb.amazonaws.com:8080/user/unfollow');
+        expect(url).to.contain('/user/unfollow');
         expect(params).to.eql(undefined);
         expect(method.execute.headers['Authorization']).to.eql('PAV_AUTH_TOKEN 000001');
         done();

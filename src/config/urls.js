@@ -1,6 +1,8 @@
-var CONGRESS = 'http://pav-congress-api-515379972.us-east-1.elb.amazonaws.com:8080';
-var USER = 'http://pav-user-api-924234322.us-east-1.elb.amazonaws.com:8080';
-var VOTES = 'http://pav-vote-api-143877429.us-east-1.elb.amazonaws.com:8080';
+var endpoint = 'http://api-placeavotedev.co.uk/'
+
+var CONGRESS = endpoint+'congressapi';
+var USER = endpoint+'userapi';
+var VOTES = endpoint+'voteapi';
 var FACEBOOKAPPID = '1686805824874862';
 
 module.exports = {
