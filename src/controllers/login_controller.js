@@ -8,6 +8,7 @@ function LoginCtrl($scope, $location, userService, authService) {
   this.location = $location;
   this.forgot = false;
   this.passwordSent = false;
+  // this.signup = false;
 
   this.user = {
     email: '',

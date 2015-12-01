@@ -1,43 +1,37 @@
 .login-wrapper {
     position: relative;
-    // background-color: white;
     height: 100%;
-    // overflow: hidden;
-    // @include media(480px){
-    // min-height: 100%;
-    // overflow: auto;
+    // .login-footer {
+    //     @include media(480px) {
+    //         display: none;
+    //     }
+    //     background-color: white;
+    //     border-top: 1px solid $grey;
+    //     position: absolute;
+    //     width: auto;
+    //     bottom: 0;
+    //     left: 0;
+    //     right: 0;
+    //     margin: 0px auto;
+    //     height: auto;
+    //     width: 212px;
+    //     ul {
+    //         li {
+    //             cursor: pointer;
+    //             display: inline-block;
+    //             height: 40px;
+    //             @include font-size(11px);
+    //             line-height: 39px;
+    //             @include medium();
+    //             padding: 0px 20px;
+    //             transition: all 0.2s ease;
+    //             &:hover {
+    //                 background-color: lighten($purple, 50%);
+    //                 color: $purple;
+    //             }
+    //         }
+    //     }
     // }
-    .login-footer {
-        @include media(480px) {
-            display: none;
-        }
-        background-color: white;
-        border-top: 1px solid $grey;
-        position: absolute;
-        width: auto;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        margin: 0px auto;
-        height: auto;
-        width: 212px;
-        ul {
-            li {
-                cursor: pointer;
-                display: inline-block;
-                height: 40px;
-                @include font-size(11px);
-                line-height: 39px;
-                @include medium();
-                padding: 0px 20px;
-                transition: all 0.2s ease;
-                &:hover {
-                    background-color: lighten($purple, 50%);
-                    color: $purple;
-                }
-            }
-        }
-    }
 }
 
 .login {
@@ -78,7 +72,7 @@
             a:hover {
                 color: darken($grey, 30%);
             }
-            strong {
+            .login--selected {
                 color: $blue;
                 font-weight: 600;
             }
@@ -383,3 +377,4 @@
         }
     }
 }
+
