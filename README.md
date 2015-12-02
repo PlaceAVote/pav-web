@@ -34,6 +34,16 @@ To recieve instance feedback the tests you are writing, use:
 
 All tests should be passing before submitting a pull request from branch -> master.
 
+#pav website
+
+To get the website up and running run:
+
+	gulp watch-website
+
+Change app-min.js to app.js in web/src/index.html *change this back before you merge it to master*
+
+Do the safety dance
+
 #pav ionic
 
 Install dependencies

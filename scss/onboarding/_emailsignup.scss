@@ -10,17 +10,16 @@
   opacity: 1;
  }
   position: absolute;
-  margin: 0px auto 40px auto;
+  margin: 40px auto 40px auto;
   left: 0;
   right: 0;
   max-width: 750px;
-  top: 5%;
   transition: all 0.3s ease;
   @include media(480px){
-  top: 0;
   padding: 0;
   background-color: white;
   margin-bottom: 0;
+  margin-top: 0;
   }
   border-radius: 3px;
   background-color: white;
@@ -86,9 +85,9 @@
         font-size: 12px;
         @include medium();
         display: inline-block;
-        width: calc(50% - 12px);
+        width: calc(50% - 13px);
         select {
-          @include medium();
+          @include light();
           margin-top: 10px;
           margin-bottom: 15px;
           width: 100%;
@@ -103,7 +102,7 @@
           border-radius: 3px;
         }
         input {
-          @include medium();
+          @include light();
           margin-top: 10px;
           margin-bottom: 15px;
           width: 100%;

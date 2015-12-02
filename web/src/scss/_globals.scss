@@ -8,7 +8,7 @@ div,
 
 body {
   background-color: $bgcolor;
-  font-family: $font-normal;
+  font-family: $font;
   position: relative;
 }
 
@@ -65,10 +65,11 @@ input {
   -webkit-appearance: none;
 }
 
+
+
 nav {
   @include media(600px){
   padding: 20px 10px !important;
-
     ul {
       display: none !important;
         &.open { 
@@ -204,23 +205,45 @@ nav {
         @include font-size(14px);
         text-decoration: none;
         color: white;
-        padding: 0 10px;
         line-height: 21px;
-        font-family: $font-light;
+        font-weight: $font-normal;
+        margin:0 0 0 20px;  
+        -webkit-box-shadow: 0px 5px 4px -3px rgba(0,0,0,0.17);
+        -moz-box-shadow: 0px 5px 4px -3px rgba(0,0,0,0.17);
+        box-shadow: 0px 5px 4px -3px rgba(0,0,0,0.17);     
       }
+      a:hover {
+    -webkit-box-shadow: 0px 5px 6px -3px rgba(0,0,0,0.32);
+    -moz-box-shadow: 0px 5px 6px -3px rgba(0,0,0,0.32);
+    box-shadow: 0px 5px 6px -3px rgba(0,0,0,0.32);
+    text-shadow: 1px 1px 1px rgba(150, 150, 150, 0.8);
+  }
     }
   }
-}
-
+} 
+ a.btn-signup {
+          background-color: $green;
+          border: 1px solid darken($green, 20%);
+          padding:10px;
+          border-radius:3px;
+        }
+  a.btn-signin {
+    background-color: rgba(0, 0, 0, 0.0);
+    border: 1px solid $white;
+    border-radius:3px;
+    padding:10px;
+  }
 .navscroll {
   z-index: 9998;
   .logo-white {
     opacity: 0;
   }
-
+  a.btn-signup {color:$white;}
+  a.btn-signin {border:1px solid $purple;text-shadow:none;}
   .logo-color {
     opacity: 1;
   }
+  
   background-color: white;
   opacity: 0.9;
   z-index: 9998;
@@ -234,6 +257,7 @@ nav {
     li {
       a {
         color: $purple;
+        box-shadow:none;
       }
     }
   }
