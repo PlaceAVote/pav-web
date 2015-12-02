@@ -8,6 +8,9 @@ describe("SignUpController", function(){
                 name : "paul"
             }
         };
+        this.user = function() {
+            return {}
+        }
     }
 	it("has a user object", function(){
     var mockUS = new mockUserService();
@@ -19,6 +22,7 @@ describe("SignUpController", function(){
 		country_code : "USA"
 	};
 	expect(subject.additionalInformation).to.eql(blankUser);
+
 	});
     it("when service returns error, set scope.error to be true", function(done){
         function mockUserService() {
@@ -35,6 +39,9 @@ describe("SignUpController", function(){
                     name : "paul"
                 }
              };
+             this.user = function() {
+                return
+             }
         }
         var mockUS = new mockUserService();
         var subject = new SignUpController(undefined, undefined, mockUS);
