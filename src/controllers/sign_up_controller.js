@@ -1,9 +1,9 @@
 var countryCodes = require('../utils/countrycodes.json');
-function SignUpCtrl ($scope, $location, userService) {
+function SignUpCtrl ($scope, $location, userService, authService) {
 	$scope = $scope || {};
 	$scope.signup = this;
 	this.userService = userService;
-  this.location = $location;
+    this.location = $location;
 	this.max = this.maxDate();
     var user = this.userService.getUser() || {};
     this.additionalInformation = {
@@ -13,6 +13,9 @@ function SignUpCtrl ($scope, $location, userService) {
         "country_code": "USA"
     };
 	this.country = countryCodes;
+    if(!userService.user) {
+        this.location.path('/');
+    }
 }
 
 SignUpCtrl.prototype.test = function() {

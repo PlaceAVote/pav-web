@@ -30,7 +30,7 @@
           text-decoration: none;
           color: white;
           padding: 10px;
-          font-family: $font-light;
+          font-weight: $font-light;
         }
       }
     }
@@ -91,14 +91,14 @@
     color: white;
     text-align: center;
     margin-bottom: 40px;
-    font-family: $font-normal;
+    font-weight: $font-normal;
   }
 
   p {
     @include font-size(20px);
     line-height: 24px;
     color: white;
-    font-family: $font-light;
+    font-weight: $font-light;
     text-align: center;
     padding: 0px 20%;
     @include media(812px){
@@ -122,7 +122,7 @@
       padding-bottom: 22px;
       text-align: center;
       }
-      font-family: $font-light;
+      font-weight: $font-light;
       text-align: left;
       @include font-size(30px);
     }
@@ -133,7 +133,7 @@
       }
 
       h2 {
-        font-family: $font-light;
+        font-weight: $font-light;
         @include font-size(14px);
         padding-bottom: 20px;
       }
@@ -207,14 +207,14 @@
       @include font-size(14px);
       color: $black;
       text-align: left;
-      font-family: $font-normal;
+      font-weight: $font-normal;
       padding: 0 0 10px 0;
       margin: 0;
     }
 
     p {
       text-align: left;
-      font-family: $font-light;
+      font-weight: $font-light;
       @include font-size(14px);
       line-height: 20px;
       color: $black;
@@ -256,7 +256,7 @@ footer {
     top: 25px;
     left: 40px;
     color: $black;
-    font-family: $font-light;
+    font-weight: $font-light;
     @include font-size(14px);
 
     // margin-right: auto;
@@ -284,7 +284,7 @@ footer {
       a {
         text-decoration: none;
         color: $black;
-        font-family: $font-light;
+        font-weight: $font-light;
         @include font-size(14px);
       }
     }
@@ -317,7 +317,7 @@ footer {
       }
       a {
         align-self: flex-end;
-        font-family: $font-light;
+        font-weight: $font-light;
         @include font-size(14px);
         padding: 0px 20px 20px;
       }
@@ -344,7 +344,7 @@ footer {
   h1 {
     padding-top: 20px;
     color: white;
-    font-family: $font-light;
+    font-weight: $font-light;
     @include font-size(28px);
     @include media(700px){
     padding-top: 0px;
