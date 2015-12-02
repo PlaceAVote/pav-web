@@ -17,3 +17,11 @@
     align-content: stretch;
   }
 }
+
+.card-message {
+  h2 {
+    @include font-size(20px);
+    text-align: center;
+    margin: 30px 0;
+  }
+}

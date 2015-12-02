@@ -36,7 +36,7 @@
   		<div class="card">
   			<h1>Top Comment In Favor</h1>
   			<hr />
-        <div class="pre-loader" ng-hide="bill.topLoaded"><hr /><hr /><hr /><hr /></div>
+        <div class="pre-loader" ng-hide="bill.topLoaded"></div>
         <aside class="row-layout loaded" ng-show="bill.forComment.author">
   			<div class="user-img-border">
           <img src="{{bill.forComment.author_img_url}}" />
@@ -53,7 +53,7 @@
       <div class="card">
         <h1>Top Comment Opposed</h1>
         <hr />
-        <div class="pre-loader" ng-hide="bill.topLoaded"><hr /><hr /><hr /><hr /></div>
+        <div class="pre-loader" ng-hide="bill.topLoaded"></div>
         <aside class="row-layout loaded" ng-show="bill.againstComment.author">
           <div class="user-img-border">
             <img ng-src="{{bill.againstComment.author_img_url}}" />
@@ -122,10 +122,13 @@
     <div class="card vote-widget">
     <h1>Vote Now</h1>
     <hr />
-    <aside class="row">
+    <aside class="row" ng-cloak ng-hide="bill.hasVoted">
       <button class="btn-green l-6" ng-click="bill.showVoteModal(true)"><span class="icon-arrow-up"></span> Vote In Favor </button>
       <button class="btn-red l-6" ng-click="bill.showVoteModal(false)"><span class="icon-arrow-down"></span> Vote Against </button>
-      </aside>
+    </aside>
+      <section class="card-message" ng-show="bill.hasVoted">
+      <h2>You have already voted on this bill.</h2>
+      </section>
     </div>
 
     <div class="card current-vote-stats">

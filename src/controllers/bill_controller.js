@@ -82,6 +82,7 @@ BillController.prototype.voteOnBill = function() {
 
 BillController.prototype.voteConfirmed = function() {
   this.userVoted = true;
+  this.hasVoted = true;
   var vote = this.vote ? this.forComment : this.againstComment;
   this.generateCommentCard(vote);
   this.getVotes(this.id);
@@ -136,6 +137,7 @@ BillController.prototype.getBill = function(id) {
     }
     else {
       that.body = result;
+      that.userVotedCheck();
       that.getLegislator(result.billData.sponsor);
     }
   });
@@ -188,20 +190,14 @@ BillController.prototype.postComment = function() {
   });
 };
 
-// BillController.prototype.commentLike = function() {
-//   var that = this;
-//   console.log('hello');
-//   if(this.comment.liked) {
-//     console.log('liked')
-//     this.commentService.revokeLike();
-//   } else 
-//   if(this.comment.disliked) {
-//     this.commentService.revokeDislike();
-//   }
-//   else {
-//     this.comentService.like();
-//   }
-// };
+BillController.prototype.userVotedCheck = function() {
+  var that = this;
+    if(this.body.billData.voted_for || this.body.billData.voted_against) {
+      that.hasVoted = true;
+    } else {
+      that.hasVoted = false;
+    }
+}
 
 
 module.exports = BillController;
