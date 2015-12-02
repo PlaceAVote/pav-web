@@ -68,7 +68,14 @@
 				  span.event-label {
 				  	text-align: left;
 				  	@include font-size(12px);
-				  	a {color: $red;}
+				  	a {
+				  		color: $red; 
+				  		text-decoration: none;
+				  		transition: color 0.1s ease;
+				  		&:hover {
+				  			color: lighten($red, 10%);
+				  		}
+				  	}
 				  	color: $black;
 				  	display: inline-block;
 				  	padding-bottom: 20px;
