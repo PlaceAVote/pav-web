@@ -11,7 +11,7 @@
                 </ul>
             </div>
             <section class="s-12">
-                <div class="login-form-contaier" ng-hide="login.signup">
+                <div class="login-form-contaier" ng-hide="login.signup || login.forgot">
                     <h1>Welcome back! Sign in below</h1>
                     <form name="emailForm">
                         <label>Email</label>
@@ -24,7 +24,7 @@
                         <button ng-click="login.login(login.user, '/topics');">Sign In</button>
                     </form>
                     <div class="s-12 forgot">
-                        <p><a href="">Forgot your password? Click here</a></p>
+                        <p><a href="" ng-click="login.forgot = true">Forgot your password? Click here</a></p>
                     </div>
                 </div>
                 <div class="login-form-container" ng-show="login.signup">
