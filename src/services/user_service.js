@@ -206,6 +206,7 @@ function UserService($resource, facebookService, authService) {
         for(var i = 0; i < response.length; i++) {
           users.push(User.createFromJson(response[i]));
         }
+        console.log(users);
         return callback(undefined, users);
       };
       followersResource.getFollowers(undefined, onLoad, onError);
