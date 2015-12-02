@@ -30,7 +30,7 @@
                   <div class="event-icon event-icon-like">
                    <i class="icon-thumbs-up"></i>
                    </div> 
-                    <span class="event-label"><a>{{profile.user.first_name}} {{profile.user.lastname}}</a> upvoted a comment:</span>
+                    <span class="event-label"><a href="#/profile/{{profile.user.user_id}}">{{profile.user.first_name}} {{profile.user.lastname}}</a> upvoted a comment:</span>
                     <comment comment="event.comment"></comment>
                     </div>
                   </div>
@@ -41,7 +41,7 @@
                     <div class="event-icon event-icon-dislike">
                     <i class="icon-thumbs-down"></i>
                     </div>
-                    <span class="event-label"><a>{{profile.user.first_name}} {{profile.user.lastname}}</a> downvoted a comment:</span>
+                    <span class="event-label"><a href="#/profile/{{profile.user.user_id}}">{{profile.user.first_name}} {{profile.user.lastname}}</a> downvoted a comment:</span>
                     <comment comment="event.comment"></comment>
                     </div>
                   </div>
@@ -49,7 +49,7 @@
                   <div class="timeline-comment" ng-switch-when="comment">
                   <span class="time-stamp">timestamp</span>
                   <div class="event-card">
-                   <span class="event-label"><a>{{profile.user.first_name}} {{profile.user.lastname}}</a> in {{event.bill_id}}: {{event.bill_title}},</span>
+                   <span class="event-label"><a href="#/profile/{{profile.user.user_id}}">{{profile.user.first_name}} {{profile.user.lastname}}</a> in {{event.bill_id}}: {{event.bill_title}},</span>
                     <comment comment="event"></comment>
                     </div>
                   </div>
