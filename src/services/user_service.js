@@ -263,7 +263,6 @@ function UserService($resource, facebookService, authService) {
         return callback({message: 'Server Error', error: err});
       };
       var onLoad = function(result) {
-        console.log(result);
         return callback(undefined, true);
       };
       resource.execute(body, onLoad, onError);

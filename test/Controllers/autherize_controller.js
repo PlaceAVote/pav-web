@@ -1,7 +1,7 @@
 var expect = require('chai').expect;
 var AuthorizeController = require('../../src/controllers/autherize_controller.js');
 
-describe('Controller Base', function() {
+describe('Auth Base', function() {
   it('uses auth service to log in (uses success path)', function(done){
     var authService = {
       validateToken: function(callback) {
@@ -67,5 +67,39 @@ describe('Controller Base', function() {
      AuthorizeController.authorize();
     }
     expect(fn).to.throw(Error);
+  });
+  describe('Logout', function(){
+    it('should take in options', function(){
+      var func = function() {
+        AuthorizeController.logout(undefined);
+      }
+      expect(func).to.throw('Need options');
+    });
+    it('calls authorizer logout is has options', function(){
+      var loggedOut = false;
+      var locationCalled = false;
+
+      var authService = {
+        logout: function(callback) {
+          loggedOut = true;
+          callback();
+        },
+      };
+
+      var locationMock = {
+        path: function(root) {
+          locationCalled = true;
+        }
+      };
+
+      var options = {
+        authorizer: authService,
+        location: locationMock,
+      };
+
+      AuthorizeController.logout(options);
+      expect(loggedOut).to.eql(true);
+      expect(locationCalled).to.eql(true);
+    });
   });
 });
