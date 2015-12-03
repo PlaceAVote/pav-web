@@ -28,6 +28,7 @@ var timelineDirective = require('./directives/timeline.js');
 var timelineFollowingEventDirective = require('./directives/following_event.js');
 var timelineFollowedEventDirective = require('./directives/followed_event.js');
 var voteEventDirective = require('./directives/vote_event.js');
+var headerNav = require('./directives/header_directive.js');
 // var statusChart = require('./directives/statuschart.js');
 //thirdparty integrations
 var Facebook = require('./integrations/facebook.js');
@@ -81,12 +82,13 @@ app.factory('voteService', ['$resource', 'authService', 'userService', VoteServi
 //controllers
 app.controller('TopicRegisterCtrl',['$scope','$location', 'userService', RegisterController]);
 app.controller('SignUpCtrl',['$scope','$location', 'userService', SignUpController]);
-app.controller('LoginCtrl',['$scope','$location', 'userService', 'authService', LoginController]);
+app.controller('LoginCtrl',['$scope','$location', 'userService', 'authService', '$rootScope', LoginController]);
 app.controller('FeedCtrl', ['$scope', '$location', 'userService', 'billService', 'trendService', 'authService', FeedController]);
 app.controller('BillCtrl', ['$scope', '$routeParams', 'billService', 'legislationService', 'voteService', 'commentService', '$location', 'authService', BillController]);
-app.controller('HeaderCtrl', ['$scope', '$location', 'authService', HeaderController]);
+app.controller('HeaderCtrl', ['$rootScope', '$scope', '$location', 'authService', 'userService', HeaderController]);
 app.controller('ProfileCtrl', ['$scope', '$location', '$routeParams', 'authService', 'userService', ProfileController]);
 //directives
+app.directive('headerNav', [headerNav]);
 app.directive('mailcheck', ['$compile','$sce', mailcheck]);
 app.directive('comment', ['$compile', 'commentService', commentDirective]);
 app.directive('comments', [commentsDirective]);

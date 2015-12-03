@@ -67,6 +67,7 @@ function AuthService($resource, options) {
 
   var logout = function(callback) {
     storage.removeItem('pav');
+    auth = undefined;
     callback(undefined, true);
   };
 
