@@ -3,12 +3,12 @@ var AuthorizeController = require('./autherize_controller.js');
 function LoginCtrl($scope, $location, userService, authService, $rootScope) {
   AuthorizeController.authorize({success: '/feed', authorizer: authService, location: $location});
   $scope = $scope || {};
+  this.rs = $rootScope || {};
   this.userService = userService;
   $scope.login = this;
   this.location = $location;
   this.forgot = false;
   this.passwordSent = false;
-  this.rs = $rootScope;
   this.rs.loggedIn = false;
 
   this.user = {
