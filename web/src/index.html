@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-  <meta property="og:image" content="img/media-img.jpg" />
+  <meta property="og:image"
+content="img/media-img.jpg" />
 <meta property="og:description"
 content="Placeavote lets you read, debate and vote on every bill before congress. The difference is now your representative has the voter's voice to represent." />
 
@@ -22,8 +23,6 @@ content="Placeavote lets you read, debate and vote on every bill before congress
  ga('send', 'pageview');
 
 </script>
-  <link rel="stylesheet" type="text/css" href="http://cloud.typography.com/6645674/765688/css/fonts.css" />
-
  </head>
  <body ng-app="webPav">
 <div id="pav-wrapper" ng-controller="MenuCtrl as menu" class="wrapper s-12 m-12 l-12">
@@ -39,11 +38,8 @@ content="Placeavote lets you read, debate and vote on every bill before congress
 	<nav ng-cloak sticky-nav id="nav" >
 		<a href="#/"><img class="logo-white" src="img/logo-white.png" /></a>
 		<a href="#/"><img class="logo-color" src="img/pav-logo-color.png" /></a>
-		<ul>
-			<li><a class="btn-signup" href="#/">Sign Up</a></li>
-			<li><a class="btn-signin" href="#/login">Sign In</a></li>
-		</ul>
-		<!-- <ul ng-class="{'open': !menu.menu}">
+
+		<ul ng-class="{'open': !menu.menu}">
 			<li>
 				<a ng-click="menu.mobile()" href="#/team">Team</a>
 			</li>
@@ -56,7 +52,7 @@ content="Placeavote lets you read, debate and vote on every bill before congress
 			<li>
 				<a ng-click="menu.mobile()" href="#/contact">Contact</a>
 			</li>
-		</ul> -->
+		</ul>
 	</nav>
 	<div ng-view ng-cloak autoscroll="true">
 	</div>

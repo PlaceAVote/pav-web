@@ -30,7 +30,7 @@
           text-decoration: none;
           color: white;
           padding: 10px;
-          font-weight: $font-light;
+          font-family: $font-light;
         }
       }
     }
@@ -87,14 +87,14 @@
     color: white;
     text-align: center;
     margin-bottom: 40px;
-    font-weight: $font-normal;
+    font-family: $font-normal;
   }
 
   p {
     @include font-size(20px);
     line-height: 24px;
     color: white;
-    font-weight: $font-light;
+    font-family: $font-light;
     text-align: center;
     padding: 0px 20%;
     @include media(812px){
@@ -116,7 +116,7 @@
       @include font-size(14px);
       color: $black;
       text-align: left;
-      font-weight: $font-normal;
+      font-family: $font-normal;
       padding: 0 0 10px 0;
       margin: 0;
     }
@@ -183,7 +183,7 @@
           @include media(480px){
           text-align: left;
           }
-          font-weight: $font-normal;
+          font-family: $font-normal;
           padding: 5px 0px 0px 0px;
           margin: 0;
           width: 100%;
@@ -194,7 +194,7 @@
           padding: 5px 0px 0px 0px;
           color: $grey;
           text-align: center;
-          font-weight: $font-normal;
+          font-family: $font-normal;
           @include font-size(12px);
           line-height: 18px;
           @include media(480px){
@@ -268,7 +268,7 @@
       top: 25px;
       left: 40px;
       color: $black;
-      font-weight: $font-light;
+      font-family: $font-light;
       @include font-size(14px);
 
       // margin-right: auto;
@@ -296,7 +296,7 @@
         a {
           text-decoration: none;
           color: $black;
-          font-weight: $font-light;
+          font-family: $font-light;
           @include font-size(14px);
         }
       }

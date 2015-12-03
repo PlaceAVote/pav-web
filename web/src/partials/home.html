@@ -3,17 +3,28 @@
 	<div class="intro">
 		<section ng-switch on="home.mobileemail">		
 			<h1>
-				Read, debate and vote on every bill before congress.
+				Democracy is built on <span>real</span> representation
 			</h1>
-			<h2>A direct link between constituents and their elected representatives in Congress</h2>
-			<div class="col m-12 l-6">
-			<a class="signup-facebook" value="Sign up with Facebook"><img src="img/logo-facebook.svg" alt="Sign up with Facebook">Sign up with Facebook</a>
-			</div>
-			<div class="col m-12 l-6">
-			<a class="signup-email" value="Sign up with Facebook">Sign up with Email</a>
-			</div>			
+			<h2>Placeavote lets you read, debate and vote on every bill before congress. The difference is now your representative knows how to represent you.</h2>
+			<a ng-click="home.mobileemail = false" ng-show="home.mobileemail" class="signup-mobile">Sign Up</a>
+				<div ng-hide="home.mobileemail" class="mobile-email">
+				<form action="//placeavote.us3.list-manage.com/subscribe/post?u=88ef7ecceaeb0c63ba6c4fa76&amp;id=253af5cdb2" method="post" target="_blank" novalidate>
+				<div>
+				<input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+				<input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button">
+				</div>
+				</form>
+				</div>
+			<h3>
+				Available on the web, iOS & Android
+			</h3>
 		</section>
-		
+		<div class="phone">
+		<video autoplay loop poster="img/vidfallback.jpg">
+  		<source src="img/app-vid.mp4" type="video/mp4">
+		</video>
+		<img src="img/phone-wrap.png" />
+		</div>	
 	</div>
 	<div class="home-box">
 	<section>
@@ -73,39 +84,24 @@
 
 <!--End mc_embed_signup-->
 	</div>
-		<footer id="footer">
-			<section>
-			<div class="row">
-			<div class="col m-6 l-6">
-				<div class="left">
-				<img src="img/placeavote-logo-color.svg" alt="Placeavote Logo Color SVG">
-				<br />
-				<p>&copy; Placeavote 2015</p>
-				</div>
-			</div>
-	<div class="col m-6 l-2">
-		<span>Company</span>
-		<ul>
-			<li><a href="#/team">Team</a></li>
-			</ul>
-	</div>
-	<div class="col m-6 l-2">
-		<span>Support</span>
-		<ul>
-			<li><a href="#/contact">Contact</a></li>
-			<li><a href="#/terms-of-service">Terms of Service</a></li>
-			<li><a href="#/privacy-policy">Privacy Policy</a></li>
-			</ul>
-	</div>
-	<div class="col m-6 l-2">
-		<span>Social</span>
-		<ul>
-			<li><a href="mailto:hello@placeavote.com">Email</a></li>
-			<li><a href="http://facebook.com/placeavote"><img class="social" src="img/logo-facebook-footer.svg" alt="Contact us on Facebook"></a></li>
-			<li><a href="https://twitter.com/placeavote"><img class="social" src="img/logo-twitter-bird.svg" alt="Contact us on Twitter"></a></li>
-			</ul>
-	</div>
-</div>
-</section>
+		<footer class="l-12" id="footer">
+	<span style="padding-bottom: 20px;">Placeavote 2015</span>
+	<ul style="display: none;">
+		<li>
+			<a href="#">Sign Up</a>
+		</li>
+
+		<li>
+			<a href="#">Sign In</a>
+		</li>
+
+		<li>
+			<a href="#">Press</a>
+		</li>
+
+		<li>
+			<a href="#">Jobs</a>
+		</li>
+	</ul>
 	</footer>
 </div>

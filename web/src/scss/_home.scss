@@ -1,57 +1,68 @@
+
+
 .home {
   position: relative;
-  .intro a {
-    margin-top: 10px;
+  .mobile-email {
+    display: none;
+    @include media(600px) {
+      display: block;
+    }
+    &.ng-hide-remove {
+      transition: all 0.3s ease;
+      transition-delay: 0.3s;
+      opacity: 1;
+    }
+    &.ng-hide {
+      opacity:0;
+    }
+    input[type="email"] {
+     margin-bottom: 10px;
     text-decoration: none;
     height: 50px;
+    border-radius: 3px;
+    border: 1px solid $green;
+    background-color: lighten($greylight, 10%);
     line-height: 50px;
-    color: $white;
-    font-size: 16px;
-    font-weight: $font-normal;
-    display:inline-block;
-    transition: all 0.2s ease;
-    border-radius: $radius;
-    cursor: pointer;
-    outline: none;
+    color: $black;
+    font-size: 18px;
     text-align: center;
-    width:300px; 
-    -webkit-box-shadow: 0px 5px 4px -3px rgba(0,0,0,0.17);
-    -moz-box-shadow: 0px 5px 4px -3px rgba(0,0,0,0.17);
-    box-shadow: 0px 5px 4px -3px rgba(0,0,0,0.17);
-    img {
-    vertical-align: text-bottom;
-    padding-right: 10px;
-    width: 20px} 
+    font-family: $font-light;
+    width: 100%;
+    outline: none;
   }
-   a:hover {
-    -webkit-box-shadow: 0px 5px 6px -3px rgba(0,0,0,0.32);
-    -moz-box-shadow: 0px 5px 6px -3px rgba(0,0,0,0.32);
-    box-shadow: 0px 5px 6px -3px rgba(0,0,0,0.32);
-    text-shadow: 1px 1px 1px rgba(150, 150, 150, 0.8);
+  input[type="submit"] {
+      margin-bottom: 20px;
+      text-decoration: none;
+      height: 50px;
+      border: 1px solid darken($green, 20%);
+      background-color: $green;
+      line-height: 50px;
+      color: white;
+      font-size: 18px;
+      text-align: center;
+      font-family: $font-light;
+      width: 100%;
+      transition: all 0.2s ease;
+      border-radius: 5px;
+      cursor: pointer;
+      outline: none;
+      @include media(600px){
+      display: inline-block;
+      }
+
+      &:hover {
+        background-color: lighten($green, 5%);
+      }
   }
-  .signup-facebook {
-                    background-color: $green;
-                    border: 1px solid darken($green, 20%);
-                   }
-  .signup-email   {
-                    background-color: rgba(0, 0, 0, 0.0);
-                    border: 2px solid $white;
-                  }
-//  label {
-//    margin-bottom: 20px;
-//    @include font-size(28px);
-//    display: block;
-//    text-align: center;
-//    color: $black;
-//    font-weight: $font-light;
-//  }
+  }
   .intro {
     z-index: 1;
+    max-height: 545px;
     overflow: hidden;
     position: relative;
     top: 0;
     background: #87e0fd;
-    max-height:500px;
+
     /* Old browsers */
     background: -moz-linear-gradient(-45deg, #87e0fd 0%, #5b7da8 0%, #746898 100%);
 
@@ -73,51 +84,52 @@
     /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#87e0fd', endColorstr='#746898', GradientType=1 );
 
+    /* IE6-9 fallback on horizontal gradient */
     @media screen and (max-device-width: 900px), screen and (max-width: 900px) {
     display: flex;
     flex-direction: column;
-    max-height: 545px;
+    max-height: none;
+    height: auto;
     }
-    section {
-              text-align:center;
-              padding:10% 10%;
-      @include media(1200px) {
 
+    section {
+
+      @include media(1200px) {
+        max-width: 420px;
       }
       @media screen and (max-device-width: 900px), screen and (max-width: 900px) {
       padding-top: 70px;
       max-width: 100%;
+      padding-right: 40px;
+      padding-left: 40px;
       color: white;
       margin-bottom: -105px;
       }
-      padding-top: 125px;
+      max-width: 745px;
+      padding-top: 200px;
+      padding-left: 40px;
       color: white;
 
       h1 {
-        @include font-size(50px);
-        font-weight: $font-normal;
-        line-height: 72px;
-        padding:0% 5% 2% 5%;
-            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.23);
-            @media screen and (max-device-width: 600px), screen and (max-width: 600px) {
-     font-size: 2.2rem;
-    font-weight: 400;
-    line-height: 45px;
-    }
+        @include font-size(40px);
+        font-family: $font-normal;
+        line-height: 45px;
+        padding-bottom: 30px;
+
+        span {
+          font-family: $font-normalitalic;
+        }
       }
 
-
-         
       h2 {
         @include font-size(18px);
         line-height: 20px;
-        font-weight: $font-light;
+        font-family: $font-light;
         padding-bottom: 20px;
-        opacity:0.9;
-        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.23)
       }
+
       h3 {
-        font-weight: $font-light;
+        font-family: $font-light;
         @include font-size(11px);
       }
     }
@@ -130,6 +142,7 @@
       &.ng-hide {
         opacity: 0;
       }
+      display: none;
       margin-bottom: 20px;
       text-decoration: none;
       height: 50px;
@@ -139,7 +152,7 @@
       color: white;
       font-size: 18px;
       text-align: center;
-      font-weight: $font-light;
+      font-family: $font-light;
       width: 100%;
       transition: all 0.2s ease;
       border-radius: 5px;
@@ -226,13 +239,13 @@
       h1 {
         @include font-size(24px);
         padding-bottom: 40px;
-        font-weight: $font-bold;
+        font-family: $font-bold;
       }
 
       p {
         @include font-size(22px);
         padding-bottom: 40px;
-        font-weight: $font-light;
+        font-family: $font-light;
         line-height: 28px;
       }
     }
@@ -253,7 +266,7 @@
       align-self: center;
       text-align: center;
       color: white;
-      font-weight: $font-normalitalic;
+      font-family: $font-normalitalic;
       @include font-size(20px);
       line-height: 24px;
       padding-bottom: 20px;
@@ -274,7 +287,7 @@
       color: $black;
       text-align: center;
       @include font-size(30px);
-      font-weight: $font-light;
+      font-family: $font-light;
 
       @media screen and (max-device-width: 900px), screen and (max-width: 900px) {
       padding: 50px 20px;
@@ -321,7 +334,7 @@
           color: $black;
           text-align: center;
           @include font-size(22px);
-          font-weight: $font-normal;
+          font-family: $font-normal;
           padding-bottom: 20px;
         }
 
@@ -330,7 +343,7 @@
           text-align: center;
           @include font-size(18px);
           line-height: 24px;
-          font-weight: $font-light;
+          font-family: $font-light;
         }
       }
     }
@@ -359,7 +372,7 @@
       align-items:center;
       justify-content: center;
       h1 {
-        font-weight: $font-light;
+        font-family: $font-light;
         text-align: center;
         margin-bottom: 40px;
         @include font-size(28px);
@@ -379,7 +392,7 @@
         color: white;
         font-size: 18px;
         text-align: center;
-        font-weight: $font-light;
+        font-family: $font-light;
         width: 50%;
         @media screen and (max-device-width: 900px), screen and (max-width: 900px) {
         width: 80%;
@@ -420,39 +433,31 @@
   footer {
     // display: flex;
     // flex-direction: column;
-    float:left;
-    width:100%;
-    height: 200px;
-    background:$white;
+    height: 60px;
     position: relative;
     display: block;
+
     @media screen and (max-device-width: 900px), screen and (max-width: 900px) {
-    display: block;
+    display: flex;
     position: initial;
     flex-direction: column;
     height: auto;
-    text-align: center;
     }
-    .left {
-      padding:30px 40px 0;
-    }
-    p {
-      color:$grey;
-      @include font-size(14px);
-    }
+
     span {
+      position: absolute;
+      display: block;
+
       @media screen and (max-device-width: 900px), screen and (max-width: 900px) {
+      position: initial;
       align-self: center;
-      text-align: center;
       padding-top: 30px;
       }
-      padding: 30px 0px 0px;
-      position: initial;
-      text-align:left;
+      top: 25px;
+      left: 40px;
       color: $black;
-      font-weight: $font-bold;
-      text-transform: uppercase;
-      @include font-size(13px);
+      font-family: $font-light;
+      @include font-size(14px);
 
       // margin-right: auto;
     }
@@ -460,48 +465,28 @@
     ul {
       padding-top: 20px;
       padding-bottom: 20px;
-      position:initial;
-      text-align:left;
+      position: absolute;
+
       @media screen and (max-device-width: 900px), screen and (max-width: 900px) {
-      display: inline;
+      display: flex;
       position: initial;
-      padding: 20px;
-      text-align: center;
-      font-weight:$font-normal;
+      align-self: center;
       }
+      right: 25px;
+
       // display: flex;
       // flex-direction: row;
       // margin-left: auto;
       li {
-        display: block;
-        padding: 0px 0 15px;;
+        display: inline-block;
+        padding: 0px 15px;
+
         a {
           text-decoration: none;
-          color: $blue;
-          font-weight: $font-light;
+          color: $black;
+          font-family: $font-light;
           @include font-size(14px);
-          &:hover {
-            color:$red;
-            box-shadow:none;
-            text-shadow:none;
-          }
         }
-      }
-    }
-    img {
-      width:200px;
-      padding-bottom: 10px;
-      @media screen and (max-device-width: 600px), screen and (max-width: 600px) {
-      width:120px;
-      text-align:center;
-      }
-      &.social {
-        width:15px;
-        margin-left:-5px;
-        padding-bottom:0;
-        &:hover {
-        opacity:0.8;
-      }
       }
     }
   }
@@ -556,7 +541,7 @@
     color: $black;
     font-size: 18px;
     text-align: center;
-    font-weight: $font-light;
+    font-family: $font-light;
     width: 100%;
 
     @media screen and (max-device-width: 900px), screen and (max-width: 900px) {
@@ -575,7 +560,7 @@
     display: block;
     text-align: center;
     color: $black;
-    font-weight: $font-light;
+    font-family: $font-light;
   }
 
   input[type="submit"] {
@@ -587,7 +572,7 @@
     color: white;
     font-size: 18px;
     text-align: center;
-    font-weight: $font-light;
+    font-family: $font-light;
     width: 100%;
 
     @media screen and (max-device-width: 900px), screen and (max-width: 900px) {
