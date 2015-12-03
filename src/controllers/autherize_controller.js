@@ -4,19 +4,30 @@ function AuthorizeController(){}///
  ** @constructor
  ** @param {object} options - options contians 'autherizer', 'location', 'success' and 'error'
 **/
-AuthorizeController.authorize = function(options){
+AuthorizeController.authorize = function(options) {
   var options = options || {};
   options.authorizer.validateToken(function(result){
-    if(result) {
-      if(options.success) {
+    if (result) {
+      if (options.success) {
         options.location.path(options.success);
       }
     }
     else {
-      if(options.error) {
+      if (options.error) {
         options.location.path(options.error);
       }
     }
+  });
+};
+
+AuthorizeController.logout = function(options) {
+  var options = options || {};
+  if (!options.location || !options.authorizer) {
+    throw 'Need options';
+  }
+
+  options.authorizer.logout(function(err, result) {
+    options.location.path('/');
   });
 };
 

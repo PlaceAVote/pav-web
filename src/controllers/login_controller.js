@@ -1,14 +1,15 @@
 var AuthorizeController = require('./autherize_controller.js');
 
-function LoginCtrl($scope, $location, userService, authService) {
+function LoginCtrl($scope, $location, userService, authService, $rootScope) {
   AuthorizeController.authorize({success: '/feed', authorizer: authService, location: $location});
   $scope = $scope || {};
+  this.rs = $rootScope || {};
   this.userService = userService;
   $scope.login = this;
   this.location = $location;
   this.forgot = false;
   this.passwordSent = false;
-  // this.signup = false;
+  this.rs.loggedIn = false;
 
   this.user = {
     email: '',
@@ -25,6 +26,7 @@ LoginCtrl.prototype.loginWithFacebook = function(){
       that.location.path("/onboarding");
     }
     else {
+      that.rs.loggedIn = true;
       that.location.path("/feed");
     }
   });
@@ -55,6 +57,7 @@ LoginCtrl.prototype.login = function(u, hash) {
           that.forgot = true;
         }
       } else {
+        that.rs.loggedIn = true;
         that.location.path("/feed");
       }
     });

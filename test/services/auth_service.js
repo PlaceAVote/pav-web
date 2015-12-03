@@ -116,6 +116,17 @@ describe('ValidateToken', function(){
       done();
     });
   });
+  describe('logout', function(){
+    it('calls callback when removed token', function(done) {
+      options.window.localStorage.storage = [{'pav': 'TOKEN'}];
+      var subject = new AuthService(undefined, options);
+      subject.logout(function(err, result) {
+        expect(err).to.eql(undefined);
+        expect(result).to.eql(true);
+        done();
+      });
+    });
+  });
 });
 
 

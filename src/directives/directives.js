@@ -1,13 +1,7 @@
 var isArray = require('../utils/is_array.js');
 
 angular.module('pavDirectives', []).
- directive('headerNav', function() {
-         return {
-             restrict: 'E',
-             templateUrl: 'partials/header.html'
-         };
-     })
-     .directive('statusChart', function() {
+     directive('statusChart', function() {
          function link(scope, el) {
             //moved this here so it was in scope.
            //TODO it should be injected in. to do so, you may have
