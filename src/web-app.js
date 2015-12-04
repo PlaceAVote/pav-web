@@ -23,6 +23,7 @@ var mailcheck = require('./directives/mailcheck.js');
 var pavDirectives = require('./directives/directives.js');
 var commentsDirective = require('./directives/comments.js');
 var commentDirective = require('./directives/comment.js');
+var commentEventDirective = require('./directives/comment_event.js');
 var bannerDirective = require('./directives/banner.js');
 var timelineDirective = require('./directives/timeline.js');
 var timelineFollowingEventDirective = require('./directives/following_event.js');
@@ -91,6 +92,7 @@ app.controller('ProfileCtrl', ['$scope', '$location', '$routeParams', 'authServi
 app.directive('headerNav', [headerNav]);
 app.directive('mailcheck', ['$compile','$sce', mailcheck]);
 app.directive('comment', ['$compile', 'commentService', commentDirective]);
+app.directive('commentEvent', ['$compile', 'commentService', commentEventDirective]);
 app.directive('comments', [commentsDirective]);
 app.directive('banner', [bannerDirective]);
 app.directive('timeline', [timelineDirective]);

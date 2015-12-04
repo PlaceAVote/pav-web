@@ -8,6 +8,7 @@ function Comment(options) {
   this.body = options.body;
   this.has_children = options.has_children;
   this.bill_id = options.bill_id;
+  this.bill_title = options.bill_title;
   this.score = options.score;
   this.timestamp = options.timestamp;
   this.id = options.id || options.comment_id;

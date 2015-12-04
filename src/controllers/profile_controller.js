@@ -39,7 +39,6 @@ ProfileController.prototype.populateTimeline = function() {
   this.userService.getUserTimeline(this.id, function(err, result) {
     if (!err) {
       that.timeline = result;
-      console.log(that.timeline);
     }
   });
 };

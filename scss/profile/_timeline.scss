@@ -96,11 +96,37 @@
 					  }
 					}
 				  .comment-container {
-				  	// display: block;
+				  	.event-bill-title {
+				  		margin-top: 0;
+				  		a {
+				  			@include medium();
+				  			text-decoration: none;
+				  			color: $blue;
+				  			font-style: italic;
+				  		}
+				  	}
+				  	.event-comment-body {
+				  		@include font-size(12px);
+				  		margin-bottom: 20px;
+				  	}
+				  	.reply-actions {
+				  		float: none;
+				  		display: flex;
+				  		justify-content: flex-end;
+				  		margin-bottom: 20px;
+				  		margin-top: 0;
+				  	}
+				  	.reply-show-hide {
+				  		width: 100%;
+				  	}
+				  	.comment-reply {
+				  		padding-left: 0;
+				  	}
 				  	width: 100%;
 				  	span {
 				  		padding-bottom: 0;
 				  	}
+
 				  	.comment {
 				  		padding-right: 0;
 					  	span {
