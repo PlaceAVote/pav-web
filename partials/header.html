@@ -8,10 +8,10 @@
 	<section class="notification">
 		<img style="cursor: pointer;" src="img/notification.svg" />
 		<img ng-click="header.dropDown()" class="user-img" ng-src="{{header.user.img_url}}"/>
-    <div ng-mouseleave="header.hideDropDown()" ng-show="header.showDropDown">
+    <div class="dropdown-container" ng-mouseleave="header.hideDropDown()" ng-show="header.showDropDown">
       <ul>
         <li ng-click="header.toProfile()">
-          Profile
+         <img class="user-img-inside" ng-src="{{header.user.img_url}}"/> View Profile
         </li>
         <li ng-click="header.logout()">
           Logout
