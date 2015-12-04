@@ -14,9 +14,9 @@
     flex-direction: row;
     margin-bottom: 20px;
     .user-img-border {
+      max-height: 55px;
       @include media(480px) {
         width:46px;
-        // height: 40px;
       }
     }
     .top-comment-body {

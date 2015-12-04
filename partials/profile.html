@@ -7,20 +7,21 @@
           <timeline timeline="profile.timeline.timeline" profile="profile"></timeline>
         </div>
       <div class="col m-12 l-4">
-      	<div class="card">
+      	<div class="card followers">
       		<h1>Followers</h1>
         	<hr />
-          <div class="profile-followers">
+          
             <div class="comment-container" ng-repeat="follower in profile.followers">
               <section class="comment">
               <img src="{{follower.img_url}}" class="user-img-border" alt="{{follower.first_name}}">
               <div class="top-comment-body">
               <h2><a href="#/profile/{{follower.user_id}}">{{follower.first_name}} {{follower.last_name}}</a></h2>
+              <p>{{follower.total_follers}}</p>
               <!-- TODO: Don't have how many followers yet returned from db -->
             </div>
             </section>
             </div>
-          </div>
+         
         </div>
       </div>
     </div>

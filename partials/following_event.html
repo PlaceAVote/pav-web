@@ -1,3 +1,7 @@
-<div class="timeline-following">
-  <span>{{user.first_name}} {{user.last_name}}</span> followed the following people, <a ng-click="event.loadProfile(event.following_id, location)">{{event.first_name}} {{event.last_name}} </a>
+<div class="event-follow event-card">
+  <div class="event-icon event-icon-add">
+   <i class="icon-add"></i>
+   </div> 
+
+  <span class="event-label"><a href="#/profile/{{user.user_id}}">{{user.first_name}} {{user.last_name}}</a> followed <a ng-click="event.loadProfile(event.following_id, location)">{{event.first_name}} {{event.last_name}} </a></span>
 </div>
