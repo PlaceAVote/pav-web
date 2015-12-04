@@ -77,12 +77,15 @@ header {
       img {
         height: 30px;
       }
+      position: relative;
       .dropdown-container {
         background:$white;
         border-radius:3px;
         font-size:12px;
         width:130px;
-        position:relative;
+        top: 44px;
+        right: 0px;
+        position:absolute;
         @include shadow();
         border:1px solid $grey;
         ul {
@@ -105,9 +108,6 @@ header {
   width: 0;
   position: absolute;
   pointer-events: none;
-  @include media(600px) {
-    display: none;
-  }
 }
 
 .dropdown-container:before {
@@ -129,7 +129,7 @@ header {
         cursor: pointer;
         height: 30px;
         border-radius: 3px;
-        border:1px solid darken($blue, 90%);
+        border:1px solid darken($blue, 25%);
         @include shadow();
         &:hover {
           -webkit-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.2);
