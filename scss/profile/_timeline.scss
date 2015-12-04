@@ -42,8 +42,8 @@
 			.time-stamp {
 				display:inline-block;
 				width: 100%;
-				@include font-size(12px);
-				margin-bottom: 3px;
+				@include font-size(10px);
+				margin-bottom: 5px;
 				@include media(600px) {
 					position: relative;
 					text-align: center;
