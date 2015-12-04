@@ -48,7 +48,6 @@ ProfileController.prototype.populateFollowers = function() {
   this.userService.getFollowers(this.id, function(err, result) {
     if (!err) {
       that.followers = result;
-      console.log(that.followers);
     }
   });
 };
