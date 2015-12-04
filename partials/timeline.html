@@ -25,7 +25,7 @@
                   </div>
                   <!-- comment liked -->
                   <div class="timeline-likeComment" ng-switch-when="likecomment">
-                  <span class="time-stamp">{{event.timestamp | date:'medium'}}</span>
+                  <span class="time-stamp">{{event.comment.timestamp | date:'medium'}}</span>
                   <div class="event-card">
                   <div class="event-icon event-icon-like">
                    <i class="icon-thumbs-up"></i>
@@ -36,7 +36,7 @@
                   </div>
                   <!-- comment disliked -->
                   <div class="timeline-dislikeComment" ng-switch-when="dislikecomment">
-                    <span class="time-stamp">{{event.timestamp | date:'medium'}}</span>
+                    <span class="time-stamp">{{event.comment.timestamp | date:'medium'}}</span>
                     <div class="event-card">
                     <div class="event-icon event-icon-dislike">
                     <i class="icon-thumbs-down"></i>
