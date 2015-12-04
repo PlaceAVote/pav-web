@@ -69,6 +69,8 @@
 				  	text-align: left;
 				  	@include font-size(12px);
 				  	a {
+				  		font-style: none;
+				  		@include light();
 				  		color: $red; 
 				  		text-decoration: none;
 				  		transition: color 0.1s ease;
@@ -80,6 +82,15 @@
 				  	display: inline-block;
 				  	padding-bottom: 20px;
 				  }
+			  	.event-bill-title {
+				  		margin-top: 0;
+				  		a {
+				  			@include medium();
+				  			text-decoration: none;
+				  			color: $blue;
+				  			font-style: italic;
+				  		}
+				  	}
 				  &.event-vote {
 				  	@include font-size(12px);
 				  	padding-bottom: 20px;
@@ -96,15 +107,7 @@
 					  }
 					}
 				  .comment-container {
-				  	.event-bill-title {
-				  		margin-top: 0;
-				  		a {
-				  			@include medium();
-				  			text-decoration: none;
-				  			color: $blue;
-				  			font-style: italic;
-				  		}
-				  	}
+				  
 				  	.event-comment-body {
 				  		@include font-size(12px);
 				  		margin-bottom: 20px;
