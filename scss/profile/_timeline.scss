@@ -88,11 +88,13 @@
 				  	}
 				  }
 				  &.event-follow {
-				  	text-align: center;
-				  	span {
-				  		text-align: center;
-				  	}
-				  }
+					  	@include media(600px) {
+					  	text-align: center;
+					  	span {
+					  		text-align: center;
+					  	}
+					  }
+					}
 				  .comment-container {
 				  	// display: block;
 				  	width: 100%;
