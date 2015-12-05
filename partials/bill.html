@@ -42,7 +42,7 @@
           <img src="{{bill.forComment.author_img_url}}" />
   			</div>
   			<div class="top-comment-body" ng-show="bill.hasForComment">
-          <h2><a href="#/profile/{{bill.forComment.author}}">{{bill.forComment.author_first_name}}</a></h2> <section class="comment-vote"><span>{{bill.forComment.score}}</span><i class="icon-thumbs-up thumbs" ng-click="bill.forComment.like(bill.commentService)"></i><i class="icon-thumbs-down thumbs" ng-click="bill.forComment.dislike(bill.commentService)"></i></section>
+          <h2><a href="#/profile/{{bill.forComment.author}}">{{bill.forComment.author_first_name}}</a></h2> <section class="comment-vote"><span ng-class="{'score-down': comment.score < 0, 'score-none': bill.forComment.score == 0}">{{bill.forComment.score}}</span><i class="icon-thumbs-up thumbs" ng-class="{'score-up': bill.forComment.liked == true}" ng-click="bill.forComment.like(bill.commentService)"></i><i class="icon-thumbs-down thumbs" ng-class="{'score-down': bill.forComment.disliked == true}" ng-click="bill.forComment.dislike(bill.commentService)"></i></section>
           <p>{{bill.forComment.body}}</p>
   			</div>
         <div ng-show="bill.noForComment">
@@ -59,7 +59,7 @@
             <img ng-src="{{bill.againstComment.author_img_url}}" />
           </div>
           <div class="top-comment-body" ng-show="bill.hasAgainstComment">
-            <h2><a href="#/profile/{{bill.againstComment.author}}">{{bill.againstComment.author_first_name}}</a></h2> <section class="comment-vote opposed"><span ng-class="{'red': bill.againstComment.score < 0}">{{bill.againstComment.score}}</span><i class="icon-thumbs-up thumbs" ng-click="bill.againstComment.like(bill.commentService)"></i><i class="icon-thumbs-down thumbs" ng-click="bill.againstComment.dislike(bill.commentService)"></i></section>
+            <h2><a href="#/profile/{{bill.againstComment.author}}">{{bill.againstComment.author_first_name}}</a></h2> <section class="comment-vote opposed"><span ng-class="{'red': bill.againstComment.score < 0}">{{bill.againstComment.score}}</span><i class="icon-thumbs-up thumbs" ng-class="{'score-up': bill.againstComment.liked == true}" ng-click="bill.againstComment.like(bill.commentService)"></i><i class="icon-thumbs-down thumbs" ng-class="{'score-down': bill.againstComment.disliked == true}" ng-click="bill.againstComment.dislike(bill.commentService)"></i></section>
             <p>{{bill.againstComment.body}}</p>
           </div>
           <div class="top-comment-body" ng-show="bill.noAgainstComment">
