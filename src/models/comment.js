@@ -108,7 +108,6 @@ Comment.prototype.like = function(service) {
     });
   }
 
-
   if(!this.liked && !this.scoring) {
       that.scoring = true;
       service.like(this.id, this.bill_id, function(err, response) {
@@ -148,7 +147,7 @@ Comment.prototype.dislike = function(service) {
     });
   }
 
-  
+
     if (this.liked && !this.scoring) {
       that.scoring = true;
       service.revoke(this.id, this.bill_id, 'like', function(err, response) {
