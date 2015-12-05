@@ -129,9 +129,9 @@ module.exports = {
     endpoint : urls.USER + '/user',
     authorize: urls.USER + '/user/token/validate?token=',
     profile: {
-      fromId: function(id) {
-        return urls.USER + '/user/' + id + '/profile'
-      },
+    fromId: function(id) {
+      return urls.USER + '/user/' + id + '/profile'
+    },
     },
     timeline: function(id) {
       return urls.USER + '/user/' + id + '/timeline'
