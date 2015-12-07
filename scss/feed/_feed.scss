@@ -127,18 +127,12 @@
   display: flex;
   flex-direction: row;
   flex-grow: 1;
-  // align-content: stretch;
   flex-shrink: 0;
-  // @include media(900px) {
-  //   flex-direction: column;
-  // }
   img.logo-full-color {
-    // display: flex;
     height: 100px;
     @include media(900px) {
       display: none;
     }
-    // justify-content: center;
   }
 
   img.close {
