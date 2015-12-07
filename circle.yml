@@ -1,6 +1,4 @@
 dependencies:
-  override:
-    - npm install
   post: 
     - "sudo pip install awscli==1.7.43"
 deployment: 
