@@ -127,15 +127,12 @@
   display: flex;
   flex-direction: row;
   flex-grow: 1;
-  align-content: stretch;
   flex-shrink: 0;
-  img {
-    display: flex;
+  img.logo-full-color {
     height: 100px;
-    @include media(560px) {
+    @include media(900px) {
       display: none;
     }
-    // justify-content: center;
   }
 
   img.close {
@@ -148,7 +145,7 @@
 
   section {
     padding-left: 40px;
-    @include media(560px) {
+    @include media(900px) {
       padding-left: 0;
     }
     display: flex;
