@@ -88,7 +88,7 @@
 		<div class="card bill-description">
 			<h1>Bill Summary</h1>
 			<hr />
-      <p>{{bill.body.billData.summary}}</p>
+      <p ng-bind-html="bill.body.billData.summary"></p>
       <div ng-click="bill.readmore = true" class="readmore">
         <p>Read More</p>
       </div>
@@ -199,7 +199,7 @@
         <img ng-click="bill.readmore = false" class="close" src="img/close-widget-black.png" />
         <h1>{{bill.body.getTitle()}}</h1>
         <section>
-        <p>{{bill.body.billData.summary}}</p>
+        <p ng-bind-html="bill.body.billData.summary"></p>
         </section>
         </div>
     </section>

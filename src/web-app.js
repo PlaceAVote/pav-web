@@ -37,7 +37,7 @@ var Facebook = require('./integrations/facebook.js');
 var TempBillResource = require('./temp/mockBillResource.js');
 var TempTrendResource = require('./temp/mockTrendResource.js');
 
-var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), 'pavDirectives']);
+var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'pavDirectives']);
 
 
 app.config(['$routeProvider', function($routeProvider) {
