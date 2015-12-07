@@ -12,9 +12,14 @@ describe("SignUpController", function(){
             return {}
         }
     }
+    function rs() {
+        return {
+        loggedIn : false
+        }
+    }
 	it("has a user object", function(){
     var mockUS = new mockUserService();
-	var subject = new SignUpController(undefined, undefined, mockUS);
+	var subject = new SignUpController(rs, undefined, undefined, mockUS);
 	var blankUser = {
 		first_name : "",
 		last_name : "",
@@ -44,7 +49,7 @@ describe("SignUpController", function(){
              }
         }
         var mockUS = new mockUserService();
-        var subject = new SignUpController(undefined, undefined, mockUS);
+        var subject = new SignUpController(rs, undefined, undefined, mockUS);
         subject.test();
      });
     it("prepopulates user data from service if user data is found", function() {
@@ -61,7 +66,7 @@ describe("SignUpController", function(){
             };
         }
         var mockUS = new mockUserService();
-        var subject = new SignUpController(undefined, undefined, mockUS);
+        var subject = new SignUpController(rs, undefined, undefined, mockUS);
         expect(subject.additionalInformation.first_name).to.eql("paul");
         expect(subject.additionalInformation.last_name).to.eql("barber");
         expect(subject.additionalInformation.dob).to.eql(new Date("04/01/1990"));
@@ -91,7 +96,7 @@ describe("SignUpController", function(){
         };
         var l = new location();
         var mockUS = new mockUserService();
-        var subject = new SignUpController(undefined, l, mockUS);
+        var subject = new SignUpController(rs, undefined, l, mockUS);
         subject.test();
     });
 });

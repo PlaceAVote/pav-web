@@ -1,5 +1,5 @@
 var countryCodes = require('../utils/countrycodes.json');
-function SignUpCtrl ($scope, $location, userService, authService) {
+function SignUpCtrl ($rootScope, $scope, $location, userService, authService) {
 	$scope = $scope || {};
 	$scope.signup = this;
 	this.userService = userService;
@@ -13,9 +13,12 @@ function SignUpCtrl ($scope, $location, userService, authService) {
         "country_code": "USA"
     };
 	this.country = countryCodes;
+    this.rs = $rootScope;
+    this.loggedIn = $rootScope.loggedIn;
     if(!userService.user) {
         this.location.path('/');
     }
+
 }
 
 SignUpCtrl.prototype.test = function() {
@@ -36,7 +39,7 @@ SignUpCtrl.prototype.test = function() {
                 }
             }
             else {
-                //move page
+                that.rs.loggedIn = true;
                 that.location.path("/feed");
             }
         });
