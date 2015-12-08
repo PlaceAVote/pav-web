@@ -3,6 +3,9 @@ var expect = require('chai').expect;
 var User = require('../../src/models/user.js');
 
 describe("FeedController", function() {
+    // this.welcomeMessage = function() {
+
+    // };
     function mockAuthService(){
       this.validateToken = function(callback) {
         return callback(true);
@@ -32,12 +35,22 @@ describe("FeedController", function() {
     };
     it("adds banner to scope", function(){
         var scope = {};
-        var subject = new FeedController(scope, {},new mockUserService(), new mockBillService(), new mockTrendService(), new mockAuthService());
+        var rootScope = {
+          user: {
+            newUser: true
+          }
+        };
+        var subject = new FeedController(scope, {},new mockUserService(), new mockBillService(), new mockTrendService(), new mockAuthService(), rootScope);
         expect(!!scope.banner).to.eql(true);
     });
     it("getTrends returns trends array", function(done){
       var scope = {};
-      var subject = new FeedController(scope, {}, new mockUserService(), new mockBillService(), new mockTrendService(), new mockAuthService());
+      var rootScope = {
+          user: {
+            newUser: true
+          }
+        };
+      var subject = new FeedController(scope, {}, new mockUserService(), new mockBillService(), new mockTrendService(), new mockAuthService(), rootScope);
       subject.getTrends(function(err, response){
         expect(err).to.eql(undefined);
         expect(!!response).to.eql(true);
@@ -46,7 +59,12 @@ describe("FeedController", function() {
     });
     it("getBills returns bills array", function(done){
       var scope = {};
-      var subject = new FeedController(scope, {}, new mockUserService(), new mockBillService(), new mockTrendService(), new mockAuthService());
+      var rootScope = {
+          user: {
+            newUser: true
+          }
+        };
+      var subject = new FeedController(scope, {}, new mockUserService(), new mockBillService(), new mockTrendService(), new mockAuthService(), rootScope);
       subject.getBills("user", function(err, response){
         expect(err).to.eql(undefined);
         expect(!!response).to.eql(true);

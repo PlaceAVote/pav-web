@@ -39,6 +39,7 @@ ProfileController.prototype.populateTimeline = function() {
   this.userService.getUserTimeline(this.id, function(err, result) {
     if (!err) {
       that.timeline = result;
+      !result.timeline.length ? that.hasActivity = false : that.hasActivity = true;
     }
   });
 };
@@ -48,6 +49,7 @@ ProfileController.prototype.populateFollowers = function() {
   this.userService.getFollowers(this.id, function(err, result) {
     if (!err) {
       that.followers = result;
+      !result.length ? that.hasFollowers = false : that.hasFollowers = true;
     }
   });
 };

@@ -285,7 +285,7 @@ function UserService($resource, facebookService, authService) {
     getFollowers: getFollowers,
     getFollowing: getFollowing,
     follow: follow,
-    unfollow: unfollow,
+    unfollow: unfollow
 	};
 }
 

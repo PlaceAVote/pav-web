@@ -28,7 +28,6 @@ LoginCtrl.prototype.loginWithFacebook = function(){
     else {
       that.rs.user = that.userService.getUser();
       that.rs.loggedIn = true;
-      console.log(that.rs.user);
       that.location.path("/feed");
     }
   });
