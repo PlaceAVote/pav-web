@@ -124,6 +124,7 @@ module.exports = {
     getById: {
       endpoint: urls.CONGRESS + '/bills/',
     },
+    feed: urls.USER + '/user/feed/',
   },
   users : {
     endpoint : urls.USER + '/user',

@@ -10,10 +10,10 @@
 	        </section>
 	    </div>
 	    <section class="feed-wrapper">
-		<div class='feed-column'>
+		<div class='feed-column l-7 m-12 s-12'>
 		    <div class="bill-container" ng-repeat="bill in bills">
-		    	<div class="bill">
-		        <h3 ng-click='bill.goToPage($parent.$location)'>{{bill.subject}}</h3>
+		    	<div class="bill card">
+		        <h1 ng-click='bill.goToPage($parent.$location)'>{{bill.subject}}</h1>
 		        <hr />
 			        <div class="bill-summary-container">
 			        <div class="bill-subject">
@@ -21,14 +21,13 @@
 			        </div>
 			        <div class="bill-summary">
 			        <h6 ng-click='bill.goToPage($parent.$location)'>{{bill.short_title}}</h6>
-			        <p>{{bill.summary}}</p>
+			        <p>{{bill.official_title}}</p>
 			        </div>
 			        </div>
 		        </div>
 		        <div class="buttons">
-		        <button ng-click="feed.welcomeMessage();"><img src="img/comments-icon.png" />{{bill.total_comments}} comments</button>
-		        <button><img src="img/comments-no-icon.png" />{{bill.majorityVote().percent}} &#37; Vote {{bill.majorityVote().majority}}</button>
-		        <button><img src="img/share.png" />share This Bill</button>
+		        <button>{{bill.comment_count}} comments</button>
+		        <button><span ng-hide="bill.noVotes">{{bill.majorityVote().percent}}&#37; Vote {{bill.majorityVote().majority}}</span><span ng-show="bill.noVotes">No votes</span></button>
 		        </div>
 		    </div>
 		</div>
