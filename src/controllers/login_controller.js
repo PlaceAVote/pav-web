@@ -84,7 +84,7 @@ LoginCtrl.prototype.emailValidation = function(email) {
 };
 
 LoginCtrl.prototype.passwordValidation = function(password) {
-  var p = /^(?=.*\d)(?=.*[A-Z])(?!.*[^a-zA-Z0-9@#$^+=])(.{8,15})$/;
+  var p = /^(?=.*\d)(?=.*[A-Z])(.{8,120})$/;
   return p.test(password);
 };
 
