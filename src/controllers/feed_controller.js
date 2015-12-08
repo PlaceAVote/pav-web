@@ -14,6 +14,7 @@ FeedController = function($scope, $location, userService, billService, trendServ
     this.getBills('notyet@implemented.com', function(err, response) {
         if(!err){
             $scope.bills = response;
+            console.log($scope.bills);
         }
     });
     this.getTrends(function(err, response) {
