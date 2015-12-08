@@ -15,8 +15,8 @@ function HeaderCtrl($rootScope, $scope, $location, authService, userService) {
 HeaderCtrl.prototype.populate = function() {
   var that = this;
   this.userService.getUserProfile('me', function(err, result) {
-    if (!err) {
-      that.user = result;
+    if (result) {
+      that.rs.user = result;
       that.rs.loggedIn = true;
     } else {
       that.logout();

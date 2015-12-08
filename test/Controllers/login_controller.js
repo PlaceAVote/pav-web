@@ -118,6 +118,9 @@ describe('LoginCtrl', function() {
               subject.userService = {
                 loginWithFacebook : function(callback){
                   callback();
+                },
+                getUser : function() {
+                	return;
                 }
               };
               subject.loginWithFacebook();

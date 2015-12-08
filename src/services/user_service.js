@@ -61,6 +61,7 @@ function UserService($resource, facebookService, authService) {
 		this.user.last_name = additionalInformation.last_name;
 		this.user.country_code = additionalInformation.country_code;
 		this.user.dob = strftime('%m/%d/%Y', additionalInformation.dob);
+    // this.user.img_url = 'img/header/generic-user.png';
 	};
 
     var makeProfilePublic = function(){

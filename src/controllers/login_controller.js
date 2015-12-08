@@ -26,6 +26,7 @@ LoginCtrl.prototype.loginWithFacebook = function(){
       that.location.path("/onboarding");
     }
     else {
+      that.rs.user = that.userService.getUser();
       that.rs.loggedIn = true;
       that.location.path("/feed");
     }
@@ -45,23 +46,36 @@ LoginCtrl.prototype.validate = function(u, hash) {
 };
 
 LoginCtrl.prototype.login = function(u, hash) {
-  var that = this;
-  var email = u.email;
-  var password = u.password;
-  this.user.emailValid = this.emailValidation(email);
-  this.user.passwordValid = this.passwordValidation(password);
-  if(this.user.emailValid && this.user.passwordValid) {
-    this.userService.login({email: email, password: password}, function(err, response){
-      if (err) {
-        if(err.status === 401){
-          that.forgot = true;
-        }
-      } else {
-        that.rs.loggedIn = true;
-        that.location.path("/feed");
-      }
-    });
-  }
+   var that = this;
+   var email = u.email;
+   var password = u.password;
+   this.user.emailValid = this.emailValidation(email);
+   this.user.passwordValid = this.passwordValidation(password);
+   if (this.user.emailValid && this.user.passwordValid) {
+      this.userService.login({
+         email: email,
+         password: password
+      }, function(err, response) {
+         if (err) {
+            if (err.status === 401) {
+               that.forgot = true;
+            }
+         } else {
+            that.userService.getUserProfile('me', function(err, result) {
+               if (result) {
+                  that.rs.user = result;
+                  that.rs.loggedIn = true;
+                  that.location.path("/feed");
+               } else {that.logout();}
+            });
+          }
+      });
+   }
+};
+
+LoginCtrl.prototype.logout = function() {
+  this.rs.loggedIn = false;
+  AuthorizeController.logout({authorizer: this.authService, location: this.location});
 };
 
 LoginCtrl.prototype.emailValidation = function(email) {
