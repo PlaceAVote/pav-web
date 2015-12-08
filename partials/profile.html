@@ -2,12 +2,15 @@
 <div class="app">
 	<div class="app-body">
 		<div class="timeline-layout">
-  			<div class="col m-12 l-8">
+      <div class="message" ng-hide="profile.hasActivity">
+        <h2>You have no activity</h2>
+      </div>
+  			<div ng-show="profile.hasActivity" class="col m-12 l-8">
           <h1 class="activity-label">Recent Activity</h1>
           <timeline timeline="profile.timeline.timeline" profile="profile"></timeline>
         </div>
       <div class="col m-12 l-4">
-      	<div class="card followers">
+      	<div ng-show="profile.hasFollowers" class="card followers">
       		<h1>Followers</h1>
         	<hr />
           

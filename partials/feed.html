@@ -1,7 +1,7 @@
 <div class="app">
 	<div class="app-body">
-	    <div class="card welcome-message" ng-show="banner.show">
-	        <img src="img/close-widget.png" ng-click="banner.hide()" class="close" />
+	    <div class="card welcome-message" ng-show="feed.newUser">
+	        <img src="img/close-widget.png" ng-click="feed.newUser = false" class="close" />
 	        <img class="logo-full-color" src="img/mark_full_color.svg" />
 	       	<section>
 	        <h1>{{banner.welcome}}</h1>
@@ -26,7 +26,7 @@
 			        </div>
 		        </div>
 		        <div class="buttons">
-		        <button><img src="img/comments-icon.png" />{{bill.total_comments}} comments</button>
+		        <button ng-click="feed.welcomeMessage();"><img src="img/comments-icon.png" />{{bill.total_comments}} comments</button>
 		        <button><img src="img/comments-no-icon.png" />{{bill.majorityVote().percent}} &#37; Vote {{bill.majorityVote().majority}}</button>
 		        <button><img src="img/share.png" />share This Bill</button>
 		        </div>

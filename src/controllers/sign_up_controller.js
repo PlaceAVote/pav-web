@@ -44,7 +44,9 @@ SignUpCtrl.prototype.test = function() {
                 if(!user.img_url) {
                 user.img_url = 'img/profile/profile-picture.png';
                 }
+                user.newUser = true;
                 that.rs.user = user;
+                console.log(that.rs);
                 that.location.path("/feed");
             }
         });
