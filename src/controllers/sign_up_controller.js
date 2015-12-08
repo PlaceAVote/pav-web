@@ -29,6 +29,7 @@ SignUpCtrl.prototype.test = function() {
         that.invalid_user = true;
     }
     else {
+        console.log(user);
         this.userService.saveUser(function(err, result){
             if(err) {
                 if(err.status === 409) {
@@ -40,6 +41,10 @@ SignUpCtrl.prototype.test = function() {
             }
             else {
                 that.rs.loggedIn = true;
+                if(!user.img_url) {
+                user.img_url = 'img/profile/profile-picture.png';
+                }
+                that.rs.user = user;
                 that.location.path("/feed");
             }
         });
