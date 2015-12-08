@@ -40,6 +40,9 @@ SignUpCtrl.prototype.test = function() {
             }
             else {
                 that.rs.loggedIn = true;
+                user.img_url = 'img/header/generic-user.png';
+                that.rs.user = user;
+                console.log(that.rs.user);
                 that.location.path("/feed");
             }
         });
