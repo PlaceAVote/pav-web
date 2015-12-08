@@ -28,6 +28,7 @@ LoginCtrl.prototype.loginWithFacebook = function(){
     else {
       that.rs.user = that.userService.getUser();
       that.rs.loggedIn = true;
+      console.log(that.rs.user);
       that.location.path("/feed");
     }
   });
@@ -84,8 +85,9 @@ LoginCtrl.prototype.emailValidation = function(email) {
 };
 
 LoginCtrl.prototype.passwordValidation = function(password) {
-  var p = /^(?=.*\d)(?=.*[A-Z])(.{8,120})$/;
-  return p.test(password);
+  // var p = /^(?=.*\d)(?=.*[A-Z])(.{8,120})$/;
+  // return p.test(password);
+  return true;
 };
 
 module.exports = LoginCtrl;
