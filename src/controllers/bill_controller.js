@@ -22,6 +22,7 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
   this.voteModal = {};
   this.stats = {};
   this.readmore = false;
+  this.showChart = false;
 }
 
 BillController.prototype.showVoteModal = function(vote){
@@ -151,6 +152,12 @@ BillController.prototype.getBillVotes = function(id) {
     }
     else {
       that.stats = result;
+      console.log(that.stats.length);
+      if(that.stats.length > 1) {
+        that.chartShow = true;
+      }
+      console.log(that.showChart);
+   
     }
   });
 };

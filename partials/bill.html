@@ -112,8 +112,8 @@
     </div>
 
 
-<section class="row bill-stats-vote l-12">
-		<div class="card bill-stats l-6">
+<section ng-switch="bill.chartShow" class="row bill-stats-vote l-12">
+		<div ng-switch-when="true" class="card bill-stats l-6">
     <h1>Statistics</h1>
     <hr />
     <status-chart data="bill.stats"></status-chart>

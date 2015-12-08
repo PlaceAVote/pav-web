@@ -12,6 +12,7 @@ function BillService(tempBillResource, $resource, authService, userService) {
             for(r in result.results){
                 bills.push(new BillSummary(result.results[r]));
             };
+            console.log(result);
             callback(undefined, bills);
         };
         var onError = function(err){
