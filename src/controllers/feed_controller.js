@@ -1,7 +1,7 @@
 var Banner = require('../models/banner.js');
 var AuthorizeController = require('./autherize_controller.js');
 
-FeedController = function($rootScope, $scope, $location, userService, billService, trendService, authService) {
+FeedController = function($scope, $location, userService, billService, trendService, authService, $rootScope) {
     AuthorizeController.authorize({error: '/', authorizer: authService, location: $location});
     this.$scope = $scope || {};
     $scope.$location = $location || {};
