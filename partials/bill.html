@@ -99,6 +99,9 @@
       <h1>COMMENTS</h1>
       <hr />
     <div class="pre-loader" ng-hide="bill.comments"></div>
+    <div ng-show="bill.commentMessage" class="card-message">
+      <h2>Be the first to comment on this bill.</h2>
+    </div>
       <comments ng-show="bill.comments" comments='bill.comments'></comments>
 		</div>
 
@@ -112,8 +115,8 @@
     </div>
 
 
-<section class="row bill-stats-vote l-12">
-		<div class="card bill-stats l-6">
+<section ng-switch="bill.chartShow" class="row bill-stats-vote l-12">
+		<div ng-switch-when="true" class="card bill-stats l-6">
     <h1>Statistics</h1>
     <hr />
     <status-chart data="bill.stats"></status-chart>
