@@ -38,6 +38,7 @@ ProfileController.prototype.populateTimeline = function() {
   var that = this;
   this.userService.getUserTimeline(this.id, function(err, result) {
     if (!err) {
+      console.log(result);
       that.timeline = result;
       !result.timeline.length ? that.hasActivity = false : that.hasActivity = true;
     }
@@ -64,7 +65,7 @@ ProfileController.prototype.populateFollowing = function() {
 };
 
 ProfileController.prototype.isNotMe = function() {
-  if (this.id == 'me') {
+  if (this.id == 'me'||this.id) {
     return false;
   }
   else {
