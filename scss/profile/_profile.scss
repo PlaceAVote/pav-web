@@ -29,6 +29,9 @@
 		border:2px solid $white;
 		box-shadow: 0px 0px 1px 1px rgba(0,0,0,0.2);
 		border-radius:3px;
+		@include media(1200px) {
+			left: 20px;
+		}
 		@include media(600px){
 			position: static;
 			width: 80px;
@@ -75,6 +78,9 @@
 		background:$white;
 	    @include shadow();
 	    border-top:1px solid $greylight;
+	    @include media(600px) {
+	    	position: relative;
+	    }
 	    .row {
 	    	max-width: 1200px;
 	    	width: 100%;
@@ -109,7 +115,35 @@
 }
 
 .follow-me {
+	@include media(600px) {
+		position: absolute;
+		top: -49px;
+		left: 120px;
+		.btn-green {
+			display: inline-block;
+			height: 28px;
+			@include font-size(10px);
+			line-height:1;
+			// vertical-align: middle;
+			width: 130px !important;
+		}
+	}
 	.btn-green {
 		width: 200px;
+	}
+}
+
+.activity-container {
+	width: 75%;
+	@include media(900px) {
+		width: 100% !important;
+	}
+}
+
+.follower-container {
+	width: 25%;
+	@include media(900px) {
+		width: 100% !important;
+		margin-bottom: 40px;
 	}
 }

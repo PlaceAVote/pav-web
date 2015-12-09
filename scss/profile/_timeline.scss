@@ -250,7 +250,7 @@
 		@include font-size(18px);
 		color: $black;
 	}
-	@include media(600px) {
+	@include media(900px) {
 		flex-direction: column;
 		.activity-label {
 			margin-left: 0;
