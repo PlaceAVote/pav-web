@@ -16,10 +16,11 @@ function Comment(options) {
   this.jsonReplies = options.replies;
   this.replies = [];
   this.deep = 0;
-  this.author_img_url = options.author_img_url || 'img/comments/user.png';
+  this.author_img_url = options.author_img_url || 'img/profile/profile-picture.png';
   this.scored = options.scored;
   this.liked = options.liked;
   this.disliked = options.disliked;
+  this.type = options.type || 'comment';
 }
 
 Comment.buildChildren = function(comment, deep) {

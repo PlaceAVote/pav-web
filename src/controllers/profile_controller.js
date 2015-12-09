@@ -50,7 +50,6 @@ ProfileController.prototype.populateFollowers = function() {
   var that = this;
   this.userService.getFollowers(this.id, function(err, result) {
     if (!err) {
-
       that.followers = result;
       !result.length ? that.hasFollowers = false : that.hasFollowers = true;
     }
