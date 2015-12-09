@@ -30,6 +30,8 @@ ProfileController.prototype.populateProfile = function() {
   this.userService.getUserProfile(this.id, function(err, result) {
     if (!err) {
       that.user = result;
+      result.following ? that.following = "unfollow" : that.following = "follow";
+      that.followStatus = result.following;
     }
   });
 };
@@ -48,6 +50,7 @@ ProfileController.prototype.populateFollowers = function() {
   var that = this;
   this.userService.getFollowers(this.id, function(err, result) {
     if (!err) {
+
       that.followers = result;
       !result.length ? that.hasFollowers = false : that.hasFollowers = true;
     }
@@ -58,7 +61,7 @@ ProfileController.prototype.populateFollowing = function() {
   var that = this;
   this.userService.getFollowing(this.id, function(err, result) {
     if (!err) {
-      that.following = result;
+
     }
   });
 };
@@ -77,26 +80,23 @@ ProfileController.prototype.follow = function() {
   if (!this.isNotMe()) {
     return;
   }
-  this.userService.follow(this.id, function(err, response) {
-    if (!err) {
-      that.user.following = false;
-      that.populate();
-    }
-  });
+  if(!this.followStatus) {
+    this.userService.follow(this.id, function(err, response) {
+      if (!err) {
+        that.user.following = false;
+        that.populate();
+      }
+    });
+  } else if(this.followStatus){
+    this.userService.unfollow(this.id, function(err, response) {
+      if (!err) {
+        that.user.following = true;
+        that.populate();
+      }
+    });
+  }
 };
 
-ProfileController.prototype.unfollow = function() {
-  var that = this;
-  if (!this.isNotMe()) {
-    return;
-  }
-  this.userService.unfollow(this.id, function(err, response) {
-    if(!err) {
-      that.user.following = true;
-      that.populate();
-    }
-  });
-};
 
 module.exports = ProfileController;
 
