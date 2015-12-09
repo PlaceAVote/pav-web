@@ -25,8 +25,7 @@
             <h3>Following</h3>
         </div>
           <div class="follow-me" ng-show="profile.isNotMe()">
-            <button class="btn-green" ng-hide="user.following" ng-click="profile.follow()">Follow</button>
-            <button class="btn-green" ng-show="user.following" ng-click="profile.unfollow()">Unfollow</button>
+            <button class="btn-green" ng-click="profile.follow()">{{profile.following}}</button>
           </div>
       </div>
   </div>
