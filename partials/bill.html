@@ -102,7 +102,7 @@
     <div ng-show="bill.commentMessage" class="card-message">
       <h2>Be the first to comment on this bill.</h2>
     </div>
-      <comments ng-hide="bill.commentMessage" comments='bill.comments'></comments>
+      <comments ng-show="bill.comments" comments='bill.comments'></comments>
 		</div>
 
     <div class="comment-create card">
