@@ -22,7 +22,7 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
   this.voteModal = {};
   this.stats = {};
   this.readmore = false;
-  this.showChart = false;
+  this.showChart = true;
 }
 
 BillController.prototype.showVoteModal = function(vote){
@@ -77,6 +77,7 @@ BillController.prototype.voteOnBill = function() {
         that.voteFailed = true;
       }
     }
+    that.chartShow = true;
     that.voteConfirmed();
   });
 };
@@ -87,6 +88,7 @@ BillController.prototype.voteConfirmed = function() {
   var vote = this.vote ? this.forComment : this.againstComment;
   this.generateCommentCard(vote);
   this.getVotes(this.id);
+  this.getBillVotes(this.id);
 };
 
 BillController.prototype.generateCommentCard = function(comment) {
@@ -152,12 +154,10 @@ BillController.prototype.getBillVotes = function(id) {
     }
     else {
       that.stats = result;
-      console.log(that.stats.length);
+      console.log(that.stats);
       if(that.stats.length > 1) {
         that.chartShow = true;
       }
-      console.log(that.showChart);
-   
     }
   });
 };
