@@ -49,8 +49,11 @@
                   <div class="timeline-comment" ng-switch-when="comment">
                   <span class="time-stamp">{{event.timestamp | date:'medium'}}</span>
                   <div class="event-card">
-                   <span class="event-label"><a href="#/profile/{{profile.user.user_id}}">{{profile.user.first_name}} {{profile.user.lastname}}</a> in {{event.bill_id}}: {{event.bill_title}},</span>
-                    <comment comment="event"></comment>
+                    <div class="event-icon event-icon-comment">
+                    <i class="icon-comment"></i>
+                    </div>
+                   <span class="event-label"><a href="#/profile/{{profile.user.user_id}}">{{profile.user.first_name}} {{profile.user.lastname}}</a> made a comment.</span>
+                    <comment-event comment="event"></comment-event>
                     </div>
                   </div>
 
