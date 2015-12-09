@@ -173,6 +173,7 @@ BillController.prototype.getComments = function() {
     }
     else if (result) {
       that.comments = result;
+      that.comments.length ? that.commentMessage = false : that.commentMessage = true;
       that.from = that.from + 10;
     }
   });
@@ -191,6 +192,7 @@ BillController.prototype.postComment = function() {
       }
     }
     else if(result) {
+      that.commentMessage = false;
       that.comments.push(result);
       that.commentBody = undefined;
     }
