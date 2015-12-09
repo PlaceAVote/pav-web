@@ -115,8 +115,12 @@
 }
 
 .follow-me {
+	position:absolute;
+	@include media(1200px) {
+		right: inherit;
+	}
+	right: 20px;
 	@include media(600px) {
-		position: absolute;
 		top: -49px;
 		left: 120px;
 		.btn-green {
@@ -145,5 +149,17 @@
 	@include media(900px) {
 		width: 100% !important;
 		margin-bottom: 40px;
+	}
+}
+
+.profile-stats {
+	color: $black;
+	span {
+		@include font-size(18px);
+		@include bold();
+	}
+	h3 {
+		@include font-size(12px);
+		@include light();
 	}
 }
