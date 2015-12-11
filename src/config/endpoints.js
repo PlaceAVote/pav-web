@@ -126,6 +126,10 @@ module.exports = {
     },
     feed: urls.USER + '/user/feed/',
   },
+  notifications: {
+    socket: urls.NOTIFICATION + '/notifications/ws',
+    poll: urls.NOTIFICATION + '/notifications',
+  },
   users : {
     endpoint : urls.USER + '/user',
     authorize: urls.USER + '/user/token/validate?token=',
