@@ -1,16 +1,28 @@
 var AuthorizeController = require('./autherize_controller.js');
 
-function HeaderCtrl($rootScope, $scope, $location, authService, userService) {
+function HeaderCtrl($rootScope, $scope, $location, authService, userService, notificationService) {
   $scope = $scope || {};
   $scope.header = this;
   this.userService = userService;
   this.authService = authService;
+  this.notificationService = notificationService;
   this.location = $location;
   this.showDropDown = false;
   this.rs = $rootScope;
   this.loggedIn = $rootScope.loggedIn;
   this.populate();
+  this.startNotifications();
 }
+
+HeaderCtrl.prototype.startNotifications = function() {
+  if (!this.notificationService) {
+    return;
+  }
+  var that = this;
+  this.notificationService.stream(function(err, result){
+    console.log(result);
+  });
+};
 
 HeaderCtrl.prototype.populate = function() {
   var that = this;
