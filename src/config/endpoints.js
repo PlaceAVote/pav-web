@@ -127,8 +127,8 @@ module.exports = {
     feed: urls.USER + '/user/feed/',
   },
   notifications: {
-    socket: urls.NOTIFICATION + '/notifications/ws',
-    poll: urls.NOTIFICATION + '/notifications',
+    socket: urls.NOTIFICATION + '/user/notifications/ws',
+    poll: urls.NOTIFICATION + '/user/notifications',
   },
   users : {
     endpoint : urls.USER + '/user',
