@@ -6,7 +6,8 @@
 		<img src="img/search.png" />
 	</section>
 	<section class="notification">
-		<img style="cursor: pointer;" src="img/notification.svg" ng-click="header.notify()" />
+  <h1 ng-show="header.notificationReceived">Notification Receieved</h1>
+		<img  style="cursor: pointer;" src="img/notification.svg" ng-click="header.notify()" />
       <div ng-mouseleave="header.hideNotifications()"
       ng-show="header.showNotifications">
         <notifications notifications="header.notifications"></notifications>

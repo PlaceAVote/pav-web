@@ -22,8 +22,14 @@ HeaderCtrl.prototype.startNotifications = function() {
   this.notificationService.stream(function(err, result){
     if (result) {
       that.notifications = result;
+      that.notifyUser();
     }
   });
+};
+
+HeaderCtrl.prototype.notifyUser = function() {
+  this.notificationReceived = true;
+  console.log('received notification');
 };
 
 HeaderCtrl.prototype.populate = function() {
@@ -51,11 +57,11 @@ HeaderCtrl.prototype.dropDown = function() {
 };
 
 HeaderCtrl.prototype.hideNotifications = function() {
+  this.notificationReceived = false;
   this.showNotifications = false
 };
 
 HeaderCtrl.prototype.notify = function() {
-  console.log('hello');
   this.showNotifications = this.showNotifications ? false : true;
 };
 
