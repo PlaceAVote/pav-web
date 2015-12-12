@@ -20,7 +20,9 @@ HeaderCtrl.prototype.startNotifications = function() {
   }
   var that = this;
   this.notificationService.stream(function(err, result){
-    console.log(result);
+    if (result) {
+      that.notifications = result;
+    }
   });
 };
 
@@ -46,6 +48,15 @@ HeaderCtrl.prototype.hideDropDown = function() {
 
 HeaderCtrl.prototype.dropDown = function() {
   this.showDropDown = this.showDropDown ? false : true;
+};
+
+HeaderCtrl.prototype.hideNotifications = function() {
+  this.showNotifications = false
+};
+
+HeaderCtrl.prototype.notify = function() {
+  console.log('hello');
+  this.showNotifications = this.showNotifications ? false : true;
 };
 
 HeaderCtrl.prototype.logout = function() {

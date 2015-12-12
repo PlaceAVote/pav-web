@@ -6,4 +6,8 @@ function CommentReplyEvent(options) {
   this.comment = new Comment(options);
 }
 
+CommentReplyEvent.prototype.goToBill = function(billId, location) {
+  location.path('/bill/'+ billId);
+};
+
 module.exports = CommentReplyEvent;

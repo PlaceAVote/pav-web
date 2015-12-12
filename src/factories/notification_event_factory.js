@@ -7,10 +7,8 @@ var getResponse = function(response) {
   }
   switch (response.type) {
     case 'commentreply':
-      console.log(response);
       return new CommentReplyEvent(response);
     default:
-      console.log(response);
       return response;
   };
 };
