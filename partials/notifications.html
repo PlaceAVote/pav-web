@@ -1,0 +1,7 @@
+<div class="dropdown-container notification-drop-down" ng-repeat="notification in notifications" ng-switch on="notification.type" >
+  <!-- comment Reply -->
+  <div ng-switch-when="commentreply">
+     <commentreply notification="notification"><commentreply>
+  </div>
+</div>
+
