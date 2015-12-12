@@ -5,11 +5,12 @@
       <div class="message" ng-hide="profile.hasActivity">
         <h2>You have no activity</h2>
       </div>
-  			<div ng-show="profile.hasActivity" class="col m-12 l-8">
+  			<div ng-show="profile.hasActivity" class="activity-container">
           <h1 class="activity-label">Recent Activity</h1>
           <timeline timeline="profile.timeline.timeline" profile="profile"></timeline>
         </div>
-      <div class="col m-12 l-4">
+
+      <div class="follower-container">
       	<div ng-show="profile.hasFollowers" class="card followers">
       		<h1>Followers</h1>
         	<hr />
@@ -19,7 +20,8 @@
               <img src="{{follower.img_url}}" class="user-img-border" alt="{{follower.first_name}}">
               <div class="top-comment-body">
               <h2><a href="#/profile/{{follower.user_id}}">{{follower.first_name}} {{follower.last_name}}</a></h2>
-              <p>{{follower.total_follers}}</p>
+              <p>{{follower.follower_count}}</p>
+
               <!-- TODO: Don't have how many followers yet returned from db -->
             </div>
             </section>

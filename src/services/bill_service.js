@@ -7,7 +7,6 @@ var config = require('../config/endpoints.js');
 function BillService(tempBillResource, $resource, authService, userService) {
     var getBills = function(username, callback) {
         var onLoad = function(result) {
-            console.log(result);
             var bills = [];
             for(r in result.results){
                 bills.push(new BillSummary(result.results[r]));
@@ -15,7 +14,6 @@ function BillService(tempBillResource, $resource, authService, userService) {
             callback(undefined, bills);
         };
         var onError = function(err){
-          console.log('error', err);
             callback(err);
         };
         var url = config.bills.feed;
