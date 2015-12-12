@@ -3,9 +3,10 @@ var endpoint = require('../config/endpoints.js').notifications.socket;
 
 var defaultStreamer = require('../connections/streamer.js');
 
-function NotificationService (options) {
+function NotificationService (authService, options) {
   options = options || {};
-  var streamer = options.streamer || defaultStreamer({endpoint: endpoint});
+  var url = endpoint + '?token=' + authService.getRawAccessToken();
+  var streamer = options.streamer || defaultStreamer({endpoint: url});
 
   var stream = function(callback) {
     streamer.onerror = function(err) {

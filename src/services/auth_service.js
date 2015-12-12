@@ -75,6 +75,7 @@ function AuthService($resource, options) {
     loggedInStatus: loggedInStatus,
     setAuth: setAuth,
     getAccessToken: getAccessToken,
+    getRawAccessToken: getRawAccessToken,
     setFacebookAuth: setFacebookAuth,
     getFacebookAccessToken: getFacebookAccessToken,
     validateToken: validateToken,
