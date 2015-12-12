@@ -3,34 +3,16 @@ var NotificationService = require('../../src/services/notification_service.js');
 
 describe('Notification Service', function() {
   it('Connects to web socket', function(done) {
-    var streamer = {
-      onopen: function(callback) {
-        this.onmessage(callback);
-      },
-      onerror:function(callback){},
-      onmessage: function(callback){
-        callback({});
-     }
-    };
+    var streamer = {};
     var options = {
       streamer: streamer,
     };
     var subject = new NotificationService(options);
-    subject.stream(function(error, message){
-      expect(message).to.deep.equal([]);
-      done();
-    });
+    expect(subject.getStreamer()).to.eql(streamer);
+    done();
   });
   it('Returns an error when an error occurs', function(done) {
-    var streamer = {
-      onopen: function(callback) {
-        this.onerror(callback);
-      },
-      onerror: function(callback) {
-        callback('ERROR');
-      },
-      onmessage: function(callback){},
-    };
+    var streamer = {};
     var options = {
       streamer: streamer,
     };
@@ -39,18 +21,11 @@ describe('Notification Service', function() {
       expect(error).to.equal('ERROR');
       done();
     });
+    streamer.onerror('ERROR');
   });
   it('Returns data from the server', function(done) {
     var data = [];
-    var streamer = {
-      onopen: function(callback) {
-        this.onmessage(callback);
-      },
-      onerror:function(callback){},
-      onmessage: function(callback){
-        callback(data);
-     }
-    };
+    var streamer = {};
     var options = {
       streamer: streamer,
     };
@@ -59,5 +34,6 @@ describe('Notification Service', function() {
       expect(message).to.deep.equal([]);
       done();
     });
+    streamer.onmessage(data);
   });
 });

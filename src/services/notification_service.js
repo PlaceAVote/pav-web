@@ -8,26 +8,24 @@ function NotificationService (options) {
   var streamer = options.streamer || defaultStreamer({endpoint: endpoint});
 
   var stream = function(callback) {
-    streamer.onopen(function(event){
-      console.log('EVENT', event);
+    streamer.onerror = function(err) {
+     console.log("ERROR", err);
+      return callback(err);
+    };
 
-      streamer.onerror(function(err) {
-        console.log(err);
-        return callback(err);
-      });
-
-      streamer.onmessage(function(message) {
-        console.log('message', message);
-        var notifications = NotificationEventFactory.getResponses(message);
-        return callback(undefined, notifications);
-      });
-    });
+    streamer.onmessage = function(message) {
+      var notifications = NotificationEventFactory.getResponses(message);
+      return callback(undefined, notifications);
+    };
   };
 
-
+  var getStreamer = function(){
+    return streamer;
+  }
 
   return {
     stream: stream,
+    getStreamer: getStreamer,
   };
 }
 
