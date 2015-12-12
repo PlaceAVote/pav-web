@@ -1,3 +1,5 @@
+var CommentReplyEvent = require('../models/comment_reply_event');
+
 var NotificationEventFactory = {
 
   getResponse: function(response) {
@@ -5,6 +7,9 @@ var NotificationEventFactory = {
       throw {message: 'No Type Defined'};
     }
     switch (response.type) {
+      case 'commentreply':
+        console.log(response);
+        return new CommentReplyEvent(response);
       default:
         console.log(response);
         return response;
