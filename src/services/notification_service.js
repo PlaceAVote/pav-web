@@ -15,7 +15,7 @@ function NotificationService (authService, options) {
     };
 
     streamer.onmessage = function(message) {
-      var notifications = NotificationEventFactory.getResponses(message);
+      var notifications = NotificationEventFactory.getResponses(message.data);
       return callback(undefined, notifications);
     };
   };
