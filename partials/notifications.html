@@ -1,0 +1,17 @@
+<div class="notifications-boundary">
+<div ng-repeat="notification in notifications" ng-switch on="notification.type" >
+  <!-- comment Reply -->
+  <div class="notification-event notification-comment-reply" ng-switch-when="commentreply">
+	  <div class="user-img-border">
+	  <img ng-src="{{notification.comment.author_img_url}}"/>
+	  </div>
+	  <div class="notification-comment-reply-info">
+	  	<p>
+	     <a class="profile-link" href="#/profile/{{notification.comment.author}}">{{notification.comment.author_first_name}} {{notification.comment.author_last_name}}</a> replied to you comment on <a class="bill-link" href="#/bill/{{notification.comment.bill_id}}">{{notification.comment.bill_id}}: {{notification.comment.bill_title}}</a>
+	    </p>
+	    <span class="time-stamp">{{notification.comment.timestamp | date:'medium'}}</span>
+	  </div>
+  </div>
+</div>
+</div>
+
