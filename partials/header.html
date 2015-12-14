@@ -8,7 +8,7 @@
 	<section class="notification">
   <h1 ng-show="header.notificationReceived">Notification Receieved</h1>
 		<img  style="cursor: pointer;" src="img/notification.svg" ng-click="header.notify()" />
-      <div ng-mouseleave="header.hideNotifications()"
+      <div class="notifications-container" ng-mouseleave="header.hideNotifications()"
       ng-show="header.showNotifications">
         <notifications notifications="header.notifications"></notifications>
       </div>

@@ -22,6 +22,7 @@ HeaderCtrl.prototype.getNotifications = function() {
       return;
     } else {
       that.notifications = res;
+      console.log(that.notifications);
     }
   });
 }
