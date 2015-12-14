@@ -22,10 +22,11 @@ var NotificationEventFactory = {
     if (!responses) {
       return results;
     }
-    response = JSON.parse(responses);
-
-    if (response.constructor != Array) {
-      results.push(getResponse(response));
+    if(typeof responses == "string") {
+    responses = JSON.parse(responses);
+    }
+    if (responses.constructor != Array) {
+      results.push(getResponse(responses));
       return results;
     }
 

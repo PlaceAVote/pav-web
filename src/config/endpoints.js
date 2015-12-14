@@ -129,6 +129,7 @@ module.exports = {
   notifications: {
     socket: urls.NOTIFICATION + '/user/notifications/ws',
     poll: urls.NOTIFICATION + '/user/notifications',
+    staticEndpoint:  urls.USER + '/user/notifications'
   },
   users : {
     endpoint : urls.USER + '/user',

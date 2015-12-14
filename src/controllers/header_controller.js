@@ -12,6 +12,18 @@ function HeaderCtrl($rootScope, $scope, $location, authService, userService, not
   this.loggedIn = $rootScope.loggedIn;
   this.populate();
   this.startNotifications();
+  this.getNotifications();
+}
+
+HeaderCtrl.prototype.getNotifications = function() {
+  var that = this;
+  this.notificationService.getNotifications(function(err, res) {
+    if(err) {
+      return;
+    } else {
+      that.notifications = res;
+    }
+  });
 }
 
 HeaderCtrl.prototype.startNotifications = function() {
@@ -21,7 +33,8 @@ HeaderCtrl.prototype.startNotifications = function() {
   var that = this;
   this.notificationService.stream(function(err, result){
     if (result) {
-      that.notifications = result;
+      that.notifications.push(result[0]);
+      console.log('controller result', that.notifications);
       that.notifyUser();
     }
   });
