@@ -12,12 +12,12 @@ describe('Notification Service', function() {
     streamer: streamer,
   };
   it('Connects to web socket', function(done) {
-    var subject = new NotificationService(authService, options);
+    var subject = new NotificationService(undefined, authService, options);
     expect(subject.getStreamer()).to.eql(streamer);
     done();
   });
   it('Returns an error when an error occurs', function(done) {
-    var subject = new NotificationService(authService, options);
+    var subject = new NotificationService(undefined, authService, options);
     subject.stream(function(error, message){
       expect(error).to.equal('ERROR');
       done();
@@ -26,7 +26,7 @@ describe('Notification Service', function() {
   });
   it('Returns data from the server', function(done) {
     var data = [];
-    var subject = new NotificationService(authService, options);
+    var subject = new NotificationService(undefined, authService, options);
     subject.stream(function(error, message){
       expect(message).to.deep.equal([]);
       done();
