@@ -6,10 +6,11 @@
 		<img src="img/search.png" />
 	</section>
 	<section class="notification">
-  <h1 ng-show="header.notificationReceived">Notification Receieved</h1>
+    <span ng-show="header.newEvent" class="notification-counter"><p>{{header.newEvent}}</p></span>
 		<img  style="cursor: pointer;" src="img/notification.svg" ng-click="header.notify()" />
       <div class="notifications-container" ng-mouseleave="header.hideNotifications()"
       ng-show="header.showNotifications">
+
         <notifications notifications="header.notifications"></notifications>
       </div>
 

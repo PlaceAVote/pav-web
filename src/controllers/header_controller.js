@@ -3,6 +3,7 @@ var AuthorizeController = require('./autherize_controller.js');
 function HeaderCtrl($rootScope, $scope, $location, authService, userService, notificationService) {
   $scope = $scope || {};
   $scope.header = this;
+  this.scope = $scope;
   this.userService = userService;
   this.authService = authService;
   this.notificationService = notificationService;
@@ -11,8 +12,10 @@ function HeaderCtrl($rootScope, $scope, $location, authService, userService, not
   this.rs = $rootScope;
   this.loggedIn = $rootScope.loggedIn;
   this.populate();
-  this.startNotifications();
+  this.notifications;
   this.getNotifications();
+  this.startNotifications();
+  this.newEvent = 0;
 }
 
 HeaderCtrl.prototype.getNotifications = function() {
@@ -22,7 +25,6 @@ HeaderCtrl.prototype.getNotifications = function() {
       return;
     } else {
       that.notifications = res;
-      console.log(that.notifications);
     }
   });
 }
@@ -33,17 +35,17 @@ HeaderCtrl.prototype.startNotifications = function() {
   }
   var that = this;
   this.notificationService.stream(function(err, result){
-    if (result) {
-      that.notifications.push(result[0]);
-      console.log('controller result', that.notifications);
-      that.notifyUser();
+    if (!err) {
+      that.notifyUser(result);
     }
   });
 };
 
-HeaderCtrl.prototype.notifyUser = function() {
+HeaderCtrl.prototype.notifyUser = function(result) {
   this.notificationReceived = true;
-  console.log('received notification');
+  this.notifications.unshift(result[0]);
+  this.newEvent++;
+  this.scope.$apply();
 };
 
 HeaderCtrl.prototype.populate = function() {
@@ -76,6 +78,7 @@ HeaderCtrl.prototype.hideNotifications = function() {
 };
 
 HeaderCtrl.prototype.notify = function() {
+  this.newEvent = 0;
   this.showNotifications = this.showNotifications ? false : true;
 };
 

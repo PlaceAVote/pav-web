@@ -5,6 +5,6 @@ module.exports = function() {
     scope: {
       notifications: '=',
     },
-    templateUrl: 'partials/notifications.html',
+    templateUrl: 'partials/notifications.html'
   };
 };
