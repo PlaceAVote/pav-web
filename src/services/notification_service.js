@@ -30,7 +30,6 @@ function NotificationService ($resource, authService, options) {
     var onLoad = function(res) {
       var notifications = [];
       var notification;
-      console.log(res);
       for (var i = 0; i < res.results.length; i++) {
       notification = NotificationEventFactory.getResponses(res.results[i]);
       notifications.push(notification[0]);
