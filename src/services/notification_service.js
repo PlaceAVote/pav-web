@@ -30,6 +30,7 @@ function NotificationService ($resource, authService, options) {
     var onLoad = function(res) {
       var notifications = [];
       var notification;
+      console.log(res);
       for (var i = 0; i < res.results.length; i++) {
       notification = NotificationEventFactory.getResponses(res.results[i]);
       notifications.push(notification[0]);
@@ -46,10 +47,26 @@ function NotificationService ($resource, authService, options) {
     resource.get(onLoad, onError);
   } 
 
+  var readNotification = function(id, callback) {
+    var onLoad = function(res) {
+      callback(undefined, res);
+    }
+
+    var onError = function(err) {
+      callback(err);
+    }
+
+    var url = config.notifications.read(id);
+    config.methods.post.headers['Authorization'] = authService.getAccessToken();
+    var resource = new $resource(url, undefined, {post: config.methods.post});
+    resource.post(onLoad,onError);
+  }
+
   return {
     stream: stream,
     getStreamer: getStreamer,
-    getNotifications: getNotifications
+    getNotifications: getNotifications,
+    readNotification: readNotification
   };
 }
 

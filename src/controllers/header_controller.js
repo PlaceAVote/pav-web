@@ -12,10 +12,15 @@ function HeaderCtrl($rootScope, $scope, $location, authService, userService, not
   this.rs = $rootScope;
   this.loggedIn = $rootScope.loggedIn;
   this.populate();
+  this.newEvent = 0;
   this.notifications;
   this.getNotifications();
   this.startNotifications();
-  this.newEvent = 0;
+}
+
+HeaderCtrl.prototype.notificationsCounter = function(inc) {
+  inc ? this.newEvent++ : this.newEvent--;
+  console.log(this.newEvent);
 }
 
 HeaderCtrl.prototype.getNotifications = function() {
@@ -25,6 +30,11 @@ HeaderCtrl.prototype.getNotifications = function() {
       return;
     } else {
       that.notifications = res;
+      for(var i = 0; i < that.notifications.length; i++) {
+        if(!that.notifications[i].read) {
+          that.notificationsCounter(true);
+        }
+      }
     }
   });
 }
@@ -41,10 +51,27 @@ HeaderCtrl.prototype.startNotifications = function() {
   });
 };
 
+HeaderCtrl.prototype.readEvent = function(res) {
+  console.log(res);
+  if (!this.notificationService) {
+    return;
+  }
+  var that = this;
+  this.location.path('bill/' + res.comment.bill_id);
+  if(!res.read) {
+  this.notificationService.readNotification(res.notification_id, function(err, result) {
+    if (!err) {
+      res.read = true;
+      that.notificationsCounter(false);
+    }
+  });
+  }
+}
+
 HeaderCtrl.prototype.notifyUser = function(result) {
   this.notificationReceived = true;
   this.notifications.unshift(result[0]);
-  this.newEvent++;
+  this.notificationsCounter(true);
   this.scope.$apply();
 };
 
@@ -78,7 +105,6 @@ HeaderCtrl.prototype.hideNotifications = function() {
 };
 
 HeaderCtrl.prototype.notify = function() {
-  this.newEvent = 0;
   this.showNotifications = this.showNotifications ? false : true;
 };
 
