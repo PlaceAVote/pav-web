@@ -20,7 +20,6 @@ function HeaderCtrl($rootScope, $scope, $location, authService, userService, not
 
 HeaderCtrl.prototype.notificationsCounter = function(inc) {
   inc ? this.newEvent++ : this.newEvent--;
-  console.log(this.newEvent);
 }
 
 HeaderCtrl.prototype.getNotifications = function() {
@@ -52,7 +51,6 @@ HeaderCtrl.prototype.startNotifications = function() {
 };
 
 HeaderCtrl.prototype.readEvent = function(res) {
-  console.log(res);
   if (!this.notificationService) {
     return;
   }
