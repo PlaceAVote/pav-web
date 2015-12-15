@@ -140,6 +140,11 @@ BillController.prototype.getBill = function(id) {
     }
     else {
       that.body = result;
+      if(that.body.featured_summary) {
+        that.bill_summary = that.body.featured_summary;
+      } else {
+        that.bill_summary = that.body.billData.summary;
+      }
       that.userVotedCheck();
       that.getLegislator(result.billData.sponsor);
     }
