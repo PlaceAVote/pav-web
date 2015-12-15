@@ -178,10 +178,10 @@
               <hr />
               <aside class="row-layout">
         <div class="user-img-border">
-          <img src="{{bill.forComment.author_img_url}}" />
+          <img ng-src="{{bill.forComment.author_img_url}}" />
         </div>
               <div class="top-comment-body">
-              <h2>{{bill.commentCard.author_first_name}}</h2>
+              <h2><a href="#/profile/{{bill.forComment.author}}">{{bill.commentCard.author_first_name}}</a></h2>
             <section class="comment-vote"><span>{{bill.forComment.score}}</span><i class="icon-thumbs-up thumbs" ng-click="bill.forComment.like(bill.commentService)"></i><i class="icon-thumbs-down thumbs" ng-click="bill.forComment.dislike(bill.commentService)"></i></section>
               <p>{{bill.commentCard.body}}</p>
               </div>
@@ -192,7 +192,7 @@
           <div class="row reply-modal">
 
            <button class="btn-blue" ng-click="bill.commentCard.showReplyInput()"><span class="icon-reply"></span> Reply to Comment </button>
-           <button class="btn-grey" ng-click="bill.hideVoteModal()"> I'm not ready yet </button>
+           <button class="btn-grey" ng-click="bill.hideVoteModal()"> Take me back to bill </button>
           </div>
         </div>
           </div>
