@@ -1,9 +1,9 @@
 <header ng-controller="HeaderCtrl as header" ng-show="header.login()">
 	<div class="row">
-	<img ng-click="header.location.path('/feed')" class="pav-icon" src="img/pav_icon.svg" />
+	<img ng-click="header.location.path('/feed')" class="pav-icon" src="http://cdn.placeavote.com/img/pav_icon.svg" />
 	<section class="notification">
     <span ng-show="header.newEvent" class="notification-counter"><p>{{header.newEvent}}</p></span>
-		<img  style="cursor: pointer;" src="img/notification.svg" ng-click="header.notify()" />
+		<img  style="cursor: pointer;" src="http://cdn.placeavote.com/img/notification.svg" ng-click="header.notify()" />
       <div class="notifications-container" ng-mouseleave="header.hideNotifications()"
       ng-show="header.showNotifications">
 
