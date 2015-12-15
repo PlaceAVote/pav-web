@@ -36,5 +36,9 @@ Bill.prototype.getTitle = function() {
   return format('%s. %s: %s', t, c, title);
 };
 
+Bill.prototype.getSummary = function() {
+  return this.billData.feature_summary || this.billData.summary;
+};
+
 module.exports = Bill;
 

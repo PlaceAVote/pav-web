@@ -78,4 +78,21 @@ describe('Bill Model', function(){
       expect(result).to.eql('HR. 114: ');
     });
   });
+  describe('getSummary', function(){
+    it('returns feature summary', function(){
+      var data = {
+        feature_summary: 'this is much better',
+        official_summary: 'but Ill take it',
+      };
+      var subject = new Bill(data);
+      expect(subject.getSummary()).to.eql('this is much better');
+    });
+    it('falls back to official summary', function() {
+      var data = {
+        summary: 'but Ill take it',
+      };
+      var subject = new Bill(data);
+      expect(subject.getSummary()).to.eql('but Ill take it');
+    });
+  });
 });

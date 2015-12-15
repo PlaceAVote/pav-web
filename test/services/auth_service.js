@@ -77,7 +77,7 @@ describe('ValidateToken', function(){
   it('calls correct endpoint', function(done) {
     options.window.localStorage.storage = [{'pav': 'TOKEN'}];
     function mockResource(url, params, method){
-      expect(url).to.eql('http://pav-user-api-924234322.us-east-1.elb.amazonaws.com:8080/user/token/validate?token=TOKEN');
+      expect(url).to.contain('/user/token/validate?token=TOKEN');
       expect(params).to.eql(undefined);
       expect(method.authorize.method).to.eql('GET');
       done();
