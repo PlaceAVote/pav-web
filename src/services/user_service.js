@@ -61,6 +61,7 @@ function UserService($resource, facebookService, authService) {
 		this.user.last_name = additionalInformation.last_name;
 		this.user.country_code = additionalInformation.country_code;
 		this.user.dob = strftime('%m/%d/%Y', additionalInformation.dob);
+    // this.user.img_url = 'img/header/generic-user.png';
 	};
 
     var makeProfilePublic = function(){
@@ -263,7 +264,6 @@ function UserService($resource, facebookService, authService) {
         return callback({message: 'Server Error', error: err});
       };
       var onLoad = function(result) {
-        console.log(result);
         return callback(undefined, true);
       };
       resource.execute(body, onLoad, onError);
@@ -285,7 +285,7 @@ function UserService($resource, facebookService, authService) {
     getFollowers: getFollowers,
     getFollowing: getFollowing,
     follow: follow,
-    unfollow: unfollow,
+    unfollow: unfollow
 	};
 }
 

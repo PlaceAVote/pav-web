@@ -1,7 +1,10 @@
 .bill-description.card {
-  max-height: 184px;
+  max-height: 196px;
   overflow: hidden;
   position: relative;
+  // h1 {
+  //   margin-bottom: 13px;
+  // }
   .readmore {
     position: absolute;
     bottom: 0;
@@ -26,6 +29,8 @@
     z-index: 9999;
     margin-top: 40px;
     max-height: calc(100% - 80px);
+    max-width: 1200px;
+    width: calc(100% - 40px);
     text-align: left;
     overflow: hidden;
     padding: 40px;

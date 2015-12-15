@@ -1,14 +1,30 @@
-<header ng-controller="HeaderCtrl as header" ng-show="header.authService.loggedInStatus()">
+<header ng-controller="HeaderCtrl as header" ng-show="header.login()">
 	<div class="row">
-	<img ng-click="header.go('/feed')" class="pav-icon" src="img/pav_icon.svg" />
+	<img ng-click="header.location.path('/feed')" class="pav-icon" src="img/pav_icon.svg" />
 	<section class="search">
 		<input type="text" placeholder="Search bills or people..." />
 		<img src="img/search.png" />
 	</section>
 	<section class="notification">
-		<img style="cursor: pointer;" src="img/notification.svg" />
-		<img ng-click="header.go('/profile/me')" class="user-img" ng-hide="user.img_url" src="img/header/generic-user.png" />
-		<img class="user-img" ng-show="user.img_url" ng-src="{{user.img_url}}" />
+    <span ng-show="header.newEvent" class="notification-counter"><p>{{header.newEvent}}</p></span>
+		<img  style="cursor: pointer;" src="img/notification.svg" ng-click="header.notify()" />
+      <div class="notifications-container" ng-mouseleave="header.hideNotifications()"
+      ng-show="header.showNotifications">
+
+        <notifications notifications="header.notifications" read-event="header.readEvent(notification)"></notifications>
+      </div>
+
+		<img ng-click="header.dropDown()" class="user-img" ng-src="{{header.rs.user.img_url}}"/>
+    <div class="dropdown-container" ng-mouseleave="header.hideDropDown()" ng-show="header.showDropDown">
+      <ul>
+        <li ng-click="header.toProfile()">
+         <img class="user-img-inside" ng-src="{{header.rs.user.img_url}}"/> View Profile
+        </li>
+        <li ng-click="header.logout()">
+          Logout
+        </li>
+      </ul>
+    </div>
 	</section>
 	</div>
 </header>

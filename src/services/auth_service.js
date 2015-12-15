@@ -65,13 +65,21 @@ function AuthService($resource, options) {
     authResource.authorize(undefined, onLoad, onError);
   };
 
+  var logout = function(callback) {
+    storage.removeItem('pav');
+    auth = undefined;
+    callback(undefined, true);
+  };
+
   return {
     loggedInStatus: loggedInStatus,
     setAuth: setAuth,
     getAccessToken: getAccessToken,
+    getRawAccessToken: getRawAccessToken,
     setFacebookAuth: setFacebookAuth,
     getFacebookAccessToken: getFacebookAccessToken,
     validateToken: validateToken,
+    logout: logout,
   };
 }
 

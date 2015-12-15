@@ -318,7 +318,7 @@ describe("comment model", function(){
     });
     it('only calls service if user has already voted', function() {
       serviceCalled = false;
-      comment.scored = true;
+      comment.scoring = true;
       var subject = new Comment(comment);
       var service = {
         dislike: function(object, billId, callback) {
@@ -329,10 +329,14 @@ describe("comment model", function(){
            serviceCalled = true;
            return callback(undefined, true);
         },
+        revoke: function(object, billId, kind, callback) {
+          serviceCalled = true;
+          return callback(undefined, true);
+        }
       };
       subject.dislike(service);
       subject.like(service);
-      expect(serviceCalled).to.eql(false);
+      expect(serviceCalled).to.eql(true);
     });
   });
 });

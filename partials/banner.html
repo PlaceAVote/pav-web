@@ -16,17 +16,18 @@
    
   <div class="profile-follow">
       <div class="row">
-         <div class="stats total-followers">
-                <span>{{user.total_followers}}</span>
-                <h3>Followers</h3>
-              </div>
-          <div class="stats total-following">
+          <div class="stats profile-stats">
+              <span>{{user.total_followers}}</span>
+              <h3>Followers</h3>
+          </div>
+
+          <div class="stats profile-stats">
             <span>{{user.total_following}}</span>
             <h3>Following</h3>
-        </div>
+          </div>
+
           <div class="follow-me" ng-show="profile.isNotMe()">
-            <button ng-hide="user.following" ng-click="profile.follow()">Follow</button>
-            <button ng-show="user.following" ng-click="profile.unfollow()">Unfollow</button>
+            <button class="btn-green" ng-click="profile.follow()">{{profile.following}}</button>
           </div>
       </div>
   </div>

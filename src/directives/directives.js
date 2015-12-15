@@ -1,39 +1,17 @@
 var isArray = require('../utils/is_array.js');
 
 angular.module('pavDirectives', []).
- directive('headerNav', function() {
-         return {
-             restrict: 'E',
-             templateUrl: 'partials/header.html'
-         };
-     })
-     .directive('statusChart', function() {
-         function link(scope, el) {
-            //moved this here so it was in scope.
-           //TODO it should be injected in. to do so, you may have
-           //to make a service that simply exposes d3.  At least then
-           //it can be reused. p.s. if you can think of a better solution
-           //do that.
-            var d3 = require('d3');
-             scope.$watch('data', function(newValue, oldValue) {
-                 var sortBy = (function() {
+     directive('statusChart', function() {
 
+            var sortBy = (function() {
                      //cached privated objects
                      var _toString = Object.prototype.toString,
-                         //the default parser function
                          _parser = function(x) {
                              return x;
                          },
-                         //gets the item to be sorted
                          _getItem = function(x) {
                              return this.parser((_toString.call(x) === "[object Object]" && x[this.prop]) || x);
                          };
-
-                     // Creates a method for sorting the Array
-                     // @array: the Array of elements
-                     // @o.prop: property name (if it is an Array of objects)
-                     // @o.desc: determines whether the sort is descending
-                     // @o.parser: function to parse the items to expected type
                      return function(array, o) {
                          if (!(array instanceof Array) || !array.length)
                              return [];
@@ -52,9 +30,56 @@ angular.module('pavDirectives', []).
 
                  }());
 
-                 var vote_for = 0,
-                     vote_against = 0;
 
+
+         function link(scope, el) {
+            //moved this here so it was in scope.
+           //TODO it should be injected in. to do so, you may have
+           //to make a service that simply exposes d3.  At least then
+           //it can be reused. p.s. if you can think of a better solution
+           //do that.
+           // console.log(data);
+           var d3 = require('d3');
+           var counter = 0;
+               var margin = {top: 30, right: 10, bottom: 20, left: 30},
+                     per_width = el[0].clientWidth,
+                     width = per_width - margin.left - margin.right,
+                     height = 270 - margin.top - margin.bottom;
+
+
+            var svg = d3.select(el[0])
+             .append("svg")
+             .attr("width", width + margin.left + margin.right)
+             .attr("height", height + margin.top + margin.bottom)
+             .append("g")
+             .attr("transform",
+                 "translate(" + margin.left + "," + margin.top + ")");
+
+
+           scope.$watch('data', function(newValue) {
+            counter++;
+                     var vote_for = 0,
+                     vote_against = 0;
+                
+                // Define the line
+                 var for_line = d3.svg.line()
+                     .x(function(d) {
+                         return x(d.created_at);
+                     })
+                     .y(function(d) {
+                         return y(d['for']);
+                     });
+
+                 var against_line = d3.svg.line()
+                     .x(function(d) {
+                         return x(d.created_at);
+                     })
+                     .y(function(d) {
+                         return y(d['against']);
+                     });
+
+
+                //This formats new data
                  if (isArray(newValue)) {
                  data = newValue;
                  data.forEach(function(d) {
@@ -77,58 +102,25 @@ angular.module('pavDirectives', []).
                          d['for'] = vote_for;
                      }
                  });
+                }
+ 
 
-                 var margin = {
-                         top: 30,
-                         right: 10,
-                         bottom: 20,
-                         left: 30
-                     },
-                     per_width = el[0].clientWidth,
-                     width = per_width - margin.left - margin.right,
-                     height = 270 - margin.top - margin.bottom;
-
-                 var svg = d3.select(el[0])
-                     .append("svg")
-                     .attr("width", width + margin.left + margin.right)
-                     .attr("height", height + margin.top + margin.bottom)
-                     .append("g")
-                     .attr("transform",
-                         "translate(" + margin.left + "," + margin.top + ")");
-
-                 var x = d3.time.scale().domain(d3.extent(data, function(d) {
+                var x = d3.time.scale().domain(d3.extent(data, function(d) {
                      return d.created_at;
                  })).range([0, width]);
                  var y = d3.scale.linear().range([height, 0]);
 
-                 var xAxis = d3.svg.axis().scale(x)
-                     .orient("bottom").ticks(5)
-                     .outerTickSize(0);
 
-                 var yAxis = d3.svg.axis().scale(y)
-                     .orient("left").ticks(4)
+
+                   var xAxis = d3.svg.axis().scale(x)
+                    .orient("bottom").ticks(5);
+
+                     var yAxis = d3.svg.axis().scale(y)
+                    .orient("left").ticks(4)
                      .innerTickSize(-width);
 
-                 // Define the line
-                 var for_line = d3.svg.line()
-                     .x(function(d) {
-                         return x(d.created_at);
-                     })
-                     .y(function(d) {
-                         return y(d['for']);
-                     });
 
-                 var against_line = d3.svg.line()
-                     .x(function(d) {
-                         return x(d.created_at);
-                     })
-                     .y(function(d) {
-                         return y(d['against']);
-                     });
-
-
-                 // Scale the range of the data
-                 x.domain(d3.extent(data, function(d) {
+               x.domain(d3.extent(data, function(d) {
                      return d.created_at;
                  }));
                  y.domain([0, d3.max(data, function(d) {
@@ -136,6 +128,10 @@ angular.module('pavDirectives', []).
                  })]);
 
 
+                //this inits the chart with necessary elements.
+                 if(counter == 1) {
+
+                var svg = d3.select('svg g');
 
                  // Add the X Axis
                  svg.append("g")
@@ -163,10 +159,51 @@ angular.module('pavDirectives', []).
                  svg.select('.y.axis .tick line')
                      .attr("class", "baseline");
 
+                 } //end of if
+
+
+
+               //This animates the graph when new data is pulled in         
+                if(counter > 1) {
+                  
+                    // Scale the range of the data again 
+                 x.domain(d3.extent(data, function(d) {
+                     return d.created_at;
+                 }));
+                 y.domain([0, d3.max(data, function(d) {
+                     return d['for'];
+                 })]);
+
+                // Select the section we want to apply our changes to
+                var svg = d3.select(el[0]).transition();
+
+                // Make the changes
+                    svg.select(".for_line")   // change the line
+                        .duration(750)
+                        .attr("d", for_line(data));
+                    svg.select(".opposed_line")   // change the line
+                        .duration(750)
+                        .attr("d", against_line(data));
+                    svg.select(".x.axis") // change the x axis
+                        .duration(750)
+                        .call(xAxis);
+                    svg.select(".y.axis") // change the y axis
+                        .duration(750)
+                        .call(yAxis);
+
+                        d3.select(window).on('resize', resize);
+                }            
+
+
+
+
+
+                //Resize event call
                  d3.select(window).on('resize', resize);
 
                  function resize() {
                      // update width
+                     var svg = d3.select('svg g');
                      width = el[0].clientWidth;
                      width = width - margin.left - margin.right;
 
@@ -179,7 +216,6 @@ angular.module('pavDirectives', []).
                      yAxis = d3.svg.axis().scale(y)
                          .orient("left").ticks(4)
                          .innerTickSize(-width);
-
 
                      d3.select(svg.node().parentNode)
                          .style('width', (width + margin.left + margin.right) + 'px');
@@ -199,18 +235,20 @@ angular.module('pavDirectives', []).
 
                      svg.selectAll(".y.axis .tick text")
                          .attr("x", "-10");
-
-                 }
-             }
+                 } //End of Resize Function
+           
              });
-
          }
 
          return {
              link: link,
              restrict: 'E',
+
+             // bindToController: true,
              scope: {
                  data: '='
-             }
+             },
+            controller: 'BillCtrl',
+             controllerAs: 'bill'
          };
      });

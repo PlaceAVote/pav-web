@@ -14,7 +14,7 @@ var AuthService = require('./services/auth_service.js');
 var LegislatorService = require('./services/legislator_service.js');
 var VoteService = require('./services/votes_service.js');
 var CommentService = require('./services/comment_service.js');
-
+var NotificationService = require('./services/notification_service.js');
 //dependencies
 var angular = require('angular');
 
@@ -23,11 +23,15 @@ var mailcheck = require('./directives/mailcheck.js');
 var pavDirectives = require('./directives/directives.js');
 var commentsDirective = require('./directives/comments.js');
 var commentDirective = require('./directives/comment.js');
+var commentEventDirective = require('./directives/comment_event.js');
 var bannerDirective = require('./directives/banner.js');
 var timelineDirective = require('./directives/timeline.js');
 var timelineFollowingEventDirective = require('./directives/following_event.js');
 var timelineFollowedEventDirective = require('./directives/followed_event.js');
 var voteEventDirective = require('./directives/vote_event.js');
+var headerNav = require('./directives/header_directive.js');
+var notificationsDirective = require('./directives/notifications.js');
+var commentReplyNotificationDirective = require('./directives/comment_reply_notification.js');
 // var statusChart = require('./directives/statuschart.js');
 //thirdparty integrations
 var Facebook = require('./integrations/facebook.js');
@@ -35,7 +39,7 @@ var Facebook = require('./integrations/facebook.js');
 var TempBillResource = require('./temp/mockBillResource.js');
 var TempTrendResource = require('./temp/mockTrendResource.js');
 
-var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), 'pavDirectives']);
+var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'pavDirectives']);
 
 
 app.config(['$routeProvider', function($routeProvider) {
@@ -77,23 +81,27 @@ app.factory('trendService', ['tempTrendResource', TrendService]);
 app.factory('commentService', ['$resource', 'userService', 'authService', CommentService]);
 app.factory('legislationService', ['$resource', 'authService', LegislatorService]);
 app.factory('voteService', ['$resource', 'authService', 'userService', VoteService]);
-
+app.factory('notificationService', ['$resource', 'authService', NotificationService]);
 //controllers
 app.controller('TopicRegisterCtrl',['$scope','$location', 'userService', RegisterController]);
-app.controller('SignUpCtrl',['$scope','$location', 'userService', SignUpController]);
-app.controller('LoginCtrl',['$scope','$location', 'userService', 'authService', LoginController]);
-app.controller('FeedCtrl', ['$scope', '$location', 'userService', 'billService', 'trendService', 'authService', FeedController]);
+app.controller('SignUpCtrl',['$rootScope','$scope','$location', 'userService', SignUpController]);
+app.controller('LoginCtrl',['$scope','$location', 'userService', 'authService', '$rootScope', LoginController]);
+app.controller('FeedCtrl', ['$scope', '$location', 'userService', 'billService', 'trendService', 'authService','$rootScope', FeedController]);
 app.controller('BillCtrl', ['$scope', '$routeParams', 'billService', 'legislationService', 'voteService', 'commentService', '$location', 'authService', BillController]);
-app.controller('HeaderCtrl', ['$scope', '$location', 'authService', HeaderController]);
+app.controller('HeaderCtrl', ['$rootScope', '$scope', '$location', 'authService', 'userService', 'notificationService', HeaderController]);
 app.controller('ProfileCtrl', ['$scope', '$location', '$routeParams', 'authService', 'userService', ProfileController]);
 //directives
+app.directive('headerNav', [headerNav]);
 app.directive('mailcheck', ['$compile','$sce', mailcheck]);
 app.directive('comment', ['$compile', 'commentService', commentDirective]);
+app.directive('commentEvent', ['$compile', 'commentService', commentEventDirective]);
 app.directive('comments', [commentsDirective]);
 app.directive('banner', [bannerDirective]);
 app.directive('timeline', [timelineDirective]);
 app.directive('following', ['$location', timelineFollowingEventDirective]);
 app.directive('followed', ['$location', timelineFollowedEventDirective]);
 app.directive('vote', ['$location', voteEventDirective]);
+app.directive('notifications', [notificationsDirective]);
+app.directive('commentreply', ['$location', commentReplyNotificationDirective]);
 // app.directive('statusChart', [statusChart]);
 

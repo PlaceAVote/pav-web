@@ -1,0 +1,34 @@
+<div class="comment-container">
+
+        <section class="comment">
+          <div class="user-img-border">
+            <img src='{{comment.author_img_url}}' />
+          </div>
+
+            <div class="top-comment-body">
+
+            <h2><a href="#/profile/{{comment.author}}">{{comment.author_first_name}}</a></h2>
+            <p class="event-bill-title">in <a href="#/bill/{{comment.bill_id}}">{{comment.bill_title}}</a></p>
+
+            <section class="comment-vote"><span  ng-class="{'score-down': comment.score < 0, 'score-none': comment.score == 0}">{{comment.score}}</span><i class="icon-thumbs-up thumbs" ng-class="{'score-up': comment.liked == true}" ng-click="comment.like(commentService)"></i><i class="icon-thumbs-down thumbs" ng-class="{'score-down': comment.disliked == true}" ng-click="comment.dislike(commentService)"/></i><span class="reply-btn" ng-click="comment.showReplyInput()">reply</span></section>
+
+            
+
+            </div>
+        </section>
+        <p class="event-comment-body">“{{comment.body}}”</p>
+            <div class="reply-comment" ng-show="comment.replyInput">
+            <textarea type="text" placeholder="Reply" ng-model="comment.replyText"></textarea>
+            <div class="reply-actions">
+             <span class="btn-blank" ng-click="comment.hideReplyInput()">CANCEL</span>
+            <span class="btn-green" ng-click="comment.reply(comment.bill_id, commentService)">POST</span>
+
+            </div>
+            </div>
+        <div class="reply-btn-container" ng-show='comment.replies.length > 0'>
+            <button class="reply-show-hide" ng-hide='comment.showChildren' ng-click='comment.show()'>{{comment.replies.length}} Replies</button>
+            <button class="reply-show-hide" ng-show='comment.showChildren' ng-click='comment.hide()'>Hide Replies</button>
+        </div>
+
+
+</div>

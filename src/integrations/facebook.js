@@ -31,17 +31,21 @@ Facebook = function(){
         facebook.getLoginStatus(function(response) {
             var auth = response.authResponse;
             if (response.status === 'connected') {
-                facebook.api('/me', {fields: 'first_name, last_name, picture, email, birthday, hometown'}, function(response) {
+                facebook.api('/me', {fields: 'first_name, last_name, picture, email, birthday, hometown, cover'}, function(response) {
                     callback(response, auth);
                 });
             }
             else {
                 facebook.login(function(response){
                     var auth = response.authResponse;
-                    facebook.api('/me', {fields: 'first_name, last_name, picture, email, birthday, hometown'}, function(response) {
-                        callback(response, auth);
+                    facebook.api('/me', {fields: 'first_name, last_name, picture, email, birthday, hometown, cover'}, function(response) {
+                      var userNode = response;
+                      facebook.api('/' + userNode.id + '/picture/?type=large' ,function(response){
+                        userNode.picture = response;
+                        callback(userNode, auth);
+                      });
                     });
-                }, {scope: 'email, user_birthday'});
+                }, {scope: 'email, user_birthday, user_photos'});
             }
         });
     };

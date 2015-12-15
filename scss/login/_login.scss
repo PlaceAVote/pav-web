@@ -1,449 +1,380 @@
 .login-wrapper {
-  position: relative;
-  // background-color: white;
-  height: 100%;
-  // overflow: hidden;
-  // @include media(480px){
-  // min-height: 100%;
-  // overflow: auto;
-  // }
-
-  .login-footer {
-    @include media(480px){
-    display: none;
-    }
-    background-color: white;
-    border-top: 1px solid $grey;
-    position: absolute;
-    width: auto;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: 0px auto;
-    height: auto;
-    width: 212px;
-
-    ul {
-      li {
-        cursor: pointer;
-        display: inline-block;
-        height: 40px;
-        @include font-size(11px);
-        line-height: 39px;
-        @include medium();
-        padding: 0px 20px;
-        transition: all 0.2s ease;
-
-        &:hover {
-          background-color: lighten($purple, 50%);
-          color: $purple;
-        }
-      }
-    }
-  }
+    position: relative;
+    height: 100%;
+    // .login-footer {
+    //     @include media(480px) {
+    //         display: none;
+    //     }
+    //     background-color: white;
+    //     border-top: 1px solid $grey;
+    //     position: absolute;
+    //     width: auto;
+    //     bottom: 0;
+    //     left: 0;
+    //     right: 0;
+    //     margin: 0px auto;
+    //     height: auto;
+    //     width: 212px;
+    //     ul {
+    //         li {
+    //             cursor: pointer;
+    //             display: inline-block;
+    //             height: 40px;
+    //             @include font-size(11px);
+    //             line-height: 39px;
+    //             @include medium();
+    //             padding: 0px 20px;
+    //             transition: all 0.2s ease;
+    //             &:hover {
+    //                 background-color: lighten($purple, 50%);
+    //                 color: $purple;
+    //             }
+    //         }
+    //     }
+    // }
 }
 
 .login {
-  position: absolute;
-  margin: 0 auto;
-  left: 0;
-  right: 0;
-  @include medium();
-  height: 100%;
-  // background: white;
-  text-align: center;
-  max-width: 400px;
-  padding: 40px 40px 0px 40px;
-
-  .logo-wrap {
-    height: 70px;
-    position: relative;
-    width: 100%;
-
-    img {
-      height: auto;
-      width: 100%;
-      max-height: 100px;
-      position: absolute;
-      margin: 0px auto;
-      left: 0;
-      right: 0;
-    }
-  }
-
-  h1 {
-    @include font-size(20px);
-    color: $black;
-    margin: 24px 0;
-    line-height: 30px;
-  }
-
-  p {
-    color: $black;
-    @include font-size(12px);
-  }
-
-  button {
-    height: 40px;
-    line-height: 39px;
-    @include font-size(12px);
-    display: inline-block;
-    border-radius: 3px;
-    width: 100%;
-    margin: 10px 0;
-    cursor: pointer;
-    outline: none;
-    transition: all 0.2s ease;
-    position: relative;
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
     @include medium();
-
-    &.fb-login {
-      background-color: $fbblue;
-      color: white;
-      width: 100%;
-      border: 1px solid $fbbluedark;
-
-      & .icon-facebook {
-        position: absolute;
-        left: 15px;
-        top: 3px;
-        @include font-size(18px);
-      }
-
-      &:hover {
-        background-color: lighten($fbbluedark, 20%);
-        border-color: $fbblue;
-      }
+    height: 100%;
+    // background: white;
+    text-align: center;
+    max-width: 510px;
+    padding: 40px 40px 0px 40px;
+    @include media(480px) {
+        padding: 40px 20px;
     }
-
-    &.tw-login,
-    &.email-login {
-      border: 1px solid $grey;
-      background-color: white;
-      @include media(480px){
-        @include font-size(12px);
-      }
-      margin: 10px 0;
-      width: calc(50% - 10px);
-
-      &:hover {
-        background-color: $purple;
-        color: white;
-        border-color: lighten($purple, 40%);
-      }
+    .login-spacing {
+        margin-bottom: 40px;
     }
-
-    &.tw-login {
-      margin-right: 10px;
-
-      &:hover {
-        background-color: $twblue;
-        border-color: lighten($twblue, 20%);
-      }
-    }
-  }
-
-  // email signin
-  section {
-    @include media(480px){
-    margin-bottom: 20px;
-    }
-    opacity: 1;
-
-    &.ng-hide-add,
-    &.ng-hide-remove {
-      transition: all 0.2s ease;
-    }
-
-    &.ng-hide {
-      opacity: 0;
-    }
-    margin-top: 5px;
-    position: relative;
-    background: white;
-    border: 1px solid #cccccc;
-    border-radius: 3px;
-
-    &:after,
-    &:before {
-      bottom: 100%;
-      left: 75%;
-      border: solid transparent;
-      content: " ";
-      height: 0;
-      width: 0;
-      position: absolute;
-      pointer-events: none;
-    }
-
-    &:after {
-      border-color: rgba(136, 183, 213, 0);
-      border-bottom-color: white;
-      border-width: 10px;
-      margin-left: -10px;
-    }
-
-    &:before {
-      border-color: rgba(204, 204, 204, 0);
-      border-bottom-color: #cccccc;
-      border-width: 11px;
-      margin-left: -11px;
-    }
-
-    // overflow: hidden;
-    // padding: 20px;
-    label {
-      @include font-size(12px);
-      text-align: left;
-      width: calc(100% - 40px);
-      display: block;
-      margin-bottom: 10px;
-      margin-left: 20px;
-
-      &:first-child {
-        margin-top: 15px;
-      }
-    }
-
-    input {
-      width: calc(100% - 40px);
-      height: 30px;
-      margin-bottom: 10px;
-      margin-left: 20px;
-      margin-right: 20px;
-      border-radius: 3px;
-      border: 1px solid $grey;
-      @include font-size(12px);
-      color: $purple;
-      padding-left: 10px;
-      outline: none;
-      transition: all 0.2s ease;
-
-      &:focus {
-        border: 1px solid $purple;
-      }
-
-      &::-webkit-input-placeholder {
-        color: $grey;
-      }
-
-      &::-moz-placeholder {
-
-        /* Firefox 19+ */
-        color: $grey;
-      }
-
-      &:-ms-input-placeholder {
-        color: $grey;
-      }
-
-      &:-moz-placeholder {
-
-        /* Firefox 18- */
-        color: $grey;
-      }
-    }
-
-    button {
-      padding: 0px;
-      width: 50%;
-      background-color: $purple;
-      color: white;
-      display: inline-block;
-      border: none;
-      outline: none;
-      height: 40px;
-      line-height: 39px;
-      margin-top: 10px;
-      margin-right: 0px;
-      margin-bottom: 0px;
-      @include font-size(12px);
-      @include medium();
-      @include media(480px){
-        @include font-size(12px);
-      }
-      margin-left: 0;
-      border-radius: 0px;
-      border-bottom-left-radius: 3px;
-      cursor: pointer;
-
-      &:hover {
-        background-color: lighten($purple, 50%);
-        color: $purple;
-      }
-
-      &:last-child {
-        border-radius: 0px;
-        border-bottom-right-radius: 3px;
-
-        &:hover {
-          background-color: lighten($purple, 50%);
-          color: $purple;
+    .logo-wrap {
+        height: 70px;
+        position: relative;
+        float: left;
+        img {
+            height: auto;
+            width: 150px;
+            left: 0;
+            right: 0;
+            display: block;
         }
-      }
-
-      &:focus {
-        border: none;
-      }
     }
-  }
+    ul {
+        text-align: right;
+        li {
+            display: inline;
+            text-align: right;
+            margin-left: 20px;
+            a:hover {
+                color: darken($grey, 30%);
+            }
+            .login--selected {
+                color: $blue;
+                font-weight: 600;
+            }
+        }
+        a {
+            color: darken($grey, 50%);
+            text-decoration: none;
+        }
+    }
+    h1 {
+        @include font-size(20px);
+        color: $black;
+        margin: 10px 0;
+        line-height: 30px;
+    }
+    p {
+        color: $black;
+        @include font-size(14px);
+    }
+    button {
+        height: 40px;
+        line-height: 39px;
+        @include font-size(14px);
+        display: inline-block;
+        border-radius: 3px;
+        width: 100%;
+        margin: 10px 0;
+        cursor: pointer;
+        outline: none;
+        transition: all 0.2s ease;
+        position: relative;
+        @include medium();
+        &.fb-login {
+            background-color: $fbblue;
+            color: white;
+            width: 100%;
+            border: 1px solid $fbbluedark;
+            line-height: 35px;
+            margin-top: 20px;
+            & .icon-facebook {
+                position: absolute;
+                left: 15px;
+                top: 3px;
+                @include font-size(18px);
+            }
+            &:hover {
+                background-color: lighten($fbbluedark, 20%);
+                border-color: $fbblue;
+            }
+        }
+        &.tw-login,
+        &.email-login {
+            border: 1px solid $grey;
+            background-color: white;
+            @include media(480px) {
+                @include font-size(14px);
+            }
+            margin: 10px 0;
+            width: calc(50% - 10px);
+            &:hover {
+                background-color: $purple;
+                color: white;
+                border-color: lighten($purple, 40%);
+            }
+        }
+        &.tw-login {
+            margin-right: 10px;
+            &:hover {
+                background-color: $twblue;
+                border-color: lighten($twblue, 20%);
+            }
+        }
+    }
+    // email signin
+    section {
+        opacity: 1;
+        &.ng-hide-add,
+        &.ng-hide-remove {
+            transition: all 0.2s ease;
+        }
+        &.ng-hide {
+            opacity: 0;
+        }
+        margin-top: 5px;
+        position: relative;
+        background: white;
+        @include box();
+        @include media(480px) {
+            padding: 10px 10px;
+        }
+        &:after {
+            border-color: rgba(136, 183, 213, 0);
+            border-bottom-color: white;
+            border-width: 10px;
+            margin-left: -10px;
+        }
+        &:before {
+            border-color: rgba(204, 204, 204, 0);
+            border-bottom-color: #cccccc;
+            border-width: 11px;
+            margin-left: -11px;
+        }
+        // overflow: hidden;
+        // padding: 20px;
+        label {
+            @include font-size(14px);
+            text-align: left;
+            width: calc(100% - 40px);
+            display: block;
+            margin-bottom: 10px;
+            margin-left: 20px;
+            font-weight: 400;
+            &:first-child {
+                margin-top: 25px;
+            }
+        }
+        input {
+            width: calc(100% - 40px);
+            height: 40px;
+            margin-bottom: 10px;
+            margin-left: 20px;
+            margin-right: 20px;
+            border-radius: 3px;
+            border: 1px solid $grey;
+            @include font-size(14px);
+            color: $purple;
+            padding-left: 10px;
+            outline: none;
+            transition: all 0.2s ease;
+            &:focus {
+                border: 1px solid darken($grey, 40%);
+            }
+            &::-webkit-input-placeholder {
+                color: $grey;
+            }
+            &::-moz-placeholder {
+                /* Firefox 19+ */
+                color: $grey;
+            }
+            &:-ms-input-placeholder {
+                color: $grey;
+            }
+            &:-moz-placeholder {
+                /* Firefox 18- */
+                color: $grey;
+            }
+        }
+        .forgot {
+            margin-bottom: 20px;
+            a {
+                text-decoration: none;
+                color: $blue;
+                &:hover {
+                    color: $red;
+                }
+            }
+        }
+        button {
+            padding: 0px;
+            width: 90%;
+            background-color: $green;
+            color: white;
+            display: inline-block;
+            border: 1px solid darken($green, 10%);
+            outline: none;
+            height: 40px;
+            line-height: 39px;
+            margin-top: 10px;
+            margin-right: 0px;
+            margin-bottom: 20px;
+            @include font-size(14px);
+            @include medium();
+            @include media(480px) {
+                @include font-size(12px);
+            }
+            margin-left: 0;
+            border-radius: 3px;
+            cursor: pointer;
+            &:hover {
+                background-color: darken($green, 10%);
+            }
+            &:focus {
+                border: none;
+            }
+        }
+    }
 }
 
 .quote {
-  background-image: url('../img/signup-bg.jpg');
-  background-size: cover;
-
-  // min-height: 1000px;
-  height: 100%;
-  padding: 40px 40px;
-  @include media(900px){
-  display: none;
-  }
-  @include media(480px){
-  display: none;
-  }
-
-  h1 {
-    color: white;
-    @include font-size(24px);
-    font-family: Georgia, Times, 'Times New Roman', serif;
-    font-style: italic;
-  }
-
-  h2 {
-    margin: 10px 0px;
-    color: white;
-    @include font-size(28px);
-    font-family: Georgia, Times, 'Times New Roman', serif;
-    font-style: italic;
-  }
-
-  span {
-    @include font-size(22px);
-    color: white;
-    font-weight: light;
-    font-family: Georgia, Times, 'Times New Roman', serif;
-  }
+    background-image: url('../img/signup-bg.jpg');
+    background-size: cover;
+    // min-height: 1000px;
+    height: 100%;
+    padding: 40px 40px;
+    @include media(900px) {
+        display: none;
+    }
+    @include media(480px) {
+        display: none;
+    }
+    h1 {
+        color: white;
+        @include font-size(24px);
+        font-family: Georgia, Times, 'Times New Roman', serif;
+        font-style: italic;
+    }
+    h2 {
+        margin: 10px 0px;
+        color: white;
+        @include font-size(28px);
+        font-family: Georgia, Times, 'Times New Roman', serif;
+        font-style: italic;
+    }
+    span {
+        @include font-size(22px);
+        color: white;
+        font-weight: light;
+        font-family: Georgia, Times, 'Times New Roman', serif;
+    }
 }
 
 .login-error {
-  border: 2px solid $red !important;
-  color: $red !important;
+    border: 2px solid $red !important;
+    color: $red !important;
 }
 
 .error-message {
-  color: $red !important;
-  text-align: left;
-  padding-left: 20px;
-  height: 1px;
-  oveflow: hidden;
-  opacity: 0;
-  transition: all 0.2s ease;
-
-  &.show {
-    opacity: 1;
-    height: 20px;
-  }
-
-  &.ng-enter {
-    transition: 0.2s;
+    color: $red !important;
+    text-align: left;
+    padding-left: 20px;
+    height: 1px;
+    oveflow: hidden;
     opacity: 0;
-  }
-
-  &.ng-enter-active {
-    opacity: 1;
-    right: 0;
-  }
-
-  &.ng-leave {
-    transition: 0.2s;
-    opacity: 1;
-  }
-
-  &.ng-leave-active {
-    opacity: 0;
-  }
+    transition: all 0.2s ease;
+    &.show {
+        opacity: 1;
+        height: 20px;
+    }
+    &.ng-enter {
+        transition: 0.2s;
+        opacity: 0;
+    }
+    &.ng-enter-active {
+        opacity: 1;
+        right: 0;
+    }
+    &.ng-leave {
+        transition: 0.2s;
+        opacity: 1;
+    }
+    &.ng-leave-active {
+        opacity: 0;
+    }
 }
 
 .mailcheck {
-  height: 0;
-  padding: 0 0;
-  overflow: hidden;
-  transition: all 0.3s ease;
-  color: white;
-  @include font-size(11px);
+    height: 0;
+    padding: 0 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    color: white;
+    @include font-size(11px);
 }
 
 .mailcheckshow {
-  padding: 10px;
-  background-color: $green;
-  color: white;
-  height: auto;
-  min-height: 31px;
-  line-height: 24px;
-  margin-bottom: 10px;
-
-  a {
-    background-color: white;
-    color: $green;
-    padding: 0px 10px;
-    border-radius: 3px;
-    cursor: pointer;
-    margin-right: 5px;
-    transition: all 0.3s ease;
-    border: 1px solid transparent;
-
-    &:hover {
-      background-color: lighten($green, 10%);
-      border: 1px solid white;
-      color: white;
+    padding: 10px;
+    background-color: $green;
+    color: white;
+    height: auto;
+    min-height: 31px;
+    line-height: 24px;
+    margin-bottom: 10px;
+    a {
+        background-color: white;
+        color: $green;
+        padding: 0px 10px;
+        border-radius: 3px;
+        cursor: pointer;
+        margin-right: 5px;
+        transition: all 0.3s ease;
+        border: 1px solid transparent;
+        &:hover {
+            background-color: lighten($green, 10%);
+            border: 1px solid white;
+            color: white;
+        }
+        &:last-child {
+            border-radius: 50%;
+            color: white;
+            background-color: $red;
+            padding: 0px;
+            width: 14px;
+            font-size: 11px;
+            height: 14px;
+            display: inline-block;
+            vertical-align: middle;
+            line-height: 11px;
+            font-size: 10px;
+            &:hover {
+                background-color: lighten($red, 20%);
+            }
+        }
     }
-
-    &:last-child {
-      border-radius: 50%;
-      color: white;
-      background-color: $red;
-      padding: 0px;
-      width: 14px;
-      font-size: 11px;
-      height: 14px;
-      display: inline-block;
-      vertical-align: middle;
-      line-height: 11px;
-      font-size: 10px;
-
-      &:hover {
-        background-color: lighten($red, 20%);
-      }
-    }
-  }
 }
-
-// .login-fix {
-//   display: flex;
-//   flex-direction: row;
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

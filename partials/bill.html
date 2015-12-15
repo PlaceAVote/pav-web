@@ -36,13 +36,13 @@
   		<div class="card">
   			<h1>Top Comment In Favor</h1>
   			<hr />
-        <div class="pre-loader" ng-hide="bill.topLoaded"><hr /><hr /><hr /><hr /></div>
+        <div class="pre-loader" ng-hide="bill.topLoaded"></div>
         <aside class="row-layout loaded" ng-show="bill.forComment.author">
   			<div class="user-img-border">
           <img src="{{bill.forComment.author_img_url}}" />
   			</div>
   			<div class="top-comment-body" ng-show="bill.hasForComment">
-          <h2>{{bill.forComment.author_first_name}}</h2> <section class="comment-vote"><span>{{bill.forComment.score}}</span><i class="icon-thumbs-up thumbs" ng-click="bill.forComment.like(bill.commentService)"></i><i class="icon-thumbs-down thumbs" ng-click="bill.forComment.dislike(bill.commentService)"></i></section>
+          <h2><a href="#/profile/{{bill.forComment.author}}">{{bill.forComment.author_first_name}}</a></h2> <section class="comment-vote"><span ng-class="{'score-down': comment.score < 0, 'score-none': bill.forComment.score == 0}">{{bill.forComment.score}}</span><i class="icon-thumbs-up thumbs" ng-class="{'score-up': bill.forComment.liked == true}" ng-click="bill.forComment.like(bill.commentService)"></i><i class="icon-thumbs-down thumbs" ng-class="{'score-down': bill.forComment.disliked == true}" ng-click="bill.forComment.dislike(bill.commentService)"></i></section>
           <p>{{bill.forComment.body}}</p>
   			</div>
         <div ng-show="bill.noForComment">
@@ -53,13 +53,13 @@
       <div class="card">
         <h1>Top Comment Opposed</h1>
         <hr />
-        <div class="pre-loader" ng-hide="bill.topLoaded"><hr /><hr /><hr /><hr /></div>
+        <div class="pre-loader" ng-hide="bill.topLoaded"></div>
         <aside class="row-layout loaded" ng-show="bill.againstComment.author">
           <div class="user-img-border">
             <img ng-src="{{bill.againstComment.author_img_url}}" />
           </div>
           <div class="top-comment-body" ng-show="bill.hasAgainstComment">
-            <h2>{{bill.againstComment.author_first_name}}</h2> <section class="comment-vote opposed"><span ng-class="{'red': bill.againstComment.score < 0}">{{bill.againstComment.score}}</span><i class="icon-thumbs-up thumbs" ng-click="bill.againstComment.like(bill.commentService)"></i><i class="icon-thumbs-down thumbs" ng-click="bill.againstComment.dislike(bill.commentService)"></i></section>
+            <h2><a href="#/profile/{{bill.againstComment.author}}">{{bill.againstComment.author_first_name}}</a></h2> <section class="comment-vote opposed"><span ng-class="{'red': bill.againstComment.score < 0}">{{bill.againstComment.score}}</span><i class="icon-thumbs-up thumbs" ng-class="{'score-up': bill.againstComment.liked == true}" ng-click="bill.againstComment.like(bill.commentService)"></i><i class="icon-thumbs-down thumbs" ng-class="{'score-down': bill.againstComment.disliked == true}" ng-click="bill.againstComment.dislike(bill.commentService)"></i></section>
             <p>{{bill.againstComment.body}}</p>
           </div>
           <div class="top-comment-body" ng-show="bill.noAgainstComment">
@@ -88,7 +88,7 @@
 		<div class="card bill-description">
 			<h1>Bill Summary</h1>
 			<hr />
-      <p>{{bill.body.billData.summary}}</p>
+      <p ng-bind-html="bill.body.billData.summary"></p>
       <div ng-click="bill.readmore = true" class="readmore">
         <p>Read More</p>
       </div>
@@ -99,6 +99,9 @@
       <h1>COMMENTS</h1>
       <hr />
     <div class="pre-loader" ng-hide="bill.comments"></div>
+    <div ng-show="bill.commentMessage" class="card-message">
+      <h2>Be the first to comment on this bill.</h2>
+    </div>
       <comments ng-show="bill.comments" comments='bill.comments'></comments>
 		</div>
 
@@ -112,8 +115,8 @@
     </div>
 
 
-<section class="row bill-stats-vote l-12">
-		<div class="card bill-stats l-6">
+<section ng-switch="bill.chartShow" class="row bill-stats-vote l-12">
+		<div ng-switch-when="true" class="card bill-stats l-6">
     <h1>Statistics</h1>
     <hr />
     <status-chart data="bill.stats"></status-chart>
@@ -122,10 +125,13 @@
     <div class="card vote-widget">
     <h1>Vote Now</h1>
     <hr />
-    <aside class="row">
+    <aside class="row" ng-cloak ng-hide="bill.hasVoted">
       <button class="btn-green l-6" ng-click="bill.showVoteModal(true)"><span class="icon-arrow-up"></span> Vote In Favor </button>
       <button class="btn-red l-6" ng-click="bill.showVoteModal(false)"><span class="icon-arrow-down"></span> Vote Against </button>
-      </aside>
+    </aside>
+      <section class="card-message" ng-show="bill.hasVoted">
+      <h2>You have already voted on this bill.</h2>
+      </section>
     </div>
 
     <div class="card current-vote-stats">
@@ -196,7 +202,7 @@
         <img ng-click="bill.readmore = false" class="close" src="img/close-widget-black.png" />
         <h1>{{bill.body.getTitle()}}</h1>
         <section>
-        <p>{{bill.body.billData.summary}}</p>
+        <p ng-bind-html="bill.body.billData.summary"></p>
         </section>
         </div>
     </section>

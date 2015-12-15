@@ -1,9 +1,9 @@
 var countryCodes = require('../utils/countrycodes.json');
-function SignUpCtrl ($scope, $location, userService) {
+function SignUpCtrl ($rootScope, $scope, $location, userService, authService) {
 	$scope = $scope || {};
 	$scope.signup = this;
 	this.userService = userService;
-  this.location = $location;
+    this.location = $location;
 	this.max = this.maxDate();
     var user = this.userService.getUser() || {};
     this.additionalInformation = {
@@ -13,6 +13,12 @@ function SignUpCtrl ($scope, $location, userService) {
         "country_code": "USA"
     };
 	this.country = countryCodes;
+    this.rs = $rootScope;
+    this.loggedIn = $rootScope.loggedIn;
+    if(!userService.user) {
+        this.location.path('/');
+    }
+
 }
 
 SignUpCtrl.prototype.test = function() {
@@ -23,6 +29,7 @@ SignUpCtrl.prototype.test = function() {
         that.invalid_user = true;
     }
     else {
+        console.log(user);
         this.userService.saveUser(function(err, result){
             if(err) {
                 if(err.status === 409) {
@@ -33,7 +40,13 @@ SignUpCtrl.prototype.test = function() {
                 }
             }
             else {
-                //move page
+                that.rs.loggedIn = true;
+                if(!user.img_url) {
+                user.img_url = 'img/profile/profile-picture.png';
+                }
+                user.newUser = true;
+                that.rs.user = user;
+                console.log(that.rs);
                 that.location.path("/feed");
             }
         });

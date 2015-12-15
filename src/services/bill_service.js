@@ -8,15 +8,18 @@ function BillService(tempBillResource, $resource, authService, userService) {
     var getBills = function(username, callback) {
         var onLoad = function(result) {
             var bills = [];
-            for(r in result){
-                bills.push(new BillSummary(result[r]));
+            for(r in result.results){
+                bills.push(new BillSummary(result.results[r]));
             };
             callback(undefined, bills);
         };
         var onError = function(err){
             callback(err);
         };
-        var results = tempBillResource.get(undefined, onLoad, onError);
+        var url = config.bills.feed;
+        config.methods.get.headers['Authorization'] = authService.getAccessToken();
+        var resource = new $resource(url, undefined, {getBills: config.methods.get})
+        resource.getBills(undefined, onLoad, onError);
     };
 
     var getBillVotes = function(id, callback) {

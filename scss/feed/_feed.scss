@@ -4,29 +4,28 @@
   width: 100%;
 
   .feed-column {
-    width: 100%;
-
+    margin-bottom: 20px;
     .bill-container {
       margin-top: 20px;
       @include shadow();
 
       .bill {
-        @include bill();
+        // @include bill();
 
-        h3 {
-          @include font-size(11px);
-          @include bold();
-          color: $blue;
-          text-transform: uppercase;
-          cursor: pointer;
-        }
+        // h3 {
+        //   @include font-size(11px);
+        //   @include bold();
+        //   color: $blue;
+        //   text-transform: uppercase;
+        //   cursor: pointer;
+        // }
 
-        hr {
-          margin-top: 18px;
-          margin-bottom: 18px;
-          border: none;
-          border-bottom: 1px solid $widgetborder;
-        }
+        // hr {
+        //   margin-top: 18px;
+        //   margin-bottom: 18px;
+        //   border: none;
+        //   border-bottom: 1px solid $widgetborder;
+        // }
 
         .bill-summary-container {
           display: flex;
@@ -47,8 +46,8 @@
             }
 
             p {
-             @include medium();
-              @include font-size(16px);
+             @include light();
+              @include font-size(13px);
               line-height: 22px;
               color: $black;
             }
@@ -68,11 +67,11 @@
           background-color: #f4f2fe;
           color: $black;
           height: 35px;
-          @include medium();
-          @include font-size(10px);
+          @include light();
+          @include font-size(13px);
           border: none;
           outline: none;
-          width: 33.333%;
+          width: 50%;
           border-radius: 0;
           transition: all 0.3s ease;
           display: flex;
@@ -93,12 +92,12 @@
             border-bottom-left-radius: 3px;
           }
 
-          &:nth-child(2) {
-            border-top: none;
-            border-bottom: 1px solid $widgetborder;
-          }
+          // &:nth-child(2) {
+          //   border-top: none;
+          //   border-bottom: 1px solid $widgetborder;
+          // }
 
-          &:nth-child(3) {
+          &:nth-child(2) {
             border: 1px solid $widgetborder;
             border-top: none;
             border-bottom-right-radius: 3px;
@@ -127,15 +126,12 @@
   display: flex;
   flex-direction: row;
   flex-grow: 1;
-  align-content: stretch;
   flex-shrink: 0;
-  img {
-    display: flex;
+  img.logo-full-color {
     height: 100px;
-    @include media(560px) {
+    @include media(900px) {
       display: none;
     }
-    // justify-content: center;
   }
 
   img.close {
@@ -148,7 +144,7 @@
 
   section {
     padding-left: 40px;
-    @include media(560px) {
+    @include media(900px) {
       padding-left: 0;
     }
     display: flex;

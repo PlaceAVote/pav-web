@@ -22,71 +22,71 @@ describe('LoginCtrl', function() {
 		});
 
 
-		it('Should make sure the password fails client side validation', function() {
-			var scope = {};
-			var subject = new LoginCtrl(scope, {}, {}, authService);
-			expect(subject.passwordValidation("password")).to.be.false;
-		});
+		// it('Should make sure the password fails client side validation', function() {
+		// 	var scope = {};
+		// 	var subject = new LoginCtrl(scope, {}, {}, authService);
+		// 	expect(subject.passwordValidation("password")).to.be.false;
+		// });
 
-		it('Should return true is password is valid', function() {
-			var scope = {};
-			var subject = new LoginCtrl(scope, {}, {}, authService);
-			expect(subject.passwordValidation("p455worD")).to.be.true;
-		});
+		// it('Should return true is password is valid', function() {
+		// 	var scope = {};
+		// 	var subject = new LoginCtrl(scope, {}, {}, authService);
+		// 	expect(subject.passwordValidation("p455worD")).to.be.true;
+		// });
 
 
-		it('Should not call location when neither password and email are valid', function() {
-			var changed = false;
-			var created = false;
-			var scope = {};
-			var subject = new LoginCtrl(scope, {}, {}, authService);
-			var user = {
-				email : "anthonyemail.com",
-				password : "password"
-			}
-			subject.userService = {
-				createUser : function(){
-					created = true;
-				}
-			};
-			subject.location = {
-				path : function() {
-					changed = true;
-				}
-			}
-			subject.validate(user);
-			expect(changed).to.be.false;
-			expect(created).to.be.false;
-			expect(subject.user.emailValid).to.be.false;
-			expect(subject.user.passwordValid).to.be.false;
+		// it('Should not call location when neither password and email are valid', function() {
+		// 	var changed = false;
+		// 	var created = false;
+		// 	var scope = {};
+		// 	var subject = new LoginCtrl(scope, {}, {}, authService);
+		// 	var user = {
+		// 		email : "anthonyemail.com",
+		// 		password : "password"
+		// 	}
+		// 	subject.userService = {
+		// 		createUser : function(){
+		// 			created = true;
+		// 		}
+		// 	};
+		// 	subject.location = {
+		// 		path : function() {
+		// 			changed = true;
+		// 		}
+		// 	}
+		// 	subject.validate(user);
+		// 	expect(changed).to.be.false;
+		// 	expect(created).to.be.false;
+		// 	expect(subject.user.emailValid).to.be.false;
+		// 	expect(subject.user.passwordValid).to.be.false;
 
-		});
+		// });
 
-		it('Should allow valid email address and password to pass client side validation', function() {
-			var created = false;
-			var changed = false;
-			var scope = {};
-			var subject = new LoginCtrl(scope, {}, {}, authService);
-			var user = {
-				email : "testing.test1@test.com",
-				password : "p34swOrD1"
-			}
-			subject.userService = {
-				createUser : function(){
-					created = true;
-				}
-			};
-			subject.location = {
-				path : function() {
-					changed = true;
-				}
-			}
-			subject.validate(user);
-			expect(subject.user.emailValid).to.be.true;
-			expect(subject.user.passwordValid).to.be.true;
-			expect(changed).to.be.true;
-			expect(created).to.be.true;
-		});
+		// it('Should allow valid email address and password to pass client side validation', function() {
+		// 	var created = false;
+		// 	var changed = false;
+		// 	var scope = {};
+		// 	var subject = new LoginCtrl(scope, {}, {}, authService);
+		// 	var user = {
+		// 		email : "testing.test1@test.com",
+		// 		password : "p34swOrD1"
+		// 	}
+		// 	subject.userService = {
+		// 		createUser : function(){
+		// 			created = true;
+		// 		}
+		// 	};
+		// 	subject.location = {
+		// 		path : function() {
+		// 			changed = true;
+		// 		}
+		// 	}
+		// 	subject.validate(user);
+		// 	expect(subject.user.emailValid).to.be.true;
+		// 	expect(subject.user.passwordValid).to.be.true;
+		// 	expect(changed).to.be.true;
+		// 	expect(created).to.be.true;
+		// });
         describe("Facebook login", function(){
             it("should call go with 'topics' if user is undefined", function(done){
               var location = {
@@ -118,6 +118,9 @@ describe('LoginCtrl', function() {
               subject.userService = {
                 loginWithFacebook : function(callback){
                   callback();
+                },
+                getUser : function() {
+                	return;
                 }
               };
               subject.loginWithFacebook();
