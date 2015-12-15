@@ -154,7 +154,7 @@ BillController.prototype.getBillVotes = function(id) {
     }
     else {
       that.stats = result;
-      if(that.stats.length > 1) {
+      if(that.stats.length > 6) {
         that.chartShow = true;
       }
     }

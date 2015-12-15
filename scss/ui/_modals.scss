@@ -146,6 +146,11 @@
 
       button:nth-child(1) {
         margin-right: 15px;
+        @include media(420px) {
+          span {
+            display: none;
+          }
+        }
       }
 
       button:nth-child(2) {
@@ -157,6 +162,7 @@
 
 .vote-confirmed {
     .card.comment-preview {
+      max-width: 100%;
       @include media(560px) {
         margin-top: 10px;
         min-width: 100%;

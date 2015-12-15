@@ -56,6 +56,7 @@ HeaderCtrl.prototype.readEvent = function(res) {
   }
   var that = this;
   this.location.path('bill/' + res.comment.bill_id);
+  this.showNotifications = this.showNotifications ? false : true;
   if(!res.read) {
   this.notificationService.readNotification(res.notification_id, function(err, result) {
     if (!err) {
@@ -94,6 +95,7 @@ HeaderCtrl.prototype.hideDropDown = function() {
 };
 
 HeaderCtrl.prototype.dropDown = function() {
+  this.hideNotifications();
   this.showDropDown = this.showDropDown ? false : true;
 };
 
@@ -103,6 +105,10 @@ HeaderCtrl.prototype.hideNotifications = function() {
 };
 
 HeaderCtrl.prototype.notify = function() {
+  if (this.notifications.length < 1) {
+    return;
+  }
+  this.hideDropDown();
   this.showNotifications = this.showNotifications ? false : true;
 };
 
@@ -112,6 +118,7 @@ HeaderCtrl.prototype.logout = function() {
 };
 
 HeaderCtrl.prototype.toProfile = function() {
+    this.hideDropDown();
     this.location.path('/profile/me');
 };
 

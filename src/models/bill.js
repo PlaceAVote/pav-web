@@ -15,6 +15,8 @@ Bill.prototype.getStatusClass = function() {
   switch (status) {
     case 'ENACTED:SIGNED':
       return ENACTEDSIGNED;
+    case 'REFERRED':
+      return BILLINTRODUCTED;
     case 'INTRODUCED':
       return BILLINTRODUCTED;
     case 'REPORTED':
