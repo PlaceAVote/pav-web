@@ -9,4 +9,4 @@ COPY . /app
 
 RUN ls -ltr
 
-CMD ["node", "/app/app.js"]
+CMD ["node", "/app/dist/js/app.js"]
