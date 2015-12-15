@@ -62,4 +62,5 @@ FeedController.prototype.getBills = function(username, callback) {
   this.billService.getBills(username, callback);
 };
 
+
 module.exports = FeedController;
