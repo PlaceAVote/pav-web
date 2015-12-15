@@ -137,6 +137,15 @@ span {
   }
 }
 
+.bill-timeline.bill-introduced ul li {  
+  &:nth-child(1) {
+    animation: fader 1s ease forwards;
+    span {
+      animation: point 1s ease forwards;
+    }
+  }  
+}
+
 @keyframes point {
   0% {
     transform: scale(1,1);
