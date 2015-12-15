@@ -22,7 +22,7 @@ describe('Legislator', function(){
   });
   it('calls resource with correct params', function(done){
     function mockResource(url, param, method){
-      expect(url).to.eql('http://pav-congress-api-515379972.us-east-1.elb.amazonaws.com:8080/legislators/100');
+      expect(url).to.contain('/legislators/100');
       expect(param).to.eql('100');
       expect(method.getById.headers['Authorization']).to.eql('token');
       done();
