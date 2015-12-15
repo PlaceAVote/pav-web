@@ -129,7 +129,10 @@ module.exports = {
   notifications: {
     socket: urls.NOTIFICATION + '/user/notifications/ws',
     poll: urls.NOTIFICATION + '/user/notifications',
-    staticEndpoint:  urls.USER + '/user/notifications'
+    staticEndpoint:  urls.USER + '/user/notifications',
+    read: function(id) {
+      return urls.USER + '/user/notification/' + id + '/mark'
+    }
   },
   users : {
     endpoint : urls.USER + '/user',

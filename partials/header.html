@@ -11,7 +11,7 @@
       <div class="notifications-container" ng-mouseleave="header.hideNotifications()"
       ng-show="header.showNotifications">
 
-        <notifications notifications="header.notifications"></notifications>
+        <notifications notifications="header.notifications" read-event="header.readEvent(notification)"></notifications>
       </div>
 
 		<img ng-click="header.dropDown()" class="user-img" ng-src="{{header.rs.user.img_url}}"/>

@@ -1,3 +1,14 @@
+    .notification-new-event {
+      display: inline-block;
+      background-color: $red;
+      color: $white;
+      position: absolute;
+      top: 0;
+      right: 0;
+      @include font-size(8px);
+      padding: 4px 2px;
+      border-radius: 3px;
+    }
     .notification-counter {
         background: $red;
         display: block;
@@ -50,6 +61,9 @@
       background: $white;
       border:1px solid $grey;
       @include shadow();
+      @include media(600px) {
+        right: 5px;
+      }
       .notifications-boundary { 
         max-height:300px;
         width:300px;
@@ -59,7 +73,11 @@
           display: flex;
           flex-direction: row;
           border-bottom: 1px solid $grey;
+          &:hover {
+            background: lighten($grey, 18%);
+          }
           .user-img-border {
+            position: relative;
             img {
               height: auto;
             }
@@ -122,6 +140,12 @@
   margin-top: -18px;
   right: 5px;
   z-index: 9999;
+}
+
+.notifications-container:before {
+  @include media(600px) {
+    right:55px;
+  }
 }
 
       img.user-img-inside{

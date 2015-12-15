@@ -4,7 +4,9 @@ module.exports = function() {
     replace: true,
     scope: {
       notifications: '=',
+      readEvent: '&',
     },
+    // controller: 'HeaderCtrl as header',
     templateUrl: 'partials/notifications.html'
   };
 };
