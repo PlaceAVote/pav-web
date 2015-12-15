@@ -213,11 +213,13 @@ span {
 .bill-timeline {
   &.passed-senate {
     li:nth-child(5) {
-      img,
-      p {
+      img
+       {
         opacity: 0.2;
       }
-
+      p {
+        opacity: 0.8;
+      }
       span {
         border-color: lighten($black, 45%);
       }
@@ -226,11 +228,13 @@ span {
 
   &.passed-house {
     li:nth-child(n + 4) {
-      img,
-      p {
+      img
+       {
         opacity: 0.2;
       }
-
+      p {
+        opacity: 0.8;
+      }
       span {
         border-color: lighten($black, 45%);
       }
@@ -239,11 +243,13 @@ span {
 
   &.committee {
     li:nth-child(n + 3) {
-      img,
-      p {
+      img
+       {
         opacity: 0.2;
       }
-
+      p {
+        opacity: 0.8;
+      }
       span {
         border-color: lighten($black, 45%);
       }
@@ -252,11 +258,13 @@ span {
 
   &.bill-introduced {
     li:nth-child(n + 2) {
-      img,
-      p {
+      img
+       {
         opacity: 0.2;
       }
-
+      p {
+        opacity: 0.8;
+      }
       span {
         border-color: lighten($black, 45%);
       }
