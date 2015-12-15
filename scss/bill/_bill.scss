@@ -293,3 +293,20 @@
   }
 }
 
+.vote-btns-stats {
+  @include media(850px) {
+    flex-direction: column;
+    .card {
+      width: 100% !important;
+    }
+  }
+}
+
+.no-chart {
+  .card {
+    width: calc(50% - 10px);
+    &:nth-child(1) {
+      margin-right:20px;
+    }
+  }
+}
