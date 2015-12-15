@@ -28,6 +28,12 @@ var gulp = require('gulp'),
     .pipe(gulp.dest('./src/config/'));
   });
 
+  gulp.task('dev-config', function() {
+    gulp.src(['./src/config/urls.js'])
+    .pipe(rename('urls.js'))
+    .pipe(gulp.dest('./src/config/'));
+  });
+
   // Website
 
   // Website Sass

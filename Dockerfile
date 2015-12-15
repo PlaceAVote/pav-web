@@ -7,4 +7,6 @@ WORKDIR /app
 
 COPY . /app
 
+RUN ls -ltr
+
 CMD ["node", "app.js"]
