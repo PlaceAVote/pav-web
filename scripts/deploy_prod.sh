@@ -5,6 +5,7 @@ set -e
 echo "-- Building Web-app..."
 
 gulp autoPrefix
+gulp live-config
 gulp browserify-web
 gulp app-min
 
