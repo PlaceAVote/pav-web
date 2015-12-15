@@ -1,14 +1,20 @@
 dependencies:
   post: 
     - "sudo pip install awscli==1.7.43"
-deployment: 
-  production: 
+deployment:
+  development:
     branch: master
-    commands: 
+    commands:
       - ". ./scripts/deploy.sh"
       - ". ./scripts/deploy_site.sh"
-experimental: 
-  notify: 
-    branches: 
-      only: 
-        - master
+      - convox login $CONVOX_GRID_HOST --password $CONVOX_API_KEY
+      - convox switch development
+      - convox deploy
+  release:
+    tag: /v[0-9]+(\.[0-9]+)*/
+    commands:
+      - ". ./scripts/deploy_prod.sh"
+      - ". ./scripts/deploy_site.sh"
+      - convox login $CONVOX_GRID_HOST --password $CONVOX_API_KEY
+      - convox switch production
+      - convox deploy
