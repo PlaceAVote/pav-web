@@ -6,10 +6,14 @@ var defaultStreamer = require('../connections/streamer.js');
 
 function NotificationService ($resource, authService, options) {
   options = options || {};
-  var url = endpoint + '?token=' + authService.getRawAccessToken();
-  var streamer = options.streamer || defaultStreamer({endpoint: url});
-
+  var streamer;
   var stream = function(callback) {
+    var token = authService.getRawAccessToken();
+    if (!token) {
+      return callback('Cant establish web socket with no authentication token');
+    }
+    var url = endpoint + '?token=' + token;
+    streamer = options.streamer || defaultStreamer({endpoint: url});
     streamer.onerror = function(err) {
      console.log("ERROR", err);
       return callback(err);
@@ -20,6 +24,14 @@ function NotificationService ($resource, authService, options) {
       return callback(undefined, notifications);
     };
   };
+
+  var close = function(){
+    if (!streamer) {
+      return;
+    }
+    streamer.close();
+    streamer = undefined;
+  }
 
   var getStreamer = function(){
     return streamer;
@@ -44,7 +56,7 @@ function NotificationService ($resource, authService, options) {
     config.methods.get.headers['Authorization'] = authService.getAccessToken();
     var resource = new $resource(url, undefined, {get: config.methods.get});
     resource.get(onLoad, onError);
-  } 
+  };
 
   var readNotification = function(id, callback) {
     var onLoad = function(res) {
@@ -65,7 +77,8 @@ function NotificationService ($resource, authService, options) {
     stream: stream,
     getStreamer: getStreamer,
     getNotifications: getNotifications,
-    readNotification: readNotification
+    readNotification: readNotification,
+    close: close,
   };
 }
 
