@@ -61,7 +61,6 @@ function UserService($resource, facebookService, authService) {
 		this.user.last_name = additionalInformation.last_name;
 		this.user.country_code = additionalInformation.country_code;
 		this.user.dob = strftime('%m/%d/%Y', additionalInformation.dob);
-    // this.user.img_url = 'img/header/generic-user.png';
 	};
 
     var makeProfilePublic = function(){
@@ -76,12 +75,12 @@ function UserService($resource, facebookService, authService) {
         }
     };
 
-    var getSaveConfig = function(throughFacebook){
-      if(throughFacebook){
-        return config.users.facebookCreateUrl;
+    var getSaveConfig = function(user){
+      if(user.password){
+        return config.users.endpoint;
       }
       else {
-        return config.users.endpoint;
+        return config.users.facebookCreateUrl;
       }
     };
     var saveUser = function(callback){
@@ -97,7 +96,7 @@ function UserService($resource, facebookService, authService) {
         if(!this.user){
             return;
         }
-        var url = getSaveConfig(this.createdFB);
+        var url = getSaveConfig(this.user);
         config.methods.put.headers["Authorization"] = authService.getAccessToken();
         var saveUser = new $resource(url, undefined, {create : config.methods.put});
         var token = authService.getFacebookAccessToken();
