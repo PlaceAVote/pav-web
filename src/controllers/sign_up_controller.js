@@ -22,35 +22,34 @@ function SignUpCtrl ($rootScope, $scope, $location, userService, authService) {
 }
 
 SignUpCtrl.prototype.test = function() {
-    var that = this;
     this.userService.addAdditionalInformation(this.additionalInformation);
     var user = this.userService.getUser();
     if(!user) {
-        that.invalid_user = true;
+        this.invalid_user = true;
+        return;
     }
-    else {
-        console.log(user);
-        this.userService.saveUser(function(err, result){
-            if(err) {
-                if(err.status === 409) {
-                    that.user_exists_error = true;
-                }
-                else {
-                that.error = true;
-                }
-            }
-            else {
-                that.rs.loggedIn = true;
-                if(!user.img_url) {
-                user.img_url = 'img/profile/profile-picture.png';
-                }
-                user.newUser = true;
-                that.rs.user = user;
-                console.log(that.rs);
-                that.location.path("/feed");
-            }
-        });
+    this.saveUser(user);
+};
+
+SignUpCtrl.prototype.saveUser = function(user) {
+  var that = this;
+  this.userService.saveUser(function(err, result) {
+    if(err) {
+      if(err.status === 409) {
+        that.user_exists_error = true;
+        return;
+      }
+      that.error = true;
+      return;
     }
+    that.rs.loggedIn = true;
+    if (!user.img_url) {
+      user.img_url = 'img/profile/profile-picture.png';
+    }
+    user.newUser = true;
+    that.rs.user = user;
+    that.location.path("/feed");
+  });
 };
 
 SignUpCtrl.prototype.maxDate = function() {
