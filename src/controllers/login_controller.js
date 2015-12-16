@@ -46,31 +46,33 @@ LoginCtrl.prototype.validate = function(u, hash) {
 };
 
 LoginCtrl.prototype.login = function(u, hash) {
-   var that = this;
-   var email = u.email;
-   var password = u.password;
-   this.user.emailValid = this.emailValidation(email);
-   this.user.passwordValid = this.passwordValidation(password);
-   if (this.user.emailValid && this.user.passwordValid) {
-      this.userService.login({
-         email: email,
-         password: password
-      }, function(err, response) {
-         if (err) {
-            if (err.status === 401) {
-               that.forgot = true;
-            }
-         } else {
-            that.userService.getUserProfile('me', function(err, result) {
-               if (result) {
-                  that.rs.user = result;
-                  that.rs.loggedIn = true;
-                  that.location.path("/feed");
-               } else {that.logout();}
-            });
-          }
-      });
-   }
+  var that = this;
+  var email = u.email;
+  var password = u.password;
+  this.user.emailValid = this.emailValidation(email);
+  this.user.passwordValid = this.passwordValidation(password);
+  if (!this.user.emailValid && !this.user.passwordValid) {
+    return;
+  }
+
+  var validUser = {
+    email: email,
+    password: password,
+  };
+
+  this.userService.login(validUser, function(err, response) {
+    if (err) {
+       return that.forgot = true;
+    }
+    that.userService.getUserProfile('me', function(err, result) {
+      if (err) {
+        return that.logout();
+      }
+      that.rs.user = result;
+      that.rs.loggedIn = true;
+      that.location.path("/feed");
+    });
+  });
 };
 
 LoginCtrl.prototype.logout = function() {
