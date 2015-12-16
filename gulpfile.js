@@ -29,7 +29,7 @@ var gulp = require('gulp'),
   });
 
   gulp.task('dev-config', function() {
-    gulp.src(['./src/config/urls.js'])
+    gulp.src(['./src/config/dev_urls.js'])
     .pipe(rename('urls.js'))
     .pipe(gulp.dest('./src/config/'));
   });

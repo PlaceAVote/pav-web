@@ -8,7 +8,7 @@ deployment:
   development:
     branch: master
     commands:
-      - ". ./scripts/deploy.sh"
+      - ". ./scripts/deploy_dev.sh"
       - convox login $CONVOX_GRID_HOST --password $CONVOX_API_KEY
       - convox switch development
       - convox deploy
