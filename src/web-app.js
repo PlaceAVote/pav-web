@@ -133,7 +133,7 @@ app.controller('HeaderCtrl', ['$rootScope', '$scope', '$location', 'authService'
 app.controller('ProfileCtrl', ['$scope', '$location', '$routeParams', 'authService', 'userService', ProfileController]);
 
 //web controllers
-app.controller('HomeCtrl', ['$scope', '$location','$anchorScroll', 'userService', '$rootScope', HomeController]);
+app.controller('HomeCtrl', ['$scope', '$location','$anchorScroll', 'userService', '$rootScope', 'authService', HomeController]);
 app.controller('FaqCtrl', ['$scope', '$location', FaqController]);
 app.controller('TeamCtrl', ['$scope', '$location', TeamController]);
 app.controller('PressCtrl', ['$scope', '$location', PressController]);

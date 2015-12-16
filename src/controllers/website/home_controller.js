@@ -1,4 +1,6 @@
-function HomeController($scope, $location, $anchorScroll, userService, $rootScope) {
+var AuthorizeController = require('../autherize_controller.js');
+function HomeController($scope, $location, $anchorScroll, userService, $rootScope, authService) {
+  AuthorizeController.authorize({success: '/feed', authorizer: authService, location: $location});
 	this.email = false;
 	this.mobileemail = true;
   this.userService = userService;
