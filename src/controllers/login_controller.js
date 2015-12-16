@@ -1,6 +1,6 @@
 var AuthorizeController = require('./autherize_controller.js');
 
-function LoginCtrl($scope, $location, userService, authService, $rootScope) {
+function LoginCtrl($scope, $location, userService, authService, $rootScope, $routeParams) {
   AuthorizeController.authorize({success: '/feed', authorizer: authService, location: $location});
   $scope = $scope || {};
   this.rs = $rootScope || {};
@@ -17,6 +17,12 @@ function LoginCtrl($scope, $location, userService, authService, $rootScope) {
     password: '',
     passwordValid: true
   };
+
+   $scope.$on("$routeChangeSuccess", function() {
+     if(this.location.hash == '#/signup') {
+       $scope.login.signup = true;
+     } 
+    });
 }
 
 LoginCtrl.prototype.loginWithFacebook = function(){

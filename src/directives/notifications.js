@@ -6,7 +6,6 @@ module.exports = function() {
       notifications: '=',
       readEvent: '&',
     },
-    // controller: 'HeaderCtrl as header',
     templateUrl: 'partials/notifications.html'
   };
 };

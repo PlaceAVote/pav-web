@@ -9,6 +9,7 @@ describe('LoginCtrl', function() {
 
 		it('Should make sure the email fail if not valid', function() {
 			var scope = {};
+			scope.$on = function() {};
 			var subject = new LoginCtrl(scope, {}, {}, authService);
 			subject.user.email = "anthony.com";
 			expect(subject.emailValidation(subject.user.email)).to.be.false;
@@ -16,6 +17,7 @@ describe('LoginCtrl', function() {
 
 		it('Should return true if valid', function() {
 			var scope = {};
+			scope.$on = function() {};
 			var subject = new LoginCtrl(scope, {}, {}, authService);
 			subject.user.email = "anthony.test1@test.com";
 			expect(subject.emailValidation(subject.user.email)).to.be.true;
@@ -95,7 +97,9 @@ describe('LoginCtrl', function() {
                   done();
                 }
               };
-              var subject = new LoginCtrl({}, location, {}, authService);
+              var scope = {}
+              scope.$on = function() {};
+              var subject = new LoginCtrl(scope, location, {}, authService);
               subject.userService = {
                 loginWithFacebook : function(callback){
                   callback({message:"User Not Found"});
@@ -114,7 +118,9 @@ describe('LoginCtrl', function() {
                   done();
                 }
               };
-              var subject = new LoginCtrl({}, location, {}, authService);
+              var scope = {};
+              scope.$on = function() {};
+              var subject = new LoginCtrl(scope, location, {}, authService);
               subject.userService = {
                 loginWithFacebook : function(callback){
                   callback();
@@ -128,7 +134,9 @@ describe('LoginCtrl', function() {
         });
        describe("failed login", function() {
         it("sets forgot to false", function(done){
-            var subject = new LoginCtrl({}, {}, {}, authService);
+        	var scope = {};
+        	scope.$on = function() {};
+            var subject = new LoginCtrl(scope, {}, {}, authService);
             subject.userService = {
                 login : function(params, callback){
                     callback({status:401});
