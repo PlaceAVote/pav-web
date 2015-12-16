@@ -38,9 +38,10 @@
 
   .intro {
     z-index: 1;
-    max-height: 545px;
+    height: 545px;
     overflow: hidden;
-    position: relative;
+    width: 100%;
+    position: absolute;
     top: 0;
     background: #87e0fd;
 

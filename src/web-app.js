@@ -133,7 +133,7 @@ app.controller('HomeCtrl', ['$scope', '$location','$anchorScroll', HomeControlle
 app.controller('FaqCtrl', ['$scope', '$location', FaqController]);
 app.controller('TeamCtrl', ['$scope', '$location', TeamController]);
 app.controller('PressCtrl', ['$scope', '$location', PressController]);
-app.controller('MenuCtrl', ['$scope', '$location', MenuController]);
+app.controller('MenuCtrl', ['$scope', '$location', '$routeParams', MenuController]);
 
 //directives
 app.directive('stickyNav', [stickyNav]);

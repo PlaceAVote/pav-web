@@ -1,6 +1,25 @@
 .home {
   position: relative;
+  .home-btns {
+    display: flex;
+    flex-direction: row;
+    @include media(900px) {
+      flex-direction: column;
+      height:200px;
+      justify-content: flex-start;
+    }
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 40px;
+  }
   .intro a {
+    &:nth-child(1) {
+      margin-right: 20px;
+    }
+    @include media(900px) {
+      width: 100% !important;
+      marign-rigth: 0;
+    }
     margin-top: 10px;
     text-decoration: none;
     height: 50px;
@@ -20,7 +39,7 @@
     box-shadow: 0px 5px 4px -3px rgba(0,0,0,0.17);
     img {
     vertical-align: text-bottom;
-    padding-right: 10px;
+    margin-right: 10px;
     width: 20px} 
   }
    a:hover {
@@ -49,9 +68,9 @@
     z-index: 1;
     overflow: hidden;
     position: relative;
-    top: 0;
+    // top: 0;
     background: #87e0fd;
-    max-height:500px;
+    // max-height:500px;
     /* Old browsers */
     background: -moz-linear-gradient(-45deg, #87e0fd 0%, #5b7da8 0%, #746898 100%);
 
@@ -74,12 +93,12 @@
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#87e0fd', endColorstr='#746898', GradientType=1 );
 
     @media screen and (max-device-width: 900px), screen and (max-width: 900px) {
-    display: flex;
-    flex-direction: column;
-    max-height: 545px;
+    // display: flex;
+    // flex-direction: column;
+    // max-height: 545px;
     }
     @include media(600px){
-    padding-top:40px;
+    // padding-top:40px;
     }
     section {
               text-align:center;
@@ -191,58 +210,70 @@
   }
 
   .home-box {
-    width: 50%;
-    float: left;
+    // width: 50%;
+    // float: left;
 
-    &.last {
-      padding: 16px 16px 16px 10px;
+    // &.last {
+    //   padding: 16px 16px 16px 10px;
 
-      @media screen and (max-device-width: 900px), screen and (max-width: 900px) {
-      padding: 0px 16px 16px 16px;
-      }
-    }
-
-    @media screen and (max-device-width: 900px), screen and (max-width: 900px) {
-    padding: 16px;
-    max-height: 100%;
-    height: auto;
-    flex-direction: column;
-    width: 100%;
-    }
-    padding: 16px 8px 16px 16px;
-    color: #3b3b3b;
+    //   @media screen and (max-device-width: 900px), screen and (max-width: 900px) {
+    //   padding: 0px 16px 16px 16px;
+    //   }
+    // }
     display: flex;
-    max-height: 500px;
+    flex-direciton: row;
+    @include media(900px) {
+      flex-direction: column;
+    }
+    padding: 16px;
+    color: #3b3b3b;
 
     section {
       border: 1px solid #d6d4e1;
       background: white;
       padding: 60px 40px;
       border-radius: 3px;
+      width: calc(50% - 10px);
+      &:nth-child(1) {
+        margin-right: 20px;
+        @include media(900px) {
+          margin-bottom: 20px;
+        }
+      }
+      // &:nth-child(2) {
+      //   margin-left: 10px;
+      // }
 
+        @media screen and (max-device-width: 900px), screen and (max-width: 900px) {
+        padding: 16px;
+        max-height: 100%;
+        height: auto;
+        flex-direction: column;
+        width: 100%;
+        }
       img {
         width: 50px;
         height: 50px;
-        padding-bottom: 40px;
+        margin-bottom: 40px;
       }
 
       h1 {
         @include font-size(24px);
         padding-bottom: 40px;
-        font-weight: $font-bold;
+        @include bold();
       }
 
       p {
         @include font-size(22px);
         padding-bottom: 40px;
-        font-weight: $font-light;
+        @include light();
         line-height: 28px;
       }
     }
   }
 
   .shoutout {
-    background: url('../img/mission-bg.jpg');
+    background: url('../img/web/mission-bg.jpg');
     background-size: cover;
     background-position: center center;
     display: flex;
@@ -420,18 +451,26 @@
     }
   }
 
-  footer {
+  #footer {
     // display: flex;
     // flex-direction: column;
-    float:left;
+    // float:left;
     width:100%;
-    height: 200px;
+    // height: 200px;
     background:$white;
-    position: relative;
-    display: block;
+    // position: relative;
+    // display: block;
+    .footer-row {
+      display: flex;
+      flex-direction: row;
+    }
+    .column {
+      display: flex;
+      flex-direction: column;
+    }
     @media screen and (max-device-width: 900px), screen and (max-width: 900px) {
-    display: block;
-    position: initial;
+    // display: block;
+    // position: initial;
     flex-direction: column;
     height: auto;
     text-align: center;
@@ -453,7 +492,7 @@
       position: initial;
       text-align:left;
       color: $black;
-      font-weight: $font-bold;
+      @include bold();
       text-transform: uppercase;
       @include font-size(13px);
 
@@ -463,7 +502,7 @@
     ul {
       padding-top: 20px;
       padding-bottom: 20px;
-      position:initial;
+      // position:initial;
       text-align:left;
       @media screen and (max-device-width: 900px), screen and (max-width: 900px) {
       display: inline;
@@ -494,7 +533,7 @@
     }
     img {
       width:200px;
-      padding-bottom: 10px;
+      margin-bottom: 10px;
       @media screen and (max-device-width: 600px), screen and (max-width: 600px) {
       width:120px;
       text-align:center;

@@ -38,12 +38,13 @@
 
   .intro {
     z-index: 1;
-    max-height: 200px;
+    height: 200px;
     @include media(600px){
     max-height: 140px;
     }
+    width: 100%;
     overflow: hidden;
-    position: relative;
+    position: absolute;
     top: 0;
     background: #87e0fd;
 
@@ -307,7 +308,7 @@ footer {
     display: inline-block;
     width: 100%;
 
-    .quote {
+    .press-quote {
       display: flex;
       flex-direction: column;
       p {
@@ -332,7 +333,7 @@ footer {
 
       img {
         margin: auto;
-        padding: 20px;
+        padding: 10px;
         max-width: 150px;
         max-height: 50px;
       }
