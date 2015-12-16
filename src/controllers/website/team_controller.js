@@ -1,6 +1,5 @@
 function TeamController($scope, $location) {
   $scope.team = this;
-  console.log('team controller');
   this.founders = [
   	{
   		img: 'img/web/profile-imgs/luke-davis.jpg',

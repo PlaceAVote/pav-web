@@ -83,6 +83,10 @@ app.config(['$routeProvider', function($routeProvider) {
 			templateUrl: 'partials/login.html',
 			controller: 'LoginCtrl as login'
 		})
+    .when('/signup', {
+      templateUrl: 'partials/login.html',
+      controller: 'LoginCtrl as login'
+    })
 		.when('/onboarding', {
 			templateUrl: 'partials/onboarding.html',
 		})
@@ -122,14 +126,14 @@ app.factory('notificationService', ['$resource', 'authService', NotificationServ
 app.controller('AssetsCtrl',['$scope','$routeParams','$location', AssetsController]);
 app.controller('TopicRegisterCtrl',['$scope','$location', 'userService', RegisterController]);
 app.controller('SignUpCtrl',['$rootScope','$scope','$location', 'userService', SignUpController]);
-app.controller('LoginCtrl',['$scope','$location', 'userService', 'authService', '$rootScope', LoginController]);
+app.controller('LoginCtrl',['$scope','$location', 'userService', 'authService', '$rootScope', '$routeParams', LoginController]);
 app.controller('FeedCtrl', ['$scope', '$location', 'userService', 'billService', 'trendService', 'authService','$rootScope', FeedController]);
 app.controller('BillCtrl', ['$scope', '$routeParams', 'billService', 'legislationService', 'voteService', 'commentService', '$location', 'authService', BillController]);
 app.controller('HeaderCtrl', ['$rootScope', '$scope', '$location', 'authService', 'userService', 'notificationService', HeaderController]);
 app.controller('ProfileCtrl', ['$scope', '$location', '$routeParams', 'authService', 'userService', ProfileController]);
 
 //web controllers
-app.controller('HomeCtrl', ['$scope', '$location','$anchorScroll', HomeController]);
+app.controller('HomeCtrl', ['$scope', '$location','$anchorScroll', 'userService', '$rootScope', HomeController]);
 app.controller('FaqCtrl', ['$scope', '$location', FaqController]);
 app.controller('TeamCtrl', ['$scope', '$location', TeamController]);
 app.controller('PressCtrl', ['$scope', '$location', PressController]);

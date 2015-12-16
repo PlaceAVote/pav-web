@@ -113,7 +113,7 @@ HeaderCtrl.prototype.notify = function() {
 };
 
 HeaderCtrl.prototype.logout = function() {
-  this.loggedIn = false;
+  this.rs.loggedIn = false;
   AuthorizeController.logout({authorizer: this.authService, location: this.location});
   this.notificationService.close();
 };

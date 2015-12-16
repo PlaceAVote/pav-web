@@ -120,8 +120,9 @@ nav {
     cursor: pointer;
   }
    .burger { 
-    position: relative;
-    padding-right: 70px;
+    position: absolute;
+    top:10px;
+    // padding-right: 70px;
       span {
         background-color: white;
         border-radius: 5px;
@@ -141,6 +142,7 @@ nav {
     }
     .menu-label, .menu-close {
       color: white;
+      padding-left: 25px;
       text-align: right;
       @include font-size(14px);
     }

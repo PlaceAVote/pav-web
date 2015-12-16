@@ -1,6 +1,9 @@
-function HomeController($scope, $location, $anchorScroll) {
+function HomeController($scope, $location, $anchorScroll, userService, $rootScope) {
 	this.email = false;
 	this.mobileemail = true;
+  this.userService = userService;
+  this.location = $location;
+  this.rs = $rootScope || {};
 	this.gotoAnchor = function(x) {
       var newHash = '#' + x;
       if ($location.hash() !== newHash) {
@@ -9,6 +12,22 @@ function HomeController($scope, $location, $anchorScroll) {
         $anchorScroll();
       }
     };
+
 }
+
+HomeController.prototype.loginWithFacebook = function(){
+  console.log('listening');
+  var that = this;
+  this.userService.loginWithFacebook(function(err, response){
+    if(err){
+      that.location.path("/onboarding");
+    }
+    else {
+      that.rs.user = that.userService.getUser();
+      that.rs.loggedIn = true;
+      that.location.path("/feed");
+    }
+  });
+};
 
 module.exports = HomeController;

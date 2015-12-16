@@ -2,7 +2,7 @@ AssetsController = function($scope, $routeParams, $location) {
 	$scope = $scope || {};
 	$scope.assets = this;
 	this.location = $location;
-	this.title = 'Place A Vote';
+	// this.title = 'Place A Vote';
 	// this.css = 'css/web.css';
 	// this.paths = {
 	// 	website: ['#/', '#/contact', '#/faq', '#/team','#/press','#/terms-of-service-and-privacy-policy']

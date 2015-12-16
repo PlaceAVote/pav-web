@@ -16,7 +16,6 @@ function MenuController($scope, $location, $routeParams) {
 	};
 
 	$scope.$on("$routeChangeSuccess", function() {
-		console.log(this.location);
 		if($scope.menu.paths.website.indexOf(this.location.hash) == -1) {
 			$scope.menu.hide = true;
 		} else {
