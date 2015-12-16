@@ -38,6 +38,10 @@ function NotificationService ($resource, authService, options) {
   }
 
   var getNotifications = function(callback) {
+    var token = authService.getAccessToken();
+    if (!token) {
+      return callback('No Token Available');
+    }
 
     var onLoad = function(res) {
       var notifications = [];
@@ -53,7 +57,7 @@ function NotificationService ($resource, authService, options) {
       callback(err);
     }
     var url = config.notifications.staticEndpoint;
-    config.methods.get.headers['Authorization'] = authService.getAccessToken();
+    config.methods.get.headers['Authorization'] = token;
     var resource = new $resource(url, undefined, {get: config.methods.get});
     resource.get(onLoad, onError);
   };
