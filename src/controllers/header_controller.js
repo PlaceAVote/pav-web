@@ -13,7 +13,7 @@ function HeaderCtrl($rootScope, $scope, $location, authService, userService, not
   this.loggedIn = $rootScope.loggedIn;
   this.populate();
   this.newEvent = 0;
-  this.notifications;
+  this.notifications = [];
   this.getNotifications();
   this.startNotifications();
 }
@@ -115,6 +115,7 @@ HeaderCtrl.prototype.notify = function() {
 HeaderCtrl.prototype.logout = function() {
   this.loggedIn = false;
   AuthorizeController.logout({authorizer: this.authService, location: this.location});
+  this.notificationService.close();
 };
 
 HeaderCtrl.prototype.toProfile = function() {

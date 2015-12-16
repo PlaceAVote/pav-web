@@ -6,10 +6,14 @@ var defaultStreamer = require('../connections/streamer.js');
 
 function NotificationService ($resource, authService, options) {
   options = options || {};
-  var url = endpoint + '?token=' + authService.getRawAccessToken();
-  var streamer = options.streamer || defaultStreamer({endpoint: url});
-
+  var streamer;
   var stream = function(callback) {
+    var token = authService.getRawAccessToken();
+    if (!token) {
+      return callback('Cant establish web socket with no authentication token');
+    }
+    var url = endpoint + '?token=' + token;
+    streamer = options.streamer || defaultStreamer({endpoint: url});
     streamer.onerror = function(err) {
      console.log("ERROR", err);
       return callback(err);
@@ -21,11 +25,23 @@ function NotificationService ($resource, authService, options) {
     };
   };
 
+  var close = function(){
+    if (!streamer) {
+      return;
+    }
+    streamer.close();
+    streamer = undefined;
+  }
+
   var getStreamer = function(){
     return streamer;
   }
 
   var getNotifications = function(callback) {
+    var token = authService.getAccessToken();
+    if (!token) {
+      return callback('No Token Available');
+    }
 
     var onLoad = function(res) {
       var notifications = [];
@@ -41,10 +57,10 @@ function NotificationService ($resource, authService, options) {
       callback(err);
     }
     var url = config.notifications.staticEndpoint;
-    config.methods.get.headers['Authorization'] = authService.getAccessToken();
+    config.methods.get.headers['Authorization'] = token;
     var resource = new $resource(url, undefined, {get: config.methods.get});
     resource.get(onLoad, onError);
-  } 
+  };
 
   var readNotification = function(id, callback) {
     var onLoad = function(res) {
@@ -65,7 +81,8 @@ function NotificationService ($resource, authService, options) {
     stream: stream,
     getStreamer: getStreamer,
     getNotifications: getNotifications,
-    readNotification: readNotification
+    readNotification: readNotification,
+    close: close,
   };
 }
 
