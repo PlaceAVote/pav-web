@@ -1,0 +1,10 @@
+<div>
+<div ng-repeat="trend in data">
+<h2>TRENDING BILL:</h2>
+<h3 ng-click="trend.goToPage(location, this.bill_id)">{{trend.short_title}}</h3>
+<p ng-click="trend.goToPage(location, this.bill_id)"><span>{{trend.comment_count}}</span> comments / <span>{{trend.majorityVote().percent}}</span> Vote {{trend.majorityVote().majority}}</p>
+<hr />
+</div>
+</div>
+
+
