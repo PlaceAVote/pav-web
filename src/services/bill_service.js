@@ -4,7 +4,7 @@ var Comment = require('../models/comment.js');
 var config = require('../config/endpoints.js');
 var TrendingBill = require('../models/trending_bill.js');
 
-function BillService(tempBillResource, $resource, authService, userService) {
+function BillService($resource, authService, userService) {
     var getBills = function(username, callback) {
         var onLoad = function(result) {
             var bills = [];

@@ -65,7 +65,7 @@ describe("Bill Service", function(){
   });
   describe('Get Bill', function(){
     it('Returns err to callback if id is not provided', function(done){
-      var subject = new BillService({});
+      var subject = new BillService();
       subject.getBill(undefined, function(err, result){
         expect(err).to.eql({message: "Error: No Id Provided"});
         expect(result).to.eql(undefined);
@@ -82,7 +82,7 @@ describe("Bill Service", function(){
         done();
       }
       var authService = new AuthService(undefined, authOptions);
-      var subject = new BillService({}, mockResource, authService);
+      var subject = new BillService(mockResource, authService);
       subject.getBill('100', function(err, result) {
       });
     });
@@ -93,7 +93,7 @@ describe("Bill Service", function(){
         }
       }
       var authService = new AuthService(undefined, authOptions);
-      var subject = new BillService({}, mockResource, authService);
+      var subject = new BillService(mockResource, authService);
       subject.getBill('100', function(err, result) {
         expect('Error: A Server Error Occured');
         expect(result).to.eql(undefined);
@@ -108,7 +108,7 @@ describe("Bill Service", function(){
         }
       }
       var authService = new AuthService(undefined, authOptions);
-      var subject = new BillService({}, mockResource, authService);
+      var subject = new BillService(mockResource, authService);
       subject.getBill('100', function(err, result) {
         expect(undefined);
         expect(result).to.not.eql(undefined);
@@ -135,7 +135,7 @@ describe("Bill Service", function(){
         }
       }
       var authService = new AuthService(undefined, authOptions);
-      var subject = new BillService(undefined, mockResource, authService);
+      var subject = new BillService(mockResource, authService);
       subject.getTopComments('serverId', function(err, resource){
         expect(err).to.eql(undefined);
         expect(resource.forComment).to.eql(new Comment(expected['for-comment']));
@@ -159,7 +159,7 @@ describe("Bill Service", function(){
       authService.getAccessToken = function(){
         return 'TOKEN';
       };
-      var subject = new BillService(undefined, mockResource, authService);
+      var subject = new BillService(mockResource, authService);
       subject.getTopComments('serverId', function(err, resource){
       });
     });
@@ -170,7 +170,7 @@ describe("Bill Service", function(){
         }
       }
       var authService = new AuthService(undefined, authOptions);
-      var subject = new BillService(undefined, mockResource, authService);
+      var subject = new BillService(mockResource, authService);
       subject.getTopComments('serverId', function(err, resource){
         expect(err).to.not.eql(undefined);
         expect(err).to.eql({message: 'Server Error'});
@@ -204,7 +204,7 @@ describe("Bill Service", function(){
       authService.getAccessToken = function(){
         return 'TOKEN';
       };
-      var subject = new BillService(undefined, mockResource, authService);
+      var subject = new BillService(mockResource, authService);
       subject.getComments('serverId', undefined, function(err, resource){
       });
     });
@@ -219,7 +219,7 @@ describe("Bill Service", function(){
       authService.getAccessToken = function(){
         return 'TOKEN';
       };
-      var subject = new BillService(undefined, mockResource, authService);
+      var subject = new BillService(mockResource, authService);
       subject.getComments('serverId', undefined, function(err, resource){
         expect(err).to.not.eql(undefined);
         expect(err).to.eql('ERROR');
@@ -237,7 +237,7 @@ describe("Bill Service", function(){
       authService.getAccessToken = function(){
         return 'TOKEN';
       };
-      var subject = new BillService(undefined, mockResource, authService);
+      var subject = new BillService(mockResource, authService);
       subject.getComments('serverId', undefined, function(err, resource){
         expect(err).to.eql(undefined);
         expect(resource.length).to.eql(1);
@@ -288,7 +288,7 @@ describe("Bill Service", function(){
           };
         },
       };
-      var subject = new BillService(undefined, mockResource, authService, userService);
+      var subject = new BillService(mockResource, authService, userService);
       subject.postComment('ID', 'HELLO DAMON!', function(err, resource){
       });
     });
@@ -310,7 +310,7 @@ describe("Bill Service", function(){
           };
         },
       };
-      var subject = new BillService(undefined, mockResource, authService, userService);
+      var subject = new BillService(mockResource, authService, userService);
       subject.postComment('ID', 'HELLO DAMON!', function(err, resource){
         expect(err).to.eql('Error');
         done();
@@ -329,7 +329,7 @@ describe("Bill Service", function(){
           return "TOKEN";
         },
       };
-      var subject = new BillService(undefined, mockResource, authService, userService);
+      var subject = new BillService(mockResource, authService, userService);
       subject.postComment('ID', 'HELLO DAMON!', function(err, resource){
         expect(err).to.eql(undefined);
         expect(resource).to.be.instanceOf(Comment);
@@ -342,7 +342,7 @@ describe("Bill Service", function(){
       var mockAuthService = {
         getAccessToken: function() {},
       };
-      var subject = new BillService(undefined, undefined, mockAuthService);
+      var subject = new BillService(undefined, mockAuthService);
       subject.getTrends(function(err, result){
         expect(err.message).to.eql('No Auth Token');
         done();
@@ -361,7 +361,7 @@ describe("Bill Service", function(){
           return 'HELLO';
         },
       };
-      var subject = new BillService(undefined, mockResource, mockAuthService);
+      var subject = new BillService(mockResource, mockAuthService);
       subject.getTrends();
     });
     it('on server error returns error', function(done) {
@@ -375,7 +375,7 @@ describe("Bill Service", function(){
           return 'HELLO';
         },
       };
-      var subject = new BillService(undefined, mockResource, mockAuthService);
+      var subject = new BillService(mockResource, mockAuthService);
       subject.getTrends(function(err, result) {
         expect(err).to.eql('Server Error');
         done();
@@ -392,7 +392,7 @@ describe("Bill Service", function(){
           return 'HELLO';
         },
       };
-      var subject = new BillService(undefined, mockResource, mockAuthService);
+      var subject = new BillService(mockResource, mockAuthService);
       subject.getTrends(function(err, result) {
         expect(err).to.eql(undefined);
         expect(result.length).to.eql(1);
