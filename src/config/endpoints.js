@@ -113,6 +113,9 @@ module.exports = {
         return urls.CONGRESS + '/bills/' + id + '/comments' + '?from=' + from
       },
     },
+    trends: {
+      endpoint: urls.CONGRESS + '/bills/trending',
+    },
     postComment: {
       endpoint: urls.CONGRESS + '/bills/comments',
     },

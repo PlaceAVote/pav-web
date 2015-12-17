@@ -1,4 +1,5 @@
 var BillService = require('../../src/services/bill_service.js');
+var TrendingBill = require('../../src/models/trending_bill.js');
 var Bill = require('../../src/models/bill_summary.js');
 var Comment = require('../../src/models/comment.js');
 var AuthService = require('../../src/services/auth_service.js');
@@ -336,4 +337,68 @@ describe("Bill Service", function(){
       });
     });
   });
-});
+  describe('Get Trends', function() {
+    it('returns error if auth token not present', function(done) {
+      var mockAuthService = {
+        getAccessToken: function() {},
+      };
+      var subject = new BillService(undefined, undefined, mockAuthService);
+      subject.getTrends(function(err, result){
+        expect(err.message).to.eql('No Auth Token');
+        done();
+      });
+    });
+    it('calls new resource with correct params', function(done) {
+      function mockResource(url, params, method) {
+        this.getTrends = function(){};
+        expect(url).to.eql('http://pav-congress-api-515379972.us-east-1.elb.amazonaws.com:8080/bills/trending');
+        expect(params).to.eql(undefined);
+        expect(method.getTrends.headers.Authorization).to.eql('HELLO');
+        done();
+      };
+      var mockAuthService = {
+        getAccessToken: function() {
+          return 'HELLO';
+        },
+      };
+      var subject = new BillService(undefined, mockResource, mockAuthService);
+      subject.getTrends();
+    });
+    it('on server error returns error', function(done) {
+      function mockResource(url, params, method) {
+      };
+      mockResource.prototype.getTrends = function(body, onLoad, onError) {
+        onError('Server Error');
+      };
+      var mockAuthService = {
+        getAccessToken: function() {
+          return 'HELLO';
+        },
+      };
+      var subject = new BillService(undefined, mockResource, mockAuthService);
+      subject.getTrends(function(err, result) {
+        expect(err).to.eql('Server Error');
+        done();
+      });
+    });
+    it('returns a list of Trend Responses', function(done) {
+      function mockResource(url, params, method) {
+      };
+      mockResource.prototype.getTrends = function(body, onLoad, onError) {
+        onLoad([require('../fixtures/trending_bill_records')]);
+      };
+      var mockAuthService = {
+        getAccessToken: function() {
+          return 'HELLO';
+        },
+      };
+      var subject = new BillService(undefined, mockResource, mockAuthService);
+      subject.getTrends(function(err, result) {
+        expect(err).to.eql(undefined);
+        expect(result.length).to.eql(1);
+        expect(result[0]).to.be.instanceof(TrendingBill);
+        done();
+      });
+    });
+  });
+  });
