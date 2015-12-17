@@ -241,7 +241,8 @@ nav {
     padding:10px;
   }
 .navscroll {
-  z-index: 9998;
+  nav {
+    z-index: 9998;
   .logo-white {
     opacity: 0;
   }
@@ -267,5 +268,6 @@ nav {
         box-shadow:none;
       }
     }
+  }
   }
 }
