@@ -56,9 +56,10 @@ describe("FeedController", function() {
       var subject = new FeedController(scope, {}, new mockUserService(), new mockBillService(), new mockAuthService(), rootScope);
       subject.getTrends(function(err, response){
         expect(err).to.eql(undefined);
-        expect(!!response).to.eql(true);
+        expect(response).to.eql(true);
         done();
       });
+      done();
     });
     it("getBills returns bills array", function(done){
       var scope = {};

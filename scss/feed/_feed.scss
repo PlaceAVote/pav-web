@@ -2,7 +2,11 @@
 
 .feed-wrapper {
   width: 100%;
-
+  display: flex;
+  flex-direction: row;
+  @include media(900px) {
+    flex-direction: column;
+  }
   .feed-column {
     margin-bottom: 20px;
     .bill-container {
@@ -162,6 +166,45 @@
       @include medium();
       color: $black;
       line-height: 24px;
+    }
+  }
+}
+
+.feed-wrapper {
+  .trends-container {
+    @include media(900px) {
+      width: 100%;
+      margin-left: 0;
+    }
+    margin-top: 20px;
+    margin-left: 20px;
+    // width: 100%;
+    h2 {
+      color: $blue;
+      @include bold();
+      @include font-size(10px);
+    }
+    h3 {
+      margin-top: 10px;
+      margin-bottom: 5px;
+      cursor: pointer;
+      @include medium(italic);
+      color: $blue;
+      @include font-size(12px);
+    }
+    p {
+      cursor: pointer;
+      margin-bottom: 10px;
+      color: $black;
+      @include font-size(11px);
+      @include medium();
+      span {
+        @include bold();
+      }
+    }
+    hr {
+      border: none;
+      border-bottom: 1px solid $grey;
     }
   }
 }

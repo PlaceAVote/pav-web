@@ -9,18 +9,14 @@ FeedController = function($scope, $location, userService, billService, authServi
     this.userService = userService;
     this.rs = $rootScope;
     this.welcomeMessage();
+    this.getTrends();
 
     this.getBills('notyet@implemented.com', function(err, response) {
         if(!err){
             $scope.bills = response;
         }
     });
-    this.getTrends(function(err, response) {
-      if(!err){
-        $scope.trends = response;
-      }
-    });
-
+    this.getTrends();
     this.getUserProfile(function(err, response) {
       if(err) {
         if(err.status === 401) {
@@ -53,8 +49,14 @@ FeedController.prototype.getUserProfile = function(callback) {
 
 };
 
-FeedController.prototype.getTrends = function(callback) {
-  this.billService.getTrends(callback);
+FeedController.prototype.getTrends = function() {
+  var that = this;
+  this.billService.getTrends(function(err, res) {
+    if(!err) {
+    that.trends = res;
+    console.log(that.trends);
+    }
+  });
 };
 
 FeedController.prototype.getBills = function(username, callback) {
