@@ -22,10 +22,10 @@ function HeaderCtrl($rootScope, $scope, $location, authService, userService, not
 
 
 HeaderCtrl.prototype.intercomInit = function() {
-  console.log(this.window);
+  console.log('intercom init');
 this.window.Intercom('boot', {
   app_id: "sh17vmbl",
-  name: "Anthony", // TODO: The current logged in user's full name
+  name: "Mr Intercom Test", // TODO: The current logged in user's full name
   email: "anthony@gmail.com", // TODO: The current logged in user's email address.
   created_at: 1312182000 // TODO: The current logged in user's sign-up date as a Unix timestamp.
 });
