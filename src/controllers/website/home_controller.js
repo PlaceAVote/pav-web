@@ -18,7 +18,6 @@ function HomeController($scope, $location, $anchorScroll, userService, $rootScop
 }
 
 HomeController.prototype.loginWithFacebook = function(){
-  console.log('listening');
   var that = this;
   this.userService.loginWithFacebook(function(err, response){
     if(err){
