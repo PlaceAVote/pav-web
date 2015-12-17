@@ -19,7 +19,6 @@ var ProfileController = require('./controllers/profile_controller.js');
 //services
 var UserService = require('./services/user_service.js');
 var BillService = require('./services/bill_service.js');
-var TrendService = require('./services/trend_service.js');
 var AuthService = require('./services/auth_service.js');
 var LegislatorService = require('./services/legislator_service.js');
 var VoteService = require('./services/votes_service.js');
@@ -43,12 +42,10 @@ var voteEventDirective = require('./directives/vote_event.js');
 var headerNav = require('./directives/header_directive.js');
 var notificationsDirective = require('./directives/notifications.js');
 var commentReplyNotificationDirective = require('./directives/comment_reply_notification.js');
+var trendsDirective = require('./directives/trends.js');
 // var statusChart = require('./directives/statuschart.js');
 //thirdparty integrations
 var Facebook = require('./integrations/facebook.js');
-//temporary resources
-var TempBillResource = require('./temp/mockBillResource.js');
-var TempTrendResource = require('./temp/mockTrendResource.js');
 
 var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'pavDirectives']);
 
@@ -107,16 +104,12 @@ app.config(['$routeProvider', function($routeProvider) {
     });
 }]);
 
-//temporary resources
-app.factory('tempBillResource', [TempBillResource]);
-app.factory('tempTrendResource', [TempTrendResource]);
 
 //services
 app.factory('facebookService', [Facebook]);
 app.factory('authService', ['$resource', AuthService]);
 app.factory('userService', ['$resource', 'facebookService', 'authService', UserService]);
-app.factory('billService', ['tempBillResource', '$resource', 'authService', 'userService', BillService]);
-app.factory('trendService', ['tempTrendResource', TrendService]);
+app.factory('billService', ['$resource', 'authService', 'userService', BillService]);
 app.factory('commentService', ['$resource', 'userService', 'authService', CommentService]);
 app.factory('legislationService', ['$resource', 'authService', LegislatorService]);
 app.factory('voteService', ['$resource', 'authService', 'userService', VoteService]);
@@ -127,7 +120,7 @@ app.factory('notificationService', ['$resource', 'authService', NotificationServ
 app.controller('TopicRegisterCtrl',['$scope','$location', 'userService', RegisterController]);
 app.controller('SignUpCtrl',['$rootScope','$scope','$location', 'userService', SignUpController]);
 app.controller('LoginCtrl',['$scope','$location', 'userService', 'authService', '$rootScope', '$routeParams', LoginController]);
-app.controller('FeedCtrl', ['$scope', '$location', 'userService', 'billService', 'trendService', 'authService','$rootScope', FeedController]);
+app.controller('FeedCtrl', ['$scope', '$location', 'userService', 'billService', 'authService', '$rootScope', FeedController]);
 app.controller('BillCtrl', ['$scope', '$routeParams', 'billService', 'legislationService', 'voteService', 'commentService', '$location', 'authService', BillController]);
 app.controller('HeaderCtrl', ['$rootScope', '$scope', '$location', 'authService', 'userService', 'notificationService','$window', HeaderController]);
 app.controller('ProfileCtrl', ['$scope', '$location', '$routeParams', 'authService', 'userService', ProfileController]);
@@ -153,5 +146,6 @@ app.directive('followed', ['$location', timelineFollowedEventDirective]);
 app.directive('vote', ['$location', voteEventDirective]);
 app.directive('notifications', [notificationsDirective]);
 app.directive('commentreply', ['$location', commentReplyNotificationDirective]);
+app.directive('trends', ['$location',trendsDirective]);
 
 
