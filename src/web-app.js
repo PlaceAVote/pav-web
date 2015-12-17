@@ -8,7 +8,7 @@ PressController = require('./controllers/website/press_controller.js'),
 MenuController = require('./controllers/website/menu_controller.js');
 
 //App Controllers
-var AssetsController = require('./controllers/assets_controller.js');
+// var AssetsController = require('./controllers/assets_controller.js');
 var RegisterController = require('./controllers/register_controller.js');
 var SignUpController = require('./controllers/sign_up_controller.js');
 var LoginController = require('./controllers/login_controller.js');
@@ -123,13 +123,13 @@ app.factory('voteService', ['$resource', 'authService', 'userService', VoteServi
 app.factory('notificationService', ['$resource', 'authService', NotificationService]);
 
 //controllers
-app.controller('AssetsCtrl',['$scope','$routeParams','$location', AssetsController]);
+// app.controller('AssetsCtrl',['$scope','$routeParams','$location', AssetsController]);
 app.controller('TopicRegisterCtrl',['$scope','$location', 'userService', RegisterController]);
 app.controller('SignUpCtrl',['$rootScope','$scope','$location', 'userService', SignUpController]);
 app.controller('LoginCtrl',['$scope','$location', 'userService', 'authService', '$rootScope', '$routeParams', LoginController]);
 app.controller('FeedCtrl', ['$scope', '$location', 'userService', 'billService', 'trendService', 'authService','$rootScope', FeedController]);
 app.controller('BillCtrl', ['$scope', '$routeParams', 'billService', 'legislationService', 'voteService', 'commentService', '$location', 'authService', BillController]);
-app.controller('HeaderCtrl', ['$rootScope', '$scope', '$location', 'authService', 'userService', 'notificationService', HeaderController]);
+app.controller('HeaderCtrl', ['$rootScope', '$scope', '$location', 'authService', 'userService', 'notificationService','$window', HeaderController]);
 app.controller('ProfileCtrl', ['$scope', '$location', '$routeParams', 'authService', 'userService', ProfileController]);
 
 //web controllers
