@@ -77,7 +77,6 @@ BillController.prototype.voteOnBill = function() {
         that.voteFailed = true;
       }
     }
-    that.chartShow = true;
     that.voteConfirmed();
   });
 };
