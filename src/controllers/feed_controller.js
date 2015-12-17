@@ -1,27 +1,22 @@
 var Banner = require('../models/banner.js');
 var AuthorizeController = require('./autherize_controller.js');
 
-FeedController = function($scope, $location, userService, billService, trendService, authService, $rootScope) {
+FeedController = function($scope, $location, userService, billService, authService, $rootScope) {
     AuthorizeController.authorize({error: '/', authorizer: authService, location: $location});
     this.$scope = $scope || {};
     $scope.$location = $location || {};
-    this.trendService = trendService;
     this.billService = billService;
     this.userService = userService;
     this.rs = $rootScope;
     this.welcomeMessage();
-    
+    this.getTrends();
+
     this.getBills('notyet@implemented.com', function(err, response) {
         if(!err){
             $scope.bills = response;
         }
     });
-    this.getTrends(function(err, response) {
-      if(!err){
-        $scope.trends = response;
-      }
-    });
-
+    this.getTrends();
     this.getUserProfile(function(err, response) {
       if(err) {
         if(err.status === 401) {
@@ -46,7 +41,7 @@ FeedController.prototype.welcomeMessage = function() {
       return that.newUser;
     }
    });
-  
+
 }
 
 FeedController.prototype.getUserProfile = function(callback) {
@@ -54,8 +49,14 @@ FeedController.prototype.getUserProfile = function(callback) {
 
 };
 
-FeedController.prototype.getTrends = function(callback) {
-  this.trendService.getTrends(callback);
+FeedController.prototype.getTrends = function() {
+  var that = this;
+  this.billService.getTrends(function(err, res) {
+    if(!err) {
+    that.trends = res;
+    console.log(that.trends);
+    }
+  });
 };
 
 FeedController.prototype.getBills = function(username, callback) {

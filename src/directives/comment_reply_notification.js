@@ -8,6 +8,7 @@ module.exports = function($location) {
     templateUrl: 'partials/comment_reply_notification.html',
     link: function(scope) {
       scope.location = $location;
+
     },
   };
 };

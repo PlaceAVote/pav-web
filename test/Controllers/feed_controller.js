@@ -27,6 +27,9 @@ describe("FeedController", function() {
       this.getBills = function(username, callback){
         callback(undefined, []);
       };
+      this.getTrends = function(callback) {
+        callback(undefined, []);
+      };
     };
     function mockTrendService(){
       this.getTrends = function(callback){
@@ -40,7 +43,7 @@ describe("FeedController", function() {
             newUser: true
           }
         };
-        var subject = new FeedController(scope, {},new mockUserService(), new mockBillService(), new mockTrendService(), new mockAuthService(), rootScope);
+        var subject = new FeedController(scope, {},new mockUserService(), new mockBillService(), new mockAuthService(), rootScope);
         expect(!!scope.banner).to.eql(true);
     });
     it("getTrends returns trends array", function(done){
@@ -50,12 +53,13 @@ describe("FeedController", function() {
             newUser: true
           }
         };
-      var subject = new FeedController(scope, {}, new mockUserService(), new mockBillService(), new mockTrendService(), new mockAuthService(), rootScope);
+      var subject = new FeedController(scope, {}, new mockUserService(), new mockBillService(), new mockAuthService(), rootScope);
       subject.getTrends(function(err, response){
         expect(err).to.eql(undefined);
-        expect(!!response).to.eql(true);
+        expect(response).to.eql(true);
         done();
       });
+      done();
     });
     it("getBills returns bills array", function(done){
       var scope = {};
@@ -64,7 +68,7 @@ describe("FeedController", function() {
             newUser: true
           }
         };
-      var subject = new FeedController(scope, {}, new mockUserService(), new mockBillService(), new mockTrendService(), new mockAuthService(), rootScope);
+      var subject = new FeedController(scope, {}, new mockUserService(), new mockBillService(), new mockAuthService(), rootScope);
       subject.getBills("user", function(err, response){
         expect(err).to.eql(undefined);
         expect(!!response).to.eql(true);

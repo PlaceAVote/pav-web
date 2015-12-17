@@ -1,36 +1,4 @@
-<div ng-controller="MenuCtrl as menu" ng-hide="menu.hide" class="wrapper s-12 m-12 l-12">
-    <div  ng-click="menu.mobile()" ng-class="{'close': !menu.menu}" class="mobile-menu">
-      <div class="burger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-        <p class="menu-label">MENU</p>
-        <p class="menu-close">CLOSE</p>
-    </div>
-  <nav ng-cloak sticky-nav id="nav" >
-    <a href="#/"><img class="logo-white" src="img/logo-white.png" /></a>
-    <a href="#/"><img class="logo-color" src="img/pav-logo-color.png" /></a>
-    <ul>
-      
-    </ul>
-    <ul ng-class="{'open': !menu.menu}">
-      <li><a class="btn-signup sign" href="#/signup">Sign Up</a></li>
-      <li><a class="btn-signin sign" href="#/login">Sign In</a></li>
-      <li>
-        <a ng-click="menu.mobile()" href="#/team">Team</a>
-      </li>
-      <li>
-        <a ng-click="menu.mobile()" href="#/faq">FAQ</a>
-      </li>
-      <li>
-        <a ng-click="menu.mobile()" href="#/press">Press</a>
-      </li>
-      <li>
-        <a ng-click="menu.mobile()" href="#/contact">Contact</a>
-      </li>
-    </ul>
-  </nav>
+<website-nav></website-nav>
 
 <div ng-controller="FaqCtrl as faq" id="pav-wrapper" class="wrapper s-12 m-12 l-12">
 <div class="faq">

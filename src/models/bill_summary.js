@@ -23,6 +23,9 @@ Bill.prototype.majorityVote = function() {
     else if(this.yesVote < this.noVote) {
         result.majority = 'No';
         result.percent = Math.round((100 / (this.noVote + this.yesVote)) * this.noVote);
+    }  else if(this.yesVote == this.noVote) {
+        result.majority = '50% - 50%';
+        result.percent = '';
     } else {
         that.noVotes = true;
     }
