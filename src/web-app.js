@@ -30,7 +30,7 @@ var angular = require('angular');
 //directives
 var mailcheck = require('./directives/mailcheck.js');
 var pavDirectives = require('./directives/directives.js');
-var stickyNav = require('./directives/sticky.js');
+var websiteNav = require('./directives/website_nav.js');
 var commentsDirective = require('./directives/comments.js');
 var commentDirective = require('./directives/comment.js');
 var commentEventDirective = require('./directives/comment_event.js');
@@ -53,28 +53,22 @@ var app = angular.module('pavApp', [require('angular-route'), require('angular-a
 app.config(['$routeProvider', function($routeProvider) {
 	$routeProvider
     .when('/', {
-      templateUrl: 'partials/website_partials/home.html',
-      controller: 'HomeCtrl as home'
+      templateUrl: 'partials/website_partials/home.html'
     })
     .when('/faq', {
-      templateUrl: 'partials/website_partials/faq.html',
-      controller: 'FaqCtrl as faq'
+      templateUrl: 'partials/website_partials/faq.html'
     })
     .when('/team', {
-      templateUrl: 'partials/website_partials/team.html',
-      controller: 'TeamCtrl as team'
+      templateUrl: 'partials/website_partials/team.html'
     })
     .when('/press', {
-      templateUrl: 'partials/website_partials/press.html',
-      controller: 'PressCtrl as press'
+      templateUrl: 'partials/website_partials/press.html'
     })
     .when('/contact', {
-      templateUrl: 'partials/website_partials/contact.html',
-      controller: 'PressCtrl as press'
+      templateUrl: 'partials/website_partials/contact.html'
     })
     .when('/terms-of-service-and-privacy-policy', {
-      templateUrl: 'partials/website_partials/tos-and-privacy-policy.html',
-      controller: 'PressCtrl as press'
+      templateUrl: 'partials/website_partials/tos-and-privacy-policy.html'
     })
 		.when('/login', {
 			templateUrl: 'partials/login.html',
@@ -133,7 +127,7 @@ app.controller('PressCtrl', ['$scope', '$location', PressController]);
 app.controller('MenuCtrl', ['$scope', '$location', '$routeParams', MenuController]);
 
 //directives
-app.directive('stickyNav', [stickyNav]);
+app.directive('websiteNav', [websiteNav]);
 app.directive('headerNav', [headerNav]);
 app.directive('mailcheck', ['$compile','$sce', mailcheck]);
 app.directive('comment', ['$compile', 'commentService', commentDirective]);
