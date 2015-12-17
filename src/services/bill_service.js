@@ -2,9 +2,9 @@ var BillSummary = require('../models/bill_summary.js');
 var Bill = require('../models/bill.js');
 var Comment = require('../models/comment.js');
 var config = require('../config/endpoints.js');
+var TrendingBill = require('../models/trending_bill.js');
 
-
-function BillService(tempBillResource, $resource, authService, userService) {
+function BillService($resource, authService, userService) {
     var getBills = function(username, callback) {
         var onLoad = function(result) {
             var bills = [];
@@ -127,13 +127,37 @@ function BillService(tempBillResource, $resource, authService, userService) {
       resource.postComment(postBody, onLoad, onError);
     };
 
+    var getTrends = function(callback) {
+      var token = authService.getAccessToken();
+      if (!token) {
+        return callback({message: 'No Auth Token'});
+      }
+
+      var url = config.bills.trends.endpoint;
+      config.methods.getArray.headers['Authorization'] = token;
+      var resource = new $resource(url, undefined, {getTrends: config.methods.getArray});
+      var onError = function(err) {
+        return callback(err);
+      };
+
+      var onLoad = function(result) {
+        var trends = result.map(function(t) {
+          var trend = new TrendingBill(t);
+          return trend;
+        });
+        callback(undefined, trends);
+      };
+      resource.getTrends(undefined, onLoad, onError);
+    };
+
     return {
       getBillVotes: getBillVotes,
       getBills: getBills,
       getBill: getBill,
       getTopComments: getTopComments,
       getComments: getComments,
-      postComment: postComment
+      postComment: postComment,
+      getTrends: getTrends,
     };
 }
 
