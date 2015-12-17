@@ -1,6 +1,6 @@
 var AuthorizeController = require('./autherize_controller.js');
 
-function HeaderCtrl($rootScope, $scope, $location, authService, userService, notificationService) {
+function HeaderCtrl($rootScope, $scope, $location, authService, userService, notificationService, $window) {
   $scope = $scope || {};
   $scope.header = this;
   this.scope = $scope;
@@ -16,6 +16,19 @@ function HeaderCtrl($rootScope, $scope, $location, authService, userService, not
   this.notifications = [];
   this.getNotifications();
   this.startNotifications();
+  this.window = $window;
+  this.intercomInit();
+}
+
+
+HeaderCtrl.prototype.intercomInit = function() {
+  console.log(this.window);
+this.window.Intercom('boot', {
+  app_id: "sh17vmbl",
+  name: "Anthony", // TODO: The current logged in user's full name
+  email: "anthony@gmail.com", // TODO: The current logged in user's email address.
+  created_at: 1312182000 // TODO: The current logged in user's sign-up date as a Unix timestamp.
+});
 }
 
 HeaderCtrl.prototype.notificationsCounter = function(inc) {
