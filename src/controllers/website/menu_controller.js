@@ -1,6 +1,7 @@
 function MenuController($scope, $location, $routeParams) {
 	$scope.menu = this;
 	this.menu = true;
+	this.stickyNav = false;
 	this.mobile = function() {
 		that = this;
 		if (that.menu) {
