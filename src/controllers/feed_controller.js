@@ -54,7 +54,6 @@ FeedController.prototype.getTrends = function() {
   this.billService.getTrends(function(err, res) {
     if(!err) {
     that.trends = res;
-    console.log(that.trends);
     }
   });
 };
