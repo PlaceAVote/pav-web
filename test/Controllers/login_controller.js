@@ -102,7 +102,28 @@ describe('LoginCtrl', function() {
               var subject = new LoginCtrl(scope, location, {}, authService);
               subject.userService = {
                 loginWithFacebook : function(callback){
-                  callback({message:"User Not Found"});
+                  callback({status:400, message:"User Not Found"});
+                }
+              };
+              subject.go = function(hash){
+                expect(hash).to.eql("/onboarding");
+                done();
+              };
+              subject.loginWithFacebook();
+            });
+            it("should go home if user has no facebook authentication", function(done){
+              var location = {
+                path: function(dest){
+                  expect(dest).to.eql('/');
+                  done();
+                }
+              };
+              var scope = {}
+              scope.$on = function() {};
+              var subject = new LoginCtrl(scope, location, {}, authService);
+              subject.userService = {
+                loginWithFacebook : function(callback){
+                  callback({status:999, message:"User Not Found"});
                 }
               };
               subject.go = function(hash){
