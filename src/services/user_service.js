@@ -17,6 +17,9 @@ function UserService($resource, facebookService, authService) {
         };
 
         facebookService.login(function(resource, auth){
+            if (!auth) {
+              return callback({status: 999, message: 'No Facebook Authentication'});
+            }
             authService.setFacebookAuth(auth);
             that.user = new User(resource.email);
             that.user.dob = new Date(resource.birthday);

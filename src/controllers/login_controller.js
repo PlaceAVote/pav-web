@@ -21,7 +21,7 @@ function LoginCtrl($scope, $location, userService, authService, $rootScope, $rou
    $scope.$on("$routeChangeSuccess", function() {
      if(this.location.hash == '#/signup') {
        $scope.login.signup = true;
-     } 
+     }
     });
 }
 
@@ -29,12 +29,15 @@ LoginCtrl.prototype.loginWithFacebook = function(){
   var that = this;
   this.userService.loginWithFacebook(function(err, response){
     if(err){
-      that.location.path("/onboarding");
+      if (err.status = 999) {
+        return that.location.path('/');
+      }
+      return that.location.path('/onboarding');
     }
     else {
       that.rs.user = that.userService.getUser();
       that.rs.loggedIn = true;
-      that.location.path("/feed");
+      that.location.path('/feed');
     }
   });
 };
