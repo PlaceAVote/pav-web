@@ -29,7 +29,7 @@ LoginCtrl.prototype.loginWithFacebook = function(){
   var that = this;
   this.userService.loginWithFacebook(function(err, response){
     if(err){
-      if (err.status = 999) {
+      if (err.status === 999) {
         return that.location.path('/');
       }
       return that.location.path('/onboarding');
