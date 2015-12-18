@@ -68,7 +68,7 @@ input {
 
 
 nav {
-  @include media(600px){
+  @include media(640px){
   padding: 20px 10px !important;
   margin-bottom:50px;
     ul {
@@ -115,7 +115,7 @@ nav {
   right: 10px;
   top: 18px;
   
-  @include media(600px) {
+  @include media(640px) {
     display: block;
     cursor: pointer;
   }
