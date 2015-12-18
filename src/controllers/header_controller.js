@@ -17,19 +17,33 @@ function HeaderCtrl($rootScope, $scope, $location, authService, userService, not
   this.getNotifications();
   this.startNotifications();
   this.window = $window;
-  this.intercomInit();
+
+$scope.$watchCollection(function() {
+    return $rootScope.user;
+    }, 
+    function(newValue, oldValue) {
+      var emptyObj = {};
+      if(newValue){
+      !newValue.first_name ? HeaderCtrl.prototype.intercomShutdown(newValue) : HeaderCtrl.prototype.intercomInit(newValue);      
+      }
+    }, true);
 }
 
 
-HeaderCtrl.prototype.intercomInit = function() {
-  console.log('intercom init');
-this.window.Intercom('boot', {
+HeaderCtrl.prototype.intercomInit = function(user) {
+window.Intercom('boot', {
   app_id: "sh17vmbl",
-  name: "Mr Intercom Test", // TODO: The current logged in user's full name
-  email: "anthony@gmail.com", // TODO: The current logged in user's email address.
-  created_at: 1312182000 // TODO: The current logged in user's sign-up date as a Unix timestamp.
+  name: user.first_name + ' ' + user.last_name,
+  email: user.email
 });
+
 }
+
+HeaderCtrl.prototype.intercomShutdown = function(user) {
+window.Intercom('shutdown');
+}
+
+
 
 HeaderCtrl.prototype.notificationsCounter = function(inc) {
   inc ? this.newEvent++ : this.newEvent--;
@@ -128,6 +142,7 @@ HeaderCtrl.prototype.notify = function() {
 HeaderCtrl.prototype.logout = function() {
   this.rs.loggedIn = false;
   AuthorizeController.logout({authorizer: this.authService, location: this.location});
+  this.rs.user = {};
   this.notificationService.close();
 };
 
