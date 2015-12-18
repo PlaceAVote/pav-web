@@ -74,6 +74,7 @@ LoginCtrl.prototype.login = function(u, hash) {
       if (err) {
         return that.logout();
       }
+      console.log('logged in as ', result)
       that.rs.user = result;
       that.rs.loggedIn = true;
       that.location.path("/feed");
@@ -83,6 +84,7 @@ LoginCtrl.prototype.login = function(u, hash) {
 
 LoginCtrl.prototype.logout = function() {
   this.rs.loggedIn = false;
+  this.rs.user = {};
   AuthorizeController.logout({authorizer: this.authService, location: this.location});
 };
 
