@@ -20,17 +20,18 @@ function NotificationService ($resource, authService, options) {
     };
 
     streamer.onmessage = function(message) {
-      var notifications = NotificationEventFactory.getResponses(message.data);
-      return callback(undefined, notifications);
+      message = JSON.parse(message.data);
+      return callback(undefined, message);
     };
   };
 
-  var close = function(){
+  var close = function(callback){
     if (!streamer) {
       return;
     }
     streamer.close();
     streamer = undefined;
+    callback(undefined);
   }
 
   var getStreamer = function(){
@@ -44,13 +45,7 @@ function NotificationService ($resource, authService, options) {
     }
 
     var onLoad = function(res) {
-      var notifications = [];
-      var notification;
-      for (var i = 0; i < res.results.length; i++) {
-      notification = NotificationEventFactory.getResponses(res.results[i]);
-      notifications.push(notification[0]);
-      }
-      callback(undefined, notifications);
+      callback(undefined, res);
     }
 
     var onError = function(err) {

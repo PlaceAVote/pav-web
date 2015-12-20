@@ -8,7 +8,7 @@ describe('Notification Service', function() {
     }
   };
   var streamer = {
-    close: function() {
+    close: function(callback) {
       closed = true;
     }
   };
@@ -37,7 +37,9 @@ describe('Notification Service', function() {
     subject.stream(function(err, result){
       var streamer = subject.getStreamer();
       expect(streamer).to.not.eql(undefined);
-      subject.close();
+      subject.close(function() {
+        return;
+      });
       streamer = subject.getStreamer();
       expect(closed).to.eql(true);
       expect(streamer).to.eql(undefined);
@@ -54,10 +56,11 @@ describe('Notification Service', function() {
     streamer.onerror('ERROR');
   });
   it('Returns data from the server', function(done) {
-    var data = [];
+    var message = '{"data": "1"}';
+    var data = {data: 1};
     var subject = new NotificationService(undefined, authService, options);
     subject.stream(function(error, message){
-      expect(message).to.deep.equal([]);
+      expect(message).to.eql(1);
       done();
     });
     streamer.onmessage(data);

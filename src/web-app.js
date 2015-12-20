@@ -138,7 +138,7 @@ app.directive('timeline', [timelineDirective]);
 app.directive('following', ['$location', timelineFollowingEventDirective]);
 app.directive('followed', ['$location', timelineFollowedEventDirective]);
 app.directive('vote', ['$location', voteEventDirective]);
-app.directive('notifications', [notificationsDirective]);
+app.directive('notifications', ['$location', notificationsDirective]);
 app.directive('commentreply', ['$location', commentReplyNotificationDirective]);
 app.directive('trends', ['$location',trendsDirective]);
 
