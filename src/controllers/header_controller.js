@@ -11,22 +11,27 @@ function HeaderCtrl($rootScope, $scope, $location, authService, userService, not
   this.showDropDown = false;
   this.rs = $rootScope;
   this.loggedIn = $rootScope.loggedIn;
+  this.unread = 0;
   this.populate();
-  this.newEvent = 0;
   this.notifications = [];
-  this.getNotifications();
-  this.startNotifications();
+  this.userNotifications = [];
+  this.newNotification = {};
   this.window = $window;
-
 $scope.$watchCollection(function() {
     return $rootScope.user;
     }, 
     function(newValue, oldValue) {
-      var emptyObj = {};
-      if(newValue){
-      !newValue.first_name ? HeaderCtrl.prototype.intercomShutdown(newValue) : HeaderCtrl.prototype.intercomInit(newValue);      
-      }
-    }, true);
+      var that = this;
+      if(newValue) {
+          if(newValue.first_name) {
+          $scope.header.intercomInit(newValue); 
+          $scope.header.getNotifications();
+          $scope.header.startNotifications();
+          } else if(!newValue.first_name) {
+          $scope.header.intercomShutdown(newValue) 
+          }
+        }
+      }, true);
 }
 
 
@@ -43,12 +48,6 @@ HeaderCtrl.prototype.intercomShutdown = function(user) {
 window.Intercom('shutdown');
 }
 
-
-
-HeaderCtrl.prototype.notificationsCounter = function(inc) {
-  inc ? this.newEvent++ : this.newEvent--;
-}
-
 HeaderCtrl.prototype.getNotifications = function() {
   var that = this;
   this.notificationService.getNotifications(function(err, res) {
@@ -56,9 +55,9 @@ HeaderCtrl.prototype.getNotifications = function() {
       return;
     } else {
       that.notifications = res;
-      for(var i = 0; i < that.notifications.length; i++) {
-        if(!that.notifications[i].read) {
-          that.notificationsCounter(true);
+      for(var i = 0; i < that.notifications.results.length; i++) {
+        if(!that.notifications.results[i].read) {
+          that.unread++;
         }
       }
     }
@@ -72,7 +71,11 @@ HeaderCtrl.prototype.startNotifications = function() {
   var that = this;
   this.notificationService.stream(function(err, result){
     if (!err) {
-      that.notifyUser(result);
+        that.rs.$apply(function() {
+          that.notificationReceived = true;
+          that.unread++;
+          that.newNotification = result;
+        });
     }
   });
 };
@@ -82,29 +85,24 @@ HeaderCtrl.prototype.readEvent = function(res) {
     return;
   }
   var that = this;
-  this.location.path('bill/' + res.comment.bill_id);
-  this.showNotifications = this.showNotifications ? false : true;
   if(!res.read) {
   this.notificationService.readNotification(res.notification_id, function(err, result) {
     if (!err) {
       res.read = true;
-      that.notificationsCounter(false);
+      that.unread--;
+    } else if(err) {
+      console.log(err);
     }
   });
   }
 }
 
-HeaderCtrl.prototype.notifyUser = function(result) {
-  this.notificationReceived = true;
-  this.notifications.unshift(result[0]);
-  this.notificationsCounter(true);
-  this.scope.$apply();
-};
-
 HeaderCtrl.prototype.populate = function() {
   var that = this;
   this.userService.getUserProfile('me', function(err, result) {
-    if (result) {
+    if(err) {
+      return;
+    } else if (result) {
       that.rs.user = result;
       that.rs.loggedIn = true;
     } else {
@@ -132,18 +130,24 @@ HeaderCtrl.prototype.hideNotifications = function() {
 };
 
 HeaderCtrl.prototype.notify = function() {
-  if (this.notifications.length < 1) {
+  var that = this;
+  if (this.notifications.results.length < 1 && this.unread < 1) {
     return;
+  } else {
+  that.hideDropDown();
+  that.showNotifications = that.showNotifications ? false : true;
   }
-  this.hideDropDown();
-  this.showNotifications = this.showNotifications ? false : true;
 };
 
 HeaderCtrl.prototype.logout = function() {
+  that = this;
   this.rs.loggedIn = false;
-  AuthorizeController.logout({authorizer: this.authService, location: this.location});
   this.rs.user = {};
-  this.notificationService.close();
+  this.unread = 0;
+  this.notificationService.close(function(res) {
+    that.notifications = undefined;
+  });
+  AuthorizeController.logout({authorizer: this.authService, location: this.location});
 };
 
 HeaderCtrl.prototype.toProfile = function() {
