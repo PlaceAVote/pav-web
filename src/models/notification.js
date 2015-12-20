@@ -1,7 +1,7 @@
 function Notification(options) {
 this.author = options.author;
 this.author_first_name = options.author_first_name;
-this.author_img_url = options.author_img_url || || '//cdn.placeavote.com/img/profile/profile-picture.png';
+this.author_img_url = options.author_img_url || '//cdn.placeavote.com/img/profile/profile-picture.png';
 this.author_last_name = options.author_last_name;
 this.bill_id = options.bill_id;
 this.bill_title = options.bill_title;
