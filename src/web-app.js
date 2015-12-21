@@ -43,6 +43,7 @@ var headerNav = require('./directives/header_directive.js');
 var notificationsDirective = require('./directives/notifications.js');
 var commentReplyNotificationDirective = require('./directives/comment_reply_notification.js');
 var trendsDirective = require('./directives/trends.js');
+var websiteFooter = require('./directives/footer.js');
 // var statusChart = require('./directives/statuschart.js');
 //thirdparty integrations
 var Facebook = require('./integrations/facebook.js');
@@ -141,5 +142,6 @@ app.directive('vote', ['$location', voteEventDirective]);
 app.directive('notifications', [notificationsDirective]);
 app.directive('commentreply', ['$location', commentReplyNotificationDirective]);
 app.directive('trends', ['$location',trendsDirective]);
+app.directive('websiteFooter', [websiteFooter]);
 
 
