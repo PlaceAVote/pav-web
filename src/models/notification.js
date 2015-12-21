@@ -20,4 +20,3 @@ Notification.prototype.goTo = function(bill_id, location) {
 }
 
 module.exports = Notification;
-

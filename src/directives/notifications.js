@@ -28,7 +28,7 @@ module.exports = function($location) {
 
     	scope.$watch('unread', function(newValue, oldValue) {
     			if(newValue > oldValue) {
-    			scope.notifications.unshift(scope.$parent.header.newNotification);
+    			scope.notifications.unshift(new Notification(scope.$parent.header.newNotification));
     			}
     	})
     }
