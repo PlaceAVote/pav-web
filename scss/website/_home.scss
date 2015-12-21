@@ -8,6 +8,10 @@
             padding: 4% 8%;
             justify-content: center;
         }
+         @include media(480px) {
+            padding:0;
+            width:auto;
+         }
         justify-content: center;
         width: 100%;
         margin-bottom: 40px;
