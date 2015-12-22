@@ -2,12 +2,12 @@
 	<div class="row">
 	<img ng-click="header.location.path('/feed')" class="pav-icon" src="//cdn.placeavote.com/img/pav_icon.svg" />
 	<section class="notification">
-    <span ng-show="header.newEvent" class="notification-counter"><p>{{header.newEvent}}</p></span>
-		<img  style="cursor: pointer;" ng-class="{'no-notifications': header.notifications.length < 1}" src="//cdn.placeavote.com/img/notification.svg" ng-click="header.notify()" />
+    <span ng-show="header.unread" class="notification-counter"><p>{{header.unread}}</p></span>
+		<img  style="cursor: pointer;" ng-class="{'no-notifications': header.notifications.results.length < 1 && header.unread < 1}" src="//cdn.placeavote.com/img/notification.svg" ng-click="header.notify()" />
       <div class="notifications-container" ng-mouseleave="header.hideNotifications()"
       ng-show="header.showNotifications">
 
-        <notifications notifications="header.notifications" read-event="header.readEvent(notification)"></notifications>
+        <notifications data="header.notifications" unread="header.unread" read-event="header.readEvent(notification)"></notifications>
       </div>
 
 		<img ng-click="header.dropDown()" class="user-img" ng-src="{{header.rs.user.img_url}}"/>

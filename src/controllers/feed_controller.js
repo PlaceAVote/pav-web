@@ -8,7 +8,7 @@ FeedController = function($scope, $location, userService, billService, authServi
     this.billService = billService;
     this.userService = userService;
     this.rs = $rootScope;
-    this.welcomeMessage();
+    // this.welcomeMessage();
     this.getTrends();
 
     this.getBills('notyet@implemented.com', function(err, response) {
@@ -30,19 +30,19 @@ FeedController = function($scope, $location, userService, billService, authServi
     });
 }
 
-FeedController.prototype.welcomeMessage = function() {
-  var that = this;
-   this.userService.getUserProfile('me', function(err, res) {
-    if(!err && that.rs.user.newUser) {
-      that.newUser = true;
-      return that.newUser;
-    } else {
-      that.newUser = false;
-      return that.newUser;
-    }
-   });
+// FeedController.prototype.welcomeMessage = function() {
+//   var that = this;
+//    this.userService.getUserProfile('me', function(err, res) {
+//     if(!err && that.rs.user.newUser) {
+//       that.newUser = true;
+//       return that.newUser;
+//     } else {
+//       that.newUser = false;
+//       return that.newUser;
+//     }
+//    });
 
-}
+// }
 
 FeedController.prototype.getUserProfile = function(callback) {
   this.userService.getUserProfile('me', callback);

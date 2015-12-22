@@ -2,6 +2,11 @@ var config = require('../config/endpoints.js');
 
 Facebook = function(){
     var facebook;
+    // The fields we request from facebook.
+    var fields = {
+      fields: 'first_name, last_name, picture, email, birthday, hometown, cover'
+    };
+
     /**
      * initialise facebook sdk.  Is registered when service is initialized.
      */
@@ -23,32 +28,59 @@ Facebook = function(){
         }(document, 'script', 'facebook-jssdk'));
     }();
 
+
     /**
-     * Login to facebook. Checks whether the user is logged in, if not ask
+     * Private internal method. Gets a users picture from a userNode.
+     */
+    var getUserPicture = function(auth, userNode, callback) {
+      facebook.api('/' + userNode.id + '/picture/?type=large' ,function(response){
+        userNode.picture = response;
+        callback(userNode, auth);
+      });
+    };
+
+    /**
+     * Private Method. Gets user profile from Facebook once logged in.
+     */
+    var getUserProfile = function(auth, callback){
+      facebook.api('/me', fields, function(response) {
+        var userNode = response;
+        getUserPicture(auth, userNode, callback);
+      });
+    };
+
+    /**
+     * Private internal method to this intergration.
+     * Is called by the login method to log the user
+     * In to facebook.
+     */
+    var loginToFacebook = function(callback) {
+      var scope = {
+        scope: 'email, user_birthday, user_photos',
+      };
+
+      facebook.login(function(response){
+        var auth = response.authResponse;
+        getUserProfile(auth, callback);
+      }, scope);
+    };
+
+    /**
+     * Exposed Public Mehtod. Checks whether the user is logged in, if not ask
      * user for permissions.  Return user object
      */
-    login = function(callback){
-        facebook.getLoginStatus(function(response) {
-            var auth = response.authResponse;
-            if (response.status === 'connected') {
-                facebook.api('/me', {fields: 'first_name, last_name, picture, email, birthday, hometown, cover'}, function(response) {
-                    callback(response, auth);
-                });
-            }
-            else {
-                facebook.login(function(response){
-                    var auth = response.authResponse;
-                    facebook.api('/me', {fields: 'first_name, last_name, picture, email, birthday, hometown, cover'}, function(response) {
-                      var userNode = response;
-                      facebook.api('/' + userNode.id + '/picture/?type=large' ,function(response){
-                        userNode.picture = response;
-                        callback(userNode, auth);
-                      });
-                    });
-                }, {scope: 'email, user_birthday, user_photos'});
-            }
-        });
+    var login = function(callback){
+      facebook.getLoginStatus(function(response) {
+        var auth = response.authResponse;
+        if (response.status === 'connected') {
+          getUserProfile(auth, callback);
+        }
+        else {
+          loginToFacebook(callback);
+        }
+      });
     };
+
     return {
         login: login
     }
