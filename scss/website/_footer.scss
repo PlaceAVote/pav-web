@@ -1,5 +1,4 @@
 footer#footer {
-    // float:left;
     padding-top: 30px;
     width:100%;
     height: auto;
@@ -8,12 +7,9 @@ footer#footer {
     display: flex;
     flex-direction: row;
     @media screen and (max-device-width: 900px), screen and (max-width: 900px) {
-    // position: initial;
-    // flex-direction: column;
-    // height: auto;
     text-align: center;
     }
-    // .row {margin-top:30px;display:block;}
+    .footer-logo{position: absolute; left: 0; top: 30px;}
     .left {
       padding:0px 40px 0;
     }
@@ -27,7 +23,10 @@ footer#footer {
     p {
       color:$grey;
       @include font-size(14px);
-      text-align:left;;
+      text-align:left;
+      @include media(900px) {
+        text-align: center;
+      }
     }
     span {
       @media screen and (max-device-width: 900px), screen and (max-width: 900px) {
@@ -91,17 +90,35 @@ footer#footer {
       }
       }
     }
-
-    section {
+    .footer-links {
       width: 100%;
       display: flex;
-      &:nth-child(2) {
       justify-content: flex-end;
-      }
-      // flex-grow: 1;
       flex-direction: row;
       @include media(900px) {
         flex-direction: column;
+      }
+    }
+
+    section {
+      display: flex;
+      justify-content: flex-end;
+      flex-direction: row;
+      @include media(900px) {
+        flex-direction: column;
+        &:nth-child(2) {
+          width: 100%;
+          position: relative;
+          flex-direction: row;
+          div {
+             width: 50%;
+          }
+        }
+        &:nth-child(1) {
+          width: 50%;
+          align-self: flex-end;
+          // flex-direction: row;  
+          }
       }
     }
 
