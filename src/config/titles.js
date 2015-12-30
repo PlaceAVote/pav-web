@@ -8,6 +8,7 @@ module.exports = {
 			this.title(this.main + ' ' + user.first_name + ' ' + user.last_name);
 		},
 		bill: function(bill) {
-			this.title();
+			billTitle = bill.short_title || bill.official_title;
+			this.title(this.main + ' ' + billTitle);
 		}
 }
