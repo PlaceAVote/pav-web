@@ -6,6 +6,7 @@ var Legislator = require('../../src/models/legislator.js');
 var CurrentVote = require('../../src/models/current_vote.js');
 var topCommentsFixtures = require('../fixtures/top_comments.js');
 
+
 var mockAuthService = {
   validateToken: function(callback) {
     return callback(true);

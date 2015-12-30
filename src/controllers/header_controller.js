@@ -1,4 +1,5 @@
 var AuthorizeController = require('./autherize_controller.js');
+var title = require('../config/titles.js');
 
 function HeaderCtrl($rootScope, $scope, $location, authService, userService, notificationService, $window) {
   $scope = $scope || {};
@@ -60,6 +61,7 @@ HeaderCtrl.prototype.getNotifications = function() {
           that.unread++;
         }
       }
+      title.notifications(that.unread);
     }
   });
 }
@@ -74,6 +76,7 @@ HeaderCtrl.prototype.startNotifications = function() {
         that.rs.$apply(function() {
           that.notificationReceived = true;
           that.unread++;
+          title.notifications(that.unread);
           that.newNotification = result;
         });
     }
@@ -90,6 +93,7 @@ HeaderCtrl.prototype.readEvent = function(res) {
     if (!err) {
       res.read = true;
       that.unread--;
+      title.notifications(that.unread);
     } else if(err) {
       console.log(err);
     }

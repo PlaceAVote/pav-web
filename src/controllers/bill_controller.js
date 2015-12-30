@@ -1,5 +1,6 @@
 var Comment = require('../models/comment.js');
 var AuthorizeController = require('./autherize_controller.js');
+var title = require('../config/titles.js');
 function BillController($scope, $routeParams, billService, legislatorService, voteService, commentService, $location, authService) {
   AuthorizeController.authorize({error: '/', authorizer: authService, location: $location});
   $scope = $scope || {};
@@ -139,6 +140,7 @@ BillController.prototype.getBill = function(id) {
     }
     else {
       that.body = result;
+      title.bill(that.body.billData);
       that.userVotedCheck();
       that.getLegislator(result.billData.sponsor);
     }

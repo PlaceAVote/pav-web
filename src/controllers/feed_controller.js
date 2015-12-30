@@ -1,5 +1,6 @@
 var Banner = require('../models/banner.js');
 var AuthorizeController = require('./autherize_controller.js');
+var title = require('../config/titles.js');
 
 FeedController = function($scope, $location, userService, billService, authService, $rootScope) {
     AuthorizeController.authorize({error: '/', authorizer: authService, location: $location});
@@ -14,6 +15,7 @@ FeedController = function($scope, $location, userService, billService, authServi
     this.getBills('notyet@implemented.com', function(err, response) {
         if(!err){
             $scope.bills = response;
+            title.feed();
         }
     });
     this.getTrends();
