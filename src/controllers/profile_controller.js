@@ -1,7 +1,7 @@
 var AuthorizeController = require('./autherize_controller.js');
 var title = require('../config/titles.js');
 
-function ProfileController($scope, $location, $routeParams, authService, userService, $window) {
+function ProfileController($scope, $location, $routeParams, authService, userService) {
   AuthorizeController.authorize({error: '/', authorizer: authService, location: $location});
   $scope = $scope || {};
   $scope.profile = this;
