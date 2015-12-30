@@ -1,8 +1,18 @@
 module.exports = {
 		title: function(t, n) {
-			n = n || '';
-			t = t || '';
-			window.document.title = n + this.main + t;
+			if(!t) {
+				t = window.document.title;
+				t = t.split(') ').pop(); 
+				window.document.title = n + t;
+			}
+			if(!n) {
+				ot = window.document.title;
+				ot = ot.split('Place').shift();
+				window.document.title = ot + this.main + t;
+			}
+			// n = n || '';
+			// t = t || '';
+			// window.document.title = n + this.main + t;
 		},
 		main: 'Place A Vote | ',
 		profile: function(user) {
@@ -16,7 +26,11 @@ module.exports = {
 			this.title('Feed');
 		},
 		notifications: function(n) {
+			if(n) {
 			this.title(undefined, '('+n+') ');
+			} else {
+			this.title(undefined,'');
+			}
 		}
 
 }
