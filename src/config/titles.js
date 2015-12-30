@@ -1,9 +1,7 @@
 module.exports = {
-		current: function() {
-			return window.document.title;
-		}
 		title: function(t, n) {
 			n = n || '';
+			t = t || '';
 			window.document.title = n + this.main + t;
 		},
 		main: 'Place A Vote | ',
@@ -18,7 +16,7 @@ module.exports = {
 			this.title('Feed');
 		},
 		notifications: function(n) {
-			this.title('(' + n + ')' + this.current());
+			this.title(undefined, '('+n+') ');
 		}
 
 }

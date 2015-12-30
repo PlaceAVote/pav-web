@@ -76,6 +76,7 @@ HeaderCtrl.prototype.startNotifications = function() {
         that.rs.$apply(function() {
           that.notificationReceived = true;
           that.unread++;
+          title.notifications(that.unread);
           that.newNotification = result;
         });
     }
@@ -92,6 +93,7 @@ HeaderCtrl.prototype.readEvent = function(res) {
     if (!err) {
       res.read = true;
       that.unread--;
+      title.notifications(that.unread);
     } else if(err) {
       console.log(err);
     }
