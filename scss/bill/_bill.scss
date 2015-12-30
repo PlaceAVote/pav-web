@@ -189,14 +189,17 @@
     }
   }
 
-  input {
+  textarea {
+    min-height: 44px;
+    height: auto;
     width: 100%;
     outline: none;
     border-radius: 3px;
     border: 1px solid $grey;
     color: $black;
     @include font-size(14px);
-    padding: 5px 10px 5px 20px;
+    padding: 12px;
+    overflow-y:hidden;
     transition: all 0.3s ease;
 
     &:focus {
