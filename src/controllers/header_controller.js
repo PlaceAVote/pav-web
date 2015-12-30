@@ -1,4 +1,5 @@
 var AuthorizeController = require('./autherize_controller.js');
+var title = require('../config/titles.js');
 
 function HeaderCtrl($rootScope, $scope, $location, authService, userService, notificationService, $window) {
   $scope = $scope || {};
@@ -60,6 +61,7 @@ HeaderCtrl.prototype.getNotifications = function() {
           that.unread++;
         }
       }
+      title.notifications(that.unread);
     }
   });
 }
