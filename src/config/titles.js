@@ -1,18 +1,22 @@
 module.exports = {
 		title: function(t, n) {
 			if(!t) {
+				if(typeof window == "undefined") {
+					return;
+				}
+
 				t = window.document.title;
 				t = t.split(') ').pop(); 
 				window.document.title = n + t;
 			}
 			if(!n) {
+				if(typeof window == "undefined") {
+					return;
+				}
 				ot = window.document.title;
 				ot = ot.split('Place').shift();
 				window.document.title = ot + this.main + t;
 			}
-			// n = n || '';
-			// t = t || '';
-			// window.document.title = n + this.main + t;
 		},
 		main: 'Place A Vote | ',
 		profile: function(user) {
