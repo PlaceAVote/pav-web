@@ -1,6 +1,7 @@
 var AuthorizeController = require('./autherize_controller.js');
+var title = require('../config/titles.js');
 
-function ProfileController($scope, $location, $routeParams, authService, userService) {
+function ProfileController($scope, $location, $routeParams, authService, userService, $window) {
   AuthorizeController.authorize({error: '/', authorizer: authService, location: $location});
   $scope = $scope || {};
   $scope.profile = this;
@@ -30,11 +31,13 @@ ProfileController.prototype.populateProfile = function() {
   this.userService.getUserProfile(this.id, function(err, result) {
     if (!err) {
       that.user = result;
+      title.profile(that.user);
       result.following ? that.following = "unfollow" : that.following = "follow";
       that.followStatus = result.following;
     }
   });
 };
+
 
 ProfileController.prototype.populateTimeline = function() {
   var that = this;
