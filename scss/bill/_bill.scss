@@ -162,69 +162,6 @@
   }
 }
 
-.card.comment-create {
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  margin-bottom: 20px;
-  background-color: #f4f2fe;
-  display: flex;
-  flex-direction: row;
-
-  form {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-  }
-
-  .gen-user-img {
-    height: 30px;
-    width: 30px;
-    margin: 5px 40px 0 20px;
-    @include media(560px){
-    margin: 5px 20px 0 0;
-    }
-
-    img {
-      width: 100%;
-    }
-  }
-
-  textarea {
-    min-height: 44px;
-    height: auto;
-    width: 100%;
-    outline: none;
-    border-radius: 3px;
-    border: 1px solid $grey;
-    color: $black;
-    @include font-size(14px);
-    padding: 12px;
-    overflow-y:hidden;
-    transition: all 0.3s ease;
-
-    &:focus {
-      border-color: $blue;
-    }
-  }
-}
-
-.row-layout.comment {
-  transition: all 0.3s ease;
-  display: flex;
-  flex-direction: row;
-  flex-shrink: 0;
-  flex-grow: 1;
-
-  // background: red;
-}
-
-.comment.ng-enter {
-  opacity: 0;
-}
-
-.comment.ng-enter.ng-enter-acitve {
-  opacity: 1;
-}
 
 .bill-stats-vote {
   @include media(850px){
