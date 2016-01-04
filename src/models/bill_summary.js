@@ -18,11 +18,11 @@ Bill.prototype.majorityVote = function() {
     that = this;
     if(this.yesVote > this.noVote) {
         result.majority = 'Yes';
-        result.percent = Math.round((100 / (this.yesVote + this.noVote)) * this.yesVote);
+        result.percent = Math.round((100 / (this.yesVote + this.noVote)) * this.yesVote) + '%';
     }
     else if(this.yesVote < this.noVote) {
         result.majority = 'No';
-        result.percent = Math.round((100 / (this.noVote + this.yesVote)) * this.noVote);
+        result.percent = Math.round((100 / (this.noVote + this.yesVote)) * this.noVote) + '%';
     }  else if(this.yesVote == this.noVote) {
         result.majority = '50% - 50%';
         result.percent = '';
