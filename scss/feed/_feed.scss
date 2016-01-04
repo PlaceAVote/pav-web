@@ -14,23 +14,6 @@
       @include shadow();
 
       .bill {
-        // @include bill();
-
-        // h3 {
-        //   @include font-size(11px);
-        //   @include bold();
-        //   color: $blue;
-        //   text-transform: uppercase;
-        //   cursor: pointer;
-        // }
-
-        // hr {
-        //   margin-top: 18px;
-        //   margin-bottom: 18px;
-        //   border: none;
-        //   border-bottom: 1px solid $widgetborder;
-        // }
-
         .bill-summary-container {
           display: flex;
           flex-direction: row;

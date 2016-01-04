@@ -26,7 +26,7 @@
 			        </div>
 		        </div>
 		        <div class="buttons">
-		        <button ng-click='bill.goToPage($parent.$location)'>{{bill.comment_count}} comments</button>
+		        <button ng-click='bill.goToPage($parent.$location)'><span>{{bill.comment_count}}</span> comments</button>
 		        <button ng-click='bill.goToPage($parent.$location)'><span ng-hide="bill.noVotes">{{bill.majorityVote().percent}}&#37; Vote {{bill.majorityVote().majority}}</span><span ng-show="bill.noVotes">No votes</span></button>
 		        </div>
 		    </div>
