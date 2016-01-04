@@ -29,11 +29,11 @@ describe("Bills", function(){
   });
   it("Majority Vote 'Yes'", function(){
     var subject = new Bill({'yes-count': 75, 'no-count': 25});
-    expect(subject.majorityVote()).to.eql({majority: 'Yes', percent: 75});
+    expect(subject.majorityVote()).to.eql({majority: 'Yes', percent: '75%'});
   });
   it("Majority Vote 'No'", function(){
     var subject = new Bill({'yes-count': 5, 'no-count': 10});
-    expect(subject.majorityVote()).to.eql({majority: 'No', percent: 67});
+    expect(subject.majorityVote()).to.eql({majority: 'No', percent: '67%'});
   });
   it('goes to bill page for specific bill', function() {
     var options = { comment_count: 10, bill_id: 1000};
