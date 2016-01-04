@@ -228,6 +228,9 @@
     .row {
       align-items: center;
       .feed-icon {
+      @include media(400px) {
+        display: block;
+      }
         margin-right: 10px;
       }
     }
