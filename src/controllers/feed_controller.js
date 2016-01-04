@@ -10,7 +10,7 @@ FeedController = function($scope, $location, userService, billService, authServi
     this.userService = userService;
     this.rs = $rootScope;
     // this.welcomeMessage();
-    this.getTrends();
+    // this.getTrends();
 
     this.getBills('notyet@implemented.com', function(err, response) {
         if(!err){

@@ -11,6 +11,7 @@ function Bill(options) {
     this.bill_id = options.bill_id;
     this.summary = options.summary;
     this.timestamp = options.timestamp;
+    this.getIcon(options);
 }
 
 Bill.prototype.majorityVote = function() {
@@ -35,5 +36,34 @@ Bill.prototype.majorityVote = function() {
 Bill.prototype.goToPage = function (location) {
   location.path('bill/' + this.bill_id);
 };
+
+Bill.prototype.getIcon = function(options) {
+    var i = options.subject;
+    var that = this;
+    if(i == 'Religion') {
+        that.icon = 'icon-religion';
+    }   
+    if(i == 'Drugs') {
+        that.icon = 'icon-smoking-area';
+    }
+    if(i == 'Defense') {
+        that.icon = 'icon-tank';
+    }    
+    if(i == 'Politics') {
+        that.icon = 'icon-building';
+    }
+    if(i == 'Gun Rights') {
+        that.icon = 'icon-gun';
+    }
+    if(i == 'Technology') {
+        that.icon = 'icon-ipad';
+    }
+    if(i == 'Economics') {
+        that.icon = 'icon-money';
+    }
+    if(i == 'Social Interest') {
+        that.icon = 'icon-police';
+    }
+}
 
 module.exports = Bill;
