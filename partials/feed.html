@@ -15,15 +15,17 @@
 		    	<div class="bill card">
 		        <h1 ng-click='bill.goToPage($parent.$location)'>{{bill.subject}}</h1>
 		        <hr />
+		        	<section class="row">
+			    	<div class="feed-icon">
+			    	<i class="{{bill.icon}}"></i>
+			    	</div>
 			        <div class="bill-summary-container">
-			        <div class="bill-subject">
-			        <span class="{{bill.subject}}"></span>
-			        </div>
 			        <div class="bill-summary">
 			        <h6 ng-click='bill.goToPage($parent.$location)'>{{bill.short_title}}</h6>
 			        <p>{{bill.official_title}}</p>
 			        </div>
 			        </div>
+			        </section>
 		        </div>
 		        <div class="stats">
 		        <section ng-click='bill.goToPage($parent.$location)'>

@@ -15,15 +15,11 @@
 
       .bill {
         .bill-summary-container {
-          display: flex;
-          flex-direction: row;
-
-          .bill-subject {
-          }
-
+          width: 100%;
+          margin-left: 8px;
           .bill-summary {
-            display: flex;
-            flex-direction: column;
+            // display: flex;
+            // flex-direction: column;
 
             h6 {
               @include medium(italic);
@@ -155,6 +151,7 @@
     @include media(900px) {
       width: 100%;
       margin-left: 0;
+      margin-bottom: 20px;
     }
     margin-top: 20px;
     margin-left: 20px;
@@ -197,6 +194,28 @@
       }
     }
   }
+  }
+}
+
+.feed-icon {
+  min-width: 50px;
+  height: 50px;
+  box-sizing: border-box;
+  // margin-right: 7px;
+  border-radius: 3px;
+  position: relative;
+  @include linear-gradient(#5b7da8, #746898);
+  i {
+    color: white;
+    @include font-size(30px);
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    line-height: 1.9;
+    left: 0;
+    height: 50px;
+    width: 100%;
+    text-align: center;
   }
 }
 
