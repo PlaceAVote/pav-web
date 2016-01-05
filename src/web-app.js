@@ -90,6 +90,10 @@ app.config(['$routeProvider', function($routeProvider) {
       templateUrl: 'partials/bill.html',
       controller: 'BillCtrl as bill'
     })
+    .when('/bill/:id/comment/:commentid', {
+      templateUrl: 'partials/bill.html',
+      controller: 'BillCtrl as bill'
+    })
     .when('/profile/:id', {
       templateUrl: 'partials/profile.html',
       controller: 'ProfileCtrl as profile'
