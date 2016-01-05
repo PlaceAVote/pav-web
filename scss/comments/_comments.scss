@@ -150,6 +150,7 @@
     border-radius: 3px;
     border: 1px solid $grey;
     color: $black;
+    @include medium();
     @include font-size(14px);
     padding: 12px 60px 12px 12px;
     overflow-y:hidden;
