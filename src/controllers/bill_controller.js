@@ -8,6 +8,7 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
   $scope.commentService = commentService;
   this.authService = authService;
   this.location = $location;
+  this.routeParams = $routeParams;
   this.from = 0;
   this.commentBody;
   this.commentService = commentService;
@@ -24,7 +25,6 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
   this.stats = {};
   this.readmore = false;
   this.showChart = true;
-  console.log('bill id', $routeParams);
 }
 
 BillController.prototype.showVoteModal = function(vote){
@@ -168,12 +168,13 @@ BillController.prototype.getComments = function() {
   if(!this.billService || !this.billService.getComments) {
     return;
   }
-  this.billService.getComments(this.id, this.from,function(err, result) {
+  this.billService.getComments(this.id, this.from, this.routeParams.commentid, function(err, result) {
     if (err) {
       that.allCommentError = true;
     }
     else if (result) {
       that.comments = result;
+      that.comments.selected = that.routeParams.commentid;
       that.comments.length ? that.commentMessage = false : that.commentMessage = true;
       that.from = that.from + 10;
     }

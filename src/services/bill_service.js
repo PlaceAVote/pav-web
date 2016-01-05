@@ -74,7 +74,8 @@ function BillService($resource, authService, userService) {
       resource.getComments(undefined, onLoad, onError);
     };
 
-    var getComments = function(id, from, callback) {
+    var getComments = function(id, from, reply, callback) {
+        reply = reply || false;
         if(!id) {
           return callback({message: 'Id Must Be Defined'});
         }
@@ -94,13 +95,14 @@ function BillService($resource, authService, userService) {
           var commentLength = comments.length;
           for (var i = 0; i < commentLength; i++) {
             var comment = new Comment(comments[i])
-            Comment.buildChildren(comment);
+            Comment.buildChildren(comment, undefined, reply);
             results.push(comment);
           }
           return callback(undefined, results);
         };
         resource.getComments(undefined, onLoad, onError);
     };
+      
 
     var postComment = function(id, comment, callback) {
       if(!id){

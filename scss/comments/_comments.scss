@@ -196,3 +196,7 @@
     border-color: darken($green, 10%);
   }
 }
+
+.comment-selected {
+  background-color: $red !important;
+}
