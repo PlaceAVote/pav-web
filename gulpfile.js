@@ -158,7 +158,7 @@ var gulp = require('gulp'),
     .pipe(gulp.dest('pav_ionic/www/dist/js'));
   });
 
-  gulp.task('img-shrink', ['jpg-shrink'], function () {
+  gulp.task('img-shrink', function () {
     return gulp.src(['./img_raw/**/*.png','./img_raw/**/*.svg','./img_raw/**/*.ico'])
     .pipe(imagemin({
       progressive: false,
