@@ -90,6 +90,10 @@ app.config(['$routeProvider', function($routeProvider) {
       templateUrl: 'partials/bill.html',
       controller: 'BillCtrl as bill'
     })
+    .when('/bill/:id/comment/:commentid', {
+      templateUrl: 'partials/bill.html',
+      controller: 'BillCtrl as bill'
+    })
     .when('/profile/:id', {
       templateUrl: 'partials/profile.html',
       controller: 'ProfileCtrl as profile'
@@ -131,7 +135,7 @@ app.controller('MenuCtrl', ['$scope', '$location', '$routeParams', MenuControlle
 app.directive('websiteNav', [websiteNav]);
 app.directive('headerNav', [headerNav]);
 app.directive('mailcheck', ['$compile','$sce', mailcheck]);
-app.directive('comment', ['$compile', 'commentService', commentDirective]);
+app.directive('comment', ['$compile', 'commentService', '$anchorScroll', '$timeout', '$location', commentDirective]);
 app.directive('commentEvent', ['$compile', 'commentService', commentEventDirective]);
 app.directive('comments', [commentsDirective]);
 app.directive('banner', [bannerDirective]);

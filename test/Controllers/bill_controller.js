@@ -694,7 +694,7 @@ describe('BillController', function() {
         getTopComments: function(id, callback){
           callback('Error');
         },
-        getComments: function(id, from, callback) {
+        getComments: function(id, from, undefined, callback) {
           callback('Error');
         }
       };
@@ -726,7 +726,7 @@ describe('BillController', function() {
         getTopComments: function(id, callback){
           callback('Error');
         },
-        getComments: function(id, from, callback) {
+        getComments: function(id, from, undefined, callback) {
           callback(undefined, [new Comment({id: 1}), new Comment({id: 2})]);
         }
       };
@@ -762,7 +762,7 @@ describe('BillController', function() {
         getTopComments: function(id, callback){
           callback('Error');
         },
-        getComments: function(id, from, callback) {
+        getComments: function(id, from, undefined, callback) {
           callback('Error');
         },
         postComment: function(id, comment, callback) {
@@ -797,7 +797,7 @@ describe('BillController', function() {
         getTopComments: function(id, callback){
           callback('Error');
         },
-        getComments: function(id, from, callback) {
+        getComments: function(id, from, undefined, callback) {
           callback(undefined, []);
         },
         postComment: function(id, comment, callback) {

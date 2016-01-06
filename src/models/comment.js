@@ -23,10 +23,19 @@ function Comment(options) {
   this.type = options.type || 'comment';
 }
 
-Comment.buildChildren = function(comment, deep) {
+Comment.buildChildren = function(comment, deep, reply) {
   if(!deep) {
     deep = 0;
   }
+
+  if(reply) {
+    comment.showChildren = true;
+  }
+
+  if(comment.id == reply) {
+    comment.selected = 'comment-selected';
+  }
+
   comment.deep = deep;
   if(!comment.replies) {
     comment.replies = [];
@@ -36,7 +45,7 @@ Comment.buildChildren = function(comment, deep) {
   }
   for(var i = 0; i < comment.jsonReplies.length; i++){
     var child = new Comment(comment.jsonReplies[i]);
-    Comment.buildChildren(child, deep+1);
+    Comment.buildChildren(child, deep+1, reply);
     comment.replies.push(child);
   }
 };
