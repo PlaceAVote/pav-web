@@ -33,7 +33,7 @@ Comment.buildChildren = function(comment, deep, reply) {
   }
 
   if(comment.id == reply) {
-    comment.selected = true;
+    comment.selected = 'comment-selected';
   }
 
   comment.deep = deep;

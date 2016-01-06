@@ -135,7 +135,7 @@ app.controller('MenuCtrl', ['$scope', '$location', '$routeParams', MenuControlle
 app.directive('websiteNav', [websiteNav]);
 app.directive('headerNav', [headerNav]);
 app.directive('mailcheck', ['$compile','$sce', mailcheck]);
-app.directive('comment', ['$compile', 'commentService', commentDirective]);
+app.directive('comment', ['$compile', 'commentService', '$anchorScroll', '$timeout', '$location', commentDirective]);
 app.directive('commentEvent', ['$compile', 'commentService', commentEventDirective]);
 app.directive('comments', [commentsDirective]);
 app.directive('banner', [bannerDirective]);

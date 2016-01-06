@@ -174,7 +174,6 @@ BillController.prototype.getComments = function() {
     }
     else if (result) {
       that.comments = result;
-      that.comments.selected = that.routeParams.commentid;
       that.comments.length ? that.commentMessage = false : that.commentMessage = true;
       that.from = that.from + 10;
     }
