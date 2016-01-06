@@ -197,6 +197,21 @@
   }
 }
 
-.comment-selected {
-  background-color: $red !important;
+#comment-selected {
+  animation: selected 5s ease;
+}
+
+@keyframes selected {
+  0% {
+    border-left: 5px solid $blue;
+    padding-left: 5px;
+  }
+  95% {
+    border-left: 5px solid $blue;
+    padding-left: 5px;
+  }
+  100% {
+    border-color: white;
+    padding-right: 0px;
+  }
 }
