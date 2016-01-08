@@ -1,13 +1,14 @@
 var AuthorizeController = require('./autherize_controller.js');
 var title = require('../config/titles.js');
 
-function HeaderCtrl($rootScope, $scope, $location, authService, userService, notificationService, $window) {
+function HeaderCtrl($rootScope, $scope, $location, authService, userService, notificationService, searchService, $window) {
   $scope = $scope || {};
   $scope.header = this;
   this.scope = $scope;
   this.userService = userService;
   this.authService = authService;
   this.notificationService = notificationService;
+  this.searchService = searchService;
   this.location = $location;
   this.showDropDown = false;
   this.rs = $rootScope;
@@ -18,23 +19,35 @@ function HeaderCtrl($rootScope, $scope, $location, authService, userService, not
   this.userNotifications = [];
   this.newNotification = {};
   this.window = $window;
-$scope.$watchCollection(function() {
-    return $rootScope.user;
-    }, 
-    function(newValue, oldValue) {
-      var that = this;
-      if(newValue) {
-          if(newValue.first_name) {
-          $scope.header.intercomInit(newValue); 
-          $scope.header.getNotifications();
-          $scope.header.startNotifications();
-          } else if(!newValue.first_name) {
-          $scope.header.intercomShutdown(newValue) 
-          }
-        }
-      }, true);
-}
+  $scope.searchResults = [];
 
+  $scope.$watchCollection(function() {
+    return $rootScope.user;
+  }, 
+  function(newValue, oldValue) {
+    var that = this;
+    if(newValue) {
+        if(newValue.first_name) {
+        $scope.header.intercomInit(newValue); 
+        $scope.header.getNotifications();
+        $scope.header.startNotifications();
+        } else if(!newValue.first_name) {
+        $scope.header.intercomShutdown(newValue) 
+        }
+      }
+    }, true);
+
+  $scope.search = function() {
+    if ($scope.query.length < 3) {
+      $scope.searchResults = [];
+      return;
+    }
+
+    searchService.search($scope.query, function(err, response) {
+      $scope.searchResults = response;
+    });
+  }
+}
 
 HeaderCtrl.prototype.intercomInit = function(user) {
 window.Intercom('boot', {

@@ -1,26 +1,44 @@
 <header ng-controller="HeaderCtrl as header" ng-show="header.login()">
 	<div class="row">
-	<img ng-click="header.location.path('/feed')" class="pav-icon" src="//cdn.placeavote.com/img/pav_icon.svg" />
-	<section class="notification">
-    <span ng-show="header.unread" class="notification-counter"><p>{{header.unread}}</p></span>
-		<img  style="cursor: pointer;" ng-class="{'no-notifications': header.notifications.results.length < 1 && header.unread < 1}" src="//cdn.placeavote.com/img/notification.svg" ng-click="header.notify()" />
+  	<img ng-click="header.location.path('/feed')" class="pav-icon" src="//cdn.placeavote.com/img/pav_icon.svg" />
+    <div class="search-form">
+      <input type="text" ng-model="query" ng-change="search()">
+      <div class="search-results" ng-show="searchResults.length > 0">
+        <div class="search-header">
+          Bill
+        </div>
+        <div ng-repeat="bill in searchResults | filter: { type: 'bill'} | limitTo: 5">
+          {{bill.short_title}}
+          <span ng-if="!bill.short_title">{{bill.official_title}}</span>
+        </div>
+
+        <div class="search-header">
+          People
+        </div>
+        <div ng-repeat="user in searchResults | filter: { type: 'users'} | limitTo: 5">
+          {{user.first_name}} {{user.last_name}}
+        </div>
+      </div>
+    </div>
+    <section class="notification">
+      <span ng-show="header.unread" class="notification-counter"><p>{{header.unread}}</p></span>
+      <img  style="cursor: pointer;" ng-class="{'no-notifications': header.notifications.results.length < 1 && header.unread < 1}" src="//cdn.placeavote.com/img/notification.svg" ng-click="header.notify()" />
       <div class="notifications-container" ng-mouseleave="header.hideNotifications()"
       ng-show="header.showNotifications">
 
         <notifications data="header.notifications" unread="header.unread" read-event="header.readEvent(notification)"></notifications>
       </div>
-
-		<img ng-click="header.dropDown()" class="user-img" ng-src="{{header.rs.user.img_url}}"/>
-    <div class="dropdown-container" ng-mouseleave="header.hideDropDown()" ng-show="header.showDropDown">
-      <ul>
-        <li ng-click="header.toProfile()">
-         <img class="user-img-inside" ng-src="{{header.rs.user.img_url}}"/> View Profile
-        </li>
-        <li ng-click="header.logout()">
-          Logout
-        </li>
-      </ul>
-    </div>
-	</section>
+  		<img ng-click="header.dropDown()" class="user-img" ng-src="{{header.rs.user.img_url}}"/>
+      <div class="dropdown-container" ng-mouseleave="header.hideDropDown()" ng-show="header.showDropDown">
+        <ul>
+          <li ng-click="header.toProfile()">
+           <img class="user-img-inside" ng-src="{{header.rs.user.img_url}}"/> View Profile
+          </li>
+          <li ng-click="header.logout()">
+            Logout
+          </li>
+        </ul>
+      </div>
+  	</section>
 	</div>
 </header>
