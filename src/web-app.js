@@ -49,7 +49,7 @@ var autoResizeDirective = require('./directives/autoresize.js');
 //thirdparty integrations
 var Facebook = require('./integrations/facebook.js');
 
-var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'pavDirectives']);
+var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), require('angular-ui-bootstrap'), 'pavDirectives']);
 
 
 app.config(['$routeProvider', function($routeProvider) {
@@ -119,7 +119,7 @@ app.controller('SignUpCtrl',['$rootScope','$scope','$location', 'userService', S
 app.controller('LoginCtrl',['$scope','$location', 'userService', 'authService', '$rootScope', '$routeParams', LoginController]);
 app.controller('FeedCtrl', ['$scope', '$location', 'userService', 'billService', 'authService', '$rootScope', FeedController]);
 app.controller('BillCtrl', ['$scope', '$routeParams', 'billService', 'legislationService', 'voteService', 'commentService', '$location', 'authService', BillController]);
-app.controller('HeaderCtrl', ['$rootScope', '$scope', '$location', 'authService', 'userService', 'notificationService', 'searchService', '$window', HeaderController]);
+app.controller('HeaderCtrl', ['$rootScope', '$scope', '$location', '$timeout', 'authService', 'userService', 'notificationService', 'searchService', '$window', HeaderController]);
 app.controller('ProfileCtrl', ['$scope', '$location', '$routeParams', 'authService', 'userService', ProfileController]);
 
 //web controllers

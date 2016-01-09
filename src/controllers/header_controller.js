@@ -1,7 +1,7 @@
 var AuthorizeController = require('./autherize_controller.js');
 var title = require('../config/titles.js');
 
-function HeaderCtrl($rootScope, $scope, $location, authService, userService, notificationService, searchService, $window) {
+function HeaderCtrl($rootScope, $scope, $location, $timeout, authService, userService, notificationService, searchService, $window) {
   $scope = $scope || {};
   $scope.header = this;
   this.scope = $scope;
@@ -47,6 +47,23 @@ function HeaderCtrl($rootScope, $scope, $location, authService, userService, not
       $scope.searchResults = response;
     });
   }
+
+  var filterTimer;
+  $scope.delaySearch = function() {
+    $timeout.cancel(filterTimer);  
+
+    filterTimer = $timeout(function() {
+      if ($scope.query.length < 3) {
+        $scope.searchResults = [];
+      } else {
+        searchService.search($scope.query, function(err, response) {
+          $scope.searchResults = response;
+          $scope.isOpened = $scope.searchResults.length > 0 && $scope.query != '';
+        });
+      }
+    }, 250); // delay 250 ms
+  };
+
 }
 
 HeaderCtrl.prototype.intercomInit = function(user) {
