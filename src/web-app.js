@@ -29,6 +29,7 @@ var SearchService = require('./services/search_service.js');
 var angular = require('angular');
 
 //directives
+var autocomplete = require('./directives/autocomplete.js');
 var mailcheck = require('./directives/mailcheck.js');
 var pavDirectives = require('./directives/directives.js');
 var websiteNav = require('./directives/website_nav.js');
@@ -49,7 +50,7 @@ var autoResizeDirective = require('./directives/autoresize.js');
 //thirdparty integrations
 var Facebook = require('./integrations/facebook.js');
 
-var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), require('angular-ui-bootstrap'), 'pavDirectives']);
+var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'pavDirectives']);
 
 
 app.config(['$routeProvider', function($routeProvider) {
@@ -145,5 +146,6 @@ app.directive('notifications', ['$location', notificationsDirective]);
 app.directive('commentreply', ['$location', commentReplyNotificationDirective]);
 app.directive('trends', ['$location',trendsDirective]);
 app.directive('autoResize', [autoResizeDirective]);
+app.directive('angucomplete',['$parse', '$http', '$sce', '$timeout', autocomplete]);
 
 

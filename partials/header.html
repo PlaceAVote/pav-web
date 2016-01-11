@@ -1,27 +1,7 @@
 <header ng-controller="HeaderCtrl as header" ng-show="header.login()">
 	<div class="row">
   	<img ng-click="header.location.path('/feed')" class="pav-icon" src="//cdn.placeavote.com/img/pav_icon.svg" />
-    <div class="search-form" uib-dropdown is-open="isOpened">
-      <input type="text" ng-model="query" ng-change="delaySearch()">
-      <div class="search-results" ng-show="searchResults.length > 0" uib-dropdown-menu >
-        <div class="search-header">
-          Bill
-        </div>
-        <div ng-repeat="bill in searchResults | filter: { type: 'bill'} | limitTo: 5">
-          {{bill.short_title}}
-          <span ng-if="!bill.short_title">{{bill.official_title}}</span>
-        </div>
-
-        <div class="search-header">
-          People
-        </div>
-        <div ng-repeat="user in searchResults | filter: { type: 'users'} | limitTo: 5">
-          {{user.first_name}} {{user.last_name}}
-        </div>
-      </div>
-
-    </div>
-
+    <angucomplete></angucomplete>
     <section class="notification">
       <span ng-show="header.unread" class="notification-counter"><p>{{header.unread}}</p></span>
       <img  style="cursor: pointer;" ng-class="{'no-notifications': header.notifications.results.length < 1 && header.unread < 1}" src="//cdn.placeavote.com/img/notification.svg" ng-click="header.notify()" />
