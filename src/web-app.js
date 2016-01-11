@@ -29,7 +29,7 @@ var SearchService = require('./services/search_service.js');
 var angular = require('angular');
 
 //directives
-var autocomplete = require('./directives/autocomplete.js');
+var search = require('./directives/search.js');
 var mailcheck = require('./directives/mailcheck.js');
 var pavDirectives = require('./directives/directives.js');
 var websiteNav = require('./directives/website_nav.js');
@@ -146,6 +146,6 @@ app.directive('notifications', ['$location', notificationsDirective]);
 app.directive('commentreply', ['$location', commentReplyNotificationDirective]);
 app.directive('trends', ['$location',trendsDirective]);
 app.directive('autoResize', [autoResizeDirective]);
-app.directive('angucomplete',['$parse', '$http', '$sce', '$timeout', autocomplete]);
+app.directive('searchBar', [search]);
 
 

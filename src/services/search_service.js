@@ -1,4 +1,5 @@
 var config = require('../config/endpoints.js');
+var SearchResults = require('../models/search_results');
 
 function SearchService($resource, authService) {
   function search(query, callback) {
@@ -8,7 +9,8 @@ function SearchService($resource, authService) {
     }
 
     var onLoad = function(res) {
-      callback(undefined, res);
+      var results = new SearchResults(res);
+      callback(undefined, results);
     }
 
     var onError = function(err) {

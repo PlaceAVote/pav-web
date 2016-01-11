@@ -19,7 +19,7 @@ function HeaderCtrl($rootScope, $scope, $location, $timeout, authService, userSe
   this.userNotifications = [];
   this.newNotification = {};
   this.window = $window;
-  $scope.searchResults = [];
+  this.searchResults = [];
 
   $scope.$watchCollection(function() {
     return $rootScope.user;
@@ -37,32 +37,22 @@ function HeaderCtrl($rootScope, $scope, $location, $timeout, authService, userSe
       }
     }, true);
 
-  $scope.search = function() {
-    if ($scope.query.length < 3) {
-      $scope.searchResults = [];
-      return;
-    }
 
-    searchService.search($scope.query, function(err, response) {
-      $scope.searchResults = response;
-    });
-  }
+  // var filterTimer;
+  // $scope.delaySearch = function() {
+  //   $timeout.cancel(filterTimer);  
 
-  var filterTimer;
-  $scope.delaySearch = function() {
-    $timeout.cancel(filterTimer);  
-
-    filterTimer = $timeout(function() {
-      if ($scope.query.length < 3) {
-        $scope.searchResults = [];
-      } else {
-        searchService.search($scope.query, function(err, response) {
-          $scope.searchResults = response;
-          $scope.isOpened = $scope.searchResults.length > 0 && $scope.query != '';
-        });
-      }
-    }, 250); // delay 250 ms
-  };
+  //   filterTimer = $timeout(function() {
+  //     if ($scope.query.length < 3) {
+  //       $scope.searchResults = [];
+  //     } else {
+  //       searchService.search($scope.query, function(err, response) {
+  //         $scope.searchResults = response;
+  //         $scope.isOpened = $scope.searchResults.length > 0 && $scope.query != '';
+  //       });
+  //     }
+  //   }, 250); // delay 250 ms
+  // };
 
 }
 
@@ -188,5 +178,17 @@ HeaderCtrl.prototype.toProfile = function() {
     this.hideDropDown();
     this.location.path('/profile/me');
 };
+
+
+HeaderCtrl.prototype.search = function(q) {
+
+var that = this;
+  this.searchService.search(q, function(err, response) {
+      if(!err) {
+        that.searchResults = response;
+      }
+    });
+
+}
 
 module.exports = HeaderCtrl;
