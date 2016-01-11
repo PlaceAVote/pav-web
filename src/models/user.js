@@ -8,6 +8,7 @@ function User(email, password) {
 	this.country_code;
   this.img_url;
   this.private = false;
+  this.gender;
 }
 
 User.createFromJson = function(json){
@@ -55,7 +56,8 @@ User.prototype.toBody = function(auth) {
         country_code: this.country_code,
         dob: this.dob,
         topics: this.getTopicNames(),
-        email: this.email
+        email: this.email,
+        gender: this.gender
     };
     if(auth) {
         body.token = auth;

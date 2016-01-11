@@ -64,6 +64,7 @@ function UserService($resource, facebookService, authService) {
 		this.user.last_name = additionalInformation.last_name;
 		this.user.country_code = additionalInformation.country_code;
 		this.user.dob = strftime('%m/%d/%Y', additionalInformation.dob);
+    this.user.gender = additionalInformation.gender;
 	};
 
     var makeProfilePublic = function(){
