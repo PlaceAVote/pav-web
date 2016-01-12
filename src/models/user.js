@@ -49,7 +49,7 @@ User.prototype.getTopicNames = function() {
 };
 
 
-User.prototype.toBody = function(auth) {
+User.prototype.toBody = function(auth, user_id) {
     var body = {
         first_name: this.first_name,
         last_name: this.last_name,
@@ -61,6 +61,7 @@ User.prototype.toBody = function(auth) {
     };
     if(auth) {
         body.token = auth;
+        body.id = user_id;
     }
     else {
         body.password = this.password;

@@ -26,10 +26,12 @@ function UserService($resource, facebookService, authService) {
             that.user.first_name = resource.first_name;
             that.user.last_name = resource.last_name;
             that.user.img_url = resource.picture.data.url;
+            that.user.gender = resource.gender;
             var authToken = authService.getFacebookAccessToken();
             config.methods.post.headers["Authorization"] = authToken;
             var facebookUserLoginResource = new $resource(config.users.facebookLoginUrl, undefined, {login : config.methods.post});
             var creds = {
+                id: resource.id,
                 email: that.user.email,
                 token: authToken,
             };
@@ -104,7 +106,8 @@ function UserService($resource, facebookService, authService) {
         config.methods.put.headers["Authorization"] = authService.getAccessToken();
         var saveUser = new $resource(url, undefined, {create : config.methods.put});
         var token = authService.getFacebookAccessToken();
-        var toSave = this.user.toBody(token);
+        var userId = authService.getFacebookId();
+        var toSave = this.user.toBody(token, userId);
         saveUser.create(toSave, onLoad, onError);
     };
 

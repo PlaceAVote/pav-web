@@ -41,7 +41,7 @@ describe("Users", function(){
         user.last_name = "barber";
         user.country_code = "USA";
         user.gender = "male";
-        var subject = user.toBody("auth_token");
+        var subject = user.toBody("auth_token", "01010101");
         var expected = {
             country_code: "USA",
             first_name: "paul",
@@ -51,6 +51,7 @@ describe("Users", function(){
             email: "paul@test.com",
             token: "auth_token",
             gender: "male",
+            id: "01010101",
             topics: []
         };
         expect(subject).to.eql(expected);
