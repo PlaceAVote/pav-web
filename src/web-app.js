@@ -146,6 +146,6 @@ app.directive('notifications', ['$location', notificationsDirective]);
 app.directive('commentreply', ['$location', commentReplyNotificationDirective]);
 app.directive('trends', ['$location',trendsDirective]);
 app.directive('autoResize', [autoResizeDirective]);
-app.directive('searchBar', [search]);
+app.directive('searchBar', ['$sce' ,'$location', search]);
 
 

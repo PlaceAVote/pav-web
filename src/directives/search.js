@@ -1,4 +1,4 @@
-module.exports = function() {
+module.exports = function($sce, $location) {
 	return {
 		restrict: 'E',
 		scope: {
@@ -7,27 +7,184 @@ module.exports = function() {
 		},
 		templateUrl: 'partials/directives/search.html',
 		link: function(scope, el, attr) {
-			var query;
-			el[0].onkeyup = function(e) {
-				console.log(e);
-				q = el[0].children[0].value;
-				if(q.length < 4) {
+			var q;
+			var selected;
+			scope.location = $location;
+			el[0].children[0].onkeyup = function(e) {
+				if(e.which == 13 && selected.type == 'bill') {
+					selected.goToBill($location, selected.bill_id);
 					scope.results = [];
+					scope.$apply();
+					return;
+					
 				}
-				if(q.length > 4) {
+				if(e.which == 13 && selected.type == 'users') {
+					selected.goToProfile($location, selected.user_id);
+					scope.results = [];
+					scope.$apply();
+					return;
+					
+				}
+				if(e.which == 40 || e.which == 38) {
+					return selectResult(e.which, el[0].lastChild.children['bill-results'],el[0].lastChild.children['user-results'],
+						function(s) {
+							selected = s;
+						});
+				}
+
+				if(e.which == 27) {
+					scope.results = [];
+					scope.$apply();
+					return;
+				}
+				q = el[0].children[0].value;
+				if(q.length < 3) {
+					scope.results = [];
+					scope.$apply();
+				}
+				if(q.length > 3) {
 					scope.query({q: q});
+					scope.$apply();
+					return;
 				}
-			}
+
+			}//End of keyup function
 
 			scope.$watchCollection('results', function(n, o) {
-				console.log('new', n);
-				console.log('old', o);
+				if(n != scope.results) {
+					scope.results = n;
+					scope.$apply();
+				}
+				if(n.users) {
+					matchText('users');
+				}
+				if(n.bills) {
+					matchText('bills');
+				}
+
 			});
+
+			var matchText = function(obj) {
+				if(scope.results[obj]) {
+					if(scope.results[obj].length > 0) {
+						for (var i in scope.results[obj]) {
+							boldMatch(q, scope.results[obj][i]);
+						}
+					}
+				} 				
+			} //End of match text
+
+			var boldMatch = function(q, text) {
+				var str, match;
+					str = new RegExp(q, 'i');
+					match = text.full_title.match(str);
+					if(match) {
+						text.html = $sce.trustAsHtml(text.html.replace(str, '<span class="text-select">'+ match[0] +'</span>'));	
+					}
+					
+			}//End of Bold Match
+
+			var selectResult = function(keyEvent, b, u, c) {
+				if(!scope.results.bills && !scope.results.users) {
+					return;
+				}
+
+				for (var i = 0; i < b.children.length; i++) {
+					if (scope.results.bills[i].selected) {
+						scope.results.bills[i].selected = false;
+						keyEvent == 40 ? i++ : i--;
+						if(i == -1 && scope.results.users.length > 0) {
+						i = scope.results.users.length - 1;
+						scope.results.users[i].selected = true;
+						scope.$apply();
+						return c(scope.results.users[i]);
+						}
+						if(i == -1 && scope.results.users.length == 0) {
+						i = scope.results.bills.length - 1;
+						scope.results.bills[i].selected = true;
+						scope.$apply();
+						return c(scope.results.bills[i]);
+						}
+						if(!scope.results.bills[i] && scope.results.users.length > 0) {
+						 scope.results.users[0].selected = true;
+						 scope.$apply();
+						 return c(scope.results.users[0]);
+						}
+						if(!scope.results.bills[i] && scope.results.users.length == 0) {
+						 scope.results.bills[0].selected = true;
+						 scope.$apply();
+						 return c(scope.results.bills[0]);
+						}
+						scope.results.bills[i].selected = true;
+						scope.$apply();
+						return c(scope.results.bills[i]);
+					}
+
+				}
+
+
+				for (var i = 0; i < u.children.length; i++) {
+					if (scope.results.users[i].selected) {
+						scope.results.users[i].selected = false;
+						keyEvent == 40 ? i++ : i--;
+						if(i == -1 && scope.results.bills.length > 0) {
+						i = scope.results.bills.length - 1;
+						scope.results.bills[i].selected = true;
+						scope.$apply();
+						return c(scope.results.bills[i]);
+						}
+						if(i == -1 && scope.results.bills.length == 0) {
+						i = scope.results.users.length - 1;
+						scope.results.users[i].selected = true;
+						scope.$apply();
+						return c(scope.results.users[i]);
+						}
+						if(!scope.results.users[i] && scope.results.bills.length > 0) {
+						 scope.results.bills[0].selected = true;
+						 scope.$apply();
+						 return c(scope.results.bills[0]);
+						}
+						if(!scope.results.users[i] && scope.results.bills.length == 0) {
+						 scope.results.users[0].selected = true;
+						 scope.$apply();
+						 return c(scope.results.users[0]);
+						}
+						scope.results.users[i].selected = true;
+						scope.$apply();											
+						return c(scope.results.users[i]);
+					}
+				}
+
+				if(scope.results.bills && scope.results.users.length == 0) {
+					scope.results.bills[0].selected = true;	
+					scope.$apply();
+					return c(scope.results.bills[0]);
+				}
+
+				if(scope.results.users && scope.results.bills.length == 0) {
+					scope.results.users[0].selected = true;
+					scope.$apply();	
+					return c(scope.results.users[0]);
+				}
+				scope.results.bills[0].selected = true;
+				scope.$apply();
+				return c(scope.results.bills[0]);
+
+			}//End of resultSelector
+
+			scope.clearItems = function() {
+				scope.results = [];
+			}
+
 		}
 	};
 }
 
-//Navigate through results with arrow keys
+
 //Preloader
-//Text highlight
-//Dynamic ordering in terms relevance
+
+
+
+
+
+				
