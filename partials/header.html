@@ -3,6 +3,7 @@
   	<img ng-click="header.location.path('/feed')" class="pav-icon" src="//cdn.placeavote.com/img/pav_icon.svg" />
 
     <search-bar class="search" results="header.searchResults" query="header.search(q)"></search-bar>
+
     <section class="notification">
       <span ng-show="header.unread" class="notification-counter"><p>{{header.unread}}</p></span>
       <img  style="cursor: pointer;" ng-class="{'no-notifications': header.notifications.results.length < 1 && header.unread < 1}" src="//cdn.placeavote.com/img/notification.svg" ng-click="header.notify()" />
@@ -23,5 +24,6 @@
         </ul>
       </div>
   	</section>
+    
 	</div>
 </header>

@@ -10,6 +10,11 @@ module.exports = function($sce, $location) {
 			var q;
 			var selected;
 			scope.location = $location;
+			el[0].onmouseleave = function(e) {
+					scope.results = [];
+					scope.$apply();
+					return;
+			}
 			el[0].children[0].onkeyup = function(e) {
 				if(e.which == 13 && selected.type == 'bill') {
 					selected.goToBill($location, selected.bill_id);
