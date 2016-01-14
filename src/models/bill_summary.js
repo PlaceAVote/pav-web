@@ -1,3 +1,4 @@
+var Icon = require('./icon.js');
 function Bill(options) {
     if(!options){
         return this;
@@ -38,32 +39,10 @@ Bill.prototype.goToPage = function (location) {
 };
 
 Bill.prototype.getIcon = function(options) {
-    var i = options.subject;
     var that = this;
-    if(i == 'Religion') {
-        that.icon = 'icon-religion';
-    }   
-    if(i == 'Drugs') {
-        that.icon = 'icon-smoking-area';
-    }
-    if(i == 'Defense') {
-        that.icon = 'icon-tank';
-    }    
-    if(i == 'Politics') {
-        that.icon = 'icon-building';
-    }
-    if(i == 'Gun Rights') {
-        that.icon = 'icon-gun';
-    }
-    if(i == 'Technology') {
-        that.icon = 'icon-ipad';
-    }
-    if(i == 'Economics') {
-        that.icon = 'icon-money';
-    }
-    if(i == 'Social Interest') {
-        that.icon = 'icon-police';
-    }
+    new Icon(options, function(i) {
+        that.icon = i;
+    })
 }
 
 module.exports = Bill;

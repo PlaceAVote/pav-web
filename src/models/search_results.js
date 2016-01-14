@@ -1,6 +1,5 @@
 var Icon = require('./icon.js');
 function SearchResults(options) {
-	console.log(options);
 	this.bills = [];
 	this.users = [];
 	var x = 0;

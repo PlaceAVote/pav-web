@@ -9,11 +9,11 @@
   input {
     width: 100%;
     height: 26px;
-    border-radius: 5px;
+    border-radius: 3px;
     border: none;
     outline: none;
     background-color: white;
-    color: $black;
+    color: black;
     @include font-size(12px);
     padding-left: 10px;
   }
@@ -64,7 +64,7 @@
           background: $pale;
         }
         p {
-          @include font-size(10px);
+          @include font-size(12px);
           font-style: italic !important;
           padding-left: 10px;
           padding-right: 5px;
