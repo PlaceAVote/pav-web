@@ -1,13 +1,14 @@
 var AuthorizeController = require('./autherize_controller.js');
 var title = require('../config/titles.js');
 
-function HeaderCtrl($rootScope, $scope, $location, authService, userService, notificationService, $window) {
+function HeaderCtrl($rootScope, $scope, $location, $timeout, authService, userService, notificationService, searchService, $window) {
   $scope = $scope || {};
   $scope.header = this;
   this.scope = $scope;
   this.userService = userService;
   this.authService = authService;
   this.notificationService = notificationService;
+  this.searchService = searchService;
   this.location = $location;
   this.showDropDown = false;
   this.rs = $rootScope;
@@ -18,23 +19,28 @@ function HeaderCtrl($rootScope, $scope, $location, authService, userService, not
   this.userNotifications = [];
   this.newNotification = {};
   this.window = $window;
-$scope.$watchCollection(function() {
-    return $rootScope.user;
-    }, 
-    function(newValue, oldValue) {
-      var that = this;
-      if(newValue) {
-          if(newValue.first_name) {
-          $scope.header.intercomInit(newValue); 
-          $scope.header.getNotifications();
-          $scope.header.startNotifications();
-          } else if(!newValue.first_name) {
-          $scope.header.intercomShutdown(newValue) 
-          }
-        }
-      }, true);
-}
+  this.searchResults = [];
+  this.timeout = $timeout;
+  this.focus = false;
+  this.searching = false;
 
+  $scope.$watchCollection(function() {
+    return $rootScope.user;
+  }, 
+  function(newValue, oldValue) {
+    var that = this;
+    if(newValue) {
+        if(newValue.first_name) {
+        $scope.header.intercomInit(newValue); 
+        $scope.header.getNotifications();
+        $scope.header.startNotifications();
+        } else if(!newValue.first_name) {
+        $scope.header.intercomShutdown(newValue) 
+        }
+      }
+    }, true);
+
+}
 
 HeaderCtrl.prototype.intercomInit = function(user) {
 window.Intercom('boot', {
@@ -158,5 +164,19 @@ HeaderCtrl.prototype.toProfile = function() {
     this.hideDropDown();
     this.location.path('/profile/me');
 };
+
+
+HeaderCtrl.prototype.search = function(q) {
+  var that = this;
+  this.searching = true;
+  this.timeout(function() {
+      that.searchService.search(q, function(err, response) {
+          if(!err) {
+            that.searchResults = response;
+            that.searching = false;
+          }
+        });
+    }, 500);
+}
 
 module.exports = HeaderCtrl;

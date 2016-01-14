@@ -1,3 +1,4 @@
+var Icon = require('./icon.js');
 function TrendingBill(options) {
 this.bill_id = options.bill_id;
 this.comment_count = options.comment_count;
@@ -35,35 +36,9 @@ TrendingBill.prototype.goToPage = function (location) {
 
 TrendingBill.prototype.getIcon = function(options) {
     var that = this;
-    if(!options.subject) {
-        that.icon = 'icon-building';
-        return;
-    }
-    var i = options.subject;
-    if(i == 'Religion') {
-        that.icon = 'icon-religion';
-    }   
-    if(i == 'Drugs') {
-        that.icon = 'icon-smoking-area';
-    }
-    if(i == 'Defense') {
-        that.icon = 'icon-tank';
-    }    
-    if(i == 'Politics') {
-        that.icon = 'icon-building';
-    }
-    if(i == 'Gun Rights') {
-        that.icon = 'icon-gun';
-    }
-    if(i == 'Technology') {
-        that.icon = 'icon-ipad';
-    }
-    if(i == 'Economics') {
-        that.icon = 'icon-money';
-    }
-    if(i == 'Social Interest') {
-        that.icon = 'icon-police';
-    }
+    new Icon(options, function(i) {
+        that.icon = i;
+    })
 }
 
 module.exports = TrendingBill;

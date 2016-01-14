@@ -160,5 +160,8 @@ module.exports = {
     facebookLoginUrl : urls.USER + '/user/facebook/authenticate',
     facebookCreateUrl: urls.USER + '/user/facebook',
   },
+  search: {
+    endpoint: urls.SEARCH + '/search'
+  }
 }
 
