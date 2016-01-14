@@ -24,10 +24,12 @@ var LegislatorService = require('./services/legislator_service.js');
 var VoteService = require('./services/votes_service.js');
 var CommentService = require('./services/comment_service.js');
 var NotificationService = require('./services/notification_service.js');
+var SearchService = require('./services/search_service.js');
 //dependencies
 var angular = require('angular');
 
 //directives
+var search = require('./directives/search.js');
 var mailcheck = require('./directives/mailcheck.js');
 var pavDirectives = require('./directives/directives.js');
 var websiteNav = require('./directives/website_nav.js');
@@ -113,6 +115,7 @@ app.factory('commentService', ['$resource', 'userService', 'authService', Commen
 app.factory('legislationService', ['$resource', 'authService', LegislatorService]);
 app.factory('voteService', ['$resource', 'authService', 'userService', VoteService]);
 app.factory('notificationService', ['$resource', 'authService', NotificationService]);
+app.factory('searchService', ['$resource', 'authService', SearchService]);
 
 //controllers
 // app.controller('AssetsCtrl',['$scope','$routeParams','$location', AssetsController]);
@@ -121,7 +124,7 @@ app.controller('SignUpCtrl',['$rootScope','$scope','$location', 'userService', S
 app.controller('LoginCtrl',['$scope','$location', 'userService', 'authService', '$rootScope', '$routeParams', LoginController]);
 app.controller('FeedCtrl', ['$scope', '$location', 'userService', 'billService', 'authService', '$rootScope', FeedController]);
 app.controller('BillCtrl', ['$scope', '$routeParams', 'billService', 'legislationService', 'voteService', 'commentService', '$location', 'authService', BillController]);
-app.controller('HeaderCtrl', ['$rootScope', '$scope', '$location', 'authService', 'userService', 'notificationService','$window', HeaderController]);
+app.controller('HeaderCtrl', ['$rootScope', '$scope', '$location', '$timeout', 'authService', 'userService', 'notificationService', 'searchService', '$window', HeaderController]);
 app.controller('ProfileCtrl', ['$scope', '$location', '$routeParams', 'authService', 'userService', ProfileController]);
 
 //web controllers
@@ -147,5 +150,6 @@ app.directive('notifications', ['$location', notificationsDirective]);
 app.directive('commentreply', ['$location', commentReplyNotificationDirective]);
 app.directive('trends', ['$location',trendsDirective]);
 app.directive('autoResize', [autoResizeDirective]);
+app.directive('searchBar', ['$sce' ,'$location', search]);
 
 
