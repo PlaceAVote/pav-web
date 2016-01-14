@@ -36,9 +36,7 @@ TrendingBill.prototype.goToPage = function (location) {
 
 TrendingBill.prototype.getIcon = function(options) {
     var that = this;
-    console.log(options.subject);
     new Icon(options, function(i) {
-        console.log(i);
         that.icon = i;
     })
 }
