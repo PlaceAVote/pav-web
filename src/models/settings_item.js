@@ -18,12 +18,11 @@ SettingsItem.createFromJson = function(json){
   settingsItem.last_name = json.last_name;
   settingsItem.dob = json.dob;
   settingsItem.gender = json.gender;
-  settingsItem.city = json.city;
+  settingsItem.city = json.city || "USA";
   settingsItem.img_url = json.img_url || '//cdn.placeavote.com/img/profile/profile-picture.png';
   settingsItem.user_id = json.user_id;
   settingsItem.social_login = json.social_login;
-  this.public = json.public;
-  settingsItem.loadedFromServer = true;
+  settingsItem.public = json.public;
   return settingsItem;
 };
 

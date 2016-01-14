@@ -74,7 +74,21 @@
     .doc-section {
       margin-bottom: 20px;
     }
-
+    
+    select {
+      @include light();
+      margin-bottom: 15px;
+      width: 100%;
+      background: white;
+      font-size: 12px;
+      height: 40px;
+      padding-left: 10px;
+      transition: all 0.2s ease;
+      outline: none;
+      border: 1px solid $grey;
+      color: $purple;
+      border-radius: 3px;
+    }
     label {
       @include font-size(14px);
       text-align: left;
@@ -125,6 +139,14 @@
       height: 14px;
       margin-right: 5px;
       -webkit-appearance: checkbox;
+    }
+    input[type="date"].ng-pristine {
+      background-color: white;
+      color: $grey;
+    }
+
+    input[type="date"].ng-dirty {
+      color: $purple;
     }
 
     button {

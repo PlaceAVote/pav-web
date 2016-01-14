@@ -9,18 +9,48 @@ SettingsController = function($scope, $location, userService, authService, $root
   this.userService = userService;
   this.rs = $rootScope;
 
+  var that = this;
   this.getUserSettings(function(err, result) {
     if (!err) {
       console.log(result);
-      this.settingsItem = SettingsItem.createFromJson(result);
+      that.settingsItem = SettingsItem.createFromJson(result);
+
     }
   });
 
-  this.ss = "asdf";
+  this.gender_options = [
+    {name: "male", des: "male"},
+    {name: "female", des: "female"},
+    {name: "they", des: "they"}
+  ];
 }
 
 SettingsController.prototype.getUserSettings = function(callback) {
   this.userService.getUserSettings(callback);
+};
+
+SettingsController.prototype.maxDate = function() {
+  var d = new Date();
+  var y = d.getFullYear();
+  d.setFullYear(y-18);
+  var year = d.getFullYear();
+  var month = d.getMonth();
+  var day = d.getDay();
+  month += 1;
+  if(month<=9) {
+    month = '0' + month.toString();
+  }
+  else {
+    month = month.toString();
+  }
+  if(day<=9) {
+    day = '0' + day.toString();
+  }
+  else {
+    day = day.toString();
+  }
+  year = year.toString();
+  return year + "-" + month + "-" + day;
 };
 
 module.exports = SettingsController;
