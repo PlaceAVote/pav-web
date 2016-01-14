@@ -117,7 +117,7 @@ var gulp = require('gulp'),
   gulp.task('compileSass', function() {
     return gulp.src('./scss/*.scss')
     .pipe(maps.init())
-    .pipe(sass({includePaths: ['./scss']}))
+    .pipe(sass({includePaths: ['./scss'], outputStyle: 'compressed'}))
     .pipe(maps.write('./'))
     .pipe(gulp.dest('./css'));
   });
