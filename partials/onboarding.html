@@ -45,6 +45,25 @@
 		<select ng-model='signup.additionalInformation["country_code"]' ng-options="country['alpha-3'] as country.name for country in signup.country">
 		</select>
 		</label>
+
+		<section class="row gender-select-container">
+		<label class="gender-label">Preferred Pronoun</label>
+		<div class="row">
+			<div class="gender-select" ng-repeat="gender in signup.gender_options">
+				<input ng-model='signup.additionalInformation["gender"]' type="radio" id="{{gender.name}}" value="{{gender.name}}" name="gender" checked="true">
+				<label class="gender" for="{{gender.name}}">
+				{{gender.des}}
+				</label>
+			</div>
+		</div>	
+		</section>	
+
+
+		
+
+		
+
+
         <p class="register-error" ng-class="{'show': signup.user_exists_error}">A User with this email has already been created.</p>
         <p class="register-error" ng-class="{'show': signup.error}">Oops! An unexpected error occured.</p>
         <p class="register-error" ng-class="{'show': signup.invalid_user}">The User details you entered are invalid.</p>

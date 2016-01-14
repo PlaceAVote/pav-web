@@ -4,7 +4,7 @@ Facebook = function(){
     var facebook;
     // The fields we request from facebook.
     var fields = {
-      fields: 'first_name, last_name, picture, email, birthday, hometown, cover'
+      fields: 'first_name, last_name, picture, email, birthday, hometown, cover, gender'
     };
 
     /**

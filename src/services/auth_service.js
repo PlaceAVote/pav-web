@@ -23,6 +23,12 @@ function AuthService($resource, options) {
     return facebookAuth.accessToken;
   };
 
+  var getFacebookId = function() {
+    if(!facebookAuth) {
+      return;
+    }
+    return facebookAuth.userID;
+  };
   var getTokenFromLocalStorage = function() {
     return storage.getItem('pav');
   };
@@ -78,6 +84,7 @@ function AuthService($resource, options) {
     getRawAccessToken: getRawAccessToken,
     setFacebookAuth: setFacebookAuth,
     getFacebookAccessToken: getFacebookAccessToken,
+    getFacebookId: getFacebookId,
     validateToken: validateToken,
     logout: logout,
   };

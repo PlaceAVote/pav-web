@@ -10,7 +10,8 @@ function SignUpCtrl ($rootScope, $scope, $location, userService, authService) {
         "first_name": user.first_name || "",
         "last_name": user.last_name || "",
         "dob": user.dob|| "",
-        "country_code": "USA"
+        "country_code": "USA",
+        "gender": user.gender || "male"
     };
 	this.country = countryCodes;
     this.rs = $rootScope;
@@ -18,10 +19,15 @@ function SignUpCtrl ($rootScope, $scope, $location, userService, authService) {
     if(!userService.user) {
         this.location.path('/');
     }
-
+    this.gender_options = [
+      {name: "male", des: "His"},
+      {name: "female", des: "Her"},
+      {name: "they", des: "They"}
+    ];
 }
 
 SignUpCtrl.prototype.test = function() {
+  console.log(this.additionalInformation);
     this.userService.addAdditionalInformation(this.additionalInformation);
     var user = this.userService.getUser();
     if(!user) {

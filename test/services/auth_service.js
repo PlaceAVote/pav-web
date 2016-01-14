@@ -22,6 +22,12 @@ describe('AuthService', function(){
     subject.setFacebookAuth({accessToken: 'TOKEN'});
     expect(subject.getFacebookAccessToken()).to.eql('TOKEN');
   });
+  it('gets facebook id', function(){
+    var subject = new AuthService(undefined, options);
+    expect(subject.getFacebookId()).to.eql(undefined);
+    subject.setFacebookAuth({accessToken: 'TOKEN', userID: '01010101'});
+    expect(subject.getFacebookId()).to.eql('01010101');
+  });
 });
 describe('Stores Token in Browser', function(){
   it('puts token in local storage on set', function() {
