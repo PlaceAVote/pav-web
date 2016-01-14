@@ -46,10 +46,17 @@ header {
       img.pav-icon {
         position: absolute;
         left: 10px;
+        opacity: 1;
+        transition: all 0.3s ease;
       }
       .notification {
         position: absolute;
         right: 10px;
+        opacity: 1;
+        transition: all 0.3s ease;
+      }
+      img.pav-icon.header-focus, .notification.header-focus {
+        opacity: 0;
       }
     }
   }

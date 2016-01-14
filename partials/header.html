@@ -1,10 +1,10 @@
 <header ng-controller="HeaderCtrl as header" ng-show="header.login()">
 	<div class="row">
-  	<img ng-click="header.location.path('/feed')" class="pav-icon" src="//cdn.placeavote.com/img/pav_icon.svg" />
+  	<img ng-click="header.location.path('/feed')" ng-class="{'header-focus':header.focus}" class="pav-icon" src="//cdn.placeavote.com/img/pav_icon.svg" />
 
-    <search-bar class="search" results="header.searchResults" query="header.search(q)"></search-bar>
+    <search-bar class="search" ng-class="{'search-focus':header.focus}" results="header.searchResults" focus="header.focus" query="header.search(q)" searching="header.searching"></search-bar>
 
-    <section class="notification">
+    <section class="notification" ng-class="{'header-focus':header.focus}">
       <span ng-show="header.unread" class="notification-counter"><p>{{header.unread}}</p></span>
       <img  style="cursor: pointer;" ng-class="{'no-notifications': header.notifications.results.length < 1 && header.unread < 1}" src="//cdn.placeavote.com/img/notification.svg" ng-click="header.notify()" />
       <div class="notifications-container" ng-mouseleave="header.hideNotifications()"

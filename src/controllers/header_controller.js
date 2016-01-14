@@ -20,6 +20,9 @@ function HeaderCtrl($rootScope, $scope, $location, $timeout, authService, userSe
   this.newNotification = {};
   this.window = $window;
   this.searchResults = [];
+  this.timeout = $timeout;
+  this.focus = false;
+  this.searching = false;
 
   $scope.$watchCollection(function() {
     return $rootScope.user;
@@ -36,23 +39,6 @@ function HeaderCtrl($rootScope, $scope, $location, $timeout, authService, userSe
         }
       }
     }, true);
-
-
-  // var filterTimer;
-  // $scope.delaySearch = function() {
-  //   $timeout.cancel(filterTimer);  
-
-  //   filterTimer = $timeout(function() {
-  //     if ($scope.query.length < 3) {
-  //       $scope.searchResults = [];
-  //     } else {
-  //       searchService.search($scope.query, function(err, response) {
-  //         $scope.searchResults = response;
-  //         $scope.isOpened = $scope.searchResults.length > 0 && $scope.query != '';
-  //       });
-  //     }
-  //   }, 250); // delay 250 ms
-  // };
 
 }
 
@@ -181,14 +167,16 @@ HeaderCtrl.prototype.toProfile = function() {
 
 
 HeaderCtrl.prototype.search = function(q) {
-
-var that = this;
-  this.searchService.search(q, function(err, response) {
-      if(!err) {
-        that.searchResults = response;
-      }
-    });
-
+  var that = this;
+  this.searching = true;
+  this.timeout(function() {
+      that.searchService.search(q, function(err, response) {
+          if(!err) {
+            that.searchResults = response;
+            that.searching = false;
+          }
+        });
+    }, 500);
 }
 
 module.exports = HeaderCtrl;

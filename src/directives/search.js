@@ -3,7 +3,9 @@ module.exports = function($sce, $location) {
 		restrict: 'E',
 		scope: {
 			results: '=',
-			query: '&'
+			query: '&',
+			focus: '=',
+			searching: '=' 
 		},
 		templateUrl: 'partials/directives/search.html',
 		link: function(scope, el, attr) {
@@ -179,6 +181,27 @@ module.exports = function($sce, $location) {
 
 			scope.clearItems = function() {
 				scope.results = [];
+			}
+
+			el[0].children[0].onfocus = function(e) {
+					scope.focus = true;
+					scope.$apply();
+					return;
+			}
+
+			el[0].children[0].onblur = function(e) {
+					scope.focus = false;
+					scope.$apply();
+					return;
+			}
+
+			el[0].children[0].onmouseover = function(e){
+					q = el[0].children[0].value;
+					if(q.length > 3) {
+					scope.query({q: q});
+					scope.$apply();
+					return;
+				}
 			}
 
 		}
