@@ -159,4 +159,9 @@ HeaderCtrl.prototype.toProfile = function() {
     this.location.path('/profile/me');
 };
 
+HeaderCtrl.prototype.toSettings = function() {
+    this.hideDropDown();
+    this.location.path('/settings');
+};
+
 module.exports = HeaderCtrl;

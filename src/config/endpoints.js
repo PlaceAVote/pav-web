@@ -159,6 +159,7 @@ module.exports = {
     login_endpoint: urls.USER + '/user/authenticate',
     facebookLoginUrl : urls.USER + '/user/facebook/authenticate',
     facebookCreateUrl: urls.USER + '/user/facebook',
+    settings: urls.USER + '/user/me/settings'
   },
 }
 

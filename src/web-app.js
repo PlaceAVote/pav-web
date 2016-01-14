@@ -16,6 +16,7 @@ var FeedController = require('./controllers/feed_controller.js');
 var BillController = require('./controllers/bill_controller.js');
 var HeaderController = require('./controllers/header_controller.js');
 var ProfileController = require('./controllers/profile_controller.js');
+var SettingsController = require('./controllers/settings_controller.js');
 //services
 var UserService = require('./services/user_service.js');
 var BillService = require('./services/bill_service.js');
@@ -98,6 +99,10 @@ app.config(['$routeProvider', function($routeProvider) {
       templateUrl: 'partials/profile.html',
       controller: 'ProfileCtrl as profile'
     })
+    .when('/settings', {
+      templateUrl: 'partials/settings.html',
+      controller: 'SettingsCtrl as settings'
+    })
     .otherwise({
       redirectTo: '/'
     });
@@ -123,6 +128,7 @@ app.controller('FeedCtrl', ['$scope', '$location', 'userService', 'billService',
 app.controller('BillCtrl', ['$scope', '$routeParams', 'billService', 'legislationService', 'voteService', 'commentService', '$location', 'authService', BillController]);
 app.controller('HeaderCtrl', ['$rootScope', '$scope', '$location', 'authService', 'userService', 'notificationService','$window', HeaderController]);
 app.controller('ProfileCtrl', ['$scope', '$location', '$routeParams', 'authService', 'userService', ProfileController]);
+app.controller('SettingsCtrl', ['$scope', '$location', 'userService', 'authService', '$rootScope', SettingsController]);
 
 //web controllers
 app.controller('HomeCtrl', ['$scope', '$location','$anchorScroll', 'userService', '$rootScope', 'authService', HomeController]);
