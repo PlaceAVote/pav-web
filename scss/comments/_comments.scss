@@ -150,6 +150,9 @@
     border-radius: 3px;
     border: 1px solid $grey;
     color: $black;
+    @include light();
+    resize: none;
+    line-height: 22px;
     @include font-size(14px);
     padding: 12px 60px 12px 12px;
     overflow-y:hidden;
@@ -167,8 +170,6 @@
   flex-direction: row;
   flex-shrink: 0;
   flex-grow: 1;
-
-  // background: red;
 }
 
 .comment.ng-enter {
@@ -193,5 +194,24 @@
     background-color: $green;
     color: white;
     border-color: darken($green, 10%);
+  }
+}
+
+#comment-selected {
+  animation: selected 5s ease;
+}
+
+@keyframes selected {
+  0% {
+    border-left: 5px solid $blue;
+    padding-left: 5px;
+  }
+  95% {
+    border-left: 5px solid $blue;
+    padding-left: 5px;
+  }
+  100% {
+    border-color: white;
+    padding-right: 0px;
   }
 }
