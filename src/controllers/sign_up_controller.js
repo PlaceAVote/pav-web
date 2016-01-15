@@ -20,13 +20,14 @@ function SignUpCtrl ($rootScope, $scope, $location, userService, authService) {
         this.location.path('/');
     }
     this.gender_options = [
-      {name: "male", des: "male"},
-      {name: "female", des: "female"},
-      {name: "they", des: "they"}
+      {name: "male", des: "His"},
+      {name: "female", des: "Her"},
+      {name: "they", des: "They"}
     ];
 }
 
 SignUpCtrl.prototype.test = function() {
+  console.log(this.additionalInformation);
     this.userService.addAdditionalInformation(this.additionalInformation);
     var user = this.userService.getUser();
     if(!user) {

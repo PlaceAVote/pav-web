@@ -164,5 +164,8 @@ module.exports = {
   password: {
     change: urls.USER + '/password/change'
   },
+  search: {
+    endpoint: urls.SEARCH + '/search'
+  }
 }
 
