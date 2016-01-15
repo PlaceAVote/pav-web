@@ -161,5 +161,8 @@ module.exports = {
     facebookCreateUrl: urls.USER + '/user/facebook',
     settings: urls.USER + '/user/me/settings'
   },
+  password: {
+    change: urls.USER + '/password/change'
+  },
 }
 

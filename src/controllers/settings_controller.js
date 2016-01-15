@@ -9,6 +9,9 @@ SettingsController = function($scope, $location, userService, authService, $root
   this.userService = userService;
   this.rs = $rootScope;
 
+  this.current_password = "";
+  this.new_password = "";
+
   var that = this;
   this.getUserSettings(function(err, result) {
     if (!err) {
@@ -28,6 +31,28 @@ SettingsController = function($scope, $location, userService, authService, $root
 SettingsController.prototype.getUserSettings = function(callback) {
   this.userService.getUserSettings(callback);
 };
+
+SettingsController.prototype.saveUserSettings = function() {
+  var params = this.settingsItem.toBody();
+  var that = this;
+  this.userService.saveUserSettings(params, function(err, result) {
+    that.error = err;
+    console.log(result);
+  });
+};
+
+SettingsController.prototype.changePassword = function() {
+  var params = {
+    current_password: this.current_password,
+    new_password: this.new_password
+  }
+  var that = this;
+  this.userService.changePassword(params, function(err, result) {
+    that.password_error = err;
+  });
+  this.current_password = "";
+  this.new_password = "";
+}
 
 SettingsController.prototype.maxDate = function() {
   var d = new Date();

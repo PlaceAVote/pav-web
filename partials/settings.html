@@ -28,7 +28,7 @@
             </div>
             <div class="profile-section">
               <label>Residence</label>
-              <input type="text" ng-model='settings.settingsItem.city' placeholder="City" />
+              <input type="text" ng-model='settings.settingsItem.city' placeholder="City" required />
               
               <div class="row">
                 <div class="l-6 indent">
@@ -39,11 +39,11 @@
 
                 <div class="l-6">
                   <label class="signupdob">Date of Birth</label>
-                  <input type="text" ng-model='settings.settingsItem.dob' />
+                  <input type="date" ng-model='settings.settingsItem.dob' required />
                 </div>
               </div>
               <label>Email Address</label>
-              <input type="text" ng-model='settings.settingsItem.email' />
+              <input type="email" ng-model='settings.settingsItem.email' required />
             </div>
 
           </div>
@@ -54,19 +54,20 @@
             <hr />
           </div>
           <div class="password-section-content">
-            <div class="row">
+            <div class="row" ng-if="!settings.settingsItem.social_login">
               <div class="l-5 indent">
                 <label>Current Password</label>
-                <input type="text"> 
+                <input type="password" ng-model='settings.current_password'> 
               </div>
               <div class="l-5 indent">
                 <label>New Password</label>
-                <input type="text"> 
+                <input type="password" ng-model='settings.new_password'> 
               </div>
               <div class="l-2">
-                <button class="down-btn">SAVE PASSWORD</button>
+                <button class="down-btn" ng-click='settings.changePassword()'>SAVE PASSWORD</button>
               </div>
             </div>
+            <div class="row" ng-if="settings.password_error">invaild current password</div>
               <label>Make my profile page completely private so no one can view it</label> 
               
               <input type="radio" ng-model='settings.settingsItem.public' ng-value="false">yes
@@ -110,6 +111,7 @@
           </div>
         </div>
         <div class="doc-section">
+          <div ng-show="settings.error">Oops! An unexpected error occured.</div>
           <div class="row">
             <div class="l-4 indent">
               <button>Read our privacy policy</button>
@@ -120,7 +122,7 @@
             <div class="l-2">
             </div>
             <div class="l-2">
-              <button>SAVE SETTINGS</button>
+              <button ng-click="settings.saveUserSettings();">SAVE SETTINGS</button>
             </div>
           </div>
         </div>
