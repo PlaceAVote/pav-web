@@ -34,6 +34,9 @@ function AuthService($resource, options) {
   };
 
   var getAccessToken = function() {
+    if (!getRawAccessToken()) {
+      return;
+    }
     return 'PAV_AUTH_TOKEN ' +  getRawAccessToken();
   };
 

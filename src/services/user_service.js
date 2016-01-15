@@ -92,6 +92,11 @@ function UserService($resource, facebookService, authService) {
     var saveUser = function(callback){
         var that = this;
 
+        var token = authService.getAccessToken();
+        if(!token) {
+          callback({status: 401, message: 'No Auth Token'});
+          return;
+        }
         var onLoad = function(user){
             authService.setAuth(user.token);
             callback(undefined, user);
@@ -103,7 +108,7 @@ function UserService($resource, facebookService, authService) {
             return;
         }
         var url = getSaveConfig(this.user);
-        config.methods.put.headers["Authorization"] = authService.getAccessToken();
+        config.methods.put.headers["Authorization"] = token;
         var saveUser = new $resource(url, undefined, {create : config.methods.put});
         var token = authService.getFacebookAccessToken();
         var userId = authService.getFacebookId();
@@ -113,6 +118,12 @@ function UserService($resource, facebookService, authService) {
 
 
     var login = function(user, callback) {
+
+        var token = authService.getAccessToken();
+        if(!token) {
+          callback({status: 401, message: 'No Auth Token'});
+          return;
+        }
 
         var onLoad = function(response) {
             authService.setAuth(response.token);
@@ -126,7 +137,7 @@ function UserService($resource, facebookService, authService) {
         if(!user || !user.email || !user.password) {
             return callback({message: "User has no password or username"});
         }
-        config.methods.post.headers["Authorization"] = authService.getAccessToken();
+        config.methods.post.headers["Authorization"] = token;
         var loginResource = new $resource(config.users.login_endpoint, undefined, {login : config.methods.post});
         loginResource.login(user, onLoad, onError);
     };
@@ -174,11 +185,16 @@ function UserService($resource, facebookService, authService) {
     };
 
     var getUserTimeline = function(id, callback) {
+      var token = authService.getAccessToken();
+      if(!token) {
+        callback({status: 401, message: 'No Auth Token'});
+        return;
+      }
       if (!id) {
         return callback({message: 'Id is required'});
       }
       var url = config.users.timeline(id);
-      config.methods.get.headers['Authorization'] = authService.getAccessToken();
+      config.methods.get.headers['Authorization'] = token;
       var timelineResource = new $resource(url, undefined, {getTimeline: config.methods.get});
       var onError = function(error) {
         return callback({message: 'Server Error', error: error});
@@ -199,11 +215,16 @@ function UserService($resource, facebookService, authService) {
     };
 
     var getFollowers = function(id, callback) {
+      var token = authService.getAccessToken();
+      if(!token) {
+        callback({status: 401, message: 'No Auth Token'});
+        return;
+      }
       if (!id) {
         return callback({message: 'Id is required'});
       }
       var url = config.users.followers(id);
-      config.methods.getArray.headers['Authorization'] = authService.getAccessToken();
+      config.methods.getArray.headers['Authorization'] = token;
       var followersResource = new $resource(url, undefined, {getFollowers: config.methods.getArray});
       var onError = function(error) {
         return callback({message: 'Server Error', error: error});
@@ -219,11 +240,16 @@ function UserService($resource, facebookService, authService) {
     };
 
     var getFollowing = function(id, callback) {
+      var token = authService.getAccessToken();
+      if(!token) {
+        callback({status: 401, message: 'No Auth Token'});
+        return;
+      }
       if (!id) {
         return callback({message: 'Id is required'});
       }
       var url = config.users.following(id);
-      config.methods.getArray.headers['Authorization'] = authService.getAccessToken();
+      config.methods.getArray.headers['Authorization'] = token;
       var followersResource = new $resource(url, undefined, {getFollowing: config.methods.getArray});
       var onError = function(error) {
         return callback({message: 'Server Error', error: error});
@@ -239,11 +265,16 @@ function UserService($resource, facebookService, authService) {
     };
 
     var follow = function(id, callback) {
+      var token = authService.getAccessToken();
+      if(!token) {
+        callback({status: 401, message: 'No Auth Token'});
+        return;
+      }
       if (!id) {
         return callback({message:'Id is Required'});
       }
       var url = config.users.follow;
-      config.methods.putNoBody.headers['Authorization'] = authService.getAccessToken();
+      config.methods.putNoBody.headers['Authorization'] = token;
       var resource = new $resource(url, undefined, {execute: config.methods.putNoBody});
       var onError = function(err) {
         return callback({message: 'Server Error', error: err});
@@ -258,6 +289,11 @@ function UserService($resource, facebookService, authService) {
     };
 
     var unfollow = function(id, callback) {
+      var token = authService.getAccessToken();
+      if(!token) {
+        callback({status: 401, message: 'No Auth Token'});
+        return;
+      }
       if (!id) {
         return callback({message:'Id is Required'});
       }
@@ -265,7 +301,7 @@ function UserService($resource, facebookService, authService) {
       var body = {
         "user_id": id,
       }
-      var resource = new $resource(url, undefined, {execute: config.methods.del.delete(body, authService.getAccessToken())});
+      var resource = new $resource(url, undefined, {execute: config.methods.del.delete(body, token)});
       var onError = function(err) {
         return callback({message: 'Server Error', error: err});
       };
