@@ -166,15 +166,19 @@ HeaderCtrl.prototype.toProfile = function() {
 
 HeaderCtrl.prototype.search = function(q) {
   var that = this;
+  if (this.cachedSearch === q) {
+    return;
+  }
+  this.cachedSearch = q;
   this.searching = true;
   this.timeout(function() {
-      that.searchService.search(q, function(err, response) {
-          if (!err) {
-            that.searchResults = response;
-            that.searching = false;
-          }
-        });
-    }, 500);
+    that.searchService.search(q, function(err, response) {
+      if (!err) {
+        that.searchResults = response;
+        that.searching = false;
+      }
+    });
+  }, 500);
 };
 
 module.exports = HeaderCtrl;
