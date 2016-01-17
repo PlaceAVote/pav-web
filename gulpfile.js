@@ -14,7 +14,40 @@ var gulp = require('gulp'),
 	browserSync = require('browser-sync').create(),
 	imagemin = require('gulp-imagemin'), //image optimiser
 	pngquant = require('imagemin-pngquant'), //png optimiser to work with imagemin
-	mozjpeg = require('imagemin-mozjpeg');
+	mozjpeg = require('imagemin-mozjpeg'),
+  jshint = require('gulp-jshint'),
+  jscs = require('gulp-jscs'),
+  gulpSequence = require('gulp-sequence'),
+  mocha = require('gulp-mocha'),
+  util = require('gulp-util'),
+  stylish = require('jshint-stylish');
+
+  var lintedPaths = ['./src/**/*.js', './*.js'];
+
+  gulp.task('lint:jshint', function() {
+    return gulp.src(lintedPaths)
+    .pipe(jshint())
+    .pipe(jshint.reporter(stylish))
+    .pipe(jshint.reporter('fail'));
+
+  });
+
+  gulp.task('lint:jscs', function() {
+    return gulp.src(lintedPaths)
+    .pipe(jscs())
+    .pipe(jscs.reporter())
+    .pipe(jscs.reporter('fail'));
+  });
+
+  gulp.task('test', function() {
+    return gulp.src(['test/**/*.js', '!test/features/**/*.js'], { read: false })
+      .pipe(mocha({ reporter: 'spec' }))
+      .on('error', util.log);
+  });
+
+  gulp.task('check', function(done) {
+    gulpSequence('lint:jshint', 'lint:jscs', 'test', done);
+  });
 
   gulp.task('compress', function() {
     return gulp.src('./web/dist/js/app.js')
@@ -184,4 +217,4 @@ var gulp = require('gulp'),
     gulp.watch(['src/**/*_ionic.js', 'src/*_ionic.js', 'src/ionic-app.js', 'partials/*_ionic.html'], ['ionicise']);
   });
 
-  gulp.task('default', ['autoPrefix', 'watchFiles', 'browserify-web']);
+  gulp.task('default', ['check', 'autoPrefix', 'watchFiles', 'browserify-web']);
