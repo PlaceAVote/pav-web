@@ -27,12 +27,16 @@ Run tests with:
 
 	npm test
 
+These tests include all unit tests and jscsrc/jshint styling configuration.
+
 To recieve instance feedback the tests you are writing, use:
 
 	mocha --watch [filename]
 
+This will require instaling mocha globally.
 
 All tests should be passing before submitting a pull request from branch -> master.
+CircleCi will not deploy a broken build.
 
 #pav website
 
