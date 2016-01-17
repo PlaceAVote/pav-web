@@ -4,7 +4,7 @@ module.exports = function() {
     replace: true,
     scope: {
       user: '=',
-      profile: '='
+      profile: '=',
     },
     templateUrl: 'partials/banner.html',
   };

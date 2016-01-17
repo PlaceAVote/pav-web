@@ -1,33 +1,32 @@
 module.exports = function($compile, commentService, $anchorScroll, $timeout, $location) {
   return {
-    restrict: "E",
+    restrict: 'E',
     replace: true,
     scope: {
       comment: '=',
-      parent: '='
+      parent: '=',
     },
     templateUrl: 'partials/comments.html',
-    link: function (scope, element, attrs, controllerAs) {
+    link: function(scope, element, attrs, controllerAs) {
       scope.commentService = commentService;
-      
+
       if (angular.isArray(scope.comment.replies)) {
 
-        element.append("<div class='comment-container comment-reply' ng-show='comment.showChildren'><comments comments='comment.replies'></comments></div>");
-         var html = element.html();
+        element.append('<div class=\'comment-container comment-reply\' ng-show=\'comment.showChildren\'><comments comments=\'comment.replies\'></comments></div>');
+        var html = element.html();
         element.contents().remove();
         element.html(html);
-        $compile(element.contents())(scope)
+        $compile(element.contents())(scope);
 
         if (scope.comment.selected) {
           $timeout(function() {
             $location.hash('comment-selected');
             $anchorScroll();
             $location.hash('');
-          }, 1000)    
+          }, 1000);
         }
-
       }
-    }
-  }
+    },
+  };
 };
 

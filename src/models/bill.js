@@ -13,18 +13,24 @@ function Bill(data) {
 Bill.prototype.getStatusClass = function() {
   var status = this.billData.status;
   switch (status) {
-    case 'ENACTED:SIGNED':
+    case 'ENACTED:SIGNED': {
       return ENACTEDSIGNED;
-    case 'REFERRED':
+    }
+    case 'REFERRED': {
       return BILLINTRODUCTED;
-    case 'INTRODUCED':
+    }
+    case 'INTRODUCED': {
       return BILLINTRODUCTED;
-    case 'REPORTED':
+    }
+    case 'REPORTED': {
       return COMMITTEE;
-    case 'CONFERENCE:PASSED:HOUSE':
+    }
+    case 'CONFERENCE:PASSED:HOUSE': {
       return PASSEDHOUSE;
-    case 'CONFERENCE:PASSED:SENATE':
+    }
+    case 'CONFERENCE:PASSED:SENATE': {
       return PASSEDSENATE;
+    }
   }
 };
 
@@ -43,4 +49,3 @@ Bill.prototype.getSummary = function() {
 };
 
 module.exports = Bill;
-
