@@ -30,12 +30,13 @@ describe('HeaderCtrl', function() {
     var mockSearch = {
       search: function(q, callback) {
         called = true;
-        callback();
+        callback(undefined, ['world']);
       }
     };
     var subject = new HeaderCtrl({}, mockScope, {}, mockTimeout, {}, mockUserService, {}, mockSearch, {});
     subject.search('hello');
     expect(called).to.eql(true);
     expect(subject.cachedSearch).to.eql('hello');
+    expect(subject.cachedResults).to.eql(['world']);
   });
 });

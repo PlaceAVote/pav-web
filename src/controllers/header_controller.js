@@ -167,14 +167,16 @@ HeaderCtrl.prototype.toProfile = function() {
 HeaderCtrl.prototype.search = function(q) {
   var that = this;
   if (this.cachedSearch === q) {
+    this.searchResults = this.cachedResults;
     return;
   }
   this.cachedSearch = q;
   this.searching = true;
   this.timeout(function() {
     that.searchService.search(q, function(err, response) {
-      if (!err) {
+      if (response) {
         that.searchResults = response;
+        that.cachedResults = response;
         that.searching = false;
       }
     });
