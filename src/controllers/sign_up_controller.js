@@ -51,7 +51,6 @@ SignUpCtrl.prototype.saveUser = function(user) {
   var that = this;
   this.userService.saveUser(function(err, result) {
     if (err) {
-      console.log(err);
       if (err.status === 409) {
         that.user_exists_error = true;
         return;
