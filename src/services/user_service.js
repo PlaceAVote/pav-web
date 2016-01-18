@@ -89,11 +89,6 @@ function UserService($resource, facebookService, authService) {
   var saveUser = function(callback) {
     var that = this;
 
-    var token = authService.getAccessToken();
-    if (!token) {
-      callback({status: 401, message: 'No Auth Token'});
-      return;
-    }
     var onLoad = function(user) {
       authService.setAuth(user.token);
       callback(undefined, user);
@@ -105,10 +100,9 @@ function UserService($resource, facebookService, authService) {
       return;
     }
     var url = getSaveConfig(this.user);
-    config.methods.put.headers.Authorization = token;
     var saveUser = new $resource(url, undefined, {create: config.methods.put});
 
-    token = authService.getFacebookAccessToken();
+    var token = authService.getFacebookAccessToken();
     var userId = authService.getFacebookId();
     var toSave = this.user.toBody(token, userId);
     saveUser.create(toSave, onLoad, onError);
@@ -116,12 +110,6 @@ function UserService($resource, facebookService, authService) {
 
 
   var login = function(user, callback) {
-
-    var token = authService.getAccessToken();
-    if (!token) {
-      callback({status: 401, message: 'No Auth Token'});
-      return;
-    }
 
     var onLoad = function(response) {
       authService.setAuth(response.token);
@@ -135,8 +123,8 @@ function UserService($resource, facebookService, authService) {
     if (!user || !user.email || !user.password) {
       return callback({message: 'User has no password or username'});
     }
-    config.methods.post.headers.Authorization = token;
-    var loginResource = new $resource(config.users.login_endpoint, undefined, {login: config.methods.post});
+
+    var loginResource = new $resource(config.users.loginEndpoint, undefined, {login: config.methods.post});
     loginResource.login(user, onLoad, onError);
   };
 

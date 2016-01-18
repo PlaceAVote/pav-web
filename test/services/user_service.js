@@ -79,11 +79,8 @@ describe("User Service", function() {
     });
   });
   describe("Save User", function() {
-    it("returns undefined if user isn't defined", function(){
-      var authService = new AuthService(undefined, authOptions);
-      authService.getAccessToken = function(){return "Hello"};
-
-      var subject = new UserService(undefined, undefined, authService);
+    it("returns undefined if user isn't defined", function() {
+      var subject = new UserService(undefined, undefined, undefined);
       expect(subject.saveUser()).to.be.undefined;
     });
     it("passes resource correct user", function(done){
@@ -158,9 +155,7 @@ describe("User Service", function() {
       });
     });
     it("login returns callback with a invalid password error", function(done){
-      var authService = new AuthService(undefined, authOptions);
-      authService.getAccessToken = function(){return "Hello"};
-      var subject = new UserService(undefined, undefined, authService);
+      var subject = new UserService(undefined, undefined, undefined);
       var callback = function(err, result) {
         expect(err.message).to.eql("User has no password or username");
         done();
@@ -178,9 +173,7 @@ describe("User Service", function() {
           done();
         };
       };
-      var authService = new AuthService(undefined, authOptions);
-      authService.getAccessToken = function(){return "Hello"};
-      var subject = new UserService(mockResource, undefined, authService);
+      var subject = new UserService(mockResource, undefined, undefined);
       subject.login({
         email: 'paul',
         password: 'TEST555'
