@@ -58,15 +58,15 @@ module.exports = function($sce, $location) {
       }; // End of keyup function
 
       scope.$watchCollection('results', function(n, o) {
-        if(n == undefined) {
+        if (n === undefined) {
           return;
         }
 
-        if(n.length == 0) {
+        if (n.length === 0) {
           return;
         }
 
-        if(n) {
+        if (n) {
           if (n != scope.results) {
             scope.results = n;
             scope.$apply();
@@ -96,7 +96,7 @@ module.exports = function($sce, $location) {
         str = new RegExp(q, 'i');
         match = text.full_title.match(str);
         if (match) {
-          if(text.html.length == undefined) {
+          if (text.html.length === undefined) {
             return;
           }
           text.html = $sce.trustAsHtml(text.html.replace(str, '<span class="text-select">' + match[0] + '</span>'));
