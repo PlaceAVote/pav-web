@@ -137,6 +137,11 @@ module.exports = {
       return urls.USER + '/user/notification/' + id + '/mark'
     }
   },
+  password : {
+    reset : function(email) {
+      return urls.USER + '/password/reset?email=' + email
+    }
+  },
   users : {
     endpoint : urls.USER + '/user',
     authorize: urls.USER + '/user/token/validate?token=',

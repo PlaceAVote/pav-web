@@ -25,6 +25,7 @@ var VoteService = require('./services/votes_service.js');
 var CommentService = require('./services/comment_service.js');
 var NotificationService = require('./services/notification_service.js');
 var SearchService = require('./services/search_service.js');
+var PasswordService = require('./services/password_service.js');
 //dependencies
 var angular = require('angular');
 
@@ -116,6 +117,7 @@ app.factory('legislationService', ['$resource', 'authService', LegislatorService
 app.factory('voteService', ['$resource', 'authService', 'userService', VoteService]);
 app.factory('notificationService', ['$resource', 'authService', NotificationService]);
 app.factory('searchService', ['$resource', 'authService', SearchService]);
+app.factory('passwordService', ['$resouce', PasswordService])
 
 //controllers
 // app.controller('AssetsCtrl',['$scope','$routeParams','$location', AssetsController]);
