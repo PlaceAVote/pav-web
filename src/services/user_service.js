@@ -168,7 +168,6 @@ function UserService($resource, facebookService, authService) {
         return callback(err);
       }
       var onLoad = function(result) {
-        //this.user = User.createFromJson(result);
         return callback(undefined, result);
       }
       settingsResource.getSettings(undefined, onLoad, onError);
@@ -182,7 +181,7 @@ function UserService($resource, facebookService, authService) {
         }
 
         if (!body) {
-          callback({message: 'Settings param is not given'});
+          callback({message: 'Must Supply Settings param'});
           return;
         }
 
