@@ -67,6 +67,7 @@ LoginCtrl.prototype.login = function(u, hash) {
   };
 
   this.userService.login(validUser, function(err, response) {
+    console.log(err, response);
     if (err) {
       that.forgot = true;
       return;
