@@ -72,7 +72,8 @@
               
               <input type="radio" ng-model='settings.settingsItem.public' ng-blur="settings.autoSave('public');" ng-value="false">yes
               <input type="radio" ng-model='settings.settingsItem.public' ng-blur="settings.autoSave('public');" ng-value="true">no
-              <span class="private-description">Your profile is currently set to private</span>
+              <span class="private-description" ng-if='settings.settingsItem.public'>Your profile is currently set to public</span>
+              <span class="private-description" ng-if='!settings.settingsItem.public'>Your profile is currently set to private</span>
               
               <!-- <p class="deactive-filter">Deactive my account</p> -->
           </div>
