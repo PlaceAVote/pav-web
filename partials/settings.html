@@ -27,23 +27,23 @@
               <!-- end link -->
             </div>
             <div class="profile-section">
-              <label>Residence</label>
-              <input type="text" ng-model='settings.settingsItem.city' placeholder="City" required />
+              <label>Residence<span class="autosave" ng-show="settings.autosaved.city">saved!</span></label>
+              <input type="text" ng-model='settings.settingsItem.city' ng-blur="settings.autoSave('city');" ng-placeholder="City" required />
               
               <div class="row">
                 <div class="l-6 indent">
-                  <label>Preferred Pronoun</label>
-                  <select ng-model='settings.settingsItem.gender' ng-options="gender.des as gender.name for gender in settings.gender_options">
+                  <label>Preferred Pronoun<span class="autosave" ng-show="settings.autosaved.gender">saved!</span></label>
+                  <select ng-model='settings.settingsItem.gender' ng-blur="settings.autoSave('gender');" ng-options="gender.des as gender.name for gender in settings.gender_options">
                   </select>
                 </div>
 
                 <div class="l-6">
-                  <label class="signupdob">Date of Birth</label>
-                  <input type="date" ng-model='settings.settingsItem.dob' required />
+                  <label class="signupdob">Date of Birth<span class="autosave" ng-show="settings.autosaved.dob">saved!</span></label>
+                  <input type="date" ng-model='settings.settingsItem.dob' ng-blur="settings.autoSave('dob');" required />
                 </div>
               </div>
-              <label>Email Address</label>
-              <input type="email" ng-model='settings.settingsItem.email' required />
+              <label>Email Address<span class="autosave" ng-show="settings.autosaved.email">saved!</span></label>
+              <input type="email" ng-model='settings.settingsItem.email' ng-blur="settings.autoSave('email');" required />
             </div>
 
           </div>
@@ -68,16 +68,16 @@
               </div>
             </div>
             <div class="row" ng-if="settings.password_error">invaild current password</div>
-              <label>Make my profile page completely private so no one can view it</label> 
+              <label>Make my profile page completely private so no one can view it<span class="autosave" ng-show="settings.autosaved.public">saved!</span></label> 
               
-              <input type="radio" ng-model='settings.settingsItem.public' ng-value="false">yes
-              <input type="radio" ng-model='settings.settingsItem.public' ng-value="true">no
+              <input type="radio" ng-model='settings.settingsItem.public' ng-blur="settings.autoSave('public');" ng-value="false">yes
+              <input type="radio" ng-model='settings.settingsItem.public' ng-blur="settings.autoSave('public');" ng-value="true">no
               <span class="private-description">Your profile is currently set to private</span>
               
-              <p class="deactive-filter">Deactive my account</p>
+              <!-- <p class="deactive-filter">Deactive my account</p> -->
           </div>
         </div>
-        <div class="notification-section">
+        <!-- <div class="notification-section">
           <div class="section-title">
             <h1>NOTIFICATION SETTINGS</h1>
             <hr />
@@ -109,7 +109,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
         <div class="doc-section">
           <div ng-show="settings.error">Oops! An unexpected error occured.</div>
           <div class="row">

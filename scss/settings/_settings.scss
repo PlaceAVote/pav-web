@@ -186,4 +186,9 @@
   h1 {
     @include font-size(14px);
   }
+
+  .autosave {
+    margin-left: 10px;
+    color: rgb(128, 128, 128);
+  }
 }

@@ -2,15 +2,23 @@ var AuthorizeController = require('./autherize_controller.js');
 var title = require('../config/titles.js');
 var SettingsItem = require('../models/settings_item.js');
 
-SettingsController = function($scope, $location, userService, authService, $rootScope) {
+SettingsController = function($scope, $location, $timeout, userService, authService, $rootScope) {
   AuthorizeController.authorize({error: '/', authorizer: authService, location: $location});
   this.$scope = $scope || {};
   $scope.$location = $location || {};
   this.userService = userService;
   this.rs = $rootScope;
-
+  this.timeout = $timeout;
   this.current_password = "";
   this.new_password = "";
+  this.autosaved = {
+    city: false,
+    gender: false,
+    dob: false,
+    email: false,
+    public: false
+  };
+
 
   var that = this;
   this.getUserSettings(function(err, result) {
@@ -26,6 +34,64 @@ SettingsController = function($scope, $location, userService, authService, $root
     {name: "female", des: "female"},
     {name: "they", des: "they"}
   ];
+}
+
+SettingsController.prototype.autoSave = function(item) {
+  if (item == 'city') {
+    if (this.settingsItem.city == "") return ;
+  }
+  if (item == 'email') {
+    if (this.settingsItem.email == "") return ;
+  }
+  
+  this.saveUserSettings();
+  var that = this;
+  if (!this.error) {
+    switch (item) {
+      case 'city':
+        this.autosaved.city = true;
+        break;
+      case 'gender':
+        this.autosaved.gender = true;
+        break;
+      case 'dob':
+        this.autosaved.dob = true;
+        break;
+      case 'email':
+        this.autosaved.email = true;
+        break;
+      case 'public':
+        this.autosaved.public = true;
+        break;
+      default: 
+        break;
+    }
+    this.timeout(function() {
+      that.eraseAutoSave(item);
+    }, 1000);
+  }
+}
+
+SettingsController.prototype.eraseAutoSave = function(item) {
+  switch (item) {
+    case 'city':
+      this.autosaved.city = false;
+      break;
+    case 'gender':
+      this.autosaved.gender = false;
+      break;
+    case 'dob':
+      this.autosaved.dob = false;
+      break;
+    case 'email':
+      this.autosaved.email = false;
+      break;
+    case 'public':
+      this.autosaved.public = false;
+      break;
+    default:
+      break;
+  }
 }
 
 SettingsController.prototype.getUserSettings = function(callback) {
