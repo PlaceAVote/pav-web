@@ -1,0 +1,12 @@
+{
+  "preset": "node-style-guide",
+  "maximumLineLength": 140,
+  "requireCamelCaseOrUpperCaseIdentifiers": false,
+  "errorFilter": "./scripts/error_filter.js",
+  "excludeFiles": [
+    "test/**",
+    "src/temp/*",
+    "src/controllers/website/*",
+    "*gulpfile*"
+  ]
+}

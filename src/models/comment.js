@@ -1,7 +1,7 @@
 function Comment(options) {
-  if(!options){
+  if (!options) {
     return;
-  };
+  }
   this.author = options.author;
   this.author_first_name = options.author_first_name;
   this.author_last_name = options.author_last_name;
@@ -24,28 +24,28 @@ function Comment(options) {
 }
 
 Comment.buildChildren = function(comment, deep, reply) {
-  if(!deep) {
+  if (!deep) {
     deep = 0;
   }
 
-  if(reply) {
+  if (reply) {
     comment.showChildren = true;
   }
 
-  if(comment.id == reply) {
+  if (comment.id == reply) {
     comment.selected = 'comment-selected';
   }
 
   comment.deep = deep;
-  if(!comment.replies) {
+  if (!comment.replies) {
     comment.replies = [];
   }
-  if(!comment.has_children) {
+  if (!comment.has_children) {
     return;
   }
-  for(var i = 0; i < comment.jsonReplies.length; i++){
+  for (var i = 0; i < comment.jsonReplies.length; i++) {
     var child = new Comment(comment.jsonReplies[i]);
-    Comment.buildChildren(child, deep+1, reply);
+    Comment.buildChildren(child, deep + 1, reply);
     comment.replies.push(child);
   }
 };
@@ -59,21 +59,20 @@ Comment.prototype.hide = function() {
 };
 
 Comment.prototype.showReplyInput = function() {
- this.replyInput = true;
+  this.replyInput = true;
 };
 
 Comment.prototype.hideReplyInput = function() {
- this.replyInput = false;
- this.replyText = undefined;
+  this.replyInput = false;
+  this.replyText = undefined;
 };
 
 Comment.prototype.reply = function(billId, service) {
   var that = this;
   service.reply(this.replyText, billId, this.id, function(err, response) {
-    if(err) {
+    if (err) {
       that.replyFailed = true;
-    }
-    else if(response) {
+    } else if (response) {
       response.deep = that.deep + 1;
       that.replies.push(response);
     }
@@ -82,17 +81,14 @@ Comment.prototype.reply = function(billId, service) {
 };
 
 Comment.prototype.like = function(service) {
- 
   var that = this;
- 
   if (this.liked && !this.scoring) {
-      that.scoring = true;
-      service.revoke(this.id, this.bill_id, 'like', function(err, response) {
-      if(err) {
+    that.scoring = true;
+    service.revoke(this.id, this.bill_id, 'like', function(err, response) {
+      if (err) {
         that.likeFailed = true;
         that.scoring = false;
-      }
-      else if(response) {
+      } else if (response) {
         that.scoring = false;
         that.liked = false;
         that.scored = false;
@@ -103,13 +99,12 @@ Comment.prototype.like = function(service) {
   }
 
   if (this.disliked && !this.scoring) {
-      that.scoring = true;
-      service.revoke(this.id, this.bill_id,'dislike', function(err, response) {
-      if(err) {
+    that.scoring = true;
+    service.revoke(this.id, this.bill_id,'dislike', function(err, response) {
+      if (err) {
         that.dislikeFailed = true;
         that.scoring = false;
-      }
-      else if(response) {
+      } else if (response) {
         that.scoring = false;
         that.disliked = false;
         that.scored = false;
@@ -118,19 +113,18 @@ Comment.prototype.like = function(service) {
     });
   }
 
-  if(!this.liked && !this.scoring) {
-      that.scoring = true;
-      service.like(this.id, this.bill_id, function(err, response) {
-      if(err) {
+  if (!this.liked && !this.scoring) {
+    that.scoring = true;
+    service.like(this.id, this.bill_id, function(err, response) {
+      that.scoring = false;
+      if (err) {
         that.likeFailed = true;
-        that.scoring = false;
+        return;
       }
-      else if(response) {
-        that.scoring = false;
-        that.liked = true;
-        that.scored = true;
-        that.score++;
-      }
+      that.scoring = false;
+      that.liked = true;
+      that.scored = true;
+      that.score++;
     });
   }
 
@@ -140,54 +134,48 @@ Comment.prototype.like = function(service) {
 Comment.prototype.dislike = function(service) {
   var that = this;
 
-    if (this.disliked && !this.scoring) {
-      that.scoring = true;
-      service.revoke(this.id, this.bill_id,'dislike', function(err, response) {
-      if(err) {
-        that.scoring = false;
-        that.dislikeFailed = true;
-      }
-      else if(response) {
-        that.scoring = false;
-        that.disliked = false;
-        that.scored = false;
-        that.score++;
-        return;
-      }
-    });
-  }
-
-
-    if (this.liked && !this.scoring) {
-      that.scoring = true;
-      service.revoke(this.id, this.bill_id, 'like', function(err, response) {
-      if(err) {
-        that.likeFailed = true;
-        that.scoring = false;
-      }
-      else if(response) {
-        that.scoring = false;
-        that.liked = false;
-        that.scored = false;
-        that.score--;
-      }
-    });
-  }
-
-
-  if(!this.disliked && !this.scoring) {
+  if (this.disliked && !this.scoring) {
     that.scoring = true;
-    service.dislike(this.id, this.bill_id, function(err, response) {
+    service.revoke(this.id, this.bill_id,'dislike', function(err, response) {
+      that.scoring = false;
       if (err) {
         that.dislikeFailed = true;
-        that.scoiring = false;
+        return;
       }
-      else if(response) {
-        that.scoring = false;
-        that.disliked = true;
-        that.scored = true;
-        that.score--;
+      that.disliked = false;
+      that.scored = false;
+      that.score++;
+      return;
+    });
+  }
+
+
+  if (this.liked && !this.scoring) {
+    that.scoring = true;
+    service.revoke(this.id, this.bill_id, 'like', function(err, response) {
+      that.scoring = false;
+      if (err) {
+        that.likeFailed = true;
+        return;
       }
+      that.liked = false;
+      that.scored = false;
+      that.score--;
+    });
+  }
+
+
+  if (!this.disliked && !this.scoring) {
+    that.scoring = true;
+    service.dislike(this.id, this.bill_id, function(err, response) {
+      that.scoring = false;
+      if (err) {
+        that.dislikeFailed = true;
+        return;
+      }
+      that.disliked = true;
+      that.scored = true;
+      that.score--;
     });
   }
 

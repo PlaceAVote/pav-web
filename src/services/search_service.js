@@ -11,25 +11,25 @@ function SearchService($resource, authService) {
     var onLoad = function(res) {
       var results = new SearchResults(res);
       callback(undefined, results);
-    }
+    };
 
     var onError = function(err) {
       callback(err);
-    }
+    };
 
     var params = {
-      term: query
-    }
+      term: query,
+    };
 
     var url = config.search.endpoint;
-    config.methods.getArray.headers['Authorization'] = token;
+    config.methods.getArray.headers.Authorization = token;
     var resource = new $resource(url, undefined, {search: config.methods.getArray});
     resource.search(params, onLoad, onError);
   }
-  
+
   return {
-    search: search
-  }
+    search: search,
+  };
 }
 
 module.exports = SearchService;

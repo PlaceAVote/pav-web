@@ -7,24 +7,24 @@ function AuthService($resource, options) {
   var facebookAuth;
   var storage = w.localStorage || {};
 
-  var setFacebookAuth = function(token){
+  var setFacebookAuth = function(token) {
     facebookAuth = token;
   };
 
   var setAuth = function(token) {
-   auth = token;
-   storage.setItem('pav', auth);
+    auth = token;
+    storage.setItem('pav', auth);
   };
 
   var getFacebookAccessToken = function() {
-    if(!facebookAuth) {
+    if (!facebookAuth) {
       return;
     }
     return facebookAuth.accessToken;
   };
 
   var getFacebookId = function() {
-    if(!facebookAuth) {
+    if (!facebookAuth) {
       return;
     }
     return facebookAuth.userID;
@@ -34,6 +34,9 @@ function AuthService($resource, options) {
   };
 
   var getAccessToken = function() {
+    if (!getRawAccessToken()) {
+      return;
+    }
     return 'PAV_AUTH_TOKEN ' +  getRawAccessToken();
   };
 
@@ -46,28 +49,27 @@ function AuthService($resource, options) {
 
   var loggedInStatus = function() {
     auth = getRawAccessToken();
-    if(!auth) {
+    if (!auth) {
       return false;
-    } else if (auth) {
-      return true;
     }
+    return true;
   };
 
   var validateToken = function(callback) {
     var token = loggedInStatus();
-    if(!token){
+    if (!token) {
       callback(token);
       return;
     }
     var url = config.users.authorize + auth;
     var authResource = new $resource(url, undefined, {authorize: config.methods.getStatus});
-    var onError = function(err){
+    var onError = function(err) {
       storage.removeItem('pav');
       return callback(false);
-    }
-    var onLoad = function(){
+    };
+    var onLoad = function() {
       return callback(true);
-    }
+    };
     authResource.authorize(undefined, onLoad, onError);
   };
 
