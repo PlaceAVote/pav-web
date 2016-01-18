@@ -58,15 +58,25 @@ module.exports = function($sce, $location) {
       }; // End of keyup function
 
       scope.$watchCollection('results', function(n, o) {
-        if (n != scope.results) {
-          scope.results = n;
-          scope.$apply();
+        if(n == undefined) {
+          return;
         }
-        if (n.users) {
-          matchText('users');
+
+        if(n.length == 0) {
+          return;
         }
-        if (n.bills) {
-          matchText('bills');
+
+        if(n) {
+          if (n != scope.results) {
+            scope.results = n;
+            scope.$apply();
+          }
+          if (n.users.length > 0) {
+            matchText('users');
+          }
+          if (n.bills.length > 0) {
+            matchText('bills');
+          }
         }
 
       });
@@ -86,6 +96,9 @@ module.exports = function($sce, $location) {
         str = new RegExp(q, 'i');
         match = text.full_title.match(str);
         if (match) {
+          if(text.html.length == undefined) {
+            return;
+          }
           text.html = $sce.trustAsHtml(text.html.replace(str, '<span class="text-select">' + match[0] + '</span>'));
         }
 
