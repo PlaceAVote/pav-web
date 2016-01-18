@@ -40,6 +40,7 @@ function SignUpCtrl($rootScope, $scope, $location, userService, authService) {
 SignUpCtrl.prototype.test = function() {
   this.userService.addAdditionalInformation(this.additionalInformation);
   var user = this.userService.getUser();
+  console.log('user', user);
   if (!user) {
     this.invalid_user = true;
     return;
@@ -51,6 +52,7 @@ SignUpCtrl.prototype.saveUser = function(user) {
   var that = this;
   this.userService.saveUser(function(err, result) {
     if (err) {
+      console.log(err);
       if (err.status === 409) {
         that.user_exists_error = true;
         return;

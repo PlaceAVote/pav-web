@@ -88,8 +88,8 @@ function UserService($resource, facebookService, authService) {
   };
   var saveUser = function(callback) {
     var that = this;
-
     var token = authService.getAccessToken();
+
     if (!token) {
       callback({status: 401, message: 'No Auth Token'});
       return;
