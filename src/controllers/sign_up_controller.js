@@ -40,7 +40,6 @@ function SignUpCtrl($rootScope, $scope, $location, userService, authService) {
 SignUpCtrl.prototype.test = function() {
   this.userService.addAdditionalInformation(this.additionalInformation);
   var user = this.userService.getUser();
-  console.log('user', user);
   if (!user) {
     this.invalid_user = true;
     return;
