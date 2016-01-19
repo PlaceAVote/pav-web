@@ -167,5 +167,6 @@ module.exports = {
     reset: function(email) {
       return urls.USER + '/password/reset?email=' + email;
     },
+    newPassword: urls.USER + '/password/reset/confirm/',
   },
 };

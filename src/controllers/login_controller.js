@@ -1,16 +1,16 @@
 var AuthorizeController = require('./autherize_controller.js');
 
-function LoginCtrl($scope, $location, userService, authService, $rootScope, $routeParams) {
+function LoginCtrl($scope, $location, userService, authService, $rootScope, $routeParams, passwordService) {
   AuthorizeController.authorize({success: '/feed', authorizer: authService, location: $location});
   $scope = $scope || {};
   this.rs = $rootScope || {};
   this.userService = userService;
+  this.passwordService = passwordService;
   $scope.login = this;
   this.location = $location;
   this.forgot = false;
   this.passwordSent = false;
   this.rs.loggedIn = false;
-
   this.user = {
     email: '',
     emailValid: true,
@@ -68,7 +68,7 @@ LoginCtrl.prototype.login = function(u, hash) {
 
   this.userService.login(validUser, function(err, response) {
     if (err) {
-      that.forgot = true;
+      that.loginInvalid = true;
       return;
     }
     that.userService.getUserProfile('me', function(err, result) {
@@ -95,6 +95,20 @@ LoginCtrl.prototype.emailValidation = function(email) {
 
 LoginCtrl.prototype.passwordValidation = function(password) {
   return true;
+};
+
+LoginCtrl.prototype.passwordReset = function(email) {
+  var that = this;
+  this.passwordService.passwordReset(email, function(err,res) {
+    if (err) {
+      that.resetFailed = true;
+      that.resetSuccess = false;
+    }
+    if (res) {
+      that.resetFailed = false;
+      that.resetSuccess = true;
+    }
+  });
 };
 
 module.exports = LoginCtrl;
