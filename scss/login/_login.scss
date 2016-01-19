@@ -299,7 +299,7 @@
     color: $red !important;
 }
 
-.error-message {
+.error-message, .success-message {
     color: $red !important;
     text-align: left;
     padding-left: 20px;
@@ -326,6 +326,10 @@
     &.ng-leave-active {
         opacity: 0;
     }
+}
+
+.success-message {
+  color: $green !important;
 }
 
 .mailcheck {
@@ -378,3 +382,14 @@
     }
 }
 
+.login-forgot, .login-reset {
+  color: $blue !important;
+  cursor: pointer;
+}
+
+.login-form-container {
+  h1 {
+    text-align: center;
+    padding: 0px;
+  }
+}
