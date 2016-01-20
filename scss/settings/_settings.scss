@@ -2,8 +2,19 @@
 	width: 100%;
   display: flex;
   flex-direction: row;
+
   @include media(900px) {
     flex-direction: column;
+  }
+  .btn-green, .btn-grey {
+  padding: 0px 20px;
+  }
+  .btn-grey {
+    margin-right: 10px;
+  }
+
+  span {
+    @include font-size(12px);
   }
 
   .settings-list {
@@ -19,7 +30,15 @@
 
   .account-section-wrapper {
     margin-left: 20px;
-
+    @include media(900px) {
+      margin-left: 0px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+    .profile-picture {
+      height: 50px;
+      width: 50px;
+    }
     .account-section {
       margin-bottom: 20px;
       .account-section-content {
@@ -31,8 +50,11 @@
           flex-direction: column;
         }
         .profile-section {
-          width: calc(100% - 200px);
-          margin-left: 20px;
+          margin-left: 15px;
+          width: 100%;
+          @include media(900px) {
+            margin-left: 0px;
+          }
         }
       }
     }
@@ -44,7 +66,7 @@
 
         .private-description {
           margin-left: 20px;
-          font-size: 14px;
+          @include font-size(12px);
         }
         .deactive-filter {
           color: red;
@@ -70,10 +92,6 @@
         margin-top: 20px;
       }
     }
-
-    .doc-section {
-      margin-bottom: 20px;
-    }
     
     select {
       @include light();
@@ -90,7 +108,7 @@
       border-radius: 3px;
     }
     label {
-      @include font-size(14px);
+      @include font-size(12px);
       text-align: left;
       display: block;
       margin-bottom: 10px;
@@ -184,7 +202,7 @@
   }
   
   h1 {
-    @include font-size(14px);
+    @include font-size(12px);
   }
 
   .autosave {
@@ -192,3 +210,5 @@
     color: rgb(128, 128, 128);
   }
 }
+
+

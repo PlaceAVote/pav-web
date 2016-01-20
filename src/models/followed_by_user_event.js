@@ -1,4 +1,4 @@
-function FollowedByUserEvent(options){
+function FollowedByUserEvent(options) {
   this.type = options.type;
   this.user_id = options.user_id;
   this.follower_id = options.follower_id;

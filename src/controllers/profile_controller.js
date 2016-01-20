@@ -12,7 +12,7 @@ function ProfileController($scope, $location, $routeParams, authService, userSer
   this.populate();
 }
 
-ProfileController.prototype.loadProfile = function(id){
+ProfileController.prototype.loadProfile = function(id) {
   if (!id) {
     return;
   }
@@ -32,7 +32,7 @@ ProfileController.prototype.populateProfile = function() {
     if (!err) {
       that.user = result;
       title.profile(that.user);
-      result.following ? that.following = "unfollow" : that.following = "follow";
+      that.following = result.following ? 'unfollow' : 'follow';
       that.followStatus = result.following;
     }
   });
@@ -44,7 +44,7 @@ ProfileController.prototype.populateTimeline = function() {
   this.userService.getUserTimeline(this.id, function(err, result) {
     if (!err) {
       that.timeline = result;
-      !result.timeline.length ? that.hasActivity = false : that.hasActivity = true;
+      that.hasActivity = !result.timeline.length ? false : true;
     }
   });
 };
@@ -54,7 +54,7 @@ ProfileController.prototype.populateFollowers = function() {
   this.userService.getFollowers(this.id, function(err, result) {
     if (!err) {
       that.followers = result;
-      !result.length ? that.hasFollowers = false : that.hasFollowers = true;
+      that.hasFollowers = !result.length ? false : true;
     }
   });
 };
@@ -69,12 +69,10 @@ ProfileController.prototype.populateFollowing = function() {
 };
 
 ProfileController.prototype.isNotMe = function() {
-  if (this.id == 'me') {
+  if (this.id === 'me') {
     return false;
   }
-  else {
-    return true;
-  }
+  return true;
 };
 
 ProfileController.prototype.follow = function() {
@@ -82,14 +80,14 @@ ProfileController.prototype.follow = function() {
   if (!this.isNotMe()) {
     return;
   }
-  if(!this.followStatus) {
+  if (!this.followStatus) {
     this.userService.follow(this.id, function(err, response) {
       if (!err) {
         that.user.following = false;
         that.populate();
       }
     });
-  } else if(this.followStatus){
+  } else if (this.followStatus) {
     this.userService.unfollow(this.id, function(err, response) {
       if (!err) {
         that.user.following = true;

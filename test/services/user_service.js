@@ -80,8 +80,8 @@ describe("User Service", function() {
     });
   });
   describe("Save User", function() {
-    it("returns undefined if user isn't defined", function(){
-      var subject = new UserService();
+    it("returns undefined if user isn't defined", function() {
+      var subject = new UserService(undefined, undefined, undefined);
       expect(subject.saveUser()).to.be.undefined;
     });
     it("passes resource correct user", function(done){
@@ -94,7 +94,8 @@ describe("User Service", function() {
           done();
         };
       }
-      authService = new AuthService(undefined, authOptions);
+      var authService = new AuthService(undefined, authOptions);
+      authService.getAccessToken = function(){return "Hello"};
       var subject = new UserService(mockResource, undefined, authService);
       subject.createUser("test@email.com", "p4SSw0rD!");
       var additionalInformation = {
@@ -112,7 +113,8 @@ describe("User Service", function() {
           succeed(user);
         };
       };
-      authService = new AuthService(undefined, authOptions);
+      var authService = new AuthService(undefined, authOptions);
+      authService.getAccessToken = function(){return "Hello"};
       var subject = new UserService(mockResource, undefined, authService);
       subject.createUser("test@email.com", "p4SSw0rD!");
       var additionalInformation = {
@@ -138,6 +140,7 @@ describe("User Service", function() {
         };
       };
       var authService = new AuthService(undefined, authOptions);
+      authService.getAccessToken = function(){return "Hello"};
       var subject = new UserService(mockResource, undefined, authService);
       subject.createUser("test@email.com", "p4SSw0rD!");
       var additionalInformation = {
@@ -153,7 +156,7 @@ describe("User Service", function() {
       });
     });
     it("login returns callback with a invalid password error", function(done){
-      var subject = new UserService();
+      var subject = new UserService(undefined, undefined, undefined);
       var callback = function(err, result) {
         expect(err.message).to.eql("User has no password or username");
         done();
@@ -171,8 +174,7 @@ describe("User Service", function() {
           done();
         };
       };
-      var authService = new AuthService(undefined, authOptions);
-      var subject = new UserService(mockResource, undefined, authService);
+      var subject = new UserService(mockResource, undefined, undefined);
       subject.login({
         email: 'paul',
         password: 'TEST555'
@@ -185,6 +187,7 @@ describe("User Service", function() {
         };
       };
       var authService = new AuthService(undefined, authOptions);
+      authService.getAccessToken = function(){return "Hello"};
       var subject = new UserService(mockResource, undefined, authService);
       subject.login({email: 'paul', password: 'passWO3rd'}, function(err, resource) {
         expect(err).to.eql(undefined);
@@ -199,6 +202,9 @@ describe("User Service", function() {
         };
       };
       var authService = new AuthService(undefined, authOptions);
+      authService.getAccessToken = function() {
+        return "HELLO!";
+      };
       var subject = new UserService(mockResource, undefined, authService);
       subject.login({email: 'paul', password: 'passWO3rd'}, function(err, resource) {
         expect(err).to.eql({message: 'Server Error'});
@@ -665,7 +671,12 @@ describe("User Service", function() {
   });
   describe('UserProfile Timeline', function() {
     it('returns error if no id is supplied', function(done) {
-      var subject = new UserService();
+      var authService = {
+        getAccessToken: function() {
+          return "***";
+        },
+      };
+      var subject = new UserService(undefined, undefined, authService);
       subject.getUserTimeline(undefined, function(err, result){
         expect(err.message).to.eql('Id is required');
         done();
@@ -679,6 +690,13 @@ describe("User Service", function() {
         this.getTimeline = function(){};
         done();
       }
+
+      authService = {
+        getAccessToken: function() {
+          return 'PAV_AUTH_TOKEN 000001';
+        },
+      };
+
       var subject = new UserService(userResource, undefined, authService);
       subject.getUserTimeline('me', function(err, response){});
     });
@@ -745,7 +763,12 @@ describe("User Service", function() {
   });
   describe('User Followers', function() {
     it('returns error if no id is supplied', function(done) {
-      var subject = new UserService();
+      authService = {
+        getAccessToken: function() {
+          return 'PAV_AUTH_TOKEN 000001';
+        },
+      };
+      var subject = new UserService(undefined, undefined, authService);
       subject.getFollowers(undefined, function(err, result){
         expect(err.message).to.eql('Id is required');
         done();
@@ -759,6 +782,11 @@ describe("User Service", function() {
         this.getFollowers = function(){};
         done();
       }
+      authService = {
+        getAccessToken: function() {
+          return 'PAV_AUTH_TOKEN 000001';
+        },
+      };
       var subject = new UserService(userResource, undefined, authService);
       subject.getFollowers('me', function(err, response){});
     });
@@ -806,7 +834,12 @@ describe("User Service", function() {
   });
   describe('User Following', function() {
     it('returns error if no id is supplied', function(done) {
-      var subject = new UserService();
+      var access = {
+        getAccessToken: function() {
+          return "hello";
+        },
+      };
+      var subject = new UserService(undefined, undefined, access);
       subject.getFollowing(undefined, function(err, result){
         expect(err.message).to.eql('Id is required');
         done();
@@ -820,6 +853,7 @@ describe("User Service", function() {
         this.getFollowing = function(){};
         done();
       }
+      authService.getAccessToken = function(){return 'PAV_AUTH_TOKEN 000001'};
       var subject = new UserService(userResource, undefined, authService);
       subject.getFollowing('007', function(err, response){});
     });
@@ -881,6 +915,7 @@ describe("User Service", function() {
         expect(method.execute.headers['Authorization']).to.eql('PAV_AUTH_TOKEN 000001');
         done();
       };
+      authService.getAccessToken = function(){return 'PAV_AUTH_TOKEN 000001'};
       var subject = new UserService(followResource, undefined, authService);
       subject.follow('id', function(err, response){});
     });
@@ -929,6 +964,7 @@ describe("User Service", function() {
         expect(method.execute.headers['Authorization']).to.eql('PAV_AUTH_TOKEN 000001');
         done();
       };
+      authService.getAccessToken = function(){return 'PAV_AUTH_TOKEN 000001'};
       var subject = new UserService(followResource, undefined, authService);
       subject.unfollow('id', function(err, response){});
     });

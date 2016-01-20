@@ -6,8 +6,8 @@ module.exports = {
     get: {
       method: 'GET',
       headers: {
-        'Content-Type' : "application/json",
-        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
       },
       withCredentials: false,
     },
@@ -15,8 +15,8 @@ module.exports = {
       method: 'GET',
       isArray: true,
       headers: {
-        'Content-Type' : "application/json",
-        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
       },
       withCredentials: false,
     },
@@ -24,8 +24,8 @@ module.exports = {
       method: 'GET',
       transformResponse: [],
       headers: {
-        'Content-Type' : "application/json",
-        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
       },
       withCredentials: false,
     },
@@ -36,20 +36,20 @@ module.exports = {
           data: id,
           isArray: false,
           headers: {
-            'Content-Type' : "application/json",
-            'Accept': 'application/json',
-            'Authorization' : token,
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            Authorization: token,
           },
           withCredentials: false,
-          };
+        };
         return req;
-      }
+      },
     },
     put: {
       method: 'PUT',
       headers: {
-        'Content-Type' : "application/json",
-        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
       },
       withCredentials: false,
     },
@@ -57,16 +57,16 @@ module.exports = {
       method: 'PUT',
       transformResponse: [],
       headers: {
-        'Content-Type' : "application/json",
-        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
       },
       withCredentials: false,
     },
     post: {
       method: 'POST',
       headers: {
-        'Content-Type' : "application/json",
-        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
       },
       withCredentials: false,
     },
@@ -81,36 +81,36 @@ module.exports = {
       endpoint: urls.VOTES + '/vote/count?bill-id=',
     },
     voteOnBill: {
-      endpoint: urls.VOTES + '/vote'
+      endpoint: urls.VOTES + '/vote',
     },
     voteRecords: {
-      endpoint: urls.VOTES + '/vote/bill/'
-    }
+      endpoint: urls.VOTES + '/vote/bill/',
+    },
   },
   comments: {
     reply: {
       endpoint: function(id) {
         id = id.trim();
-        return urls.CONGRESS + '/comments/' + id + '/reply'
+        return urls.CONGRESS + '/comments/' + id + '/reply';
       },
     },
     like: {
       endpoint: function(id) {
         id = id.trim();
-        return urls.CONGRESS + '/comments/' + id + '/like'
-      }
+        return urls.CONGRESS + '/comments/' + id + '/like';
+      },
     },
     dislike: {
       endpoint: function(id) {
         id = id.trim();
-        return urls.CONGRESS + '/comments/' + id + '/dislike'
-      }
+        return urls.CONGRESS + '/comments/' + id + '/dislike';
+      },
     },
   },
   bills: {
     comments: {
       endpoint: function(id, from) {
-        return urls.CONGRESS + '/bills/' + id + '/comments' + '?from=' + from
+        return urls.CONGRESS + '/bills/' + id + '/comments' + '?from=' + from;
       },
     },
     trends: {
@@ -134,38 +134,41 @@ module.exports = {
     poll: urls.NOTIFICATION + '/user/notifications',
     staticEndpoint:  urls.USER + '/user/notifications',
     read: function(id) {
-      return urls.USER + '/user/notification/' + id + '/mark'
-    }
+      return urls.USER + '/user/notification/' + id + '/mark';
+    },
   },
-  users : {
-    endpoint : urls.USER + '/user',
+  users: {
+    endpoint: urls.USER + '/user',
     authorize: urls.USER + '/user/token/validate?token=',
     profile: {
-    fromId: function(id) {
-      return urls.USER + '/user/' + id + '/profile'
-    },
+      fromId: function(id) {
+        return urls.USER + '/user/' + id + '/profile';
+      },
     },
     timeline: function(id) {
-      return urls.USER + '/user/' + id + '/timeline'
+      return urls.USER + '/user/' + id + '/timeline';
     },
     followers: function(id) {
-      return urls.USER + '/user/' + id + '/followers'
+      return urls.USER + '/user/' + id + '/followers';
     },
     following: function(id) {
-      return urls.USER + '/user/' + id + '/following'
+      return urls.USER + '/user/' + id + '/following';
     },
     follow: urls.USER + '/user/follow',
     unfollow: urls.USER + '/user/unfollow',
-    login_endpoint: urls.USER + '/user/authenticate',
-    facebookLoginUrl : urls.USER + '/user/facebook/authenticate',
+    loginEndpoint: urls.USER + '/user/authenticate',
+    facebookLoginUrl: urls.USER + '/user/facebook/authenticate',
     facebookCreateUrl: urls.USER + '/user/facebook',
-    settings: urls.USER + '/user/me/settings'
-  },
-  password: {
-    change: urls.USER + '/password/change'
+    settings: urls.USER + '/user/me/settings',
   },
   search: {
-    endpoint: urls.SEARCH + '/search'
-  }
-}
-
+    endpoint: urls.SEARCH + '/search',
+  },
+  password: {
+    reset: function(email) {
+      return urls.USER + '/password/reset?email=' + email;
+    },
+    newPassword: urls.USER + '/password/reset/confirm/',
+    change: urls.USER + '/password/change',
+  },
+};

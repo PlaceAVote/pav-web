@@ -8,5 +8,6 @@ gulp autoPrefix
 gulp dev-config
 gulp browserify-web
 gulp app-min
+gulp template-prod
 
 echo "-- Building Web-app"

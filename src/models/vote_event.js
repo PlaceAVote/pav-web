@@ -1,5 +1,5 @@
 function VoteEvent(options) {
-  var options = options || {};
+  options = options || {};
   this.bill_id = options.bill_id;
   this.vote = options.vote;
   this.vote_id = options['vote-id'];
@@ -11,7 +11,7 @@ function VoteEvent(options) {
 }
 
 VoteEvent.prototype.loadBill = function(location) {
-  if(!location || !location.path) {
+  if (!location || !location.path) {
     return;
   }
   location.path(bill_id);

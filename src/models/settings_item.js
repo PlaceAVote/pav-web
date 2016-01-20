@@ -1,18 +1,18 @@
 var strftime = require('strftime');
 
 function SettingsItem() {
-  this.email;
-  this.first_name;
-  this.last_name;
-  this.dob; // Date, not string
-  this.gender;
-  this.city;
-  this.img_url;
-  this.public;
-  this.social_login;
+  this.email = '';
+  this.first_name = '';
+  this.last_name = '';
+  this.dob = ''; // Date, not string
+  this.gender = '';
+  this.city = '';
+  this.img_url = '';
+  this.public = '';
+  this.social_login = '';
 }
 
-SettingsItem.createFromJson = function(json){
+SettingsItem.createFromJson = function(json) {
   json = json || {};
   var settingsItem = new SettingsItem();
   settingsItem.email = json.email;
@@ -36,10 +36,10 @@ SettingsItem.prototype.toBody = function() {
     gender: this.gender,
     dob: strftime('%m/%d/%Y', this.dob),
     public: this.public,
-    city: this.city
-  }
+    city: this.city,
+  };
 
   return body;
-}
+};
 
 module.exports = SettingsItem;

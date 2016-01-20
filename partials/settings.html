@@ -6,17 +6,15 @@
           <h1>ACCOUNT SETTINGS</h1>
           <hr />
           <ul>
-            <li>Account</li>
-            <li>Password Security & Privacy</li>
-            <li>Notification</li>
-            <li>Find friends</li>
+            <li ng-click="settings.scrollTo('accountSettings'); settings.showSettings = true;">Account</li>
+            <li ng-click="settings.scrollTo('passwordSettings'); settings.showSettings = true;">Password & Privacy Settings</li>
           </ul>
         </div>
       </div>
 
-      <div class="account-section-wrapper card l-8">
+      <div class="account-section-wrapper card l-8 m-12 s-12" ng-show="settings.showSettings">
         <div class="account-section">
-          <div class="section-title">
+          <div id="accountSettings" class="section-title">
             <h1>ACCOUNT</h1>
             <hr />
           </div>
@@ -31,13 +29,13 @@
               <input type="text" ng-model='settings.settingsItem.city' ng-blur="settings.autoSave('city');" ng-placeholder="City" required />
               
               <div class="row">
-                <div class="l-6 indent">
+                <div class="l-6 m-12 indent">
                   <label>Preferred Pronoun<span class="autosave" ng-show="settings.autosaved.gender">saved!</span></label>
                   <select ng-model='settings.settingsItem.gender' ng-blur="settings.autoSave('gender');" ng-options="gender.des as gender.name for gender in settings.gender_options">
                   </select>
                 </div>
 
-                <div class="l-6">
+                <div class="l-6 m-12">
                   <label class="signupdob">Date of Birth<span class="autosave" ng-show="settings.autosaved.dob">saved!</span></label>
                   <input type="date" ng-model='settings.settingsItem.dob' ng-blur="settings.autoSave('dob');" required />
                 </div>
@@ -48,85 +46,44 @@
 
           </div>
         </div>
-        <div class="password-section">
-          <div class="section-title">
+        <div class="password-section" ng-show="settings.showSettings">
+          <div id="passwordSettings" class="section-title">
             <h1>PASSWORD & PRIVACY SETTINGS</h1>
             <hr />
           </div>
           <div class="password-section-content">
-            <div class="row" ng-if="!settings.settingsItem.social_login">
-              <div class="l-5 indent">
+            <div class="row col-m medium-margin-bottom" ng-if="!settings.settingsItem.social_login">
+              <p class="medium-margin-bottom" ng-show="settings.passwordError">There was an error when trying to save your password.</p>
+              <div class="l-3 m-12 medium-margin-right no-margin-right-m">
                 <label>Current Password</label>
-                <input type="password" ng-model='settings.current_password'> 
+                <input class="no-margin-bottom medium-margin-bottom-m" type="password" ng-model='settings.current_password'> 
               </div>
-              <div class="l-5 indent">
+              <div class="l-3 m-12 medium-margin-bottom-m">
                 <label>New Password</label>
-                <input type="password" ng-model='settings.new_password'> 
+                <input class="no-margin-bottom" type="password" ng-model='settings.new_password'> 
               </div>
-              <div class="l-2">
-                <button class="down-btn" ng-click='settings.changePassword()'>SAVE PASSWORD</button>
-              </div>
+                <a class="btn-green layout-right text-center layout-bottom m-12" ng-click='settings.changePassword()'><p ng-show="settings.savingPassword">SAVING...</p><p ng-hide="settings.savingPassword || settings.newPassword">SAVE PASSWORD</p><p ng-show="settings.newPassword">PASSWORD SAVED!</p></a>
             </div>
             <div class="row" ng-if="settings.password_error">invaild current password</div>
               <label>Make my profile page completely private so no one can view it<span class="autosave" ng-show="settings.autosaved.public">saved!</span></label> 
               
-              <input type="radio" ng-model='settings.settingsItem.public' ng-blur="settings.autoSave('public');" ng-value="false">yes
-              <input type="radio" ng-model='settings.settingsItem.public' ng-blur="settings.autoSave('public');" ng-value="true">no
+              <input type="radio" ng-model='settings.settingsItem.public' ng-blur="settings.autoSave('public');" ng-value="false"><span>yes</span>
+              <input type="radio" ng-model='settings.settingsItem.public' ng-blur="settings.autoSave('public');" ng-value="true"><span>no</span>
               <span class="private-description" ng-if='settings.settingsItem.public'>Your profile is currently set to public</span>
               <span class="private-description" ng-if='!settings.settingsItem.public'>Your profile is currently set to private</span>
-              
-              <!-- <p class="deactive-filter">Deactive my account</p> -->
           </div>
         </div>
-        <!-- <div class="notification-section">
-          <div class="section-title">
-            <h1>NOTIFICATION SETTINGS</h1>
-            <hr />
-          </div>
-          <div class="notification-section-content"> 
-            <div class="l-5">
-              <label>Notify me when i have a cardiac arrest</label>
-              <input type="checkbox" />
-            </div>
-            <div class="l-5">
-              <label>Notify me when i have a cardiac arrest</label>
-              <input type="checkbox" />
-            </div>
-          </div>
-        </div>
-        <div class="friends-section">
-          <div class="section-title">
-            <h1>INVITE YOUR FRIENDS TO PLACEAVOTE!</h1>
-            <hr />
-          </div>
-          <div class="friends-section-content">
-            <div class="row">
-              <div class="l-10 indent">
-                <label>Enter email address(s) here, seperate them by commas for multiple emails.</label>
-                <input type="text">
-              </div>
-              <div class="l-2">
-                <button class="down-btn">SEND INVITES</button>
-              </div>
-            </div>
-          </div>
-        </div> -->
         <div class="doc-section">
           <div ng-show="settings.error">Oops! An unexpected error occured.</div>
-          <div class="row">
-            <div class="l-4 indent">
-              <button>Read our privacy policy</button>
-            </div>
-            <div class="l-4 indent">
-              <button>Read our terms of service</button>
-            </div>
-            <div class="l-2">
-            </div>
-            <div class="l-2">
-              <button ng-click="settings.saveUserSettings();">SAVE SETTINGS</button>
-            </div>
+          <div class="row col-m">
+              <a ng-click="settings.showSettings = false;" class="btn-grey m-12 medium-margin-bottom-m text-center">Read our privacy policy</a>
+              <a ng-click="settings.showSettings = false;" class="btn-grey m-12 medium-margin-bottom-m text-center">Read our terms of service</a>
+              <a class="btn-green layout-right m-12 text-center" ng-click="settings.saveUserSettings();"><p ng-show="settings.saving">SAVING...</p><p ng-hide="settings.saving || settings.saveConfirmed">SAVE SETTINGS</p><p ng-show="settings.saveConfirmed">SAVED!</p></a>
           </div>
         </div>
+      </div>
+      <div class="card l-8 m-12 medium-margin-left no-margin-left-m large-margin-top-m large-margin-bottom" ng-hide="settings.showSettings">
+        <terms-and-conditions></terms-and-conditions>
       </div>
     </section>
   </div>

@@ -3,8 +3,8 @@ module.exports = function() {
     restrict: 'E',
     replace: true,
     scope: {
-      comments: '='
+      comments: '=',
     },
-    template: "<comment ng-repeat='comment in comments' comment='comment'></comment>",
+    template: '<comment ng-repeat=\'comment in comments\' comment=\'comment\'></comment>',
   };
 };

@@ -2,97 +2,114 @@ var AuthorizeController = require('./autherize_controller.js');
 var title = require('../config/titles.js');
 var SettingsItem = require('../models/settings_item.js');
 
-SettingsController = function($scope, $location, $timeout, userService, authService, $rootScope) {
+SettingsController = function($scope, $location, $timeout, userService, authService, $rootScope, $anchorScroll) {
   AuthorizeController.authorize({error: '/', authorizer: authService, location: $location});
   this.$scope = $scope || {};
   $scope.$location = $location || {};
   this.userService = userService;
   this.rs = $rootScope;
+  this.location = $location;
+  this.anchorScroll = $anchorScroll;
   this.timeout = $timeout;
-  this.current_password = "";
-  this.new_password = "";
+  this.current_password = '';
+  this.new_password = '';
   this.autosaved = {
     city: false,
     gender: false,
     dob: false,
     email: false,
-    public: false
+    public: false,
   };
+  this.showSettings = true;
 
 
   var that = this;
   this.getUserSettings(function(err, result) {
     if (!err) {
-      console.log(result);
       that.settingsItem = SettingsItem.createFromJson(result);
 
     }
   });
 
   this.gender_options = [
-    {name: "male", des: "male"},
-    {name: "female", des: "female"},
-    {name: "they", des: "they"}
+    {name: 'His', des: 'male'},
+    {name: 'Her', des: 'female'},
+    {name: 'They', des: 'they'},
   ];
-}
+};
 
 SettingsController.prototype.autoSave = function(item) {
   if (item == 'city') {
-    if (this.settingsItem.city == "") return ;
+    if (this.settingsItem.city === '') {
+      return;
+    }
   }
   if (item == 'email') {
-    if (this.settingsItem.email == "") return ;
+    if (this.settingsItem.email === '') {
+      return;
+    }
   }
-  
   this.saveUserSettings();
   var that = this;
   if (!this.error) {
     switch (item) {
-      case 'city':
+      case 'city': {
         this.autosaved.city = true;
         break;
-      case 'gender':
+      }
+      case 'gender': {
         this.autosaved.gender = true;
         break;
-      case 'dob':
+      }
+      case 'dob': {
         this.autosaved.dob = true;
         break;
-      case 'email':
+      }
+      case 'email': {
         this.autosaved.email = true;
         break;
-      case 'public':
+      }
+      case 'public': {
         this.autosaved.public = true;
         break;
-      default: 
+      }
+      default: {
         break;
+      }
     }
     this.timeout(function() {
       that.eraseAutoSave(item);
     }, 1000);
   }
-}
+};
 
 SettingsController.prototype.eraseAutoSave = function(item) {
   switch (item) {
-    case 'city':
+    case 'city': {
       this.autosaved.city = false;
       break;
-    case 'gender':
+    }
+    case 'gender': {
       this.autosaved.gender = false;
       break;
-    case 'dob':
+    }
+    case 'dob': {
       this.autosaved.dob = false;
       break;
-    case 'email':
+    }
+    case 'email': {
       this.autosaved.email = false;
       break;
-    case 'public':
+    }
+    case 'public': {
       this.autosaved.public = false;
       break;
-    default:
+    }
+    default: {
       break;
+    }
   }
-}
+};
 
 SettingsController.prototype.getUserSettings = function(callback) {
   this.userService.getUserSettings(callback);
@@ -101,47 +118,73 @@ SettingsController.prototype.getUserSettings = function(callback) {
 SettingsController.prototype.saveUserSettings = function() {
   var params = this.settingsItem.toBody();
   var that = this;
+  this.saving = true;
   this.userService.saveUserSettings(params, function(err, result) {
-    that.error = err;
-    console.log(result);
+    if (err) {
+      that.saving = false;
+      that.error = err;
+    }
+
+    if (result) {
+      that.saveConfirmed = true;
+      that.saving = false;
+      that.timeout(function() {
+        that.saveConfirmed = false;
+      }, 2000);
+    }
   });
 };
 
 SettingsController.prototype.changePassword = function() {
+  this.savingPassword = true;
+  this.passwordError = false;
   var params = {
     current_password: this.current_password,
-    new_password: this.new_password
-  }
+    new_password: this.new_password,
+  };
   var that = this;
   this.userService.changePassword(params, function(err, result) {
-    that.password_error = err;
+    if (err) {
+      that.passwordError = true;
+      that.savingPassword = false;
+    }
+    if (result) {
+      that.savingPassword = false;
+      that.newPassword = true;
+      that.timeout(function() {
+        that.newPassword = false;
+      }, 2000);
+    }
   });
-  this.current_password = "";
-  this.new_password = "";
-}
+  this.current_password = '';
+  this.new_password = '';
+};
 
 SettingsController.prototype.maxDate = function() {
   var d = new Date();
   var y = d.getFullYear();
-  d.setFullYear(y-18);
+  d.setFullYear(y - 18);
   var year = d.getFullYear();
   var month = d.getMonth();
   var day = d.getDay();
   month += 1;
-  if(month<=9) {
+  if (month <= 9) {
     month = '0' + month.toString();
-  }
-  else {
+  } else {
     month = month.toString();
   }
-  if(day<=9) {
+  if (day <= 9) {
     day = '0' + day.toString();
-  }
-  else {
+  } else {
     day = day.toString();
   }
   year = year.toString();
-  return year + "-" + month + "-" + day;
+  return year + '-' + month + '-' + day;
+};
+
+SettingsController.prototype.scrollTo = function(hash) {
+  this.location.hash(hash);
+  this.anchorScroll();
 };
 
 module.exports = SettingsController;

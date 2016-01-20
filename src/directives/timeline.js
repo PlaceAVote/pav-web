@@ -4,7 +4,7 @@ module.exports = function() {
     replace: true,
     scope: {
       timeline: '=',
-      profile: '='
+      profile: '=',
     },
     templateUrl: 'partials/timeline.html',
   };
