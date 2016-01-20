@@ -159,6 +159,12 @@ module.exports = {
     loginEndpoint: urls.USER + '/user/authenticate',
     facebookLoginUrl: urls.USER + '/user/facebook/authenticate',
     facebookCreateUrl: urls.USER + '/user/facebook',
+    issue: {
+      endpoint: urls.USER + '/user/issue',
+      response: function(id) {
+        return urls.USER + '/user/' + id + '/response';
+      },
+    },
   },
   search: {
     endpoint: urls.SEARCH + '/search',
