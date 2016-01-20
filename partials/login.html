@@ -28,7 +28,7 @@
                     <form name="passwordReset" ng-show="login.forgot">
                     <h1>Please enter your email address, a link will be generated for you to reset your password.</h1>
                     <input type="email" ng-model="login.user.email" />
-                     <p class="error-message" ng-class="{'show': login.resetFailed}">Invalid User Credentials</p>
+                     <p class="error-message" ng-class="{'show': login.resetFailed}">Email address not recognised, try another or login via facebook.</p>
                      <p class="success-message" ng-class="{'show': login.resetSuccess}">An email has been sent.</p>
                     <button ng-click="login.passwordReset(login.user.email)">Send</button>
                     <p class="click" ng-click="login.forgot = false">Back</p>
