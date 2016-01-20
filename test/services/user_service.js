@@ -173,8 +173,6 @@ describe("User Service", function() {
           done();
         };
       };
-      // var authService = new AuthService(undefined, authOptions);
-      // authService.getAccessToken = function(){return "Hello"};
       var subject = new UserService(mockResource, undefined, undefined);
       subject.login({
         email: 'paul',
