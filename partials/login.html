@@ -6,22 +6,32 @@
                     <a href="/#/"><img src="../img/pav-logo-color.png" /></a>
                 </div>
                 <ul>
-                    <li><a href="" ng-class="{'login--selected': !login.signup}" ng-click="login.signup = false">Sign In</a></li>
-                    <li><a href="" ng-class="{'login--selected': login.signup}" ng-click="login.signup = true">Sign Up</a></li>
+                    <li><a href="" ng-class="{'login--selected': !login.signup}" ng-click="login.signup = false; login.forgot = false">Sign In</a></li>
+                    <li><a href="" ng-class="{'login--selected': login.signup}" ng-click="login.signup = true; login.forgot = false">Sign Up</a></li>
                 </ul>
             </div>
             <section class="s-12">
-                <div class="login-form-contaier" ng-hide="login.signup">
-                    <h1>Welcome back! Sign in below</h1>
-                    <form name="emailForm">
+                <div class="login-form-container" ng-hide="login.signup">
+                    
+                    <form name="emailForm" ng-hide="login.forgot">
+                        <h1>Welcome back! Sign in below</h1>
                         <label>Email</label>
                         <input id="email" name="email" type="text" ng-class="{'login-error': !login.user.emailValid}" ng-model="login.user.email" placeholder="yourname@example.com" required/>
                         <p class="error-message" ng-class="{'show': !login.user.emailValid}">Email address is invalid, please try again.</p>
                         <label>Password (contains one digit and one capital letter)</label>
                         <input name="password" type="password" ng-class="{'login-error': !login.user.passwordValid}" ng-model="login.user.password" placeholder="*******" />
                         <p class="error-message" ng-class="{'show': !login.user.passwordValid}">Password requires at least one digit and one capital letter.</p>
-                        <p class="error-message" ng-class="{'show': login.forgot}">Invalid User Credentials</p>
+                        <p class="error-message" ng-class="{'show': login.loginInvalid}">Invalid User Credentials</p>
                         <button ng-click="login.login(login.user, '/topics');">Sign In</button>
+                        <p class="login-forgot" ng-click="login.forgot = true">Forgot your password?</p>
+                    </form>
+                    <form name="passwordReset" ng-show="login.forgot">
+                    <h1>Please enter your email address, a link will be generated for you to reset your password.</h1>
+                    <input type="email" ng-model="login.user.email" />
+                     <p class="error-message" ng-class="{'show': login.resetFailed}">Email address not recognised, try another or login via facebook.</p>
+                     <p class="success-message" ng-class="{'show': login.resetSuccess}">An email has been sent.</p>
+                    <button ng-click="login.passwordReset(login.user.email)">Send</button>
+                    <p class="click" ng-click="login.forgot = false">Back</p>
                     </form>
                 </div>
                 <div class="login-form-container" ng-show="login.signup">
@@ -36,7 +46,7 @@
                         <button ng-click="login.validate(login.user, '/onboarding');">Sign Up</button>
                     </form>
                 </div>
-                <div ng-show="login.forgot">
+                <div ng-show="login.loginInvalid">
                    <p class="error-message">Invalid User Credentials</p>
                 </div>
             </section>

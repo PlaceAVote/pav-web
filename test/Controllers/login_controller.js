@@ -154,7 +154,7 @@ describe('LoginCtrl', function() {
             });
         });
        describe("failed login", function() {
-        it("sets forgot to false", function(done){
+        it("sets loginInvalid to false", function(done){
         	var scope = {};
         	scope.$on = function() {};
             var subject = new LoginCtrl(scope, {}, {}, authService);
@@ -168,9 +168,42 @@ describe('LoginCtrl', function() {
                 callback();
             }
             test(function(){
-                expect(subject.forgot).to.eql(true);
+                expect(subject.loginInvalid).to.eql(true);
                 done();
              });
         });
        });
+       describe("Forgot password", function() {
+        it("Should return status 200 when password reset is successful", function() {
+          var scope = {};
+          scope.$on = function() {};
+          var subject = new LoginCtrl(scope, {}, {}, authService);
+          subject.passwordService = {
+            passwordReset : function(params, callback) {
+              callback(undefined, {status: '200'});
+            }
+          }
+          subject.passwordReset('user@email.com', function(err, res) {
+            expect(res).to.equal({status: '200'});
+            expect(subject.resetFailed).to.equal(false);
+            expect(subject.resetSuccess).to.equal(true);
+          });
+        });
+        it("Should return status 401 when password reset has failed", function() {
+          var scope = {};
+          scope.$on = function() {};
+          var subject = new LoginCtrl(scope, {}, {}, authService);
+          subject.passwordService = {
+            passwordReset : function(params, callback) {
+              callback({status: '401'});
+            }
+          }
+          subject.passwordReset('user@email.com', function(err) {
+            expect(err).to.equal({status: '401'});
+            expect(subject.resetFailed).to.equal(true);
+            expect(subject.resetSuccess).to.equal(false);
+          });
+        });
+       });
+
 });

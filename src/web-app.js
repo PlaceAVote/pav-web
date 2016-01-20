@@ -14,6 +14,8 @@ var FeedController = require('./controllers/feed_controller.js');
 var BillController = require('./controllers/bill_controller.js');
 var HeaderController = require('./controllers/header_controller.js');
 var ProfileController = require('./controllers/profile_controller.js');
+var PasswordController = require('./controllers/password_controller.js');
+
 // Services
 var UserService = require('./services/user_service.js');
 var BillService = require('./services/bill_service.js');
@@ -23,6 +25,8 @@ var VoteService = require('./services/votes_service.js');
 var CommentService = require('./services/comment_service.js');
 var NotificationService = require('./services/notification_service.js');
 var SearchService = require('./services/search_service.js');
+var PasswordService = require('./services/password_service.js');
+
 // Dependencies
 var angular = require('angular');
 
@@ -98,6 +102,10 @@ app.config(['$routeProvider', function($routeProvider) {
         templateUrl: 'partials/profile.html',
         controller: 'ProfileCtrl as profile',
       })
+      .when('/password/reset/:token', {
+        templateUrl: 'partials/password_reset.html',
+        controller: 'PasswordResetCtrl as password',
+      })
       .otherwise({
         redirectTo: '/',
       });
@@ -115,15 +123,17 @@ app.factory('legislationService', ['$resource', 'authService', LegislatorService
 app.factory('voteService', ['$resource', 'authService', 'userService', VoteService]);
 app.factory('notificationService', ['$resource', 'authService', NotificationService]);
 app.factory('searchService', ['$resource', 'authService', SearchService]);
+app.factory('passwordService', ['$resource', PasswordService]);
 
 // Controllers
 app.controller('TopicRegisterCtrl',['$scope','$location', 'userService', RegisterController]);
 app.controller('SignUpCtrl',['$rootScope','$scope','$location', 'userService', SignUpController]);
-app.controller('LoginCtrl',['$scope','$location', 'userService', 'authService', '$rootScope', '$routeParams', LoginController]);
+app.controller('LoginCtrl',['$scope','$location', 'userService', 'authService', '$rootScope', '$routeParams', 'passwordService', LoginController]);
 app.controller('FeedCtrl', ['$scope', '$location', 'userService', 'billService', 'authService', '$rootScope', FeedController]);
 app.controller('BillCtrl', ['$scope', '$routeParams', 'billService', 'legislationService', 'voteService', 'commentService', '$location', 'authService', BillController]);
 app.controller('HeaderCtrl', ['$rootScope', '$scope', '$location', '$timeout', 'authService', 'userService', 'notificationService', 'searchService', '$window', HeaderController]);
 app.controller('ProfileCtrl', ['$scope', '$location', '$routeParams', 'authService', 'userService', ProfileController]);
+app.controller('PasswordResetCtrl', ['$scope','$location','$routeParams','passwordService','authService', PasswordController]);
 
 // Web controllers
 app.controller('HomeCtrl', ['$scope', '$location','$anchorScroll', 'userService', '$rootScope', 'authService', HomeController]);
