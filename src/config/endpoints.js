@@ -165,6 +165,7 @@ module.exports = {
         return urls.USER + '/user/' + id + '/response';
       },
     },
+    settings: urls.USER + '/user/me/settings',
   },
   search: {
     endpoint: urls.SEARCH + '/search',
@@ -174,5 +175,6 @@ module.exports = {
       return urls.USER + '/password/reset?email=' + email;
     },
     newPassword: urls.USER + '/password/reset/confirm/',
+    change: urls.USER + '/password/change',
   },
 };

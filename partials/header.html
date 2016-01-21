@@ -12,11 +12,15 @@
 
         <notifications data="header.notifications" unread="header.unread" read-event="header.readEvent(notification)"></notifications>
       </div>
+
   		<img ng-click="header.dropDown()" class="user-img" ng-src="{{header.rs.user.img_url}}"/>
       <div class="dropdown-container" ng-mouseleave="header.hideDropDown()" ng-show="header.showDropDown">
         <ul>
           <li ng-click="header.toProfile()">
            <img class="user-img-inside" ng-src="{{header.rs.user.img_url}}"/> View Profile
+          </li>
+          <li ng-click="header.toSettings()">
+            Account Settings
           </li>
           <li ng-click="header.logout()">
             Logout
@@ -24,6 +28,6 @@
         </ul>
       </div>
   	</section>
-    
+
 	</div>
 </header>
