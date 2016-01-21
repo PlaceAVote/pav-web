@@ -1,5 +1,6 @@
 var expect = require('chai').expect;
 var IssueService = require('../../src/services/issue_service.js');
+var Issue = require('../../src/models/issue.js');
 
 describe("Issue Service", function() {
   var mockAuthWithoutToken = {
@@ -18,6 +19,96 @@ describe("Issue Service", function() {
     bill_id: "hr2-114",
     comment: "Comment Body goes here",
   };
+
+  describe("Get Issues", function() {
+    it('requires a token to get issues', function(done) {
+      var subject = new IssueService({}, mockAuthWithoutToken);
+      subject.getIssues(function(err, result) {
+        expect(err).to.eql('Token is needed to get issues');
+        done();
+      });
+    });
+
+    it('calls params with correct config', function(done) {
+      function mockResource(url, params, method) {
+        this.getIssues = function(){};
+        expect(url).to.contain('/user/feed');
+        expect(params).to.eql(undefined);
+        expect(method.getIssues.headers.Authorization).to.eql('Token');
+        expect(method.getIssues.method).to.eql('GET');
+        done();
+      }
+      var subject = new IssueService(mockResource, mockAuth);
+      subject.getIssues(function(err, result) {
+        expect(err).to.eql(undefined);
+      });
+    });
+
+    it('returns an error from the server', function(done) {
+      function mockResource(url, params, method) {
+        this.getIssues = function(body, onLoad, onError) {
+          expect(body).to.eql(undefined);
+          onError('Error');
+        };
+      }
+      var subject = new IssueService(mockResource, mockAuth);
+      subject.getIssues(function(err) {
+        expect(err).to.eql('Error');
+        done();
+      });
+    });
+
+    it('returns an empty array if server does not return user issue', function(done) {
+      function mockResource(url, params, method) {
+        this.getIssues = function(body, onLoad, onError) {
+          var result = {
+            results: [
+              {
+                type: 'bill',
+                bill_id: 'hr2-114',
+              }
+            ]
+          };
+          return onLoad(result);
+        };
+
+      }
+      var subject = new IssueService(mockResource, mockAuth);
+      subject.getIssues(function(err, result) {
+        expect(err).to.eql(undefined);
+        expect(result).to.be.empty;
+        done();
+      });
+    });
+
+    it('returns an array of issue if server return user issue', function(done) {
+      function mockResource(url, params, method) {
+        this.getIssues = function(body, onLoad, onError) {
+          var result = {
+            results: [
+              {
+                type: 'bill',
+                bill_id: 'hr2-114',
+              },
+              {
+                type: 'userissue',
+                bill_id: 'hr2-114',
+              },
+            ]
+          };
+          return onLoad(result);
+        };
+
+      }
+      var subject = new IssueService(mockResource, mockAuth);
+      subject.getIssues(function(err, result) {
+        expect(err).to.eql(undefined);
+        expect(result.length).to.eql(1);
+        expect(result[0]).to.be.an.instanceof(Issue);
+        done();
+      });
+    });
+  });
 
   describe("Save Issue", function() {
     it('returns an error if no issue is given', function(done) {
@@ -46,7 +137,7 @@ describe("Issue Service", function() {
         done();
       }
       var subject = new IssueService(mockResource, mockAuth);
-      subject.saveIssue(function(err, result) {
+      subject.saveIssue(true, function(err, result) {
         expect(err).to.eql(undefined);
       });
     });

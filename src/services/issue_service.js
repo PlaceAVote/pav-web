@@ -1,4 +1,5 @@
 var config = require('../config/endpoints.js');
+var Issue = require('../../src/models/issue.js');
 
 function IssueService($resource, authService, callback) {
   var saveIssue = function(issue, callback) {
@@ -26,6 +27,33 @@ function IssueService($resource, authService, callback) {
     var request = new $resource(url, undefined, {save: config.methods.put});
 
     request.save(issue, onLoad, onError);
+  };
+
+  var getIssues = function(callback) {
+    var token = authService.getAccessToken();
+    if (!token) {
+      callback('Token is needed to get issues');
+      return;
+    }
+
+    var onLoad = function(result) {
+      var issues = [];
+      for (var r in result.results) {
+        if (result.results[r].type == 'userissue') {
+          issues.push(new Issue(result.results[r]));
+        }
+      }
+      callback(undefined, issues);
+    };
+
+    var onError = function(err) {
+      callback(err);
+    };
+
+    var url = config.bills.feed;
+    config.methods.get.headers.Authorization = authService.getAccessToken();
+    var request = new $resource(url, undefined, {getIssues: config.methods.get});
+    request.getIssues(undefined, onLoad, onError);
   };
 
   var setIssueResponse = function(issue_id, response_value, callback) {
@@ -89,6 +117,7 @@ function IssueService($resource, authService, callback) {
 
   return {
     saveIssue: saveIssue,
+    getIssues: getIssues,
     setIssueResponse: setIssueResponse,
     getIssueResponse: getIssueResponse,
   };
