@@ -39,6 +39,7 @@ SettingsController = function($scope, $location, $timeout, userService, authServ
 };
 
 SettingsController.prototype.autoSave = function(item) {
+  var that = this;
   if (item == 'city') {
     if (this.settingsItem.city === '') {
       return;
@@ -49,38 +50,38 @@ SettingsController.prototype.autoSave = function(item) {
       return;
     }
   }
-  this.saveUserSettings();
-  var that = this;
-  if (!this.error) {
-    switch (item) {
-      case 'city': {
-        this.autosaved.city = true;
-        break;
+  this.saveUserSettings(function() {
+    if (!that.error) {
+      switch (item) {
+        case 'city': {
+          that.autosaved.city = true;
+          break;
+        }
+        case 'gender': {
+          that.autosaved.gender = true;
+          break;
+        }
+        case 'dob': {
+          that.autosaved.dob = true;
+          break;
+        }
+        case 'email': {
+          that.autosaved.email = true;
+          break;
+        }
+        case 'public': {
+          that.autosaved.public = true;
+          break;
+        }
+        default: {
+          break;
+        }
       }
-      case 'gender': {
-        this.autosaved.gender = true;
-        break;
-      }
-      case 'dob': {
-        this.autosaved.dob = true;
-        break;
-      }
-      case 'email': {
-        this.autosaved.email = true;
-        break;
-      }
-      case 'public': {
-        this.autosaved.public = true;
-        break;
-      }
-      default: {
-        break;
-      }
+      that.timeout(function() {
+        that.eraseAutoSave(item);
+      }, 1000);
     }
-    this.timeout(function() {
-      that.eraseAutoSave(item);
-    }, 1000);
-  }
+  });
 };
 
 SettingsController.prototype.eraseAutoSave = function(item) {
@@ -115,7 +116,7 @@ SettingsController.prototype.getUserSettings = function(callback) {
   this.userService.getUserSettings(callback);
 };
 
-SettingsController.prototype.saveUserSettings = function() {
+SettingsController.prototype.saveUserSettings = function(callback) {
   var params = this.settingsItem.toBody();
   var that = this;
   this.saving = true;
@@ -131,6 +132,9 @@ SettingsController.prototype.saveUserSettings = function() {
       that.timeout(function() {
         that.saveConfirmed = false;
       }, 2000);
+      if (callback) {
+        callback();
+      }
     }
   });
 };

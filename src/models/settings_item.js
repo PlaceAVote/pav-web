@@ -1,15 +1,7 @@
 var strftime = require('strftime');
 
 function SettingsItem() {
-  this.email = '';
-  this.first_name = '';
-  this.last_name = '';
-  this.dob = ''; // Date, not string
-  this.gender = '';
-  this.city = '';
-  this.img_url = '';
-  this.public = '';
-  this.social_login = '';
+
 }
 
 SettingsItem.createFromJson = function(json) {
