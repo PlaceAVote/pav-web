@@ -1,4 +1,5 @@
 var config = require('../config/endpoints');
+var questionFactory = require('../factories/question_factory.js');
 
 
 /**
@@ -6,7 +7,7 @@ var config = require('../config/endpoints');
  */
 function getQuestions(Resource, authService, options, callback) {
   options = options || {};
-  var questionFactory = options.questionFactory;
+  var factory = options.questionFactory || questionFactory;
   if (!Resource || !authService) {
     callback('Resource and AuthService must be defined');
     return;
@@ -24,7 +25,7 @@ function getQuestions(Resource, authService, options, callback) {
     return;
   };
   var onLoad = function(result) {
-    callback(undefined, questionFactory.generate(result));
+    callback(undefined, factory.generate(result));
     return;
   };
 
