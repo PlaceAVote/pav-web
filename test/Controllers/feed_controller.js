@@ -36,6 +36,11 @@ describe("FeedController", function() {
         callback(undefined, []);
       };
     };
+    function mockFeedService(){
+      this.getFeed = function(callback){
+        callback(undefined, []);
+      };
+    };
     it("adds banner to scope", function(){
         var scope = {};
         var rootScope = {
@@ -43,7 +48,7 @@ describe("FeedController", function() {
             newUser: true
           }
         };
-        var subject = new FeedController(scope, {},new mockUserService(), new mockBillService(), new mockAuthService(), rootScope);
+        var subject = new FeedController(scope, {},new mockUserService(), new mockBillService(), new mockAuthService(), new mockFeedService(), rootScope);
         expect(!!scope.banner).to.eql(true);
     });
     it("getTrends returns trends array", function(done){
@@ -53,7 +58,7 @@ describe("FeedController", function() {
             newUser: true
           }
         };
-      var subject = new FeedController(scope, {}, new mockUserService(), new mockBillService(), new mockAuthService(), rootScope);
+      var subject = new FeedController(scope, {}, new mockUserService(), new mockBillService(), new mockAuthService(), new mockFeedService(), rootScope);
       subject.getTrends(function(err, response){
         expect(err).to.eql(undefined);
         expect(response).to.eql(true);
@@ -61,15 +66,15 @@ describe("FeedController", function() {
       });
       done();
     });
-    it("getBills returns bills array", function(done){
+    it("getFeed returns feed array", function(done){
       var scope = {};
       var rootScope = {
           user: {
             newUser: true
           }
         };
-      var subject = new FeedController(scope, {}, new mockUserService(), new mockBillService(), new mockAuthService(), rootScope);
-      subject.getBills("user", function(err, response){
+      var subject = new FeedController(scope, {}, new mockUserService(), new mockBillService(), new mockAuthService(), new mockFeedService(), rootScope);
+      subject.getFeed(function(err, response){
         expect(err).to.eql(undefined);
         expect(!!response).to.eql(true);
         done();

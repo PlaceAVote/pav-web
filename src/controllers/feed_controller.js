@@ -1,21 +1,18 @@
 var Banner = require('../models/banner.js');
 var AuthorizeController = require('./autherize_controller.js');
 var title = require('../config/titles.js');
+var BillSummary = require('../models/bill_summary.js');
+var Issue = require('../models/issue.js');
 
-FeedController = function($scope, $location, userService, billService, authService, $rootScope) {
+FeedController = function($scope, $location, userService, billService, authService, feedService, $rootScope) {
   AuthorizeController.authorize({error: '/', authorizer: authService, location: $location});
   this.$scope = $scope || {};
   $scope.$location = $location || {};
   this.billService = billService;
   this.userService = userService;
+  this.feedService = feedService;
   this.rs = $rootScope;
 
-  this.getBills('notyet@implemented.com', function(err, response) {
-    if (!err) {
-      $scope.bills = response;
-      title.feed();
-    }
-  });
   this.getTrends();
   this.getUserProfile(function(err, response) {
     if (err) {
@@ -25,6 +22,24 @@ FeedController = function($scope, $location, userService, billService, authServi
     } else {
       $scope.user = response;
       $scope.banner = new Banner(response);
+    }
+  });
+
+  this.getFeed(function(err, response) {
+    if (!err) {
+      title.feed();
+
+      var bills = [];
+      var issues = [];
+      for (var r in response.feed) {
+        if (response.feed[r] instanceof BillSummary) {
+          bills.push(response.feed[r]);
+        } else if (response.feed[r] instanceof Issue) {
+          issues.push(response.feed[r]);
+        }
+      }
+      $scope.bills = bills;
+      $scope.issues = issues;
     }
   });
 };
@@ -43,9 +58,8 @@ FeedController.prototype.getTrends = function() {
   });
 };
 
-FeedController.prototype.getBills = function(username, callback) {
-  this.billService.getBills(username, callback);
+FeedController.prototype.getFeed = function(callback) {
+  this.feedService.getFeed(callback);
 };
-
 
 module.exports = FeedController;
