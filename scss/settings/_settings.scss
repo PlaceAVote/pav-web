@@ -35,10 +35,7 @@
       margin-top: 20px;
       margin-bottom: 20px;
     }
-    .profile-picture {
-      height: 50px;
-      width: 50px;
-    }
+
     .account-section {
       margin-bottom: 20px;
       .account-section-content {
@@ -211,4 +208,38 @@
   }
 }
 
+
+.profile-picture-section {
+  border: 1px solid $grey !important;
+  border-radius: 3px;
+  overflow: hidden;
+  min-width: 200px;
+  min-height: 200px;
+  max-width: 200px;
+  max-height: 200px;
+  position: relative;
+  .edit-btn {
+    display: none;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+  }
+  &:hover .edit-btn {
+    display: inline-block;
+  }
+}
+
+.card.profile-picture-edit {
+  min-width: 350px !important;
+  // width: initial !important;
+}
+
+.upload-btn {
+  width: 50%;
+}
+
+.profile-picture {
+    height: 100%;
+    width: 100%;
+}
 

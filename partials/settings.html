@@ -1,3 +1,20 @@
+<div class="modal" ng-show="settings.showModal">
+<div class="card profile-picture-edit">
+<div class="row">
+<h1>CHANGE PROFILE PICTURE</h1><i class="icon-close layout-right" ng-click="settings.showModal = false"></i>
+</div>
+<hr />
+  <div class="uploaded-image-container medium-margin-top">
+  <image-crop image="settings.image" crop="settings.crop"></image-crop>
+  </div>
+  <div class="row medium-margin-bottom small-margin-top">
+  <p>Upload a photo here:</p>
+  <label for="uploadFile" class="btn-blue upload-btn text-center">CHOOSE FILE</label>
+  <input style="position: absolute; left: -99999px;" type="file" accept="image/*" id="uploadFile" fileread="settings.image">
+  </div>
+  <a class="btn-green text-center l-12" ng-click="settings.saveProfileImage();">SAVE CHANGES</a>
+</div>
+</div>
 <div class="app">
 	<div class="app-body">
     <section class="settings-wrapper">
@@ -19,8 +36,9 @@
             <hr />
           </div>
           <div class="account-section-content">
-            <div class="profile-picutre-section">
+            <div class="profile-picture-section">
               <!-- insert a link on image to refresh profile page -->
+              <span class="edit-btn" ng-click="settings.showModal = true">Edit</span>
               <img ng-src="{{settings.settingsItem.img_url}}" class="profile-picture" alt="Profile Picture"/>
               <!-- end link -->
             </div>

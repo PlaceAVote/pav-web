@@ -22,7 +22,6 @@ SettingsController = function($scope, $location, $timeout, userService, authServ
   };
   this.showSettings = true;
 
-
   var that = this;
   this.getUserSettings(function(err, result) {
     if (!err) {
@@ -189,6 +188,10 @@ SettingsController.prototype.maxDate = function() {
 SettingsController.prototype.scrollTo = function(hash) {
   this.location.hash(hash);
   this.anchorScroll();
+};
+
+SettingsController.prototype.saveProfileImage = function() {
+  this.crop = true;
 };
 
 module.exports = SettingsController;
