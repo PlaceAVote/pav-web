@@ -5,23 +5,6 @@ var config = require('../config/endpoints.js');
 var TrendingBill = require('../models/trending_bill.js');
 
 function BillService($resource, authService, userService) {
-  var getBills = function(username, callback) {
-    var onLoad = function(result) {
-      var bills = [];
-      for (var r in result.results) {
-        bills.push(new BillSummary(result.results[r]));
-      }
-      callback(undefined, bills);
-    };
-    var onError = function(err) {
-      callback(err);
-    };
-    var url = config.bills.feed;
-    config.methods.get.headers.Authorization = authService.getAccessToken();
-    var resource = new $resource(url, undefined, {getBills: config.methods.get});
-    resource.getBills(undefined, onLoad, onError);
-  };
-
   var getBillVotes = function(id, callback) {
     if (!id) {
       return callback({message: 'Error: No Id Provided'});
@@ -154,7 +137,6 @@ function BillService($resource, authService, userService) {
 
   return {
     getBillVotes: getBillVotes,
-    getBills: getBills,
     getBill: getBill,
     getTopComments: getTopComments,
     getComments: getComments,
