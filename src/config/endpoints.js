@@ -127,7 +127,9 @@ module.exports = {
     getById: {
       endpoint: urls.CONGRESS + '/bills/',
     },
-    feed: urls.USER + '/user/feed/',
+  },
+  feed: {
+    endpoint: urls.USER + '/user/feed/',
   },
   notifications: {
     socket: urls.NOTIFICATION + '/user/notifications/ws',
