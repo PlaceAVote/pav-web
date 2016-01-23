@@ -140,6 +140,7 @@ module.exports = {
   users: {
     endpoint: urls.USER + '/user',
     authorize: urls.USER + '/user/token/validate?token=',
+    questions: urls.USER + '/user/questions',
     profile: {
       fromId: function(id) {
         return urls.USER + '/user/' + id + '/profile';
