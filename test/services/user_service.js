@@ -6,6 +6,7 @@ var AuthService = require("../../src/services/auth_service.js");
 var mockLocal = require('../mocks/local_storage.js');
 var authOptions = { window: {localStorage: new mockLocal() }};
 var User = require('../../src/models/user.js');
+var SettingsItem = require('../../src/models/settings_item.js');
 
 describe("User Service", function() {
   describe("Create User", function(){
@@ -400,6 +401,197 @@ describe("User Service", function() {
         expect(err).to.eql(undefined);
         expect(result.loadedFromServer).to.eql(true);
         expect(serverCalls).to.eql(0);
+        done();
+      });
+    });
+  });
+  describe('Get User Settings', function() {
+    var authService = {
+      getAccessToken: function() {
+        return 'PAV_AUTH_TOKEN CHOUNDFLKAND:ND'
+      }
+    };
+    it('returns error if user has no access token', function(done) {
+      var auth = {
+        getAccessToken: function() {
+          return undefined;
+        }
+      };
+      var subject = new UserService(undefined, undefined, auth);
+      subject.getUserSettings(function(err, result) {
+        expect(err.status).to.eql(401);
+        expect(err.message).to.eql('No Auth Token');
+        expect(result).to.eql(undefined);
+        done();
+      });
+    });
+    it('calls get resource with correct params', function(done) {
+      function mockResource(url, params, method, options) {
+        this.getSettings = function(){};
+        expect(url).to.contain('/user/me/settings');
+        expect(params).to.eql(undefined);
+        expect(method.getSettings.headers['Authorization']).to.eql('PAV_AUTH_TOKEN CHOUNDFLKAND:ND');
+        expect(method.getSettings.method).to.eql('GET');
+        done();
+      };
+      var subject = new UserService(mockResource, undefined, authService);
+      subject.getUserSettings(function(err, result) {
+      });
+    });
+    it('returns an error from server', function(done) {
+      function mockResource() {
+      }
+      mockResource.prototype.getSettings = function(body, onLoad, onError){
+          return onError({status: 401});
+      }
+      var subject = new UserService(mockResource, undefined, authService);
+      subject.getUserSettings(function(err, result) {
+        expect(err).to.eql({status:401});
+        done();
+      });
+    });
+    it('returns user from server', function(done) {
+      var settingsItem = {
+        email: 'stefan@test.com',
+        first_name: 'stefan',
+        last_name: 'huber',
+        dob: '12/12/1985',
+        gender: 'male',
+        pulbic: true,
+        social_login: false,
+        city: 'Berlin'
+      };
+      function mockResource() {
+      }
+      mockResource.prototype.getSettings = function(body, onLoad, onError){
+          return onLoad(settingsItem);
+      }
+      var subject = new UserService(mockResource, undefined, authService);
+      subject.getUserSettings(function(err, result) {
+        expect(err).to.eql(undefined);
+        expect(result.email).to.eql(settingsItem.email);
+        done();
+      });
+    });
+  });
+  describe('Save User Settings', function() {
+    var authService = {
+      getAccessToken: function() {
+        return 'PAV_AUTH_TOKEN CHOUNDFLKAND:ND'
+      }
+    };
+    var settingsItem = new SettingsItem();
+    settingsItem.email = "stefan@test.com";
+    settingsItem.first_name = "stefan";
+    settingsItem.last_name = "huber";
+    settingsItem.dob = new Date('12/12/1985');
+    settingsItem.gender = "male";
+    settingsItem.public = true;
+    settingsItem.social_login = false;
+    settingsItem.city = "Berlin";
+    settingsItem.img_url = "stefan.png"
+    settingsItem.user_id = "X77";
+    
+    it('returns error if user has no access token', function(done) {
+      var auth = {
+        getAccessToken: function() {
+          return undefined;
+        }
+      };
+      var subject = new UserService(undefined, undefined, auth);
+      subject.saveUserSettings(true, function(err, result) {
+        expect(err.status).to.eql(401);
+        expect(err.message).to.eql('No Auth Token');
+        expect(result).to.eql(undefined);
+        done();
+      });
+    });
+    it('returns error if params is missing', function(done) {
+      var subject = new UserService(undefined, undefined, authService);
+      subject.saveUserSettings(undefined, function(err, result) {
+        expect(err.message).to.eql('Must Supply Settings param');
+        expect(result).to.eql(undefined);
+        done();
+      });
+    });
+    it("returns user to callback when there's no error", function(done){
+      function mockResource(url, params, methods, options) {
+        this.save = function(body, succeed, error){
+          return succeed(settingsItem);
+        };
+      };
+      var subject = new UserService(mockResource, undefined, authService);
+      subject.saveUserSettings(settingsItem.toBody(), function(err, result){
+        expect(err).to.be.undefined;
+        expect(result.first_name).to.eql('stefan');
+        expect(result.last_name).to.eql('huber');
+        expect(result.email).to.eql('stefan@test.com');
+        expect(result.dob).to.eql(new Date("12/12/1985"));
+        expect(result.city).to.eql('Berlin');
+        done();
+      });
+    });
+  });
+  describe('Password Change', function() {
+    var authService = {
+      getAccessToken: function() {
+        return 'PAV_AUTH_TOKEN CHOUNDFLKAND:ND'
+      }
+    };
+    it('returns error if user has no access token', function(done) {
+      var auth = {
+        getAccessToken: function() {
+          return undefined;
+        }
+      };
+      var subject = new UserService(undefined, undefined, auth);
+      subject.changePassword(true, function(err, result) {
+        expect(err.status).to.eql(401);
+        expect(err.message).to.eql('No Auth Token');
+        expect(result).to.eql(undefined);
+        done();
+      });
+    });
+    it('returns error if params is missing', function(done) {
+      var subject = new UserService(undefined, undefined, authService);
+      subject.changePassword(undefined, function(err, result) {
+        expect(err.message).to.eql('Must Supply password params');
+        expect(result).to.eql(undefined);
+        done();
+      });
+    });
+    it('calls with correct params', function(done) {
+      function mockResource(url, params, method, options) {
+        this.save = function(){};
+        expect(url).to.contain('/password/change');
+        expect(params).to.eql(undefined);
+        expect(method.save.headers['Authorization']).to.eql('PAV_AUTH_TOKEN CHOUNDFLKAND:ND');
+        expect(method.save.method).to.eql('POST');
+        done();
+      };
+      var subject = new UserService(mockResource, undefined, authService);
+      var body = {
+        current_password: "X12345",
+        new_password: "Y12345"
+      }
+      subject.changePassword(body, function(err, result) {
+      });
+    });
+    it("returns resource to callback when there's no error", function(done){
+      var body = {
+        current_password: "X12345",
+        new_password: "Y12345"
+      }
+      function mockResource(url, params, methods, options) {
+        this.save = function(body, succeed, error){
+          return succeed(body);
+        };
+      };
+      var subject = new UserService(mockResource, undefined, authService);
+      subject.saveUserSettings(body, function(err, result){
+        expect(err).to.be.undefined;
+        expect(result.current_password).to.eql('X12345');
+        expect(result.new_password).to.eql('Y12345');
         done();
       });
     });

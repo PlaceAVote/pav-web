@@ -164,6 +164,11 @@ HeaderCtrl.prototype.toProfile = function() {
 };
 
 
+HeaderCtrl.prototype.toSettings = function() {
+  this.hideDropDown();
+  this.location.path('/settings');
+};
+
 HeaderCtrl.prototype.search = function(q) {
   var that = this;
   if (this.cachedSearch === q) {

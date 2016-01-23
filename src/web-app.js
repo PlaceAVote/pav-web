@@ -14,6 +14,7 @@ var FeedController = require('./controllers/feed_controller.js');
 var BillController = require('./controllers/bill_controller.js');
 var HeaderController = require('./controllers/header_controller.js');
 var ProfileController = require('./controllers/profile_controller.js');
+var SettingsController = require('./controllers/settings_controller.js');
 var PasswordController = require('./controllers/password_controller.js');
 
 // Services
@@ -48,6 +49,7 @@ var notificationsDirective = require('./directives/notifications.js');
 var commentReplyNotificationDirective = require('./directives/comment_reply_notification.js');
 var trendsDirective = require('./directives/trends.js');
 var autoResizeDirective = require('./directives/autoresize.js');
+var termsAndConditionsDirective = require('./directives/terms_and_conditions.js');
 
 // Thirdparty integrations
 var Facebook = require('./integrations/facebook.js');
@@ -56,61 +58,64 @@ var app = angular.module('pavApp', [require('angular-route'), require('angular-a
 
 
 app.config(['$routeProvider', function($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'partials/website_partials/home.html',
-      })
-      .when('/faq', {
-        templateUrl: 'partials/website_partials/faq.html',
-      })
-      .when('/team', {
-        templateUrl: 'partials/website_partials/team.html',
-      })
-      .when('/press', {
-        templateUrl: 'partials/website_partials/press.html',
-      })
-      .when('/contact', {
-        templateUrl: 'partials/website_partials/contact.html',
-      })
-      .when('/terms-of-service-and-privacy-policy', {
-        templateUrl: 'partials/website_partials/tos-and-privacy-policy.html',
-      })
-      .when('/login', {
-        templateUrl: 'partials/login.html',
-        controller: 'LoginCtrl as login',
-      })
-      .when('/signup', {
-        templateUrl: 'partials/login.html',
-        controller: 'LoginCtrl as login',
-      })
-      .when('/onboarding', {
-        templateUrl: 'partials/onboarding.html',
-      })
-      .when('/feed', {
-        templateUrl: 'partials/feed.html',
-        controller: 'FeedCtrl as feed',
-      })
-      .when('/bill/:id', {
-        templateUrl: 'partials/bill.html',
-        controller: 'BillCtrl as bill',
-      })
-      .when('/bill/:id/comment/:commentid', {
-        templateUrl: 'partials/bill.html',
-        controller: 'BillCtrl as bill',
-      })
-      .when('/profile/:id', {
-        templateUrl: 'partials/profile.html',
-        controller: 'ProfileCtrl as profile',
-      })
-      .when('/password/reset/:token', {
-        templateUrl: 'partials/password_reset.html',
-        controller: 'PasswordResetCtrl as password',
-      })
-      .otherwise({
-        redirectTo: '/',
-      });
-  },
-]);
+  $routeProvider
+  .when('/', {
+    templateUrl: 'partials/website_partials/home.html',
+  })
+  .when('/faq', {
+    templateUrl: 'partials/website_partials/faq.html',
+  })
+  .when('/team', {
+    templateUrl: 'partials/website_partials/team.html',
+  })
+  .when('/press', {
+    templateUrl: 'partials/website_partials/press.html',
+  })
+  .when('/contact', {
+    templateUrl: 'partials/website_partials/contact.html',
+  })
+  .when('/terms-of-service-and-privacy-policy', {
+    templateUrl: 'partials/website_partials/tos-and-privacy-policy.html',
+  })
+	.when('/login', {
+  templateUrl: 'partials/login.html',
+  controller: 'LoginCtrl as login',
+	})
+  .when('/signup', {
+    templateUrl: 'partials/login.html',
+    controller: 'LoginCtrl as login',
+  })
+	.when('/onboarding', {
+  templateUrl: 'partials/onboarding.html',
+	})
+  .when('/feed', {
+    templateUrl: 'partials/feed.html',
+    controller: 'FeedCtrl as feed',
+  })
+  .when('/bill/:id', {
+    templateUrl: 'partials/bill.html',
+    controller: 'BillCtrl as bill',
+  })
+  .when('/bill/:id/comment/:commentid', {
+    templateUrl: 'partials/bill.html',
+    controller: 'BillCtrl as bill',
+  })
+  .when('/profile/:id', {
+    templateUrl: 'partials/profile.html',
+    controller: 'ProfileCtrl as profile',
+  })
+  .when('/settings', {
+    templateUrl: 'partials/settings.html',
+    controller: 'SettingsCtrl as settings',
+  })
+  .when('/password/reset/:token', {
+    templateUrl: 'partials/password_reset.html',
+    controller: 'PasswordResetCtrl as password',
+  })
+  .otherwise({
+    redirectTo: '/',
+  });
+},]);
 
 
 // Services
@@ -133,6 +138,7 @@ app.controller('FeedCtrl', ['$scope', '$location', 'userService', 'billService',
 app.controller('BillCtrl', ['$scope', '$routeParams', 'billService', 'legislationService', 'voteService', 'commentService', '$location', 'authService', BillController]);
 app.controller('HeaderCtrl', ['$rootScope', '$scope', '$location', '$timeout', 'authService', 'userService', 'notificationService', 'searchService', '$window', HeaderController]);
 app.controller('ProfileCtrl', ['$scope', '$location', '$routeParams', 'authService', 'userService', ProfileController]);
+app.controller('SettingsCtrl', ['$scope', '$location', '$timeout', 'userService', 'authService', '$rootScope','$anchorScroll', SettingsController]);
 app.controller('PasswordResetCtrl', ['$scope','$location','$routeParams','passwordService','authService', PasswordController]);
 
 // Web controllers
@@ -159,5 +165,6 @@ app.directive('commentreply', ['$location', commentReplyNotificationDirective]);
 app.directive('trends', ['$location',trendsDirective]);
 app.directive('autoResize', [autoResizeDirective]);
 app.directive('searchBar', ['$sce' ,'$location', search]);
+app.directive('termsAndConditions', [termsAndConditionsDirective]);
 
 

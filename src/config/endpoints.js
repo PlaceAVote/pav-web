@@ -160,6 +160,7 @@ module.exports = {
     loginEndpoint: urls.USER + '/user/authenticate',
     facebookLoginUrl: urls.USER + '/user/facebook/authenticate',
     facebookCreateUrl: urls.USER + '/user/facebook',
+    settings: urls.USER + '/user/me/settings',
   },
   search: {
     endpoint: urls.SEARCH + '/search',
@@ -169,5 +170,6 @@ module.exports = {
       return urls.USER + '/password/reset?email=' + email;
     },
     newPassword: urls.USER + '/password/reset/confirm/',
+    change: urls.USER + '/password/change',
   },
 };

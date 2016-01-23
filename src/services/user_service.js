@@ -151,6 +151,76 @@ function UserService($resource, facebookService, authService) {
     profileResource.getProfile(undefined, onLoad, onError);
   };
 
+
+  var getUserSettings = function(callback) {
+    var token = authService.getAccessToken();
+    if (!token) {
+      callback({status: 401, message: 'No Auth Token'});
+      return;
+    }
+
+    var url = config.users.settings;
+    config.methods.get.headers.Authorization = token;
+    var settingsResource = new $resource(url, undefined, {getSettings: config.methods.get});
+    var onError = function(err) {
+      return callback(err);
+    };
+    var onLoad = function(result) {
+      return callback(undefined, result);
+    };
+    settingsResource.getSettings(undefined, onLoad, onError);
+  };
+
+  var saveUserSettings = function(body, callback) {
+    var token = authService.getAccessToken();
+    if (!token) {
+      callback({status: 401, message: 'No Auth Token'});
+      return;
+    }
+
+    if (!body) {
+      callback({message: 'Must Supply Settings param'});
+      return;
+    }
+
+    var onLoad = function(result) {
+      callback(undefined, result);
+    };
+    var onError = function(err) {
+      callback(err);
+    };
+
+    var url = config.users.settings;
+    config.methods.post.headers.Authorization = token;
+    var settingsResource = new $resource(url, undefined, {save: config.methods.post});
+    settingsResource.save(body, onLoad, onError);
+  };
+
+  var changePassword = function(body, callback) {
+    var token = authService.getAccessToken();
+    if (!token) {
+      callback({status: 401, message: 'No Auth Token'});
+      return;
+    }
+
+    if (!body) {
+      callback({message: 'Must Supply password params'});
+      return;
+    }
+
+    var onLoad = function(result) {
+      callback(undefined, result);
+    };
+    var onError = function(err) {
+      callback(err);
+    };
+
+    var url = config.password.change;
+    config.methods.post.headers.Authorization = token;
+    var passwordResource = new $resource(url, undefined, {save: config.methods.post});
+    passwordResource.save(body, onLoad, onError);
+  };
+
   var getUserFromId = function(id, callback) {
     if (!id) {
       return callback({message: 'Must Supply User Id'});
@@ -308,6 +378,9 @@ function UserService($resource, facebookService, authService) {
     loginWithFacebook: loginWithFacebook,
     makeProfilePublic: makeProfilePublic,
     getUserProfile: getUserProfile,
+    getUserSettings: getUserSettings,
+    saveUserSettings: saveUserSettings,
+    changePassword: changePassword,
     getUserFromId: getUserFromId,
     getUserTimeline: getUserTimeline,
     getFollowers: getFollowers,
