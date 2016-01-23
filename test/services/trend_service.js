@@ -14,6 +14,7 @@ describe("Trend Service", function(){
             "bill_id": "hr2-114",
             "total_comments": "34",
             "short_title": "Medicare Access and CHIP Reauthorization Act of 2015",
+            "official_title": "Medicare Access and CHIP Reauthorization Act of 2015 but only longer.",
             "votes": {
               "yes": 2,
               "no": 50
