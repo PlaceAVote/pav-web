@@ -60,14 +60,14 @@ describe('Bill Model', function(){
       var subject = new Bill(billData);
       expect(subject.billData).to.eql(billData);
       var result = subject.getTitle();
-      expect(result).to.eql('HR. 114: Medicare Access and CHIP Reauthorization Act of 2015');
+      expect(result).to.eql('HR 2: Medicare Access and CHIP Reauthorization Act of 2015');
     });
     it('uses official title when short isnt available', function(){
       billData.short_title = undefined;
       var subject = new Bill(billData);
       expect(subject.billData).to.eql(billData);
       var result = subject.getTitle();
-      expect(result).to.eql("HR. 114: To amend title XVIII of the Social Security Act to repeal the Medicare sustainable growth rate and strengthen Medicare access by improving physician payments and making other improvements, to reauthorize the Children's Health Insurance Program, and for other purposes.");
+      expect(result).to.eql("HR 2: To amend title XVIII of the Social Security Act to repeal the Medicare sustainable growth rate and strengthen Medicare access by improving physician payments and making other improvements, to reauthorize the Children's Health Insurance Program, and for other purposes.");
     });
     it('it has an empty string (not undefined) if no title is available', function(){
       billData.short_title = undefined;
@@ -75,7 +75,7 @@ describe('Bill Model', function(){
       var subject = new Bill(billData);
       expect(subject.billData).to.eql(billData);
       var result = subject.getTitle();
-      expect(result).to.eql('HR. 114: ');
+      expect(result).to.eql('HR 2: ');
     });
   });
   describe('getSummary', function(){
