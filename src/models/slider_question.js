@@ -5,9 +5,10 @@ var RIGHT = 'right';
 var QuestionBase = require('./question_base.js');
 
 function Slider(options) {
+  options = options || {};
   QuestionBase.call(this, options);
   this.answers = splitAnswers(options.answers);
-  //Instantiates at position 1 (Not Sure).
+  // Instantiates at position 1 (Not Sure).
   this.position = 1;
 }
 
@@ -43,20 +44,23 @@ function splitAnswers(answers) {
   var answerResults = [];
   var keys = Object.keys(answers);
   for (var i = 0; i < keys.length; i++) {
-   var key = keys[i];
-   switch (key) {
-    case LEFT: {
-      answerResults[0] = answers[key];
-    }
+    var key = keys[i];
+    switch (key) {
+      case LEFT: {
+        answerResults[0] = answers[key];
+        break;
+      }
 
-    case MIDDLE: {
-      answerResults[1] = answers[key];
-    }
+      case MIDDLE: {
+        answerResults[1] = answers[key];
+        break;
+      }
 
-    case RIGHT: {
-      answerResults[2] = answers[key];
+      case RIGHT: {
+        answerResults[2] = answers[key];
+        break;
+      }
     }
-   }
   }
   return answerResults;
 }

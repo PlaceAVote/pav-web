@@ -1,4 +1,5 @@
 function QuestionBase(options) {
+  options = options || {};
   this.id = options.question_id;
   this.type = options.question_type;
   this.answers = options.answers;
