@@ -123,7 +123,7 @@ app.config(['$routeProvider', function($routeProvider) {
 // Services
 app.factory('facebookService', [Facebook]);
 app.factory('authService', ['$resource', AuthService]);
-app.factory('userService', ['$resource', 'facebookService', 'authService', UserService]);
+app.factory('userService', ['$resource', 'facebookService', 'authService','$http', UserService]);
 app.factory('billService', ['$resource', 'authService', 'userService', BillService]);
 app.factory('commentService', ['$resource', 'userService', 'authService', CommentService]);
 app.factory('legislationService', ['$resource', 'authService', LegislatorService]);

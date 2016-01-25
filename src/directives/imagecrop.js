@@ -5,6 +5,7 @@ module.exports = function() {
         scope: {
           image: '=',
           crop: '=',
+          saveImage: '&',
         },
         templateUrl: 'partials/directives/imagecrop.html',
         link: function(scope, el, attr) {
@@ -52,11 +53,31 @@ module.exports = function() {
               var img = new Image(200,200);
               img.src = img_c.crop('image/jpeg', 1);
               console.log(img.src);
-              scope.crop = false;              
+              // console.log(scope.saveImage);
+              convertDataURIToBinary(img.src, function(i) {
+                scope.saveImage({img: i});
+              });
+              
+              scope.crop = false;          
             }
           });
 
+          var BASE64_MARKER = ';base64,';
+          function convertDataURIToBinary(dataURI, callback) {
+            var base64Index = dataURI.indexOf(BASE64_MARKER) + BASE64_MARKER.length;
+            var base64 = dataURI.substring(base64Index);
+            var raw = window.atob(base64);
+            var rawLength = raw.length;
+            var array = new Uint8Array(new ArrayBuffer(rawLength));
+            for(i = 0; i < rawLength; i++) {
+              array[i] = raw.charCodeAt(i);
+            }
+            return callback(array);
+          }
 
         },
     };
 };
+
+
+

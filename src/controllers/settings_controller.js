@@ -21,7 +21,7 @@ SettingsController = function($scope, $location, $timeout, userService, authServ
     public: false,
   };
   this.showSettings = true;
-
+  this.croppedImage = false;
   var that = this;
   this.getUserSettings(function(err, result) {
     if (!err) {
@@ -192,6 +192,14 @@ SettingsController.prototype.scrollTo = function(hash) {
 
 SettingsController.prototype.saveProfileImage = function() {
   this.crop = true;
+};
+
+SettingsController.prototype.saveProfilePicture = function(img) {
+  console.log('controller save image', img);
+   this.userService.profilePicture(img.img, function(err, res) {
+    console.log('settings controller');
+    //update view
+  });
 };
 
 module.exports = SettingsController;
