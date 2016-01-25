@@ -45,15 +45,18 @@ module.exports = function() {
 
           scope.$watch('crop', function(n, o) {
             if(n) {
+              if (!img_c) {
+                scope.crop = false;
+                return
+              }
               var img = new Image(200,200);
               img.src = img_c.crop('image/jpeg', 1);
-              // img.width = 200;
-              // img.height = 200;
-              // console.log(dimensions.w, dimensions.h);
               console.log(img.src);
               scope.crop = false;              
             }
           });
+
+
         },
     };
 };

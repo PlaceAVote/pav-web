@@ -3,13 +3,13 @@ module.exports = (function() {
   //  Used to setup the options for the ImageCropper
   var pos_opts = {
     'update': ['up',false],
-    'create_cb' : ['cr',false],
-    'destroy_cb' : ['de', false],
-    'min_crop_width' : ['mcw', 32],
-    'min_crop_height' : ['mch', 32],
-    'max_width' : ['mw',500],
-    'max_height' : ['mh',500],
-    'fixed_size' : ['fs',false]
+    'create_cb': ['cr',false],
+    'destroy_cb': ['de', false],
+    'min_crop_width': ['mcw', 32],
+    'min_crop_height': ['mch', 32],
+    'max_width': ['mw',500],
+    'max_height': ['mh',500],
+    'fixed_size': ['fs',false],
   };
 
   //  Callback handlers used for every handle and their cbs
@@ -202,12 +202,12 @@ module.exports = (function() {
     if(!quality || quality < 0 || quality > 1) {quality = 1;}
 
     var canvas = document.createElement('canvas');
-    canvas.setAttribute('width', dim.w);
-    canvas.setAttribute('height', dim.h);
+    canvas.setAttribute('width', 200);
+    canvas.setAttribute('height', 200);
     var ctx = canvas.getContext('2d');
     ctx.drawImage(img,
       ratio.w * dim.x, ratio.h * dim.y, ratio.w * dim.w, ratio.h * dim.h,
-      0, 0, dim.w, dim.h
+      0, 0, 200, 200
     );
     return canvas.toDataURL(mime_type, quality);
   };
