@@ -21,7 +21,7 @@ SettingsController = function($scope, $location, $timeout, userService, authServ
     public: false,
   };
   this.showSettings = true;
-  this.croppedImage = false;
+  this.profilePicture = {};
   var that = this;
   this.getUserSettings(function(err, result) {
     if (!err) {
@@ -190,15 +190,26 @@ SettingsController.prototype.scrollTo = function(hash) {
   this.anchorScroll();
 };
 
-SettingsController.prototype.saveProfileImage = function() {
-  this.crop = true;
+SettingsController.prototype.hasCropped = function() {
+  this.profilePicture.cropped = true;
 };
 
 SettingsController.prototype.saveProfilePicture = function(img) {
-  console.log('controller save image', img);
-   this.userService.profilePicture(img.img, function(err, res) {
-    console.log('settings controller');
-    //update view
+  var that = this;
+  this.profilePicture.saving = true;
+  this.userService.profilePicture(img.img, function(err, res) {
+    if (err) {
+      that.profilePicture.error = true;
+      that.profilePicture.saving = false;
+    }
+
+    if (res) {
+      that.profilePicture.saving = false;
+      that.profilePicture.success = true;
+      that.settingsItem.img_url = res.img_url;
+      that.rs.user.img_url = res.img_url;
+      that.showModal = false;
+    }
   });
 };
 

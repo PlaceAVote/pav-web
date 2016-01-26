@@ -84,7 +84,7 @@ module.exports = {
         data: data,
         isArray: false,
         headers: {
-          'Content-Type': 'multipart/form-data',
+          'Content-Type': 'application/json',
           Accept: 'application/json',
           Authorization: token,
         },

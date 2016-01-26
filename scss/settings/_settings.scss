@@ -226,12 +226,14 @@
   }
   &:hover .edit-btn {
     display: inline-block;
+    @include media(600px) {
+      display: none;
+    }
   }
 }
 
 .card.profile-picture-edit {
   min-width: 350px !important;
-  // width: initial !important;
 }
 
 .upload-btn {

@@ -3,7 +3,7 @@ var config = require('../config/endpoints.js');
 var strftime = require('strftime');
 var TimelineResponseFactory = require('../factories/timeline_response_factory.js');
 
-function UserService($resource, facebookService, authService, $http) {
+function UserService($resource, facebookService, authService) {
   this.createdFB = false;
   var loginWithFacebook = function(callback) {
     var that = this;
@@ -378,74 +378,18 @@ function UserService($resource, facebookService, authService, $http) {
     }
     var url = config.users.profilePicture;
 
-    //THIS NEEDS SORTING
-    var form = new FormData();
-    form.append("file", img);
+    var body = {
+      file: img,
+    };
 
-    var xhr = new XMLHttpRequest();
-    xhr.withCredentials = false;
-    xhr.Authorization = token;
-    xhr['Content-Type'] = 'multipart/form-data';
-
-    xhr.addEventListener("readystatechange", function () {
-      if (this.readyState === 4) {
-        onLoad(this.responseText);
-      }
-    });
-
-    xhr.open("POST", url);
-
-    xhr.send(form);
-
-
-
-
-
-
-
-
-
-
-
-
-    // var body = {
-    //   file: img,
-    // };
-// function uploadFiles(url, files) {
-  // var formData = new FormData();
-  // formData.append('file', img);
-
-  //  $http.post(url, formData, {
-  //     transformRequest: angular.identity,
-  //     headers: {'Content-Type': undefined}
-  // })
-  // .success(function(res){
-  //   console.log(res);
-  // })
-  // .error(function(err){
-  //   console.log(err);
-  // });
-
-// //   for (var i = 0, file; file = files[i]; ++i) {
-// //     formData.append(file.name, file);
-// //   }
-    
-//     // var body = new FormData();
-//     // body.append('file', img);
-//     // console.log(body);
-//     config.methods.postImg.headers.Authorization = token;
-//     config.methods.postImg.transformRequest = angular.identity;
-
-//     var resource = new $resource(url, formData, {execute: config.methods.postImg});
-        var onError = function(err) {
-          console.log('onerror', err);
-          // return callback({message: 'Server Error', error: err});
-        };
-        var onLoad = function(result) {
-          console.log('onload', result)
-          // return callback(undefined, true);
-        };
-//     resource.execute(formData,onLoad, onError);
+    var resource = new $resource(url, undefined, {execute: config.methods.postData(body,token)});
+    var onError = function(err) {
+      return callback(err);
+    };
+    var onLoad = function(result) {
+      return callback(undefined, result);
+    };
+    resource.execute(body,onLoad, onError);
   };
 
   return {
