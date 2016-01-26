@@ -5,6 +5,7 @@ var FaqController = require('./controllers/website/faq_controller.js');
 var TeamController = require('./controllers/website/team_controller.js');
 var PressController = require('./controllers/website/press_controller.js');
 var MenuController = require('./controllers/website/menu_controller.js');
+var ContactController = require('./controllers/website/contact_controller.js');
 
 // App Controllers
 var RegisterController = require('./controllers/register_controller.js');
@@ -148,6 +149,7 @@ app.controller('FaqCtrl', ['$scope', '$location', FaqController]);
 app.controller('TeamCtrl', ['$scope', '$location', TeamController]);
 app.controller('PressCtrl', ['$scope', '$location', PressController]);
 app.controller('MenuCtrl', ['$scope', '$location', '$routeParams', MenuController]);
+app.controller('ContactCtrl', ['$scope', '$window', ContactController]);
 
 // Directives
 app.directive('websiteNav', [websiteNav]);

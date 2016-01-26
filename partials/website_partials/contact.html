@@ -1,5 +1,5 @@
 <website-nav></website-nav>
-<div ng-controller="FaqCtrl as faq" id="pav-wrapper" class="wrapper s-12 m-12 l-12">
+<div ng-controller="ContactCtrl as contact" id="pav-wrapper" class="wrapper s-12 m-12 l-12">
     <div class="team contact">
         <section class="team-wrapper">
             <h1>Contact Us</h1>
@@ -13,10 +13,10 @@
                     <a href="mailto:hello@placeavote.com">hello@placeavote.com</a>
                 </div>
                 <div class="l-8 s-12">
-                    <input type="text" name="FirstName" placeholder="Firstname Lastname">
-                    <input type="email" name="email" placeholder="example@example.com">
-                    <textarea rows="10" cols="0" placeholder="Put your message here"></textarea>
-                    <button>Send Message</button>
+                    <input type="text" name="FirstName" ng-model="contact.firstName" placeholder="Firstname Lastname">
+                    <input type="email" name="email" ng-model="contact.email" placeholder="example@example.com">
+                    <textarea rows="10" cols="0" ng-model="contact.mailBody" placeholder="Put your message here"></textarea>
+                    <button ng-click="contact.toMail();">Send Message</button>
                 </div>
             </div>
         </section>
