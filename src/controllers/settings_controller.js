@@ -21,8 +21,7 @@ SettingsController = function($scope, $location, $timeout, userService, authServ
     public: false,
   };
   this.showSettings = true;
-
-
+  this.profilePicture = {};
   var that = this;
   this.getUserSettings(function(err, result) {
     if (!err) {
@@ -189,6 +188,29 @@ SettingsController.prototype.maxDate = function() {
 SettingsController.prototype.scrollTo = function(hash) {
   this.location.hash(hash);
   this.anchorScroll();
+};
+
+SettingsController.prototype.hasCropped = function() {
+  this.profilePicture.cropped = true;
+};
+
+SettingsController.prototype.saveProfilePicture = function(img) {
+  var that = this;
+  this.profilePicture.saving = true;
+  this.userService.profilePicture(img.img, function(err, res) {
+    if (err) {
+      that.profilePicture.error = true;
+      that.profilePicture.saving = false;
+    }
+
+    if (res) {
+      that.profilePicture.saving = false;
+      that.profilePicture.success = true;
+      that.settingsItem.img_url = res.img_url;
+      that.rs.user.img_url = res.img_url;
+      that.showModal = false;
+    }
+  });
 };
 
 module.exports = SettingsController;

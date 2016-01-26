@@ -6,7 +6,7 @@ function stringContains(sourceString, subString) {
 
 module.exports = function(error) {
 
-  var lineLength = ['web-app', 'login_controller', 'mailcheck', 'comment'];
+  var lineLength = ['web-app', 'login_controller', 'mailcheck', 'comment', 'imagecrop'];
   for (var i = 0; i < lineLength.length; i++) {
     if (stringContains(error.filename, lineLength[i]) &&
         stringContains(error.rule,'maximumLineLength')) {
