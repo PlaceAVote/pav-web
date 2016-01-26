@@ -1,5 +1,5 @@
 function FollowingUserEvent(options) {
-  var options = options || {}
+  options = options || {};
   this.type = options.type;
   this.user_id = options.user_id;
   this.following_id = options.following_id;

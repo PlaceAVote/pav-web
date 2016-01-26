@@ -16,7 +16,7 @@
     .user-img-border {
       max-height: 55px;
       @include media(480px) {
-        width:46px;
+        min-width:46px;
       }
     }
     .top-comment-body {
@@ -82,7 +82,9 @@
   textarea {
     resize: none;
     width: 100%;
-    height: 40px;
+    min-height: 40px;
+    height: auto;
+    overflow-y: hidden;
     outline: none;
     border: 1px solid $greylight;
     border-radius: 3px;
@@ -113,3 +115,103 @@
   }
 }
 
+.card.comment-create {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  margin-bottom: 20px;
+  background-color: #f4f2fe;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  form {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .gen-user-img {
+    height: 30px;
+    width: 30px;
+    margin: 5px 40px 0 20px;
+    @include media(560px){
+    margin: 5px 20px 0 0;
+    }
+
+    img {
+      width: 100%;
+    }
+  }
+
+  textarea {
+    min-height: 44px;
+    height: auto;
+    width: 100%;
+    outline: none;
+    border-radius: 3px;
+    border: 1px solid $grey;
+    color: $black;
+    @include light();
+    resize: none;
+    line-height: 22px;
+    @include font-size(14px);
+    padding: 12px 60px 12px 12px;
+    overflow-y:hidden;
+    transition: all 0.3s ease;
+
+    &:focus {
+      border-color: $blue;
+    }
+  }
+}
+
+.row-layout.comment {
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: row;
+  flex-shrink: 0;
+  flex-grow: 1;
+}
+
+.comment.ng-enter {
+  opacity: 0;
+}
+
+.comment.ng-enter.ng-enter-acitve {
+  opacity: 1;
+}
+
+
+.btn-blank.comment-post-btn {
+  position: absolute;
+  right: 30px;
+  bottom: 27px;
+  line-height: 1;
+  width: 50px;
+  border-radius: 3px;
+  height: 30px;
+  border: 1px solid $grey;
+  &:hover {
+    background-color: $green;
+    color: white;
+    border-color: darken($green, 10%);
+  }
+}
+
+#comment-selected {
+  animation: selected 5s ease;
+}
+
+@keyframes selected {
+  0% {
+    border-left: 5px solid $blue;
+    padding-left: 5px;
+  }
+  95% {
+    border-left: 5px solid $blue;
+    padding-left: 5px;
+  }
+  100% {
+    border-color: white;
+    padding-right: 0px;
+  }
+}

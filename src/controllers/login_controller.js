@@ -1,44 +1,42 @@
 var AuthorizeController = require('./autherize_controller.js');
 
-function LoginCtrl($scope, $location, userService, authService, $rootScope, $routeParams) {
+function LoginCtrl($scope, $location, userService, authService, $rootScope, $routeParams, passwordService) {
   AuthorizeController.authorize({success: '/feed', authorizer: authService, location: $location});
   $scope = $scope || {};
   this.rs = $rootScope || {};
   this.userService = userService;
+  this.passwordService = passwordService;
   $scope.login = this;
   this.location = $location;
   this.forgot = false;
   this.passwordSent = false;
   this.rs.loggedIn = false;
-
   this.user = {
     email: '',
     emailValid: true,
     password: '',
-    passwordValid: true
+    passwordValid: true,
   };
 
-   $scope.$on("$routeChangeSuccess", function() {
-     if(this.location.hash == '#/signup') {
-       $scope.login.signup = true;
-     }
-    });
+  $scope.$on('$routeChangeSuccess', function() {
+    if (this.location.hash == '#/signup') {
+      $scope.login.signup = true;
+    }
+  });
 }
 
-LoginCtrl.prototype.loginWithFacebook = function(){
+LoginCtrl.prototype.loginWithFacebook = function() {
   var that = this;
-  this.userService.loginWithFacebook(function(err, response){
-    if(err){
+  this.userService.loginWithFacebook(function(err, response) {
+    if (err) {
       if (err.status === 999) {
         return that.location.path('/');
       }
       return that.location.path('/onboarding');
     }
-    else {
-      that.rs.user = that.userService.getUser();
-      that.rs.loggedIn = true;
-      that.location.path('/feed');
-    }
+    that.rs.user = that.userService.getUser();
+    that.rs.loggedIn = true;
+    that.location.path('/feed');
   });
 };
 
@@ -47,11 +45,10 @@ LoginCtrl.prototype.validate = function(u, hash) {
   var password = u.password;
   this.user.emailValid = this.emailValidation(email);
   this.user.passwordValid = this.passwordValidation(password);
-  if(this.user.emailValid && this.user.passwordValid) {
+  if (this.user.emailValid && this.user.passwordValid) {
     this.userService.createUser(email, password);
     this.location.path(hash);
   }
-
 };
 
 LoginCtrl.prototype.login = function(u, hash) {
@@ -71,16 +68,16 @@ LoginCtrl.prototype.login = function(u, hash) {
 
   this.userService.login(validUser, function(err, response) {
     if (err) {
-       return that.forgot = true;
+      that.loginInvalid = true;
+      return;
     }
     that.userService.getUserProfile('me', function(err, result) {
       if (err) {
         return that.logout();
       }
-      console.log('logged in as ', result)
       that.rs.user = result;
       that.rs.loggedIn = true;
-      that.location.path("/feed");
+      that.location.path('/feed');
     });
   });
 };
@@ -97,9 +94,21 @@ LoginCtrl.prototype.emailValidation = function(email) {
 };
 
 LoginCtrl.prototype.passwordValidation = function(password) {
-  // var p = /^(?=.*\d)(?=.*[A-Z])(.{8,120})$/;
-  // return p.test(password);
   return true;
+};
+
+LoginCtrl.prototype.passwordReset = function(email) {
+  var that = this;
+  this.passwordService.passwordReset(email, function(err,res) {
+    if (err) {
+      that.resetFailed = true;
+      that.resetSuccess = false;
+    }
+    if (res) {
+      that.resetFailed = false;
+      that.resetSuccess = true;
+    }
+  });
 };
 
 module.exports = LoginCtrl;

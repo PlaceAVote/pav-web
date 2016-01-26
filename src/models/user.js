@@ -1,16 +1,17 @@
 function User(email, password) {
-	this.email = email;
-	this.password = password;
-	this.topics;
-	this.first_name;
-	this.last_name;
-	this.dob;
-	this.country_code;
-  this.img_url;
+  this.email = email;
+  this.password = password;
+  this.topics = undefined;
+  this.first_name = undefined;
+  this.last_name = undefined;
+  this.dob = undefined;
+  this.country_code = undefined;
+  this.img_url = undefined;
   this.private = false;
+  this.gender = undefined;
 }
 
-User.createFromJson = function(json){
+User.createFromJson = function(json) {
   json = json || {};
   var user = new User();
   user.email = json.email;
@@ -31,42 +32,43 @@ User.createFromJson = function(json){
 };
 
 User.prototype.setToken = function(token) {
-    this.token = token;
-    this.password = undefined;
+  this.token = token;
+  this.password = undefined;
 };
 
 
 User.prototype.getTopicNames = function() {
-    var names = [];
-    if(this.topics){
-        var topicLength = this.topics.length;
-        for(var i = topicLength-1; i>=0; i--) {
-            names.push(this.topics[i].name);
-        };
+  var names = [];
+  if (this.topics) {
+    var topicLength = this.topics.length;
+    for (var i = topicLength - 1; i >= 0; i--) {
+      names.push(this.topics[i].name);
     }
-    return names;
+  }
+  return names;
 };
 
 
-User.prototype.toBody = function(auth) {
-    var body = {
-        first_name: this.first_name,
-        last_name: this.last_name,
-        country_code: this.country_code,
-        dob: this.dob,
-        topics: this.getTopicNames(),
-        email: this.email
-    };
-    if(auth) {
-        body.token = auth;
-    }
-    else {
-        body.password = this.password;
-    }
-    if(this.img_url){
-        body.img_url = this.img_url;
-    }
-    return body;
+User.prototype.toBody = function(auth, user_id) {
+  var body = {
+    first_name: this.first_name,
+    last_name: this.last_name,
+    country_code: this.country_code,
+    dob: this.dob,
+    topics: this.getTopicNames(),
+    email: this.email,
+    gender: this.gender,
+  };
+  if (auth) {
+    body.token = auth;
+    body.id = user_id;
+  } else {
+    body.password = this.password;
+  }
+  if (this.img_url) {
+    body.img_url = this.img_url;
+  }
+  return body;
 };
 
 module.exports = User;

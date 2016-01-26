@@ -1,11 +1,11 @@
-function Interest(name, icon){
-	this.name = name;
-	this.icon = icon;
-	this.selected = false;
+function Interest(name, icon) {
+  this.name = name;
+  this.icon = icon;
+  this.selected = false;
 }
 
 Interest.prototype.select = function() {
-	this.selected = this.selected ? false : true;
-}
+  this.selected = this.selected ? false : true;
+};
 
 module.exports = Interest;

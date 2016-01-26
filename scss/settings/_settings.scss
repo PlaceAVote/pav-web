@@ -1,0 +1,214 @@
+.settings-wrapper {
+	width: 100%;
+  display: flex;
+  flex-direction: row;
+
+  @include media(900px) {
+    flex-direction: column;
+  }
+  .btn-green, .btn-grey {
+  padding: 0px 20px;
+  }
+  .btn-grey {
+    margin-right: 10px;
+  }
+
+  span {
+    @include font-size(12px);
+  }
+
+  .settings-list {
+    @include shadow();
+
+    li {
+      @include font-size(14px);
+      color: $blue;
+      line-height: 40px;
+      cursor: pointer;
+    }
+  }
+
+  .account-section-wrapper {
+    margin-left: 20px;
+    @include media(900px) {
+      margin-left: 0px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+    .profile-picture {
+      height: 50px;
+      width: 50px;
+    }
+    .account-section {
+      margin-bottom: 20px;
+      .account-section-content {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        margin-top: 20px;
+        @include media(900px) {
+          flex-direction: column;
+        }
+        .profile-section {
+          margin-left: 15px;
+          width: 100%;
+          @include media(900px) {
+            margin-left: 0px;
+          }
+        }
+      }
+    }
+
+    .password-section {
+      margin-bottom: 20px;
+      .password-section-content {
+        margin-top: 20px;
+
+        .private-description {
+          margin-left: 20px;
+          @include font-size(12px);
+        }
+        .deactive-filter {
+          color: red;
+          margin-top: 25px;
+          cursor: pointer;
+        }
+      }
+    }
+    
+    .notification-section {
+      margin-bottom: 20px;
+      .notification-section-content {
+        margin-top: 20px;
+        label {
+          display: inline-block;
+        }
+      }
+    }
+    
+    .friends-section {
+      margin-bottom: 20px;
+      .friends-section-content {
+        margin-top: 20px;
+      }
+    }
+    
+    select {
+      @include light();
+      margin-bottom: 15px;
+      width: 100%;
+      background: white;
+      font-size: 12px;
+      height: 40px;
+      padding-left: 10px;
+      transition: all 0.2s ease;
+      outline: none;
+      border: 1px solid $grey;
+      color: $purple;
+      border-radius: 3px;
+    }
+    label {
+      @include font-size(12px);
+      text-align: left;
+      display: block;
+      margin-bottom: 10px;
+      font-weight: 400;
+      color: $blue;
+    }
+
+    input {
+      width: 100%;
+      height: 40px;
+      margin-bottom: 10px;
+      margin-right: 20px;
+      border-radius: 3px;
+      border: 1px solid $grey;
+      @include font-size(14px);
+      color: $purple;
+      padding-left: 10px;
+      outline: none;
+      transition: all 0.2s ease;
+      &:focus {
+          border: 1px solid darken($grey, 40%);
+      }
+      &::-webkit-input-placeholder {
+          color: $grey;
+      }
+      &::-moz-placeholder {
+          /* Firefox 19+ */
+          color: $grey;
+      }
+      &:-ms-input-placeholder {
+          color: $grey;
+      }
+      &:-moz-placeholder {
+          /* Firefox 18- */
+          color: $grey;
+      }
+    }
+    input[type=radio] {
+      width: 14px;
+      height: 14px;
+      margin-right: 5px;
+      -webkit-appearance: radio;
+    }
+    input[type=checkbox] {
+      width: 14px;
+      height: 14px;
+      margin-right: 5px;
+      -webkit-appearance: checkbox;
+    }
+    input[type="date"].ng-pristine {
+      background-color: white;
+      color: $grey;
+    }
+
+    input[type="date"].ng-dirty {
+      color: $purple;
+    }
+
+    button {
+      padding: 0px;
+      width: 100%;
+      background-color: $green;
+      color: white;
+      display: inline-block;
+      border: 1px solid darken($green, 10%);
+      outline: none;
+      height: 40px;
+      line-height: 39px;
+      margin-top: 10px;
+      margin-right: 0px;
+      margin-bottom: 20px;
+      @include font-size(12px);
+      font-weight: 700;
+      margin-left: 0;
+      border-radius: 3px;
+      cursor: pointer;
+      &:hover {
+        background-color: darken($green, 10%);
+      }
+      &:focus {
+        border: none;
+      }
+      &.down-btn {
+        margin-top: 30px;
+      }
+    }
+
+    .indent {
+      padding-right: 20px;
+    }
+  }
+  
+  h1 {
+    @include font-size(12px);
+  }
+
+  .autosave {
+    margin-left: 10px;
+    color: rgb(128, 128, 128);
+  }
+}
+
+

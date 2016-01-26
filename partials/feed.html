@@ -15,24 +15,27 @@
 		    	<div class="bill card">
 		        <h1 ng-click='bill.goToPage($parent.$location)'>{{bill.subject}}</h1>
 		        <hr />
+		        	<section class="row">
+			    	<div class="feed-icon">
+			    	<i class="{{bill.icon}}"></i>
+			    	</div>
 			        <div class="bill-summary-container">
-			        <div class="bill-subject">
-			        <span class="{{bill.subject}}"></span>
-			        </div>
 			        <div class="bill-summary">
 			        <h6 ng-click='bill.goToPage($parent.$location)'>{{bill.short_title}}</h6>
 			        <p>{{bill.official_title}}</p>
 			        </div>
 			        </div>
+			        </section>
 		        </div>
-		        <div class="buttons">
-		        <button ng-click='bill.goToPage($parent.$location)'>{{bill.comment_count}} comments</button>
-		        <button ng-click='bill.goToPage($parent.$location)'><span ng-hide="bill.noVotes">{{bill.majorityVote().percent}}&#37; Vote {{bill.majorityVote().majority}}</span><span ng-show="bill.noVotes">No votes</span></button>
+		        <div class="stats">
+		        <section ng-click='bill.goToPage($parent.$location)'>
+		        <span class="bold">{{bill.comment_count}} &nbsp;</span> comments</section>
+		        <section ng-click='bill.goToPage($parent.$location)'><span ng-hide="bill.noVotes"><span class="bold">{{bill.majorityVote().percent}}</span> Vote {{bill.majorityVote().majority}}</span><span ng-show="bill.noVotes">No votes</span></section>
 		        </div>
 		    </div>
 		</div>
 		<div class="trends-container l-5">
-			<h2>TRENDING GLOBALLY</h2>
+			<h2><i class="icon-trending-graph"></i>TRENDING GLOBALLY</h2>
 			<hr />
 			<trends data="feed.trends"></trends>
 		</div>

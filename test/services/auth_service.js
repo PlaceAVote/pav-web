@@ -12,7 +12,7 @@ var options = {
 describe('AuthService', function(){
   it('gets auth token', function(){
     var subject = new AuthService(undefined, options);
-    expect(subject.getAccessToken()).to.eql('PAV_AUTH_TOKEN undefined');
+    expect(subject.getAccessToken()).to.eql(undefined);
     subject.setAuth('TOKEN');
     expect(subject.getAccessToken()).to.eql('PAV_AUTH_TOKEN TOKEN');
   });
@@ -21,6 +21,12 @@ describe('AuthService', function(){
     expect(subject.getFacebookAccessToken()).to.eql(undefined);
     subject.setFacebookAuth({accessToken: 'TOKEN'});
     expect(subject.getFacebookAccessToken()).to.eql('TOKEN');
+  });
+  it('gets facebook id', function(){
+    var subject = new AuthService(undefined, options);
+    expect(subject.getFacebookId()).to.eql(undefined);
+    subject.setFacebookAuth({accessToken: 'TOKEN', userID: '01010101'});
+    expect(subject.getFacebookId()).to.eql('01010101');
   });
 });
 describe('Stores Token in Browser', function(){
@@ -44,7 +50,7 @@ describe('Stores Token in Browser', function(){
     local.storage = [];
     var subject = new AuthService(undefined, options);
     var token = subject.getAccessToken();
-    expect(token).to.eql('PAV_AUTH_TOKEN undefined');
+    expect(token).to.eql(undefined);
     local.storage = [];
   });
 });

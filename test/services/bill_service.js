@@ -183,7 +183,7 @@ describe("Bill Service", function(){
     it('returns an error if bill id is undefined', function(done){
       var mockResource = require('../../src/temp/mockBillResource.js');
       var subject = new BillService(mockResource);
-      subject.getComments(undefined, undefined, function(err, resource){
+      subject.getComments(undefined, undefined, undefined, function(err, resource){
         expect(err).to.not.eql(undefined);
         expect(err).to.eql({message: 'Id Must Be Defined'});
         done();
@@ -220,7 +220,7 @@ describe("Bill Service", function(){
         return 'TOKEN';
       };
       var subject = new BillService(mockResource, authService);
-      subject.getComments('serverId', undefined, function(err, resource){
+      subject.getComments('serverId', undefined, undefined, function(err, resource){
         expect(err).to.not.eql(undefined);
         expect(err).to.eql('ERROR');
         done();
@@ -238,7 +238,7 @@ describe("Bill Service", function(){
         return 'TOKEN';
       };
       var subject = new BillService(mockResource, authService);
-      subject.getComments('serverId', undefined, function(err, resource){
+      subject.getComments('serverId', undefined, undefined, function(err, resource){
         expect(err).to.eql(undefined);
         expect(resource.length).to.eql(1);
         expect(resource[0].author).to.eql('tony@pl.com');

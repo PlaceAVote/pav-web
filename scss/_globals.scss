@@ -12,6 +12,11 @@ body {
   color: $black;
 }
 
+* { 
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -moz-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
 .app {
   padding-top: 70px;
   display: flex;
@@ -97,3 +102,6 @@ input {
   -webkit-appearance: none;
 }
 
+.click {
+  cursor: pointer;
+}

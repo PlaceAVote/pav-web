@@ -1,12 +1,14 @@
 var AuthorizeController = require('./autherize_controller.js');
+var title = require('../config/titles.js');
 
-function HeaderCtrl($rootScope, $scope, $location, authService, userService, notificationService, $window) {
+function HeaderCtrl($rootScope, $scope, $location, $timeout, authService, userService, notificationService, searchService, $window) {
   $scope = $scope || {};
   $scope.header = this;
   this.scope = $scope;
   this.userService = userService;
   this.authService = authService;
   this.notificationService = notificationService;
+  this.searchService = searchService;
   this.location = $location;
   this.showDropDown = false;
   this.rs = $rootScope;
@@ -17,65 +19,70 @@ function HeaderCtrl($rootScope, $scope, $location, authService, userService, not
   this.userNotifications = [];
   this.newNotification = {};
   this.window = $window;
-$scope.$watchCollection(function() {
-    return $rootScope.user;
-    }, 
-    function(newValue, oldValue) {
-      var that = this;
-      if(newValue) {
-          if(newValue.first_name) {
-          $scope.header.intercomInit(newValue); 
-          $scope.header.getNotifications();
-          $scope.header.startNotifications();
-          } else if(!newValue.first_name) {
-          $scope.header.intercomShutdown(newValue) 
-          }
-        }
-      }, true);
-}
+  this.searchResults = [];
+  this.timeout = $timeout;
+  this.focus = false;
+  this.searching = false;
 
+  $scope.$watchCollection(function() {
+    return $rootScope.user;
+  },
+  function(newValue, oldValue) {
+    var that = this;
+    if (newValue) {
+      if (newValue.first_name) {
+        $scope.header.intercomInit(newValue);
+        $scope.header.getNotifications();
+        $scope.header.startNotifications();
+      } else if (!newValue.first_name) {
+        $scope.header.intercomShutdown(newValue);
+      }
+    }
+  }, true);
+}
 
 HeaderCtrl.prototype.intercomInit = function(user) {
-window.Intercom('boot', {
-  app_id: "sh17vmbl",
-  name: user.first_name + ' ' + user.last_name,
-  email: user.email
-});
+  window.Intercom('boot', {
+    app_id: 'sh17vmbl',
+    name: user.first_name + ' ' + user.last_name,
+    email: user.email,
+  });
 
-}
+};
 
 HeaderCtrl.prototype.intercomShutdown = function(user) {
-window.Intercom('shutdown');
-}
+  window.Intercom('shutdown');
+};
 
 HeaderCtrl.prototype.getNotifications = function() {
   var that = this;
   this.notificationService.getNotifications(function(err, res) {
-    if(err) {
+    if (err) {
       return;
-    } else {
-      that.notifications = res;
-      for(var i = 0; i < that.notifications.results.length; i++) {
-        if(!that.notifications.results[i].read) {
-          that.unread++;
-        }
+    }
+    that.notifications = res;
+    for (var i = 0; i < that.notifications.results.length; i++) {
+      if (!that.notifications.results[i].read) {
+        that.unread++;
       }
     }
+    title.notifications(that.unread);
   });
-}
+};
 
 HeaderCtrl.prototype.startNotifications = function() {
   if (!this.notificationService) {
     return;
   }
   var that = this;
-  this.notificationService.stream(function(err, result){
+  this.notificationService.stream(function(err, result) {
     if (!err) {
-        that.rs.$apply(function() {
-          that.notificationReceived = true;
-          that.unread++;
-          that.newNotification = result;
-        });
+      that.rs.$apply(function() {
+        that.notificationReceived = true;
+        that.unread++;
+        title.notifications(that.unread);
+        that.newNotification = result;
+      });
     }
   });
 };
@@ -85,24 +92,26 @@ HeaderCtrl.prototype.readEvent = function(res) {
     return;
   }
   var that = this;
-  if(!res.read) {
-  this.notificationService.readNotification(res.notification_id, function(err, result) {
-    if (!err) {
-      res.read = true;
-      that.unread--;
-    } else if(err) {
-      console.log(err);
-    }
-  });
+  if (!res.read) {
+    this.notificationService.readNotification(res.notification_id, function(err, result) {
+      if (!err) {
+        res.read = true;
+        that.unread--;
+        title.notifications(that.unread);
+      } else if (err) {
+        console.log(err);
+      }
+    });
   }
-}
+};
 
 HeaderCtrl.prototype.populate = function() {
   var that = this;
   this.userService.getUserProfile('me', function(err, result) {
-    if(err) {
+    if (err) {
       return;
-    } else if (result) {
+    }
+    if (result) {
       that.rs.user = result;
       that.rs.loggedIn = true;
     } else {
@@ -112,11 +121,11 @@ HeaderCtrl.prototype.populate = function() {
 };
 
 HeaderCtrl.prototype.login = function() {
-    return this.rs.loggedIn;
+  return this.rs.loggedIn;
 };
 
 HeaderCtrl.prototype.hideDropDown = function() {
-  this.showDropDown = false
+  this.showDropDown = false;
 };
 
 HeaderCtrl.prototype.dropDown = function() {
@@ -126,17 +135,16 @@ HeaderCtrl.prototype.dropDown = function() {
 
 HeaderCtrl.prototype.hideNotifications = function() {
   this.notificationReceived = false;
-  this.showNotifications = false
+  this.showNotifications = false;
 };
 
 HeaderCtrl.prototype.notify = function() {
   var that = this;
   if (this.notifications.results.length < 1 && this.unread < 1) {
     return;
-  } else {
+  }
   that.hideDropDown();
   that.showNotifications = that.showNotifications ? false : true;
-  }
 };
 
 HeaderCtrl.prototype.logout = function() {
@@ -151,8 +159,33 @@ HeaderCtrl.prototype.logout = function() {
 };
 
 HeaderCtrl.prototype.toProfile = function() {
-    this.hideDropDown();
-    this.location.path('/profile/me');
+  this.hideDropDown();
+  this.location.path('/profile/me');
+};
+
+
+HeaderCtrl.prototype.toSettings = function() {
+  this.hideDropDown();
+  this.location.path('/settings');
+};
+
+HeaderCtrl.prototype.search = function(q) {
+  var that = this;
+  if (this.cachedSearch === q) {
+    this.searchResults = this.cachedResults;
+    return;
+  }
+  this.cachedSearch = q;
+  this.searching = true;
+  this.timeout(function() {
+    that.searchService.search(q, function(err, response) {
+      if (response) {
+        that.searchResults = response;
+        that.cachedResults = response;
+        that.searching = false;
+      }
+    });
+  }, 500);
 };
 
 module.exports = HeaderCtrl;

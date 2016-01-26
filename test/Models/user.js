@@ -18,6 +18,7 @@ describe("Users", function(){
         user.first_name = "paul";
         user.last_name = "barber";
         user.country_code = "USA";
+        user.gender = "male";
         var subject = user.toBody();
         var expected = {
             country_code: "USA",
@@ -27,6 +28,7 @@ describe("Users", function(){
             dob: new Date("04/01/1990"),
             email: "paul@test.com",
             password: "test0606",
+            gender: "male",
             topics: []
         };
         expect(subject).to.eql(expected);
@@ -38,7 +40,8 @@ describe("Users", function(){
         user.first_name = "paul";
         user.last_name = "barber";
         user.country_code = "USA";
-        var subject = user.toBody("auth_token");
+        user.gender = "male";
+        var subject = user.toBody("auth_token", "01010101");
         var expected = {
             country_code: "USA",
             first_name: "paul",
@@ -47,6 +50,8 @@ describe("Users", function(){
             dob: new Date("04/01/1990"),
             email: "paul@test.com",
             token: "auth_token",
+            gender: "male",
+            id: "01010101",
             topics: []
         };
         expect(subject).to.eql(expected);
