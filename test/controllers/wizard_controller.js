@@ -76,7 +76,7 @@ describe('Wizard', function() {
       var subject = new Wizard();
       subject.currentQuestion = question;
       subject.questions = [question];
-      question.changePosition(-1);
+      question.position = 0;
       subject.answerQuestion();
       expect(subject.answered.length).to.eql(1);
       expect(subject.answered[0].answers[0]).to.eql('I want less gun control');

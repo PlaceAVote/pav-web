@@ -8,25 +8,15 @@ function Slider(options) {
   options = options || {};
   QuestionBase.call(this, options);
   this.answers = splitAnswers(options.answers);
-  // Instantiates at position 1 (Not Sure).
+  // Instantiates at position 1 (MIDDLE).
   this.position = 1;
 }
 
 Slider.prototype = Object.create(QuestionBase.prototype);
 Slider.prototype.constructor = Slider;
 
-Slider.prototype.changePosition = function(i) {
-  if (this.position + i < 0) {
-    return;
-  }
-  if (!this.answers || this.answers.length === 0) {
-    this.position = null;
-    return;
-  }
-  if (this.position + i > this.answers.length - 1) {
-    return;
-  }
-  this.position += i;
+Slider.prototype.getPosition = function() {
+  return this.answers[this.position];
 };
 
 Slider.prototype.transform = function() {
@@ -42,25 +32,14 @@ function splitAnswers(answers) {
   }
 
   var answerResults = [];
-  var keys = Object.keys(answers);
-  for (var i = 0; i < keys.length; i++) {
-    var key = keys[i];
-    switch (key) {
-      case LEFT: {
-        answerResults[0] = answers[key];
-        break;
-      }
-
-      case MIDDLE: {
-        answerResults[1] = answers[key];
-        break;
-      }
-
-      case RIGHT: {
-        answerResults[2] = answers[key];
-        break;
-      }
-    }
+  if (answers[LEFT]) {
+    answerResults.push(answers[LEFT]);
+  }
+  if (answers[MIDDLE]) {
+    answerResults.push(answers[MIDDLE]);
+  }
+  if (answers[RIGHT]) {
+    answerResults.push(answers[RIGHT]);
   }
   return answerResults;
 }

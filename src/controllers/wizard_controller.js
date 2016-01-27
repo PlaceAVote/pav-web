@@ -14,15 +14,17 @@ function WizardController($scope, questionService) {
 WizardController.prototype.loadQuestions = function(callback) {
   var that = this;
   if (!this.questionService) {
-    callback('Question Service not defined');
+    console.log('No Question Service Defined');
+    callback();
     return;
   }
-  this.questionService.getQuestions(function(err, answers) {
+  this.questionService.getQuestions(function(err, questions) {
     if (err) {
+      console.log(err);
       callback();
       return;
     }
-    that.questions = answers;
+    that.questions = questions;
     currentQuestion = that.getNextQuestion();
     callback(currentQuestion);
   });

@@ -22,41 +22,22 @@ describe('Slider Question', function() {
 
   });
 
-  describe('change position', function() {
+  describe('get position', function() {
 
-    it('increments or decrements the position', function() {
+    it('Gets the position of the slider', function() {
       var subject = new Slider(options);
       expect(subject.position).to.eql(1);
-      subject.changePosition(1);
-      expect(subject.position).to.eql(2);
-      subject.changePosition(-1);
-      expect(subject.position).to.eql(1);
+      var position = subject.getPosition();
+      expect(position).to.eql('Not sure');
     });
 
-    it('cant go less than zero', function() {
+    it('returns undefined if position is outside of index', function() {
       var subject = new Slider(options);
-      subject.position = 0;
-      subject.changePosition(-1);
-      expect(subject.position).to.eql(0);
+      subject.position = 5;
+      var position = subject.getPosition();
+      expect(position).to.eql(undefined);
     });
 
-    it('cant go above the length of the answers array', function() {
-
-      var answers = {
-        left: 'I want less gun control',
-        middle: 'Not sure',
-        right: 'I want more gun control',
-      };
-      var subject = new Slider(options);
-      subject.position = 2;
-      subject.changePosition(1);
-      expect(subject.position).to.eql(2);
-    });
-    it('will be set as undefined if answers array is undefined or length of zero', function() {
-      var subject = new Slider({});
-      subject.changePosition(2);
-      expect(subject.position).to.eql(null);
-    });
   });
   describe('transform', function() {
     it('it converts the model ready to be sent in a post request', function() {

@@ -1,0 +1,5 @@
+<div>
+  You chose {{question.topic}}, can you be more specific?
+  <h2>{{question.getPosition()}}</h2>
+  <input type="range" min="0" max="{{question.answers.length - 1}}" ng-model="question.position"/>
+</div>

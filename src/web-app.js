@@ -16,6 +16,7 @@ var HeaderController = require('./controllers/header_controller.js');
 var ProfileController = require('./controllers/profile_controller.js');
 var SettingsController = require('./controllers/settings_controller.js');
 var PasswordController = require('./controllers/password_controller.js');
+var WizardController = require('./controllers/wizard_controller.js');
 
 // Services
 var UserService = require('./services/user_service.js');
@@ -27,6 +28,7 @@ var CommentService = require('./services/comment_service.js');
 var NotificationService = require('./services/notification_service.js');
 var SearchService = require('./services/search_service.js');
 var PasswordService = require('./services/password_service.js');
+var QuestionService = require('./services/question_service.js');
 
 // Dependencies
 var angular = require('angular');
@@ -50,6 +52,8 @@ var commentReplyNotificationDirective = require('./directives/comment_reply_noti
 var trendsDirective = require('./directives/trends.js');
 var autoResizeDirective = require('./directives/autoresize.js');
 var termsAndConditionsDirective = require('./directives/terms_and_conditions.js');
+var wizardDirective = require('./directives/wizard.js');
+var sliderDirective = require('./directives/wizard_slider.js');
 
 // Thirdparty integrations
 var Facebook = require('./integrations/facebook.js');
@@ -129,6 +133,7 @@ app.factory('voteService', ['$resource', 'authService', 'userService', VoteServi
 app.factory('notificationService', ['$resource', 'authService', NotificationService]);
 app.factory('searchService', ['$resource', 'authService', SearchService]);
 app.factory('passwordService', ['$resource', PasswordService]);
+app.factory('questionService', ['$resource', 'authService', QuestionService]);
 
 // Controllers
 app.controller('TopicRegisterCtrl',['$scope','$location', 'userService', RegisterController]);
@@ -147,6 +152,7 @@ app.controller('FaqCtrl', ['$scope', '$location', FaqController]);
 app.controller('TeamCtrl', ['$scope', '$location', TeamController]);
 app.controller('PressCtrl', ['$scope', '$location', PressController]);
 app.controller('MenuCtrl', ['$scope', '$location', '$routeParams', MenuController]);
+app.controller('WizardCtrl', ['$scope', 'questionService', WizardController]);
 
 // Directives
 app.directive('websiteNav', [websiteNav]);
@@ -166,5 +172,7 @@ app.directive('trends', ['$location',trendsDirective]);
 app.directive('autoResize', [autoResizeDirective]);
 app.directive('searchBar', ['$sce' ,'$location', search]);
 app.directive('termsAndConditions', [termsAndConditionsDirective]);
+app.directive('wizard', [wizardDirective]);
+app.directive('slider', [sliderDirective]);
 
 

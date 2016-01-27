@@ -1,0 +1,14 @@
+<section ng-controller="WizardCtrl as wizard">
+  <div ng-show="wizard.currentQuestion" ng-switch on="wizard.currentQuestion.type">
+    <div class="top-wizard-controller">
+      Question {{wizard.currentQuestionIndex + 1}} of {{wizard.questions.length}}
+      <button ng-click="wizard.skipQuestion()">Skip</button>
+    </div>
+
+    <slider ng-switch-when="slider" question="wizard.currentQuestion"> </slider>
+
+    <div class="bottom-wizard-controller">
+      <button ng-click="wizard.answerQuestion()">Next</button>
+    </div>
+  </div>
+</section>
