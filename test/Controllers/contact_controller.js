@@ -2,31 +2,40 @@ var expect = require('chai').expect;
 var ContactCtrl = require('../../src/controllers/website/contact_controller.js');
 
 describe('Contact Controller', function() {
-  it('toMail should return without body if mail body is not defined', function(done) {
-    var scope = {};
-    var window = {
-      location: {
-        href: "",
+  var scope = {
+    mailData: {
+      name: "bob",
+      email: "bob@test.com",
+      body: "hi",
+    },
+  };
+  var timeout = function() {};
+
+  it('toMail set success true if mail service return success', function(done) {
+    function mockMailService() {
+      this.sendMail = function(mailData, callback) {
+         return callback(undefined, []);
       }
     };
-    var subject = new ContactCtrl(scope, window);
+
+    var subject = new ContactCtrl(scope, timeout, new mockMailService());
     subject.toMail();
-    expect(window.location.href).to.eql("mailto:hello@placeavote.com");
+    expect(subject.sendMailSuccess).to.eql(true);
+    expect(subject.sendMailErr).to.eql(false);
     done();
   });
 
-  it('toMail should return with correct body if mail body is defined', function(done) {
-    var scope = {};
-    var window = {
-      location: {
-        href: "",
+  it('toMail set error true if mail service return error', function(done) {
+    function mockMailService() {
+      this.sendMail = function(mailData, callback) {
+         return callback([]);
       }
     };
-    var subject = new ContactCtrl(scope, window);
-    subject.mailBody = "This is a mail body";
+
+    var subject = new ContactCtrl(scope, timeout, new mockMailService());
     subject.toMail();
-    expect(window.location.href).to.eql("mailto:hello@placeavote.com?body=This%20is%20a%20mail%20body");
+    expect(subject.sendMailSuccess).to.eql(false);
+    expect(subject.sendMailErr).to.eql(true);
     done();
   });
-  
 });

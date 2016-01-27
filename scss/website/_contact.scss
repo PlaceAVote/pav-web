@@ -57,4 +57,11 @@
             background-color: lighten($green, 5%);
         }
     }
+    .has-err {
+        color: $red;
+    }
+    .has-success {
+        color: $green;
+    }
+
 }
