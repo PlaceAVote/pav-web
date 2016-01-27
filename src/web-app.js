@@ -52,7 +52,7 @@ var autoResizeDirective = require('./directives/autoresize.js');
 var termsAndConditionsDirective = require('./directives/terms_and_conditions.js');
 var imageCropDirective = require('./directives/imagecrop.js');
 var fileReadDirective = require('./directives/fileread.js');
-
+var preloaderDirective = require('./directives/preloader.js');
 // Thirdparty integrations
 var Facebook = require('./integrations/facebook.js');
 
@@ -170,5 +170,6 @@ app.directive('searchBar', ['$sce' ,'$location', search]);
 app.directive('termsAndConditions', [termsAndConditionsDirective]);
 app.directive('imageCrop', [imageCropDirective]);
 app.directive('fileread', [fileReadDirective]);
+app.directive('loader', ['$location', preloaderDirective]);
 
 
