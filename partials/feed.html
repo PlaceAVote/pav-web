@@ -15,8 +15,8 @@
 		    	<div class="bill card">
 		        <h1 ng-click='bill.goToPage($parent.$location)'>{{bill.subject}}</h1>
 		        <hr />
-		        	<section class="row">
-			    	<div class="feed-icon">
+		        	<section class="row small-margin-top">
+			    	<div class="feed-icon medium-margin-right">
 			    	<i class="{{bill.icon}}"></i>
 			    	</div>
 			        <div class="bill-summary-container">
@@ -34,11 +34,13 @@
 		        </div>
 		    </div>
 		</div>
-		<div class="trends-container l-5">
-			<h2><i class="icon-trending-graph"></i>TRENDING GLOBALLY</h2>
-			<hr />
-			<trends data="feed.trends"></trends>
-		</div>
+    <div class="l-5 m-12 s-12">
+  		<div class="trends-container">
+  			<h2><i class="icon-trending-graph"></i>TRENDING GLOBALLY</h2>
+  			<hr />
+  			<trends data="feed.trends"></trends>
+  		</div>
+    </div>
 		</section>
 	</div>
 </div>
