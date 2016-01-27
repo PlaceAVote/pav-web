@@ -3,6 +3,7 @@ var AuthorizeController = require('./autherize_controller.js');
 function LoginCtrl($scope, $location, userService, authService, $rootScope, $routeParams, passwordService) {
   AuthorizeController.authorize({success: '/feed', authorizer: authService, location: $location});
   $scope = $scope || {};
+  this.loaded = true;
   this.rs = $rootScope || {};
   this.userService = userService;
   this.passwordService = passwordService;
@@ -27,14 +28,17 @@ function LoginCtrl($scope, $location, userService, authService, $rootScope, $rou
 
 LoginCtrl.prototype.loginWithFacebook = function() {
   var that = this;
+  this.loaded = false;
   this.userService.loginWithFacebook(function(err, response) {
     if (err) {
       if (err.status === 999) {
+        that.loaded = true;
         return that.location.path('/');
       }
       return that.location.path('/onboarding');
     }
     that.rs.user = that.userService.getUser();
+    that.loaded = true;
     that.rs.loggedIn = true;
     that.location.path('/feed');
   });
@@ -65,13 +69,15 @@ LoginCtrl.prototype.login = function(u, hash) {
     email: email,
     password: password,
   };
-
+  this.loaded = false;
   this.userService.login(validUser, function(err, response) {
     if (err) {
+      that.loaded = true;
       that.loginInvalid = true;
       return;
     }
     that.userService.getUserProfile('me', function(err, result) {
+      that.loaded = true;
       if (err) {
         return that.logout();
       }
@@ -99,12 +105,15 @@ LoginCtrl.prototype.passwordValidation = function(password) {
 
 LoginCtrl.prototype.passwordReset = function(email) {
   var that = this;
+  this.loaded = false;
   this.passwordService.passwordReset(email, function(err,res) {
     if (err) {
+      that.loaded = true;
       that.resetFailed = true;
       that.resetSuccess = false;
     }
     if (res) {
+      that.loaded = true;
       that.resetFailed = false;
       that.resetSuccess = true;
     }

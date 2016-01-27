@@ -23,13 +23,12 @@ function HeaderCtrl($rootScope, $scope, $location, $timeout, authService, userSe
   this.timeout = $timeout;
   this.focus = false;
   this.searching = false;
-
   $scope.$watchCollection(function() {
     return $rootScope.user;
   },
   function(newValue, oldValue) {
     var that = this;
-    if (newValue) {
+    if (newValue && !oldValue) {
       if (newValue.first_name) {
         $scope.header.intercomInit(newValue);
         $scope.header.getNotifications();
