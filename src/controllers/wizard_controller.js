@@ -1,5 +1,6 @@
 // Delete this.
 var DragAndDrop = require('../models/drag_and_drop_question.js');
+var Slider = require('../models/slider_question.js');
 
 function WizardController($scope, questionService) {
   var that = this;
@@ -44,8 +45,21 @@ WizardController.prototype.loadQuestions = function(callback) {
       ],
     };
     var q = new DragAndDrop(data);
+    data = {
+      question_id: '1003',
+      question_type: 'slider',
+      topic: 'Gun Controll',
+      answers: {
+        left: 'I want less gun control',
+        middle: 'Not sure',
+        right: 'I want more gun control',
+      },
+    };
+    var q1 = new Slider(data);
     console.log(q);
     that.questions.push(q);
+    that.questions.push(q1);
+    console.log(q1);
     currentQuestion = that.getNextQuestion();
     callback(currentQuestion);
   });
