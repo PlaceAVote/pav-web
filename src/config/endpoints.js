@@ -80,6 +80,28 @@ module.exports = {
       },
       withCredentials: false,
     },
+    postImg: {
+      method: 'POST',
+      headers: {
+        'Content-Type': undefined,
+        Accept: 'application/json',
+      },
+      withCredentials: false,
+    },
+    postData: function(data, token) {
+      req = {
+        method: 'POST',
+        data: data,
+        isArray: false,
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: token,
+        },
+        withCredentials: false,
+      };
+      return req;
+    },
   },
   legislator: {
     getById: {
@@ -171,6 +193,7 @@ module.exports = {
     facebookLoginUrl: urls.USER + '/user/facebook/authenticate',
     facebookCreateUrl: urls.USER + '/user/facebook',
     settings: urls.USER + '/user/me/settings',
+    profilePicture: urls.USER + '/user/me/profile/image',
   },
   search: {
     endpoint: urls.SEARCH + '/search',
