@@ -1,3 +1,6 @@
+// Delete this.
+var DragAndDrop = require('../models/drag_and_drop_question.js');
+
 function WizardController($scope, questionService) {
   var that = this;
   $scope = $scope || {};
@@ -25,6 +28,24 @@ WizardController.prototype.loadQuestions = function(callback) {
       return;
     }
     that.questions = questions;
+    var data = {
+      question_id: '1002',
+      question_type: 'dragdrop',
+      question: 'Which of these bills interests you, drag and drop in...',
+      answers: [
+        {
+          bill_id: 'hr2-114',
+          bill_title: 'Bill to make July 3rd National Cowboy Day',
+        },
+        {
+          bill_id: 'hr2-115',
+          bill_title: 'Bill to make July 5th National Cowboy Day',
+        },
+      ],
+    };
+    var q = new DragAndDrop(data);
+    console.log(q);
+    that.questions.push(q);
     currentQuestion = that.getNextQuestion();
     callback(currentQuestion);
   });
