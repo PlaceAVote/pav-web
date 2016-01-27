@@ -1,8 +1,5 @@
 <div class="modal" ng-show="settings.showModal">
-<div class="card profile-picture-edit">
-<div class="box-loader" ng-show="settings.profilePicture.saving">
-  <i class="loader"></i>
-</div>
+<div class="card profile-picture-edit" loader loader-context="settings.profilePicture.saving">
 <div class="row">
 <h1>CHANGE PROFILE PICTURE</h1><i class="icon-close layout-right" ng-click="settings.showModal = false"></i>
 </div>

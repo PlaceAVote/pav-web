@@ -10,7 +10,7 @@
 	        </section>
 	    </div>
 	    <section class="feed-wrapper">
-		<div class='feed-column l-7 m-12 s-12'>
+		<div class="feed-column l-7 m-12 s-12">
 		    <div class="bill-container" ng-repeat="bill in bills">
 		    	<div class="bill card">
 		        <h1 ng-click='bill.goToPage($parent.$location)'>{{bill.subject}}</h1>
@@ -35,7 +35,7 @@
 		    </div>
 		</div>
     <div class="l-5 m-12 s-12">
-  		<div class="trends-container">
+  		<div class="trends-container" loader loader-context="feed.trends">
   			<h2><i class="icon-trending-graph"></i>TRENDING GLOBALLY</h2>
   			<hr />
   			<trends data="feed.trends"></trends>

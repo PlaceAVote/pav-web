@@ -288,11 +288,6 @@ h1.bill-title{
 
 .bill-timeline {
   margin-bottom: 80px;
-  align-self: center;
-  max-width: 500px;
-  @include media(560px){
-  max-width: 320px;
-  }
   width: 100%;
   flex-shrink: 0;
   position: relative;
@@ -373,5 +368,18 @@ h1.bill-title{
         z-index: 9000;
       }
     }
+  }
+}
+
+.bill-timeline-container {
+  overflow: hidden;
+  align-self: center;
+  max-width: 500px;
+  position: relative;
+    @include media(560px){
+  max-width: 320px;
+  }
+  .box-loader {
+    background: $greylight;
   }
 }

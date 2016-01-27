@@ -21,7 +21,9 @@ SettingsController = function($scope, $location, $timeout, userService, authServ
     public: false,
   };
   this.showSettings = true;
-  this.profilePicture = {};
+  this.profilePicture = {
+    saving: true,
+  };
   var that = this;
   this.getUserSettings(function(err, result) {
     if (!err) {
@@ -196,15 +198,15 @@ SettingsController.prototype.hasCropped = function() {
 
 SettingsController.prototype.saveProfilePicture = function(img) {
   var that = this;
-  this.profilePicture.saving = true;
+  this.profilePicture.saving = false;
   this.userService.profilePicture(img.img, function(err, res) {
     if (err) {
       that.profilePicture.error = true;
-      that.profilePicture.saving = false;
+      that.profilePicture.saving = true;
     }
 
     if (res) {
-      that.profilePicture.saving = false;
+      that.profilePicture.saving = true;
       that.profilePicture.success = true;
       that.settingsItem.img_url = res.img_url;
       that.rs.user.img_url = res.img_url;
