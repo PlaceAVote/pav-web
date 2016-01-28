@@ -22,6 +22,9 @@ ContactController.prototype.toMail = function() {
     } else {
       that.sendMailErr = false;
       that.sendMailSuccess = true;
+      that.name = '';
+      that.email = '';
+      that.mailBody = '';
     }
     that.timeout(function() {
       that.sendMailSuccess = false;
