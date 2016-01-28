@@ -5,11 +5,15 @@
   display: flex;
   flex-direction: row;
   @include media(900px) {
-    flex-direction: column;
+    // flex-direction: column;
+    display: block;
   }
   .feed-column {
+    height: 100%;
+    position: relative;
     margin-bottom: 20px;
     .bill-container {
+      position: relative;
       margin-top: 20px;
       @include shadow();
 
@@ -152,6 +156,7 @@
       margin-left: 0;
       margin-bottom: 20px;
     }
+    position: relative;
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
@@ -160,8 +165,10 @@
     background: #DAD9E2;
     padding: 20px;
     border-radius: 3px;
-    // height: 100%;
     border: 1px solid #CDCCD4;
+    .box-loader {
+      background: #DAD9e2;
+    }
     h2 {
       color: $blue;
       @include bold();

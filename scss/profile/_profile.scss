@@ -139,12 +139,14 @@
 
 .activity-container {
 	width: 75%;
+  // display: inline-block;
 	@include media(900px) {
 		width: 100% !important;
 	}
 }
 
 .follower-container {
+  // display: inline-block;
 	width: 25%;
 	@include media(900px) {
 		width: 100% !important;
