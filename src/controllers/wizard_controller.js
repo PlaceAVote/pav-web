@@ -1,11 +1,14 @@
 // Delete this.
 var DragAndDrop = require('../models/drag_and_drop_question.js');
 var Slider = require('../models/slider_question.js');
+var TaxMultiPart = require('../models/tax_multi_part_question.js');
+var taxCalculator = require('../models/tax_calculator.js')();
 
 function WizardController($scope, questionService) {
   var that = this;
   $scope = $scope || {};
   $scope.wizard = this;
+  this.scope = $scope;
   this.questionService = questionService;
   this.questions = [];
   this.answered = [];
@@ -56,10 +59,16 @@ WizardController.prototype.loadQuestions = function(callback) {
       },
     };
     var q1 = new Slider(data);
-    console.log(q);
+    data = {
+      question_id: '1004',
+      question_type: 'tax_multi',
+      extension: taxCalculator,
+      scope: that.scope,
+    };
+    var q2 = new TaxMultiPart(data);
     that.questions.push(q);
     that.questions.push(q1);
-    console.log(q1);
+    that.questions.push(q2);
     currentQuestion = that.getNextQuestion();
     callback(currentQuestion);
   });
