@@ -9,9 +9,9 @@
 	        <p>{{banner.privacyMessage}}, to change this setting, <span>click here</span></p>
 	        </section>
 	    </div>
-      <wizard></wizard>
 	    <section class="feed-wrapper">
 		<div class="feed-column l-7 m-12 s-12">
+        <wizard></wizard>
 		    <div class="bill-container" ng-repeat="bill in bills">
 		    	<div class="bill card">
 		        <h1 ng-click='bill.goToPage($parent.$location)'>{{bill.subject}}</h1>

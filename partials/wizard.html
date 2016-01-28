@@ -1,15 +1,18 @@
-<section ng-controller="WizardCtrl as wizard">
+<section ng-controller="WizardCtrl as wizard" class="card wizard-container">
   <div ng-show="wizard.currentQuestion" ng-switch on="wizard.currentQuestion.type">
-    <div class="top-wizard-controller">
+    <div class="top-wizard-controller row">
       Question {{wizard.currentQuestionIndex + 1}} of {{wizard.questions.length}}
-      <button ng-click="wizard.skipQuestion()">Skip</button>
+      <div class="layout-right">
+        <button ng-click="wizard.skipQuestion()">Skip</button>
+        <i class="icon-close"></i>
+      </div>
     </div>
-
+    <hr />
     <slider ng-switch-when="slider" question="wizard.currentQuestion"> </slider>
     <dad ng-switch-when="dragdrop" question="wizard.currentQuestion"> </dad>
-
-    <div class="bottom-wizard-controller">
-      <button ng-click="wizard.answerQuestion()">Next</button>
+    <hr />
+    <div class="bottom-wizard-controller row medium-margin-top">
+      <button class="btn-green btn-small l-2 layout-right" ng-click="wizard.answerQuestion()">NEXT</button>
     </div>
   </div>
 </section>

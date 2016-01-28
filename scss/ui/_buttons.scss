@@ -121,6 +121,11 @@
   @include medium();
 }
 
+.btn-small {
+  height: 30px;
+  line-height: 28px;
+}
+
 button {
   @include light();
 }
