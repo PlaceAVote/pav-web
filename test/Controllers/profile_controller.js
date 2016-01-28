@@ -39,4 +39,28 @@ describe('Populate Profile', function() {
       expect(following).to.eql(true);
       done();
   });
+
+  it('calls me profile if user is logged in user', function(done) {
+    var routeParams = {
+      id: '123123'
+    };
+
+    var getUserCalled = false;
+    var userService = {
+      getUserProfile: function(id, callback) {
+        if (id != 'me') {
+          callback(undefined, {user_id: '123123'});
+        } else {
+          getUserCalled = true;
+        }
+      },
+      getUserTimeline: function() {},
+      getFollowers: function() {},
+      getFollowing: function() {},
+    };
+
+    var subject = new ProfileController(undefined, location, routeParams, authService, userService);
+    expect(getUserCalled).to.eql(true);
+    done();
+  });
 });
