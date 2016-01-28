@@ -28,6 +28,7 @@ var NotificationService = require('./services/notification_service.js');
 var SearchService = require('./services/search_service.js');
 var PasswordService = require('./services/password_service.js');
 var FeedService = require('./services/feed_service.js');
+var IssueService = require('./services/issue_service.js');
 
 // Dependencies
 var angular = require('angular');
@@ -131,6 +132,7 @@ app.factory('notificationService', ['$resource', 'authService', NotificationServ
 app.factory('searchService', ['$resource', 'authService', SearchService]);
 app.factory('passwordService', ['$resource', PasswordService]);
 app.factory('feedService', ['$resource', 'authService', 'userService', FeedService]);
+app.factory('issueService', ['$resource', 'authService', IssueService]);
 
 // Controllers
 app.controller('TopicRegisterCtrl',['$scope','$location', 'userService', RegisterController]);

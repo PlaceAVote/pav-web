@@ -2,13 +2,21 @@ var Issue = require("../../src/models/issue.js");
 var expect = require("chai").expect;
 
 describe("Issues", function(){
-  it("Issue to have a bill id property", function() {
+  it("Issue to have a issue id property", function() {
     var options = {
-      bill_id: "hr2-114"
+      issue_id: "0001"
     };
     var subject = new Issue(options);
-    expect(subject.bill_id).to.eql("hr2-114");
+    expect(subject.issue_id).to.eql("0001");
   });
+
+  it("Issue to have a bill id property", function() {
+      var options = {
+        bill_id: "hr2-114"
+      };
+      var subject = new Issue(options);
+      expect(subject.bill_id).to.eql("hr2-114");
+    });
 
   it("Issue to have comment property", function() {
     var options = {

@@ -2,6 +2,7 @@ function Issue(options) {
   if (!options) {
     return this;
   }
+  this.issue_id = options.issue_id;
   this.bill_id = options.bill_id;
   this.comment = options.comment;
   this.article_link = options.article_link;

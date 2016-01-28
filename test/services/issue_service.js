@@ -104,7 +104,7 @@ describe("Issue Service", function() {
     it('calls params with correct config', function(done) {
       function mockResource(url, params, method) {
         this.setResponse = function(){};
-        expect(url).to.contain('/user/' + mockIssueId + '/response');
+        expect(url).to.contain('/user/issue/' + mockIssueId + '/response');
         expect(params).to.eql(undefined);
         expect(method.setResponse.headers.Authorization).to.eql('Token');
         expect(method.setResponse.method).to.eql('POST');
@@ -119,7 +119,6 @@ describe("Issue Service", function() {
     it('returns an error from the server', function(done) {
       function mockResource(url, params, method) {
         this.setResponse = function(body, onLoad, onError){
-          expect(body.issue_id).to.eql(mockIssueId);
           expect(body.emotional_response).to.eql(mockResponseValue);
           onError('Error');
         };
@@ -140,7 +139,6 @@ describe("Issue Service", function() {
       var subject = new IssueService(mockResource, mockAuth);
       subject.setIssueResponse(mockIssueId, mockResponseValue, function(err, result) {
         expect(err).to.eql(undefined);
-        expect(result.issue_id).to.eql(mockIssueId);
         expect(result.emotional_response).to.eql(mockResponseValue);
         done();
       });
@@ -167,7 +165,7 @@ describe("Issue Service", function() {
     it('calls params with correct config', function(done) {
       function mockResource(url, params, method) {
         this.getResponse = function(){};
-        expect(url).to.contain('/user/' + mockIssueId + '/response');
+        expect(url).to.contain('/user/issue/' + mockIssueId + '/response');
         expect(params).to.eql(undefined);
         expect(method.getResponse.headers.Authorization).to.eql('Token');
         expect(method.getResponse.method).to.eql('GET');
@@ -198,7 +196,6 @@ describe("Issue Service", function() {
         this.getResponse = function(body, onLoad, onError) {
           expect(body).to.eql(undefined);
           var toBody = {
-            issue_id: mockIssueId,
             emotional_response: mockResponseValue,
           };
           onLoad(toBody);
@@ -207,7 +204,6 @@ describe("Issue Service", function() {
       var subject = new IssueService(mockResource, mockAuth);
       subject.getIssueResponse(mockIssueId, function(err, result) {
         expect(err).to.eql(undefined);
-        expect(result.issue_id).to.eql(mockIssueId);
         expect(result.emotional_response).to.eql(mockResponseValue);
         done();
       });

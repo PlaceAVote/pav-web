@@ -164,7 +164,7 @@ module.exports = {
     issue: {
       endpoint: urls.USER + '/user/issue',
       response: function(id) {
-        return urls.USER + '/user/' + id + '/response';
+        return urls.USER + '/user/issue/' + id + '/response';
       },
     },
     settings: urls.USER + '/user/me/settings',
