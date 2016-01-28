@@ -8,8 +8,26 @@ function ProfileController($scope, $location, $routeParams, authService, userSer
   this.location = $location;
   this.authService = authService;
   this.userService = userService;
-  this.id = $routeParams.id;
-  this.populate();
+
+  var that = this;
+  if ($routeParams.id === 'me') {
+    this.id = $routeParams.id;
+    this.populate();
+  } else {
+    this.userService.getUserProfile('me', function(err, result) {
+      if (err) {
+        console.log(err);
+        return;
+      }
+
+      if (result.user_id === $routeParams.id) {
+        that.location.path('/profile/me');
+        return;
+      }
+      that.id = $routeParams.id;
+      that.populate();
+    });
+  }
 }
 
 ProfileController.prototype.loadProfile = function(id) {
