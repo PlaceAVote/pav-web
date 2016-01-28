@@ -71,8 +71,9 @@
 }
 
 .faq-wrapper {
-  position: absolute;
-  top: 90px;
+  position: relative;
+  padding-top: 90px;
+  padding-bottom: 140px;
   left: 0;
   right: 0;
   width: calc(100% - 80px);
@@ -109,7 +110,7 @@
     border-radius: 3px;
     border: 1px solid $grey;
     padding: 40px;
-    @include media(600px){
+    @include media(600px) {
     padding: 10px;
     }
   }
