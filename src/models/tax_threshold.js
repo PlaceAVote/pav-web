@@ -44,20 +44,62 @@ var bands = {
 };
 
 var sectors =  {
-  military: 15.8,
-  government: 1.92,
-  education: 1.85,
-  health: 27.76,
-  veterans: 4.24,
-  housing: 1.67,
-  international: 1.08,
-  environment: 1.03,
-  science: 0.78,
-  social: 33.76,
-  transport: 2.24,
-  food: 3.58,
-  other: 1.54,
-  debt: 6.04,
+  military: {
+    percentage: 15.8,
+    name: 'Military',
+  },
+  government: {
+    percentage: 1.92,
+    name: 'Government',
+  },
+  education: {
+    percentage: 1.85,
+    name: 'Education',
+  },
+  health: {
+    percentage: 27.76,
+    name: 'Medicare & Health',
+  },
+  veterans: {
+    percentage: 4.24,
+    name: 'Veteran\'s Benefits',
+  },
+  housing: {
+    percentage: 1.67,
+    name: 'Housing & Community',
+  },
+  international: {
+    percentage: 1.08,
+    name: 'International Affairs',
+  },
+  environment: {
+    percentage: 1.03,
+    name: 'Energy & Environments',
+  },
+  science: {
+    percentage: 0.78,
+    name: 'Science',
+  },
+  social: {
+    percentage: 33.76,
+    name: 'Social Security, Unemployment, Labor',
+  },
+  transport: {
+    percentage: 2.24,
+    name: 'Transporation',
+  },
+  food: {
+    percentage: 3.58,
+    name: 'Food & Agriculture',
+  },
+  other: {
+    percentage: 1.54,
+    name: 'Other',
+  },
+  debt: {
+    percentage: 6.04,
+    name: 'Debt',
+  },
 };
 
 module.exports = {

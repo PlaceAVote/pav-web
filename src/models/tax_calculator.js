@@ -2,6 +2,10 @@ var threshold = require('./tax_threshold.js');
 var bands = threshold.bands;
 var sectors = threshold.sectors;
 
+/**
+ * Give an income bracket and the income return the
+ * anual contribution.
+ */
 function generateContrubtion(income, bracket) {
   return {
     percentage: bracket.percentage,
@@ -9,14 +13,41 @@ function generateContrubtion(income, bracket) {
   };
 }
 
+/**
+ * Given an income and a sector determine how much
+ * the tax payer would pay per month.
+ *
+ * @param {Int} income - USD.
+ * @param {String} sector - references sectors in tax_threshold.js
+ * @param {Int} contribution - USD.
+ */
 function monthlyContributionToSector(income, sector) {
-  var sectorPecentage = sectors[sector];
+  var sectorPecentage = sectors[sector].percentage;
   var contribution = getTaxContributation(income);
   // TODO Patch the contribution based on doc. provided
   // where percentage === 103
   var sum = ((contribution.total / 100) * sectorPecentage) / 12;
   var monthly = Math.round(sum * 100) / 100;
   return monthly;
+}
+
+/**
+ * Given an Income return an array of monthly contributions to each sectoror.
+ * @param {Int} income - USD.
+ * @returns {Object[]} monthly contributions
+ */
+function getAllMonthlyContributions(income) {
+  var sects = Object.keys(sectors);
+  var contributions = [];
+  for (var i = 0; i < sects.length; i++) {
+    var sector = sects[i];
+    var monthly = {
+      name: sectors[sector].name,
+      contribution: monthlyContributionToSector(income, sector),
+    };
+    contributions.push(monthly);
+  }
+  return contributions;
 }
 
 /**
@@ -58,11 +89,14 @@ function getTaxContributation(income) {
   return generateContrubtion(income, bands.g);
 }
 
-
+/**
+ *  A calculator to determine tax contributions.
+ */
 function taxCalculator() {
   return {
     getTaxContributation: getTaxContributation,
     monthlyContributionToSector: monthlyContributionToSector,
+    getAllMonthlyContributions: getAllMonthlyContributions,
   };
 }
 

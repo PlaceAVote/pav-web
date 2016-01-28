@@ -67,4 +67,13 @@ describe('taxCalculator', function() {
     });
   });
 
+  describe('getAllMonthlyContributions', function() {
+    it('returns an array of readable names and monthyly contributions for each tax category', function() {
+      var subject = taxCalculator.getAllMonthlyContributions(35000);
+     expect(subject.length).to.eql(14);
+     expect(subject[0].name).to.eql('Military');
+     expect(subject[0].contribution).to.eql(81.34);
+    });
+  });
+
 });
