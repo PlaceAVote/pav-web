@@ -2,4 +2,14 @@
   h3 {
     @include font-size(10px);
   }
+  h4 {
+    @include font-size(10px);
+    line-height: 0;
+    display: inline-block;
+  }
+  .icon-close {
+    position: absolute;
+    right: 17px;
+    top: 24px;
+  }
 }
