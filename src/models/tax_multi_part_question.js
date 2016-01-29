@@ -3,7 +3,7 @@ var QuestionBase = require('./question_base.js');
 function TaxMultiPart(options) {
   QuestionBase.call(this, options);
   this.income = 0;
-  this.zip = '0';
+  this.zip = '91210';
   this.range = {
     min: 0,
     max: 1000000,
@@ -31,7 +31,7 @@ TaxMultiPart.prototype.update = function() {
 };
 
 TaxMultiPart.prototype.transform = function() {
-  return [firstAnswer, secondAnswer];
+  return [this.income, this.zip];
 };
 
 module.exports = TaxMultiPart;
