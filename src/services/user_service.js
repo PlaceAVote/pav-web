@@ -367,6 +367,31 @@ function UserService($resource, facebookService, authService) {
     resource.execute(body, onLoad, onError);
   };
 
+  var profilePicture = function(img, callback) {
+    var token = authService.getAccessToken();
+    if (!token) {
+      callback({status: 401, message: 'No Auth Token'});
+      return;
+    }
+    if (!img) {
+      return callback({message: 'img is Required'});
+    }
+    var url = config.users.profilePicture;
+
+    var body = {
+      file: img,
+    };
+
+    var resource = new $resource(url, undefined, {execute: config.methods.postData(body,token)});
+    var onError = function(err) {
+      return callback(err);
+    };
+    var onLoad = function(result) {
+      return callback(undefined, result);
+    };
+    resource.execute(body,onLoad, onError);
+  };
+
   return {
     createUser: createUser,
     getUser: getUser,
@@ -387,6 +412,7 @@ function UserService($resource, facebookService, authService) {
     getFollowing: getFollowing,
     follow: follow,
     unfollow: unfollow,
+    profilePicture: profilePicture,
   };
 }
 

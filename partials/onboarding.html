@@ -1,12 +1,12 @@
-<div class="onboarding-container l-7 m-10 s-12">
-	<div class="ob-header" ng-controller="TopicRegisterCtrl as topicsRegister">
-		<img ng-click="register.userService.getTopics()" src="img/pav-logo-color.png" />
+<div class="onboarding-container l-7 m-10 s-12" ng-controller="TopicRegisterCtrl as topicsRegister" ng-hide="register.userService.getTopics()">
+	<div class="ob-header">
+		<img src="img/pav-logo-color.png" />
 		<span class="progress-bar">
 			<span ng-class="{'complete': register.userService.getTopics()}"></span>
 		</span>
 	</div>
 	<div class="border"></div>
-	<section ng-controller="TopicRegisterCtrl as topicsRegister" ng-hide="register.userService.getTopics()">
+	<section>
 	<h2>Welcome to Placeavote!</h2>
 	<p>To get you started, please select the topics that interest you</p>
 	<div class="topics">
@@ -20,10 +20,17 @@
 	<button ng-click="register.topicsSubmit()">Continue</button>
 	</div>
 	</section>
+</div>
 
-
-
-	<section ng-controller="SignUpCtrl as signup" ng-show="signup.userService.getTopics()">
+<div class="onboarding-container l-7 m-10 s-12" ng-controller="SignUpCtrl as signup" ng-show="signup.userService.getTopics()">
+  <div class="ob-header">
+    <img src="img/pav-logo-color.png" />
+    <span class="progress-bar">
+      <span ng-class="{'complete': signup.userService.getTopics()}"></span>
+    </span>
+  </div>
+  <div class="border"></div>
+	<section loader loader-context="signup.loaded">
 		<h2>We just need a few more details and then you'll be ready to go.</h2>
 		<form>
 		<label class="firstname">First Name
@@ -70,5 +77,5 @@
 		<button ng-click="signup.test();">Continue</button>
 		</form>
         </section>
-
 </div>
+

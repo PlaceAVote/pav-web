@@ -1,41 +1,5 @@
 .press {
   position: relative;
-
-  // nav {
-  //   padding: 20px 40px;
-  //   display: flex;
-  //   flex-direction: row;
-  //   z-index: 2;
-  //   top: 0;
-  //   position: absolute;
-  //   width: 100%;
-
-  //   .logo-white {
-  //     width: 140px;
-  //     height: 23px;
-  //   }
-
-  //   .logo-color {
-  //   }
-
-  //   ul {
-  //     display: flex;
-  //     margin-left: auto;
-
-  //     li {
-  //       flex-direction: column;
-
-  //       a {
-  //         @include font-size(14px);
-  //         text-decoration: none;
-  //         color: white;
-  //         padding: 10px;
-  //         font-weight: $font-light;
-  //       }
-  //     }
-  //   }
-  // }
-
   .intro {
     z-index: 1;
     height: 200px;
@@ -74,8 +38,8 @@
 }
 
 .press-wrapper {
-  position: absolute;
-  top: 90px;
+  position: relative;
+  padding-top: 90px;
   left: 0;
   right: 0;
   width: calc(100% - 80px);
@@ -83,7 +47,7 @@
   margin: auto;
   @include media(600px){
   width: calc(100% - 40px);
-  top: 55px;
+  padding-top: 55px;
   }
 
   h1 {
@@ -130,7 +94,7 @@
 
     .press-kit-container {
       @include media(700px){
-    padding-bottom: 22px;
+       padding-bottom: 22px;
       }
 
       h2 {
@@ -231,66 +195,7 @@
   }
 }
 
-footer {
-  // display: flex;
-  // flex-direction: column;
-  height: 60px;
-  position: relative;
-  display: block;
-
-  @media screen and (max-device-width: 900px), screen and (max-width: 900px) {
-  display: flex;
-  position: initial;
-  flex-direction: column;
-  height: auto;
-  }
-
-  span {
-    position: absolute;
-    display: block;
-
-    @media screen and (max-device-width: 900px), screen and (max-width: 900px) {
-    position: initial;
-    align-self: center;
-    padding-top: 30px;
-    }
-    top: 25px;
-    left: 40px;
-    color: $black;
-    font-weight: $font-light;
-    @include font-size(14px);
-
-    // margin-right: auto;
-  }
-
-  ul {
-    padding-top: 20px;
-    padding-bottom: 20px;
-    position: absolute;
-
-    @media screen and (max-device-width: 900px), screen and (max-width: 900px) {
-    display: flex;
-    position: initial;
-    align-self: center;
-    }
-    right: 25px;
-
-    // display: flex;
-    // flex-direction: row;
-    // margin-left: auto;
-    li {
-      display: inline-block;
-      padding: 0px 15px;
-
-      a {
-        text-decoration: none;
-        color: $black;
-        font-weight: $font-light;
-        @include font-size(14px);
-      }
-    }
-  }
-}
+ 
 
 .lower {
   height: auto;

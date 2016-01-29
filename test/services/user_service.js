@@ -996,5 +996,31 @@ describe("User Service", function() {
       });
     });
   });
+  describe('profilePicture Service', function() {
+      it('should post an image and return image url', function() {
+        function profilePictureResource(url, params, method) {
+          this.execute = function(body, onLoad, onError) {
+            onLoad({img_url: 'img_url'})
+          }
+        }
+        var subject = new UserService(profilePictureResource, undefined, authService);
+        subject.profilePicture('img', function(err, res) {
+          expect(res.img_url).to.equal('img_url');
+          expect(err).to.equal(undefined);
+        });
+      });
+      it('it should return an error', function() {
+        function profilePictureErrorResource(url, params, method) {
+          this.execute = function(body, onLoad, onError) {
+            onError({error: 'ERROR'})
+          }
+        }
+        var subject = new UserService(profilePictureErrorResource, undefined, authService);
+        subject.profilePicture('img', function(err, res) {
+          expect(res).to.equal(undefined);
+          expect(err.error).to.equal('ERROR');
+        });
+      });
+  });
 });
 

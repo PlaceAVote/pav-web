@@ -38,10 +38,10 @@ Bill.prototype.getTitle = function() {
   if (!this.billData && !this.billData.bill_type) {
     return;
   }
-  var t = this.billData.bill_type.toUpperCase();
-  var c = this.billData.congress;
+  var billType = this.billData.bill_type.toUpperCase();
+  var billNumber = this.billData.number;
   var title = this.billData.short_title || this.billData.official_title || '';
-  return format('%s. %s: %s', t, c, title);
+  return format('%s %s: %s', billType, billNumber, title);
 };
 
 Bill.prototype.getSummary = function() {

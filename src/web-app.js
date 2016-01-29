@@ -5,6 +5,7 @@ var FaqController = require('./controllers/website/faq_controller.js');
 var TeamController = require('./controllers/website/team_controller.js');
 var PressController = require('./controllers/website/press_controller.js');
 var MenuController = require('./controllers/website/menu_controller.js');
+var ContactController = require('./controllers/website/contact_controller.js');
 
 // App Controllers
 var RegisterController = require('./controllers/register_controller.js');
@@ -29,6 +30,7 @@ var SearchService = require('./services/search_service.js');
 var PasswordService = require('./services/password_service.js');
 var FeedService = require('./services/feed_service.js');
 var IssueService = require('./services/issue_service.js');
+var MailService = require('./services/mail_service.js');
 
 // Dependencies
 var angular = require('angular');
@@ -50,8 +52,12 @@ var headerNav = require('./directives/header_directive.js');
 var notificationsDirective = require('./directives/notifications.js');
 var commentReplyNotificationDirective = require('./directives/comment_reply_notification.js');
 var trendsDirective = require('./directives/trends.js');
+var websiteFooter = require('./directives/footer.js');
 var autoResizeDirective = require('./directives/autoresize.js');
 var termsAndConditionsDirective = require('./directives/terms_and_conditions.js');
+var imageCropDirective = require('./directives/imagecrop.js');
+var fileReadDirective = require('./directives/fileread.js');
+var preloaderDirective = require('./directives/preloader.js');
 
 // Thirdparty integrations
 var Facebook = require('./integrations/facebook.js');
@@ -133,6 +139,7 @@ app.factory('searchService', ['$resource', 'authService', SearchService]);
 app.factory('passwordService', ['$resource', PasswordService]);
 app.factory('feedService', ['$resource', 'authService', 'userService', FeedService]);
 app.factory('issueService', ['$resource', 'authService', IssueService]);
+app.factory('mailService', ['$resource', MailService]);
 
 // Controllers
 app.controller('TopicRegisterCtrl',['$scope','$location', 'userService', RegisterController]);
@@ -151,6 +158,7 @@ app.controller('FaqCtrl', ['$scope', '$location', FaqController]);
 app.controller('TeamCtrl', ['$scope', '$location', TeamController]);
 app.controller('PressCtrl', ['$scope', '$location', PressController]);
 app.controller('MenuCtrl', ['$scope', '$location', '$routeParams', MenuController]);
+app.controller('ContactCtrl', ['$scope', '$timeout', 'mailService', ContactController]);
 
 // Directives
 app.directive('websiteNav', [websiteNav]);
@@ -167,8 +175,10 @@ app.directive('vote', ['$location', voteEventDirective]);
 app.directive('notifications', ['$location', notificationsDirective]);
 app.directive('commentreply', ['$location', commentReplyNotificationDirective]);
 app.directive('trends', ['$location',trendsDirective]);
+app.directive('websiteFooter', [websiteFooter]);
 app.directive('autoResize', [autoResizeDirective]);
 app.directive('searchBar', ['$sce' ,'$location', search]);
 app.directive('termsAndConditions', [termsAndConditionsDirective]);
-
-
+app.directive('imageCrop', [imageCropDirective]);
+app.directive('fileread', [fileReadDirective]);
+app.directive('loader', ['$location', preloaderDirective]);
