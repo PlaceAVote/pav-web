@@ -1,10 +1,10 @@
 <section ng-controller="WizardCtrl as wizard" class="card wizard-container">
   <div ng-show="wizard.currentQuestion" ng-switch on="wizard.currentQuestion.type">
     <div class="top-wizard-controller row">
-      Question {{wizard.currentQuestionIndex + 1}} of {{wizard.questions.length}}
+      <h3 class="no-margin-bottom layout-left v-layout-middle">Question {{wizard.currentQuestionIndex + 1}} of {{wizard.questions.length}}</h3>
       <div class="layout-right">
-        <button ng-click="wizard.skipQuestion()">Skip</button>
-        <i class="icon-close"></i>
+        <span ng-click="wizard.skipQuestion()" class="v-layout-middle red click">Skip</span>
+        <i class="icon-close red click"></i>
       </div>
     </div>
     <hr />

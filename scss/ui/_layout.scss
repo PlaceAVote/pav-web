@@ -34,6 +34,18 @@
   align-self: flex-end;
 }
 
+.v-layout-top {
+  align-self:flex-start;
+}
+
+.v-layout-middle {
+  align-self:center;
+}
+
+.v-layout-bottom {
+  align-self:flex-end;
+}
+
 //No Margins
 
 .no-margin-bottom {
