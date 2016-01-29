@@ -2,6 +2,7 @@ var urls = require('./urls.js');
 
 module.exports = {
   facebookAppId: urls.FACEBOOKAPPID,
+  mandrillKey: urls.MANDRILAPIKEY,
   methods: {
     get: {
       method: 'GET',
@@ -64,6 +65,15 @@ module.exports = {
     },
     post: {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      withCredentials: false,
+    },
+    postArray: {
+      method: 'POST',
+      isArray: true,
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
@@ -194,5 +204,8 @@ module.exports = {
     },
     newPassword: urls.USER + '/password/reset/confirm/',
     change: urls.USER + '/password/change',
+  },
+  mandrill: {
+    endpoint: 'https://mandrillapp.com/api/1.0//messages/send.json',
   },
 };
