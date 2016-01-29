@@ -1,0 +1,12 @@
+<div>
+  Find out where your taxes go by adding your household income.
+  {{question.income}}
+  <input type="range" min="{{question.range.min}}" max="{{question.range.max}}" step="{{question.range.step}}" ng-model="question.income"/>
+  <input type="text" ng-model="question.zip" />
+  <div ng-show="question.sectors">
+    <div ng-repeat="sector in question.sectors">
+      {{sector.name}}
+      {{sector.contribution}}
+    </div>
+  </div>
+</div>

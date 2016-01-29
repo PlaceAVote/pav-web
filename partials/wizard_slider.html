@@ -1,5 +1,5 @@
 <div>
-  You chose {{question.topic}}, can you be more specific?
-  <h2>{{question.getPosition()}}</h2>
+  <p class="medium-margin-bottom">You chose <span class="blue">{{question.topic}}</span>, can you be more specific?</p>
+  <h3 class="text-center">{{question.getPosition()}}</h3>
   <input type="range" min="0" max="{{question.answers.length - 1}}" ng-model="question.position"/>
 </div>
