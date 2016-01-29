@@ -37,10 +37,18 @@ LoginCtrl.prototype.loginWithFacebook = function() {
       }
       return that.location.path('/onboarding');
     }
-    that.rs.user = that.userService.getUser();
-    that.loaded = true;
-    that.rs.loggedIn = true;
-    that.location.path('/feed');
+
+    that.userService.getUserProfile('me', function(err, result) {
+      if (err) {
+        return;
+      }
+      if (result) {
+        that.rs.user = result;
+        that.rs.loggedIn = true;
+        that.loaded = true;
+        that.location.path('/feed');
+      }
+    });
   });
 };
 

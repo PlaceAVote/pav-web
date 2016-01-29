@@ -24,9 +24,16 @@ HomeController.prototype.loginWithFacebook = function(){
       that.location.path("/onboarding");
     }
     else {
-      that.rs.user = that.userService.getUser();
-      that.rs.loggedIn = true;
-      that.location.path("/feed");
+      that.userService.getUserProfile('me', function(err, result) {
+        if (err) {
+          return;
+        }
+        if (result) {
+          that.rs.user = result;
+          that.rs.loggedIn = true;
+          that.location.path('/feed');
+        }
+      });
     }
   });
 };
