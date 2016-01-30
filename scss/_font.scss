@@ -23,12 +23,11 @@
 
 // @include font-face(whitneylight_italic, whitney-lightital-bas-webfont) ;
 $font: "Whitney SSm A", "Whitney SSm B";
-$font-bold: "Whitney SSm A", "Whitney SSm B";
-$font-bolditalic: 'whitneyboldital', sans-serif;
-$font-normal: "Whitney SSm A", "Whitney SSm B";
-$font-normalitalic: "Whitney SSm A", "Whitney SSm B";
-$font-light: "Whitney SSm A", "Whitney SSm B";
-$font-italic: "Whitney SSm A", "Whitney SSm B";
+$font-bold: 700;
+$font-normal: 400;
+$font-normalitalic: 400;
+$font-light: 300;
+$font-italic: 500;
 
 @mixin bold() {
 font-style: normal;

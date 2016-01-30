@@ -4,6 +4,7 @@ var NOTIFICATION = 'ws://pav-user-api-924234322.us-east-1.elb.amazonaws.com:8080
 var VOTES = 'http://pav-vote-api-143877429.us-east-1.elb.amazonaws.com:8080';
 var SEARCH = 'http://pav-search-api-1175034802.us-east-1.elb.amazonaws.com:8080';
 var FACEBOOKAPPID = '1686805824874862';
+var MANDRILAPIKEY = 'wIcrhjbexBF4E0vspS7t9w';
 
 module.exports = {
   CONGRESS: CONGRESS,
@@ -11,5 +12,6 @@ module.exports = {
   VOTES: VOTES,
   NOTIFICATION: NOTIFICATION,
   FACEBOOKAPPID: FACEBOOKAPPID,
+  MANDRILAPIKEY: MANDRILAPIKEY,
   SEARCH: SEARCH,
 };

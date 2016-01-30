@@ -68,7 +68,7 @@ input {
 
 
 nav {
-  @include media(600px){
+  @include media(640px){
   padding: 20px 10px !important;
   margin-bottom:50px;
     ul {
@@ -115,7 +115,7 @@ nav {
   right: 10px;
   top: 18px;
   
-  @include media(600px) {
+  @include media(640px) {
     display: block;
     cursor: pointer;
   }
@@ -187,7 +187,7 @@ nav {
     position: absolute;
     height: 23px;
     left: 40px;
-    top: 20px;
+    top: 24px;
     @include media(600px) {
       left: 10px;
     }
@@ -197,6 +197,7 @@ nav {
     opacity: 1;
     width: 140px;
     height: 23px;
+    margin-top:4px;
   }
 
   ul {
@@ -245,13 +246,18 @@ nav {
     z-index: 9998;
   .logo-white {
     opacity: 0;
-  }
+  }  
+        
   a.btn-signup {color:$white;}
-  a.btn-signin {border:1px solid $purple;text-shadow:none;}
+  a.btn-signin {border: 1px solid $greydark;
+        color: $greydark;
+      &:hover {
+            text-shadow: none;
+            background-color: rgba(0, 0, 0, 0.1);
+        }}
   .logo-color {
     opacity: 1;
   }
-  
   background-color: white;
   opacity: 0.9;
   z-index: 9998;

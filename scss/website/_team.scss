@@ -1,41 +1,5 @@
 .team {
   position: relative;
-
-  // nav {
-  //   padding: 20px 40px;
-  //   display: flex;
-  //   flex-direction: row;
-  //   z-index: 2;
-  //   top: 0;
-  //   position: absolute;
-  //   width: 100%;
-
-  //   .logo-white {
-  //     width: 140px;
-  //     height: 23px;
-  //   }
-
-  //   .logo-color {
-  //   }
-
-  //   ul {
-  //     display: flex;
-  //     margin-left: auto;
-
-  //     li {
-  //       flex-direction: column;
-
-  //       a {
-  //         @include font-size(14px);
-  //         text-decoration: none;
-  //         color: white;
-  //         padding: 10px;
-  //         font-weight: $font-light;
-  //       }
-  //     }
-  //   }
-  // }
-
   .intro {
     z-index: 1;
     height: 545px;
@@ -71,8 +35,9 @@
 }
 
 .team-wrapper {
-  position: absolute;
-  top: 90px;
+  position: relative;
+  padding-top: 90px;
+  padding-bottom: 140px;
   left: 0;
   right: 0;
   width: calc(100% - 80px);
