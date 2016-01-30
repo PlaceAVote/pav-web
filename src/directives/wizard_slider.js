@@ -7,7 +7,7 @@ module.exports = function($timeout) {
     templateUrl: 'partials/wizard_slider.html',
     link: function(scope, el, ettr) {
       scope.$watch('question', function(n, o) {
-        if(n !== undefined) {
+        if (n !== undefined) {
           scope.question.sliderConfig = {
             showSelectionBar: true,
             hideLimitLabels: true,
@@ -17,9 +17,9 @@ module.exports = function($timeout) {
               return '';
             },
           };
-          $timeout(function(){
-              scope.$broadcast('rzSliderForceRender');
-          })
+          $timeout(function() {
+            scope.$broadcast('rzSliderForceRender');
+          });
         }
       });
     },

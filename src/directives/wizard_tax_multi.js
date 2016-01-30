@@ -7,7 +7,7 @@ module.exports = function($filter) {
     templateUrl: 'partials/wizard_tax_multi.html',
     link: function(scope, el, attr) {
       scope.$watch('question', function(n, o) {
-        if(n !== undefined) {
+        if (n !== undefined) {
           scope.question.sliderConfig = {
             showSelectionBar: true,
             ceil: scope.question.range.max,
