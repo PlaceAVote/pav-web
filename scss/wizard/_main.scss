@@ -18,3 +18,25 @@
     @include medium();
   }
 }
+
+.spending-table {
+  border: 1px solid $widgetborder;
+  border-radius: 3px;
+  &-row {
+    padding: 10px;
+    border-bottom: 1px solid lighten($widgetborder, 10%);
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+.spending-table-total {
+  border: 1px solid $widgetborder;
+  border-radius: 3px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-top: none;
+  padding: 10px;
+  align-self: center;
+}

@@ -5,6 +5,7 @@ var RIGHT = 'right';
 var QuestionBase = require('./question_base.js');
 
 function Slider(options) {
+  console.log(options);
   options = options || {};
   QuestionBase.call(this, options);
   this.answers = splitAnswers(options.answers);

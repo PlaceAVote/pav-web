@@ -56,3 +56,15 @@ font-weight: 400;
 .text-right {
   text-align: right;
 }
+
+.bold {
+  @include bold();
+}
+
+.medium {
+  @include medium();
+}
+
+.light {
+  @include light();
+}
