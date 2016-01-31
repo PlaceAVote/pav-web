@@ -7,7 +7,7 @@
   <div ng-show="question.sectors" class="spending-table medium-margin-top">
     <div ng-repeat="sector in question.sectors" class="row spending-table-row col-m">
       <h3 class="layout-left v-layout-middle">{{sector.name}}</h3>
-      <div class="layout-right row col-m m-8 s-12">
+      <div class="layout-right layout-center-m no-margin-left-m row col-m m-8 s-12">
         <h3 class="text-left v-layout-middle bold lightblue medium-margin-right">{{sector.contribution | currency:undefined:0}} Per month</h3> 
         <button class="blue-button medium-button">CHANGE THIS</button>
       </div>
