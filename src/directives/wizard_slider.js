@@ -13,6 +13,7 @@ module.exports = function($timeout) {
             hideLimitLabels: true,
             ceil: scope.question.answers.length - 1,
             minRange: 0,
+
             translate: function(value) {
               return '';
             },

@@ -15,7 +15,7 @@ module.exports = function($filter) {
             step: scope.question.range.step,
             hideLimitLabels: true,
             translate: function(value) {
-              return $filter('currency')(value);
+              return $filter('currency')(value, undefined, 0);
             },
           };
         }

@@ -20,6 +20,18 @@
   }
 }
 
+.col-s {
+  @include media(500px) {
+    flex-direction: column;
+  }
+}
+
+.row-s {
+  @include media(500px) {
+    flex-direction: row;
+  }
+}
+
 
 .layout-right {
   align-self: flex-start;

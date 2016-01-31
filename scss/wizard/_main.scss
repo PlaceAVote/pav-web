@@ -1,9 +1,9 @@
 .wizard-container {
   h3 {
-    @include font-size(10px);
+    @include font-size(12px);
   }
   h4 {
-    @include font-size(10px);
+    @include font-size(12px);
     line-height: 0;
     display: inline-block;
   }
