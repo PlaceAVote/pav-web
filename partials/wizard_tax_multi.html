@@ -1,20 +1,20 @@
 <div class="col">
-  <p class="large-margin-bottom">Find out where your taxes go by adding your household income.</p>
+  <p class="margin-bottom-large">Find out where your taxes go by adding your household income.</p>
   <div>
   <rzslider rz-slider-model="question.income" rz-slider-options="question.sliderConfig"></rzslider>
   </div>
   <!-- <input type="text" ng-model="question.zip" /> -->
-  <div ng-show="question.sectors" class="spending-table medium-margin-top">
-    <div ng-repeat="sector in question.sectors" class="row spending-table-row col-m">
-      <h3 class="layout-left v-layout-middle">{{sector.name}}</h3>
-      <div class="layout-right layout-center-m no-margin-left-m row col-m m-8 s-12">
-        <h3 class="text-left v-layout-middle bold lightblue medium-margin-right no-margin-right-m">{{sector.contribution | currency:undefined:0}} Per month</h3> 
+  <div ng-show="question.sectors" class="spending-table margin-top-medium">
+    <div ng-repeat="sector in question.sectors" class="row spending-table-row tablet-col">
+      <h3 class="h-left tablet-h-center text-center middle">{{sector.name}}</h3>
+      <div class="h-right tablet-h-center tablet-margin-left-none row tablet-col m-8 s-12">
+        <h3 class="text-left middle bold lightblue margin-right-medium tablet-margin-right-none margin-right-medium">{{sector.contribution | currency:undefined:0}} Per month</h3> 
         <button class="blue-button medium-button">CHANGE THIS</button>
       </div>
     </div>
   </div>
   <div class="spending-table-total l-5 m-7 s-10 row">
-    <h3 class="v-layout-middle layout-left">Total: </h3>
-    <h3 class="v-layout-middle layout-right red bold">Total</h3>
+    <h3 class="middle h-left">Total: </h3>
+    <h3 class="middle h-right red bold">Total</h3>
   </div>
 </div>

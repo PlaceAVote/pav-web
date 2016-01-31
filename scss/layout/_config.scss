@@ -1,0 +1,56 @@
+$viewports: (
+    mobile: 480px,
+    tablet: 768px
+);
+
+$margins: (
+    none: 0,
+    small: 10px,
+    medium: 15px,
+    large: 20px
+);
+
+$padding: (
+    none: 0,
+    small: 10px,
+    medium: 15px,
+    large: 20px
+);
+
+// $grid: (
+//     col: 12
+// );
+
+$orientationLayout: (
+    row: $row,
+    col: $column
+);
+
+$alignHorizontalChildren: (
+    h-center: $center,
+    h-left: $left,
+    h-right: $right
+);
+
+$alignVerticalChildren: (
+    middle: $middle,
+    top: $top,
+    bottom: $bottom
+);
+
+$alignText: (
+    center: $center,
+    left: $left,
+    right: $right
+);
+
+// $colors: (
+//     black: #121211,
+//     white: #f0f0f0
+// );
+
+// $backgroundColours: (
+//     red: #ff0000,
+//     greed: green,
+//     blue: blue
+// );
