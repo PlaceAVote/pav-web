@@ -27,6 +27,7 @@ describe('Wizard', function() {
 
     it('returns null if questions have length of combined skipped and answered', function() {
       var subject = new Wizard();
+      subject.sendQuestions = function(){};
       subject.questions = ['hello', 'goodbye', 'world'];
       subject.answered = ['hello', 'world'];
       subject.skipped = ['goodbye'];
@@ -74,6 +75,7 @@ describe('Wizard', function() {
       };
       var question = new Slider(options);
       var subject = new Wizard();
+      subject.sendQuestions = function(){};
       subject.currentQuestion = question;
       subject.questions = [question];
       question.position = 0;
@@ -102,8 +104,12 @@ describe('Wizard', function() {
           called = true;
           callback(null, [expectedQuestion]);
         },
+        answerQuestions: function(){},
       };
-      var subject = new Wizard({}, mockQuestionService);
+      var scope = {
+        $watch: function(){},
+      };
+      var subject = new Wizard(scope, mockQuestionService);
       subject.loadQuestions(function(currentQuestion) {
         expect(called).to.eql(true);
         expect(currentQuestion).to.eql(expectedQuestion);
@@ -123,6 +129,35 @@ describe('Wizard', function() {
       subject.loadQuestions(function(currentQuestion) {
         expect(subject.questions).to.eql([]);
         expect(currentQuestion).to.eql(undefined);
+        done();
+      });
+    });
+  });
+  describe('sendQuestions', function() {
+    it('sends questions to the server', function(done){
+
+      var actualAnswers;
+      var mockQuestionService = {
+        getQuestions: function(){},
+        answerQuestions: function(answers, callback) {
+          actualAnswers = answers;
+          callback();
+        },
+      };
+      var subject = new Wizard({}, mockQuestionService);
+      var expected = [
+        {
+          question_id: "1003",
+          answers: ["18000", "ne333ax"]
+        },
+        {
+          question_id: "1001",
+          answers: ["this bill", "that bill"],
+        },
+      ];
+      subject.answered = expected;
+      subject.sendQuestions(function(err, result) {
+        expect(actualAnswers).to.eql(expected);
         done();
       });
     });

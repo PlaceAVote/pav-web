@@ -74,6 +74,15 @@ WizardController.prototype.loadQuestions = function(callback) {
   });
 };
 
+WizardController.prototype.sendQuestions = function(callback) {
+  this.questionService.answerQuestions(this.answered, function() {
+    if (callback) {
+      callback();
+    }
+  });
+};
+
+
 WizardController.prototype.getNextQuestion = function() {
   if (!this.questions || this.questions.length === 0) {
     return null;
@@ -81,6 +90,7 @@ WizardController.prototype.getNextQuestion = function() {
   this.currentQuestionIndex = this.answered.length + this.skipped.length;
 
   if (this.questions.length === this.currentQuestionIndex) {
+    this.sendQuestions();
     return null;
   }
 
