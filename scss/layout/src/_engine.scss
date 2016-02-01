@@ -38,8 +38,16 @@
 
 
 @mixin media($width) {
-  @media only screen and (max-width: $width) {
-    @content;
+  @if $mobileFirst == false {
+      @media only screen and (max-width: $width) {
+        @content;
+      }
+  }
+  
+  @if $mobileFirst == true {
+    @media only screen and (min-width: $width) {
+        @content;
+      }
   }
 }
 
@@ -122,6 +130,12 @@
 @mixin marginEngine($mediaName) {
   @for $x from 1 through $marginLength {
     $className: nth($marginList, $x);
+    #{$mediaName}margin-#{$className} {
+      margin-top: map-get($margins, $className);
+      margin-right: map-get($margins, $className);
+      margin-bottom: map-get($margins, $className);
+      margin-left: map-get($margins, $className);   
+    }
     @for $n from 1 through length($directions) {
       $d: nth($directions, $n);
       #{$mediaName}margin-#{$d}-#{$className} {
@@ -134,6 +148,12 @@
 @mixin paddingEngine($mediaName){
   @for $x from 1 through $paddingLength {
     $className: nth($paddingList, $x);
+    #{$mediaName}padding-#{$className} {
+      padding-top: map-get($padding, $className);
+      padding-right: map-get($padding, $className);
+      padding-bottom: map-get($padding, $className);
+      padding-left: map-get($padding, $className);
+    }
     @for $n from 1 through length($directions) {
       $d: nth($directions, $n);
       #{$mediaName}padding-#{$d}-#{$className} {

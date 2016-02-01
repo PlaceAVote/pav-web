@@ -1,4 +1,6 @@
 .wizard-container {
+  overflow: hidden;
+  margin-top: 20px;
   h3 {
     @include font-size(12px);
   }
@@ -39,4 +41,51 @@
   border-top: none;
   padding: 10px;
   align-self: center;
+}
+
+.drag-box, .angular-ui-tree-drag li {
+  cursor: pointer;
+  position: relative;
+  border-radius: 3px;
+  border: 1px solid $widgetborder;
+  p {
+    @include light();
+    @include font-size(12px);
+    line-height: 20px;
+    font-family: $font;
+  }
+}
+
+.angular-ui-tree-drag {
+  position: fixed;
+  li {
+    overflow: hidden;
+    background: white;
+    border-style: dashed;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  }
+}
+
+.angular-ui-tree-placeholder {
+  background: lighten($greylight, 10%);
+  border: 1px dashed $greylight;
+  margin-botton: 15px !important;
+  border-radius: 3px;
+}
+
+.drag-section {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  @include font-size(12px);
+    span {
+      font-family: $font;
+      color: lighten($black, 10%);
+    }
+    .icon-drag {
+      position: absolute;
+      left: -18px;
+      @include font-size(13px);
+      transform: rotate(-24deg);
+    }
 }

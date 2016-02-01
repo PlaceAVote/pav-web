@@ -66,7 +66,8 @@ var preloaderDirective = require('./directives/preloader.js');
 // Thirdparty integrations
 var Facebook = require('./integrations/facebook.js');
 var slider = require('angularjs-slider');
-var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'pavDirectives', 'rzModule',]);
+var draggable = require('angular-ui-tree');
+var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'pavDirectives', 'rzModule', 'ui.tree']);
 
 
 app.config(['$routeProvider', function($routeProvider) {
