@@ -40,7 +40,7 @@
   			<hr />
         <aside class="row-layout loaded" ng-show="bill.forComment.author">
   			<div class="user-img-border">
-          <img src="{{bill.forComment.author_img_url}}" />
+          <img ng-src="{{bill.forComment.author_img_url}}" />
   			</div>
   			<div class="top-comment-body" ng-show="bill.hasForComment">
           <h2><a href="#/profile/{{bill.forComment.author}}">{{bill.forComment.author_first_name}}</a></h2> <section class="comment-vote no-reply"><span ng-class="{'score-down': comment.score < 0, 'score-none': bill.forComment.score == 0}">{{bill.forComment.score}}</span><i class="icon-thumbs-up thumbs" ng-class="{'score-up': bill.forComment.liked == true}" ng-click="bill.forComment.like(bill.commentService)"></i><i class="icon-thumbs-down thumbs" ng-class="{'score-down': bill.forComment.disliked == true}" ng-click="bill.forComment.dislike(bill.commentService)"></i></section>
