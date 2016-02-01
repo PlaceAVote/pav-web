@@ -132,7 +132,7 @@ describe('LoginCtrl', function() {
               };
               subject.loginWithFacebook();
             });
-            it("should call go with 'feed' if no errors", function(done){
+            it("should get user profile and call go with 'feed' if no errors", function(done){
               var location = {
                 path: function(dest){
                   expect(dest).to.eql('/feed');
@@ -141,16 +141,19 @@ describe('LoginCtrl', function() {
               };
               var scope = {};
               scope.$on = function() {};
+              var called = false;
               var subject = new LoginCtrl(scope, location, {}, authService);
               subject.userService = {
                 loginWithFacebook : function(callback){
                   callback();
                 },
-                getUser : function() {
-                	return;
+                getUserProfile : function(id, callback) {
+                  called = true;
+                  callback(undefined, true);
                 }
               };
               subject.loginWithFacebook();
+              expect(called).to.eql(true);
             });
         });
        describe("failed login", function() {

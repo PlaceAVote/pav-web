@@ -3,6 +3,7 @@ var countryCodes = require('../utils/countrycodes.json');
 function SignUpCtrl($rootScope, $scope, $location, userService, authService) {
   $scope = $scope || {};
   $scope.signup = this;
+  this.loaded = true;
   this.userService = userService;
   this.location = $location;
   this.max = this.maxDate();
@@ -49,7 +50,9 @@ SignUpCtrl.prototype.test = function() {
 
 SignUpCtrl.prototype.saveUser = function(user) {
   var that = this;
+  this.loaded = false;
   this.userService.saveUser(function(err, result) {
+    that.loaded = true;
     if (err) {
       if (err.status === 409) {
         that.user_exists_error = true;

@@ -250,6 +250,13 @@
 }
 
 .timeline-layout {
+  ng-transclude {
+    width: 100%;
+  }
+  position: relative;
+  .box-loader {
+    background: $greylight;
+  }
 	display: flex;
 	flex-direction: row;
 	.activity-label {

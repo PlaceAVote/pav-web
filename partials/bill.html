@@ -1,5 +1,6 @@
 <div class="app">
 	<div class="app-body">
+              <div class="bill-timeline-container" loader loader-context="bill.body">
             		<h1 class="bill-title">{{bill.body.getTitle()}}</h1>
                 <section class="bill-timeline {{bill.body.getStatusClass()}}">
             		<ul>
@@ -31,15 +32,15 @@
             		</ul>
                 <div  class="bill-timeline-bar"><span class="{{bill.body.getStatusClass()}}"></span></div>
             		</section>
+                </div>
 
     <section class="top-comments" ng-show="bill.forComment.author">
-  		<div class="card">
+  		<div class="card" loader loader-context="bill.topLoaded">
   			<h1>Top Comment In Favor</h1>
   			<hr />
-        <div class="pre-loader" ng-hide="bill.topLoaded"></div>
         <aside class="row-layout loaded" ng-show="bill.forComment.author">
   			<div class="user-img-border">
-          <img src="{{bill.forComment.author_img_url}}" />
+          <img ng-src="{{bill.forComment.author_img_url}}" />
   			</div>
   			<div class="top-comment-body" ng-show="bill.hasForComment">
           <h2><a href="#/profile/{{bill.forComment.author}}">{{bill.forComment.author_first_name}}</a></h2> <section class="comment-vote no-reply"><span ng-class="{'score-down': comment.score < 0, 'score-none': bill.forComment.score == 0}">{{bill.forComment.score}}</span><i class="icon-thumbs-up thumbs" ng-class="{'score-up': bill.forComment.liked == true}" ng-click="bill.forComment.like(bill.commentService)"></i><i class="icon-thumbs-down thumbs" ng-class="{'score-down': bill.forComment.disliked == true}" ng-click="bill.forComment.dislike(bill.commentService)"></i></section>
@@ -50,10 +51,9 @@
         </div>
         </aside>
   		</div>
-      <div class="card">
+      <div class="card" loader loader-context="bill.topLoaded">
         <h1>Top Comment Opposed</h1>
         <hr />
-        <div class="pre-loader" ng-hide="bill.topLoaded"></div>
         <aside class="row-layout loaded" ng-show="bill.againstComment.author">
           <div class="user-img-border">
             <img ng-src="{{bill.againstComment.author_img_url}}" />
@@ -70,10 +70,9 @@
 
     </section>
     <section class="bill-spec">
-		<div class="card bill-sponsor">
+		<div class="card bill-sponsor" loader loader-context="bill.body.billData.sponsor.name">
       <h1>Bill Sponsor</h1>
 			<hr />
-      <div class="pre-loader" ng-hide="bill.body.billData.sponsor.name"></div>
       <aside class="row-layout loaded" ng-show="bill.body.billData.sponsor.name">
 			<div class="senator-img">
         <img ng-src="{{bill.legislator.getImageUrl()}}" />
@@ -95,10 +94,11 @@
 		</div>
     </section>
 
-    <div class="card bill-comments">
+    <div class="card bill-comments" loader loader-context="bill.comments">
       <h1>COMMENTS</h1>
       <hr />
-    <div class="pre-loader" ng-hide="bill.comments"></div>
+    <!-- <div class="pre-loader" ng-hide="bill.comments"></div> -->
+
     <div ng-show="bill.commentMessage" class="card-message">
       <h2>Be the first to comment on this bill.</h2>
     </div>
@@ -117,7 +117,7 @@
 
 
 <section ng-switch="bill.chartShow" class="row bill-stats-vote l-12">
-		<div ng-switch-when="true" class="card bill-stats l-6">
+		<div ng-switch-when="true" class="card bill-stats l-6" >
     <h1>Statistics</h1>
     <hr />
     <status-chart data="bill.stats"></status-chart>

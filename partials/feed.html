@@ -12,12 +12,13 @@
 	    <section class="feed-wrapper">
 		<div class='feed-column l-7 m-12 s-12'>
         <issues-post></issues-post>
+        <wizard></wizard>
 		    <div class="bill-container" ng-repeat="bill in bills">
 		    	<div class="bill card">
 		        <h1 ng-click='bill.goToPage($parent.$location)'>{{bill.subject}}</h1>
 		        <hr />
-		        	<section class="row">
-			    	<div class="feed-icon">
+		        	<section class="row margin-top-small">
+			    	<div class="feed-icon margin-right-medium">
 			    	<i class="{{bill.icon}}"></i>
 			    	</div>
 			        <div class="bill-summary-container">
@@ -35,11 +36,13 @@
 		        </div>
 		    </div>
 		</div>
-		<div class="trends-container l-5">
-			<h2><i class="icon-trending-graph"></i>TRENDING GLOBALLY</h2>
-			<hr />
-			<trends data="feed.trends"></trends>
-		</div>
+    <div class="l-5 m-12 s-12">
+  		<div class="trends-container" loader loader-context="feed.trends">
+  			<h2><i class="icon-trending-graph"></i>TRENDING GLOBALLY</h2>
+  			<hr />
+  			<trends data="feed.trends"></trends>
+  		</div>
+    </div>
 		</section>
 	</div>
 </div>

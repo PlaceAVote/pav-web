@@ -11,7 +11,7 @@
                 </ul>
             </div>
             <section class="s-12">
-                <div class="login-form-container" ng-hide="login.signup">
+                <div class="login-form-container" ng-hide="login.signup" loader loader-context="login.loaded">
                     
                     <form name="emailForm" ng-hide="login.forgot">
                         <h1>Welcome back! Sign in below</h1>
@@ -34,7 +34,7 @@
                     <p class="click" ng-click="login.forgot = false">Back</p>
                     </form>
                 </div>
-                <div class="login-form-container" ng-show="login.signup">
+                <div class="login-form-container" ng-show="login.signup" loader loader-context="login.loaded">
                     <h1>Register today!</h1>
                     <form name="emailForm">
                         <label>Email</label>

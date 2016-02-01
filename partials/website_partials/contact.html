@@ -1,36 +1,33 @@
 <website-nav></website-nav>
-<div class="PressCtrl as press" class="press">
-<section class="press-wrapper">
-<div class="title">
-<h1>Contact</h1>
-<div class="featured contact">
-<a href="tel:+1 (844) 427-1000">+1 (844) 427-1000</a>
-<a href="mailto:hello@placeavote.com">hello@placeavote.com</a>
+<div ng-controller="ContactCtrl as contact" id="pav-wrapper" class="wrapper s-12 m-12 l-12">
+    <div class="team contact">
+        <section class="team-wrapper">
+            <h1>Contact Us</h1>
+            <p>We'd love your input: questions, bug reports, feature requests – every little bit helps. Let us know what we can do to improve Placeavote.</p>
+            <div class="team-container row col-m">
+                <div class="s-12 m-12 l-4">
+                    <h4>Contact Details</h4>
+                    <hr />
+                    <span>Placeavote is made in Los Angeles, California</span>
+                    <a href="tel:+1 (844) 427-1000">+1 (844) 427-1000</a>
+                    <a href="mailto:hello@placeavote.com">hello@placeavote.com</a>
+                </div>
+                <div class="l-8 m-12 s-12">
+                    <span ng-if="contact.sendMailErr" ng-class="{'has-err':contact.sendMailErr}">
+                        Failed to send email, please enter the fields correctly and send again.
+                    </span>
+                    <span ng-if="contact.sendMailSuccess" ng-class="{'has-success':contact.sendMailSuccess}">
+                        Mail is sent successfully.
+                    </span>
+                    <input type="text" name="FirstName" ng-model="contact.name" placeholder="Your name">
+                    <input type="email" name="email" ng-model="contact.email" placeholder="Your email address">
+                    <textarea rows="10" cols="0" ng-model="contact.mailBody" placeholder="Your message..."></textarea>
+                    <button ng-click="contact.toMail();">Send Message</button>
+                </div>
+            </div>
+        </section>
+        <div class="intro">
+        </div>
+    </div>
 </div>
-</div>
-<div class="map-container">
-<img style="width: 100%;" src="img/web/contact/location.png" /></div>
-<footer class="l-12">
-	<span style="padding-bottom: 20px;">Placeavote 2015</span>
-	<ul style="display: none;">
-		<li>
-			<a href="#">Sign Up</a>
-		</li>
-
-		<li>
-			<a href="#">Sign In</a>
-		</li>
-
-		<li>
-			<a href="#">Press</a>
-		</li>
-
-		<li>
-			<a href="#">Jobs</a>
-		</li>
-	</ul>
-	</footer>
-</section>
-<div class="intro">
-</div>
-</div>
+<website-footer></website-footer>

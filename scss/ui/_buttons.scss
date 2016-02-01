@@ -106,8 +106,91 @@
   }
 }
 
+.edit-btn {
+  display: inline-block;
+  height: 20px;
+  line-height: 20px;
+  @include font-size(9px);
+  backgrund: white;
+  border: 1px solid $grey;
+  border-radius: 3px;
+  cursor: pointer;
+  text-align: center;
+  padding: 0px 10px;
+  background: $white;
+  @include medium();
+}
+
+.btn-small {
+  height: 30px;
+  line-height: 28px;
+}
+
 button {
   @include light();
+}
+
+.small-button {
+  border-radius: 3px;
+  color: white;
+  height: 20px;
+  line-height: 20px;
+  font-size: 10px;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  text-shadow: 0px 1px 1px transparentize($black, 0.6);
+  transition: all 0.3s ease;
+}
+
+.medium-button {
+  border-radius: 3px;
+  color: white;
+  height: 30px;
+  // line-height: 30px;
+  @include bold();
+  vertical-align: middle;
+  font-size: 10px;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  text-shadow: 0px 1px 1px transparentize($black, 0.6);
+  transition: all 0.3s ease;
+}
+
+.large-button {
+  border-radius: 3px;
+  color: white;
+  height: 45px;
+  line-height: 45px;
+  font-size: 15px;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  text-shadow: 0px 1px 1px transparentize($black, 0.6);
+  transition: all 0.3s ease;
+}
+
+.blue-button {
+  background: $blue;
+  border: 1px solid darken($blue, 10%);
+    &:hover {
+      background: lighten($blue, 4%);
+    span {
+      text-shadow: 0px 3px 5px transparentize($black, 0.8);
+    }
+  }
+}
+
+.green-button {
+  background: $green;
+  border: 1px solid darken($green, 10%);
+    &:hover {
+      background: lighten($green, 4%);
+    span {
+      text-shadow: 0px 3px 5px transparentize($green, 0.8);
+    }
+  }
 }
 
 // .follow-me {
