@@ -52,8 +52,8 @@ function answerQuestions(Resource, authService, answers, callback) {
     return;
   }
 
-  config.methods.post.headers.Authorization = token;
-  var request = new Resource(config.users.questions, undefined, {answerQuestions: config.methods.post});
+  config.methods.postArray.headers.Authorization = token;
+  var request = new Resource(config.users.questions, undefined, {answerQuestions: config.methods.postArray});
 
   var onError = function(err) {
     callback(err);
