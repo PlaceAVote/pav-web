@@ -11,6 +11,7 @@ module.exports = function($sce, $location) {
     link: function(scope, el, attr) {
       var q;
       var selected;
+      var cachedQuery;
       scope.location = $location;
       el[0].onmouseleave = function(e) {
         scope.results = [];
@@ -18,14 +19,14 @@ module.exports = function($sce, $location) {
         return;
       };
       el[0].children[0].onkeyup = function(e) {
-        if (e.which == 13 && selected.type == 'bill') {
+        if (e.which == 13 && scope.results.constructor !== Array && selected && selected.type == 'bill') {
           selected.goToBill($location, selected.bill_id);
           scope.results = [];
           scope.$apply();
           return;
         }
 
-        if (e.which == 13 && selected.type == 'users') {
+        if (e.which == 13 && scope.results.constructor !== Array && selected && selected.type == 'users') {
           selected.goToProfile($location, selected.user_id);
           scope.results = [];
           scope.$apply();
@@ -55,6 +56,12 @@ module.exports = function($sce, $location) {
           return;
         }
 
+        if (q.length && e.which == 13) {
+          cachedQuery = q;
+          scope.query({q: q});
+          scope.$apply();
+          return;
+        }
       }; // End of keyup function
 
       scope.$watchCollection('results', function(n, o) {
@@ -210,7 +217,7 @@ module.exports = function($sce, $location) {
 
       el[0].children[0].onmouseover = function(e) {
         q = el[0].children[0].value;
-        if (q.length > 3) {
+        if (q.length > 3 || cachedQuery === q) {
           scope.query({q: q});
           scope.$apply();
           return;
