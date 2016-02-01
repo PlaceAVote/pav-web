@@ -52,6 +52,7 @@ var commentReplyNotificationDirective = require('./directives/comment_reply_noti
 var trendsDirective = require('./directives/trends.js');
 var autoResizeDirective = require('./directives/autoresize.js');
 var termsAndConditionsDirective = require('./directives/terms_and_conditions.js');
+var issuesPostDirective = require('./directives/issues_post.js');
 
 // Thirdparty integrations
 var Facebook = require('./integrations/facebook.js');
@@ -170,5 +171,6 @@ app.directive('trends', ['$location',trendsDirective]);
 app.directive('autoResize', [autoResizeDirective]);
 app.directive('searchBar', ['$sce' ,'$location', search]);
 app.directive('termsAndConditions', [termsAndConditionsDirective]);
+app.directive('issuesPost', [issuesPostDirective]);
 
 

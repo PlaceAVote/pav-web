@@ -11,6 +11,7 @@
 	    </div>
 	    <section class="feed-wrapper">
 		<div class='feed-column l-7 m-12 s-12'>
+        <issues-post></issues-post>
 		    <div class="bill-container" ng-repeat="bill in bills">
 		    	<div class="bill card">
 		        <h1 ng-click='bill.goToPage($parent.$location)'>{{bill.subject}}</h1>
