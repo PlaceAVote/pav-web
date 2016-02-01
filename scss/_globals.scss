@@ -4,6 +4,11 @@ html,
   min-height: 100%;
 }
 
+html {
+  float: left;
+  min-width: 100%;
+}
+
 body {
   background-color: $bgcolor;
   font-family: $font;

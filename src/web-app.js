@@ -65,8 +65,9 @@ var preloaderDirective = require('./directives/preloader.js');
 
 // Thirdparty integrations
 var Facebook = require('./integrations/facebook.js');
-
-var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'pavDirectives']);
+var slider = require('angularjs-slider');
+var draggable = require('angular-ui-tree');
+var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'pavDirectives', 'rzModule', 'ui.tree']);
 
 
 app.config(['$routeProvider', function($routeProvider) {
@@ -184,9 +185,9 @@ app.directive('autoResize', [autoResizeDirective]);
 app.directive('searchBar', ['$sce' ,'$location', search]);
 app.directive('termsAndConditions', [termsAndConditionsDirective]);
 app.directive('wizard', [wizardDirective]);
-app.directive('slider', [sliderDirective]);
+app.directive('slider', ['$timeout', sliderDirective]);
 app.directive('dad', [dragAndDropDirective]);
-app.directive('tax', [taxMultiDirective]);
+app.directive('tax', ['$filter', taxMultiDirective]);
 app.directive('imageCrop', [imageCropDirective]);
 app.directive('fileread', [fileReadDirective]);
 app.directive('loader', ['$location', preloaderDirective]);

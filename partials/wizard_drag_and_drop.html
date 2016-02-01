@@ -1,8 +1,11 @@
 <div>
-  Which of these bills interested you the most?  Drag and drop them in order of most interest?
-
-  <div ng-repeat="answer in question.answers">
-    {{answer.bill_id}}
-    {{answer.bill_title}}
+  <p class="margin-bottom-medium margin-top-medium">Which of these bills interested you the most? Drag and drop them in order of most interest?</p>
+  <div ui-tree>
+    <ol ui-tree-nodes ng-model="question.answers" data-drag-delay="500">
+      <li ng-repeat="answer in question.answers" class="drag-box margin-top-medium margin-bottom-medium padding-medium" ui-tree-node>
+          <p>{{answer.bill_id}} {{answer.bill_title}}</p>
+          <div class="drag-section"><i class="icon-drag blue"></i><span>DRAG ME!</span></div>
+      </li>
+    </ol>
   </div>
 </div>
