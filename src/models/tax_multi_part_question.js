@@ -28,10 +28,14 @@ TaxMultiPart.prototype.update = function() {
     return;
   }
   this.sectors = this.extension.getAllMonthlyContributions(this.income);
+  this.total = this.extension.getTaxContributation(this.income).total / 12;
 };
 
 TaxMultiPart.prototype.transform = function() {
-  return [this.income, this.zip];
+  return {
+    question_id: this.id,
+    answers: [this.income, this.zip],
+  };
 };
 
 module.exports = TaxMultiPart;
