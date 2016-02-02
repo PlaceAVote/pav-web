@@ -14,8 +14,8 @@ function IssueService($resource, authService, callback) {
       return;
     }
 
-    var onLoad = function() {
-      callback();
+    var onLoad = function(result) {
+      callback(undefined, result);
     };
 
     var onError = function(err) {
@@ -30,7 +30,7 @@ function IssueService($resource, authService, callback) {
   };
 
   var setIssueResponse = function(issue_id, response_value, callback) {
-    if (!issue_id || !response_value) {
+    if (!issue_id || response_value === undefined) {
       callback('Issue id and response value is required');
       return;
     }
@@ -54,7 +54,6 @@ function IssueService($resource, authService, callback) {
     var request = new $resource(url, undefined, {setResponse: config.methods.post});
 
     var body = {
-      issue_id: issue_id,
       emotional_response: response_value,
     };
 
