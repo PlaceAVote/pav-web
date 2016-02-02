@@ -1,0 +1,91 @@
+.wizard-container {
+  overflow: hidden;
+  margin-top: 20px;
+  h3 {
+    @include font-size(12px);
+  }
+  h4 {
+    @include font-size(12px);
+    line-height: 0;
+    display: inline-block;
+  }
+  .icon-close {
+    position: absolute;
+    right: 17px;
+    top: 20px;
+  }
+
+  p {
+    @include font-size(14px);
+    @include medium();
+  }
+}
+
+.spending-table {
+  border: 1px solid $widgetborder;
+  border-radius: 3px;
+  &-row {
+    padding: 10px;
+    border-bottom: 1px solid lighten($widgetborder, 10%);
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+.spending-table-total {
+  border: 1px solid $widgetborder;
+  border-radius: 3px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-top: none;
+  padding: 10px;
+  align-self: center;
+}
+
+.drag-box, .angular-ui-tree-drag li {
+  cursor: pointer;
+  position: relative;
+  border-radius: 3px;
+  border: 1px solid $widgetborder;
+  p {
+    @include light();
+    @include font-size(12px);
+    line-height: 20px;
+    font-family: $font;
+  }
+}
+
+.angular-ui-tree-drag {
+  position: fixed;
+  li {
+    overflow: hidden;
+    background: white;
+    border-style: dashed;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  }
+}
+
+.angular-ui-tree-placeholder {
+  background: lighten($greylight, 10%);
+  border: 1px dashed $greylight;
+  margin-botton: 15px !important;
+  border-radius: 3px;
+}
+
+.drag-section {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  @include font-size(12px);
+    span {
+      font-family: $font;
+      color: lighten($black, 10%);
+    }
+    .icon-drag {
+      position: absolute;
+      left: -18px;
+      @include font-size(13px);
+      transform: rotate(-24deg);
+    }
+}

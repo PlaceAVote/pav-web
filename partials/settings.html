@@ -1,14 +1,14 @@
 <div class="modal" ng-show="settings.showModal">
 <div class="card profile-picture-edit" loader loader-context="settings.profilePicture.saving">
 <div class="row">
-<h1>CHANGE PROFILE PICTURE</h1><i class="icon-close layout-right" ng-click="settings.showModal = false"></i>
+<h1>CHANGE PROFILE PICTURE</h1><i class="icon-close h-right" ng-click="settings.showModal = false"></i>
 </div>
 <hr />
-  <div class="uploaded-image-container medium-margin-top">
+  <div class="uploaded-image-container margin-top-medium">
   <image-crop image="settings.image" crop="settings.profilePicture.cropped" save-Image="settings.saveProfilePicture({img: img});"></image-crop>
   </div>
    <p ng-show="settings.profilePicture.error">There was an error uploading your profile picture</p>
-  <div class="row medium-margin-bottom small-margin-top">
+  <div class="row margin-bottom-medium margin-top-small">
   <p>Upload a photo here:</p>
   <label for="uploadFile" class="btn-blue upload-btn text-center">CHOOSE FILE</label>
   <input style="position: absolute; left: -99999px;" type="file" accept="image/*" id="uploadFile" fileread="settings.image">
@@ -71,17 +71,17 @@
             <hr />
           </div>
           <div class="password-section-content">
-            <div class="row col-m medium-margin-bottom" ng-if="!settings.settingsItem.social_login">
-              <p class="medium-margin-bottom" ng-show="settings.passwordError">There was an error when trying to save your password.</p>
-              <div class="l-3 m-12 medium-margin-right no-margin-right-m">
+            <div class="row tablet-col margin-bottom-medium" ng-if="!settings.settingsItem.social_login">
+              <p class="margin-bottom-medium" ng-show="settings.passwordError">There was an error when trying to save your password.</p>
+              <div class="l-3 m-12 margin-right-medium tablet-margin-right-none">
                 <label>Current Password</label>
-                <input class="no-margin-bottom medium-margin-bottom-m" type="password" ng-model='settings.current_password'> 
+                <input class="margin-bottom-none talet-margin-bottom-medium" type="password" ng-model='settings.current_password'> 
               </div>
-              <div class="l-3 m-12 medium-margin-bottom-m">
+              <div class="l-3 m-12 tablet-margin-bottom-medium">
                 <label>New Password</label>
-                <input class="no-margin-bottom" type="password" ng-model='settings.new_password'> 
+                <input class="margin-bottom-none" type="password" ng-model='settings.new_password'> 
               </div>
-                <a class="btn-green layout-right text-center layout-bottom m-12" ng-click='settings.changePassword()'><p ng-show="settings.savingPassword">SAVING...</p><p ng-hide="settings.savingPassword || settings.newPassword">SAVE PASSWORD</p><p ng-show="settings.newPassword">PASSWORD SAVED!</p></a>
+                <a class="btn-green h-right text-center bottom m-12" ng-click='settings.changePassword()'><p ng-show="settings.savingPassword">SAVING...</p><p ng-hide="settings.savingPassword || settings.newPassword">SAVE PASSWORD</p><p ng-show="settings.newPassword">PASSWORD SAVED!</p></a>
             </div>
             <div class="row" ng-if="settings.password_error">invaild current password</div>
               <label>Make my profile page completely private so no one can view it<span class="autosave" ng-show="settings.autosaved.public">saved!</span></label> 
@@ -94,14 +94,14 @@
         </div>
         <div class="doc-section">
           <div ng-show="settings.error">Oops! An unexpected error occured.</div>
-          <div class="row col-m">
+          <div class="row tablet-col">
               <a ng-click="settings.showSettings = false;" class="btn-grey m-12 medium-margin-bottom-m text-center">Read our privacy policy</a>
               <a ng-click="settings.showSettings = false;" class="btn-grey m-12 medium-margin-bottom-m text-center">Read our terms of service</a>
-              <a class="btn-green layout-right m-12 text-center" ng-click="settings.saveUserSettings();"><p ng-show="settings.saving">SAVING...</p><p ng-hide="settings.saving || settings.saveConfirmed">SAVE SETTINGS</p><p ng-show="settings.saveConfirmed">SAVED!</p></a>
+              <a class="btn-green h-right m-12 text-center" ng-click="settings.saveUserSettings();"><p ng-show="settings.saving">SAVING...</p><p ng-hide="settings.saving || settings.saveConfirmed">SAVE SETTINGS</p><p ng-show="settings.saveConfirmed">SAVED!</p></a>
           </div>
         </div>
       </div>
-      <div class="card l-8 m-12 medium-margin-left no-margin-left-m large-margin-top-m large-margin-bottom" ng-hide="settings.showSettings">
+      <div class="card l-8 m-12 margin-left-medium tablet-margin-left-none tablet-margin-top-large margin-bottom-larger" ng-hide="settings.showSettings">
         <terms-and-conditions></terms-and-conditions>
       </div>
     </section>

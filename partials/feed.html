@@ -10,13 +10,15 @@
 	        </section>
 	    </div>
 	    <section class="feed-wrapper">
-		<div class="feed-column l-7 m-12 s-12">
+		<div class='feed-column l-7 m-12 s-12'>
+        <issues-post></issues-post>
+        <wizard></wizard>
 		    <div class="bill-container" ng-repeat="bill in bills">
 		    	<div class="bill card">
 		        <h1 ng-click='bill.goToPage($parent.$location)'>{{bill.subject}}</h1>
 		        <hr />
-		        	<section class="row small-margin-top">
-			    	<div class="feed-icon medium-margin-right">
+		        	<section class="row margin-top-small">
+			    	<div class="feed-icon margin-right-medium">
 			    	<i class="{{bill.icon}}"></i>
 			    	</div>
 			        <div class="bill-summary-container">

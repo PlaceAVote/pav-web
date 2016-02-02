@@ -17,6 +17,7 @@ var HeaderController = require('./controllers/header_controller.js');
 var ProfileController = require('./controllers/profile_controller.js');
 var SettingsController = require('./controllers/settings_controller.js');
 var PasswordController = require('./controllers/password_controller.js');
+var WizardController = require('./controllers/wizard_controller.js');
 
 // Services
 var UserService = require('./services/user_service.js');
@@ -30,6 +31,7 @@ var SearchService = require('./services/search_service.js');
 var PasswordService = require('./services/password_service.js');
 var FeedService = require('./services/feed_service.js');
 var IssueService = require('./services/issue_service.js');
+var QuestionService = require('./services/question_service.js');
 var MailService = require('./services/mail_service.js');
 
 // Dependencies
@@ -55,14 +57,20 @@ var trendsDirective = require('./directives/trends.js');
 var websiteFooter = require('./directives/footer.js');
 var autoResizeDirective = require('./directives/autoresize.js');
 var termsAndConditionsDirective = require('./directives/terms_and_conditions.js');
+var issuesPostDirective = require('./directives/issues_post.js');
+var wizardDirective = require('./directives/wizard.js');
+var sliderDirective = require('./directives/wizard_slider.js');
+var dragAndDropDirective = require('./directives/wizard_drag_and_drop.js');
+var taxMultiDirective = require('./directives/wizard_tax_multi.js');
 var imageCropDirective = require('./directives/imagecrop.js');
 var fileReadDirective = require('./directives/fileread.js');
 var preloaderDirective = require('./directives/preloader.js');
 
 // Thirdparty integrations
 var Facebook = require('./integrations/facebook.js');
-
-var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'pavDirectives']);
+var slider = require('angularjs-slider');
+var draggable = require('angular-ui-tree');
+var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'pavDirectives', 'rzModule', 'ui.tree']);
 
 
 app.config(['$routeProvider', function($routeProvider) {
@@ -139,6 +147,7 @@ app.factory('searchService', ['$resource', 'authService', SearchService]);
 app.factory('passwordService', ['$resource', PasswordService]);
 app.factory('feedService', ['$resource', 'authService', 'userService', FeedService]);
 app.factory('issueService', ['$resource', 'authService', IssueService]);
+app.factory('questionService', ['$resource', 'authService', QuestionService]);
 app.factory('mailService', ['$resource', MailService]);
 
 // Controllers
@@ -158,6 +167,7 @@ app.controller('FaqCtrl', ['$scope', '$location', FaqController]);
 app.controller('TeamCtrl', ['$scope', '$location', TeamController]);
 app.controller('PressCtrl', ['$scope', '$location', PressController]);
 app.controller('MenuCtrl', ['$scope', '$location', '$routeParams', MenuController]);
+app.controller('WizardCtrl', ['$scope', 'questionService', WizardController]);
 app.controller('ContactCtrl', ['$scope', '$timeout', 'mailService', ContactController]);
 
 // Directives
@@ -179,6 +189,12 @@ app.directive('websiteFooter', [websiteFooter]);
 app.directive('autoResize', [autoResizeDirective]);
 app.directive('searchBar', ['$sce' ,'$location', search]);
 app.directive('termsAndConditions', [termsAndConditionsDirective]);
+app.directive('issuesPost', [issuesPostDirective]);
+
+app.directive('wizard', [wizardDirective]);
+app.directive('slider', ['$timeout', sliderDirective]);
+app.directive('dad', [dragAndDropDirective]);
+app.directive('tax', ['$filter', taxMultiDirective]);
 app.directive('imageCrop', [imageCropDirective]);
 app.directive('fileread', [fileReadDirective]);
 app.directive('loader', ['$location', preloaderDirective]);

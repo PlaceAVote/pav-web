@@ -15,23 +15,25 @@
   border-color: transparentize($blue, 0.75)
     transparentize($blue, 0.75) transparentize($blue, 0.25) transparentize($blue, 0.25);
   border-radius: 100%;
-  animation: clockwise .5s linear infinite;
+  // transform: scaleZ(1,1); 
+  animation: clockwise 0.5s linear infinite;
 
   &.ng-hide-add, &.ng-hide-remove, &.ng-hide-remove-active, &.ng-hide-add-active {
-  	transition: all 0.3s ease;
+    transition: all 0.3s ease;
   }
   &.ng-hide-add {
-  	opacity: 1;
+    opacity: 1;
   }
   &.ng-hide-add.ng-hide-add-active {
-  	opacity: 0;
+    opacity: 0;
   }
   &.ng-hide-remove {
-  	opacity: 0;
+    opacity: 0;
   }
   &.ng-hide-remove.ng-hide-remove-active {
-  	opacity: 1;
+    opacity: 1;
   }
+
 }
 
 .box-loader {
@@ -48,21 +50,18 @@
     .loader {
       height: 20px;
       width: 20px;
+      // animation: bounceOut 0.5s ease;
     }
     &.ng-hide-add, &.ng-hide-remove, &.ng-hide-remove-active, &.ng-hide-add-active {
       transition: all 0.3s ease;
     }
-    &.ng-hide-add {
-      opacity: 1;
-    }
     &.ng-hide-add.ng-hide-add-active {
+      transition-delay: 0.3s;
       opacity: 0;
-    }
-    &.ng-hide-remove {
-      opacity: 0;
-    }
-    &.ng-hide-remove.ng-hide-remove-active {
-      opacity: 1;
+      .loader {
+       animation: bounce 0.3s ease;
+       transform: scale(0);
+      }
     }
 }
 
@@ -72,3 +71,10 @@
 {
   to {transform: rotate(360deg) translatez(0);}
 }
+
+@keyframes bounce {
+  0% { transform: scale(1.1);}
+  50% { transform: scale(1.6);}
+  100% { transform: scale(0);}
+}
+

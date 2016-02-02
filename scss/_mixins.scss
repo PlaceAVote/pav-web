@@ -20,6 +20,17 @@
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{$one}', endColorstr='#{$two}', GradientType=1 );
 }
 
+@mixin linear-gradient-vertical($one, $two) {
+  background: $one;
+  background: -moz-linear-gradient(top, $one 0%, $two 100%);
+  // background: -webkit-gradient(top, left top, right top, color-stop(0%, $one), color-stop(100%, $two));
+  background: -webkit-linear-gradient(top, $one 0%, $two 100%);
+  background: -o-linear-gradient(top, $one 0%, $two 100%);
+  background: -ms-linear-gradient(top, $one 0%, $two 100%);
+  background: linear-gradient(to bottom, $one 0%, $two 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{$one}', endColorstr='#{$two}', GradientType=1 );
+}
+
 @mixin media($width) {
   @media screen and (max-device-width: $width), screen and (max-width: $width) {
     @content;
