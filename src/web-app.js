@@ -161,7 +161,7 @@ app.controller('HeaderCtrl', ['$rootScope', '$scope', '$location', '$timeout', '
 app.controller('ProfileCtrl', ['$scope', '$location', '$routeParams', 'authService', 'userService', ProfileController]);
 app.controller('SettingsCtrl', ['$scope', '$location', '$timeout', 'userService', 'authService', '$rootScope','$anchorScroll', SettingsController]);
 app.controller('PasswordResetCtrl', ['$scope','$location','$routeParams','passwordService','authService', PasswordController]);
-app.controller('IssuesCtrl', ['$scope', IssuesController]);
+app.controller('IssuesCtrl', ['$scope', '$rootScope', IssuesController]);
 // Web controllers
 app.controller('HomeCtrl', ['$scope', '$location','$anchorScroll', 'userService', '$rootScope', 'authService', HomeController]);
 app.controller('FaqCtrl', ['$scope', '$location', FaqController]);

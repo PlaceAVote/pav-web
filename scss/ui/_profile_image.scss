@@ -1,0 +1,13 @@
+.profile-image-holder {
+    height: 30px;
+    width: 30px;
+    border-radius: 3px;
+    overflow: hidden;
+    border: 1px solid $widgetborder;
+    div {
+      height: 100%;
+      width: 100%;
+      background-size: 100%;
+      background-position: center center;
+    }
+}

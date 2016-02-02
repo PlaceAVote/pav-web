@@ -22,9 +22,16 @@
           @include font-size(12px);
         }    
     }
+
+  .profile-image-holder {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+  }
+
   .post-message {
     margin-bottom: 32px;
-    padding-left: 50px;
+    padding-left: 45px;
   }
   .issues-options {
     position: absolute;
