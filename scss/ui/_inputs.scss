@@ -6,7 +6,7 @@
   height: 40px;
   font-fmaily: $font;
   box-shadow: inset 1px 1px 4px rgba(0,0,0,0.1);
-  @include medium();
+  @include light();
   @include font-size(14px);
   &:focus {
     outline: none;
