@@ -1,31 +1,31 @@
-<div class="issues-container">
-
-  <i class="icon-issue"></i> <p>Create and Issue</p>  
-
-  <div class="card padding-small margin-top-medium">
+<div class="issues-container" ng-controller="IssuesController as issue">
+  <div class="row issues-title margin-bottom-small margin-top-large">
+    <i class="middle icon-issues"></i> <p class="margin-left-small">Create an Issue</p>  
+  </div>
+  <div class="card padding-small">
 
     <div class="profile-image-holder">
       <div style="background-image: url({{img_url}});">
       </div>
     </div>
 
-    <textarea placeholder="Share your opinions with people and rally around a bill or cause"></textarea>
+    <textarea class="padding-small post-message" placeholder="Share your opinions with people and rally around a bill or cause" auto-resize></textarea>
 
     <div class="row">
-      <div class="issues-options h-left">
+      <div class="issues-options pale-bg h-left">
           <div>
-            <p>Attachment</p>
+            <p>Add Attachment:</p>
           </div>
-          <div>
-            <i></i>
+          <div class="middle padding-left-small padding-right-small">
+            <i class="icon-issues"></i>
           </div>
-          <div>
-            <i></i>
+          <div class="middle padding-left-small padding-right-small">
+            <i class="icon-issues"></i>
           </div>  
       </div>
-      <div class="h-right">
+     <!--  <div class="h-right">
         <h2 class="red bold">SHOW ME AN EXAMPLE</h2>
-      </div>
+      --><!--  </div> -->
     </div>
 
   </div>
