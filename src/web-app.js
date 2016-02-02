@@ -18,6 +18,7 @@ var ProfileController = require('./controllers/profile_controller.js');
 var SettingsController = require('./controllers/settings_controller.js');
 var PasswordController = require('./controllers/password_controller.js');
 var WizardController = require('./controllers/wizard_controller.js');
+var IssuesController = require('./controllers/issues_controller.js');
 
 // Services
 var UserService = require('./services/user_service.js');
@@ -160,7 +161,7 @@ app.controller('HeaderCtrl', ['$rootScope', '$scope', '$location', '$timeout', '
 app.controller('ProfileCtrl', ['$scope', '$location', '$routeParams', 'authService', 'userService', ProfileController]);
 app.controller('SettingsCtrl', ['$scope', '$location', '$timeout', 'userService', 'authService', '$rootScope','$anchorScroll', SettingsController]);
 app.controller('PasswordResetCtrl', ['$scope','$location','$routeParams','passwordService','authService', PasswordController]);
-
+app.controller('IssuesCtrl', ['$scope', IssuesController]);
 // Web controllers
 app.controller('HomeCtrl', ['$scope', '$location','$anchorScroll', 'userService', '$rootScope', 'authService', HomeController]);
 app.controller('FaqCtrl', ['$scope', '$location', FaqController]);
