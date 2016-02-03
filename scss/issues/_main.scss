@@ -33,6 +33,11 @@
   .post-message {
     padding-left: 45px;
   }
+  .flat-bottom {
+    border-bottom: none;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
   .issues-options {
     position: absolute;
     bottom: 0;
@@ -90,11 +95,13 @@
       width: 10px;
     }
     input {
-      @include font-size(14px);
+      @include font-size(12px);
       width: 100%;
       background: $pale;
       border:none;
-      height: 40px;
+      font-family: $font;
+      @include medium();
+      height: 35px;
       padding-left: 10px;
       border: 1px solid $widgetborder;
       border-bottom-left-radius: 3px;
@@ -102,6 +109,9 @@
       &:focus {
         outline: none;
       } 
+      &::-webkit-input-placeholder {
+        color: lighten(desaturate($blue, 20%), 15%);
+     }
     }
   }
 }
