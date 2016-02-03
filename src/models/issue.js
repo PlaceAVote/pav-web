@@ -4,6 +4,7 @@ function Issue(options) {
   }
   this.issue_id = options.issue_id;
   this.bill_id = options.bill_id;
+  this.bill_title = options.bill_title;
   this.comment = options.comment;
   this.article_link = options.article_link;
   this.article_title = options.article_title;
@@ -12,6 +13,7 @@ function Issue(options) {
   this.author_id = options.author_id;
   this.author_first_name = options.author_first_name;
   this.author_last_name = options.author_last_name;
+  this.emotional_response = options.emotional_response;
   this.author_img_url = options.author_img_url || '//cdn.placeavote.com/img/profile/profile-picture.png';
 }
 
