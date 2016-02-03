@@ -1,0 +1,8 @@
+.issue-card {
+  p.title {
+    @include font-size(12px);
+  }
+  .icon-issues {
+    @include font-size(13px);
+  }
+}
