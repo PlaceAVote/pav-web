@@ -6,6 +6,7 @@ module.exports = function($sce, $location) {
       query: '&',
       focus: '=',
       searching: '=',
+      placeholder: '@',
     },
     templateUrl: 'partials/directives/search.html',
     link: function(scope, el, attr) {

@@ -10,7 +10,7 @@
 
     <textarea msd-elastic ng-model="issues.post" class="padding-small post-message" placeholder="Share your opinions with people and rally around a bill or cause" rows="1"></textarea>
     <div class="row" ng-show="issues.billSearchOpen">
-      <search-bar class="bill-search" results="issues.searchResults" focus="issues.focus" query="issues.search(q)" searching="issues.searching" bills issues></search-bar>
+      <search-bar class="bill-search" placeholder="Start typing to search for a bill" results="issues.searchResults" focus="issues.focus" query="issues.search(q)" searching="issues.searching" bills issues></search-bar>
     </div>
     <div class="row">
       <div class="issues-options pale-bg h-left">
