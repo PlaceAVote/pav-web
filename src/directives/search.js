@@ -9,6 +9,13 @@ module.exports = function($sce, $location) {
     },
     templateUrl: 'partials/directives/search.html',
     link: function(scope, el, attr) {
+      console.log(attr.$attr.people);
+      if(attr.$attr.people) {
+        scope.people = true;
+      }
+      if(attr.$attr.bills) {
+        scope.bills = true;
+      }
       var q;
       var selected;
       var cachedQuery;
@@ -34,7 +41,8 @@ module.exports = function($sce, $location) {
         }
 
         if (e.which == 40 || e.which == 38) {
-          return selectResult(e.which, el[0].lastChild.children['bill-results'],el[0].lastChild.children['user-results'],
+          console.log(document);
+          return selectResult(e.which, document.getElementById('bill-results'),document.getElementById('user-results'),
               function(s) {
                 selected = s;
               });

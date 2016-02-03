@@ -9,7 +9,9 @@
     </div>
 
     <textarea msd-elastic ng-model="issues.post" class="padding-small post-message" placeholder="Share your opinions with people and rally around a bill or cause" rows="1"></textarea>
-
+    <div class="row" ng-show="issues.billSearchOpen">
+      <search-bar class="search" ng-class="{'search-focus':header.focus}" results="header.searchResults" focus="header.focus" query="header.search(q)" searching="header.searching" bills></search-bar>
+    </div>
     <div class="row">
       <div class="issues-options pale-bg h-left">
           <div>
@@ -19,7 +21,7 @@
             <span class="tool-tip">Add a news article or website link</span>
             <i class="middle icon-links"></i>
           </div>
-          <div class="row padding-left-small padding-right-small">
+          <div ng-click="issues.billSearchOpen = true" class="row padding-left-small padding-right-small">
           <span class="tool-tip">Attach a bill to this issue</span>
             <i class="middle icon-bills"></i>
           </div>  
