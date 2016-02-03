@@ -94,12 +94,26 @@
       height: 10px;
       width: 10px;
     }
+    ul li {
+      color: $blue;
+      font-style: italic;
+      @include font-size(12px);
+      padding: 5px 5px 5px 0;
+      @include medium($font-italic);
+      background: $pale;
+      border: 1px solid $widgetborder;
+      border-top: none;
+      &:hover, &.selected {
+        background: desaturate(darken($pale, 10%), 50%);
+      }
+    }
     input {
       @include font-size(12px);
       width: 100%;
       background: $pale;
       border:none;
       font-family: $font;
+      color: $black;
       @include medium();
       height: 35px;
       padding-left: 10px;
