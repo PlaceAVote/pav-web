@@ -10,7 +10,7 @@
   }
 
   .card {
-    overflow: hidden;
+    // overflow: hidden;
     padding-bottom: 42px;
   }
   
@@ -78,3 +78,30 @@
   }
 }
 
+.issues-container {
+  .bill-search {
+    width: 100%;
+    position: relative;
+    .loader {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      height: 10px;
+      width: 10px;
+    }
+    input {
+      @include font-size(14px);
+      width: 100%;
+      background: $pale;
+      border:none;
+      height: 40px;
+      padding-left: 10px;
+      border: 1px solid $widgetborder;
+      border-bottom-left-radius: 3px;
+      border-bottom-right-radius: 3px;
+      &:focus {
+        outline: none;
+      } 
+    }
+  }
+}

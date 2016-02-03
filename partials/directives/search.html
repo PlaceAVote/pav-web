@@ -1,13 +1,16 @@
 <input type="text" type="text" placeholder="Search bills or people..."/>
 <div class="loader" ng-show="searching"></div>
 <div class="search-results" ng-class="{'has-results': results.bills.length > 0 || results.users.length > 0}">
-	<div class="search-category" ng-show="results.bills.length > 0 && bills">
+	<div class="search-category" ng-show="results.bills.length > 0 && bills && !issues">
 		<p>Bills</p>
 	</div>
 	<ul id="bill-results" ng-show="bills">
-		<li class="result-item" ng-repeat="bill in results.bills" ng-class="{'selected': bill.selected}" ng-click="bill.goToBill(location, bill.bill_id);clearItems();">
+		<li ng-if="!issues" class="result-item" ng-repeat="bill in results.bills" ng-class="{'selected': bill.selected}" ng-click="bill.goToBill(location, bill.bill_id);clearItems();">
 			<div class="results-icon"><i class="{{bill.icon}}"></i></div><p ng-bind-html="bill.html"></p>
 		</li>
+    <li ng-if="issues" ng-class="{'selected': bill.selected}" ng-repeat="bill in results.bills">
+      <p class="margin-left-small blue" ng-bind-html="bill.html"></p>
+    </li>
 	</ul>
 	<div class="search-category" ng-show="results.users.length > 0 && people">
 		<p>People</p>

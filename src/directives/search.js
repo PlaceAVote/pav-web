@@ -16,6 +16,9 @@ module.exports = function($sce, $location) {
       if(attr.$attr.bills) {
         scope.bills = true;
       }
+      if(attr.$attr.issues) {
+        scope.issues = true;
+      }
       var q;
       var selected;
       var cachedQuery;
@@ -26,7 +29,7 @@ module.exports = function($sce, $location) {
         return;
       };
       el[0].children[0].onkeyup = function(e) {
-        if (e.which == 13 && scope.results.constructor !== Array && selected && selected.type == 'bill') {
+        if (e.which == 13 && scope.results.constructor !== Array && selected && selected.type == 'bill' && !scope.issues) {
           selected.goToBill($location, selected.bill_id);
           scope.results = [];
           scope.$apply();
@@ -41,7 +44,6 @@ module.exports = function($sce, $location) {
         }
 
         if (e.which == 40 || e.which == 38) {
-          console.log(document);
           return selectResult(e.which, document.getElementById('bill-results'),document.getElementById('user-results'),
               function(s) {
                 selected = s;
