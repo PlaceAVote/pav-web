@@ -8,11 +8,12 @@
       </div>
     </div>
 
-    <textarea msd-elastic ng-model="issues.issue.comment" ng-class="{'flat-bottom': issues.billSearch || issues.linkAdd}" class="padding-small post-message" placeholder="Share your opinions with people and rally around a bill or cause" rows="1"></textarea>
+    <textarea msd-elastic ng-model="issues.issue.comment" ng-class="{'flat-bottom': issues.billSearch || issues.linkAdd || issues.attachments.length > 0}" class="padding-small post-message" placeholder="Share your opinions with people and rally around a bill or cause" rows="1"></textarea>
 
     <div class="row issue-attachments" ng-show="issues.attachments.length > 0">
-        <div class="attachment" ng-repeat="attachment in issues.attachments">
-          <i class="icon-close" ng-click="issues.deleteAttachment($index)"></i> {{attachment.type}}: {{attachment.title}}
+        <div class="attachment row padding-left-small padding-right-small" ng-repeat="attachment in issues.attachments">
+          <i class="icon-close click" ng-click="issues.deleteAttachment($index)"></i>
+          <p class="middle">{{attachment.type}}: {{attachment.title}}</p>
         </div>
     </div>
 

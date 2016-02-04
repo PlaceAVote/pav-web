@@ -9,9 +9,9 @@ function IssuesController($scope, $rootScope, searchService, $timeout) {
 };
 
 //  {
-// comment:  
-// bill_id:  
-// article_link:
+//    comment:  
+//    bill_id:  
+//    article_link:
 // }
 
 
@@ -72,9 +72,7 @@ IssuesController.prototype.attach = function(attachment) {
 }
 
 IssuesController.prototype.deleteAttachment = function(i) {
-  console.log('hello');
   this.attachments.splice(i, 1);
 };
-//Delete attachment
 
 module.exports = IssuesController

@@ -69,7 +69,7 @@
         &:hover {
           background: darken($pale, 2%);
           & .tool-tip {
-            display:inline-block;
+            opacity: 1;
           }
         }
       }
@@ -169,3 +169,25 @@
   }
 }
 
+.issue-attachments {
+  overflow: hidden;
+  height: 35px;
+  border: 1px solid $widgetborder;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  background: lighten($greylight, 5%);
+  .attachment {
+    border-right: 1px solid $widgetborder;
+    max-width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: lighten(desaturate($blue, 20%), 15%);
+    @include font-size(11px);
+    i {
+      @include font-size(12px);
+      line-height: 35px;
+      margin-right: 5px;
+    }
+  }
+}
