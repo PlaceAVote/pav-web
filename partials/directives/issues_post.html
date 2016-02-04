@@ -8,10 +8,20 @@
       </div>
     </div>
 
-    <textarea msd-elastic ng-model="issues.post" ng-class="{'flat-bottom': issues.billSearch || issues.linkAdd}" class="padding-small post-message" placeholder="Share your opinions with people and rally around a bill or cause" rows="1"></textarea>
+    <textarea msd-elastic ng-model="issues.issue.comment" ng-class="{'flat-bottom': issues.billSearch || issues.linkAdd}" class="padding-small post-message" placeholder="Share your opinions with people and rally around a bill or cause" rows="1"></textarea>
+
+    <div class="row issue-attachments" ng-show="issues.attachments.length > 0">
+        <div class="attachment" ng-repeat="attachment in issues.attachments">
+          <i class="icon-close" ng-click="issues.deleteAttachment($index)"></i> {{attachment.type}}: {{attachment.title}}
+        </div>
+    </div>
+
+    <div class="row" ng-show="issues.errorMessage">
+      <p class="red">{{issues.errorMessage}}</p>
+    </div>
 
     <div class="row" ng-show="issues.billSearch">
-      <search-bar class="bill-search" placeholder="Start typing to search for a bill" results="issues.searchResults" focus="issues.focus" query="issues.search(q)" searching="issues.searching" bills issues></search-bar>
+      <search-bar class="bill-search" placeholder="Start typing to search for a bill" results="issues.searchResults" focus="issues.focus" query="issues.search(q)" searching="issues.searching" attach-bill="issues.attach(bill);" bills issues></search-bar>
     </div>
 
     <div class="row" ng-show="issues.linkAdd">
@@ -32,13 +42,9 @@
             <i class="middle icon-bills"></i>
           </div>  
       </div>
-     <!--  <div class="h-right">
-        <h2 class="red bold">SHOW ME AN EXAMPLE</h2>
-      --><!--  </div> -->
+        <button class="green-button medium-button padding-left-large padding-right-large">POST</button>
     </div>
 
   </div>
 
 </div>
-
-<issue></issue>

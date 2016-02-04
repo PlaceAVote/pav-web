@@ -7,6 +7,7 @@ module.exports = function($sce, $location) {
       focus: '=',
       searching: '=',
       placeholder: '@',
+      attachBill: '&',
     },
     templateUrl: 'partials/directives/search.html',
     link: function(scope, el, attr) {
@@ -233,6 +234,11 @@ module.exports = function($sce, $location) {
           return;
         }
       };
+
+      scope.attach = function(bill) {
+        scope.attachBill({bill: bill});
+        return;
+      }
     },
   };
 };

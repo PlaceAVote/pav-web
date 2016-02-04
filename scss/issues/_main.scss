@@ -10,7 +10,13 @@
   }
 
   .card {
-    padding-bottom: 42px;
+    padding-bottom: 50px;
+  }
+  
+  .green-button.medium-button {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
   }
   
   .issues-title {
@@ -162,3 +168,4 @@
     border-style: dashed;
   }
 }
+

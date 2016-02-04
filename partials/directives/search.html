@@ -8,7 +8,7 @@
 		<li ng-if="!issues" class="result-item" ng-repeat="bill in results.bills" ng-class="{'selected': bill.selected}" ng-click="bill.goToBill(location, bill.bill_id);clearItems();">
 			<div class="results-icon"><i class="{{bill.icon}}"></i></div><p ng-bind-html="bill.html"></p>
 		</li>
-    <li ng-if="issues" ng-class="{'selected': bill.selected}" ng-repeat="bill in results.bills">
+    <li ng-if="issues" ng-class="{'selected': bill.selected}" ng-repeat="bill in results.bills" ng-click="attach(bill);clearItems();">
       <p class="margin-left-small blue middle h-left" ng-bind-html="bill.html"></p>
       <div class="add-bill-options row">
         <i class="icon-add middle margin-right-small"></i><h2 class="middle">Add Bill</h2>

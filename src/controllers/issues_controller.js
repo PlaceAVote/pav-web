@@ -5,6 +5,7 @@ function IssuesController($scope, $rootScope, searchService, $timeout) {
   this.searchService = searchService;
   this.timeout = $timeout;
   this.issue = {}
+  this.attachments = [];
 };
 
 //  {
@@ -34,13 +35,46 @@ IssuesController.prototype.search = function(q) {
 };
 
 IssuesController.prototype.toggleSearch = function() {
+  var that = this;
   this.linkAdd = false;
+  for (i in this.attachments) {
+    if (that.attachments[i].type === 'Bill') {
+      that.setError('Bill already attached');
+      return;
+    }
+  } 
   this.billSearch ? this.billSearch = false : this.billSearch = true;
 };
+
+IssuesController.prototype.setError = function(message) {
+  var that = this
+  this.errorMessage = message;
+  this.timeout(function(){
+    that.errorMessage = false;
+  }, 2000);
+}
 
 IssuesController.prototype.toggleLink = function() {
   this.billSearch = false;
   this.linkAdd ? this.linkAdd = false : this.linkAdd = true;
 };
+
+IssuesController.prototype.attach = function(attachment) {
+  var that = this;
+  if (attachment.type === 'bill') {
+    that.issue.bill_id = attachment.bill_id;
+    that.attachments.push({
+      type: 'Bill',
+      title: attachment.short_title || attachment.official_title,
+    });
+    that.billSearch = false;
+  }
+}
+
+IssuesController.prototype.deleteAttachment = function(i) {
+  console.log('hello');
+  this.attachments.splice(i, 1);
+};
+//Delete attachment
 
 module.exports = IssuesController
