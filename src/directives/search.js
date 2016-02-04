@@ -10,7 +10,6 @@ module.exports = function($sce, $location) {
     },
     templateUrl: 'partials/directives/search.html',
     link: function(scope, el, attr) {
-      console.log(attr.$attr.people);
       if(attr.$attr.people) {
         scope.people = true;
       }

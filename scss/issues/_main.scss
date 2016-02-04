@@ -10,7 +10,6 @@
   }
 
   .card {
-    // overflow: hidden;
     padding-bottom: 42px;
   }
   
@@ -68,8 +67,23 @@
           }
         }
       }
+      &:nth-child(3).option-selected {
+        border-right: 1px solid $widgetborder;
+      }
       i {
         font-family: "pav" !important;
+      }
+    }
+    .option-selected {
+      background: white;
+      transform: translateY(-3px);
+      border-top: 1px solid $widgetborder;
+      box-shadow: 0px 3px 0px $widgetborder, -1px 1px 0px 0px $widgetborder;
+      i {
+        color: $red !important;
+      }
+      &:hover {
+        background: white !important;
       }
     }
     .icon-links {
@@ -89,12 +103,14 @@
     position: relative;
     .loader {
       position: absolute;
-      top: 15px;
+      top: 11px;
       right: 15px;
-      height: 10px;
-      width: 10px;
+      height: 15px;
+      width: 15px;
     }
     ul li {
+      cursor: pointer;
+      position: relative;
       color: $blue;
       font-style: italic;
       @include font-size(12px);
@@ -103,29 +119,46 @@
       background: $pale;
       border: 1px solid $widgetborder;
       border-top: none;
+      padding-right: 100px;
+      .text-select {
+        padding: 0px 3px;
+        font-weight: bold;
+        color: darken($blue, 5%);
+        text-shadow: 0px 1px 0px $white;
+      }
       &:hover, &.selected {
-        background: desaturate(darken($pale, 10%), 50%);
+        background: desaturate(darken($pale, 5%), 50%);
+      }
+      .add-bill-options {
+        position: absolute;
+        right: 10px;
+        top: 6px;
+        @include font-size(10px);
+        color: lighten(desaturate($blue, 30%), 10%);
+        font-style: normal;
       }
     }
-    input {
-      @include font-size(12px);
-      width: 100%;
-      background: $pale;
-      border:none;
-      font-family: $font;
-      color: $black;
-      @include medium();
-      height: 35px;
-      padding-left: 10px;
-      border: 1px solid $widgetborder;
-      border-bottom-left-radius: 3px;
-      border-bottom-right-radius: 3px;
-      &:focus {
-        outline: none;
-      } 
-      &::-webkit-input-placeholder {
-        color: lighten(desaturate($blue, 20%), 15%);
-     }
-    }
+  }
+    input, .link-add {
+    @include font-size(12px);
+    width: 100%;
+    background: $pale;
+    font-family: $font;
+    color: $black;
+    @include medium();
+    height: 35px;
+    padding-left: 10px;
+    border: 1px solid $widgetborder;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    &:focus {
+      outline: none;
+    } 
+    &::-webkit-input-placeholder {
+      color: lighten(desaturate($blue, 20%), 15%);
+   }
+  }
+  .link-add {
+    border-style: dashed;
   }
 }

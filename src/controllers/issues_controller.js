@@ -1,9 +1,18 @@
 function IssuesController($scope, $rootScope, searchService, $timeout) {
   this.rs = $rootScope;
+  this.scope = $scope;
   this.post;
   this.searchService = searchService;
   this.timeout = $timeout;
+  this.issue = {}
 };
+
+//  {
+// comment:  
+// bill_id:  
+// article_link:
+// }
+
 
 IssuesController.prototype.search = function(q) {
   var that = this;
@@ -23,4 +32,15 @@ IssuesController.prototype.search = function(q) {
     });
   }, 500);
 };
+
+IssuesController.prototype.toggleSearch = function() {
+  this.linkAdd = false;
+  this.billSearch ? this.billSearch = false : this.billSearch = true;
+};
+
+IssuesController.prototype.toggleLink = function() {
+  this.billSearch = false;
+  this.linkAdd ? this.linkAdd = false : this.linkAdd = true;
+};
+
 module.exports = IssuesController

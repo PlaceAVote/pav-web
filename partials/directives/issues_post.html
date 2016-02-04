@@ -8,20 +8,26 @@
       </div>
     </div>
 
-    <textarea msd-elastic ng-model="issues.post" ng-class="{'flat-bottom': issues.billSearchOpen}" class="padding-small post-message" placeholder="Share your opinions with people and rally around a bill or cause" rows="1"></textarea>
-    <div class="row" ng-show="issues.billSearchOpen">
+    <textarea msd-elastic ng-model="issues.post" ng-class="{'flat-bottom': issues.billSearch || issues.linkAdd}" class="padding-small post-message" placeholder="Share your opinions with people and rally around a bill or cause" rows="1"></textarea>
+
+    <div class="row" ng-show="issues.billSearch">
       <search-bar class="bill-search" placeholder="Start typing to search for a bill" results="issues.searchResults" focus="issues.focus" query="issues.search(q)" searching="issues.searching" bills issues></search-bar>
     </div>
+
+    <div class="row" ng-show="issues.linkAdd">
+      <input class="link-add" type="text" placeholder="Paste website link here" />
+    </div>
+
     <div class="row">
       <div class="issues-options pale-bg h-left">
           <div>
             <p>Add Attachment: </p>
           </div>
-          <div class="row padding-left-small padding-right-small">
+          <div ng-click="issues.toggleLink();" ng-class="{'option-selected': issues.linkAdd}" class="row padding-left-small padding-right-small">
             <span class="tool-tip">Add a news article or website link</span>
             <i class="middle icon-links"></i>
           </div>
-          <div ng-click="issues.billSearchOpen = true" class="row padding-left-small padding-right-small">
+          <div ng-click="issues.toggleSearch();" ng-class="{'option-selected': issues.billSearch}" class="row padding-left-small padding-right-small">
           <span class="tool-tip">Attach a bill to this issue</span>
             <i class="middle icon-bills"></i>
           </div>  

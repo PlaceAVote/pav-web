@@ -9,7 +9,10 @@
 			<div class="results-icon"><i class="{{bill.icon}}"></i></div><p ng-bind-html="bill.html"></p>
 		</li>
     <li ng-if="issues" ng-class="{'selected': bill.selected}" ng-repeat="bill in results.bills">
-      <p class="margin-left-small blue" ng-bind-html="bill.html"></p>
+      <p class="margin-left-small blue middle h-left" ng-bind-html="bill.html"></p>
+      <div class="add-bill-options row">
+        <i class="icon-add middle margin-right-small"></i><h2 class="middle">Add Bill</h2>
+      </div>
     </li>
 	</ul>
 	<div class="search-category" ng-show="results.users.length > 0 && people">
