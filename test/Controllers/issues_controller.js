@@ -2,7 +2,6 @@ var expect = require('chai').expect;
 var IssuesController = require('../../src/controllers/issues_controller.js');
 
 describe('Issues Controller', function() {
-  //ToggleSearch
   var mockTimeout = function(func) {
     return func;
   }
@@ -119,5 +118,4 @@ describe('Issues Controller', function() {
     subject.validateUrl();
     expect(subject.errorMessage).to.equal('Link entered not valid');
   });
-  //ValidateUrl
 });
