@@ -1,19 +1,11 @@
 function IssuesController($scope, $rootScope, searchService, $timeout) {
   this.rs = $rootScope;
   this.scope = $scope;
-  this.post;
   this.searchService = searchService;
   this.timeout = $timeout;
-  this.issue = {}
+  this.issue = {};
   this.attachments = [];
-};
-
-//  {
-//    comment:  
-//    bill_id:  
-//    article_link:
-// }
-
+}
 
 IssuesController.prototype.search = function(q) {
   var that = this;
@@ -37,42 +29,77 @@ IssuesController.prototype.search = function(q) {
 IssuesController.prototype.toggleSearch = function() {
   var that = this;
   this.linkAdd = false;
-  for (i in this.attachments) {
+  for (var i in this.attachments) {
     if (that.attachments[i].type === 'Bill') {
       that.setError('Bill already attached');
       return;
     }
-  } 
-  this.billSearch ? this.billSearch = false : this.billSearch = true;
+  }
+  if (this.billSearch) {
+    that.billSearch = false;
+  } else {
+    that.billSearch = true;
+  }
+};
+
+IssuesController.prototype.toggleLink = function() {
+  var that = this;
+  this.billSearch = false;
+  for (var i in this.attachments) {
+    if (that.attachments[i].type === 'Article') {
+      that.setError('Article already attached');
+      return;
+    }
+  }
+  if (this.linkAdd) {
+    that.linkAdd = false;
+  } else {
+    that.linkAdd = true;
+  }
 };
 
 IssuesController.prototype.setError = function(message) {
-  var that = this
+  var that = this;
   this.errorMessage = message;
-  this.timeout(function(){
+  this.timeout(function() {
     that.errorMessage = false;
   }, 2000);
-}
-
-IssuesController.prototype.toggleLink = function() {
-  this.billSearch = false;
-  this.linkAdd ? this.linkAdd = false : this.linkAdd = true;
 };
 
 IssuesController.prototype.attach = function(attachment) {
   var that = this;
   if (attachment.type === 'bill') {
-    that.issue.bill_id = attachment.bill_id;
     that.attachments.push({
       type: 'Bill',
       title: attachment.short_title || attachment.official_title,
     });
     that.billSearch = false;
   }
-}
+
+  if (attachment.type === 'article') {
+    that.attachments.push({
+      type: 'Article',
+      title: attachment.article_link,
+    });
+    that.linkAdd = false;
+  }
+};
 
 IssuesController.prototype.deleteAttachment = function(i) {
   this.attachments.splice(i, 1);
 };
 
-module.exports = IssuesController
+IssuesController.prototype.validateUrl = function() {
+  var that = this;
+  var r = new RegExp('^(http[s]?:\\/\\/(www\\.)?|ftp:\\/\\/(www\\.)?|www\\.){1}([0-9A-Za-z-\\.@:%_\+~#=]+)+((\\.[a-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?');
+  if (this.url.match(r)) {
+    that.attach({
+      article_link: that.url,
+      type: 'article',
+    });
+  } else {
+    that.setError('Link entered not valid');
+  }
+};
+
+module.exports = IssuesController;

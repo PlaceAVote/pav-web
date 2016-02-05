@@ -10,15 +10,11 @@
 
     <textarea msd-elastic ng-model="issues.issue.comment" ng-class="{'flat-bottom': issues.billSearch || issues.linkAdd || issues.attachments.length > 0}" class="padding-small post-message" placeholder="Share your opinions with people and rally around a bill or cause" rows="1"></textarea>
 
-    <div class="row issue-attachments" ng-show="issues.attachments.length > 0">
+    <div class="row issue-attachments" ng-show="issues.attachments.length > 0" ng-class="{'flat-bottom': issues.billSearch || issues.linkAdd}">
         <div class="attachment row padding-left-small padding-right-small" ng-repeat="attachment in issues.attachments">
           <i class="icon-close click" ng-click="issues.deleteAttachment($index)"></i>
           <p class="middle">{{attachment.type}}: {{attachment.title}}</p>
         </div>
-    </div>
-
-    <div class="row" ng-show="issues.errorMessage">
-      <p class="red">{{issues.errorMessage}}</p>
     </div>
 
     <div class="row" ng-show="issues.billSearch">
@@ -26,7 +22,13 @@
     </div>
 
     <div class="row" ng-show="issues.linkAdd">
-      <input class="link-add" type="text" placeholder="Paste website link here" />
+      <form class="l-12" ng-submit="issues.validateUrl()">
+        <input class="link-add" type="text" ng-model="issues.url" placeholder="Paste website link here" />
+      </form>
+    </div>
+
+    <div class="row" ng-show="issues.errorMessage">
+      <p class="red message-error margin-top-small margin-bottom-small">{{issues.errorMessage}}</p>
     </div>
 
     <div class="row">

@@ -11,13 +11,13 @@ module.exports = function($sce, $location) {
     },
     templateUrl: 'partials/directives/search.html',
     link: function(scope, el, attr) {
-      if(attr.$attr.people) {
+      if (attr.$attr.people) {
         scope.people = true;
       }
-      if(attr.$attr.bills) {
+      if (attr.$attr.bills) {
         scope.bills = true;
       }
-      if(attr.$attr.issues) {
+      if (attr.$attr.issues) {
         scope.issues = true;
       }
       var q;
@@ -238,7 +238,7 @@ module.exports = function($sce, $location) {
       scope.attach = function(bill) {
         scope.attachBill({bill: bill});
         return;
-      }
+      };
     },
   };
 };

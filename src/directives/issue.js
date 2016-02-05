@@ -1,9 +1,9 @@
 module.exports = function() {
-    return {
-        restrict: 'E',
-        scope: {
+  return {
+    restrict: 'E',
+    scope: {
 
-        },
-        templateUrl: 'partials/directives/issue.html',
-    };
+    },
+    templateUrl: 'partials/directives/issue.html',
+  };
 };
