@@ -23,8 +23,7 @@ function IssueService($resource, authService, callback) {
     };
 
     var url = config.users.issue.endpoint;
-    config.methods.put.headers.Authorization = token;
-    var request = new $resource(url, undefined, {save: config.methods.put});
+    var request = new $resource(url, undefined, {save: config.methods.putData(issue, token)});
 
     request.save(issue, onLoad, onError);
   };

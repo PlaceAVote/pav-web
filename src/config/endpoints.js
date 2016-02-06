@@ -102,6 +102,20 @@ module.exports = {
       };
       return req;
     },
+    putData: function(data, token) {
+      req = {
+        method: 'PUT',
+        data: data,
+        isArray: false,
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: token,
+        },
+        withCredentials: false,
+      };
+      return req;
+    },
   },
   legislator: {
     getById: {

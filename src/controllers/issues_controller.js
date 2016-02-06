@@ -1,10 +1,11 @@
-function IssuesController($scope, $rootScope, searchService, $timeout) {
+function IssuesController($scope, $rootScope, searchService, $timeout, issueService) {
   this.rs = $rootScope;
   this.scope = $scope;
   this.searchService = searchService;
   this.timeout = $timeout;
   this.issue = {};
   this.attachments = [];
+  this.issueService = issueService;
 }
 
 IssuesController.prototype.search = function(q) {
@@ -72,6 +73,7 @@ IssuesController.prototype.attach = function(attachment) {
     that.attachments.push({
       type: 'Bill',
       title: attachment.short_title || attachment.official_title,
+      bill_id: attachment.bill_id,
     });
     that.billSearch = false;
   }
@@ -86,6 +88,11 @@ IssuesController.prototype.attach = function(attachment) {
 };
 
 IssuesController.prototype.deleteAttachment = function(i) {
+  if (this.attachments[i].type === 'Article') {
+    delete this.issue.article_link;
+  } else {
+    delete this.issue.bill_id;
+  }
   this.attachments.splice(i, 1);
 };
 
@@ -100,6 +107,37 @@ IssuesController.prototype.validateUrl = function() {
   } else {
     that.setError('Link entered not valid');
   }
+};
+
+IssuesController.prototype.postIssue = function() {
+  console.log(this.issue);
+  var that = this;
+  if (this.issue.comment === '' || !this.issue.comment) {
+    that.setError('You need to enter a comment before posting');
+    return;
+  }
+  for (var i in this.attachments) {
+    if (that.attachments[i]) {
+      if(that.attachments[i].type === 'Article') {
+        that.issue.article_link = that.attachments[i].title;
+      }
+      if(that.attachments[i].type === 'Bill') {
+        that.issue.bill_id = that.attachments[i].bill_id;
+      }
+    }
+  }
+  console.log(this.issue);
+
+  this.issueService.saveIssue(this.issue, function(err, res) {
+    if (err) {
+      console.log('err', err);
+      that.setError('There was an error when uploading your Issue');
+    }
+    if (res) {
+      console.log('res', res);
+
+    }
+  });
 };
 
 module.exports = IssuesController;
