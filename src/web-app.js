@@ -67,6 +67,8 @@ var imageCropDirective = require('./directives/imagecrop.js');
 var fileReadDirective = require('./directives/fileread.js');
 var preloaderDirective = require('./directives/preloader.js');
 var issueDirective = require('./directives/issue.js');
+var feedEventsDirective = require('./directives/feed_events.js');
+var feedBillEventDirective = require('./directives/feed_bill_event.js');
 
 // Thirdparty integrations
 var Facebook = require('./integrations/facebook.js');
@@ -201,3 +203,5 @@ app.directive('tax', ['$filter', taxMultiDirective]);
 app.directive('imageCrop', [imageCropDirective]);
 app.directive('fileread', [fileReadDirective]);
 app.directive('loader', ['$location', preloaderDirective]);
+app.directive('feedEvents', [feedEventsDirective]);
+app.directive('feedBillEvent', ['$location', feedBillEventDirective]);

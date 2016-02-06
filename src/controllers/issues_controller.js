@@ -136,7 +136,6 @@ IssuesController.prototype.postIssue = function() {
     }
     if (res) {
       console.log('res', res);
-
     }
   });
 };

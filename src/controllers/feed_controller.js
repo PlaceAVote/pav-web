@@ -26,20 +26,23 @@ FeedController = function($scope, $location, userService, billService, authServi
   });
 
   this.getFeed(function(err, response) {
+    var that = this;
     if (!err) {
       title.feed();
 
-      var bills = [];
-      var issues = [];
-      for (var r in response.feed) {
-        if (response.feed[r] instanceof BillSummary) {
-          bills.push(response.feed[r]);
-        } else if (response.feed[r] instanceof Issue) {
-          issues.push(response.feed[r]);
-        }
-      }
-      $scope.bills = bills;
-      $scope.issues = issues;
+      // var bills = [];
+      // var issues = [];
+      // for (var r in response.feed) {
+      //   if (response.feed[r] instanceof BillSummary) {
+      //     bills.push(response.feed[r]);
+      //   } else if (response.feed[r] instanceof Issue) {
+      //     issues.push(response.feed[r]);
+      //   }
+      // }
+      // $scope.bills = bills;
+      // $scope.issues = issues;
+      $scope.events = response.feed;
+      console.log($scope.events);
     }
   });
 };
