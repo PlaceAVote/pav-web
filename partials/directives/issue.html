@@ -1,13 +1,61 @@
 <div class="margin-top-medium card issue-card padding-top-small">
   <div class="row">
      <div class="profile-image-holder middle margin-right-small">
-        <div style="background-image: url('http://placeavote.com/img/profile-imgs/anthony-oneill.jpg')">
+        <div ng-style="{'background-image': 'url(' + issue.author_img_url + ')'}">
         </div>
      </div>
-     <p class="middle title"><span class="red">Anthony O'Neill</span>&nbsp; shared an &nbsp;<i class="icon-issues blue"></i>&nbsp; Issue</p> 
+     <p class="middle title"><span class="red">{{issue.author_first_name}} {{issue.author_last_name}}</span>&nbsp; shared an &nbsp;<i class="icon-issues blue"></i>&nbsp; Issue</p> 
    </div>
    <hr style="margin-top: 10px;" />
+   <div class="row margin-top-small" ng-if="issue.bill_id">
+    <p class="title">Talking About: <span class="bill-ref blue pale-bg margin-left-small mobile-margin-left-none medium click">{{issue.bill_title}}</span></p> 
+   </div>
+   
+   <div class="row margin-top-small">
+   <p>{{issue.comment}}</p>
+   </div>
+
+   <div ng-if="issue.article_link" class="column issue-article margin-top-small padding-small margin-bottom-small" ng-style="{'background-image': 'url(' + issue.article_img + ')'}">
+      <h2>{{issue.article_title}}</h2>
+      <a ng-href="{{issue.article_link}}">view article</a>
+      <div class="backdrop"></div>
+   </div>
+
    <div class="row">
-    <p>Talking About: <span class="bill-ref"></span></p> 
+     <div class="h-left">
+        <p class="medium">What's your reaction?</p>
+     </div>
+
+     <div class="h-right reactions">
+        <div class="reaction">
+          <img src="img/reactions/smile-inactive.svg" />
+        </div>
+        <div class="reaction">
+          <img src="img/reactions/straightface-inactive.svg" />
+        </div>
+        <div class="reaction">
+          <img src="img/reactions/sadface-inactive.svg" />
+        </div>
+     </div>
    </div>
 </div>
+
+
+<!-- 
+article_img: undefined
+article_link: undefined
+article_title: undefined
+author_first_name: undefined
+author_id: "b498190d-bb4d-43fd-a258-084d6b6ae52d"
+author_img_url: "//cdn.placeavote.com/img/profile/profile-picture.png"
+author_last_name: undefined
+bill_id: undefined
+bill_title: undefined
+comment: undefined
+emotional_response: "none"
+issue_id: "c5ee340c-69a5-4071-9f08-44e73ca02d46"
+timestamp: 1454761284681
+article_img: undefined
+article_link: "http://www.skysports.com/football/man-city-vs-leicester/live/341431"
+article_title: "Premier League (Sky Sports)"
+type: "issue" -->
