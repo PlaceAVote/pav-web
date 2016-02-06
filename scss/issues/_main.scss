@@ -12,6 +12,11 @@
   .card {
     padding-bottom: 50px;
   }
+
+  ng-transclude {
+    display: flex;
+    flex-direction: column;
+  }
   
   .green-button.medium-button {
   position: absolute;
