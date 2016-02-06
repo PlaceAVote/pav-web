@@ -48,13 +48,42 @@ function IssueService($resource, authService, callback) {
       callback(err);
     };
 
+    var body = {
+      emotional_response: response_value,
+    };
+
     var url = config.users.issue.response(issue_id);
-    config.methods.post.headers.Authorization = token;
-    var request = new $resource(url, undefined, {setResponse: config.methods.post});
+    var request = new $resource(url, undefined, {setResponse: config.methods.postData(body, token)});
+
+    request.setResponse(body, onLoad, onError);
+  };
+
+  var deleteIssueResponse = function(issue_id, response_value, callback) {
+    if (!issue_id || response_value === undefined) {
+      callback('Issue id and response value is required');
+      return;
+    }
+
+    var token = authService.getAccessToken();
+    if (!token) {
+      callback('Token is needed to set issue response');
+      return;
+    }
+
+    var onLoad = function(result) {
+      callback(undefined, result);
+    };
+
+    var onError = function(err) {
+      callback(err);
+    };
 
     var body = {
       emotional_response: response_value,
     };
+
+    var url = config.users.issue.response(issue_id);
+    var request = new $resource(url, undefined, {setResponse: config.methods.del.delete(body, token)});
 
     request.setResponse(body, onLoad, onError);
   };
@@ -90,6 +119,7 @@ function IssueService($resource, authService, callback) {
     saveIssue: saveIssue,
     setIssueResponse: setIssueResponse,
     getIssueResponse: getIssueResponse,
+    deleteIssueResponse: deleteIssueResponse,
   };
 }
 

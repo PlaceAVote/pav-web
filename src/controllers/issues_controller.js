@@ -126,7 +126,6 @@ IssuesController.prototype.postIssue = function() {
       }
     }
   }
-  console.log(this.issue);
   this.loading = true;
   this.issueService.saveIssue(this.issue, function(err, res) {
     that.loading = false;
@@ -136,6 +135,9 @@ IssuesController.prototype.postIssue = function() {
     }
     if (res) {
       console.log('res', res);
+      that.issue = {};
+      that.attachments = [];
+      that.scope.$parent.posted();
     }
   });
 };

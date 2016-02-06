@@ -12,10 +12,10 @@ function Issue(options) {
   this.article_img = options.article_img;
   this.timestamp = options.timestamp;
   this.author_id = options.author_id;
-  this.author_first_name = options.author_first_name;
-  this.author_last_name = options.author_last_name;
+  this.author_first_name = options.first_name;
+  this.author_last_name = options.last_name;
   this.emotional_response = options.emotional_response;
-  this.author_img_url = options.author_img_url || '//cdn.placeavote.com/img/profile/profile-picture.png';
+  this.author_img_url = options.img_url || '//cdn.placeavote.com/img/profile/profile-picture.png';
 }
 
 module.exports = Issue;

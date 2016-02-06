@@ -4,7 +4,8 @@
         <div ng-style="{'background-image': 'url(' + issue.author_img_url + ')'}">
         </div>
      </div>
-     <p class="middle title"><span class="red">{{issue.author_first_name}} {{issue.author_last_name}}</span>&nbsp; shared an &nbsp;<i class="icon-issues blue"></i>&nbsp; Issue</p> 
+     <p class="middle title middle"><span class="red">{{issue.author_first_name}} {{issue.author_last_name}}</span>&nbsp; shared an &nbsp;<i class="icon-issues blue"></i>&nbsp; Issue</p> 
+     <span class="h-right middle blue timestamp">{{issue.timestamp | date:'medium'}}</span>
    </div>
    <hr style="margin-top: 10px;" />
    <div class="row margin-top-small" ng-if="issue.bill_id">
@@ -21,20 +22,23 @@
       <div class="backdrop"></div>
    </div>
 
-   <div class="row">
+   <div class="row margin-top-small">
      <div class="h-left">
-        <p class="medium">What's your reaction?</p>
+        <p class="medium middle">What's your reaction?</p>
      </div>
 
      <div class="h-right reactions">
-        <div class="reaction">
-          <img src="img/reactions/smile-inactive.svg" />
+        <div class="reaction click" ng-click="eResponse(issue.issue_id, 'positive', issue)">
+          <img ng-hide="issue.emotional_response === 'positive'" src="img/reactions/smile-inactive.svg" />
+          <img ng-show="issue.emotional_response === 'positive'" src="img/reactions/smile-active.svg" />
         </div>
-        <div class="reaction">
-          <img src="img/reactions/straightface-inactive.svg" />
+        <div class="reaction click" ng-click="eResponse(issue.issue_id, 'neutral', issue)">
+          <img ng-hide="issue.emotional_response === 'neutral'" src="img/reactions/straightface-inactive.svg" />
+          <img ng-show="issue.emotional_response === 'neutral'" src="img/reactions/straightface-active.svg" />
         </div>
-        <div class="reaction">
-          <img src="img/reactions/sadface-inactive.svg" />
+        <div class="reaction click" ng-click="eResponse(issue.issue_id, 'negative', issue)">
+          <img ng-hide="issue.emotional_response === 'negative'" src="img/reactions/sadface-inactive.svg" />
+          <img ng-show="issue.emotional_response === 'negative'" src="img/reactions/sadface-active.svg" />
         </div>
      </div>
    </div>
@@ -42,6 +46,7 @@
 
 
 <!-- 
+"positive, neutral, negative, none
 article_img: undefined
 article_link: undefined
 article_title: undefined

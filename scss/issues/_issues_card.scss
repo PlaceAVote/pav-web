@@ -1,5 +1,5 @@
 .issue-card {
-  p{
+  p {
     @include font-size(12px);
     .bill-ref {
       border: 1px solid $widgetborder;
@@ -9,6 +9,10 @@
       max-width: 360px;
       @include font-size(11px);
     }
+  }
+
+  .timestamp {
+    @include font-size(10px);
   }
   .icon-issues {
     @include font-size(13px);
@@ -55,6 +59,23 @@
       height: 100%;
       background: rgba(0,0,0,0.5);
       z-index: 1;
+    }
+  }
+}
+
+.reactions {
+  .reaction {
+    position:relative;
+    width: 25px;
+    height: 25px;
+    &:nth-child(1), &:nth-child(2) {
+      margin-right: 5px;
+    }
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
     }
   }
 }
