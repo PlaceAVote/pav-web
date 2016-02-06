@@ -9,7 +9,7 @@
    </div>
    <hr style="margin-top: 10px;" />
    <div class="row margin-top-small" ng-if="issue.bill_id">
-    <p class="title">Talking About: <span class="bill-ref blue pale-bg margin-left-small mobile-margin-left-none medium click">{{issue.bill_title}}</span></p> 
+    <p class="title">Talking About: <span ng-click="issue.goToPage(location)" class="bill-ref blue pale-bg margin-left-small mobile-margin-left-none medium click">{{issue.bill_title}}</span></p> 
    </div>
    
    <div class="row margin-top-small">

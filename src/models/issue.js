@@ -18,4 +18,8 @@ function Issue(options) {
   this.author_img_url = options.img_url || '//cdn.placeavote.com/img/profile/profile-picture.png';
 }
 
+Issue.prototype.goToPage = function(location) {
+  location.path('bill/' + this.bill_id);
+}
+
 module.exports = Issue;

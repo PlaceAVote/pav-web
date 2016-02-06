@@ -195,7 +195,7 @@ app.directive('autoResize', [autoResizeDirective]);
 app.directive('searchBar', ['$sce' ,'$location', search]);
 app.directive('termsAndConditions', [termsAndConditionsDirective]);
 app.directive('issuesPost', [issuesPostDirective]);
-app.directive('issue', ['issueService', issueDirective]);
+app.directive('issue', ['$location', 'issueService', issueDirective]);
 app.directive('wizard', [wizardDirective]);
 app.directive('slider', ['$timeout', sliderDirective]);
 app.directive('dad', [dragAndDropDirective]);
