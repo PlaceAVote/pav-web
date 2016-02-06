@@ -118,10 +118,10 @@ IssuesController.prototype.postIssue = function() {
   }
   for (var i in this.attachments) {
     if (that.attachments[i]) {
-      if(that.attachments[i].type === 'Article') {
+      if (that.attachments[i].type === 'Article') {
         that.issue.article_link = that.attachments[i].title;
       }
-      if(that.attachments[i].type === 'Bill') {
+      if (that.attachments[i].type === 'Bill') {
         that.issue.bill_id = that.attachments[i].bill_id;
       }
     }

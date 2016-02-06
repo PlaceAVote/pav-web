@@ -17,8 +17,8 @@ module.exports = function($location, issueService) {
               issue.emotional_response = 'none';
               return;
             }
-          })
-        } else {          
+          });
+        } else {
           issueService.setIssueResponse(id, emo, function(err, res) {
             if (err) {
               return;

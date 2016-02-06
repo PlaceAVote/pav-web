@@ -7,6 +7,6 @@ module.exports = function($location) {
     templateUrl: 'partials/directives/feed_bill_event.html',
     link: function(scope, el, attr) {
       scope.location = $location;
-    }
+    },
   };
 };

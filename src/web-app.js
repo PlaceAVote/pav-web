@@ -75,7 +75,8 @@ var Facebook = require('./integrations/facebook.js');
 var slider = require('angularjs-slider');
 var draggable = require('angular-ui-tree');
 var textarea = require('angular-elastic');
-var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'pavDirectives', 'rzModule', 'ui.tree', 'monospaced.elastic',]);
+var moment = require('angular-moment');
+var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'pavDirectives', 'rzModule', 'ui.tree', 'monospaced.elastic', 'angularMoment']);
 
 
 app.config(['$routeProvider', function($routeProvider) {

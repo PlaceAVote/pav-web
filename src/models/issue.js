@@ -20,6 +20,6 @@ function Issue(options) {
 
 Issue.prototype.goToPage = function(location) {
   location.path('bill/' + this.bill_id);
-}
+};
 
 module.exports = Issue;

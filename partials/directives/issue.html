@@ -5,7 +5,7 @@
         </div>
      </div>
      <p class="middle title middle"><span class="red">{{issue.author_first_name}} {{issue.author_last_name}}</span>&nbsp; shared an &nbsp;<i class="icon-issues blue"></i>&nbsp; Issue</p> 
-     <span class="h-right middle blue timestamp">{{issue.timestamp | date:'medium'}}</span>
+     <span class="h-right middle blue timestamp">{{issue.timestamp | amCalendar}}</span>
    </div>
    <hr style="margin-top: 10px;" />
    <div class="row margin-top-small" ng-if="issue.bill_id">
