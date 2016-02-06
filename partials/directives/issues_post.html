@@ -2,7 +2,7 @@
   <div class="row issues-title margin-bottom-small margin-top-large">
     <i class="middle icon-issues"></i> <p class="margin-left-small">Create an Issue</p>  
   </div>
-  <div class="card padding-small">
+  <div class="card padding-small" loader loader-context="issues.loading" truthy>
     <div class="profile-image-holder">
       <div ng-style="{'background-image': 'url(' + issues.rs.user.img_url + ')'}">
       </div>

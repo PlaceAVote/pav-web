@@ -127,8 +127,9 @@ IssuesController.prototype.postIssue = function() {
     }
   }
   console.log(this.issue);
-
+  this.loading = true;
   this.issueService.saveIssue(this.issue, function(err, res) {
+    that.loading = false;
     if (err) {
       console.log('err', err);
       that.setError('There was an error when uploading your Issue');
