@@ -41,6 +41,14 @@ describe("FeedController", function() {
         callback(undefined, []);
       };
     };
+    function mockFeedServiceEvents() {
+      this.getFeed = function(callback) {
+        var response = {
+          feed: ['events'],
+        };
+        callback(undefined, response);
+      }
+    }
     it("adds banner to scope", function(){
         var scope = {};
         var rootScope = {
@@ -73,12 +81,10 @@ describe("FeedController", function() {
             newUser: true
           }
         };
-      var subject = new FeedController(scope, {}, new mockUserService(), new mockBillService(), new mockAuthService(), new mockFeedService(), rootScope);
-      subject.getFeed(function(err, response){
-        expect(err).to.eql(undefined);
-        expect(!!response).to.eql(true);
-        done();
-      });
+      var subject = new FeedController(scope, {}, new mockUserService(), new mockBillService(), new mockAuthService(), new mockFeedServiceEvents(), rootScope);
+      subject.getFeed();
+      expect(subject.events).to.be.Array;
+      done();
     });
 });
 
