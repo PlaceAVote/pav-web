@@ -70,28 +70,30 @@
 
     </section>
     <section class="bill-spec">
-		<div class="card padding-small bill-sponsor" loader loader-context="bill.body.billData.sponsor.name">
-      <h1>Bill Sponsor</h1>
-			<hr class="margin-top-small" />
-      <aside class="row-layout loaded" ng-show="bill.body.billData.sponsor.name">
-			<div class="senator-img">
-        <img ng-src="{{bill.legislator.getImageUrl()}}" />
-			</div>
-			<div class="bill-sponsor-info">
-        <h2>{{bill.body.billData.sponsor.name}}</h2>
-        <h3>{{bill.legislator.properties.current_term.party}}</h3>
-			</div>
-      </aside>
-		</div>
+  		<div class="card padding-small bill-sponsor" loader loader-context="bill.body.billData.sponsor.name">
+        <h1>Bill Sponsor</h1>
+  			<hr class="margin-top-small" />
+        <aside class="row-layout loaded" ng-show="bill.body.billData.sponsor.name">
+  			<div class="senator-img">
+          <img ng-src="{{bill.legislator.getImageUrl()}}" />
+  			</div>
+  			<div class="bill-sponsor-info">
+          <h2>{{bill.body.billData.sponsor.name}}</h2>
+          <h3>{{bill.legislator.properties.current_term.party}}</h3>
+  			</div>
+        </aside>
+  		</div>
 
-		<div class="card padding-small bill-description">
-			<h1>Bill Summary</h1>
-			<hr class="margin-top-small margin-bottom-small" />
-      <p ng-bind-html="bill.body.getSummary()"></p>
-    <div ng-click="bill.readmore = true" class="readmore">
-        <p>Read More</p>
-      </div>
-		</div>
+  		<div class="card padding-small bill-description">
+  			<h1>Bill Summary</h1>
+  			<hr class="margin-top-small margin-bottom-small" />
+        <div class="preview-container">
+        <p ng-bind-html="bill.body.getSummary()"></p>
+        </div>
+      <div ng-click="bill.readmore = true" class="readmore">
+          <p>Read More</p>
+        </div>
+  		</div>
     </section>
 
     <div class="card padding-small bill-comments" loader loader-context="bill.comments">
