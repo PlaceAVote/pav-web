@@ -1,0 +1,206 @@
+.issues-container {
+  .issues-title {
+    i {
+      line-height: 10px;
+    }
+    i, p {
+        @include medium();
+        @include font-size(12px);
+      }    
+  }
+
+  .card {
+    padding-bottom: 50px;
+  }
+
+  ng-transclude {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .green-button.medium-button {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  }
+  
+  .issues-title {
+      i {
+        line-height: 10px;
+      }
+      i, p {
+          @include medium();
+          @include font-size(12px);
+        }    
+    }
+
+  .profile-image-holder {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+  }
+
+  .post-message {
+    padding-left: 45px;
+    width: 100%;
+    line-height: 20px;
+    @include font-size(14px);
+    font-family: $font;
+    @include medium();
+    @include media(600px) {
+      min-height: 70px;
+    }
+  }
+  .flat-bottom {
+    border-bottom: none;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  .issues-options {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-top: 1px solid $widgetborder;
+    border-right: 1px solid $widgetborder;
+    border-top-right-radius: 3px;
+    p {
+      @include font-size(12px);
+      @include medium();
+    }
+    div {
+      &:nth-child(1) {
+        padding: 7px 10px;
+      }
+      &:nth-child(1), &:nth-child(2) {
+        border-right: 1px solid $widgetborder;
+      }
+      &:nth-child(2), &:nth-child(3) {
+        position: relative;
+        margin: 0px auto;
+        cursor: pointer;
+        transition: all 0.1s ease;
+        &:hover {
+          background: darken($pale, 2%);
+          & .tool-tip {
+            opacity: 1;
+          }
+        }
+      }
+      &:nth-child(3).option-selected {
+        border-right: 1px solid $widgetborder;
+      }
+      i {
+        font-family: "pav" !important;
+      }
+    }
+    .option-selected {
+      background: white;
+      transform: translateY(-3px);
+      border-top: 1px solid $widgetborder;
+      box-shadow: 0px 3px 0px $widgetborder, -1px 1px 0px 0px $widgetborder;
+      i {
+        color: $red !important;
+      }
+      &:hover {
+        background: white !important;
+      }
+    }
+    .icon-links {
+      color: #AEADB3;
+      @include font-size(15px);
+    }
+    .icon-bills {
+      color: #AEADB3;
+      @include font-size(16px);
+    }
+  }
+}
+
+.issues-container {
+  .bill-search {
+    width: 100%;
+    position: relative;
+    .loader {
+      position: absolute;
+      top: 11px;
+      right: 15px;
+      height: 15px;
+      width: 15px;
+    }
+    ul li {
+      cursor: pointer;
+      position: relative;
+      color: $blue;
+      font-style: italic;
+      @include font-size(12px);
+      padding: 5px 5px 5px 0;
+      @include medium($font-italic);
+      background: $pale;
+      border: 1px solid $widgetborder;
+      border-top: none;
+      padding-right: 100px;
+      .text-select {
+        padding: 0px 3px;
+        font-weight: bold;
+        color: darken($blue, 5%);
+        text-shadow: 0px 1px 0px $white;
+      }
+      &:hover, &.selected {
+        background: desaturate(darken($pale, 5%), 50%);
+      }
+      .add-bill-options {
+        position: absolute;
+        right: 10px;
+        top: 6px;
+        @include font-size(10px);
+        color: lighten(desaturate($blue, 30%), 10%);
+        font-style: normal;
+      }
+    }
+  }
+    input, .link-add {
+    @include font-size(12px);
+    width: 100%;
+    background: $pale;
+    font-family: $font;
+    color: $black;
+    @include medium();
+    height: 35px;
+    padding-left: 10px;
+    border: 1px solid $widgetborder;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    &:focus {
+      outline: none;
+    } 
+    &::-webkit-input-placeholder {
+      color: lighten(desaturate($blue, 20%), 15%);
+   }
+  }
+  .link-add {
+    border-style: dashed;
+  }
+}
+
+.issue-attachments {
+  overflow: hidden;
+  height: 35px;
+  border: 1px solid $widgetborder;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  background: lighten($greylight, 5%);
+  .attachment {
+    border-right: 1px solid $widgetborder;
+    max-width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: lighten(desaturate($blue, 20%), 15%);
+    @include font-size(11px);
+    i {
+      @include font-size(12px);
+      line-height: 35px;
+      margin-right: 5px;
+    }
+  }
+}

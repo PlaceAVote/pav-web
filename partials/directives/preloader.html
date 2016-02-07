@@ -1,4 +1,11 @@
+<div ng-if="!show">
 <div class="box-loader" ng-hide="ctrl.context">
   <i class="loader"></i>
+</div>
+</div>
+<div ng-if="show">
+<div class="box-loader" ng-show="ctrl.context">
+  <i class="loader"></i>
+</div>
 </div>
 <ng-transclude></ng-transclude>

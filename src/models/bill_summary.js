@@ -3,6 +3,7 @@ function Bill(options) {
   if (!options) {
     return this;
   }
+  this.type = 'bill';
   this.subject = options.subject;
   this.short_title = options.short_title;
   this.official_title = options.official_title;

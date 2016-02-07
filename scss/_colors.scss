@@ -8,6 +8,7 @@ $green: #a5cc71;
 $fbblue: #3b5998;
 $fbbluedark: #324b81;
 $blue: #4d6eb3;
+$lightblue: #3667B1;
 $purple: #543594;
 $lightpurple: #9283b4;
 $pale: #f4f2fe;
@@ -16,3 +17,36 @@ $bgcolor: #e8e7ee;
 $widgetborder: #d6d4e1;
 $radius: 3px;
 
+.black {color: $black; }
+.white {color: $white; }
+.grey {color: $grey; }
+.greylight {color: $greylight; }
+.red {color: $red; }
+.green {color: $green; }
+.fbblue {color: $fbblue; }
+.fbbluedark {color: $fbbluedark; }
+.blue {color: $blue; }
+.purple {color: $purple; }
+.lightpurple {color: $lightpurple; }
+.pale {color: $pale; }
+.twblue {color: $twblue; }
+.bgcolor {color: $bgcolor; }
+.widgetborder {color: $widgetborder; }
+.lightblue { color: $lightblue;}
+
+.black-bg {background-color: $black; }
+.white-bg {background-color: $white; }
+.grey-bg {background-color: $grey; }
+.greylight-bg {background-color: $greylight; }
+.red-bg {background-color: $red; }
+.green-bg {background-color: $green; }
+.fbblue-bg {background-color: $fbblue; }
+.fbbluedark-bg {background-color: $fbbluedark; }
+.blue-bg {background-color: $blue; }
+.purple-bg {background-color: $purple; }
+.lightpurple-bg {background-color: $lightpurple; }
+.pale-bg {background-color: $pale; }
+.twblue-bg {background-color: $twblue; }
+.bgcolor {background-color: $bgcolor; }
+.widgetborder-bg {background-color: $widgetborder; }
+.lightblue-bg { color: $lightblue;}

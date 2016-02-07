@@ -1,18 +1,24 @@
-<input type="text" type="text" placeholder="Search bills or people..."/>
+<input type="text" type="text" placeholder="{{placeholder}}"/>
 <div class="loader" ng-show="searching"></div>
 <div class="search-results" ng-class="{'has-results': results.bills.length > 0 || results.users.length > 0}">
-	<div class="search-category" ng-show="results.bills.length > 0">
+	<div class="search-category" ng-show="results.bills.length > 0 && bills && !issues">
 		<p>Bills</p>
 	</div>
-	<ul id="bill-results">
-		<li class="result-item" ng-repeat="bill in results.bills" ng-class="{'selected': bill.selected}" ng-click="bill.goToBill(location, bill.bill_id);clearItems();">
+	<ul id="bill-results" ng-show="bills">
+		<li ng-if="!issues" class="result-item" ng-repeat="bill in results.bills" ng-class="{'selected': bill.selected}" ng-click="bill.goToBill(location, bill.bill_id);clearItems();">
 			<div class="results-icon"><i class="{{bill.icon}}"></i></div><p ng-bind-html="bill.html"></p>
 		</li>
+    <li ng-if="issues" ng-class="{'selected': bill.selected}" ng-repeat="bill in results.bills" ng-click="attach(bill);clearItems();">
+      <p class="margin-left-small blue middle h-left" ng-bind-html="bill.html"></p>
+      <div class="add-bill-options row">
+        <i class="icon-add middle margin-right-small"></i><h2 class="middle">Add Bill</h2>
+      </div>
+    </li>
 	</ul>
-	<div class="search-category" ng-show="results.users.length > 0">
+	<div class="search-category" ng-show="results.users.length > 0 && people">
 		<p>People</p>
 	</div>
-	<ul id="user-results">
+	<ul id="user-results" ng-show="people">
 		<li class="result-item" ng-repeat="user in results.users" ng-class="{'selected': user.selected}" ng-click="user.goToProfile(location, user.user_id);clearItems();">
 			<img ng-src="{{user.img_url}}" /><p ng-bind-html="user.html"></p>
 		</li>

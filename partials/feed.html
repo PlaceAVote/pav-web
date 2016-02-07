@@ -10,29 +10,10 @@
 	        </section>
 	    </div>
 	    <section class="feed-wrapper">
-		<div class="feed-column l-7 m-12 s-12">
-		    <div class="bill-container" ng-repeat="bill in bills">
-		    	<div class="bill card">
-		        <h1 ng-click='bill.goToPage($parent.$location)'>{{bill.subject}}</h1>
-		        <hr />
-		        	<section class="row small-margin-top">
-			    	<div class="feed-icon medium-margin-right">
-			    	<i class="{{bill.icon}}"></i>
-			    	</div>
-			        <div class="bill-summary-container">
-			        <div class="bill-summary">
-			        <h6 ng-click='bill.goToPage($parent.$location)'>{{bill.short_title}}</h6>
-			        <p>{{bill.official_title}}</p>
-			        </div>
-			        </div>
-			        </section>
-		        </div>
-		        <div class="stats">
-		        <section ng-click='bill.goToPage($parent.$location)'>
-		        <span class="bold">{{bill.comment_count}} &nbsp;</span> comments</section>
-		        <section ng-click='bill.goToPage($parent.$location)'><span ng-hide="bill.noVotes"><span class="bold">{{bill.majorityVote().percent}}</span> Vote {{bill.majorityVote().majority}}</span><span ng-show="bill.noVotes">No votes</span></section>
-		        </div>
-		    </div>
+		<div class='feed-column l-7 m-12 s-12'>
+        <issues-post posted="feed.getFeed()"></issues-post>
+        <!-- <wizard></wizard> -->
+        <feed-events events="feed.events" refresh="feed.loading"></feed-events>
 		</div>
     <div class="l-5 m-12 s-12">
   		<div class="trends-container" loader loader-context="feed.trends">

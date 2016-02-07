@@ -1,0 +1,48 @@
+<div class="margin-top-medium card issue-card padding-top-small">
+  <div class="row">
+     <div class="profile-image-holder middle margin-right-small click" ng-click="issue.goToProfile(location)">
+        <div ng-style="{'background-image': 'url(' + issue.author_img_url + ')'}">
+        </div>
+     </div>
+     <div class="row mobile-col middle">
+     <p class="red click" ng-click="issue.goToProfile(location)">{{issue.author_first_name}} {{issue.author_last_name}} &nbsp;</p><p>shared an &nbsp;<i class="icon-issues blue"></i>&nbsp; Issue</p> 
+     </div>
+     <span class="h-right middle blue timestamp">{{issue.timestamp | amCalendar}}</span>
+
+   </div>
+   <hr style="margin-top: 10px;" />
+   <div class="row margin-top-small" ng-if="issue.bill_id">
+    <p class="title">Talking About: <span ng-click="issue.goToBill(location)" class="bill-ref blue pale-bg margin-left-small mobile-margin-left-none mobile-margin-top-small medium click">{{issue.bill_title}}</span></p> 
+   </div>
+   
+   <div class="row margin-top-small">
+   <p>{{issue.comment}}</p>
+   </div>
+
+   <div ng-if="issue.article_link" class="column issue-article margin-top-small padding-small margin-bottom-small" ng-style="{'background-image': 'url(' + issue.article_img + ')'}">
+      <h2>{{issue.article_title}}</h2>
+      <a ng-href="{{issue.article_link}}" target="_blank">view article</a>
+      <div class="backdrop"></div>
+   </div>
+
+   <div class="row margin-top-small">
+     <div class="h-left">
+        <p class="medium middle">What's your reaction?</p>
+     </div>
+
+     <div class="h-right reactions">
+        <div class="reaction click" ng-click="eResponse(issue.issue_id, 'positive', issue)">
+          <img ng-hide="issue.emotional_response === 'positive'" src="img/reactions/smile-inactive.svg" />
+          <img ng-show="issue.emotional_response === 'positive'" src="img/reactions/smile-active.svg" />
+        </div>
+        <div class="reaction click" ng-click="eResponse(issue.issue_id, 'neutral', issue)">
+          <img ng-hide="issue.emotional_response === 'neutral'" src="img/reactions/straightface-inactive.svg" />
+          <img ng-show="issue.emotional_response === 'neutral'" src="img/reactions/straightface-active.svg" />
+        </div>
+        <div class="reaction click" ng-click="eResponse(issue.issue_id, 'negative', issue)">
+          <img ng-hide="issue.emotional_response === 'negative'" src="img/reactions/sadface-inactive.svg" />
+          <img ng-show="issue.emotional_response === 'negative'" src="img/reactions/sadface-active.svg" />
+        </div>
+     </div>
+   </div>
+</div>

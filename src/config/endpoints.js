@@ -102,6 +102,20 @@ module.exports = {
       };
       return req;
     },
+    putData: function(data, token) {
+      req = {
+        method: 'PUT',
+        data: data,
+        isArray: false,
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: token,
+        },
+        withCredentials: false,
+      };
+      return req;
+    },
   },
   legislator: {
     getById: {
@@ -159,7 +173,9 @@ module.exports = {
     getById: {
       endpoint: urls.CONGRESS + '/bills/',
     },
-    feed: urls.USER + '/user/feed/',
+  },
+  feed: {
+    endpoint: urls.USER + '/user/feed/',
   },
   notifications: {
     socket: urls.NOTIFICATION + '/user/notifications/ws',
@@ -192,6 +208,12 @@ module.exports = {
     loginEndpoint: urls.USER + '/user/authenticate',
     facebookLoginUrl: urls.USER + '/user/facebook/authenticate',
     facebookCreateUrl: urls.USER + '/user/facebook',
+    issue: {
+      endpoint: urls.USER + '/user/issue',
+      response: function(id) {
+        return urls.USER + '/user/issue/' + id + '/response';
+      },
+    },
     settings: urls.USER + '/user/me/settings',
     profilePicture: urls.USER + '/user/me/profile/image',
   },

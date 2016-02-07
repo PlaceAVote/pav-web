@@ -1,0 +1,98 @@
+.issue-card {
+  p {
+    @include font-size(12px);
+    .bill-ref {
+      border: 1px solid $widgetborder;
+      border-radius: 3px;
+      padding: 3px 6px;
+      display: inline-flex;
+      max-width: 360px;
+      @include font-size(11px);
+    }
+  }
+
+  .timestamp {
+    @include font-size(10px);
+  }
+  .icon-issues {
+    @include font-size(13px);
+  }
+  .issue-article {
+    position: relative;
+    color: white;
+    h2, a {
+      transition: all 0.3s ease;
+      text-shadow: 0px 1px 5px rgba(0,0,0,0);
+    }
+    h2 {
+      z-index: 2;
+      position: relative;
+      @include font-size(14px);
+    }
+    a {
+      position: relative;
+      z-index: 2;
+      color: white;
+      text-decoration: none;
+      @include font-size(10px);
+    }
+    border-radius: 3px;
+    overflow: hidden;
+    background-position: center center;
+    background-size: 100%;
+    transition: all 0.3s ease;
+    &:hover {
+      .backdrop {
+        background: rgba(0,0,0,0.2);
+      }
+      background-size: 110%;
+      h2, a {
+        text-shadow: 0px 1px 3px rgba(0,0,0,0.6);
+      }
+    }
+    .backdrop {
+      transition: all 0.5s ease;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1;
+    }
+  }
+}
+
+.reactions {
+  .reaction {
+    overflow: hidden;
+    position:relative;
+    width: 25px;
+    height: 25px;
+    &:nth-child(1), &:nth-child(2) {
+      margin-right: 5px;
+    }
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      &.ng-hide-add, &.ng-hide-remove, &.ng-hide-remove-active, &.ng-hide-add-active {
+        transition: all 0.3s ease;
+      }
+      &.ng-hide-add {
+        transform: scale(1);
+      }
+      &.ng-hide-add.ng-hide-add-active {
+        transform: scale(0);
+      }
+      &.ng-hide-remove {
+        transform: scale(0);
+
+      }
+      &.ng-hide-remove.ng-hide-remove-active {
+        transform: scale(1);
+      }
+    }
+  }
+}

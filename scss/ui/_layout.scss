@@ -1,179 +1,267 @@
-.row {
-  display: flex;
-  flex-direction: row;
-}
+// .row {
+//   display: flex;
+//   flex-direction: row;
+// }
 
-.col {
-  display: flex;
-  flex-direction: column;
-}
+// .col {
+//   display: flex;
+//   flex-direction: column;
+// }
 
-.col-m {
-  @include media(900px) {
-    flex-direction: column;
-  }
-}
+// .col-m {
+//   @include media(900px) {
+//     flex-direction: column;
+//   }
+// }
 
-.row-m {
-  @include media(900px) {
-    flex-direction: row;
-  }
-}
+// .row-m {
+//   @include media(900px) {
+//     flex-direction: row;
+//   }
+// }
+
+// .col-s {
+//   @include media(500px) {
+//     flex-direction: column;
+//   }
+// }
+
+// .row-s {
+//   @include media(500px) {
+//     flex-direction: row;
+//   }
+// }
 
 
-.layout-right {
-  align-self: flex-start;
-  margin-left: auto;
-}
+// .layout-right {
+//   align-self: flex-start;
+//   margin-left: auto;
+// }
 
-.layout-left {
-  align-self: flex-start;
-}
+// .layout-center {
+//   align-self: center;
+// }
 
-.layout-bottom {
-  align-self: flex-end;
-}
+// .layout-left {
+//   align-self: flex-start;
+// }
 
-//No Margins
+// .layout-bottom {
+//   align-self: flex-end;
+// }
 
-.no-margin-bottom {
-  margin-bottom: 0;  
-}
+// .v-layout-top {
+//   align-self:flex-start;
+// }
 
-.no-margin-top {
-  margin-top: 0;  
-}
+// .v-layout-middle {
+//   align-self:center;
+// }
 
-.no-margin-left {
-  margin-left: 0;  
-}
+// .v-layout-bottom {
+//   align-self:flex-end;
+// }
 
-.no-margin-right {
-  margin-right: 0;  
-}
+// //No Margins
 
-//Small Margins
-$margin-small: 10px;
-.small-margin-bottom {
-  margin-bottom: $margin-small;  
-}
+// .no-margin-bottom {
+//   margin-bottom: 0;  
+// }
 
-.small-margin-top {
-  margin-top: $margin-small;  
-}
+// .no-margin-top {
+//   margin-top: 0;  
+// }
 
-.small-margin-left {
-  margin-left: $margin-small;  
-}
+// .no-margin-left {
+//   margin-left: 0;  
+// }
 
-.small-margin-right {
-  margin-right: $margin-small;  
-}
+// .no-margin-right {
+//   margin-right: 0;  
+// }
 
-@include media(900px) {
-  .small-margin-bottom-m {
-    margin-bottom: $margin-small;  
-  }
+// //Small Margins
+// $margin-small: 10px;
+// .small-margin-bottom {
+//   margin-bottom: $margin-small;  
+// }
 
-  .small-margin-top-m {
-    margin-top: $margin-small;  
-  }
+// .small-margin-top {
+//   margin-top: $margin-small;  
+// }
 
-  .small-margin-left-m {
-    margin-left: $margin-small;  
-  }
+// .small-margin-left {
+//   margin-left: $margin-small;  
+// }
 
-  .small-margin-right-m {
-    margin-right: $margin-small;  
-  }
-}
+// .small-margin-right {
+//   margin-right: $margin-small;  
+// }
 
-//Medium Margins
-$margin-medium: 15px;
-.medium-margin-bottom {
-  margin-bottom: $margin-medium;  
-}
+// @include media(900px) {
+//   .small-margin-bottom-m {
+//     margin-bottom: $margin-small;  
+//   }
 
-.medium-margin-top {
-  margin-top: $margin-medium;  
-}
+//   .small-margin-top-m {
+//     margin-top: $margin-small;  
+//   }
 
-.medium-margin-left {
-  margin-left: $margin-medium;  
-}
+//   .small-margin-left-m {
+//     margin-left: $margin-small;  
+//   }
 
-.medium-margin-right {
-  margin-right: $margin-medium;  
-}
+//   .small-margin-right-m {
+//     margin-right: $margin-small;  
+//   }
+//   .layout-right-m {
+//     align-self: flex-start;
+//     margin-left: auto;
+//   }
 
-@include media(900px) {
-  .medium-margin-bottom-m {
-    margin-bottom: $margin-medium;  
-  }
+//   .layout-center-m {
+//     align-self: center;
+//   }
 
-  .medium-margin-top-m {
-    margin-top: $margin-medium;  
-  }
+//   .layout-left-m {
+//     align-self: flex-start;
+//   }
 
-  .medium-margin-left-m {
-    margin-left: $margin-medium;  
-  }
+//   .layout-bottom-m {
+//     align-self: flex-end;
+//   }
 
-  .medium-margin-right-m {
-    margin-right: $margin-medium;  
-  }
-}
+//   .v-layout-top-m {
+//     align-self:flex-start;
+//   }
 
-//Large Margins
-$margin-large: 20px;
-.large-margin-bottom {
-  margin-bottom: $margin-large;  
-}
+//   .v-layout-middle-m {
+//     align-self:center;
+//   }
 
-.large-margin-top {
-  margin-top: $margin-large;  
-}
+//   .v-layout-bottom-m {
+//     align-self:flex-end;
+//   }
+// }
 
-.large-margin-left {
-  margin-left: $margin-large;  
-}
+// //Medium Margins
+// $margin-medium: 15px;
+// .medium-margin-bottom {
+//   margin-bottom: $margin-medium;  
+// }
 
-.large-margin-right {
-  margin-right: $margin-large;  
-}
+// .medium-margin-top {
+//   margin-top: $margin-medium;  
+// }
 
-@include media(900px) {
-  .large-margin-bottom-m {
-  margin-bottom: $margin-large;  
-  }
+// .medium-margin-left {
+//   margin-left: $margin-medium;  
+// }
 
-  .large-margin-top-m {
-  margin-top: $margin-large;  
-  }
+// .medium-margin-right {
+//   margin-right: $margin-medium;  
+// }
 
-  .large-margin-left-m {
-  margin-left: $margin-large;  
-  }
+// @include media(900px) {
+//   .medium-margin-bottom-m {
+//     margin-bottom: $margin-medium;  
+//   }
 
-  .large-margin-right-m {
-  margin-right: $margin-large;  
-  }
-}
+//   .medium-margin-top-m {
+//     margin-top: $margin-medium;  
+//   }
 
-@include media(900px) {
-  .no-margin-bottom-m {
-    margin-bottom: 0;  
-  }
+//   .medium-margin-left-m {
+//     margin-left: $margin-medium;  
+//   }
 
-  .no-margin-top-m {
-    margin-top: 0;  
-  }
+//   .medium-margin-right-m {
+//     margin-right: $margin-medium;  
+//   }
+// }
 
-  .no-margin-left-m {
-    margin-left: 0;  
-  }
+// //Large Margins
+// $margin-large: 20px;
+// .large-margin-bottom {
+//   margin-bottom: $margin-large;  
+// }
 
-  .no-margin-right-m {
-    margin-right: 0;  
-  }
-}
+// .large-margin-top {
+//   margin-top: $margin-large;  
+// }
+
+// .large-margin-left {
+//   margin-left: $margin-large;  
+// }
+
+// .large-margin-right {
+//   margin-right: $margin-large;  
+// }
+
+// @include media(900px) {
+//   .large-margin-bottom-m {
+//   margin-bottom: $margin-large;  
+//   }
+
+//   .large-margin-top-m {`
+//   margin-top: $margin-large;  
+//   }
+
+//   .large-margin-left-m {
+//   margin-left: $margin-large;  
+//   }
+
+//   .large-margin-right-m {
+//   margin-right: $margin-large;  
+//   }
+// }
+
+// @include media(900px) {
+//   .no-margin-bottom-m {
+//     margin-bottom: 0;  
+//   }
+
+//   .no-margin-top-m {
+//     margin-top: 0;  
+//   }
+
+//   .no-margin-left-m {
+//     margin-left: 0;  
+//   }
+
+//   .no-margin-right-m {
+//     margin-right: 0;  
+//   }
+// }
+
+// @include media(500px) {
+  
+//   .layout-right-s {
+//     align-self: flex-start;
+//     margin-left: auto;
+//   }
+
+//   .layout-center-s {
+//     align-self: center;
+//   }
+
+//   .layout-left-s {
+//     align-self: flex-start;
+//   }
+
+//   .layout-bottom-s {
+//     align-self: flex-end;
+//   }
+
+//   .v-layout-top-s {
+//     align-self:flex-start;
+//   }
+
+//   .v-layout-middle-s {
+//     align-self:center;
+//   }
+
+//   .v-layout-bottom-s {
+//     align-self:flex-end;
+//   }
+// }
