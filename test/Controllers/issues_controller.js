@@ -118,4 +118,98 @@ describe('Issues Controller', function() {
     subject.validateUrl();
     expect(subject.errorMessage).to.equal('Link entered not valid');
   });
+    var mockIssueService = {
+      saveIssue: function(issue, callback) {
+        callback(undefined, true);
+      }
+    };
+
+    var mockIssueServiceError = {
+      saveIssue: function(issue, callback) {
+        callback(true, undefined);
+      }
+    };
+
+    var scope = {
+      $parent: {
+        posted: function() {
+          return;
+        }
+      }
+    }
+
+  it('should posts issue without attachments', function() {
+    var subject = new IssuesController(scope,undefined,undefined,undefined,mockIssueService);
+    subject.issue = {
+      comment: 'Hello World',
+    };
+    subject.attachments = [];
+    subject.postIssue();
+    expect(subject.issue).to.be.empty;
+    expect(subject.attachments).to.be.empty;
+    expect(subject.loading).to.equal(false);
+  });
+
+  it('should posts issue with article attachment', function() {
+    var subject = new IssuesController(scope,undefined,undefined,undefined,mockIssueService);
+    subject.issue = {
+      comment: 'Hello World',
+    };
+    subject.attachments = [{type: 'Article', title: 'http://www.google.com'}];
+    subject.postIssue();
+    expect(subject.issue).to.be.empty;
+    expect(subject.attachments).to.be.empty;
+    expect(subject.loading).to.equal(false);
+  });
+
+  it('should posts issue with bill attachment', function() {
+    var subject = new IssuesController(scope,undefined,undefined,undefined,mockIssueService);
+    subject.issue = {
+      comment: 'Hello World',
+    };
+    subject.attachments = [{type: 'Bill', bill_id: 'HR-144'}];
+    subject.postIssue();
+    expect(subject.issue).to.be.empty;
+    expect(subject.attachments).to.be.empty;
+    expect(subject.loading).to.equal(false);
+  });
+
+  it('should posts issue with article and bill attachments', function() {
+    var subject = new IssuesController(scope,undefined,undefined,undefined,mockIssueService);
+    subject.issue = {
+      comment: 'Hello World',
+    };
+    subject.attachments = [{type: 'Article', title: 'http://www.google.com'},{type: 'Bill', bill_id: 'HR-144'}];
+    subject.postIssue();
+    expect(subject.issue).to.be.empty;
+    expect(subject.attachments).to.be.empty;
+    expect(subject.loading).to.equal(false);
+  });
+
+  it('should return error if comment is empty string', function() {
+    var subject = new IssuesController(scope,undefined,undefined,mockTimeout,mockIssueServiceError);
+    subject.issue = {
+      comment: '',
+    };
+    subject.postIssue();
+    expect(subject.errorMessage).to.equal('You need to enter a comment before posting');
+  });
+
+  it('should return error if no comment', function() {
+    var subject = new IssuesController(scope,undefined,undefined,mockTimeout,mockIssueServiceError);
+    subject.issue = {};
+    subject.postIssue();
+    expect(subject.errorMessage).to.equal('You need to enter a comment before posting');
+  });
+
+  it('should return error if service fails', function() {
+    var subject = new IssuesController(scope,undefined,undefined,mockTimeout,mockIssueServiceError);
+    subject.issue = {
+      comment: 'Hello World',
+    };
+    subject.postIssue();
+    expect(subject.loading).to.equal(false)
+    expect(subject.errorMessage).to.equal('There was an error when uploading your Issue');
+  });
+
 });

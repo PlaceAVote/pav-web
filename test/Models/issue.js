@@ -12,9 +12,9 @@ describe("Issues", function(){
       article_img: "http://medium.com/img/101",
       timestamp: "123213213",
       author_id: "002",
-      author_first_name: "bob",
-      author_last_name: "pop",
-      author_img_url: "http://img.com",
+      first_name: "bob",
+      last_name: "pop",
+      img_url: "http://img.com",
       bill_title: "HR2 is awesome",
       emotional_response: 1
     };
