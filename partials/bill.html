@@ -116,13 +116,13 @@
     </div>
 
 
-<section ng-switch="bill.chartShow" class="row bill-stats-vote l-12">
+<section ng-switch="bill.chartShow" class="row tablet-col bill-stats-vote l-12">
 		<div ng-switch-when="true" class="card bill-stats l-6" >
     <h1>Statistics</h1>
     <hr />
     <status-chart data="bill.stats"></status-chart>
 		</div>
-    <div ng-class="{'row no-chart': !bill.chartShow, 'col': bill.chartShow}" class="l-12 vote-btns-stats">
+    <div ng-class="{'row no-chart': !bill.chartShow, 'col': bill.chartShow}" class="l-12 vote-btns-stats tablet-col">
     <div class="card vote-widget">
     <h1>Vote Now</h1>
     <hr />
