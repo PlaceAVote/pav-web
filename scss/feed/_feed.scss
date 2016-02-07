@@ -14,7 +14,7 @@
     margin-bottom: 20px;
     .bill-container {
       position: relative;
-      margin-top: 20px;
+      // margin-top: 20px;
       @include shadow();
 
       .bill {
@@ -49,8 +49,8 @@
 
         section {
           outline: none;
-          cursor: pointer;
-          background-color: #f4f2fe;
+          // cursor: pointer;
+          // background-color: #f4f2fe;
           color: $black;
           height: 35px;
           line-height: 35px;
@@ -65,9 +65,9 @@
           flex-direction: row;
           justify-content: center;
           position:relative;
-          span.bold {
-            @include bold();
-          }
+          // span.bold {
+          //   @include bold();
+          // }
           &:nth-child(1) {
             border: 1px solid $widgetborder;
             border-top: none;

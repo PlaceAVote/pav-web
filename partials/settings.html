@@ -1,5 +1,5 @@
 <div class="modal" ng-show="settings.showModal">
-<div class="card profile-picture-edit" loader loader-context="settings.profilePicture.saving">
+<div class="card padding-small profile-picture-edit" loader loader-context="settings.profilePicture.saving">
 <div class="row">
 <h1>CHANGE PROFILE PICTURE</h1><i class="icon-close h-right" ng-click="settings.showModal = false"></i>
 </div>
@@ -20,9 +20,9 @@
 	<div class="app-body">
     <section class="settings-wrapper">
       <div class='l-4 m-12 s-12'>
-        <div class="settings-list card">
+        <div class="settings-list padding-small card">
           <h1>ACCOUNT SETTINGS</h1>
-          <hr />
+          <hr class="margin-top-small" />
           <ul>
             <li ng-click="settings.scrollTo('accountSettings'); settings.showSettings = true;">Account</li>
             <li ng-click="settings.scrollTo('passwordSettings'); settings.showSettings = true;">Password & Privacy Settings</li>
@@ -30,11 +30,11 @@
         </div>
       </div>
 
-      <div class="account-section-wrapper card l-8 m-12 s-12" ng-show="settings.showSettings">
+      <div class="account-section-wrapper card padding-small l-8 m-12 s-12" ng-show="settings.showSettings">
         <div class="account-section">
           <div id="accountSettings" class="section-title">
             <h1>ACCOUNT</h1>
-            <hr />
+            <hr class="margin-top-small" />
           </div>
           <div class="account-section-content">
             <div class="profile-picture-section">
@@ -68,7 +68,7 @@
         <div class="password-section" ng-show="settings.showSettings">
           <div id="passwordSettings" class="section-title">
             <h1>PASSWORD & PRIVACY SETTINGS</h1>
-            <hr />
+            <hr class="margin-top-small" />
           </div>
           <div class="password-section-content">
             <div class="row tablet-col margin-bottom-medium" ng-if="!settings.settingsItem.social_login">
@@ -101,7 +101,7 @@
           </div>
         </div>
       </div>
-      <div class="card l-8 m-12 margin-left-medium tablet-margin-left-none tablet-margin-top-large margin-bottom-larger" ng-hide="settings.showSettings">
+      <div class="card l-8 m-12 padding-small margin-left-medium tablet-margin-left-none tablet-margin-top-large margin-bottom-larger" ng-hide="settings.showSettings">
         <terms-and-conditions></terms-and-conditions>
       </div>
     </section>
