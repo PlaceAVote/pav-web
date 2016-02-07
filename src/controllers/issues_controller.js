@@ -110,7 +110,6 @@ IssuesController.prototype.validateUrl = function() {
 };
 
 IssuesController.prototype.postIssue = function() {
-  console.log(this.issue);
   var that = this;
   if (this.issue.comment === '' || !this.issue.comment) {
     that.setError('You need to enter a comment before posting');
@@ -130,11 +129,9 @@ IssuesController.prototype.postIssue = function() {
   this.issueService.saveIssue(this.issue, function(err, res) {
     that.loading = false;
     if (err) {
-      console.log('err', err);
       that.setError('There was an error when uploading your Issue');
     }
     if (res) {
-      console.log('res', res);
       that.issue = {};
       that.attachments = [];
       that.scope.$parent.posted();

@@ -43,6 +43,13 @@
   .post-message {
     padding-left: 45px;
     width: 100%;
+    line-height: 20px;
+    @include font-size(14px);
+    font-family: $font;
+    @include medium();
+    @include media(600px) {
+      min-height: 70px;
+    }
   }
   .flat-bottom {
     border-bottom: none;

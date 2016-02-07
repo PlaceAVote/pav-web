@@ -18,8 +18,12 @@ function Issue(options) {
   this.author_img_url = options.img_url || '//cdn.placeavote.com/img/profile/profile-picture.png';
 }
 
-Issue.prototype.goToPage = function(location) {
+Issue.prototype.goToBill = function(location) {
   location.path('bill/' + this.bill_id);
+};
+
+Issue.prototype.goToProfile = function(location) {
+  location.path('profile/' + this.author_id);
 };
 
 module.exports = Issue;
