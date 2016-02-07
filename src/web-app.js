@@ -161,7 +161,7 @@ app.controller('TopicRegisterCtrl',['$scope','$location', 'userService', Registe
 app.controller('SignUpCtrl',['$rootScope','$scope','$location', 'userService', SignUpController]);
 app.controller('LoginCtrl',['$scope','$location', 'userService', 'authService', '$rootScope', '$routeParams', 'passwordService', LoginController]);
 app.controller('FeedCtrl', ['$scope', '$location', 'userService', 'billService', 'authService', 'feedService', '$rootScope', FeedController]);
-app.controller('BillCtrl', ['$scope', '$routeParams', 'billService', 'legislationService', 'voteService', 'commentService', '$location', 'authService', BillController]);
+app.controller('BillCtrl', ['$scope', '$routeParams', 'billService', 'legislationService', 'voteService', 'commentService', '$location', 'authService', '$rootScope', BillController]);
 app.controller('HeaderCtrl', ['$rootScope', '$scope', '$location', '$timeout', 'authService', 'userService', 'notificationService', 'searchService', '$window', HeaderController]);
 app.controller('ProfileCtrl', ['$scope', '$location', '$routeParams', 'authService', 'userService', ProfileController]);
 app.controller('SettingsCtrl', ['$scope', '$location', '$timeout', 'userService', 'authService', '$rootScope','$anchorScroll', SettingsController]);

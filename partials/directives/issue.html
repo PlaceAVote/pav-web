@@ -1,4 +1,4 @@
-<div class="margin-top-medium card issue-card padding-top-small">
+<div class="margin-top-medium card issue-card padding-small">
   <div class="row">
      <div class="profile-image-holder middle margin-right-small click" ng-click="issue.goToProfile(location)">
         <div ng-style="{'background-image': 'url(' + issue.author_img_url + ')'}">
@@ -10,16 +10,16 @@
      <span class="h-right middle blue timestamp">{{issue.timestamp | amCalendar}}</span>
 
    </div>
-   <hr style="margin-top: 10px;" />
-   <div class="row margin-top-small" ng-if="issue.bill_id">
+   <hr class="margin-top-small margin-bottom-small" />
+   <div class="row margin-bottom-small" ng-if="issue.bill_id">
     <p class="title">Talking About: <span ng-click="issue.goToBill(location)" class="bill-ref blue pale-bg margin-left-small mobile-margin-left-none mobile-margin-top-small medium click">{{issue.bill_title}}</span></p> 
    </div>
    
-   <div class="row margin-top-small">
+   <div class="row margin-bottom-small">
    <p>{{issue.comment}}</p>
    </div>
 
-   <div ng-if="issue.article_link" class="column issue-article margin-top-small padding-small margin-bottom-small" ng-style="{'background-image': 'url(' + issue.article_img + ')'}">
+   <div ng-if="issue.article_link" class="column issue-article padding-small margin-bottom-small" ng-style="{'background-image': 'url(' + issue.article_img + ')'}">
       <h2>{{issue.article_title}}</h2>
       <a ng-href="{{issue.article_link}}" target="_blank">view article</a>
       <div class="backdrop"></div>

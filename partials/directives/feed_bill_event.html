@@ -1,7 +1,7 @@
-<div class="bill-container">
-    <div class="bill card">
+<div class="bill-container margin-top-medium">
+    <div class="bill card padding-small">
     <h1 ng-click='bill.goToPage(location)'>{{bill.subject}}</h1>
-    <hr />
+    <hr class="margin-top-small" />
         <section class="row margin-top-small">
         <div class="feed-icon margin-right-medium">
         <i class="{{bill.icon}}"></i>
@@ -15,8 +15,8 @@
         </section>
     </div>
     <div class="stats">
-    <section ng-click='bill.goToPage(location)'>
+    <section class="click pale-bg" ng-click='bill.goToPage(location)'>
     <span class="bold">{{bill.comment_count}} &nbsp;</span> comments</section>
-    <section ng-click='bill.goToPage(location)'><span ng-hide="bill.noVotes"><span class="bold">{{bill.majorityVote().percent}}</span> Vote {{bill.majorityVote().majority}}</span><span ng-show="bill.noVotes">No votes</span></section>
+    <section class="click pale-bg" ng-click='bill.goToPage(location)'><span ng-hide="bill.noVotes"><span class="bold">{{bill.majorityVote().percent}}</span> Vote {{bill.majorityVote().majority}}</span><span ng-show="bill.noVotes">No votes</span></section>
     </div>
 </div>
