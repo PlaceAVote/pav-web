@@ -10,7 +10,7 @@
 
     <textarea msd-elastic ng-model="issues.issue.comment" ng-class="{'flat-bottom': issues.billSearch || issues.linkAdd || issues.attachments.length > 0}" class="padding-small post-message" placeholder="Share your opinions with people and rally around a bill or cause" rows="1"></textarea>
 
-    <div class="row issue-attachments" ng-show="issues.attachments.length > 0" ng-class="{'flat-bottom': issues.billSearch || issues.linkAdd}">
+    <div class="row issue-attachments l-12" ng-show="issues.attachments.length > 0" ng-class="{'flat-bottom': issues.billSearch || issues.linkAdd}">
         <div class="attachment row padding-left-small padding-right-small" ng-repeat="attachment in issues.attachments">
           <i class="icon-close click" ng-click="issues.deleteAttachment($index)"></i>
           <p class="middle">{{attachment.type}}: {{attachment.title}}</p>

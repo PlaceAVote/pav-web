@@ -238,6 +238,9 @@
 .no-chart {
   .vote-widget {
     height: 100px;
+    @include media(560px) {
+      height: auto;
+    }
   }
   .card {
     width: calc(50% - 10px);
