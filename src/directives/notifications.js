@@ -35,7 +35,7 @@ module.exports = function($location) {
 
       scope.hideNotifications = function() {
         scope.$parent.header.showNotifications = false;
-      }
+      };
     },
   };
 };
