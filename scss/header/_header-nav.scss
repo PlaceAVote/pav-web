@@ -9,6 +9,10 @@ header {
     top: 10px;
   }
 
+  .profile-image-holder {
+    border-color: darken($blue, 30%);
+  }
+
   @include linear-gradient(#564a88, #445a95);
   z-index: 9999;
   height: 50px;
@@ -25,7 +29,7 @@ header {
   -moz-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
 
-  .row {
+  .row-header {
     @include max-width();
     @include media(1200px) {
       padding-left: 20px;
