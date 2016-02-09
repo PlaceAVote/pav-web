@@ -11,3 +11,26 @@
       background-position: center center;
     }
 }
+
+
+  .profile-image-holder.comments {
+      &.notification-marker {
+        position: relative;
+      }
+      min-width: 55px;
+      min-height: 55px;
+      width: 55px;
+      height: 55px;
+      max-width: 55px;
+      max-height: 55px;
+      border: 2px solid white;
+      box-shadow: 0px 0px 0px 1px $greylight;
+      @include media(480px) {
+        max-width:46px;
+        width:46px;
+        min-width: 46px;
+        max-height:46px;
+        height:46px;
+        min-height: 46px;
+      }
+    } 
