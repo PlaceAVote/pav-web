@@ -12,6 +12,7 @@ function FeedService($resource, authService, userService) {
     }
 
     var onLoad = function(response) {
+      console.log(response);
       try {
         var results = {
           feed: FeedResponseFactory.getResponses(response.results),

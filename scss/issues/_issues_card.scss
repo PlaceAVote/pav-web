@@ -67,7 +67,7 @@
   .reaction {
     overflow: hidden;
     position:relative;
-    width: 25px;
+    min-width: 25px;
     background: $greylight;
     border: 1px solid $grey;
     border-radius: 3px;
@@ -77,7 +77,10 @@
       margin-right: 5px;
     }
     span {
-      @include font-size(9px);
+      @include font-size(10px);
+      vertical-align: middle;
+      margin-right: 7px;
+      margin-left: 29px;
     }
     img {
       position: absolute;
@@ -102,9 +105,6 @@
         transform: scale(1);
       }
     }
-  }
-  .reaction-count {
-    width: 60px;
   }
   .reaction-positive {
     border-color: $green;
