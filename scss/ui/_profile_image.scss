@@ -14,6 +14,9 @@
 
 
   .profile-image-holder.comments {
+      &.notification-marker {
+        position: relative;
+      }
       min-width: 55px;
       min-height: 55px;
       width: 55px;
