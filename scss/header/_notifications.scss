@@ -51,10 +51,11 @@
     section.notification {
       img {
         height: 30px;
+        margin-right: 24px;
       }
-      img.user-img {
-        margin-left: 20px;
-      }
+      // img.user-img {
+      //   margin-left: 20px;
+      // }
       position: relative;
 
     .notifications-container {
@@ -108,28 +109,35 @@
       }
       
     }
-      .dropdown-container {
-        background:$white;
-        border-radius:3px;
-        font-size:12px;
-        width:130px;
-        top: 44px;
-        right: 0px;
-        position:absolute;
-        @include shadow();
-        border:1px solid $grey;
-        ul {
-          li {
-            text-align:center;
-            font-weight:normal;
-            cursor:pointer;
-            padding:10px 10px;
-            &:hover {
-            background:$greylight;
-          }
-          }
-        }
+
+.dropdown-container {
+  background:$white;
+  border-radius:3px;
+  font-size:12px;
+  width:130px;
+  top: 44px;
+  right: 0px;
+  position:absolute;
+  @include shadow();
+  border:1px solid $grey;
+  ul {
+    li {
+      .profile-image-holder {
+        width: 20px;
+        height: 20px;
+        border-color: $grey;
       }
+      text-align:center;
+      font-weight:normal;
+      cursor:pointer;
+      padding:10px 10px;
+      &:hover {
+      background:$greylight;
+    }
+    }
+  }
+}
+
 .notifications-container:before, .dropdown-container:before {
   top: 0;
   border: solid transparent;
