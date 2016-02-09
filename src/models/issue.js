@@ -16,6 +16,9 @@ function Issue(options) {
   this.author_last_name = options.last_name;
   this.emotional_response = options.emotional_response;
   this.author_img_url = options.img_url || '//cdn.placeavote.com/img/profile/profile-picture.png';
+  this.negative_responses = options.negative_responses;
+  this.neutral_responses = options.neutral_responses;
+  this.positive_responses = options.positive_responses;
 }
 
 Issue.prototype.goToBill = function(location) {

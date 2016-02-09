@@ -49,7 +49,6 @@ FeedController.prototype.getFeed = function() {
     if (!err) {
       title.feed();
       that.events = response.feed;
-      console.log(that.events);
     }
   });
 };
