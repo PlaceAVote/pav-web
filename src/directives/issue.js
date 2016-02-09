@@ -14,6 +14,7 @@ module.exports = function($location, issueService) {
               return;
             }
             if (res) {
+              issue[issue.emotional_response + '_responses'] -= 1;
               issue.emotional_response = 'none';
               return;
             }
@@ -24,7 +25,12 @@ module.exports = function($location, issueService) {
               return;
             }
             if (res) {
+              if (issue.emotional_response !== 'none') {
+                issue[issue.emotional_response + '_responses'] -= 1;
+              }
               issue.emotional_response = res.emotional_response;
+              issue[issue.emotional_response + '_responses'] += 1;
+              return;
             }
           });
         }
