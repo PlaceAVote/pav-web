@@ -2,9 +2,10 @@
   <div class="profile-header">
    
        <div class="row"> 
-          <!-- insert a link on image to refresh profile page -->
-          <img ng-src="{{user.img_url}}" class="profile-picture" alt="Profile Picture"/>
-          <!-- end link -->
+          <div ng-click="header.dropDown()" class="profile-image-holder profile-picture click">
+            <div ng-style="{'background-image': 'url(' + user.img_url + ')'}">
+            </div>
+          </div>
             <div class="user-title">
                <h1>{{user.first_name }} {{user.last_name}}</h1>
                 <span><!-- geo location icon --></span>
