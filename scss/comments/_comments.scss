@@ -91,11 +91,11 @@
     margin-top: 5px;
     margin-bottom: 5px;
     padding:10px;
-    font-family:$font-normal;
+    font-family:$font;
     @include medium();
     color: $black;
     box-sizing: border-box;
-    @include font-size(10px);
+    @include font-size(12px);
   }
   .reply-actions {
     float: right;
