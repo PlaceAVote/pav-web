@@ -18,7 +18,7 @@
         </section>
         <p class="event-comment-body">“{{comment.body}}”</p>
             <div class="reply-comment" ng-show="comment.replyInput">
-            <textarea type="text" placeholder="Reply" rows="1" auto-resize ng-model="comment.replyText"></textarea>
+            <textarea type="text" placeholder="Reply" rows="1" auto-resize ng-model="comment.replyText" msd-elastic></textarea>
             <div class="reply-actions">
              <span class="btn-blank" ng-click="comment.hideReplyInput()">CANCEL</span>
             <span class="btn-green" ng-click="comment.reply(comment.bill_id, commentService)">POST</span>
