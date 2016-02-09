@@ -31,17 +31,20 @@
      </div>
 
      <div class="h-right reactions">
-        <div class="reaction click" ng-click="eResponse(issue.issue_id, 'positive', issue)">
+        <div class="reaction click row reaction-count" ng-class="{'reaction-positive': issue.emotional_response === 'positive'}" ng-click="eResponse(issue.issue_id, 'positive', issue)">
           <img ng-hide="issue.emotional_response === 'positive'" src="img/reactions/smile-inactive.svg" />
           <img ng-show="issue.emotional_response === 'positive'" src="img/reactions/smile-active.svg" />
+          <span class="h-right middle bold black">{{issue.positive_responses}}</span>
         </div>
-        <div class="reaction click" ng-click="eResponse(issue.issue_id, 'neutral', issue)">
+        <div class="reaction click row reaction-count" ng-class="{'reaction-neutral': issue.emotional_response === 'neutral'}" ng-click="eResponse(issue.issue_id, 'neutral', issue)">
           <img ng-hide="issue.emotional_response === 'neutral'" src="img/reactions/straightface-inactive.svg" />
           <img ng-show="issue.emotional_response === 'neutral'" src="img/reactions/straightface-active.svg" />
+          <span class="h-right middle bold black">{{issue.neutral_responses}}</span>
         </div>
-        <div class="reaction click" ng-click="eResponse(issue.issue_id, 'negative', issue)">
+        <div class="reaction click row reaction-count" ng-class="{'reaction-negative': issue.emotional_response === 'negative'}" ng-click="eResponse(issue.issue_id, 'negative', issue)">
           <img ng-hide="issue.emotional_response === 'negative'" src="img/reactions/sadface-inactive.svg" />
           <img ng-show="issue.emotional_response === 'negative'" src="img/reactions/sadface-active.svg" />
+          <span class="h-right middle bold black">{{issue.negative_responses}}</span>
         </div>
      </div>
    </div>

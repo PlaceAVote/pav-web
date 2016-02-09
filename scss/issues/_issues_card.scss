@@ -68,15 +68,23 @@
     overflow: hidden;
     position:relative;
     width: 25px;
+    background: $greylight;
+    border: 1px solid $grey;
+    border-radius: 3px;
     height: 25px;
+    transition: all 0.2s ease;
     &:nth-child(1), &:nth-child(2) {
       margin-right: 5px;
     }
+    span {
+      @include font-size(9px);
+    }
     img {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
+      top: 1px;
+      left: 1px;
+      width: 21px;
+      height: 21px;
       &.ng-hide-add, &.ng-hide-remove, &.ng-hide-remove-active, &.ng-hide-add-active {
         transition: all 0.3s ease;
       }
@@ -93,6 +101,30 @@
       &.ng-hide-remove.ng-hide-remove-active {
         transform: scale(1);
       }
+    }
+  }
+  .reaction-count {
+    width: 60px;
+  }
+  .reaction-positive {
+    border-color: $green;
+    background: lighten($green, 32%);
+    span {
+      color: $green;
+    }
+  }
+  .reaction-neutral {
+    border-color: #C1712F;
+    background: lighten(#FFEBB3, 5%);
+    span {
+      color: #C1712F;
+    }
+  }
+  .reaction-negative {
+    border-color: $red;
+    background: lighten($red, 32%);
+    span {
+      color: $red;
     }
   }
 }
