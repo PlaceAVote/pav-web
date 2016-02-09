@@ -32,6 +32,10 @@ module.exports = function($location) {
           scope.notifications.unshift(new Notification(scope.$parent.header.newNotification));
         }
       });
+
+      scope.hideNotifications = function() {
+        scope.$parent.header.showNotifications = false;
+      }
     },
   };
 };

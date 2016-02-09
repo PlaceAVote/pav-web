@@ -8,7 +8,7 @@
 	  </div>
 	  <div class="notification-comment-reply-info">
 	  	<p>
-	     <a class="profile-link" href="#/profile/{{notification.author}}">{{notification.author_first_name}} {{notification.author_last_name}}</a> replied to your comment on <a class="bill-link" ng-click="notification.goTo(notification.bill_id, notification.comment_id, location); readEvent({notification: notification});">{{notification.bill_id}}: {{notification.bill_title}}</a>
+	     <a class="profile-link" href="#/profile/{{notification.author}}">{{notification.author_first_name}} {{notification.author_last_name}}</a> replied to your comment on <a class="bill-link" ng-click="notification.goTo(notification.bill_id, notification.comment_id, location); readEvent({notification: notification});hideNotifications();">{{notification.bill_id}}: {{notification.bill_title}}</a>
 	    </p>
 	    <span class="time-stamp">{{notification.timestamp | date:'medium'}}</span>
 	  </div>
