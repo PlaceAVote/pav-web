@@ -20,7 +20,11 @@
 	</div>
 	<ul id="user-results" ng-show="people">
 		<li class="result-item" ng-repeat="user in results.users" ng-class="{'selected': user.selected}" ng-click="user.goToProfile(location, user.user_id);clearItems();">
-			<img ng-src="{{user.img_url}}" /><p ng-bind-html="user.html"></p>
+     <div class="profile-image-holder">
+      <div ng-style="{'background-image': 'url(' + user.img_url + ')'}">
+      </div>
+    </div> 
+      <p ng-bind-html="user.html"></p>
 		</li>
 	</ul>
 </div>

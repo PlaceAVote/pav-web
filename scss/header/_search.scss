@@ -80,6 +80,9 @@
       }      
     }
     #user-results {
+      .profile-image-holder {
+        border-color: $greylight;
+      }
       li {
         img {
           height: 30px;
