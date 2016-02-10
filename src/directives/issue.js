@@ -7,29 +7,52 @@ module.exports = function($location, issueService) {
     templateUrl: 'partials/directives/issue.html',
     link: function(scope, el, attr) {
       scope.location = $location;
+      scope.issueService = issueService;
       scope.eResponse = function(id, emo, issue) {
+        var that = this;
+        
+        if (this.loading) {
+          return;
+        }
+        this.loading = true;
         if (emo === issue.emotional_response) {
-          issueService.deleteIssueResponse(id, emo, function(err, res) {
+          scope.issueService.deleteIssueResponse(id, emo, function(err, res) {
             if (err) {
+              that.loading = false;
               return;
             }
             if (res) {
-              issue[issue.emotional_response + '_responses'] -= 1;
+              if (!that.loading) {
+                that.loading = false;
+                return;
+              }
+              if (issue[issue.emotional_response + '_responses'] <= 0) {
+                return;
+              }
+              issue[issue.emotional_response + '_responses']--;
               issue.emotional_response = 'none';
+              that.loading = false;
               return;
             }
           });
-        } else {
-          issueService.setIssueResponse(id, emo, function(err, res) {
+        } 
+
+        if (emo !== issue.emotional_response) {
+          scope.issueService.setIssueResponse(id, emo, function(err, res) {
             if (err) {
+              that.loading = false;
               return;
             }
             if (res) {
               if (issue.emotional_response !== 'none') {
-                issue[issue.emotional_response + '_responses'] -= 1;
+                if (issue[issue.emotional_response + '_responses'] <= 0) {
+                  return;
+                }
+                issue[issue.emotional_response + '_responses']--;
               }
               issue.emotional_response = res.emotional_response;
-              issue[issue.emotional_response + '_responses'] += 1;
+              issue[res.emotional_response + '_responses']++;
+              that.loading = false;
               return;
             }
           });

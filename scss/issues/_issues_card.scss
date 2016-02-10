@@ -68,19 +68,35 @@
     overflow: hidden;
     position:relative;
     min-width: 25px;
-    background: $greylight;
-    border: 1px solid $grey;
+    width: 25px;
+    background: transparent;
+    border: 1px solid rgba(0,0,0,0);
     border-radius: 3px;
     height: 25px;
-    transition: all 0.2s ease;
+    transition: all 1s ease;
     &:nth-child(1), &:nth-child(2) {
       margin-right: 5px;
     }
     span {
       @include font-size(10px);
       vertical-align: middle;
-      margin-right: 7px;
-      margin-left: 29px;
+      position: relative;
+      overflow: hidden;
+      width: 0;
+      display: inline-block;
+      opacity: 0;
+      transition-delay: 2s;
+      transition: all 1s ease;
+      margin-right: 0px;
+      margin-left: 0px;
+    }
+    &.reaction-active {
+      background: $greylight;
+      border: 1px solid $grey;
+      width: 100%;
+      span { width: 100%; opacity: 1;
+      margin-right: 8px;
+      margin-left: 29px;}
     }
     img {
       position: absolute;
@@ -92,39 +108,55 @@
         transition: all 0.3s ease;
       }
       &.ng-hide-add {
-        transform: scale(1);
+        opacity:1;
+        // transform: scale(1);
       }
       &.ng-hide-add.ng-hide-add-active {
-        transform: scale(0);
+        opacity: 0;
+        // transform: scale(0);
       }
       &.ng-hide-remove {
-        transform: scale(0);
+        opacity: 0;
+        // transform: scale(0);
 
       }
       &.ng-hide-remove.ng-hide-remove-active {
-        transform: scale(1);
+        opacity: 1;
+        // transform: scale(1);
       }
     }
   }
-  .reaction-positive {
+  // .reaction-active {
+  //   background: $greylight;
+  //   border: 1px solid $grey;
+  //   // transition: all 1s ease;
+  //   span { width: 100%; opacity: 1;
+  //     margin-right: 7px;
+  //     margin-left: 29px;}
+  // }
+  .reaction.reaction-positive {
     border-color: $green;
     background: lighten($green, 32%);
     span {
       color: $green;
+      width: 100%; opacity: 1;
     }
   }
-  .reaction-neutral {
+  .reaction.reaction-neutral {
     border-color: #C1712F;
     background: lighten(#FFEBB3, 5%);
     span {
       color: #C1712F;
+      width: 100%; opacity: 1;
     }
   }
-  .reaction-negative {
+  .reaction.reaction-negative {
     border-color: $red;
     background: lighten($red, 32%);
     span {
+      width: 100%; opacity: 1;
       color: $red;
     }
   }
+
 }
