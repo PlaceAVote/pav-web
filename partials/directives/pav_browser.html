@@ -1,0 +1,15 @@
+<div class="pav-browser" ng-class="{'active' : showBrowser}">
+<div class="pav-browser-toolbar row">
+<i class="icon-close click" ng-click="showBrowser = false"></i>
+<a ng-click="openLink(); clearFrame();" target="_blank" class="middle h-right margin-right-small">Open in Browser Tab</a>
+</div>
+<iframe id="pavBrowserFrame" ng-src="{{article}}"></iframe>
+  <div class="browser-loader-frame" ng-show="loading">
+    <div class="loader-message col">
+      <h1 class="color blue bold middle h-center">Fetching article...</h1>
+      <p class="grey middle">{{article}}</p>
+    </div>
+    <div loader loader-context="loading" truthy>
+    </div>
+  </div>
+</div>

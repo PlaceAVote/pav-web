@@ -16,10 +16,10 @@
    </div>
    
    <div class="row margin-bottom-small">
-   <p>{{issue.comment}}</p>
+   <p class="click">{{issue.comment}}</p>
    </div>
 
-   <div ng-if="issue.article_link" class="column issue-article padding-small margin-bottom-small" ng-style="{'background-image': 'url(' + issue.article_img + ')'}">
+   <div ng-if="issue.article_link" ng-click="goToArticle(issue.article_link);"  class="column issue-article padding-small margin-bottom-small click" ng-style="{'background-image': 'url(' + issue.article_img + ')'}">
       <h2>{{issue.article_title}}</h2>
       <a ng-href="{{issue.article_link}}" target="_blank">view article</a>
       <div class="backdrop"></div>

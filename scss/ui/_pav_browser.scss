@@ -1,0 +1,96 @@
+.pav-browser {
+    position: fixed;
+    top: 50px;
+    right: -480px;
+    height: 100%;
+    width: 480px;
+    @include media(600px) {
+      right: -100%;
+      width: 100%;
+      top: 0;
+      z-index: 9999;
+    }
+    background-color: white;
+    overflow:hidden;
+    z-index: 9990;
+    transition: all 0.3s ease;
+    box-shadow: -10px 0px 10px 0px rgba(0,0,0,0.0);
+    &.active {
+      right: 0px;
+      box-shadow: -10px 0px 10px 0px rgba(0,0,0,0.2);
+    }
+    .pav-browser-toolbar {
+      background: $greylight;
+      height: 50px;
+      z-index: 9991;
+      @include media(600px) {
+        z-index: 99999 !important;
+      }
+      width: 100%;
+      position: relative;
+      top: 0;
+      i {
+        top: 5px;
+        line-height: 0;
+        left: 8px;
+        position: absolute;
+        @include font-size(40px);
+        color: darken($greylight, 20%);
+      }
+      a {
+        @include font-size(10px);
+      }
+    }
+    .browser-loader-frame {
+      position: relative; 
+      height: 100%;
+      width: 100%;
+      background: white;
+      .box-loader {
+        .loader {
+          width: 40px;
+          height: 40px;
+        }
+      }
+    }
+    iframe {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+    }
+}
+
+.browser-loader-frame {
+      &.ng-hide-add, &.ng-hide-remove, &.ng-hide-remove-active, &.ng-hide-add-active {
+        transition: all 0.3s ease;
+      }
+      &.ng-hide-add {
+        transition-delay: 1s;
+        opacity: 1;
+      }
+      &.ng-hide-add.ng-hide-add-active {
+        transition-delay: 0.6s;
+        opacity: 0;
+      }
+      &.ng-hide-remove {
+        opacity: 0;
+      }
+      &.ng-hide-remove.ng-hide-remove-active {
+        opacity: 1;
+      }
+}
+
+.loader-message {
+  position: absolute;
+  top: calc(50% + 60px);
+  width: 100%;
+  transform: translateY(-50%);
+  padding: 30px;
+  h1 {
+    @include font-size(12px);
+  }
+  p {
+    @include font-size(9px);
+    text-align: center;
+  }
+}

@@ -68,6 +68,7 @@ var preloaderDirective = require('./directives/preloader.js');
 var issueDirective = require('./directives/issue.js');
 var feedEventsDirective = require('./directives/feed_events.js');
 var feedBillEventDirective = require('./directives/feed_bill_event.js');
+var pavWebBrowser = require('./directives/pav_browser.js');
 
 // Thirdparty integrations
 var Facebook = require('./integrations/facebook.js');
@@ -194,7 +195,7 @@ app.directive('websiteFooter', [websiteFooter]);
 app.directive('searchBar', ['$sce' ,'$location', search]);
 app.directive('termsAndConditions', [termsAndConditionsDirective]);
 app.directive('issuesPost', [issuesPostDirective]);
-app.directive('issue', ['$location', 'issueService', issueDirective]);
+app.directive('issue', ['$location', 'issueService','$rootScope', issueDirective]);
 app.directive('wizard', [wizardDirective]);
 app.directive('slider', ['$timeout', sliderDirective]);
 app.directive('dad', [dragAndDropDirective]);
@@ -204,3 +205,4 @@ app.directive('fileread', [fileReadDirective]);
 app.directive('loader', ['$location', preloaderDirective]);
 app.directive('feedEvents', [feedEventsDirective]);
 app.directive('feedBillEvent', ['$location', feedBillEventDirective]);
+app.directive('pavBrowser', ['$rootScope', '$sce', pavWebBrowser]);

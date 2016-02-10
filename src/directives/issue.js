@@ -1,4 +1,4 @@
-module.exports = function($location, issueService) {
+module.exports = function($location, issueService, $rootScope) {
   return {
     restrict: 'E',
     scope: {
@@ -34,6 +34,10 @@ module.exports = function($location, issueService) {
             }
           });
         }
+      };
+      scope.goToArticle = function(article) {
+        $rootScope.articleLink = article;
+        $rootScope.browserOpen = !$rootScope.browserOpen;
       };
     },
   };
