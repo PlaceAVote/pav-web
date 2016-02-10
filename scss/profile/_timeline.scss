@@ -180,6 +180,13 @@
 			line-height: 0.5 !important;
 		}
 	}
+  &-issue {
+    background-color: saturate(lighten($blue, 20%), 40%);
+    i {
+      @include font-size(22px);
+      line-height: 0.7 !important;
+    }
+  }
 	&-dislike {
 		background-color: $red;
 		i {
@@ -275,3 +282,26 @@
 	}
 }
 
+.issue-event {
+  .event-description {
+    margin-bottom: 20px;
+  }
+  .issue-comment {
+    p {
+      @include font-size(14px);
+      margin-bottom: 10px;
+    }
+  }
+  .timestamp {
+    display: none;
+  }
+  hr {
+    display: none;
+  }
+  .profile-image-holder {
+    display: none;
+  }
+  .issue-card {
+    padding-bottom: 20px;
+  }
+}

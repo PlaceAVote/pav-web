@@ -4,6 +4,7 @@ var FollowingUserEvent = require('../../src/models/following_user_event.js');
 var VoteEvent = require('../../src/models/vote_event.js');
 var DislikeCommentEvent = require('../../src/models/dislike_comment_event.js');
 var LikeCommentEvent = require('../../src/models/like_comment.js');
+var IssueEvent = require('../../src/models/issue.js');
 
 function TimelineResponseFactory() {}
 
@@ -31,6 +32,12 @@ TimelineResponseFactory.getResponse = function(response) {
     }
     case 'dislikecomment': {
       return new DislikeCommentEvent(response);
+    }
+    case 'dislikecomment': {
+      return new DislikeCommentEvent(response);
+    }
+    case 'userissue': {
+      return new IssueEvent(response);
     }
     default: {
       throw {

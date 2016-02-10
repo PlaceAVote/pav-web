@@ -2,6 +2,8 @@
 <div ng-repeat="event in events" ng-switch on="event.type">
   <feed-bill-event ng-switch-when="bill" bill="event">
   </feed-bill-event>
-  <issue ng-switch-when="issue" issue="event">
-  </issue>
+  <div class="margin-top-medium card padding-small">
+    <issue issue="event">
+    </issue>
+  </div>
 </div>

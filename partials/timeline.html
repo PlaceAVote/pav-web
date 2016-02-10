@@ -56,6 +56,16 @@
                     <comment-event comment="event"></comment-event>
                     </div>
                   </div>
+                  <!-- issue event -->
+                  <div ng-switch-when="issue" class="issue-event">
+                    <span class="time-stamp">{{event.timestamp | date:'medium'}}</span>
+                    <div class="event-card">
+                      <div class="event-icon event-icon-issue">
+                        <i class="icon-issues"></i>
+                      </div>
+                      <issue issue="event"></issue>
+                    </div>
+                  </div>
 
           </div>
        </section>

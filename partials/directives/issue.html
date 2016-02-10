@@ -1,10 +1,10 @@
-<div class="margin-top-medium card issue-card padding-small">
+<div class="issue-card">
   <div class="row">
      <div class="profile-image-holder middle margin-right-small click" ng-click="issue.goToProfile(location)">
         <div ng-style="{'background-image': 'url(' + issue.author_img_url + ')'}">
         </div>
      </div>
-     <div class="row mobile-col middle">
+     <div class="row mobile-col middle event-description">
      <p class="red click" ng-click="issue.goToProfile(location)">{{issue.author_first_name}} {{issue.author_last_name}} &nbsp;</p><p>shared an &nbsp;<i class="icon-issues blue"></i>&nbsp; Issue</p> 
      </div>
      <span class="h-right middle blue timestamp">{{issue.timestamp | amCalendar}}</span>
@@ -15,7 +15,7 @@
     <p class="title">Talking About: <span ng-click="issue.goToBill(location)" class="bill-ref blue pale-bg margin-left-small mobile-margin-left-none mobile-margin-top-small medium click">{{issue.bill_title}}</span></p> 
    </div>
    
-   <div class="row margin-bottom-small">
+   <div class="row issue-comment margin-bottom-small">
    <p>{{issue.comment}}</p>
    </div>
 
