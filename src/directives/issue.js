@@ -10,7 +10,6 @@ module.exports = function($location, issueService) {
       scope.issueService = issueService;
       scope.eResponse = function(id, emo, issue) {
         var that = this;
-        
         if (this.loading) {
           return;
         }
@@ -35,7 +34,7 @@ module.exports = function($location, issueService) {
               return;
             }
           });
-        } 
+        }
 
         if (emo !== issue.emotional_response) {
           scope.issueService.setIssueResponse(id, emo, function(err, res) {
