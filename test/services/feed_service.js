@@ -26,66 +26,56 @@ describe("Feed Service", function() {
     type: "bill",
   };
 
+  var mockResource = function(url, params, method) {
+    this.getFeed = function(onLoad, onError) {
+      onLoad({
+        last_timestamp: '213123',
+        results: [mockIssue, mockBill],
+      });
+    };
+  };
+
+  var mockResourceError = function(url, params, method) {
+    this.getFeed = function(onLoad, onError) {
+      onError('error');
+    };
+  };
+
   describe("Get Feed", function() {
     it('requires a token to get feed', function(done) {
-      var subject = new FeedService({}, mockAuthWithoutToken);
-      subject.getFeed(function(err, result) {
+      var subject = new FeedService(mockResource, mockAuthWithoutToken);
+      subject.getFeed(undefined, function(err, result) {
         expect(err).to.eql('Token is needed to get feed');
         done();
       });
     });
 
     it('calls params with correct config', function(done) {
-      function mockResource(url, params, method) {
-        this.getFeed = function(){};
-        expect(url).to.contain('/user/feed');
-        expect(params).to.eql(undefined);
-        expect(method.getFeed.headers.Authorization).to.eql('Token');
-        expect(method.getFeed.method).to.eql('GET');
-        done();
-      }
       var subject = new FeedService(mockResource, mockAuth);
-      subject.getFeed(function(err, result) {
-        expect(err).to.eql(undefined);
+      subject.getFeed('1231253252', function(err, result) {
+        expect(err).to.be.string;
       });
+      done();
     });
 
     it('returns an error from the server', function(done) {
-      function mockResource(url, params, method) {
-        this.getFeed = function(body, onLoad, onError) {
-          expect(body).to.eql(undefined);
-          onError('Error');
-        };
-      }
-      var subject = new FeedService(mockResource, mockAuth);
-      subject.getFeed(function(err) {
-        expect(err).to.eql('Error');
+      var subject = new FeedService(mockResourceError, mockAuth);
+      subject.getFeed(undefined,function(err, res) {
+        expect(err).to.eql('error');
         done();
       });
     });
 
     it('returns array of BillSummary and Issue if server response successfully', function(done) {
-      function mockResource(url, params, method) {
-        this.getFeed = function(body, onLoad, onError) {
-          var result = {
-            results: [
-              mockBill,
-              mockIssue
-            ]
-          };
-          return onLoad(result);
-        };
-
-      }
       var subject = new FeedService(mockResource, mockAuth);
-      subject.getFeed(function(err, result) {
-        expect(err).to.eql(undefined);
+      subject.getFeed('23423423', function(err, result) {
+        console.log('from feed service');
+        console.log(err, result.feed.length);
         expect(result.feed.length).to.eql(2);
-        expect(result.feed[0]).to.be.an.instanceof(BillSummary);
-        expect(result.feed[1]).to.be.an.instanceof(Issue);
+        expect(result.feed[1]).to.be.an.instanceof(BillSummary);
+        expect(result.feed[0]).to.be.an.instanceof(Issue);
         done();
       });
     });
-
   });
 });

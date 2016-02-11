@@ -37,12 +37,12 @@ describe("FeedController", function() {
       };
     };
     function mockFeedService(){
-      this.getFeed = function(callback){
+      this.getFeed = function(timestamp, callback){
         callback(undefined, []);
       };
     };
     function mockFeedServiceEvents() {
-      this.getFeed = function(callback) {
+      this.getFeed = function(timestamp, callback) {
         var response = {
           feed: ['events'],
         };

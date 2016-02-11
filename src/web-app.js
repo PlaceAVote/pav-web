@@ -177,8 +177,9 @@ app.controller('MenuCtrl', ['$scope', '$location', '$routeParams', MenuControlle
 app.controller('WizardCtrl', ['$scope', 'questionService', WizardController]);
 app.controller('ContactCtrl', ['$scope', '$timeout', 'mailService', ContactController]);
 
-//Values
-app.value('THROTTLE_MILLISECONDS', null)
+// Values
+app.value('THROTTLE_MILLISECONDS', null);
+
 // Directives
 app.directive('websiteNav', [websiteNav]);
 app.directive('headerNav', [headerNav]);

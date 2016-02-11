@@ -60,7 +60,6 @@ FeedController.prototype.feedCheck = function() {
   if (this.loadingScoll || this.newTimestamp === this.lastLoaded) {
     return;
   }
-  
   this.newTimestamp = this.lastLoaded;
   this.loadingScroll = true;
   this.feedService.getFeed(this.newTimestamp, function(err, response) {
@@ -71,11 +70,11 @@ FeedController.prototype.feedCheck = function() {
         for (var i in response.feed) {
           that.events.push(response.feed[i]);
         }
-        that.feedMessage()
+        that.feedMessage();
       } else {
         that.lastLoaded = response.last_timestamp;
-        for (var i in response.feed) {
-          that.events.push(response.feed[i]);
+        for (var x in response.feed) {
+          that.events.push(response.feed[x]);
         }
       }
     }
@@ -87,6 +86,7 @@ FeedController.prototype.feedMessage = function() {
   var that = this;
   this.timeout(function() {
     that.scrollMessage = false;
-  }, 5000); 
-}
+  }, 5000);
+};
+
 module.exports = FeedController;

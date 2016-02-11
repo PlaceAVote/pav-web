@@ -31,7 +31,7 @@ function FeedService($resource, authService, userService) {
     var url = config.feed.endpoint;
     body = {};
     if (timestamp) {
-     body.from = timestamp;
+      body.from = timestamp;
     }
     config.methods.get.headers.Authorization = authService.getAccessToken();
     var request = new $resource(url, body, {getFeed: config.methods.get});

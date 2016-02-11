@@ -1,3 +1,4 @@
+/* jshint ignore:start */
 module.exports = function($rootScope, $window, $interval, THROTTLE_MILLISECONDS) {
     return {
       scope: {
@@ -6,7 +7,7 @@ module.exports = function($rootScope, $window, $interval, THROTTLE_MILLISECONDS)
         infiniteScrollDistance: '=',
         infiniteScrollDisabled: '=',
         infiniteScrollUseDocumentBottom: '=',
-        infiniteScrollListenForEvent: '@'
+        infiniteScrollListenForEvent: '@',
       },
       link: function(scope, elem, attrs) {
         var changeContainer, checkInterval, checkWhenEnabled, container, handleInfiniteScrollContainer, handleInfiniteScrollDisabled, handleInfiniteScrollDistance, handleInfiniteScrollUseDocumentBottom, handler, height, immediateCheck, offsetTop, pageYOffset, scrollDistance, scrollEnabled, throttle, unregisterEventListener, useDocumentBottom, windowElement;
@@ -72,7 +73,8 @@ module.exports = function($rootScope, $window, $interval, THROTTLE_MILLISECONDS)
             if (checkInterval) {
               $interval.cancel(checkInterval);
             }
-            return checkWhenEnabled = false;
+            checkWhenEnabled = false;
+            return checkWhenEnabled;
           }
         };
         throttle = function(func, wait) {
@@ -96,23 +98,26 @@ module.exports = function($rootScope, $window, $interval, THROTTLE_MILLISECONDS)
               return func.call();
             } else {
               if (!timeout) {
-                return timeout = $interval(later, remaining, 1);
+                timeout = $interval(later, remaining, 1);
+                return timeout;
               }
             }
           };
         };
-        if (THROTTLE_MILLISECONDS != null) {
+        if (THROTTLE_MILLISECONDS !== null) {
           handler = throttle(handler, THROTTLE_MILLISECONDS);
         }
         scope.$on('$destroy', function() {
           container.unbind('scroll', handler);
-          if (unregisterEventListener != null) {
+          if (unregisterEventListener !== null) {
             unregisterEventListener();
-            return unregisterEventListener = null;
+            unregisterEventListener = null;
+            return unregisterEventListener;
           }
         });
         handleInfiniteScrollDistance = function(v) {
-          return scrollDistance = parseFloat(v) || 0;
+          scrollDistance = parseFloat(v) || 0;
+          return scrollDistance;
         };
         scope.$watch('infiniteScrollDistance', handleInfiniteScrollDistance);
         handleInfiniteScrollDistance(scope.infiniteScrollDistance);
@@ -126,15 +131,18 @@ module.exports = function($rootScope, $window, $interval, THROTTLE_MILLISECONDS)
         scope.$watch('infiniteScrollDisabled', handleInfiniteScrollDisabled);
         handleInfiniteScrollDisabled(scope.infiniteScrollDisabled);
         handleInfiniteScrollUseDocumentBottom = function(v) {
-          return useDocumentBottom = v;
+          useDocumentBottom = v;
+          return useDocumentBottom;
         };
         scope.$watch('infiniteScrollUseDocumentBottom', handleInfiniteScrollUseDocumentBottom);
         handleInfiniteScrollUseDocumentBottom(scope.infiniteScrollUseDocumentBottom);
         changeContainer = function(newContainer) {
+          /*jshint unused:true, eqnull:true */
           if (container != null) {
             container.unbind('scroll', handler);
           }
           container = newContainer;
+          /*jshint unused:true, eqnull:true */
           if (newContainer != null) {
             return container.bind('scroll', handler);
           }
@@ -144,6 +152,7 @@ module.exports = function($rootScope, $window, $interval, THROTTLE_MILLISECONDS)
           unregisterEventListener = $rootScope.$on(scope.infiniteScrollListenForEvent, handler);
         }
         handleInfiniteScrollContainer = function(newContainer) {
+          /*jshint unused:true, eqnull:true */
           if ((newContainer == null) || newContainer.length === 0) {
             return;
           }
@@ -154,6 +163,7 @@ module.exports = function($rootScope, $window, $interval, THROTTLE_MILLISECONDS)
           } else if (typeof newContainer === 'string') {
             newContainer = angular.element(document.querySelector(newContainer));
           }
+          /*jshint unused:true, eqnull:true */
           if (newContainer != null) {
             return changeContainer(newContainer);
           } else {
@@ -162,18 +172,22 @@ module.exports = function($rootScope, $window, $interval, THROTTLE_MILLISECONDS)
         };
         scope.$watch('infiniteScrollContainer', handleInfiniteScrollContainer);
         handleInfiniteScrollContainer(scope.infiniteScrollContainer || []);
+        /*jshint unused:true, eqnull:true */
         if (attrs.infiniteScrollParent != null) {
           changeContainer(angular.element(elem.parent()));
         }
+        /*jshint unused:true, eqnull:true */
         if (attrs.infiniteScrollImmediateCheck != null) {
           immediateCheck = scope.$eval(attrs.infiniteScrollImmediateCheck);
         }
-        return checkInterval = $interval((function() {
+        checkInterval = $interval((function() {
           if (immediateCheck) {
             handler();
           }
           return $interval.cancel(checkInterval);
         }));
+        return checkInterval;
       }
     };
   };
+/* jshint ignore:end */
