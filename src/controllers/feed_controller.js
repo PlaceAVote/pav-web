@@ -57,7 +57,7 @@ FeedController.prototype.getFeed = function() {
 
 FeedController.prototype.feedCheck = function() {
   var that = this;
-  if (this.loadingScoll || this.newTimestamp === this.lastLoaded) {
+  if (this.loadingScroll || this.newTimestamp === this.lastLoaded) {
     return;
   }
   this.newTimestamp = this.lastLoaded;
@@ -70,7 +70,7 @@ FeedController.prototype.feedCheck = function() {
         for (var i in response.feed) {
           that.events.push(response.feed[i]);
         }
-        that.feedMessage();
+        that.feedMessage('End of the line.');
       } else {
         that.lastLoaded = response.last_timestamp;
         for (var x in response.feed) {
@@ -81,8 +81,8 @@ FeedController.prototype.feedCheck = function() {
   });
 };
 
-FeedController.prototype.feedMessage = function() {
-  this.scrollMessage = 'End of the line.';
+FeedController.prototype.feedMessage = function(message) {
+  this.scrollMessage = message;
   var that = this;
   this.timeout(function() {
     that.scrollMessage = false;
