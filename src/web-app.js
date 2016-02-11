@@ -68,6 +68,7 @@ var preloaderDirective = require('./directives/preloader.js');
 var issueDirective = require('./directives/issue.js');
 var feedEventsDirective = require('./directives/feed_events.js');
 var feedBillEventDirective = require('./directives/feed_bill_event.js');
+var infiniteScroll = require('./directives/infinite_scroll.js');
 
 // Thirdparty integrations
 var Facebook = require('./integrations/facebook.js');
@@ -139,6 +140,7 @@ app.config(['$routeProvider', function($routeProvider) {
 },]);
 
 
+
 // Services
 app.factory('facebookService', [Facebook]);
 app.factory('authService', ['$resource', AuthService]);
@@ -159,7 +161,7 @@ app.factory('mailService', ['$resource', MailService]);
 app.controller('TopicRegisterCtrl',['$scope','$location', 'userService', RegisterController]);
 app.controller('SignUpCtrl',['$rootScope','$scope','$location', 'userService', SignUpController]);
 app.controller('LoginCtrl',['$scope','$location', 'userService', 'authService', '$rootScope', '$routeParams', 'passwordService', LoginController]);
-app.controller('FeedCtrl', ['$scope', '$location', 'userService', 'billService', 'authService', 'feedService', '$rootScope', FeedController]);
+app.controller('FeedCtrl', ['$scope', '$location', 'userService', 'billService', 'authService', 'feedService', '$rootScope','$timeout', FeedController]);
 app.controller('BillCtrl', ['$scope', '$routeParams', 'billService', 'legislationService', 'voteService', 'commentService', '$location', 'authService', '$rootScope', BillController]);
 app.controller('HeaderCtrl', ['$rootScope', '$scope', '$location', '$timeout', 'authService', 'userService', 'notificationService', 'searchService', '$window', HeaderController]);
 app.controller('ProfileCtrl', ['$scope', '$location', '$routeParams', 'authService', 'userService', ProfileController]);
@@ -175,6 +177,8 @@ app.controller('MenuCtrl', ['$scope', '$location', '$routeParams', MenuControlle
 app.controller('WizardCtrl', ['$scope', 'questionService', WizardController]);
 app.controller('ContactCtrl', ['$scope', '$timeout', 'mailService', ContactController]);
 
+//Values
+app.value('THROTTLE_MILLISECONDS', null)
 // Directives
 app.directive('websiteNav', [websiteNav]);
 app.directive('headerNav', [headerNav]);
@@ -204,3 +208,4 @@ app.directive('fileread', [fileReadDirective]);
 app.directive('loader', ['$location', preloaderDirective]);
 app.directive('feedEvents', [feedEventsDirective]);
 app.directive('feedBillEvent', ['$location', feedBillEventDirective]);
+app.directive('infiniteScroll', ['$rootScope', '$window', '$interval', 'THROTTLE_MILLISECONDS', infiniteScroll]);

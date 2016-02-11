@@ -4,7 +4,7 @@ var Issue = require('../../src/models/issue.js');
 var FeedResponseFactory = require('../factories/feed_response_factory.js');
 
 function FeedService($resource, authService, userService) {
-  var getFeed = function(callback) {
+  var getFeed = function(timestamp, callback) {
     var token = authService.getAccessToken();
     if (!token) {
       callback('Token is needed to get feed');
@@ -14,6 +14,7 @@ function FeedService($resource, authService, userService) {
     var onLoad = function(response) {
       try {
         var results = {
+          last_timestamp: response.last_timestamp,
           feed: FeedResponseFactory.getResponses(response.results),
         };
         return callback(undefined, results);
@@ -28,9 +29,13 @@ function FeedService($resource, authService, userService) {
     };
 
     var url = config.feed.endpoint;
+    body = {};
+    if (timestamp) {
+     body.from = timestamp;
+    }
     config.methods.get.headers.Authorization = authService.getAccessToken();
-    var request = new $resource(url, undefined, {getFeed: config.methods.get});
-    request.getFeed(undefined, onLoad, onError);
+    var request = new $resource(url, body, {getFeed: config.methods.get});
+    request.getFeed(onLoad, onError);
   };
   return {
     getFeed: getFeed,
