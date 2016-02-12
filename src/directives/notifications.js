@@ -1,7 +1,6 @@
 module.exports = function($location) {
   return {
     restrict: 'E',
-    // replace: true,
     scope: {
       unread: '=',
       open: '=',
@@ -12,10 +11,9 @@ module.exports = function($location) {
     },
     templateUrl: 'partials/notifications.html',
     link: function(scope, el, attr) {
-      // scope.isClosed = true;
-      // var
+
       el[0].onmousewheel = function(e) {
-         window.scrollTo(0, scope.scrollPos);
+        window.scrollTo(0, scope.scrollPos);
       };
 
       scope.location = $location;
@@ -24,21 +22,6 @@ module.exports = function($location) {
           scope.scrollPos = window.scrollY;
         }
       });
-
-
-      // scope.notifications = [];
-      // scope.$watchCollection('data', function(newValue, oldValue) {
-      //   if (oldValue && !newValue) {
-      //     scope.notifications = [];
-      //   }
-      //   if (newValue) {
-      //     if (newValue.hasOwnProperty('results')) {
-      //       for (var i = 0; i < newValue.results.length; i++) {
-      //         scope.notifications.push(new Notification(newValue.results[i]));
-      //       }
-      //     }
-      //   }
-      // });
 
       scope.$watch('unread', function(newValue, oldValue) {
         if (newValue > oldValue) {

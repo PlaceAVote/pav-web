@@ -6,7 +6,7 @@
 
     <section class="notification row" ng-class="{'header-focus':header.focus}">
       <span ng-show="header.unread" class="notification-counter"><p>{{header.unread}}</p></span>
-      <img style="cursor: pointer;" ng-class="{'no-notifications': header.notifications.results.length < 1 && header.unread < 1}" src="//cdn.placeavote.com/img/notification.svg" ng-click="header.notify()" />
+      <img style="cursor: pointer;" class="notifications-icon" ng-class="{'no-notifications': header.notifications.results.length < 1 && header.unread < 1}" src="//cdn.placeavote.com/img/notification.svg" ng-click="header.notify()" />
       <div class="notifications-container" ng-mouseleave="header.hideNotifications()"
       ng-show="header.showNotifications">
 

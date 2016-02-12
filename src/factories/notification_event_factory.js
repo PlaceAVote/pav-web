@@ -2,7 +2,7 @@ var NotificationReplyEvent = require('../models/notification_comment_reply.js');
 var NotificationEmotionEvent = require('../models/notification_emotion_event.js');
 // Private method, should always use the getResponses method
 
-function NotificationEventFactory() {};
+function NotificationEventFactory() {}
 
 NotificationEventFactory.getResponse = function(response) {
   if (!response || !response.type) {
@@ -12,11 +12,9 @@ NotificationEventFactory.getResponse = function(response) {
   }
   switch (response.type) {
     case 'commentreply': {
-      console.log('commentreply', response);
       return new NotificationReplyEvent(response);
     }
-    case 'userissuer': {
-      console.log('issue', response);
+    case 'issueresponse': {
       return new NotificationEmotionEvent(response);
     }
     default: {
@@ -30,9 +28,7 @@ NotificationEventFactory.getResponses = function(responses) {
   if (!responses) {
     return results;
   }
-  console.log(responses.length);
   for (var i in responses) {
-    console.log(i);
     results.push(NotificationEventFactory.getResponse(responses[i]));
   }
   return results;

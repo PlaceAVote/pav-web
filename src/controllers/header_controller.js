@@ -59,11 +59,8 @@ HeaderCtrl.prototype.getNotifications = function() {
     if (err) {
       return;
     }
-    console.log(res);
     that.notifications = res.results;
     that.newTimestamp = res.last_timestamp;
-    console.log(that.notifications);
-    // console.l
     for (var i = 0; i < that.notifications.length; i++) {
       if (!that.notifications[i].read) {
         that.unread++;
@@ -79,32 +76,23 @@ HeaderCtrl.prototype.notificationCheck = function() {
     return;
   }
   if (this.loadingScroll || this.newTimestamp === this.lastLoaded) {
-    console.log('end of the line', this.newTimestamp, this.lasLoaded);
     return;
   }
-  console.log('loading', this.newTimestamp, this.lastLoaded);
-  console.log('check', this.newTimestamp);
   this.loadingScroll = true;
   this.notificationService.getNotifications(this.newTimestamp, function(err, response) {
     that.loadingScroll = false;
-    console.log('res', response);
     if (!err) {
       if (response.last_timestamp === null) {
 
         for (var i in response.results) {
-          console.log('timestamp is null');
           that.notifications.push(response.results[i]);
-          console.log(response.results[i]);
         }
-        // console.log('end of the line');
-        // that.notificationFeedMessage('End of the line.');
         that.newTimestamp = null;
-        that.loadLoaded = null;
+        that.lastLoaded = null;
       } else {
         that.lastLoaded = that.newTimestamp;
         that.newTimestamp = response.last_timestamp;
         for (var x in response.results) {
-          // console.log(response.results[x]);
           that.notifications.push(response.results[x]);
         }
       }
@@ -123,7 +111,7 @@ HeaderCtrl.prototype.startNotifications = function() {
         that.notificationReceived = true;
         that.unread++;
         title.notifications(that.unread);
-        that.newNotification = result;
+        that.notifications.unshift(result);
       });
     }
   });

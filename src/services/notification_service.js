@@ -1,7 +1,6 @@
 var NotificationEventFactory = require('../factories/notification_event_factory.js');
 var endpoint = require('../config/endpoints.js').notifications.socket;
 var config = require('../config/endpoints.js');
-// var Notification = require('../models/notification.js');
 
 var defaultStreamer = require('../connections/streamer.js');
 
@@ -20,8 +19,7 @@ function NotificationService($resource, authService, options) {
     };
 
     streamer.onmessage = function(message) {
-      message = JSON.parse(message.data);
-      return callback(undefined, message);
+      return callback(undefined, NotificationEventFactory.getResponse(JSON.parse(message.data)));
     };
   };
 
@@ -54,7 +52,7 @@ function NotificationService($resource, authService, options) {
       }
       catch (e) {
         return callback(e);
-      }      
+      }
     };
 
     var onError = function(err) {
