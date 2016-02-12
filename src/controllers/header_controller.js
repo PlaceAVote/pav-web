@@ -127,7 +127,7 @@ HeaderCtrl.prototype.readEvent = function(res) {
       if (!err) {
         res.read = true;
         that.unread--;
-        if(that.unread < 0) {
+        if (that.unread < 0) {
           that.unread = 0;
         }
         title.notifications(that.unread);
@@ -178,7 +178,7 @@ HeaderCtrl.prototype.notify = function() {
   }
   that.hideDropDown();
   that.showNotifications = that.showNotifications ? false : true;
-  if(that.showNotifications) {
+  if (that.showNotifications) {
     that.unread = 0;
   }
 };
