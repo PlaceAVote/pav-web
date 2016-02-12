@@ -1,7 +1,10 @@
-var CommentReplyEvent = require('../models/comment_reply_event');
-
+var NotificationReplyEvent = require('../models/notification_comment_reply.js');
+var NotificationEmotionEvent = require('../models/notification_emotion_event.js');
 // Private method, should always use the getResponses method
-var getResponse = function(response) {
+
+function NotificationEventFactory() {};
+
+NotificationEventFactory.getResponse = function(response) {
   if (!response || !response.type) {
     throw {
       message: 'No Type Defined',
@@ -9,7 +12,12 @@ var getResponse = function(response) {
   }
   switch (response.type) {
     case 'commentreply': {
-      return new CommentReplyEvent(response);
+      console.log('commentreply', response);
+      return new NotificationReplyEvent(response);
+    }
+    case 'userissuer': {
+      console.log('issue', response);
+      return new NotificationEmotionEvent(response);
     }
     default: {
       return response;
@@ -17,28 +25,17 @@ var getResponse = function(response) {
   }
 };
 
-var NotificationEventFactory = {
-  // Entry point for factory always returns an
-  // array regardless if there is no response,
-  // one Response or many.
-  getResponses: function(responses) {
-    var results = [];
-    if (!responses) {
-      return results;
-    }
-    if (typeof responses == 'string') {
-      responses = JSON.parse(responses);
-    }
-    if (responses.constructor != Array) {
-      results.push(getResponse(responses));
-      return results;
-    }
-
-    for (var i = 0; i < responses.length; i++) {
-      results.push(NotificationEventFactory.getResponse(responses[i]));
-    }
+NotificationEventFactory.getResponses = function(responses) {
+  var results = [];
+  if (!responses) {
     return results;
-  },
+  }
+  console.log(responses.length);
+  for (var i in responses) {
+    console.log(i);
+    results.push(NotificationEventFactory.getResponse(responses[i]));
+  }
+  return results;
 };
 
 module.exports = NotificationEventFactory;

@@ -1,5 +1,6 @@
-<div class="notifications-boundary">
-<div ng-repeat="notification in notifications" ng-switch on="notification.type" >
+<div class="notifications-boundary" id="notifications" infinite-scroll="scrollTrigger();">
+<div infinite-scroll="scrollTrigger();">
+<div ng-repeat="notification in notifications" ng-switch on="notification.type">
   <!-- comment Reply -->
   <div class="notification-event notification-comment-reply" ng-switch-when="commentreply">
      <div class="profile-image-holder comments notification-marker">
@@ -7,10 +8,6 @@
      <div ng-style="{'background-image': 'url(' + notification.author_img_url + ')'}">
      </div>
    </div> 
-<!-- 	  <div class="user-img-border">
-	  <span ng-hide="notification.read" class="notification-new-event">new</span>
-	  <img ng-src="{{notification.author_img_url}}"/>
-	  </div> -->
 	  <div class="notification-comment-reply-info">
 	  	<p>
 	     <a class="profile-link" href="#/profile/{{notification.author}}">{{notification.author_first_name}} {{notification.author_last_name}}</a> replied to your comment on <a class="bill-link" ng-click="notification.goTo(notification.bill_id, notification.comment_id, location); readEvent({notification: notification});hideNotifications();">{{notification.bill_id}}: {{notification.bill_title}}</a>
@@ -18,6 +15,22 @@
 	    <span class="time-stamp">{{notification.timestamp | date:'medium'}}</span>
 	  </div>
   </div>
+
+    <div class="notification-event notification-comment-reply" ng-switch-when="issueresponse">
+     <div class="profile-image-holder comments notification-marker">
+     <!-- <span ng-hide="notification.read" class="notification-new-event">new</span> -->
+     <div ng-style="{'background-image': 'url(' + notification.author_img_url + ')'}">
+     </div>
+   </div> 
+    <div class="notification-comment-reply-info">
+      <p>
+       <a class="profile-link" href="#/profile/{{notification.author}}">{{notification.first_name}} {{notification.last_name}}</a>
+      </p>
+      <span class="time-stamp">{{notification.timestamp | date:'medium'}}</span>
+    </div>
+  </div>
+</div>
+  <div loader loader-context="scroll" truthy></div>
 </div>
 </div>
 

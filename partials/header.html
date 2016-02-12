@@ -10,7 +10,7 @@
       <div class="notifications-container" ng-mouseleave="header.hideNotifications()"
       ng-show="header.showNotifications">
 
-        <notifications data="header.notifications" unread="header.unread" read-event="header.readEvent(notification)"></notifications>
+        <notifications notifications="header.notifications" unread="header.unread" read-event="header.readEvent(notification)" scroll-trigger="header.notificationCheck();" open="header.showNotifications" scroll="header.loadingScroll"></notifications>
       </div>
     <div ng-click="header.dropDown()" class="profile-image-holder click h-right">
       <div ng-style="{'background-image': 'url(' + header.rs.user.img_url + ')'}">
