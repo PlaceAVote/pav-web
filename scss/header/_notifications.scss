@@ -20,7 +20,13 @@
         border-radius: 3px;
         position: absolute;
         top: 0px;
-        right: 50px;
+        right: 45px;
+        @include media(1200px) {
+          right: 60px;
+        }
+        @include media(560px) {
+          right: 45px;
+        }
         animation: notify 1s ease;
         p {
           width: 12px;
@@ -54,7 +60,14 @@
         margin-right: 24px;
         position: absolute;
         right: 25px;
+        @include media(1200px) {
+        right: 40px;
+        }
+        @include media(560px) {
+        right: 25px;
+        }
       }
+
       // img.user-img {
       //   margin-left: 20px;
       // }
@@ -67,6 +80,9 @@
       background: $white;
       border:1px solid $grey;
       @include shadow();
+      @include media(1200px) {
+        right: 63px;
+      }
       @include media(600px) {
         right: 9px;
       }

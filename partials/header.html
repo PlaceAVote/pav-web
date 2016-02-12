@@ -5,7 +5,7 @@
     <search-bar class="search" placeholder="Search bills or people..." ng-class="{'search-focus':header.focus}" results="header.searchResults" focus="header.focus" query="header.search(q)" searching="header.searching" people bills></search-bar>
 
     <section class="notification row" ng-class="{'header-focus':header.focus}">
-      <span ng-show="header.unread" class="notification-counter"><p>{{header.unread}}</p></span>
+      <span ng-show="header.unread > 0" class="notification-counter"><p>{{header.unread}}</p></span>
       <img style="cursor: pointer;" class="notifications-icon" ng-class="{'no-notifications': header.notifications.results.length < 1 && header.unread < 1}" src="//cdn.placeavote.com/img/notification.svg" ng-click="header.notify()" />
       <div class="notifications-container" ng-mouseleave="header.hideNotifications()"
       ng-show="header.showNotifications">
