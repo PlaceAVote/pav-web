@@ -677,7 +677,7 @@ describe("User Service", function() {
         },
       };
       var subject = new UserService(undefined, undefined, authService);
-      subject.getUserTimeline(undefined, function(err, result){
+      subject.getUserTimeline(undefined, undefined, function(err, result){
         expect(err.message).to.eql('Id is required');
         done();
       });
@@ -685,7 +685,7 @@ describe("User Service", function() {
     it('passes correct params to resource', function(done) {
       function userResource(url, params, method) {
         expect(url).to.contain('/user/me/timeline');
-        expect(params).to.eql(undefined);
+        expect(params).to.eql({});
         expect(method.getTimeline.headers['Authorization']).to.eql('PAV_AUTH_TOKEN 000001');
         this.getTimeline = function(){};
         done();
@@ -698,7 +698,7 @@ describe("User Service", function() {
       };
 
       var subject = new UserService(userResource, undefined, authService);
-      subject.getUserTimeline('me', function(err, response){});
+      subject.getUserTimeline(undefined, 'me', function(err, response){});
     });
     it('returns an error from server', function(done) {
       function userResource(url, params, method) {
@@ -707,7 +707,7 @@ describe("User Service", function() {
         };
       }
       var subject = new UserService(userResource, undefined, authService);
-      subject.getUserTimeline('me', function(err, response){
+      subject.getUserTimeline(undefined, 'me', function(err, response){
         expect(err.message).to.eql('Server Error');
         expect(response).to.eql(undefined);
         done();
@@ -726,16 +726,17 @@ describe("User Service", function() {
             {
               type: 'likecomment'
             }
-          ]}
-          r['next-page'] = 1;
+          ],
+          last_timestamp: '1234',
+        }
           return onLoad(r);
         };
       }
       var subject = new UserService(userResource, undefined, authService);
-      subject.getUserTimeline('me', function(err, response){
+      subject.getUserTimeline(undefined, 'me', function(err, response){
+        console.log('TIMELINE!!', err, response);
         expect(err).to.eql(undefined);
-        expect(response.next_page).to.eql(1);
-        expect(response.timeline.length).to.eql(3);
+        expect(response.last_timestamp).to.eql('1234');
         done();
       });
     });
@@ -755,7 +756,7 @@ describe("User Service", function() {
         };
       }
       var subject = new UserService(userResource, undefined, authService);
-      subject.getUserTimeline('me', function(err, response){
+      subject.getUserTimeline(undefined,'me', function(err, response){
         expect(err.message).to.eql('Type Not Supported');
         done();
       });

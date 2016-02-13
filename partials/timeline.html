@@ -1,7 +1,8 @@
+<div>
 <div class="profile-timeline">
        <aside>
        </aside>
-       <section>
+       <section infinite-scroll="profile.getTimeLineEvents();">
           <div class="timeline-events" ng-repeat="event in timeline" ng-switch on="event.type">
                   <!-- Vote -->
                   <div ng-switch-when="vote">
@@ -66,7 +67,7 @@
                       <issue issue="event"></issue>
                     </div>
                   </div>
-
           </div>
        </section>
+</div>
 </div>

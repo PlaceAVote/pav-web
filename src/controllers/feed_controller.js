@@ -83,10 +83,6 @@ FeedController.prototype.feedCheck = function() {
 
 FeedController.prototype.feedMessage = function(message) {
   this.scrollMessage = message;
-  var that = this;
-  this.timeout(function() {
-    that.scrollMessage = false;
-  }, 5000);
 };
 
 module.exports = FeedController;

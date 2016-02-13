@@ -74,9 +74,9 @@
       // position: absolute;
 
     .notifications-container {
-      position: fixed;
+      position: absolute;
       top:53px;
-      right:89px;
+      right:48px;
       background: $white;
       border:1px solid $grey;
       @include shadow();
@@ -84,7 +84,7 @@
         right: 63px;
       }
       @include media(600px) {
-        right: 9px;
+        right: 0px;
       }
       .notifications-boundary { 
         max-height:300px;
