@@ -4,6 +4,8 @@ module.exports = function() {
     scope: {
       events: '=',
       refresh: '=',
+      scroll: '=',
+      message: '=',
     },
     templateUrl: 'partials/directives/feed_events.html',
   };

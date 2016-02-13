@@ -1,7 +1,7 @@
 <banner user="profile.user" profile="profile"></banner>
 <div class="app">
 	<div class="app-body">
-		<div class="timeline-layout" loader loader-context="profile.timeline.timeline">
+		<div class="timeline-layout">
       <div class="message" ng-hide="profile.hasActivity">
         <h2>You have no activity</h2>
       </div>
@@ -9,9 +9,12 @@
       			<div ng-show="profile.hasActivity" class="activity-container">
               <h1 class="activity-label">Recent Activity</h1>
               <timeline timeline="profile.timeline.timeline" profile="profile"></timeline>
+              <div class="row timeline-scroll-loader" ng-show="profile.loadingScroll" loader loader-context="profile.loadingScroll" truthy>
+              </div>
+              <h1 class="activity-label" ng-show="profile.timeLineEventMessage">{{profile.timeLineEventMessage}}</h1>
             </div>
 
-          <div class="follower-container">
+          <div class="follower-container mobile-margin-top-large">
           	<div ng-show="profile.hasFollowers" class="card padding-small followers">
           		<h1>Followers</h1>
             	<hr class="margin-top-small" />

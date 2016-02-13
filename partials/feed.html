@@ -10,10 +10,10 @@
 	        </section>
 	    </div>
 	    <section class="feed-wrapper">
-		<div class='feed-column l-7 m-12 s-12'>
+		<div class='feed-column l-7 m-12 s-12' infinite-scroll="feed.feedCheck();">
         <issues-post posted="feed.getFeed()"></issues-post>
         <!-- <wizard></wizard> -->
-        <feed-events events="feed.events" refresh="feed.loading"></feed-events>
+        <feed-events events="feed.events" refresh="feed.loading" scroll="feed.loadingScroll" message="feed.scrollMessage"></feed-events>
 		</div>
     <div class="l-5 m-12 s-12">
   		<div class="trends-container" loader loader-context="feed.trends">

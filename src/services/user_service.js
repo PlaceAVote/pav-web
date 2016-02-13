@@ -240,7 +240,7 @@ function UserService($resource, facebookService, authService) {
     resource.getProfile(undefined, onLoad, onError);
   };
 
-  var getUserTimeline = function(id, callback) {
+  var getUserTimeline = function(timestamp, id, callback) {
     var token = authService.getAccessToken();
     if (!token) {
       callback({status: 401, message: 'No Auth Token'});
@@ -251,14 +251,19 @@ function UserService($resource, facebookService, authService) {
     }
     var url = config.users.timeline(id);
     config.methods.get.headers.Authorization = token;
-    var timelineResource = new $resource(url, undefined, {getTimeline: config.methods.get});
+    body = {};
+    if (timestamp) {
+      body.from = timestamp;
+    }
+    var timelineResource = new $resource(url, body, {getTimeline: config.methods.get});
     var onError = function(error) {
       return callback({message: 'Server Error', error: error});
     };
+
     var onLoad = function(response) {
       try {
         var results = {
-          next_page: response['next-page'],
+          last_timestamp: response.last_timestamp,
           timeline: TimelineResponseFactory.getResponses(response.results),
         };
         return callback(undefined, results);
