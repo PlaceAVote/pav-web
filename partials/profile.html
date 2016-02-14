@@ -1,4 +1,4 @@
-<banner user="profile.user" profile="profile"></banner>
+<banner user="profile.user" toggle="profile.showFollowers" profile="profile"></banner>
 <div class="app">
 	<div class="app-body">
 		<div class="timeline-layout">
@@ -6,7 +6,7 @@
         <h2>You have no activity</h2>
       </div>
       <div class="row tablet-col l-12">
-      			<div ng-show="profile.hasActivity" class="activity-container">
+      			<div ng-show="profile.hasActivity" class="activity-container" ng-class="{'tablet-leave-canvas-left': profile.showFollowers}">
               <h1 class="activity-label">Recent Activity</h1>
               <timeline timeline="profile.timeline.timeline" profile="profile"></timeline>
               <div class="row timeline-scroll-loader" ng-show="profile.loadingScroll" loader loader-context="profile.loadingScroll" truthy>
@@ -14,7 +14,7 @@
               <h1 class="activity-label" ng-show="profile.timeLineEventMessage">{{profile.timeLineEventMessage}}</h1>
             </div>
 
-          <div class="follower-container mobile-margin-top-large">
+          <div class="follower-container mobile-margin-top-large" ng-class="{'tablet-enter-canvas-right': profile.showFollowers}">
           	<div ng-show="profile.hasFollowers" class="card padding-small followers">
           		<h1>Followers</h1>
             	<hr class="margin-top-small" />
@@ -26,9 +26,9 @@
                     </div>
                   </div>
                   <div class="top-comment-body">
-                  <h2><a href="#/profile/{{follower.user_id}}">{{follower.first_name}} {{follower.last_name}}</a></h2>
-                  <p>{{follower.follower_count}}</p>
-                </div>
+                    <h2><a href="#/profile/{{follower.user_id}}">{{follower.first_name}} {{follower.last_name}}</a></h2>
+                    <p>{{follower.follower_count}}</p>
+                  </div>
                 </section>
                 </div>
              

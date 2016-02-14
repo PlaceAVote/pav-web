@@ -153,7 +153,14 @@
 	@include media(900px) {
 		width: 100% !important;
 		margin-bottom: 40px;
+    display: none;
 	}
+  &.tablet-enter-canvas-right {
+     display: block;
+    @include media(480px) {
+     top: -75px;   
+    }
+  }
 }
 
 .profile-stats {
@@ -166,4 +173,12 @@
 		@include font-size(12px);
 		@include light();
 	}
+}
+
+.followers-mobile {
+  display: block;
+  position:absolute;
+  right: 0px;
+  width: 100%;
+  top: 0px;
 }

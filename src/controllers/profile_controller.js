@@ -43,7 +43,7 @@ ProfileController.prototype.populateTimeline = function() {
   this.userService.getUserTimeline(undefined, this.id, function(err, result) {
     if (!err) {
       that.timeline = result;
-      that.lastLoaded = that.timeline.last_timestamp;
+      that.newTimestamp = that.timeline.last_timestamp;
       that.hasActivity = !result.timeline.length ? false : true;
     }
   });
@@ -55,7 +55,6 @@ ProfileController.prototype.getTimeLineEvents = function() {
     return;
   }
   this.loadingScroll = true;
-  this.newTimestamp = this.lastLoaded;
   this.userService.getUserTimeline(this.newTimestamp, this.id, function(err, result) {
     that.loadingScroll = false;
     if (result) {
@@ -82,6 +81,10 @@ ProfileController.prototype.setTimeLineEventMessage = function(message) {
   var that = this;
   this.timeLineEventMessage = message;
 };
+
+// Profile.prototype.toggleFollowers = function() {
+//   this.showFollowers ? this.showFollowers = false;
+// };
 
 ProfileController.prototype.populateFollowers = function() {
   var that = this;

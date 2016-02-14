@@ -1,0 +1,40 @@
+@include media(900px) {
+  .tablet-enter-canvas-right {
+    top:0;
+    right: 0;
+    position: absolute;
+    // animation-iteration-count: 1;
+    // animation-fill-mode: forwards;
+    // animation: enterFromRight 0.2s ;
+    // transition:all 0.3s ease;
+  }
+
+
+  .tablet-leave-canvas-left {
+    top:0;
+    left: -100%;
+    position: absolute;
+    // animation-iteration-count: 1;
+    // animation-fill-mode: forwards;
+    // animation: leaveFromLeft 0.2s;
+    // transition:all 0.3s ease;
+  }
+}
+
+// @keyframes enterFromRight {
+//   0% {
+//     right: -100%;
+//   }
+//   100% {
+//     right: 0;
+//   }
+// }
+
+// @keyframes leaveFromLeft {
+//   0% {
+//     left: 0;
+//   }
+//   100% {
+//     left: -100%;
+//   }
+// }

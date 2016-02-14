@@ -17,8 +17,8 @@
    
   <div class="profile-follow">
       <div class="row">
-          <div class="stats profile-stats">
-              <span>{{user.total_followers}}</span>
+          <div class="stats profile-stats click" >
+              <span ng-click="toggleFollowers();">{{user.total_followers}}</span>
               <h3>Followers</h3>
           </div>
 

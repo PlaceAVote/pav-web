@@ -2,7 +2,7 @@
 <div class="profile-timeline">
        <aside>
        </aside>
-       <section infinite-scroll="profile.getTimeLineEvents();">
+       <section infinite-scroll="profile.getTimeLineEvents();" infinite-scroll-distance="0.5">
           <div class="timeline-events" ng-repeat="event in timeline" ng-switch on="event.type">
                   <!-- Vote -->
                   <div ng-switch-when="vote">
