@@ -37,7 +37,8 @@
 			margin: 20px 0px;
 			display: block;
 			@include media(600px) {
-				margin: 80px 0px;
+				margin: 105px 0px;
+        position: relative;
 			}
 			.time-stamp {
 				display:inline-block;
@@ -45,11 +46,17 @@
 				@include font-size(10px);
 				margin-bottom: 5px;
 				@include media(600px) {
-					position: relative;
+					position: absolute;
+          left: 0;
+          right: 0;
+          top: -23px;
+          margin: 0 auto;
+          width: 130px;
+          border-radius: 5px;
 					text-align: center;
 					z-index: 9000;
-					padding-bottom:13px;
-					// margin-bottom: 60px;
+          background: #C6C3CE;
+          color: white;
 				}
 			}
 			.event-card {
@@ -171,7 +178,7 @@
 	@include media(600px) {
 		left: 0;
 		right: 0;
-		top: -80px;
+		top: -72px;
 		margin: 0 auto;
 	}
 	&-like {
