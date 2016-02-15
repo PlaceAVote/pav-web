@@ -68,7 +68,7 @@
     overflow: hidden;
     position:relative;
     min-width: 25px;
-    width: 25px;
+    width: auto !important;
     background: transparent;
     border: 1px solid rgba(0,0,0,0);
     border-radius: 3px;

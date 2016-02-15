@@ -35,7 +35,10 @@ FeedController.prototype.getUserProfile = function(callback) {
 
 FeedController.prototype.getTrends = function() {
   var that = this;
+  this.trendsLoading = true;
   this.billService.getTrends(function(err, res) {
+    that.trendsLoading = false;
+    that.trends = false;
     if (!err) {
       that.trends = res;
     }
