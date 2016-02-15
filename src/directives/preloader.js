@@ -2,6 +2,7 @@ module.exports = function(location) {
   return {
     restrict: 'A',
     transclude: true,
+    // replace: true
     controller: function() {},
     controllerAs: 'ctrl',
     bindToController: {
