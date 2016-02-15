@@ -35,7 +35,7 @@
           <img ng-show="issue.emotional_response === 'positive'" src="img/reactions/smile-active.svg" />
           <span ng-hide="issue.positive_responses < 1 || !issue.positive_responses" class="bold black">{{issue.positive_responses}}</span>
         </div>
-        <div class="reaction click" ng-class="{'reaction-neutral': issue.emotional_response === 'neutral', 'reaction-active': issue.neutral_responses > 0}" ng-click="eResponse(issue.issue_id, 'neutral', issue)">
+        <div class="reaction click" ng-class="{'reaction-neutral': issue.emotional_response === 'neutral', 'reaction-active': issue.neutral_responses > 0}" ng-click="3(issue.issue_id, 'neutral', issue)">
           <img ng-hide="issue.emotional_response === 'neutral'" src="img/reactions/straightface-inactive.svg" />
           <img ng-show="issue.emotional_response === 'neutral'" src="img/reactions/straightface-active.svg" />
           <span ng-hide="issue.neutral_responses < 1 || !issue.neutral_responses" class="bold black">{{issue.neutral_responses}}</span>

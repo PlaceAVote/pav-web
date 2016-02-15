@@ -10,6 +10,9 @@ module.exports = function($location, issueService) {
       scope.issueService = issueService;
       scope.eResponse = function(id, emo, issue) {
         var that = this;
+        if (attr.$attr.example) {
+          return;
+        }
         if (this.loading) {
           return;
         }

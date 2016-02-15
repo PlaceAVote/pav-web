@@ -45,9 +45,14 @@
             <i class="middle icon-bills"></i>
           </div>  
       </div>
-        <button class="green-button medium-button padding-left-large padding-right-large" ng-click="issues.postIssue();">POST</button>
+        <h2 ng-hide="dirty" ng-click="showExample();" class="show-example-button red bold click">SHOW ME AN EXAMPLE</h2>
+        <button ng-show="dirty" class="green-button medium-button padding-left-large padding-right-large" ng-click="issues.postIssue();">POST</button>
     </div>
 
   </div>
+</div>
 
+<div ng-show="example" class="margin-top-medium card padding-small example-issue">
+  <issue issue="exampleIssue" example>
+  </issue>
 </div>
