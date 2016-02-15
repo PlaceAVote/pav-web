@@ -12,6 +12,12 @@ describe('Issue Directive', function() {
     }
   };
 
+  var mockAttr = {
+    $attr: function() {
+      return;
+    }
+  };
+
   var mockLocation = function() {
     return;
   }
@@ -24,7 +30,7 @@ describe('Issue Directive', function() {
       },
     };
     var subject = new Issues(mockLocation, mockIssueService);
-    subject.link(scope);
+    subject.link(scope, undefined, mockAttr);
     scope.eResponse(undefined,'positive',scope.issue);
     expect(scope.issue.positive_responses).to.equal(0);
   });
@@ -37,7 +43,7 @@ describe('Issue Directive', function() {
       },
     };
     var subject = new Issues(mockLocation, mockIssueService);
-    subject.link(scope);
+    subject.link(scope, undefined, mockAttr);
     scope.eResponse(undefined,'negative',scope.issue);
     expect(scope.issue.negative_responses).to.equal(1);
     expect(scope.issue.emotional_response).to.equal('negative');
@@ -52,7 +58,7 @@ describe('Issue Directive', function() {
       },
     };
     var subject = new Issues(mockLocation, mockIssueService);
-    subject.link(scope);
+    subject.link(scope, undefined, mockAttr);
     scope.eResponse(undefined,'negative',scope.issue);
     expect(scope.issue.negative_responses).to.equal(1);
     expect(scope.issue.neutral_responses).to.equal(1);

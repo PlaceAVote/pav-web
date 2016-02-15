@@ -13,13 +13,13 @@ module.exports = function() {
           n[0].onfocus = function(e) {
             scope.dirty = true;
             scope.$apply();
-            };
+          };
           n[0].onblur = function(e) {
             if (n[0].value === '') {
               scope.dirty = false;
               scope.$apply();
-            };
-          }
+            }
+          };
         }
       });
 
