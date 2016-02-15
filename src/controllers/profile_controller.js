@@ -9,6 +9,7 @@ function ProfileController($scope, $location, $routeParams, authService, userSer
   this.authService = authService;
   this.userService = userService;
   this.id = $routeParams.id;
+  this.showFollowers = true;
   this.populate();
 }
 
@@ -82,15 +83,12 @@ ProfileController.prototype.setTimeLineEventMessage = function(message) {
   this.timeLineEventMessage = message;
 };
 
-// Profile.prototype.toggleFollowers = function() {
-//   this.showFollowers ? this.showFollowers = false;
-// };
 
 ProfileController.prototype.populateFollowers = function() {
   var that = this;
   this.userService.getFollowers(this.id, function(err, result) {
     if (!err) {
-      that.followers = result;
+      that.currentFollowers = result;
       that.hasFollowers = !result.length ? false : true;
     }
   });
@@ -100,7 +98,8 @@ ProfileController.prototype.populateFollowing = function() {
   var that = this;
   this.userService.getFollowing(this.id, function(err, result) {
     if (!err) {
-
+      that.currentFollowing = result;
+      that.isFollowing = !result.length ? false : true;
     }
   });
 };
