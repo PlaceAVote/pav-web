@@ -33,7 +33,7 @@ ProfileController.prototype.populateProfile = function() {
     if (!err) {
       that.user = result;
       title.profile(that.user);
-      that.following = result.following ? 'unfollow' : 'follow';
+      that.following = result.following ? 'Unfollow' : 'Follow';
       that.followStatus = result.following;
     }
   });

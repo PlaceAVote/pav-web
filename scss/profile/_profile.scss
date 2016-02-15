@@ -129,7 +129,8 @@
 			display: inline-block;
 			height: 28px;
 			@include font-size(10px);
-			line-height:1;
+			line-height:28px;
+      padding: 0px;
 			// vertical-align: middle;
 			width: 130px !important;
 		}
