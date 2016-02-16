@@ -14,7 +14,9 @@
       <tax ng-switch-when="tax_multi" question="wizard.currentQuestion"> </tax>
       <div class="bottom-wizard-controller row margin-top-medium">
         <p class="red middle h-left">{{wizard.errorMessage}}</p>
-        <button class="green-button medium-button h-right padding-left-large padding-right-large" ng-click="wizard.answerQuestion()">NEXT</button>
+        <button ng-hide="wizard.lastQuestion" class="green-button medium-button h-right padding-left-large padding-right-large" ng-click="wizard.answerQuestion()">NEXT</button>
+        <p class="middle" ng-show="wizard.lastQuestion && !wizard.errorMessage">What's next? Take a look at our issues feature below!</p>
+       <button ng-show="wizard.lastQuestion" class="green-button medium-button h-right padding-left-large padding-right-large" ng-click="wizard.answerQuestion()">Go</button>
       </div>
   </section>
 </div>

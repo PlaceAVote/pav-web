@@ -54,10 +54,15 @@ WizardController.prototype.getNextQuestion = function() {
   if (!this.questions || this.questions.length === 0) {
     return null;
   }
+
   this.currentQuestionIndex = this.answered.length + this.skipped.length;
   if (this.questions.length === this.currentQuestionIndex) {
     this.sendQuestions();
     return null;
+  }
+
+  if (this.questions[this.currentQuestionIndex].type === 'tax_multi') {
+    this.lastQuestion = true;
   }
 
   return this.questions[this.currentQuestionIndex];
