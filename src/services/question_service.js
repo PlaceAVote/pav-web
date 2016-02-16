@@ -63,7 +63,10 @@ function answerQuestions(Resource, authService, answers, callback) {
     callback();
     return;
   };
-  request.answerQuestions(answers, onLoad, onError);
+  var body = {
+    answers: answers,
+  };
+  request.answerQuestions(body, onLoad, onError);
 }
 
 /**

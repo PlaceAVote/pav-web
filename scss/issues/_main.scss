@@ -221,7 +221,8 @@
   }
 }
 
-.example-issue {
+//Shamefull css, I know. Wizard's aren't welcome here.
+.wizard-container, .example-issue {
   transform: scale(1);
   &.ng-hide-remove {
     animation:fadeIn 0.3s cubic-bezier(.43,0,0,.99), scaleUp 0.3s cubic-bezier(.43,0,0,.99);

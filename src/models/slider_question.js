@@ -22,7 +22,7 @@ Slider.prototype.getPosition = function() {
 Slider.prototype.transform = function() {
   return {
     question_id: this.id,
-    answers: [this.answers[this.position]],
+    answer: [this.answers[this.position]],
   };
 };
 

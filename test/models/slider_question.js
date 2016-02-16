@@ -54,8 +54,8 @@ describe('Slider Question', function() {
       subject.position = 2;
       var transformed = subject.transform();
       expect(transformed.question_id).to.eql('1001');
-      expect(transformed.answers.length).to.eql(1);
-      expect(transformed.answers).to.eql(['I want more gun control']);
+      expect(transformed.answer.length).to.eql(1);
+      expect(transformed.answer).to.eql(['I want more gun control']);
     });
   });
 });

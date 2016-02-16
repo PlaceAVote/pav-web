@@ -1,20 +1,22 @@
 <div ng-controller="WizardCtrl as wizard">
-  <section ng-show="wizard.currentQuestion" class="card wizard-container">
+  <section ng-show="wizard.currentQuestion" class="card wizard-container padding-small">
     <div ng-switch on="wizard.currentQuestion.type">
       <div class="top-wizard-controller row">
         <h3 class="no-margin-bottom no-margin-top layout-left v-layout-middle">Question {{wizard.currentQuestionIndex + 1}} of {{wizard.questions.length}}</h3>
-        <div class="h-right">
-          <h4 ng-click="wizard.skipQuestion()" class="middle margin-right-medium red click">SKIP</h4>
-          <i class="icon-close red click"></i>
+        <div ng-click="wizard.skipQuestion()" class="h-right row">
+          <h4 class="middle margin-right-medium red h-right middle click">SKIP</h4>
+          <i class="icon-close red h-right middle click"></i>
         </div>
       </div>
-      <hr />
+      <hr class="margin-top-small" />
       <slider ng-switch-when="slider" question="wizard.currentQuestion"> </slider>
       <dad ng-switch-when="dragdrop" question="wizard.currentQuestion"> </dad>
       <tax ng-switch-when="tax_multi" question="wizard.currentQuestion"> </tax>
-      
       <div class="bottom-wizard-controller row margin-top-medium">
-        <button class="green-button medium-button h-right padding-left-large padding-right-large" ng-click="wizard.answerQuestion()">NEXT</button>
+        <p class="red middle h-left">{{wizard.errorMessage}}</p>
+        <button ng-hide="wizard.lastQuestion" class="green-button medium-button h-right padding-left-large padding-right-large" ng-click="wizard.answerQuestion()">NEXT</button>
+        <p class="middle" ng-show="wizard.lastQuestion && !wizard.errorMessage">What's next? Take a look at our issues feature below!</p>
+       <button ng-show="wizard.lastQuestion" class="green-button medium-button h-right padding-left-large padding-right-large" ng-click="wizard.answerQuestion()">Go</button>
       </div>
   </section>
 </div>

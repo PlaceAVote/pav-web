@@ -203,7 +203,7 @@ app.directive('issue', ['$location', 'issueService', issueDirective]);
 app.directive('wizard', [wizardDirective]);
 app.directive('slider', ['$timeout', sliderDirective]);
 app.directive('dad', [dragAndDropDirective]);
-app.directive('tax', ['$filter', taxMultiDirective]);
+app.directive('tax', ['$filter', '$location', taxMultiDirective]);
 app.directive('imageCrop', [imageCropDirective]);
 app.directive('fileread', [fileReadDirective]);
 app.directive('loader', ['$location', preloaderDirective]);
