@@ -96,7 +96,7 @@ describe('Wizard', function() {
   });
 
   describe('load questions', function() {
-    xit('loads the questions and returns the current one', function(done) {
+    it('loads the questions and returns the current one', function(done) {
       var called = false;
       var expectedQuestion = new Slider({question_id: '1'});
       var mockQuestionService = {
