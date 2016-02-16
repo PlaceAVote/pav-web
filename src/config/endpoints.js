@@ -133,7 +133,10 @@ module.exports = {
       endpoint: urls.VOTES + '/vote',
     },
     voteRecords: {
-      endpoint: urls.VOTES + '/vote/bill/',
+      endpoint: function(props) {
+        return urls.VOTES + '/vote/bill/' + props.id;
+      },
+      properties: ['id'],
     },
   },
   comments: {
@@ -174,7 +177,10 @@ module.exports = {
       },
     },
     getById: {
-      endpoint: urls.CONGRESS + '/bills/',
+      endpoint: function(props) {
+        return urls.CONGRESS + '/bills/' + props.id;
+      },
+      properties: ['id'],
     },
   },
   feed: {

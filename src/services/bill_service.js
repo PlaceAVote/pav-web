@@ -5,38 +5,6 @@ var config = require('../config/endpoints.js');
 var TrendingBill = require('../models/trending_bill.js');
 
 function BillService($resource, authService, userService) {
-  var getBillVotes = function(id, callback) {
-    if (!id) {
-      return callback({message: 'Error: No Id Provided'});
-    }
-    var onLoad = function(result) {
-      return callback(undefined, result);
-    };
-    var onError = function(err) {
-      return callback(err);
-    };
-    var url = config.votes.voteRecords.endpoint + id;
-    config.methods.getArray.headers.Authorization = authService.getAccessToken();
-    var resource = new $resource(url, undefined,  {getBillVotes: config.methods.getArray});
-    resource.getBillVotes(undefined, onLoad, onError);
-  };
-
-  var getBill = function(id, callback) {
-    if (!id) {
-      return callback({message: 'Error: No Id Provided'});
-    }
-    var onLoad = function(result) {
-      return callback(undefined, new Bill(result));
-    };
-    var onError = function(err) {
-      return callback(err);
-    };
-    var url = config.bills.getById.endpoint + id;
-    config.methods.get.headers.Authorization = authService.getAccessToken();
-    var resource = new $resource(url, id,  {getById: config.methods.get});
-    resource.getById(undefined, onLoad, onError);
-  };
-
   var getTopComments = function(id, callback) {
     if (!id) {
       return callback({message: 'Id Must Be Defined'});
@@ -136,8 +104,6 @@ function BillService($resource, authService, userService) {
   };
 
   return {
-    getBillVotes: getBillVotes,
-    getBill: getBill,
     getTopComments: getTopComments,
     getComments: getComments,
     postComment: postComment,

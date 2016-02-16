@@ -1,4 +1,5 @@
 var Comment = require('../models/comment.js');
+var Bill = require('../models/bill.js');
 var AuthorizeController = require('./autherize_controller.js');
 var title = require('../config/titles.js');
 function BillController($scope, $routeParams, billService, voteService, commentService, $location, authService, $rootScope, service) {
@@ -136,28 +137,47 @@ BillController.prototype.getLegislator = function(legislator) {
       that.legislatorError = true;
     } else {
       that.legislator = result;
-      console.log(that.legislator);
     }
   });
 };
 
 BillController.prototype.getBill = function(id) {
   var that = this;
-  this.billService.getBill(id, function(err, result) {
+  var options = {
+    spec: {
+      type: 'get',
+      method: 'getById',
+      resource: 'bills',
+    },
+    properties: {
+      id: id,
+    },
+  };
+  this.service.get(options, function(err, result) {
     if (err) {
       that.error = true;
     } else {
-      that.body = result;
+      that.body = new Bill(result);
       title.bill(that.body.billData);
       that.userVotedCheck();
-      that.getLegislator(result.billData.sponsor);
+      that.getLegislator(that.body.billData.sponsor);
     }
   });
 };
 
 BillController.prototype.getBillVotes = function(id) {
   var that = this;
-  this.billService.getBillVotes(id, function(err, result) {
+  var options = {
+    spec: {
+      type: 'getArray',
+      method: 'voteRecords',
+      resource: 'votes',
+    },
+    properties: {
+      id: id,
+    },
+  };
+  this.service.get(options, function(err, result) {
     if (err) {
       that.error = true;
     } else {
