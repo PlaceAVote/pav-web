@@ -154,9 +154,8 @@ var gulp = require('gulp'),
     gulp.watch(["web/src/partials/*.html", "./web/dist/css/*.css", "./web/dist/js/*.js"]).on("change", browserSync.reload);
   });
 
-  gulp.task('watch-website',  ['website-sass', 'index-html', 'website-fonts', 'browserify-website', 'website-imgs', 'website-html', 'download-folder', 'browser-sync-website'] , function() {
-    gulp.watch(['./web/src/scss/*.scss','./web/src/website.js', './web/src/js/**/*', './web/src/index.html', './web/src/partials/*.html'], ['website-sass', 'index-html' ,'browserify-website', 'website-imgs', 'website-html']);
-    gulp.watch(['./web/dist/css/*.css'], ['website-autoPrefix']);
+  gulp.task('watch-website',  ['website-autoPrefix', 'index-html', 'website-fonts', 'browserify-website', 'website-imgs', 'website-html', 'download-folder', 'browser-sync-website'] , function() {
+    gulp.watch(['./web/src/scss/*.scss','./web/src/website.js', './web/src/js/**/*', './web/src/index.html', './web/src/partials/*.html'], ['website-autoPrefix', 'index-html' ,'browserify-website', 'website-imgs', 'website-html']);
   });
 
   gulp.task('build-site', ['index-html', 'website-fonts', 'browserify-website', 'website-imgs', 'website-html', 'download-folder', 'website-autoPrefix'],function() {
