@@ -51,7 +51,7 @@ describe('Wizard', function() {
       var mockQuestion = {
         transform: function(params) {
           called = true;
-          return 'hello';
+            return 'hello';
         },
       };
       var subject = new Wizard();
@@ -81,7 +81,7 @@ describe('Wizard', function() {
       question.position = 0;
       subject.answerQuestion();
       expect(subject.answered.length).to.eql(1);
-      expect(subject.answered[0].answers[0]).to.eql('I want less gun control');
+      expect(subject.answered[0].answer[0]).to.eql('I want less gun control');
       expect(subject.answered[0].question_id).to.eql('1001');
     });
   });
@@ -96,7 +96,7 @@ describe('Wizard', function() {
   });
 
   describe('load questions', function() {
-    xit('loads the questions and returns the current one', function(done) {
+    it('loads the questions and returns the current one', function(done) {
       var called = false;
       var expectedQuestion = new Slider({question_id: '1'});
       var mockQuestionService = {
@@ -113,7 +113,8 @@ describe('Wizard', function() {
       subject.loadQuestions(function(currentQuestion) {
         expect(called).to.eql(true);
         expect(currentQuestion).to.eql(expectedQuestion);
-        expect(subject.questions.length).to.eql(1);
+        console.log('sihsiufdsiughdsiufhds', subject.questions, subject.questions.length);
+        expect(subject.questions.length).to.eql(2);
         expect(subject.questions[0]).to.eql(expectedQuestion);
         done();
       });

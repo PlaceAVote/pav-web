@@ -165,7 +165,7 @@ describe('Question Service', function() {
       };
       function mockResource(url, params, method) {
         this.answerQuestions = function(body, onLoad, onError){
-          expect(body).to.eql(answers);
+          expect(body.answers).to.eql(answers);
           onError('Error');
         };
       }
@@ -185,7 +185,7 @@ describe('Question Service', function() {
       };
       function mockResource(url, params, method) {
         this.answerQuestions = function(body, onLoad, onError){
-          expect(body).to.eql(answers);
+          expect(body.answers).to.eql(answers);
           onLoad();
         };
       }

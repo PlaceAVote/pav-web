@@ -1,8 +1,5 @@
-// Delete this.
-var DragAndDrop = require('../models/drag_and_drop_question.js');
-var Slider = require('../models/slider_question.js');
-var TaxMultiPart = require('../models/tax_multi_part_question.js');
 var taxCalculator = require('../models/tax_calculator.js')();
+var TaxMultiPart = require('../models/tax_multi_part_question.js');
 
 function WizardController($scope, questionService) {
   var that = this;
@@ -31,44 +28,14 @@ WizardController.prototype.loadQuestions = function(callback) {
       callback();
       return;
     }
-    that.questions = questions;
-    var data = {
-      question_id: '1002',
-      question_type: 'dragdrop',
-      question: 'Which of these bills interests you, drag and drop in...',
-      answers: [
-        {
-          bill_id: 'hr2-114',
-          bill_title: 'Bill to make July 3rd National Cowboy Day',
-        },
-        {
-          bill_id: 'hr2-115',
-          bill_title: 'Bill to make July 5th National Cowboy Day',
-        },
-      ],
-    };
-    var q = new DragAndDrop(data);
-    data = {
-      question_id: '1003',
-      question_type: 'slider',
-      topic: 'Gun Controll',
-      answers: {
-        left: 'I want less gun control',
-        middle: 'Not sure',
-        right: 'I want more gun control',
-      },
-    };
-    var q1 = new Slider(data);
-    data = {
+    var multiPart = new TaxMultiPart({
       question_id: '1004',
       question_type: 'tax_multi',
       extension: taxCalculator,
       scope: that.scope,
-    };
-    var q2 = new TaxMultiPart(data);
-    that.questions.push(q);
-    that.questions.push(q1);
-    that.questions.push(q2);
+    });
+    questions.push(multiPart);
+    that.questions = questions;
     currentQuestion = that.getNextQuestion();
     callback(currentQuestion);
   });
@@ -87,11 +54,15 @@ WizardController.prototype.getNextQuestion = function() {
   if (!this.questions || this.questions.length === 0) {
     return null;
   }
-  this.currentQuestionIndex = this.answered.length + this.skipped.length;
 
+  this.currentQuestionIndex = this.answered.length + this.skipped.length;
   if (this.questions.length === this.currentQuestionIndex) {
     this.sendQuestions();
     return null;
+  }
+
+  if (this.questions[this.currentQuestionIndex].type === 'tax_multi') {
+    this.lastQuestion = true;
   }
 
   return this.questions[this.currentQuestionIndex];
@@ -99,6 +70,12 @@ WizardController.prototype.getNextQuestion = function() {
 
 WizardController.prototype.answerQuestion = function() {
   var question = this.currentQuestion.transform();
+  if (question.question_id === '1004') {
+    if (question.answer[1] === '') {
+      this.setError('Please enter zip code.');
+      return;
+    }
+  }
   this.answered.push(question);
   this.currentQuestion = this.getNextQuestion();
 };
@@ -106,6 +83,10 @@ WizardController.prototype.answerQuestion = function() {
 WizardController.prototype.skipQuestion = function() {
   this.skipped.push(this.currentQuestion);
   this.currentQuestion = this.getNextQuestion();
+};
+
+WizardController.prototype.setError = function(message) {
+  this.errorMessage = message;
 };
 
 module.exports = WizardController;

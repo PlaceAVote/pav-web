@@ -1,6 +1,5 @@
 var Slider = require('../models/slider_question.js');
 var DragAndDrop = require('../models/drag_and_drop_question.js');
-
 /**
  * Takes an array of raw json questions and
  * returns an array of question/answer models.
@@ -17,6 +16,7 @@ function generate(results) {
     }
     return {};
   });
+
   return questions;
 }
 
