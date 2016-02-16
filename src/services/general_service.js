@@ -36,9 +36,8 @@ function get(Resource, config, options, callback) {
   }
 
   var url = method.endpoint(options.properties);
-  var pack = {
-    [options.spec.method]: config.methods[options.spec.type],
-  };
+  var pack = {};
+  pack[options.spec.method] = config.methods[options.spec.type];
   var request = new Resource(url, null, pack);
 
   var onError = function(err) {
