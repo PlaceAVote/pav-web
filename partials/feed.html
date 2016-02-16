@@ -11,8 +11,7 @@
 	    </div>
 	    <section class="feed-wrapper">
 		<div class='feed-column l-7 m-12 s-12' infinite-scroll="feed.feedCheck();" infinite-scroll-distance="0.5">
-        <!-- <wizard ng-show="feed.rs.user.newUser"></wizard> -->
-        <wizard></wizard>
+        <wizard ng-show="feed.rs.user.newUser"></wizard>
         <issues-post posted="feed.getFeed()"></issues-post>
         <div class="feed-event-loader row" ng-show="feed.loading" loader loader-context="feed.loading" truthy></div>
         <feed-events events="feed.events" refresh="feed.loading" scroll="feed.loadingScroll" message="feed.scrollMessage"></feed-events>
