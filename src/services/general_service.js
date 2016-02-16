@@ -1,3 +1,5 @@
+var rConfig = require('../config/endpoints.js');
+
 function get(Resource, config, options, callback) {
   options = options || {};
   var spec = options.spec;
@@ -56,6 +58,7 @@ function get(Resource, config, options, callback) {
 }
 
 function service(resource, config) {
+  config = config || rConfig;
   return {
     get: function(options, callback) {
       get(resource, config, options, callback);

@@ -1,11 +1,12 @@
 var Comment = require('../models/comment.js');
 var AuthorizeController = require('./autherize_controller.js');
 var title = require('../config/titles.js');
-function BillController($scope, $routeParams, billService, legislatorService, voteService, commentService, $location, authService, $rootScope) {
+function BillController($scope, $routeParams, billService, voteService, commentService, $location, authService, $rootScope, service) {
   AuthorizeController.authorize({error: '/', authorizer: authService, location: $location});
   $scope = $scope || {};
   $scope.bill = this;
   $scope.commentService = commentService;
+  this.service = service;
   this.rs = $rootScope;
   this.authService = authService;
   this.location = $location;
@@ -14,7 +15,6 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
   this.commentBody = undefined;
   this.commentService = commentService;
   this.billService = billService;
-  this.legislatorService = legislatorService;
   this.voteService = voteService;
   this.Identify($routeParams);
   this.getBill(this.id);
@@ -121,11 +121,22 @@ BillController.prototype.getLegislator = function(legislator) {
     return;
   }
   var id = legislator.thomas_id;
-  this.legislatorService.getById(id, function(err, result) {
+  var options = {
+    spec: {
+      type: 'get',
+      method: 'getById',
+      resource: 'legislator',
+    },
+    properties: {
+      id: id,
+    },
+  };
+  this.service.get(options, function(err, result) {
     if (err) {
       that.legislatorError = true;
     } else {
       that.legislator = result;
+      console.log(that.legislator);
     }
   });
 };

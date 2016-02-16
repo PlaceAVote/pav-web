@@ -119,7 +119,10 @@ module.exports = {
   },
   legislator: {
     getById: {
-      endpoint: urls.CONGRESS + '/legislators/',
+      endpoint: function(props) {
+        return urls.CONGRESS + '/legislators/' + props.id;
+      },
+      properties: ['id'],
     },
   },
   votes: {

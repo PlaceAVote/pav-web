@@ -24,7 +24,6 @@ var IssuesController = require('./controllers/issues_controller.js');
 var UserService = require('./services/user_service.js');
 var BillService = require('./services/bill_service.js');
 var AuthService = require('./services/auth_service.js');
-var LegislatorService = require('./services/legislator_service.js');
 var VoteService = require('./services/votes_service.js');
 var CommentService = require('./services/comment_service.js');
 var NotificationService = require('./services/notification_service.js');
@@ -33,6 +32,7 @@ var PasswordService = require('./services/password_service.js');
 var FeedService = require('./services/feed_service.js');
 var IssueService = require('./services/issue_service.js');
 var QuestionService = require('./services/question_service.js');
+var Service = require('./services/general_service.js');
 var MailService = require('./services/mail_service.js');
 
 // Dependencies
@@ -147,7 +147,6 @@ app.factory('authService', ['$resource', AuthService]);
 app.factory('userService', ['$resource', 'facebookService', 'authService', UserService]);
 app.factory('billService', ['$resource', 'authService', 'userService', BillService]);
 app.factory('commentService', ['$resource', 'userService', 'authService', CommentService]);
-app.factory('legislationService', ['$resource', 'authService', LegislatorService]);
 app.factory('voteService', ['$resource', 'authService', 'userService', VoteService]);
 app.factory('notificationService', ['$resource', 'authService', NotificationService]);
 app.factory('searchService', ['$resource', 'authService', SearchService]);
@@ -155,6 +154,8 @@ app.factory('passwordService', ['$resource', PasswordService]);
 app.factory('feedService', ['$resource', 'authService', 'userService', FeedService]);
 app.factory('issueService', ['$resource', 'authService', IssueService]);
 app.factory('questionService', ['$resource', 'authService', QuestionService]);
+
+app.factory('service', ['$resource', Service]);
 app.factory('mailService', ['$resource', MailService]);
 
 // Controllers
@@ -162,7 +163,7 @@ app.controller('TopicRegisterCtrl',['$scope','$location', 'userService', Registe
 app.controller('SignUpCtrl',['$rootScope','$scope','$location', 'userService', SignUpController]);
 app.controller('LoginCtrl',['$scope','$location', 'userService', 'authService', '$rootScope', '$routeParams', 'passwordService', LoginController]);
 app.controller('FeedCtrl', ['$scope', '$location', 'userService', 'billService', 'authService', 'feedService', '$rootScope','$timeout', FeedController]);
-app.controller('BillCtrl', ['$scope', '$routeParams', 'billService', 'legislationService', 'voteService', 'commentService', '$location', 'authService', '$rootScope', BillController]);
+app.controller('BillCtrl', ['$scope', '$routeParams', 'billService', 'voteService', 'commentService', '$location', 'authService', '$rootScope', 'service', BillController]);
 app.controller('HeaderCtrl', ['$rootScope', '$scope', '$location', '$timeout', 'authService', 'userService', 'notificationService', 'searchService', '$window', HeaderController]);
 app.controller('ProfileCtrl', ['$scope', '$location', '$routeParams', 'authService', 'userService', ProfileController]);
 app.controller('SettingsCtrl', ['$scope', '$location', '$timeout', 'userService', 'authService', '$rootScope','$anchorScroll', SettingsController]);
