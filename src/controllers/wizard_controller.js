@@ -64,15 +64,13 @@ WizardController.prototype.getNextQuestion = function() {
 };
 
 WizardController.prototype.answerQuestion = function() {
-  var err;
-  if (this.currentQuestion.isValid) {
-    err = this.currentQuestion.isValid();
-  }
-  if (err) {
-    this.setError(err);
-    return;
-  }
   var question = this.currentQuestion.transform();
+  if (question.question_id === '1004') {
+    if (question.answer[1] === '') {
+      this.setError('Please enter zip code.');
+      return;
+    }
+  }
   this.answered.push(question);
   this.currentQuestion = this.getNextQuestion();
 };
