@@ -3,6 +3,7 @@ module.exports = function($location, issueService) {
     restrict: 'E',
     scope: {
       issue: '=',
+      example: '=',
     },
     templateUrl: 'partials/directives/issue.html',
     link: function(scope, el, attr) {
@@ -10,9 +11,6 @@ module.exports = function($location, issueService) {
       scope.issueService = issueService;
       scope.eResponse = function(id, emo, issue) {
         var that = this;
-        if (attr.$attr.example) {
-          return;
-        }
         if (this.loading) {
           return;
         }

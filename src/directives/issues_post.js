@@ -31,6 +31,7 @@ module.exports = function() {
         }
       };
 
+      scope.theExample = true;
       var example = {
         issue_id: '1234',
         bill_id: 's2344-114',
@@ -50,6 +51,7 @@ module.exports = function() {
       };
 
       scope.exampleIssue = new ExampleIssue(example);
+      scope.exampleIssue.type = 'example';
 
     },
   };
