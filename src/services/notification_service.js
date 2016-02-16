@@ -19,8 +19,7 @@ function NotificationService($resource, authService, options) {
     };
 
     streamer.onmessage = function(message) {
-      message = JSON.parse(message.data);
-      return callback(undefined, message);
+      return callback(undefined, NotificationEventFactory.getResponse(JSON.parse(message.data)));
     };
   };
 
@@ -37,22 +36,35 @@ function NotificationService($resource, authService, options) {
     return streamer;
   };
 
-  var getNotifications = function(callback) {
+  var getNotifications = function(timestamp, callback) {
     var token = authService.getAccessToken();
     if (!token) {
       return callback('No Token Available');
     }
 
     var onLoad = function(res) {
-      callback(undefined, res);
+      try {
+        var results = {
+          last_timestamp: res.last_timestamp,
+          results: NotificationEventFactory.getResponses(res.results),
+        };
+        return callback(undefined, results);
+      }
+      catch (e) {
+        return callback(e);
+      }
     };
 
     var onError = function(err) {
       callback(err);
     };
     var url = config.notifications.staticEndpoint;
+    var body = {};
+    if (timestamp) {
+      body.from = timestamp;
+    }
     config.methods.get.headers.Authorization = token;
-    var resource = new $resource(url, undefined, {get: config.methods.get});
+    var resource = new $resource(url, body, {get: config.methods.get});
     resource.get(onLoad, onError);
   };
 

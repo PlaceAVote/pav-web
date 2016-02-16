@@ -20,7 +20,13 @@
         border-radius: 3px;
         position: absolute;
         top: 0px;
-        right: 50px;
+        right: 45px;
+        @include media(1200px) {
+          right: 60px;
+        }
+        @include media(560px) {
+          right: 45px;
+        }
         animation: notify 1s ease;
         p {
           width: 12px;
@@ -49,28 +55,42 @@
         }
       }
     section.notification {
-      img {
+      .notifications-icon {
         height: 30px;
+        margin-right: 24px;
+        position: absolute;
+        right: 25px;
+        @include media(1200px) {
+        right: 40px;
+        }
+        @include media(560px) {
+        right: 25px;
+        }
       }
-      img.user-img {
-        margin-left: 20px;
-      }
-      position: relative;
+
+      // img.user-img {
+      //   margin-left: 20px;
+      // }
+      // position: absolute;
 
     .notifications-container {
       position: absolute;
-      top:44px;
-      right:54px;
+      top:53px;
+      right:48px;
       background: $white;
       border:1px solid $grey;
       @include shadow();
+      @include media(1200px) {
+        right: 63px;
+      }
       @include media(600px) {
-        right: 5px;
+        right: 0px;
       }
       .notifications-boundary { 
         max-height:300px;
         width:300px;
         overflow: scroll;
+        // position: relative;
         .notification-event {
           padding: 10px;
           display: flex;
@@ -108,28 +128,35 @@
       }
       
     }
-      .dropdown-container {
-        background:$white;
-        border-radius:3px;
-        font-size:12px;
-        width:130px;
-        top: 44px;
-        right: 0px;
-        position:absolute;
-        @include shadow();
-        border:1px solid $grey;
-        ul {
-          li {
-            text-align:center;
-            font-weight:normal;
-            cursor:pointer;
-            padding:10px 10px;
-            &:hover {
-            background:$greylight;
-          }
-          }
-        }
+
+.dropdown-container {
+  background:$white;
+  border-radius:3px;
+  font-size:12px;
+  width:130px;
+  top: 44px;
+  right: 0px;
+  position:absolute;
+  @include shadow();
+  border:1px solid $grey;
+  ul {
+    li {
+      .profile-image-holder {
+        width: 20px;
+        height: 20px;
+        border-color: $grey;
       }
+      text-align:center;
+      font-weight:normal;
+      cursor:pointer;
+      padding:10px 10px;
+      &:hover {
+      background:$greylight;
+    }
+    }
+  }
+}
+
 .notifications-container:before, .dropdown-container:before {
   top: 0;
   border: solid transparent;
@@ -169,3 +196,48 @@
         }
       }
     }
+
+.loader-holder {
+  position: absolute;
+  bottom: 0px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  overflow: hidden;
+  // height: 0;
+  width: 100%;
+  background: white;
+  border-top: 1px solid lighten($blue, 35%);
+  box-shadow: inset 0px 1px 10px rgba(0,0,0,0.1);
+  .box-loader {
+    height: 40px;
+  }
+  &.ng-hide-add, &.ng-hide-remove, &.ng-hide-remove-active, &.ng-hide-add-active {
+    transition: all 0.3s ease;
+  }
+  &.ng-hide-add,&.ng-hide-add-active {
+    transition-delay: 0.3s;
+  }
+  &.ng-hide-remove {
+    height: 0px;
+  }
+  &.ng-hide-remove.ng-hide-remove-active {
+    height: 40px;
+  }
+  &.ng-hide-add {
+    height: 40px;
+  }
+  &.ng-hide-add.ng-hide-add-active {
+    height: 0px;
+  }
+}
+// .notifications-loader {
+//   display: inline-block;
+//   background: red;
+// }
+
+.reaction-image-holder {
+  position: relative;
+  img {
+    width: 32px;
+  }
+}

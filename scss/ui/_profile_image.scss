@@ -1,0 +1,38 @@
+.profile-image-holder {
+    height: 30px;
+    width: 30px;
+    border-radius: 3px;
+    overflow: hidden;
+    border: 1px solid $widgetborder;
+    div {
+      height: 100%;
+      width: 100%;
+      background-size: 100%;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-color: #413B4C;
+    }
+}
+
+
+  .profile-image-holder.comments {
+      &.notification-marker {
+        position: relative;
+      }
+      min-width: 55px;
+      min-height: 55px;
+      width: 55px;
+      height: 55px;
+      max-width: 55px;
+      max-height: 55px;
+      border: 2px solid white;
+      box-shadow: 0px 0px 0px 1px $greylight;
+      @include media(480px) {
+        max-width:46px;
+        width:46px;
+        min-width: 46px;
+        max-height:46px;
+        height:46px;
+        min-height: 46px;
+      }
+    } 

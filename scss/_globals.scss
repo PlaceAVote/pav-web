@@ -37,12 +37,8 @@ body {
       padding-left: 20px;
     }
     @include media(480px) {
-      padding-left: 15px;
-      padding-right: 15px;
-    }
-    @include media(320px) {
-      padding-left: 8px;
-      padding-right: 8px;
+      padding-left: 0px;
+      padding-right: 0px;
     }
   }
 }
@@ -110,3 +106,8 @@ input {
 .click {
   cursor: pointer;
 }
+
+textarea:focus::-webkit-input-placeholder { color:transparent; }
+textarea:focus:-moz-placeholder { color:transparent; }
+textarea:focus::-moz-placeholder { color:transparent; }
+textarea:focus:-ms-input-placeholder { color:transparent; }

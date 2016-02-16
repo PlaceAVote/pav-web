@@ -13,21 +13,21 @@
     display: flex;
     flex-direction: row;
     margin-bottom: 20px;
-    .user-img-border {
-      max-height: 55px;
-      @include media(480px) {
-        min-width:46px;
-      }
-    }
+    // .user-img-border {
+    //   max-height: 55px;
+    //   @include media(480px) {
+    //     min-width:46px;
+    //   }
+    // }
     .top-comment-body {
       margin-top: 0;
     }
-    .profile-img {
-      width: 50px;
-      img {
-        width: 100%;
-      }
-    }
+    // .profile-img {
+    //   width: 50px;
+    //   img {
+    //     width: 100%;
+    //   }
+    // }
   }
 }
 
@@ -91,11 +91,11 @@
     margin-top: 5px;
     margin-bottom: 5px;
     padding:10px;
-    font-family:$font-normal;
+    font-family:$font;
     @include medium();
     color: $black;
     box-sizing: border-box;
-    @include font-size(10px);
+    @include font-size(12px);
   }
   .reply-actions {
     float: right;
@@ -129,17 +129,12 @@
     width: 100%;
   }
 
-  .gen-user-img {
-    height: 30px;
-    width: 30px;
-    margin: 5px 40px 0 20px;
-    @include media(560px){
-    margin: 5px 20px 0 0;
-    }
-
-    img {
-      width: 100%;
-    }
+  .profile-image-holder {
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    height: 38px;
+    width: 38px;
   }
 
   textarea {
@@ -150,11 +145,12 @@
     border-radius: 3px;
     border: 1px solid $grey;
     color: $black;
+    font-family: $font;
     @include light();
     resize: none;
     line-height: 22px;
     @include font-size(14px);
-    padding: 12px 60px 12px 12px;
+    padding: 12px 60px 12px 55px;
     overflow-y:hidden;
     transition: all 0.3s ease;
 
@@ -183,8 +179,8 @@
 
 .btn-blank.comment-post-btn {
   position: absolute;
-  right: 30px;
-  bottom: 27px;
+  right: 19px;
+  top: 19px;
   line-height: 1;
   width: 50px;
   border-radius: 3px;

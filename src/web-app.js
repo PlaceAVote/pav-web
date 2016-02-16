@@ -18,6 +18,7 @@ var ProfileController = require('./controllers/profile_controller.js');
 var SettingsController = require('./controllers/settings_controller.js');
 var PasswordController = require('./controllers/password_controller.js');
 var WizardController = require('./controllers/wizard_controller.js');
+var IssuesController = require('./controllers/issues_controller.js');
 
 // Services
 var UserService = require('./services/user_service.js');
@@ -29,6 +30,8 @@ var CommentService = require('./services/comment_service.js');
 var NotificationService = require('./services/notification_service.js');
 var SearchService = require('./services/search_service.js');
 var PasswordService = require('./services/password_service.js');
+var FeedService = require('./services/feed_service.js');
+var IssueService = require('./services/issue_service.js');
 var QuestionService = require('./services/question_service.js');
 var MailService = require('./services/mail_service.js');
 
@@ -53,8 +56,8 @@ var notificationsDirective = require('./directives/notifications.js');
 var commentReplyNotificationDirective = require('./directives/comment_reply_notification.js');
 var trendsDirective = require('./directives/trends.js');
 var websiteFooter = require('./directives/footer.js');
-var autoResizeDirective = require('./directives/autoresize.js');
 var termsAndConditionsDirective = require('./directives/terms_and_conditions.js');
+var issuesPostDirective = require('./directives/issues_post.js');
 var wizardDirective = require('./directives/wizard.js');
 var sliderDirective = require('./directives/wizard_slider.js');
 var dragAndDropDirective = require('./directives/wizard_drag_and_drop.js');
@@ -62,12 +65,18 @@ var taxMultiDirective = require('./directives/wizard_tax_multi.js');
 var imageCropDirective = require('./directives/imagecrop.js');
 var fileReadDirective = require('./directives/fileread.js');
 var preloaderDirective = require('./directives/preloader.js');
+var issueDirective = require('./directives/issue.js');
+var feedEventsDirective = require('./directives/feed_events.js');
+var feedBillEventDirective = require('./directives/feed_bill_event.js');
+var infiniteScroll = require('./directives/infinite_scroll.js');
 
 // Thirdparty integrations
 var Facebook = require('./integrations/facebook.js');
 var slider = require('angularjs-slider');
 var draggable = require('angular-ui-tree');
-var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'pavDirectives', 'rzModule', 'ui.tree']);
+var textarea = require('angular-elastic');
+var moment = require('angular-moment');
+var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'pavDirectives', 'rzModule', 'ui.tree', 'monospaced.elastic', 'angularMoment']);
 
 
 app.config(['$routeProvider', function($routeProvider) {
@@ -131,6 +140,7 @@ app.config(['$routeProvider', function($routeProvider) {
 },]);
 
 
+
 // Services
 app.factory('facebookService', [Facebook]);
 app.factory('authService', ['$resource', AuthService]);
@@ -142,6 +152,8 @@ app.factory('voteService', ['$resource', 'authService', 'userService', VoteServi
 app.factory('notificationService', ['$resource', 'authService', NotificationService]);
 app.factory('searchService', ['$resource', 'authService', SearchService]);
 app.factory('passwordService', ['$resource', PasswordService]);
+app.factory('feedService', ['$resource', 'authService', 'userService', FeedService]);
+app.factory('issueService', ['$resource', 'authService', IssueService]);
 app.factory('questionService', ['$resource', 'authService', QuestionService]);
 app.factory('mailService', ['$resource', MailService]);
 
@@ -149,13 +161,13 @@ app.factory('mailService', ['$resource', MailService]);
 app.controller('TopicRegisterCtrl',['$scope','$location', 'userService', RegisterController]);
 app.controller('SignUpCtrl',['$rootScope','$scope','$location', 'userService', SignUpController]);
 app.controller('LoginCtrl',['$scope','$location', 'userService', 'authService', '$rootScope', '$routeParams', 'passwordService', LoginController]);
-app.controller('FeedCtrl', ['$scope', '$location', 'userService', 'billService', 'authService', '$rootScope', FeedController]);
-app.controller('BillCtrl', ['$scope', '$routeParams', 'billService', 'legislationService', 'voteService', 'commentService', '$location', 'authService', BillController]);
+app.controller('FeedCtrl', ['$scope', '$location', 'userService', 'billService', 'authService', 'feedService', '$rootScope','$timeout', FeedController]);
+app.controller('BillCtrl', ['$scope', '$routeParams', 'billService', 'legislationService', 'voteService', 'commentService', '$location', 'authService', '$rootScope', BillController]);
 app.controller('HeaderCtrl', ['$rootScope', '$scope', '$location', '$timeout', 'authService', 'userService', 'notificationService', 'searchService', '$window', HeaderController]);
 app.controller('ProfileCtrl', ['$scope', '$location', '$routeParams', 'authService', 'userService', ProfileController]);
 app.controller('SettingsCtrl', ['$scope', '$location', '$timeout', 'userService', 'authService', '$rootScope','$anchorScroll', SettingsController]);
 app.controller('PasswordResetCtrl', ['$scope','$location','$routeParams','passwordService','authService', PasswordController]);
-
+app.controller('IssuesCtrl', ['$scope', '$rootScope', 'searchService', '$timeout', 'issueService', IssuesController]);
 // Web controllers
 app.controller('HomeCtrl', ['$scope', '$location','$anchorScroll', 'userService', '$rootScope', 'authService', HomeController]);
 app.controller('FaqCtrl', ['$scope', '$location', FaqController]);
@@ -164,6 +176,9 @@ app.controller('PressCtrl', ['$scope', '$location', PressController]);
 app.controller('MenuCtrl', ['$scope', '$location', '$routeParams', MenuController]);
 app.controller('WizardCtrl', ['$scope', 'questionService', WizardController]);
 app.controller('ContactCtrl', ['$scope', '$timeout', 'mailService', ContactController]);
+
+// Values
+app.value('THROTTLE_MILLISECONDS', null);
 
 // Directives
 app.directive('websiteNav', [websiteNav]);
@@ -181,9 +196,10 @@ app.directive('notifications', ['$location', notificationsDirective]);
 app.directive('commentreply', ['$location', commentReplyNotificationDirective]);
 app.directive('trends', ['$location',trendsDirective]);
 app.directive('websiteFooter', [websiteFooter]);
-app.directive('autoResize', [autoResizeDirective]);
 app.directive('searchBar', ['$sce' ,'$location', search]);
 app.directive('termsAndConditions', [termsAndConditionsDirective]);
+app.directive('issuesPost', [issuesPostDirective]);
+app.directive('issue', ['$location', 'issueService', issueDirective]);
 app.directive('wizard', [wizardDirective]);
 app.directive('slider', ['$timeout', sliderDirective]);
 app.directive('dad', [dragAndDropDirective]);
@@ -191,3 +207,6 @@ app.directive('tax', ['$filter', taxMultiDirective]);
 app.directive('imageCrop', [imageCropDirective]);
 app.directive('fileread', [fileReadDirective]);
 app.directive('loader', ['$location', preloaderDirective]);
+app.directive('feedEvents', [feedEventsDirective]);
+app.directive('feedBillEvent', ['$location', feedBillEventDirective]);
+app.directive('infiniteScroll', ['$rootScope', '$window', '$interval', 'THROTTLE_MILLISECONDS', infiniteScroll]);

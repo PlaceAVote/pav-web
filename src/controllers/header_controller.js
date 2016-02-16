@@ -55,17 +55,48 @@ HeaderCtrl.prototype.intercomShutdown = function(user) {
 
 HeaderCtrl.prototype.getNotifications = function() {
   var that = this;
-  this.notificationService.getNotifications(function(err, res) {
+  this.notificationService.getNotifications(undefined, function(err, res) {
     if (err) {
       return;
     }
-    that.notifications = res;
-    for (var i = 0; i < that.notifications.results.length; i++) {
-      if (!that.notifications.results[i].read) {
+    that.notifications = res.results;
+    that.newTimestamp = res.last_timestamp;
+    for (var i = 0; i < that.notifications.length; i++) {
+      if (!that.notifications[i].read) {
         that.unread++;
       }
     }
     title.notifications(that.unread);
+  });
+};
+
+HeaderCtrl.prototype.notificationCheck = function() {
+  var that = this;
+  if (!this.showNotifications) {
+    return;
+  }
+  if (this.loadingScroll || this.newTimestamp === this.lastLoaded) {
+    return;
+  }
+  this.loadingScroll = true;
+  this.notificationService.getNotifications(this.newTimestamp, function(err, response) {
+    that.loadingScroll = false;
+    if (!err) {
+      if (response.last_timestamp === null) {
+
+        for (var i in response.results) {
+          that.notifications.push(response.results[i]);
+        }
+        that.newTimestamp = null;
+        that.lastLoaded = null;
+      } else {
+        that.lastLoaded = that.newTimestamp;
+        that.newTimestamp = response.last_timestamp;
+        for (var x in response.results) {
+          that.notifications.push(response.results[x]);
+        }
+      }
+    }
   });
 };
 
@@ -80,7 +111,7 @@ HeaderCtrl.prototype.startNotifications = function() {
         that.notificationReceived = true;
         that.unread++;
         title.notifications(that.unread);
-        that.newNotification = result;
+        that.notifications.unshift(result);
       });
     }
   });
@@ -96,6 +127,9 @@ HeaderCtrl.prototype.readEvent = function(res) {
       if (!err) {
         res.read = true;
         that.unread--;
+        if (that.unread < 0) {
+          that.unread = 0;
+        }
         title.notifications(that.unread);
       } else if (err) {
         console.log(err);
@@ -139,11 +173,14 @@ HeaderCtrl.prototype.hideNotifications = function() {
 
 HeaderCtrl.prototype.notify = function() {
   var that = this;
-  if (this.notifications.results.length < 1 && this.unread < 1) {
+  if (this.notifications.length < 1 && this.unread < 1) {
     return;
   }
   that.hideDropDown();
   that.showNotifications = that.showNotifications ? false : true;
+  if (that.showNotifications) {
+    that.unread = 0;
+  }
 };
 
 HeaderCtrl.prototype.logout = function() {

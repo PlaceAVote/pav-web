@@ -4,6 +4,7 @@ module.exports = function($location) {
     replace: true,
     scope: {
       data: '=',
+      refresh: '=',
     },
     templateUrl: 'partials/trends.html',
     link: function(scope) {

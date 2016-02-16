@@ -35,13 +35,17 @@
                 </div>
 
     <section class="top-comments" ng-show="bill.forComment.author">
-  		<div class="card" loader loader-context="bill.topLoaded">
+  		<div class="card padding-small" loader loader-context="bill.topLoaded">
   			<h1>Top Comment In Favor</h1>
-  			<hr />
+  			<hr class="margin-top-small margin-bottom-small" />
         <aside class="row-layout loaded" ng-show="bill.forComment.author">
-  			<div class="user-img-border">
+<!--   			<div class="user-img-border">
           <img ng-src="{{bill.forComment.author_img_url}}" />
-  			</div>
+  			</div> -->
+        <div class="profile-image-holder comments click">
+          <div ng-style="{'background-image': 'url(' + bill.forComment.author_img_url + ')'}">
+          </div>
+        </div>
   			<div class="top-comment-body" ng-show="bill.hasForComment">
           <h2><a href="#/profile/{{bill.forComment.author}}">{{bill.forComment.author_first_name}}</a></h2> <section class="comment-vote no-reply"><span ng-class="{'score-down': comment.score < 0, 'score-none': bill.forComment.score == 0}">{{bill.forComment.score}}</span><i class="icon-thumbs-up thumbs" ng-class="{'score-up': bill.forComment.liked == true}" ng-click="bill.forComment.like(bill.commentService)"></i><i class="icon-thumbs-down thumbs" ng-class="{'score-down': bill.forComment.disliked == true}" ng-click="bill.forComment.dislike(bill.commentService)"></i></section>
           <p>{{bill.forComment.body}}</p>
@@ -51,12 +55,13 @@
         </div>
         </aside>
   		</div>
-      <div class="card" loader loader-context="bill.topLoaded">
+      <div class="card padding-small" loader loader-context="bill.topLoaded">
         <h1>Top Comment Opposed</h1>
-        <hr />
+        <hr class="margin-top-small margin-bottom-small" />
         <aside class="row-layout loaded" ng-show="bill.againstComment.author">
-          <div class="user-img-border">
-            <img ng-src="{{bill.againstComment.author_img_url}}" />
+          <div class="profile-image-holder comments click">
+            <div ng-style="{'background-image': 'url(' + bill.againstComment.author_img_url + ')'}">
+            </div>
           </div>
           <div class="top-comment-body" ng-show="bill.hasAgainstComment">
             <h2><a href="#/profile/{{bill.againstComment.author}}">{{bill.againstComment.author_first_name}}</a></h2> <section class="comment-vote opposed no-reply"><span ng-class="{'red': bill.againstComment.score < 0}">{{bill.againstComment.score}}</span><i class="icon-thumbs-up thumbs" ng-class="{'score-up': bill.againstComment.liked == true}" ng-click="bill.againstComment.like(bill.commentService)"></i><i class="icon-thumbs-down thumbs" ng-class="{'score-down': bill.againstComment.disliked == true}" ng-click="bill.againstComment.dislike(bill.commentService)"></i></section>
@@ -70,62 +75,64 @@
 
     </section>
     <section class="bill-spec">
-		<div class="card bill-sponsor" loader loader-context="bill.body.billData.sponsor.name">
-      <h1>Bill Sponsor</h1>
-			<hr />
-      <aside class="row-layout loaded" ng-show="bill.body.billData.sponsor.name">
-			<div class="senator-img">
-        <img ng-src="{{bill.legislator.getImageUrl()}}" />
-			</div>
-			<div class="bill-sponsor-info">
-        <h2>{{bill.body.billData.sponsor.name}}</h2>
-        <h3>{{bill.legislator.properties.current_term.party}}</h3>
-			</div>
-      </aside>
-		</div>
+  		<div class="card padding-small bill-sponsor" loader loader-context="bill.body.billData.sponsor.name">
+        <h1>Bill Sponsor</h1>
+  			<hr class="margin-top-small" />
+        <aside class="row-layout loaded" ng-show="bill.body.billData.sponsor.name">
+  			<div class="senator-img">
+          <img ng-src="{{bill.legislator.getImageUrl()}}" />
+  			</div>
+  			<div class="bill-sponsor-info">
+          <h2>{{bill.body.billData.sponsor.name}}</h2>
+          <h3>{{bill.legislator.properties.current_term.party}}</h3>
+  			</div>
+        </aside>
+  		</div>
 
-		<div class="card bill-description">
-			<h1>Bill Summary</h1>
-			<hr />
-      <p ng-bind-html="bill.body.getSummary()"></p>
-    <div ng-click="bill.readmore = true" class="readmore">
-        <p>Read More</p>
-      </div>
-		</div>
+  		<div class="card padding-small bill-description">
+  			<h1>Bill Summary</h1>
+  			<hr class="margin-top-small margin-bottom-small" />
+        <div class="preview-container">
+        <p ng-bind-html="bill.body.getSummary()"></p>
+        </div>
+      <div ng-click="bill.readmore = true" class="readmore">
+          <p>Read More</p>
+        </div>
+  		</div>
     </section>
 
-    <div class="card bill-comments" loader loader-context="bill.comments">
+    <div class="card padding-small bill-comments" loader loader-context="bill.comments">
       <h1>COMMENTS</h1>
-      <hr />
-    <!-- <div class="pre-loader" ng-hide="bill.comments"></div> -->
-
+      <hr class="margin-top-small margin-bottom-small" />
     <div ng-show="bill.commentMessage" class="card-message">
       <h2>Be the first to comment on this bill.</h2>
     </div>
       <comments ng-show="bill.comments" comments='bill.comments'></comments>
 		</div>
 
-    <div class="comment-create card">
+    <div class="comment-create padding-small card">
+    <div class="profile-image-holder">
+      <div ng-style="{'background-image': 'url(' + bill.rs.user.img_url + ')'}">
+      </div>
+    </div>
       <form ng-submit="bill.postComment()">
-        <div class="gen-user-img">
-        <img src="//cdn.placeavote.com/img/comments/user.png" />
-        </div>
-        <textarea name='commentOnBillBox' rows="1" ng-model='bill.commentBody' placeholder='Write your comment here' auto-resize></textarea>
+        <textarea name='commentOnBillBox' rows="1" ng-model='bill.commentBody' placeholder='Write your comment here' msd-elastic></textarea>
         <input type="submit" value="Post" class="comment-post-btn btn-blank" />
       </form>
     </div>
 
 
-<section ng-switch="bill.chartShow" class="row bill-stats-vote l-12">
-		<div ng-switch-when="true" class="card bill-stats l-6" >
+<section ng-switch="bill.chartShow" class="row tablet-col bill-stats-vote l-12">
+		<div ng-switch-when="true" class="card padding-small bill-stats l-6" >
     <h1>Statistics</h1>
-    <hr />
+    <hr class="margin-top-small" />
     <status-chart data="bill.stats"></status-chart>
 		</div>
-    <div ng-class="{'row no-chart': !bill.chartShow, 'col': bill.chartShow}" class="l-12 vote-btns-stats">
-    <div class="card vote-widget">
+    <div ng-class="{'row no-chart': !bill.chartShow, 'col': bill.chartShow}" class="l-12 vote-btns-stats tablet-col">
+
+    <div class="card padding-small vote-widget">
     <h1>Vote Now</h1>
-    <hr />
+    <hr class="margin-top-small margin-bottom-small" />
     <aside class="row" ng-cloak ng-hide="bill.hasVoted">
       <button class="btn-green l-6" ng-click="bill.showVoteModal(true)"><span class="icon-arrow-up"></span> Vote In Favor </button>
       <button class="btn-red l-6" ng-click="bill.showVoteModal(false)"><span class="icon-arrow-down"></span> Vote Against </button>
@@ -135,19 +142,19 @@
       </section>
     </div>
 
-    <div class="card current-vote-stats">
+    <div class="card column padding-small padding-bottom-none margin-bottom-small" style="height: 150px; max-height: 150px;">
     <h1>Current Voting</h1>
-    <hr />
-      <aside class="row">
-      <div class="l-6">
-      <h2>IN FAVOR:</h2>
-      <p>{{bill.currentVotes.yesPercentage}} &#37;</p>
+    <hr class="margin-top-small margin-bottom-small" />
+      <div class="row" style="height: 100%;">
+        <div class="l-6 middle h-center col">
+        <h2 class="text-center">IN FAVOR:</h2>
+        <p class="green text-center bold">{{bill.currentVotes.yesPercentage}} &#37;</p>
+        </div>
+        <div class="l-6 middle h-center col">
+        <h2 class="text-center">OPPOSED:</h2>
+        <p class="red text-center bold">{{bill.currentVotes.noPercentage}} &#37;</p>
+        </div>
       </div>
-      <div class="l-6">
-      <h2>OPPOSED:</h2>
-      <p>{{bill.currentVotes.noPercentage}} &#37;</p>
-      </div>
-      </aside>
     </div>
     </div>
   </section>
@@ -155,7 +162,7 @@
 
 
    <section class="modal" ng-show='bill.showVote' >
-       <div class="card vote-confirm" ng-hide='bill.userVoted' >
+       <div class="card padding-small vote-confirm" ng-hide='bill.userVoted' >
        <img ng-click="bill.hideVoteModal()" class="close" src="//cdn.placeavote.com/img/close-widget-black.png" />
         <h5>Please confirm your vote</h5>
         <div class='vote-modal'>
@@ -166,7 +173,7 @@
             </div>
         </div>
         </div>
-    <div class="card vote-confirmed" ng-show='bill.userVoted'>
+    <div class="card padding-small vote-confirmed" ng-show='bill.userVoted'>
           <img ng-click="bill.hideVoteModal()" class="close" src="//cdn.placeavote.com/img/close-widget-black.png" />
           <div class="vote-confirmed-header">
           <img class="logo-modal" src="//cdn.placeavote.com/img/mark_full_color.svg" />

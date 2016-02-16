@@ -1,33 +1,52 @@
-<banner user="profile.user" profile="profile"></banner>
+<banner user="profile.user" toggle="profile.showFollowStats" followers="profile.showFollowers" following="profile.showFollowing" profile="profile"></banner>
 <div class="app">
 	<div class="app-body">
-		<div class="timeline-layout" loader loader-context="profile.timeline.timeline">
-      <div class="message" ng-hide="profile.hasActivity">
+		<div class="timeline-layout">
+      <div class="message" ng-show="profile.timeline.timeline.length < 1">
         <h2>You have no activity</h2>
       </div>
-      <div class="row col-m l-12">
-      			<div ng-show="profile.hasActivity" class="activity-container">
+      <div class="row tablet-col l-12">
+      			<div ng-show="profile.hasActivity" class="activity-container" ng-class="{'tablet-leave-canvas-left': profile.showFollowStats}">
               <h1 class="activity-label">Recent Activity</h1>
               <timeline timeline="profile.timeline.timeline" profile="profile"></timeline>
+              <div class="row timeline-scroll-loader" ng-show="profile.loadingScroll" loader loader-context="profile.loadingScroll" truthy>
+              </div>
+              <h1 class="activity-label" ng-show="profile.timeLineEventMessage">{{profile.timeLineEventMessage}}</h1>
             </div>
 
-          <div class="follower-container">
-          	<div ng-show="profile.hasFollowers" class="card followers">
+          <div class="follower-container mobile-margin-top-large" ng-class="{'tablet-enter-canvas-right': profile.showFollowStats}">
+          	<div ng-show="profile.hasFollowers && profile.showFollowers" class="card padding-small followers">
           		<h1>Followers</h1>
-            	<hr />
-              
-                <div class="comment-container" ng-repeat="follower in profile.followers">
+            	<hr class="margin-top-small" />
+                <div class="comment-container" ng-repeat="follower in profile.currentFollowers">
                   <section class="comment">
-                  <img ng-src="{{follower.img_url}}" class="user-img-border" alt="{{follower.first_name}}">
+                  <div class="profile-image-holder comments click">
+                    <div ng-style="{'background-image': 'url(' + follower.img_url + ')'}">
+                    </div>
+                  </div>
                   <div class="top-comment-body">
-                  <h2><a href="#/profile/{{follower.user_id}}">{{follower.first_name}} {{follower.last_name}}</a></h2>
-                  <p>{{follower.follower_count}}</p>
-
-                  <!-- TODO: Don't have how many followers yet returned from db -->
-                </div>
+                    <h2><a href="#/profile/{{follower.user_id}}">{{follower.first_name}} {{follower.last_name}}</a></h2>
+                    <p>{{follower.follower_count}}</p>
+                  </div>
                 </section>
                 </div>
-             
+            </div>
+
+            <div ng-show="profile.isFollowing && profile.showFollowing" class="card padding-small followers">
+              <h1>Following</h1>
+              <hr class="margin-top-small" />
+                <div class="comment-container" ng-repeat="follower in profile.currentFollowing">
+                  <section class="comment">
+                  <div class="profile-image-holder comments click">
+                    <div ng-style="{'background-image': 'url(' + follower.img_url + ')'}">
+                    </div>
+                  </div>
+                  <div class="top-comment-body">
+                    <h2><a href="#/profile/{{follower.user_id}}">{{follower.first_name}} {{follower.last_name}}</a></h2>
+                    <p>{{follower.follower_count}}</p>
+                  </div>
+                </section>
+                </div>
             </div>
           </div>
       </div>

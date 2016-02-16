@@ -36,6 +36,8 @@
 			position: static;
 			width: 80px;
 			height: 80px;
+      min-width: 80px;
+      min-height: 80px;
 			display: block;
 			}
 		}
@@ -127,7 +129,8 @@
 			display: inline-block;
 			height: 28px;
 			@include font-size(10px);
-			line-height:1;
+			line-height:28px;
+      padding: 0px;
 			// vertical-align: middle;
 			width: 130px !important;
 		}
@@ -151,7 +154,14 @@
 	@include media(900px) {
 		width: 100% !important;
 		margin-bottom: 40px;
+    display: none;
 	}
+  &.tablet-enter-canvas-right {
+     display: block;
+    @include media(480px) {
+     top: -75px;   
+    }
+  }
 }
 
 .profile-stats {
@@ -164,4 +174,12 @@
 		@include font-size(12px);
 		@include light();
 	}
+}
+
+.followers-mobile {
+  display: block;
+  position:absolute;
+  right: 0px;
+  width: 100%;
+  top: 0px;
 }

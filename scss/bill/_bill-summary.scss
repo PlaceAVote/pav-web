@@ -1,10 +1,5 @@
 .bill-description.card {
-  max-height: 196px;
-  overflow: hidden;
   position: relative;
-  // h1 {
-  //   margin-bottom: 13px;
-  // }
   .readmore {
     position: absolute;
     bottom: 0;
@@ -16,11 +11,15 @@
     background: white;
     box-shadow: 0px -23px 42px white;
     cursor: pointer;
-    p {
+      p {
       @include font-size(12px);
       @include medium();
       color: $blue;
-    }
+    }    
+  }
+  .preview-container {
+    overflow:hidden;
+    max-height: 96px;
   }
 }
 .modal {
@@ -39,6 +38,7 @@
         @include light();
         @include font-size(20px);
         color: $black;
+        line-height: 26px;
         padding-bottom: 20px;
     }
     section {

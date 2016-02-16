@@ -56,13 +56,15 @@ describe('Notification Service', function() {
     streamer.onerror('ERROR');
   });
   it('Returns data from the server', function(done) {
-    var message = '{"data": "1"}';
-    var data = {data: 1};
+    var message = {data: {type: 'commentreply', data: 1}};
+    // message.data = '{"data": "1", "type": "commentreply"}';
+    var data = {data: 1, type: 'commentreply'};
+
     var subject = new NotificationService(undefined, authService, options);
     subject.stream(function(error, message){
-      expect(message).to.eql(1);
-      done();
+      streamer.onmessage(message);
+      expect(message.data.data).to.eql(1);
     });
-    streamer.onmessage(data);
+    done();
   });
 });

@@ -1,10 +1,14 @@
 <div class="comment-container">
 
         <section class="comment" ng-attr-id="{{comment.selected}}">
-          <div class="user-img-border">
+<!--           <div class="user-img-border">
             <img ng-src='{{comment.author_img_url}}' />
           </div>
-
+ -->        
+            <div class="profile-image-holder comments click">
+              <div ng-style="{'background-image': 'url(' + comment.author_img_url + ')'}">
+            </div>
+          </div>
             <div class="top-comment-body">
 
             <h2><a href="#/profile/{{comment.author}}">{{comment.author_first_name}}</a></h2>
@@ -13,7 +17,7 @@
 
             <p>{{comment.body}}</p>
             <div class="reply-comment" ng-show="comment.replyInput">
-            <textarea type="text" placeholder="Reply" ng-model="comment.replyText" rows="1" auto-resize></textarea>
+            <textarea type="text" placeholder="Reply" ng-model="comment.replyText" rows="1" msd-elastic></textarea>
             <div class="reply-actions">
              <span class="btn-blank" ng-click="comment.hideReplyInput()">CANCEL</span>
             <span class="btn-green" ng-click="comment.reply(comment.bill_id, commentService)">POST</span>
