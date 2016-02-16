@@ -1,15 +1,18 @@
 <div class="col">
-  <p class="margin-bottom-large">Find out where your taxes go by adding your household income.</p>
+  <p class="margin-bottom-large margin-top-medium">Find out where your taxes go by adding your household income.</p>
   <div>
   <rzslider rz-slider-model="question.income" rz-slider-options="question.sliderConfig"></rzslider>
   </div>
-  <!-- <input type="text" ng-model="question.zip" placeholder="20500" /> -->
+  <div class="row h-center padding-top-large">
+    <p class="middle margin-right-small">Add in your postal code</p>
+    <input class="middle margin-left-small input-text padding-left-small" type="text" ng-model="question.zip" placeholder="20500" />
+  </div>
   <div ng-show="question.sectors" class="spending-table margin-top-medium">
     <div ng-repeat="sector in question.sectors" class="row spending-table-row tablet-col">
       <h3 class="h-left tablet-h-center text-center middle">{{sector.name}}</h3>
       <div class="h-right tablet-h-center tablet-margin-left-none row tablet-col m-8 s-12">
         <h3 class="text-left middle bold lightblue margin-right-medium tablet-margin-right-none margin-right-medium">{{sector.contribution | currency:undefined:0}} Per month</h3>
-        <button class="blue-button medium-button">CHANGE THIS</button>
+        <button class="blue-button medium-button click" ng-click="goToBill(sector.bill_id)">CHANGE THIS</button>
       </div>
     </div>
   </div>

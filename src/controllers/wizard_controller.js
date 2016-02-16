@@ -1,4 +1,5 @@
 var taxCalculator = require('../models/tax_calculator.js')();
+var TaxMultiPart = require('../models/tax_multi_part_question.js');
 
 function WizardController($scope, questionService) {
   var that = this;
@@ -27,6 +28,13 @@ WizardController.prototype.loadQuestions = function(callback) {
       callback();
       return;
     }
+    var multiPart = new TaxMultiPart({
+      question_id: '1004',
+      question_type: 'tax_multi',
+      extension: taxCalculator,
+      scope: that.scope,
+    });
+    questions.push(multiPart);    
     that.questions = questions;
     currentQuestion = that.getNextQuestion();
     callback(currentQuestion);
@@ -47,8 +55,7 @@ WizardController.prototype.getNextQuestion = function() {
     return null;
   }
   this.currentQuestionIndex = this.answered.length + this.skipped.length;
-
-  if (this.questions.length === this.currentQuestionIndex) {
+  if (this.questions.length === this.currentQuestionIndex) {   
     this.sendQuestions();
     return null;
   }
@@ -58,6 +65,11 @@ WizardController.prototype.getNextQuestion = function() {
 
 WizardController.prototype.answerQuestion = function() {
   var question = this.currentQuestion.transform();
+  console.log(question);
+  if (question.answer[1] === '') {
+      this.setError('Please enter zip code');
+      return;
+    }
   this.answered.push(question);
   this.currentQuestion = this.getNextQuestion();
 };
@@ -65,6 +77,10 @@ WizardController.prototype.answerQuestion = function() {
 WizardController.prototype.skipQuestion = function() {
   this.skipped.push(this.currentQuestion);
   this.currentQuestion = this.getNextQuestion();
+};
+
+WizardController.prototype.setError = function(message) {
+  this.errorMessage = message;
 };
 
 module.exports = WizardController;

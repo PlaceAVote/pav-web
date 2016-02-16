@@ -1,4 +1,4 @@
-module.exports = function($filter) {
+module.exports = function($filter, $location) {
   return {
     restrict: 'E',
     scope: {
@@ -6,6 +6,7 @@ module.exports = function($filter) {
     },
     templateUrl: 'partials/wizard_tax_multi.html',
     link: function(scope, el, attr) {
+      scope.location = $location;
       scope.$watch('question', function(n, o) {
         if (n !== undefined) {
           scope.question.sliderConfig = {
@@ -20,6 +21,10 @@ module.exports = function($filter) {
           };
         }
       });
+
+      scope.goToBill = function(billId) {
+        scope.location.path('bill/' + billId);
+      };
     },
   };
 };

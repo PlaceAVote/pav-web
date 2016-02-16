@@ -42,6 +42,7 @@ function getAllMonthlyContributions(income) {
   for (var i = 0; i < sects.length; i++) {
     var sector = sects[i];
     var monthly = {
+      bill_id: sectors[sector].bill_id,
       name: sectors[sector].name,
       contribution: monthlyContributionToSector(income, sector),
     };

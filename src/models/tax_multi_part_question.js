@@ -34,7 +34,7 @@ TaxMultiPart.prototype.update = function() {
 TaxMultiPart.prototype.transform = function() {
   return {
     question_id: this.id,
-    answers: [this.income, this.zip],
+    answer: [this.income, this.zip],
   };
 };
 
