@@ -38,5 +38,10 @@ TaxMultiPart.prototype.transform = function() {
   };
 };
 
+// TaxMultiPart.prototype.isValid = function() {
+//   return null if valid.
+//   return error message.
+// }
+
 module.exports = TaxMultiPart;
 

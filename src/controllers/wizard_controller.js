@@ -34,7 +34,7 @@ WizardController.prototype.loadQuestions = function(callback) {
       extension: taxCalculator,
       scope: that.scope,
     });
-    questions.push(multiPart);    
+    questions.push(multiPart);
     that.questions = questions;
     currentQuestion = that.getNextQuestion();
     callback(currentQuestion);
@@ -55,7 +55,7 @@ WizardController.prototype.getNextQuestion = function() {
     return null;
   }
   this.currentQuestionIndex = this.answered.length + this.skipped.length;
-  if (this.questions.length === this.currentQuestionIndex) {   
+  if (this.questions.length === this.currentQuestionIndex) {
     this.sendQuestions();
     return null;
   }
@@ -64,12 +64,15 @@ WizardController.prototype.getNextQuestion = function() {
 };
 
 WizardController.prototype.answerQuestion = function() {
+  var err;
+  if (this.currentQuestion.isValid) {
+    err = this.currentQuestion.isValid();
+  }
+  if (err) {
+    this.setError(err);
+    return;
+  }
   var question = this.currentQuestion.transform();
-  console.log(question);
-  if (question.answer[1] === '') {
-      this.setError('Please enter zip code');
-      return;
-    }
   this.answered.push(question);
   this.currentQuestion = this.getNextQuestion();
 };

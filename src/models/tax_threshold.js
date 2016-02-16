@@ -104,16 +104,6 @@ var sectors =  {
     name: 'Food & Agriculture',
     bill_id: 'hr4226-114',
   },
-  // other: {
-  //   percentage: 1.54,
-  //   name: 'Other',
-  //   bill_id: '',
-  // },
-  // debt: {
-  //   percentage: 6.04,
-  //   name: 'Debt',
-  //   bill_id: '',
-  // },
 };
 
 module.exports = {

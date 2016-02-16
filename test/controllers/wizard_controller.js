@@ -51,7 +51,7 @@ describe('Wizard', function() {
       var mockQuestion = {
         transform: function(params) {
           called = true;
-          return 'hello';
+            return 'hello';
         },
       };
       var subject = new Wizard();
