@@ -94,6 +94,6 @@ WizardController.prototype.setError = function(message) {
 
 WizardController.prototype.closeWizard = function() {
   this.rs.user.newUser = false;
-}
+};
 
 module.exports = WizardController;
