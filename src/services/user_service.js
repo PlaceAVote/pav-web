@@ -3,11 +3,13 @@ var config = require('../config/endpoints.js');
 var strftime = require('strftime');
 var TimelineResponseFactory = require('../factories/timeline_response_factory.js');
 
-function UserService($resource, facebookService, authService) {
+function UserService($resource, facebookService, authService, userStore) {
   this.createdFB = false;
+  users = userStore || {};
   var loginWithFacebook = function(callback) {
     var that = this;
     var onLoad = function(resource) {
+      users.me = resource;
       authService.setAuth(resource.token);
       callback(undefined, resource);
     };
@@ -90,6 +92,7 @@ function UserService($resource, facebookService, authService) {
     var that = this;
 
     var onLoad = function(user) {
+      users.me = user;
       authService.setAuth(user.token);
       callback(undefined, user);
     };
@@ -112,6 +115,8 @@ function UserService($resource, facebookService, authService) {
   var login = function(user, callback) {
 
     var onLoad = function(response) {
+
+      users.me = response;
       authService.setAuth(response.token);
       return callback(undefined, response);
     };
@@ -134,6 +139,7 @@ function UserService($resource, facebookService, authService) {
       callback({status: 401, message: 'No Auth Token'});
       return;
     }
+    // This has no effect in actual product.
     if (this.user && this.user.loadedFromServer) {
       return callback(undefined, this.user);
     }
@@ -145,6 +151,10 @@ function UserService($resource, facebookService, authService) {
       return callback(err);
     };
     var onLoad = function(result) {
+      // Be wary of this.
+      if (!users || !users.me) {
+        users.me = result;
+      }
       this.user = User.createFromJson(result);
       return callback(undefined, this.user);
     };
@@ -397,6 +407,19 @@ function UserService($resource, facebookService, authService) {
     resource.execute(body,onLoad, onError);
   };
 
+  var isUserMe = function(id, users) {
+    if (id === 'me') {
+      return true;
+    }
+    if (!users) {
+      return false;
+    }
+    if (users.me && users.me.user_id === id) {
+      return true;
+    }
+    return false;
+  };
+
   return {
     createUser: createUser,
     getUser: getUser,
@@ -418,6 +441,9 @@ function UserService($resource, facebookService, authService) {
     follow: follow,
     unfollow: unfollow,
     profilePicture: profilePicture,
+    isUserMe: function(id) {
+      return isUserMe(id, users);
+    },
   };
 }
 

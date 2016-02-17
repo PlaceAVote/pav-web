@@ -491,7 +491,7 @@ describe("User Service", function() {
     settingsItem.city = "Berlin";
     settingsItem.img_url = "stefan.png"
     settingsItem.user_id = "X77";
-    
+
     it('returns error if user has no access token', function(done) {
       var auth = {
         getAccessToken: function() {
@@ -734,7 +734,6 @@ describe("User Service", function() {
       }
       var subject = new UserService(userResource, undefined, authService);
       subject.getUserTimeline(undefined, 'me', function(err, response){
-        console.log('TIMELINE!!', err, response);
         expect(err).to.eql(undefined);
         expect(response.last_timestamp).to.eql('1234');
         done();
@@ -1022,6 +1021,50 @@ describe("User Service", function() {
           expect(err.error).to.equal('ERROR');
         });
       });
+  });
+  describe('isUserMe', function() {
+
+    it('returns false if there are no users', function() {
+      var subject = new UserService(null, null, null, null);
+      var isMe = subject.isUserMe('10293');
+      expect(isMe).to.eql(false);
+    });
+
+    it('returns false if a user is not me', function() {
+      var users = {
+        '1000': {},
+        me: {
+          user_id: '999',
+        }
+      };
+      var subject = new UserService(null, null, null, users);
+      var isMe = subject.isUserMe('10293');
+      expect(isMe).to.eql(false);
+
+      isMe = subject.isUserMe('1000');
+      expect(isMe).to.eql(false);
+
+      isMe = subject.isUserMe('0');
+      expect(isMe).to.eql(false);
+    });
+
+    it('returns true if a user is not me', function() {
+      var users = {
+        'me': {
+          user_id: '10293',
+        },
+        '1000': {},
+      };
+      var subject = new UserService(null, null, null, users);
+      var isMe = subject.isUserMe('10293');
+      expect(isMe).to.eql(true);
+    });
+
+    it('returns true when id is me', function() {
+      var subject = new UserService(null, null, null, null);
+      var isMe = subject.isUserMe('me');
+      expect(isMe).to.eql(true);
+    });
   });
 });
 
