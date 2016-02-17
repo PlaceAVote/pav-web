@@ -62,8 +62,10 @@ HeaderCtrl.prototype.getNotifications = function() {
     that.notifications = res.results;
     that.newTimestamp = res.last_timestamp;
     for (var i = 0; i < that.notifications.length; i++) {
-      if (!that.notifications[i].read) {
-        that.unread++;
+      if (that.notifications[i].hasOwnProperty('read')) {
+        if(!that.notifications[i].read) {
+          that.unread++;
+        }
       }
     }
     title.notifications(that.unread);
@@ -180,6 +182,7 @@ HeaderCtrl.prototype.notify = function() {
   that.showNotifications = that.showNotifications ? false : true;
   if (that.showNotifications) {
     that.unread = 0;
+    title.notifications(that.unread);
   }
 };
 
