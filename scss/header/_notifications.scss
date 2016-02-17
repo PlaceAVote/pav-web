@@ -79,9 +79,6 @@
       right:48px;
       background: $white;
       border:1px solid $grey;
-      &::-webkit-scrollbar { 
-          display: none; 
-      }
       @include shadow();
       @include media(1200px) {
         right: 63px;
@@ -94,6 +91,9 @@
         width:300px;
         overflow: scroll;
         // position: relative;
+        &::-webkit-scrollbar { 
+          display: none; 
+        }
         .notification-event {
           padding: 10px;
           display: flex;
