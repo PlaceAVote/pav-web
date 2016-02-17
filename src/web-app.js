@@ -168,13 +168,14 @@ app.controller('ProfileCtrl', ['$scope', '$location', '$routeParams', 'authServi
 app.controller('SettingsCtrl', ['$scope', '$location', '$timeout', 'userService', 'authService', '$rootScope','$anchorScroll', SettingsController]);
 app.controller('PasswordResetCtrl', ['$scope','$location','$routeParams','passwordService','authService', PasswordController]);
 app.controller('IssuesCtrl', ['$scope', '$rootScope', 'searchService', '$timeout', 'issueService', IssuesController]);
+app.controller('WizardCtrl', ['$scope', 'questionService','$rootScope', WizardController]);
+
 // Web controllers
 app.controller('HomeCtrl', ['$scope', '$location','$anchorScroll', 'userService', '$rootScope', 'authService', HomeController]);
 app.controller('FaqCtrl', ['$scope', '$location', FaqController]);
 app.controller('TeamCtrl', ['$scope', '$location', TeamController]);
 app.controller('PressCtrl', ['$scope', '$location', PressController]);
 app.controller('MenuCtrl', ['$scope', '$location', '$routeParams', MenuController]);
-app.controller('WizardCtrl', ['$scope', 'questionService', WizardController]);
 app.controller('ContactCtrl', ['$scope', '$timeout', 'mailService', ContactController]);
 
 // Values
@@ -203,7 +204,7 @@ app.directive('issue', ['$location', 'issueService', issueDirective]);
 app.directive('wizard', [wizardDirective]);
 app.directive('slider', ['$timeout', sliderDirective]);
 app.directive('dad', [dragAndDropDirective]);
-app.directive('tax', ['$filter', '$location', taxMultiDirective]);
+app.directive('tax', ['$filter', '$location','$anchorScroll',taxMultiDirective]);
 app.directive('imageCrop', [imageCropDirective]);
 app.directive('fileread', [fileReadDirective]);
 app.directive('loader', ['$location', preloaderDirective]);
