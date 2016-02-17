@@ -98,6 +98,9 @@ IssuesController.prototype.deleteAttachment = function(i) {
 
 IssuesController.prototype.validateUrl = function() {
   var that = this;
+  if (!this.url) {
+    return;
+  }
   var r = new RegExp('^(http[s]?:\\/\\/(www\\.)?|ftp:\\/\\/(www\\.)?|www\\.){1}([0-9A-Za-z-\\.@:%_\+~#=]+)+((\\.[a-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?');
   if (this.url.match(r)) {
     that.attach({
