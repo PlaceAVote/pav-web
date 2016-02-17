@@ -79,6 +79,9 @@
       right:48px;
       background: $white;
       border:1px solid $grey;
+      &::-webkit-scrollbar { 
+          display: none; 
+      }
       @include shadow();
       @include media(1200px) {
         right: 63px;
