@@ -1,12 +1,14 @@
-module.exports = function($filter, $location) {
+module.exports = function($filter, $location, $anchorScroll) {
   return {
     restrict: 'E',
     scope: {
       question: '=',
+      answer: '&',
     },
     templateUrl: 'partials/wizard_tax_multi.html',
     link: function(scope, el, attr) {
       scope.location = $location;
+      scope.anchorScroll = $anchorScroll;
       scope.$watch('question', function(n, o) {
         if (n !== undefined) {
           scope.question.sliderConfig = {
@@ -23,6 +25,11 @@ module.exports = function($filter, $location) {
       });
 
       scope.goToBill = function(billId) {
+        if (scope.question.zip === '') {
+          scope.errorMessage = true;
+          scope.anchorScroll('zipCode');
+          return;
+        }
         scope.location.path('bill/' + billId);
       };
     },
