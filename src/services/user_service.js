@@ -139,6 +139,7 @@ function UserService($resource, facebookService, authService, userStore) {
       callback({status: 401, message: 'No Auth Token'});
       return;
     }
+    // This has no effect in actual product.
     if (this.user && this.user.loadedFromServer) {
       return callback(undefined, this.user);
     }
@@ -150,6 +151,10 @@ function UserService($resource, facebookService, authService, userStore) {
       return callback(err);
     };
     var onLoad = function(result) {
+      // Be wary of this.
+      if (!users || !users.me) {
+        users.me = result;
+      }
       this.user = User.createFromJson(result);
       return callback(undefined, this.user);
     };
