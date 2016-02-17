@@ -1,12 +1,13 @@
 var taxCalculator = require('../models/tax_calculator.js')();
 var TaxMultiPart = require('../models/tax_multi_part_question.js');
 
-function WizardController($scope, questionService) {
+function WizardController($scope, questionService, $rootScope) {
   var that = this;
   $scope = $scope || {};
   $scope.wizard = this;
   this.scope = $scope;
   this.questionService = questionService;
+  this.rs = $rootScope;
   this.questions = [];
   this.answered = [];
   this.skipped = [];
@@ -42,7 +43,9 @@ WizardController.prototype.loadQuestions = function(callback) {
 };
 
 WizardController.prototype.sendQuestions = function(callback) {
+  var that = this;
   this.questionService.answerQuestions(this.answered, function() {
+    that.rs.user.newUser = false;
     if (callback) {
       callback();
     }
@@ -87,6 +90,10 @@ WizardController.prototype.skipQuestion = function() {
 
 WizardController.prototype.setError = function(message) {
   this.errorMessage = message;
+};
+
+WizardController.prototype.closeWizard = function() {
+  this.rs.user.newUser = false;
 };
 
 module.exports = WizardController;
