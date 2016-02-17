@@ -104,16 +104,14 @@ ProfileController.prototype.populateFollowing = function() {
   });
 };
 
-ProfileController.prototype.isNotMe = function() {
-  if (this.id === 'me') {
-    return false;
-  }
-  return true;
+ProfileController.prototype.isMe = function() {
+  var me = this.userService.isUserMe(this.id);
+  return me;
 };
 
 ProfileController.prototype.follow = function() {
   var that = this;
-  if (!this.isNotMe()) {
+  if (this.isMe()) {
     return;
   }
   if (!this.followStatus) {

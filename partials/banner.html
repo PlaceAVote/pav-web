@@ -1,7 +1,7 @@
 <section class="profile">
   <div class="profile-header">
-   
-       <div class="row"> 
+
+       <div class="row">
           <div class="profile-image-holder profile-picture click">
             <div ng-style="{'background-image': 'url(' + user.img_url + ')'}">
             </div>
@@ -13,8 +13,8 @@
             </div>
         </div>
   </div>
-    
-   
+
+
   <div class="profile-follow">
       <div class="row">
           <div class="stats profile-stats click" ng-click="toggleFollowers();">
@@ -27,7 +27,7 @@
             <h3>Following</h3>
           </div>
 
-          <div class="follow-me" ng-show="profile.isNotMe()">
+          <div class="follow-me" ng-hide="profile.isMe()">
             <button class="btn-green" ng-click="profile.follow()">{{profile.following}}</button>
           </div>
       </div>
