@@ -63,7 +63,7 @@ HeaderCtrl.prototype.getNotifications = function() {
     that.newTimestamp = res.last_timestamp;
     for (var i = 0; i < that.notifications.length; i++) {
       if (that.notifications[i].hasOwnProperty('read')) {
-        if(!that.notifications[i].read) {
+        if (!that.notifications[i].read) {
           that.unread++;
         }
       }
