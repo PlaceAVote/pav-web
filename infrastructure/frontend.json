@@ -1,0 +1,75 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "The infrastructure for hosting place a votes front end.",
+  "Parameters": {
+    "Environment": {
+      "Type": "String",
+      "Default": "dev",
+      "AllowedValues": ["dev", "beta", "prod"],
+      "Description": "Specifies which environment to create/update"
+    }
+  },
+  "Mappings": {
+    "BucketName": {
+      "dev": { "bucket": "www.placeavote.dev" },
+      "beta": { "bucket": "www.placeavote.beta" },
+      "prod": { "bucket" : "www.placeavote.com" }
+    }
+  },
+  "Conditions" :{
+    "Dev" : {"Fn::Equals" : [{"Ref" : "Environment"}, "dev"]},
+    "Beta" : {"Fn::Equals" : [{"Ref" : "Environment"}, "beta"]},
+    "Prod" : {"Fn::Equals" : [{"Ref" : "Environment"}, "prod"]}
+  },
+  "Resources": {
+    "DevSite": {
+      "Type": "AWS::S3::Bucket",
+      "Condition": "Dev",
+      "DeletionPolicy" : "Retain",
+      "Properties": {
+        "AccessControl": "PublicRead",
+        "BucketName": { "Fn::FindInMap" : [ "BucketName", { "Ref" : "Environment" }, "bucket"]},
+
+        "WebsiteConfiguration": {
+          "IndexDocument": "index.html"
+        }
+      }
+    },
+
+    "BetaSite": {
+      "Type": "AWS::S3::Bucket",
+      "Condition": "Beta",
+      "DeletionPolicy" : "Retain",
+      "Properties": {
+        "AccessControl": "PublicRead",
+        "BucketName": { "Fn::FindInMap" : [ "BucketName", { "Ref" : "Environment" }, "bucket"]},
+
+        "WebsiteConfiguration": {
+          "IndexDocument": "index.html",
+          "RedirectAllRequestsTo" : {
+            "HostName" : "www.beta.placeavote.com",
+            "Protocol" : "https"
+          }
+        }
+      }
+    },
+
+    "LiveSite": {
+      "Type": "AWS::S3::Bucket",
+      "DeletionPolicy" : "Retain",
+      "Condition": "Prod",
+      "Properties": {
+        "AccessControl": "PublicRead",
+        "BucketName": { "Fn::FindInMap" : [ "BucketName", { "Ref" : "Environment" }, "bucket"]},
+
+        "WebsiteConfiguration": {
+          "IndexDocument": "index.html",
+          "RedirectAllRequestsTo" : {
+            "HostName" : "www.placeavote.com",
+            "Protocol" : "https"
+          }
+        }
+      }
+    }
+  }
+}
