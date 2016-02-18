@@ -72,6 +72,7 @@ var infiniteScroll = require('./directives/infinite_scroll.js');
 
 // Thirdparty integrations
 var Facebook = require('./integrations/facebook.js');
+var Twitter = require('./integrations/twitter.js');
 var slider = require('angularjs-slider');
 var draggable = require('angular-ui-tree');
 var textarea = require('angular-elastic');
@@ -143,6 +144,7 @@ app.config(['$routeProvider', function($routeProvider) {
 
 // Services
 app.factory('facebookService', [Facebook]);
+app.factory('twitterService', [Twitter]);
 app.factory('authService', ['$resource', AuthService]);
 app.factory('userService', ['$resource', 'facebookService', 'authService', UserService]);
 app.factory('billService', ['$resource', 'authService', 'userService', BillService]);
@@ -162,7 +164,7 @@ app.controller('TopicRegisterCtrl',['$scope','$location', 'userService', Registe
 app.controller('SignUpCtrl',['$rootScope','$scope','$location', 'userService', SignUpController]);
 app.controller('LoginCtrl',['$scope','$location', 'userService', 'authService', '$rootScope', '$routeParams', 'passwordService', LoginController]);
 app.controller('FeedCtrl', ['$scope', '$location', 'userService', 'billService', 'authService', 'feedService', '$rootScope','$timeout', FeedController]);
-app.controller('BillCtrl', ['$scope', '$routeParams', 'billService', 'legislationService', 'voteService', 'commentService', '$location', 'authService', '$rootScope', BillController]);
+app.controller('BillCtrl', ['$scope', '$routeParams', 'billService', 'legislationService', 'voteService', 'commentService', '$location', 'authService', '$rootScope', 'facebookService', BillController]);
 app.controller('HeaderCtrl', ['$rootScope', '$scope', '$location', '$timeout', 'authService', 'userService', 'notificationService', 'searchService', '$window', HeaderController]);
 app.controller('ProfileCtrl', ['$scope', '$location', '$routeParams', 'authService', 'userService', ProfileController]);
 app.controller('SettingsCtrl', ['$scope', '$location', '$timeout', 'userService', 'authService', '$rootScope','$anchorScroll', SettingsController]);

@@ -35,7 +35,7 @@ Bill.prototype.getStatusClass = function() {
 };
 
 Bill.prototype.getTitle = function() {
-  if (!this.billData && !this.billData.bill_type) {
+  if (!this.billData || !this.billData.bill_type) {
     return;
   }
   var billType = this.billData.bill_type.toUpperCase();

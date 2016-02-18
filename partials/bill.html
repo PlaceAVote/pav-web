@@ -34,6 +34,9 @@
             		</section>
                 </div>
 
+                <a class="facebook-share-link" ng-click="bill.shareToFacebook()">Share on Facebook</a>
+                <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text={{bill.getShareMessage()}}&url={{bill.getLocation()}}" data-size="large">Share on Twitter</a>
+
     <section class="top-comments" ng-show="bill.forComment.author">
   		<div class="card padding-small" loader loader-context="bill.topLoaded">
   			<h1>Top Comment In Favor</h1>
@@ -179,6 +182,10 @@
           <img class="logo-modal" src="//cdn.placeavote.com/img/mark_full_color.svg" />
           <h3>Vote Confirmed</h3>
           <p>Congratulations, you have just cast your vote on:</p>
+
+                <a class="facebook-share-link" ng-click="bill.shareToFacebook()">Share on Facebook</a>
+                <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text={{bill.voteShareMessage}}&url={{bill.getLocation()}}" data-size="large">Tweet</a>
+
           <h4>{{bill.body.getTitle()}}</h4>
           </div>
           <div class="card comment-preview" ng-show="bill.commentCard.set">

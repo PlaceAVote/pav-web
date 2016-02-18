@@ -1,7 +1,9 @@
 var Comment = require('../models/comment.js');
 var AuthorizeController = require('./autherize_controller.js');
 var title = require('../config/titles.js');
-function BillController($scope, $routeParams, billService, legislatorService, voteService, commentService, $location, authService, $rootScope) {
+var tweet = require('../models/tweet.js');
+
+function BillController($scope, $routeParams, billService, legislatorService, voteService, commentService, $location, authService, $rootScope, facebook) {
   AuthorizeController.authorize({error: '/', authorizer: authService, location: $location});
   $scope = $scope || {};
   $scope.bill = this;
@@ -10,6 +12,7 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
   this.authService = authService;
   this.location = $location;
   this.routeParams = $routeParams;
+  this.facebook = facebook;
   this.from = 0;
   this.commentBody = undefined;
   this.commentService = commentService;
@@ -27,6 +30,22 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
   this.readmore = false;
   this.showChart = true;
 }
+
+BillController.prototype.getLocation = function() {
+  var t = tweet();
+  return t.generateLink(window.location.href);
+};
+
+BillController.prototype.getShareMessage = function() {
+  var t = tweet();
+  return t.generateMessage('Check out this bill @placeavote');
+};
+
+BillController.prototype.shareToFacebook = function() {
+  var t = tweet();
+  var link = t.generateLink(window.location.href);
+  this.facebook.share(link);
+};
 
 BillController.prototype.showVoteModal = function(vote) {
   if (!this.userVoted) {
@@ -87,8 +106,21 @@ BillController.prototype.voteConfirmed = function() {
   this.hasVoted = true;
   var vote = this.vote ? this.forComment : this.againstComment;
   this.generateCommentCard(vote);
+  this.voteShareMessage = this.generateVoteShareMessage(vote);
   this.getVotes(this.id);
   this.getBillVotes(this.id);
+};
+
+BillController.prototype.generateVoteShareMessage = function(vote) {
+  var t = tweet();
+  var title = '';
+  if (this.body) {
+    title = this.body.getTitle();
+  }
+  if (vote) {
+    return t.generateMessage('I just voted in favour of ' + title + ' @placeavote');
+  }
+  return t.generateMessage('I just voted against ' + title + ' @placeavote');
 };
 
 BillController.prototype.generateCommentCard = function(comment) {
