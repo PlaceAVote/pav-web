@@ -26,7 +26,6 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
   this.voteModal = {};
   this.stats = {};
   this.readmore = false;
-  this.showChart = true;
 }
 
 BillController.prototype.showVoteModal = function(vote) {
@@ -152,7 +151,7 @@ BillController.prototype.getBillVotes = function(id) {
       that.error = true;
     } else {
       that.stats = result;
-      if (that.stats.length > 6) {
+      if (that.stats.length > 10) {
         that.chartShow = true;
       }
     }
