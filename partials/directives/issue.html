@@ -16,7 +16,7 @@
    </div>
    
    <div class="row issue-comment margin-bottom-small">
-   <p>{{issue.comment}}</p>
+   <p ng-bind="issue.comment"></p>
    </div>
 
    <a ng-if="issue.article_link" ng-href="{{issue.article_link}}" target="_blank" class="column issue-article padding-small margin-bottom-small" ng-style="{'background-image': 'url(' + issue.article_img + ')'}">

@@ -56,7 +56,8 @@ module.exports = function($sce, $location) {
           scope.$apply();
           return;
         }
-        q = el[0].children[0].value;
+        console.log($sce);
+        q = $sanitze(el[0].children[0].value);
         if (q.length < 3) {
           scope.results = [];
           scope.$apply();

@@ -15,7 +15,7 @@
 
             <section class="comment-vote"><span  ng-class="{'score-down': comment.score < 0, 'score-none': comment.score == 0}">{{comment.score}}</span><i class="icon-thumbs-up thumbs" ng-class="{'score-up': comment.liked == true}" ng-click="comment.like(commentService)"></i><i class="icon-thumbs-down thumbs" ng-class="{'score-down': comment.disliked == true}" ng-click="comment.dislike(commentService)"/></i><span class="reply-btn" ng-click="comment.showReplyInput()">reply</span></section>
 
-            <p>{{comment.body}}</p>
+            <p ng-bind="comment.body"></p>
             <div class="reply-comment" ng-show="comment.replyInput">
             <textarea type="text" placeholder="Reply" ng-model="comment.replyText" rows="1" msd-elastic></textarea>
             <p style="color: red;" ng-show="comment.errorMessage !== ''">{{comment.errorMessage}}</p>
