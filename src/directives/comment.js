@@ -9,9 +9,8 @@ module.exports = function($compile, commentService, $anchorScroll, $timeout, $lo
     templateUrl: 'partials/comments.html',
     link: function(scope, element, attrs, controllerAs) {
       scope.commentService = commentService;
-
+      scope.timeout = $timeout;
       if (angular.isArray(scope.comment.replies)) {
-
         element.append('<div class=\'comment-container comment-reply\' ng-show=\'comment.showChildren\'><comments comments=\'comment.replies\'></comments></div>');
         var html = element.html();
         element.contents().remove();

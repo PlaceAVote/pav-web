@@ -1,11 +1,12 @@
 var Comment = require('../models/comment.js');
 var AuthorizeController = require('./autherize_controller.js');
 var title = require('../config/titles.js');
-function BillController($scope, $routeParams, billService, legislatorService, voteService, commentService, $location, authService, $rootScope) {
+function BillController($scope, $routeParams, billService, legislatorService, voteService, commentService, $location, authService, $rootScope, $timeout) {
   AuthorizeController.authorize({error: '/', authorizer: authService, location: $location});
   $scope = $scope || {};
   $scope.bill = this;
   $scope.commentService = commentService;
+  this.timeout = $timeout;
   this.rs = $rootScope;
   this.authService = authService;
   this.location = $location;
@@ -25,7 +26,6 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
   this.voteModal = {};
   this.stats = {};
   this.readmore = false;
-  this.showChart = true;
 }
 
 BillController.prototype.showVoteModal = function(vote) {
@@ -151,7 +151,7 @@ BillController.prototype.getBillVotes = function(id) {
       that.error = true;
     } else {
       that.stats = result;
-      if (that.stats.length > 6) {
+      if (that.stats.length > 10) {
         that.chartShow = true;
       }
     }
@@ -176,7 +176,13 @@ BillController.prototype.getComments = function() {
 
 BillController.prototype.postComment = function() {
   var that = this;
+  var r = new RegExp(/<script[\s\S]*?>[\s\S]*?<\/script>/gi);
   if (!this.billService || !this.billService.postComment) {
+    return;
+  }
+  if (r.test(this.commentBody)) {
+    this.commentError('Sorry, there was an error.');
+    this.commentBody = '';
     return;
   }
   this.billService.postComment(this.id, this.commentBody, function(err, result) {
@@ -191,6 +197,14 @@ BillController.prototype.postComment = function() {
       that.commentBody = undefined;
     }
   });
+};
+
+BillController.prototype.commentError = function(message) {
+  var that = this;
+  this.errorMessage = message;
+  this.timeout(function() {
+    that.errorMessage = '';
+  }, 2000);
 };
 
 BillController.prototype.userVotedCheck = function() {
