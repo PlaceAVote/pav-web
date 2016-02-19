@@ -91,6 +91,9 @@
         width:300px;
         overflow: scroll;
         // position: relative;
+        &::-webkit-scrollbar { 
+          display: none; 
+        }
         .notification-event {
           padding: 10px;
           display: flex;
@@ -134,8 +137,14 @@
   border-radius:3px;
   font-size:12px;
   width:130px;
-  top: 44px;
+  top: 53px;
   right: 0px;
+  @include media(1200px) {
+    right: 20px;
+  }
+  @include media(600px) {
+    right: 0px;
+  }
   position:absolute;
   @include shadow();
   border:1px solid $grey;

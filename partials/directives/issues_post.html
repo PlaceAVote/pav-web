@@ -21,8 +21,9 @@
       <search-bar class="bill-search" placeholder="Start typing to search for a bill" results="issues.searchResults" focus="issues.focus" query="issues.search(q)" searching="issues.searching" attach-bill="issues.attach(bill);" bills issues></search-bar>
     </div>
 
-    <div class="row" ng-show="issues.linkAdd">
+    <div class="row link-add-container" ng-show="issues.linkAdd">
       <form class="l-12" ng-submit="issues.validateUrl()">
+        <button class="link-add-button">Add Link</button>
         <input class="link-add" type="text" ng-model="issues.url" placeholder="Paste website link here" />
       </form>
     </div>
@@ -52,7 +53,7 @@
   </div>
 </div>
 
-<div ng-show="example" class="margin-top-medium card padding-small example-issue">
+<div ng-cloak ng-show="example" class="ng-cloak margin-top-medium card padding-small example-issue">
   <issue issue="exampleIssue" example="theExample">
   </issue>
 </div>

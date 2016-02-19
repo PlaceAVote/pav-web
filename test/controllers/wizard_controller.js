@@ -145,7 +145,14 @@ describe('Wizard', function() {
           callback();
         },
       };
-      var subject = new Wizard({}, mockQuestionService);
+
+      var mockRootScope = {
+        user: {
+          newUser: true,
+        },
+      };
+
+      var subject = new Wizard({}, mockQuestionService, mockRootScope);
       var expected = [
         {
           question_id: "1003",

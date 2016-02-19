@@ -67,8 +67,15 @@ Comment.prototype.hideReplyInput = function() {
   this.replyText = undefined;
 };
 
-Comment.prototype.reply = function(billId, service) {
+Comment.prototype.reply = function(billId, service, timeout) {
   var that = this;
+  var r = new RegExp(/<script[\s\S]*?>[\s\S]*?<\/script>/gi);
+  if (r.test(this.replyText)) {
+    this.commentError('Sorry, there was an error.', timeout);
+    this.replyText = '';
+    return;
+  }
+
   service.reply(this.replyText, billId, this.id, function(err, response) {
     if (err) {
       that.replyFailed = true;
@@ -78,6 +85,15 @@ Comment.prototype.reply = function(billId, service) {
     }
     that.hideReplyInput();
   });
+};
+
+Comment.prototype.commentError = function(message, timeout) {
+  var that = this;
+  this.errorMessage = message;
+  console.log(this.errorMessage);
+  timeout(function() {
+    that.errorMessage = '';
+  }, 2000);
 };
 
 Comment.prototype.like = function(service) {
