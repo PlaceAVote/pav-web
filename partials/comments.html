@@ -18,9 +18,10 @@
             <p>{{comment.body}}</p>
             <div class="reply-comment" ng-show="comment.replyInput">
             <textarea type="text" placeholder="Reply" ng-model="comment.replyText" rows="1" msd-elastic></textarea>
+            <p style="color: red;" ng-show="comment.errorMessage !== ''">{{comment.errorMessage}}</p>
             <div class="reply-actions">
              <span class="btn-blank" ng-click="comment.hideReplyInput()">CANCEL</span>
-            <span class="btn-green" ng-click="comment.reply(comment.bill_id, commentService)">POST</span>
+            <span class="btn-green" ng-click="comment.reply(comment.bill_id, commentService, timeout)">POST</span>
 
             </div>
             </div>

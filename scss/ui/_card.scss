@@ -26,9 +26,10 @@
 
 .card-message {
   h2 {
-    @include font-size(20px);
+    @include font-size(14px);
     text-align: center;
-    margin-top: 5px;
+    // padding: 20px;
+    // margin-top: 5px;
   }
 }
 

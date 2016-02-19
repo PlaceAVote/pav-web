@@ -3,10 +3,11 @@ var AuthorizeController = require('./autherize_controller.js');
 var title = require('../config/titles.js');
 var tweet = require('../models/tweet.js');
 
-function BillController($scope, $routeParams, billService, legislatorService, voteService, commentService, $location, authService, $rootScope, facebook) {
+function BillController($scope, $routeParams, billService, legislatorService, voteService, commentService, $location, authService, $rootScope, $timeout, facebook) {
   $scope = $scope || {};
   $scope.bill = this;
   $scope.commentService = commentService;
+  this.timeout = $timeout;
   this.rs = $rootScope;
   this.rs.inApp = true;
   this.authService = authService;
@@ -211,7 +212,7 @@ BillController.prototype.getBillVotes = function(id) {
       that.error = true;
     } else {
       that.stats = result;
-      if (that.stats.length > 6) {
+      if (that.stats.length > 10) {
         that.chartShow = true;
       }
     }
@@ -239,7 +240,13 @@ BillController.prototype.postComment = function() {
   if (!that.validationHandler()) {
     return;
   }
+  var r = new RegExp(/<script[\s\S]*?>[\s\S]*?<\/script>/gi);
   if (!this.billService || !this.billService.postComment) {
+    return;
+  }
+  if (r.test(this.commentBody)) {
+    this.commentError('Sorry, there was an error.');
+    this.commentBody = '';
     return;
   }
   this.billService.postComment(this.id, this.commentBody, function(err, result) {
@@ -254,6 +261,14 @@ BillController.prototype.postComment = function() {
       that.commentBody = undefined;
     }
   });
+};
+
+BillController.prototype.commentError = function(message) {
+  var that = this;
+  this.errorMessage = message;
+  this.timeout(function() {
+    that.errorMessage = '';
+  }, 2000);
 };
 
 BillController.prototype.userVotedCheck = function() {

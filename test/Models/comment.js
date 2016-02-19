@@ -338,5 +338,13 @@ describe("comment model", function(){
       subject.like(service);
       expect(serviceCalled).to.eql(true);
     });
+
+    it('should return error if comment contains script tag', function() {
+      var mockTimeout = function() {return;};
+      var subject = new Comment();
+      subject.replyText = '<script></script>';
+      subject.reply(undefined,undefined, mockTimeout);
+      expect(subject.replyText).to.equal('');
+    });
   });
 });

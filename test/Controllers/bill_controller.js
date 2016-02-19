@@ -825,6 +825,46 @@ describe('BillController', function() {
       expect(billController.comments.length).to.eql(1);
       expect(billController.comments[0].id).to.eql(1);
     });
+
+    it('should return error if comment contains script tag', function() {
+      var mockBillService = {
+      getBillVotes: function(id, callback){
+        callback('Error');
+      },
+        getBill: function(id, callback){
+          callback('Error');
+        },
+        getTopComments: function(id, callback){
+          callback('Error');
+        },
+        getComments: function(id, from, undefined, callback) {
+          callback(undefined, []);
+        },
+        postComment: function(id, comment, callback) {
+          var c = new Comment();
+          c.id = 1;
+          return callback(undefined, c);
+        },
+      };
+      var mockLegislationService = {
+        getById: function(id, callback){
+          callback('Error');
+        },
+      };
+      var mockVoteService = {
+        getVotesForBill: function(id, callback){
+          callback('Error');
+        },
+        voteOnBill: function(id, vote, callback){
+          callback('Error');
+        },
+      };
+      var mockTimeout = function() {return;};      
+      var subject = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, undefined, mockAuthService, {}, mockTimeout);
+      subject.commentBody = '<script></script>';
+      subject.postComment();
+      expect(subject.commentBody).to.equal('');
+    });
   });
 });
 
