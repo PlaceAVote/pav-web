@@ -1,5 +1,6 @@
 var LoginCtrl = require("../../src/controllers/login_controller.js");
 var expect = require("chai").expect;
+var doc = { body: { addEventListener: function(){}}};
 var authService = {
   validateToken: function(callback){
     return callback(false);
@@ -10,7 +11,7 @@ describe('LoginCtrl', function() {
 		it('Should make sure the email fail if not valid', function() {
 			var scope = {};
 			scope.$on = function() {};
-			var subject = new LoginCtrl(scope, {}, {}, authService);
+      var subject = new LoginCtrl(scope, {}, {}, authService, {}, {}, {}, doc);
 			subject.user.email = "anthony.com";
 			expect(subject.emailValidation(subject.user.email)).to.be.false;
 		});
@@ -18,8 +19,8 @@ describe('LoginCtrl', function() {
 		it('Should return true if valid', function() {
 			var scope = {};
 			scope.$on = function() {};
-			var subject = new LoginCtrl(scope, {}, {}, authService);
-			subject.user.email = "anthony.test1@test.com";
+      var subject = new LoginCtrl(scope, {}, {}, authService, {}, {}, {}, doc);
+      subject.user.email = "anthony.test1@test.com";
 			expect(subject.emailValidation(subject.user.email)).to.be.true;
 		});
 
@@ -99,7 +100,7 @@ describe('LoginCtrl', function() {
               };
               var scope = {}
               scope.$on = function() {};
-              var subject = new LoginCtrl(scope, location, {}, authService);
+              var subject = new LoginCtrl(scope, location, {}, authService, {}, {}, {}, doc);
               subject.userService = {
                 loginWithFacebook : function(callback){
                   callback({status:400, message:"User Not Found"});
@@ -120,7 +121,7 @@ describe('LoginCtrl', function() {
               };
               var scope = {}
               scope.$on = function() {};
-              var subject = new LoginCtrl(scope, location, {}, authService);
+              var subject = new LoginCtrl(scope, location, {}, authService, {}, {}, {}, doc);
               subject.userService = {
                 loginWithFacebook : function(callback){
                   callback({status:999, message:"User Not Found"});
@@ -142,7 +143,7 @@ describe('LoginCtrl', function() {
               var scope = {};
               scope.$on = function() {};
               var called = false;
-              var subject = new LoginCtrl(scope, location, {}, authService);
+              var subject = new LoginCtrl(scope, location, {}, authService, {}, {}, {}, doc);
               subject.userService = {
                 loginWithFacebook : function(callback){
                   callback();
@@ -160,7 +161,7 @@ describe('LoginCtrl', function() {
         it("sets loginInvalid to false", function(done){
         	var scope = {};
         	scope.$on = function() {};
-            var subject = new LoginCtrl(scope, {}, {}, authService);
+          var subject = new LoginCtrl(scope, {}, {}, authService, {}, {}, {}, doc);
             subject.userService = {
                 login : function(params, callback){
                     callback({status:401});
@@ -180,7 +181,7 @@ describe('LoginCtrl', function() {
         it("Should return status 200 when password reset is successful", function() {
           var scope = {};
           scope.$on = function() {};
-          var subject = new LoginCtrl(scope, {}, {}, authService);
+          var subject = new LoginCtrl(scope, {}, {}, authService, {}, {}, {}, doc);
           subject.passwordService = {
             passwordReset : function(params, callback) {
               callback(undefined, {status: '200'});
@@ -195,7 +196,7 @@ describe('LoginCtrl', function() {
         it("Should return status 401 when password reset has failed", function() {
           var scope = {};
           scope.$on = function() {};
-          var subject = new LoginCtrl(scope, {}, {}, authService);
+          var subject = new LoginCtrl(scope, {}, {}, authService, {}, {}, {}, doc);
           subject.passwordService = {
             passwordReset : function(params, callback) {
               callback({status: '401'});

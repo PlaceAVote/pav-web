@@ -1,8 +1,9 @@
 var Interest = require('./../models/interest.js');
 
-function RegisterController($scope, $location, userService) {
+function RegisterController($scope, $location, userService, $rootScope) {
   $scope = $scope || {};
   $scope.register = this;
+  $rootScope.inApp = false;
   this.userService = userService;
   this.location = $location;
   this.interests = [

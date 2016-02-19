@@ -1,0 +1,11 @@
+<div style="padding:25px" ng-controller="LoginCtrl as invalid">
+  <div ng-show="invalid.showNotRegisteredPartial">
+    <div>
+      <h2>Sign Up Free</h2>
+      <input type="text" ng-model="invalid.user.email" >
+      <input type="password" ng-model="invalid.user.password" >
+      <button ng-click="invalid.validate(invalid.user, '/onboarding')">Sign Up</button>
+      <button ng-click="invalid.loginWithFacebook()">Sign Up with Facebook</button>
+    </div>
+  </div>
+</div>

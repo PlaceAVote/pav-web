@@ -1,6 +1,6 @@
 var AuthorizeController = require('./autherize_controller.js');
 
-function LoginCtrl($scope, $location, userService, authService, $rootScope, $routeParams, passwordService) {
+function LoginCtrl($scope, $location, userService, authService, $rootScope, $routeParams, passwordService, doc) {
   AuthorizeController.authorize({success: '/feed', authorizer: authService, location: $location});
   $scope = $scope || {};
   this.loaded = true;
@@ -11,13 +11,21 @@ function LoginCtrl($scope, $location, userService, authService, $rootScope, $rou
   this.location = $location;
   this.forgot = false;
   this.passwordSent = false;
-  this.rs.loggedIn = false;
+  this.rs.inApp = false;
   this.user = {
     email: '',
     emailValid: true,
     password: '',
     passwordValid: true,
   };
+
+  var that = this;
+  that.showNotRegisteredPartial = false;
+  doc = doc || document;
+  doc.body.addEventListener('not-valid', function() {
+    that.showNotRegisteredPartial  = true;
+  });
+
 
   $scope.$on('$routeChangeSuccess', function() {
     if (this.location.hash == '#/signup') {
@@ -43,8 +51,10 @@ LoginCtrl.prototype.loginWithFacebook = function() {
         return;
       }
       if (result) {
+        that.showNotRegisteredPartial = false;
         that.rs.user = result;
-        that.rs.loggedIn = true;
+        that.rs.inApp = true;
+        that.rs.notLoggedIn = false;
         that.loaded = true;
         that.location.path('/feed');
       }
@@ -59,6 +69,7 @@ LoginCtrl.prototype.validate = function(u, hash) {
   this.user.passwordValid = this.passwordValidation(password);
   if (this.user.emailValid && this.user.passwordValid) {
     this.userService.createUser(email, password);
+    this.showNotRegisteredPartial = false;
     this.location.path(hash);
   }
 };
@@ -89,15 +100,18 @@ LoginCtrl.prototype.login = function(u, hash) {
       if (err) {
         return that.logout();
       }
+      that.showNotRegisteredPartial = false;
       that.rs.user = result;
-      that.rs.loggedIn = true;
+      that.rs.inApp = true;
+      that.rs.notLoggedIn = false;
       that.location.path('/feed');
     });
   });
 };
 
 LoginCtrl.prototype.logout = function() {
-  this.rs.loggedIn = false;
+  this.rs.inApp = false;
+  this.rs.notLoggedIn = true;
   this.rs.user = {};
   AuthorizeController.logout({authorizer: this.authService, location: this.location});
 };

@@ -6,6 +6,7 @@ function HomeController($scope, $location, $anchorScroll, userService, $rootScop
   this.userService = userService;
   this.location = $location;
   this.rs = $rootScope || {};
+  this.rs.inApp = false;
 	this.gotoAnchor = function(x) {
       var newHash = '#' + x;
       if ($location.hash() !== newHash) {
@@ -30,12 +31,12 @@ HomeController.prototype.loginWithFacebook = function(){
         }
         if (result) {
           that.rs.user = result;
-          that.rs.loggedIn = true;
+          that.rs.inApp = true;
           that.location.path('/feed');
         }
       });
     }
   });
 };
-
 module.exports = HomeController;
+

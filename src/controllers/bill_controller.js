@@ -4,11 +4,11 @@ var title = require('../config/titles.js');
 var tweet = require('../models/tweet.js');
 
 function BillController($scope, $routeParams, billService, legislatorService, voteService, commentService, $location, authService, $rootScope, facebook) {
-  AuthorizeController.authorize({error: '/', authorizer: authService, location: $location});
   $scope = $scope || {};
   $scope.bill = this;
   $scope.commentService = commentService;
   this.rs = $rootScope;
+  this.rs.inApp = true;
   this.authService = authService;
   this.location = $location;
   this.routeParams = $routeParams;
@@ -29,7 +29,19 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
   this.stats = {};
   this.readmore = false;
   this.showChart = true;
+  this.authenticate();
 }
+
+BillController.prototype.authenticate = function() {
+  var that = this;
+  if (!that.authService) {
+    return;
+  }
+  that.authService.validateToken(function(result) {
+    that.validated = result;
+    that.rs.notLoggedIn = true;
+  });
+};
 
 BillController.prototype.getLocation = function() {
   var t = tweet();
@@ -47,7 +59,20 @@ BillController.prototype.shareToFacebook = function() {
   this.facebook.share(link);
 };
 
+BillController.prototype.validationHandler = function() {
+  if (this.validated) {
+    return true;
+  }
+  var event = new CustomEvent('not-valid', { detail: 'Invalid request', controller: 'Bill' });
+  document.body.dispatchEvent(event);
+  return false;
+};
+
 BillController.prototype.showVoteModal = function(vote) {
+  if (!this.validationHandler(this.validated)) {
+    return;
+  }
+
   if (!this.userVoted) {
     this.vote = vote;
     if (vote) {
@@ -89,6 +114,9 @@ BillController.prototype.getVotes = function(id) {
 
 BillController.prototype.voteOnBill = function() {
   var that = this;
+  if (!this.validationHandler(this.validated)) {
+    return;
+  }
   this.voteService.voteOnBill(this.id, this.vote, function(err, result) {
     if (err) {
       if (err.status && err.status === 409) {
@@ -208,6 +236,9 @@ BillController.prototype.getComments = function() {
 
 BillController.prototype.postComment = function() {
   var that = this;
+  if (!that.validationHandler()) {
+    return;
+  }
   if (!this.billService || !this.billService.postComment) {
     return;
   }

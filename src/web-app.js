@@ -70,6 +70,8 @@ var feedEventsDirective = require('./directives/feed_events.js');
 var feedBillEventDirective = require('./directives/feed_bill_event.js');
 var infiniteScroll = require('./directives/infinite_scroll.js');
 
+var invalidDirective = require('./directives/invalid.js');
+
 // Thirdparty integrations
 var Facebook = require('./integrations/facebook.js');
 var Twitter = require('./integrations/twitter.js');
@@ -160,7 +162,7 @@ app.factory('questionService', ['$resource', 'authService', QuestionService]);
 app.factory('mailService', ['$resource', MailService]);
 
 // Controllers
-app.controller('TopicRegisterCtrl',['$scope','$location', 'userService', RegisterController]);
+app.controller('TopicRegisterCtrl',['$scope','$location', 'userService', '$rootScope', RegisterController]);
 app.controller('SignUpCtrl',['$rootScope','$scope','$location', 'userService', SignUpController]);
 app.controller('LoginCtrl',['$scope','$location', 'userService', 'authService', '$rootScope', '$routeParams', 'passwordService', LoginController]);
 app.controller('FeedCtrl', ['$scope', '$location', 'userService', 'billService', 'authService', 'feedService', '$rootScope','$timeout', FeedController]);
@@ -211,5 +213,6 @@ app.directive('imageCrop', [imageCropDirective]);
 app.directive('fileread', [fileReadDirective]);
 app.directive('loader', ['$location', preloaderDirective]);
 app.directive('feedEvents', [feedEventsDirective]);
+app.directive('invalid', [invalidDirective]);
 app.directive('feedBillEvent', ['$location', feedBillEventDirective]);
 app.directive('infiniteScroll', ['$rootScope', '$window', '$interval', 'THROTTLE_MILLISECONDS', infiniteScroll]);

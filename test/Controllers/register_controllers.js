@@ -16,29 +16,29 @@ describe("RegisterController", function() {
 				added = true;
 			}
 		};
-		var subject = new RegisterController({}, location, userService);
+		var subject = new RegisterController({}, location, userService, {});
 		subject.go('test');
 		expect(called).to.be.true;
 		expect(added).to.be.true;
 		expect(args).to.eql('test');
 	});
 	it("has a list of topics", function() {
-		var subject = new RegisterController({}, {});
+		var subject = new RegisterController({}, {}, {}, {});
 		expect(!!subject.interests).to.be.true;
 	});
 	describe("Select", function(){
 		it("selects the correct interest based upon name", function() {
-			var subject = new RegisterController({},{});
+			var subject = new RegisterController({}, {}, {}, {});
 			subject.interests = [new Interest('test', '.test')];
 			expect(subject.getInterest('test').name).to.eql('test');
 		});
 		it("returns undefined if interest can't be found", function() {
-			var subject = new RegisterController({},{});
+			var subject = new RegisterController({}, {}, {}, {});
 			expect(!!subject.getInterest('test')).to.be.false;
 		});
 		it("calls select on the selected interest", function() {
 			var called = false;
-			var subject = new RegisterController({});
+			var subject = new RegisterController({}, {}, {}, {});
 			subject.interests = [new Interest('test', '.test')];
 			subject.interests[0].select = function(){
 				called = true;
@@ -48,7 +48,7 @@ describe("RegisterController", function() {
 		});
 		it("doesn't call select if getInterest returns undefined", function() {
 			var called = false;
-			var subject = new RegisterController({});
+			var subject = new RegisterController({}, {}, {}, {});
 			subject.interests = [new Interest('test', '.test')];
 			subject.interests[0].select = function(){
 				called = true;
@@ -59,7 +59,7 @@ describe("RegisterController", function() {
 	});
 	describe("Get Selected", function(){
 		it("returns a list of selected interests", function(){
-			var subject = new RegisterController();
+			var subject = new RegisterController({}, {}, {}, {});
 			subject.select('Religion');
 			subject.select('Drugs');
 			var interest = subject.getSelected();
