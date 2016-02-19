@@ -104,7 +104,7 @@
     <div class="card padding-small bill-comments" loader loader-context="bill.comments">
       <h1>COMMENTS</h1>
       <hr class="margin-top-small margin-bottom-small" />
-    <div ng-show="bill.commentMessage" class="card-message">
+    <div ng-show="bill.commentMessage" class="card-message padding-large">
       <h2>Be the first to comment on this bill.</h2>
     </div>
       <comments ng-show="bill.comments" comments='bill.comments'></comments>
@@ -139,7 +139,7 @@
       <button class="btn-green l-6" ng-click="bill.showVoteModal(true)"><span class="icon-arrow-up"></span> Vote In Favor </button>
       <button class="btn-red l-6" ng-click="bill.showVoteModal(false)"><span class="icon-arrow-down"></span> Vote Against </button>
     </aside>
-      <section class="card-message" ng-show="bill.hasVoted">
+      <section class="card-message padding-top-small" ng-show="bill.hasVoted">
       <h2>You have already voted on this bill.</h2>
       </section>
     </div>
