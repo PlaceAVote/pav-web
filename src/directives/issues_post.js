@@ -7,6 +7,7 @@ module.exports = function() {
     },
     templateUrl: 'partials/directives/issues_post.html',
     link: function(scope, el, attr) {
+      scope.example = false;
       scope.textarea = el[0].getElementsByClassName('post-message');
       scope.$watchCollection('textarea', function(n) {
         if (n[0]) {
