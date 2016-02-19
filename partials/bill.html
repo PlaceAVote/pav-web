@@ -109,8 +109,8 @@
     </div>
       <comments ng-show="bill.comments" comments='bill.comments'></comments>
 		</div>
+    <div class="comment-create padding-small card col">
 
-    <div class="comment-create padding-small card">
     <div class="profile-image-holder">
       <div ng-style="{'background-image': 'url(' + bill.rs.user.img_url + ')'}">
       </div>
@@ -119,8 +119,10 @@
         <textarea name='commentOnBillBox' rows="1" ng-model='bill.commentBody' placeholder='Write your comment here' msd-elastic></textarea>
         <input type="submit" value="Post" class="comment-post-btn btn-blank" />
       </form>
+      <div class="row padding-top-small" ng-show="bill.errorMessage !== ''">
+        <p class="red">{{bill.errorMessage}}</p>
+      </div>
     </div>
-
 
 <section ng-switch="bill.chartShow" class="row tablet-col bill-stats-vote l-12">
 		<div ng-switch-when="true" class="card padding-small bill-stats l-6" >
