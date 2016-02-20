@@ -11,3 +11,4 @@ gulp app-min
 gulp template-prod
 
 echo "-- Building Web-app"
+. ./scripts/deploy.sh dev.placeavote.com

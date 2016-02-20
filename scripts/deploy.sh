@@ -7,24 +7,9 @@ bucket="$1"
 echo "-- Deploying to Envionrment... $1"
 
 echo "Uploading zip to S3"
+aws s3 sync ./css s3://${bucket}/css --acl "public-read" --content-type "text/css"
+aws s3 sync ./dist s3://${bucket}/dist --acl "public-read"
+aws s3 sync ./font s3://${bucket}/font --acl "public-read"
+aws s3 sync ./img s3://${bucket}/img --acl "public-read"
+aws s3 sync ./partials s3://${bucket}/partials --acl "public-read" --content-type "text/html"
 aws s3api put-object --bucket ${bucket} --key index.html --body index.html --content-type text/html --acl public-read
-aws s3api put-object --bucket ${bucket} --key dist/js/app-min.js --body ./dist/js/app-min.js --acl public-read
-aws s3api put-object --bucket ${bucket} --key css/styles.css --body ./css/styles.css --content-type text/css  --acl public-read
-
-FILES="partials/*.html partials/*/*.html  font/* img/*.png img/*.svg img/*/*.svg img/*/*.png"
-for f in $FILES
-do
-  echo ${f}
-  if [[ ${f} == *".svg"* ]]
-  then
-    aws s3api put-object --bucket ${bucket} --key ${f} --body ${f}  --content-type image/svg+xml --acl public-read
-  elif [[ ${f} == *".png"* ]]
-  then
-    aws s3api put-object --bucket ${bucket} --key ${f} --body ${f} --content-type image/png --acl public-read
-  elif [[ ${f} == *".html"* ]]
-  then
-    aws s3api put-object --bucket ${bucket} --key ${f} --body ${f} --content-type text/html  --acl public-read
-  else
-    aws s3api put-object --bucket ${bucket} --key ${f} --body ${f} --acl public-read
-  fi
-done

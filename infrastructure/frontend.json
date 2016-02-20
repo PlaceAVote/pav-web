@@ -11,20 +11,15 @@
   },
   "Mappings": {
     "BucketName": {
-      "dev": { "bucket": "www.placeavote.dev" },
-      "beta": { "bucket": "www.placeavote.beta" },
+      "dev": { "bucket": "dev.placeavote.com" },
+      "beta": { "bucket": "beta.placeavote.com" },
       "prod": { "bucket" : "www.placeavote.com" }
     }
   },
-  "Conditions" :{
-    "Dev" : {"Fn::Equals" : [{"Ref" : "Environment"}, "dev"]},
-    "Beta" : {"Fn::Equals" : [{"Ref" : "Environment"}, "beta"]},
-    "Prod" : {"Fn::Equals" : [{"Ref" : "Environment"}, "prod"]}
-  },
   "Resources": {
-    "DevSite": {
+
+    "Site": {
       "Type": "AWS::S3::Bucket",
-      "Condition": "Dev",
       "DeletionPolicy" : "Retain",
       "Properties": {
         "AccessControl": "PublicRead",
@@ -36,39 +31,43 @@
       }
     },
 
-    "BetaSite": {
-      "Type": "AWS::S3::Bucket",
-      "Condition": "Beta",
-      "DeletionPolicy" : "Retain",
+    "CDN": {
+      "Type": "AWS::CloudFront::Distribution",
       "Properties": {
-        "AccessControl": "PublicRead",
-        "BucketName": { "Fn::FindInMap" : [ "BucketName", { "Ref" : "Environment" }, "bucket"]},
-
-        "WebsiteConfiguration": {
-          "IndexDocument": "index.html",
-          "RedirectAllRequestsTo" : {
-            "HostName" : "www.beta.placeavote.com",
-            "Protocol" : "https"
-          }
+        "DistributionConfig": {
+          "Aliases": [{ "Fn::FindInMap" : [ "BucketName", { "Ref" : "Environment" }, "bucket"]}],
+          "Origins": [
+            {
+              "S3OriginConfig": {
+                "OriginAccessIdentity": ""
+              },
+              "Id": {"Fn::GetAtt": ["Site", "WebsiteURL"]},
+              "DomainName": {"Fn::GetAtt": ["Site", "DomainName"]}
+            }
+          ],
+          "DefaultCacheBehavior": {
+            "ForwardedValues": {
+              "QueryString": true
+            },
+            "TargetOriginId": {"Fn::GetAtt": ["Site", "WebsiteURL"]},
+            "ViewerProtocolPolicy": "allow-all"
+          },
+          "DefaultRootObject": "index.html",
+          "Enabled": true
         }
       }
     },
 
-    "LiveSite": {
-      "Type": "AWS::S3::Bucket",
-      "DeletionPolicy" : "Retain",
-      "Condition": "Prod",
+    "Route": {
+      "Type": "AWS::Route53::RecordSet",
       "Properties": {
-        "AccessControl": "PublicRead",
-        "BucketName": { "Fn::FindInMap" : [ "BucketName", { "Ref" : "Environment" }, "bucket"]},
-
-        "WebsiteConfiguration": {
-          "IndexDocument": "index.html",
-          "RedirectAllRequestsTo" : {
-            "HostName" : "www.placeavote.com",
-            "Protocol" : "https"
-          }
-        }
+        "AliasTarget": {
+          "DNSName": {"Fn::GetAtt": ["CDN", "DomainName"]},
+          "HostedZoneId": "Z2FDTNDATAQYW2"
+        },
+        "HostedZoneId": "ZHFDR302GM09A",
+        "Name": { "Fn::FindInMap" : [ "BucketName", { "Ref" : "Environment" }, "bucket"]},
+        "Type": "A"
       }
     }
   }
