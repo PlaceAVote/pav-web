@@ -1,11 +1,18 @@
-<div style="padding:25px" ng-controller="LoginCtrl as invalid">
-  <div ng-show="invalid.showNotRegisteredPartial">
-    <div>
-      <h2>Sign Up Free</h2>
-      <input type="text" ng-model="invalid.user.email" >
-      <input type="password" ng-model="invalid.user.password" >
-      <button ng-click="invalid.validate(invalid.user, '/onboarding')">Sign Up</button>
-      <button ng-click="invalid.loginWithFacebook()">Sign Up with Facebook</button>
+<div ng-controller="LoginCtrl as invalid">
+  <div ng-show="invalid.showNotRegisteredPartial" class="fullscreen-user-signup col">
+    <i ng-click="invalid.showNotRegisteredPartial = false" class="icon-close click black h-right padding-large"></i>
+    <h2 class="text-center margin-top-large">You need to sign up or log in to get involved!</h2>
+    <h2 class="text-center margin-bottom-large">It's simple, free and only takes 2 minutes.</h2>
+    <div class="col h-center user-signup-card card padding-large">
+      <h2 class="text-center margin-bottom-medium">Sign Up Free</h2>
+      <input class="input-text margin-bottom-medium padding-left-medium" placeholder="Email" type="text" ng-model="invalid.user.email" >
+      <input class="input-text margin-bottom-medium padding-left-medium" placeholder="Password" type="password" ng-model="invalid.user.password" >
+      <button class="large-button green-button margin-bottom-medium" ng-click="invalid.validate(invalid.user, '/onboarding')">Sign Up</button>
+      <button class="large-button blue-button" ng-click="invalid.loginWithFacebook()">Sign Up with Facebook</button>
     </div>
+    <h1 class="text-center margin-top-large">Or <span class="bold">Log In</span></h1>
   </div>
 </div>
+
+
+<!-- ng-show="invalid.showNotRegisteredPartial" -->
