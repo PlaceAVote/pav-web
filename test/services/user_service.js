@@ -265,21 +265,6 @@ describe("User Service", function() {
         expect(resource.first_name).to.eql("paul");
       });
     });
-    it("onError sets created via facebook bool", function(done){
-      function mockResource(url, params, methods, options) {
-        this.login = function(data, onLoad, onError){
-          onError({message: "User Not Found"});
-        }
-      };
-      facebook = new MockFacebook();
-      authService = new AuthService(undefined, authOptions);
-      authService.setAuth({accessToken: 'TOKEN'});
-      var subject = new UserService(mockResource, mockFacebook, authService);
-      subject.loginWithFacebook(function(err, resource){
-        expect(subject.createdFB).to.eql(true);
-        done();
-      });
-    });
     it("create from facebook should only have specific params", function(done){
       mockResource = function(){
         this.create = function(data, onLoad, onError){
