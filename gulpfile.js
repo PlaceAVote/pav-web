@@ -175,7 +175,7 @@ var gulp = require('gulp'),
   });
 
   gulp.task('compileSass', function() {
-    return gulp.src('./scss/*.scss')
+    return gulp.src('./scss_new/*.scss')
     .pipe(maps.init())
     .pipe(sass({includePaths: ['./scss'], outputStyle: 'compressed'}))
     .pipe(maps.write('./'))
@@ -235,7 +235,7 @@ var gulp = require('gulp'),
   });
 
   gulp.task('watchFiles', function() {
-    gulp.watch('scss/**/**/*', ['autoPrefix']);
+    gulp.watch('scss_new/**/**/*', ['autoPrefix']);
     gulp.watch(['src/**/*.js', 'src/*.js'], ['browserify-web']);
     gulp.watch('partials/**/*');
   });

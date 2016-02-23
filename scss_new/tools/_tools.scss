@@ -1,0 +1,42 @@
+/*------------------------------------*\
+    #TOOLS-MIXINS
+\*------------------------------------*/
+
+
+/**
+ * Rem converts pixel value into rem value.
+ */
+
+@function calculateRem($size) {
+    $remSize: $size / 16px;
+    @return $remSize * 1rem;
+}
+
+
+
+
+
+/**
+ * font-size returns font-size property with pixel and 
+ * rem values.
+ */
+
+@mixin font-size($size) {
+    font-size: $size; 
+    font-size: calculateRem($size);
+}
+
+
+
+
+
+/**
+ * media query mixin that wraps around properties you pass
+ * into it.
+ */
+
+@mixin media($width) {
+  @media screen and (max-device-width: $width), screen and (max-width: $width) {
+    @content;
+  }
+}

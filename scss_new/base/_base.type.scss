@@ -1,0 +1,103 @@
+/*------------------------------------*\
+    #BASE-TYPE
+\*------------------------------------*/
+
+
+/**
+* The font we're using is Whitney and is provided via
+* CloudTypography CDN.
+*/
+
+* {
+    font-family: "Whitney SSm A", "Whitney SSm B";
+}
+
+
+/**
+* Font weights and style variables
+*/
+
+$font-bold: 700;
+
+$font-normal: 400;
+
+$font-normalitalic: 400;
+
+$font-light: 300;
+
+$font-italic: 500;
+
+
+/**
+ * Type has been split into app and marketing sections, 
+ * however some of the marketing type may appear on the
+ * app. 
+ */
+
+/*------------------------------------*\
+    #APP-TYPE
+\*------------------------------------*/
+
+
+/**
+* h1 is the card header: bold and blue.
+*/
+
+h1 {
+    @include font-size(14px);
+    color: $blue;
+    font-weight: $font-bold;
+    text-transform: uppercase;
+}
+
+/**
+* p in the context of the app is general body text that
+* you will find in bill summaries, comments, timeline etc.
+*/
+
+p {
+    @include font-size(14px);
+    color: $black;
+    font-weight: $font-normal;
+}
+
+/**
+* h2 is used for user links.
+*/
+
+h2 {
+    @include font-size(14px);
+    color: $red;
+    font-weight: $font-normal;
+}
+
+
+h2 {
+
+}
+
+
+h3 {
+
+}
+
+
+h4 {
+
+}
+
+
+
+
+
+/*------------------------------------*\
+    #MARKETING-TYPE
+\*------------------------------------*/
+
+
+a {
+   @include font-size(18px);
+   color: $green;
+   text-decoration: none;
+}
+
