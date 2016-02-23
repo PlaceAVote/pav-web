@@ -1,0 +1,26 @@
+.fullscreen-user-signup {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    background: white;
+    top: 0;
+    left: 0;
+    z-index: 99999;
+    h2 {
+      @include font-size(24px);
+      @include media(600px) {
+        @include font-size(18px);
+        padding: 20px;
+      }
+    }
+    .user-signup-card {
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .input-text {
+      border-color: $grey;
+      height: 35px;
+    }
+
+}
