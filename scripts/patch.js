@@ -24,7 +24,6 @@ function updateDistribution(dist, done) {
       MinimumProtocolVersion: 'SSLv3'
     };
     config.ViewerCertificate = viewCert;
-    console.log(config.ViewerCertificate);
     config.DefaultCacheBehavior.Compress = true;
     config.CallerReference = uuid.v4();
     config.Id = dist.Id;
@@ -102,6 +101,8 @@ function patch(done) {
   });
 }
 
+// Waiting for 5 minutes so cloud formation
+// will create initial CDN distribution.
 setTimeout(function() {
   patch(function(err){
     if (err) {
