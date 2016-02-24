@@ -13,7 +13,7 @@ function SignUpCtrl($rootScope, $scope, $location, userService, authService) {
     last_name: user.last_name || '',
     dob: user.dob || '',
     country_code: 'USA',
-    gender: user.gender || 'male',
+    gender: user.gender || 'they',
   };
   this.country = countryCodes;
   this.rs = $rootScope;
