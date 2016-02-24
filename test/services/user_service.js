@@ -297,7 +297,8 @@ describe("User Service", function() {
       subject.userToken = {
         accessToken: "AUTHT0k3n"
       };
-      subject.saveUser();
+      var mockCallback = function() {return};
+      subject.saveUser(mockCallback, true);
     });
     describe("User public perception", function(){
       it("can be changed to be public", function(){
