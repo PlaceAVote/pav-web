@@ -23,7 +23,7 @@ function LoginCtrl($scope, $location, userService, authService, $rootScope, $rou
   that.showNotRegisteredPartial = false;
   doc = doc || document;
   doc.body.addEventListener('not-valid', function() {
-    that.showNotRegisteredPartial  = true;
+    that.showNotRegisteredPartial = true;
   });
 
 

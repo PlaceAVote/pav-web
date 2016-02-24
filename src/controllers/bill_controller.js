@@ -40,7 +40,7 @@ BillController.prototype.authenticate = function() {
   }
   that.authService.validateToken(function(result) {
     that.validated = result;
-    that.rs.notLoggedIn = true;
+    that.rs.notLoggedIn = !result;
   });
 };
 
