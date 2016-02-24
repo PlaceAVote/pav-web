@@ -84,6 +84,7 @@ function patch(done) {
       }
     }
     if (!update) {
+      console.log('Nothing to update');
       done();
       return;
     }
@@ -100,10 +101,13 @@ function patch(done) {
   });
 }
 
-patch(function(err){
-  if (err) {
-    console.log('ERROR: ', err);
-    return;
-  }
-  console.log('Distribution Completing');
-});
+setTimeout(function() {
+  patch(function(err){
+    if (err) {
+      console.log('ERROR: ', err);
+      return;
+    }
+    console.log('Distribution Completing');
+  });
+}, 300000);
+
