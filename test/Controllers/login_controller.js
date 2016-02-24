@@ -20,6 +20,7 @@ describe('LoginCtrl', function() {
 			var scope = {};
 			scope.$on = function() {};
       var subject = new LoginCtrl(scope, {}, {}, authService, {}, {}, {}, doc);
+			subject.user.email = "anthonyemail@test.com";
 			expect(subject.emailValidation(subject.user.email)).to.be.true;
 		});
 
