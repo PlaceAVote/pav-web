@@ -10,5 +10,5 @@ gulp browserify-web
 gulp app-min
 gulp template-prod
 
-echo "-- Building Web-app"
+echo "-- Deploying Web-app"
 . ./scripts/deploy.sh dev.placeavote.com
