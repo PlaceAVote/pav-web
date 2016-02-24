@@ -21,10 +21,15 @@ function HomeController($scope, $location, $anchorScroll, userService, $rootScop
 HomeController.prototype.loginWithFacebook = function(){
   var that = this;
   this.userService.loginWithFacebook(function(err, response){
-    if(err){
-      that.location.path("/onboarding");
-    }
-    else {
+    if (err) {
+      if (err.status === 999) {
+        that.loaded = true;
+        return that.location.path('/');
+      }
+      that.rs.facebookSignUp = true;
+      console.log(that.rs);
+      return that.location.path('/onboarding');
+    } else {
       that.userService.getUserProfile('me', function(err, result) {
         if (err) {
           return;
@@ -38,5 +43,5 @@ HomeController.prototype.loginWithFacebook = function(){
     }
   });
 };
-module.exports = HomeController;
 
+module.exports = HomeController;

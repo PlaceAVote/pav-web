@@ -20,20 +20,20 @@ describe('LoginCtrl', function() {
 			var scope = {};
 			scope.$on = function() {};
       var subject = new LoginCtrl(scope, {}, {}, authService, {}, {}, {}, doc);
-      subject.user.email = "anthony.test1@test.com";
+			subject.user.email = "anthony.test1@test.com";
 			expect(subject.emailValidation(subject.user.email)).to.be.true;
 		});
 
 
 		// it('Should make sure the password fails client side validation', function() {
 		// 	var scope = {};
-		// 	var subject = new LoginCtrl(scope, {}, {}, authService);
+		// 	var subject = new LoginCtrl(scope, {}, {}, authService, {});
 		// 	expect(subject.passwordValidation("password")).to.be.false;
 		// });
 
 		// it('Should return true is password is valid', function() {
 		// 	var scope = {};
-		// 	var subject = new LoginCtrl(scope, {}, {}, authService);
+		// 	var subject = new LoginCtrl(scope, {}, {}, authService, {});
 		// 	expect(subject.passwordValidation("p455worD")).to.be.true;
 		// });
 
@@ -42,7 +42,7 @@ describe('LoginCtrl', function() {
 		// 	var changed = false;
 		// 	var created = false;
 		// 	var scope = {};
-		// 	var subject = new LoginCtrl(scope, {}, {}, authService);
+		// 	var subject = new LoginCtrl(scope, {}, {}, authService, {});
 		// 	var user = {
 		// 		email : "anthonyemail.com",
 		// 		password : "password"
@@ -69,7 +69,7 @@ describe('LoginCtrl', function() {
 		// 	var created = false;
 		// 	var changed = false;
 		// 	var scope = {};
-		// 	var subject = new LoginCtrl(scope, {}, {}, authService);
+		// 	var subject = new LoginCtrl(scope, {}, {}, authService, {});
 		// 	var user = {
 		// 		email : "testing.test1@test.com",
 		// 		password : "p34swOrD1"
@@ -208,6 +208,59 @@ describe('LoginCtrl', function() {
             expect(subject.resetSuccess).to.equal(false);
           });
         });
+       });
+
+       it("should set facebook login bool to true if it returns an error", function() {
+        var mockUserService = {
+          loginWithFacebook: function(callback) {
+            var err = {status: 401};
+            return callback(err);
+          },
+        };
+        var mockRootScope = {
+          facebookSignUp: false,
+        }
+
+        var mockLocation = {
+          path: function() {
+            return;
+          }
+        }
+
+        var scope = {};
+        scope.$on = function() {};
+
+        var subject = new LoginCtrl(scope, mockLocation, mockUserService, authService, mockRootScope);
+        subject.loginWithFacebook();
+        expect(subject.rs.facebookSignUp).to.equal(true);
+
+       });
+
+       it("should set path to root if facebook login returns an error status 999", function() {
+        var mockUserService = {
+          loginWithFacebook: function(callback) {
+            var err = {status: 999};
+            return callback(err);
+          },
+        };
+        var mockRootScope = {
+          facebookSignUp: false,
+        }
+
+        var mockLocation = {
+          path: function() {
+            return;
+          }
+        }
+
+        var scope = {};
+        scope.$on = function() {};
+
+        var subject = new LoginCtrl(scope, mockLocation, mockUserService, authService, mockRootScope);
+        subject.loginWithFacebook();
+        expect(subject.rs.facebookSignUp).to.equal(false);
+        expect(subject.loaded).to.equal(true);
+
        });
 
 });
