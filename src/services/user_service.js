@@ -87,24 +87,35 @@ function UserService($resource, facebookService, authService, userStore) {
     }
     return config.users.endpoint;
   };
-  var saveUser = function(callback) {
-    var that = this;
 
+  var saveUser = function(callback, facebook) {
+    var that = this;
     var onLoad = function(user) {
       users.me = user;
       authService.setAuth(user.token);
       callback(undefined, user);
     };
+
     var onError = function(err) {
       callback(err);
     };
+
     if (!this.user) {
       return;
     }
-    var token = authService.getFacebookAccessToken();
-    var userId = authService.getFacebookId();
-    var url = getSaveConfig(token);
-    var toSave = this.user.toBody(token, userId);
+
+    var url, toSave;
+
+    if (facebook) {
+      var token = authService.getFacebookAccessToken();
+      var userId = authService.getFacebookId();
+      url = getSaveConfig(token);
+      toSave = this.user.toBody(token, userId);
+    } else {
+      url = getSaveConfig();
+      toSave = this.user.toBody();
+    }
+
     authService.setFacebookAuth(undefined);
 
     var saveUser = new $resource(url, undefined, {create: config.methods.put});
