@@ -4,7 +4,7 @@ function LoginCtrl($scope, $location, userService, authService, $rootScope, $rou
   AuthorizeController.authorize({success: '/feed', authorizer: authService, location: $location});
   $scope = $scope || {};
   this.loaded = true;
-  this.rs = $rootScope || {};
+  this.rs = $rootScope;
   this.userService = userService;
   this.passwordService = passwordService;
   $scope.login = this;
@@ -43,6 +43,7 @@ LoginCtrl.prototype.loginWithFacebook = function() {
         that.loaded = true;
         return that.location.path('/');
       }
+      that.rs.facebookSignUp = true;
       return that.location.path('/onboarding');
     }
 

@@ -25,7 +25,7 @@ describe("SignUpController", function(){
 		last_name : "",
 		dob : "",
 		country_code : "USA",
-        gender: "male"
+        gender: "they"
 	};
 	expect(subject.additionalInformation).to.eql(blankUser);
 

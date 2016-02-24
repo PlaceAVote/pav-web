@@ -4,7 +4,7 @@ var strftime = require('strftime');
 var TimelineResponseFactory = require('../factories/timeline_response_factory.js');
 
 function UserService($resource, facebookService, authService, userStore) {
-  this.createdFB = false;
+
   users = userStore || {};
   var loginWithFacebook = function(callback) {
     var that = this;
@@ -14,7 +14,6 @@ function UserService($resource, facebookService, authService, userStore) {
       callback(undefined, resource);
     };
     var onError = function(err) {
-      that.createdFB = true;
       callback(err, that.user);
     };
 
@@ -82,32 +81,44 @@ function UserService($resource, facebookService, authService, userStore) {
     }
   };
 
-  var getSaveConfig = function(user) {
-    if (user.password) {
-      return config.users.endpoint;
+  var getSaveConfig = function(token) {
+    if (token) {
+      return config.users.facebookCreateUrl;
     }
-    return config.users.facebookCreateUrl;
+    return config.users.endpoint;
   };
-  var saveUser = function(callback) {
-    var that = this;
 
+  var saveUser = function(callback, facebook) {
+    var that = this;
     var onLoad = function(user) {
       users.me = user;
       authService.setAuth(user.token);
       callback(undefined, user);
     };
+
     var onError = function(err) {
       callback(err);
     };
+
     if (!this.user) {
       return;
     }
-    var url = getSaveConfig(this.user);
-    var saveUser = new $resource(url, undefined, {create: config.methods.put});
 
-    var token = authService.getFacebookAccessToken();
-    var userId = authService.getFacebookId();
-    var toSave = this.user.toBody(token, userId);
+    var url, toSave;
+
+    if (facebook) {
+      var token = authService.getFacebookAccessToken();
+      var userId = authService.getFacebookId();
+      url = getSaveConfig(token);
+      toSave = this.user.toBody(token, userId);
+    } else {
+      url = getSaveConfig();
+      toSave = this.user.toBody();
+    }
+
+    authService.setFacebookAuth(undefined);
+
+    var saveUser = new $resource(url, undefined, {create: config.methods.put});
     saveUser.create(toSave, onLoad, onError);
   };
 

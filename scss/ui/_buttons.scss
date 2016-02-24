@@ -131,6 +131,7 @@ button {
 }
 
 .small-button {
+  text-decoration: none;
   border-radius: 3px;
   color: white;
   height: 20px;
@@ -144,6 +145,7 @@ button {
 }
 
 .medium-button {
+  text-decoration: none;
   border-radius: 3px;
   color: white;
   height: 30px;
@@ -159,6 +161,7 @@ button {
 }
 
 .large-button {
+  text-decoration: none;
   border-radius: 3px;
   color: white;
   height: 45px;
@@ -189,6 +192,54 @@ button {
       background: lighten($green, 4%);
     span {
       text-shadow: 0px 3px 5px transparentize($green, 0.8);
+    }
+  }
+}
+
+
+
+.twitter-share, .facebook-share {
+  @include font-size(14px);
+  @include light();
+  font-family: $font-normal;
+  border-radius: 3px;
+  text-align: center;
+  // display: inline-block;
+  text-decoration: none;
+  line-height: 28px;
+  padding: 5px 15px 5px 36px;
+  color: white;
+  position: relative;
+    span {
+      position: absolute;
+      top: 7px;
+      left: 10px;
+      @include font-size(20px);
+    }
+
+  @include media(600px) {
+    @include font-size(11px);
+  }
+}
+
+.twitter-share {
+  border: 1px solid darken($twblue, 10%);
+  background: $twblue;
+  &:hover {
+    background: lighten($twblue, 4%);
+    span {
+    text-shadow: 0px 3px 5px transparentize($twblue, 0.8);
+    }
+  }
+}
+
+.facebook-share {
+  border: 1px solid darken($fbblue, 10%);
+  background: $fbblue;
+  &:hover {
+    background: lighten($fbblue, 4%);
+    span {
+    text-shadow: 0px 3px 5px transparentize($fbblue, 0.8);
     }
   }
 }

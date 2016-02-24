@@ -22,5 +22,11 @@
       border-color: $grey;
       height: 35px;
     }
+}
 
+.social-sharing-container {
+  @include media(600px) {
+    align-self: center !important;
+    margin-left: 0;
+  }
 }
