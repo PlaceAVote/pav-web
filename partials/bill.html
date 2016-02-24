@@ -30,21 +30,21 @@
             				<span></span>
             			</li>
             		</ul>
-                <div  class="bill-timeline-bar"><span class="{{bill.body.getStatusClass()}}"></span></div>
+                <div class="bill-timeline-bar"><span class="{{bill.body.getStatusClass()}}"></span></div>
             		</section>
                 </div>
 
-                <a class="facebook-share-link" ng-click="bill.shareToFacebook()">Share on Facebook</a>
-                <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text={{bill.getShareMessage()}}&url={{bill.getLocation()}}" data-size="large">Share on Twitter</a>
+    <div class="row h-right tablet-margin-bottom-small social-sharing-container">
+      <button class="facebook-share margin-right-small click" ng-click="bill.shareToFacebook()"><span class="icon-facebook padding-right-small"></span>Share on Facebook</button>
+      <a class="twitter-share" ng-href="https://twitter.com/intent/tweet?text={{bill.getShareMessage()}}&url={{bill.getLocation()}}" data-size="large"><span class="icon-twitter padding-right-small"></span>Share on Twitter</a> 
+    </div>
+      
 
     <section class="top-comments" ng-show="bill.forComment.author">
   		<div class="card padding-small" loader loader-context="bill.topLoaded">
   			<h1>Top Comment In Favor</h1>
   			<hr class="margin-top-small margin-bottom-small" />
         <aside class="row-layout loaded" ng-show="bill.forComment.author">
-<!--   			<div class="user-img-border">
-          <img ng-src="{{bill.forComment.author_img_url}}" />
-  			</div> -->
         <div class="profile-image-holder comments click">
           <div ng-style="{'background-image': 'url(' + bill.forComment.author_img_url + ')'}">
           </div>

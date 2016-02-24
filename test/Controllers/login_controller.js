@@ -20,7 +20,6 @@ describe('LoginCtrl', function() {
 			var scope = {};
 			scope.$on = function() {};
       var subject = new LoginCtrl(scope, {}, {}, authService, {}, {}, {}, doc);
-			subject.user.email = "anthony.test1@test.com";
 			expect(subject.emailValidation(subject.user.email)).to.be.true;
 		});
 
@@ -230,7 +229,7 @@ describe('LoginCtrl', function() {
         var scope = {};
         scope.$on = function() {};
 
-        var subject = new LoginCtrl(scope, mockLocation, mockUserService, authService, mockRootScope);
+        var subject = new LoginCtrl(scope, mockLocation, mockUserService, authService, mockRootScope, {}, {}, doc);
         subject.loginWithFacebook();
         expect(subject.rs.facebookSignUp).to.equal(true);
 
@@ -256,7 +255,7 @@ describe('LoginCtrl', function() {
         var scope = {};
         scope.$on = function() {};
 
-        var subject = new LoginCtrl(scope, mockLocation, mockUserService, authService, mockRootScope);
+        var subject = new LoginCtrl(scope, mockLocation, mockUserService, authService, mockRootScope, {}, {}, doc);
         subject.loginWithFacebook();
         expect(subject.rs.facebookSignUp).to.equal(false);
         expect(subject.loaded).to.equal(true);
