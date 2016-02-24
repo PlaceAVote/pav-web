@@ -4,6 +4,7 @@ var uuid = require('uuid');
 var awsOptions = {region: 'us-east-1'};
 var client = new AWS.CloudFront(awsOptions);
 
+var config = require('./config.js');
 var arg = process.argv[process.argv.length -1];
 
 function updateDistribution(dist, done) {
@@ -18,7 +19,7 @@ function updateDistribution(dist, done) {
     }
 
     viewCert = {
-      ACMCertificateArn: 'arn:aws:acm:us-east-1:645639678282:certificate/cc3ba321-abf8-4ee3-ac96-9f9158bc5bc2',
+      ACMCertificateArn: config.certAtn,
       SSLSupportMethod: 'sni-only',
       MinimumProtocolVersion: 'SSLv3'
     };
