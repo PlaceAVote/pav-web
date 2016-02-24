@@ -4,7 +4,7 @@ var uuid = require('uuid');
 var awsOptions = {region: 'us-east-1'};
 var client = new AWS.CloudFront(awsOptions);
 
-var config = require('./config.js');
+var sysConfig = require('./config.js');
 var arg = process.argv[process.argv.length -1];
 
 function updateDistribution(dist, done) {
@@ -19,11 +19,12 @@ function updateDistribution(dist, done) {
     }
 
     viewCert = {
-      ACMCertificateArn: config.certAtn,
+      ACMCertificateArn: sysConfig.certArn,
       SSLSupportMethod: 'sni-only',
       MinimumProtocolVersion: 'SSLv3'
     };
     config.ViewerCertificate = viewCert;
+    console.log(config.ViewerCertificate);
     config.DefaultCacheBehavior.Compress = true;
     config.CallerReference = uuid.v4();
     config.Id = dist.Id;
