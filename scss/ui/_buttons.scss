@@ -244,6 +244,20 @@ button {
   }
 }
 
+.signup-modal-button {
+  cursor: pointer;
+  @include font-size(14px);
+  @include light();
+  font-family: $font-normal;
+  border-radius: 3px;
+  text-align: center;
+  text-decoration: none;
+  line-height: 28px;
+  padding: 5px 15px 5px 15px;
+  color: white;
+  position: relative;
+}
+
 // .follow-me {
 // .btn-green {
 //     &.ng-enter {
