@@ -209,6 +209,9 @@
   section {
     display: inline-block;
     width: 100%;
+    border:1px solid $grey;
+    margin-bottom:20px;
+    border-radius:3px;
 
     .press-quote {
       display: flex;
