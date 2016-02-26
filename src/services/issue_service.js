@@ -115,11 +115,35 @@ function IssueService($resource, authService, callback) {
     request.getResponse(undefined, onLoad, onError);
   };
 
+  var getIssue = function(issue_id, callback) {
+
+     if (!issue_id) {
+      callback('Issue id is required');
+      return;
+    }
+
+    var token = authService.getAccessToken();
+
+    var onLoad = function(result) {
+      callback(undefined, new Issue(result));
+    };
+
+    var onError = function(err) {
+      callback(err);
+    };
+
+    var url = config.users.issue.endpoint + '/' + issue_id;
+    var request = new $resource(url, undefined, {getIssue: config.methods.get});
+
+    request.getIssue(undefined, onLoad, onError);
+  }
+
   return {
     saveIssue: saveIssue,
     setIssueResponse: setIssueResponse,
     getIssueResponse: getIssueResponse,
     deleteIssueResponse: deleteIssueResponse,
+    getIssue: getIssue,
   };
 }
 
