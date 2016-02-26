@@ -193,6 +193,7 @@ module.exports = {
       fromId: function(id) {
         return urls.USER + '/user/' + id + '/profile';
       },
+      open: urls.USER + '/user/profile/',
     },
     timeline: function(id) {
       return urls.USER + '/user/' + id + '/timeline';

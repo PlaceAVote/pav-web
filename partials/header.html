@@ -1,10 +1,10 @@
-<header ng-controller="HeaderCtrl as header" ng-show="header.inPlatform()">
+<header ng-controller="HeaderCtrl as header" ng-show="header.rs.inApp">
 
 	<div class="row-header">
   	<img ng-click="header.location.path('/feed')" ng-class="{'header-focus':header.focus}" class="pav-icon" src="//cdn.placeavote.com/img/pav_icon.svg" />
 
     <search-bar class="search" placeholder="Search bills or people..." ng-class="{'search-focus':header.focus}" results="header.searchResults" focus="header.focus" query="header.search(q)" searching="header.searching" people bills></search-bar>
-    <div ng-show="header.notLoggedIn()" class="not-logged-in">
+    <div ng-show="header.rs.notLoggedIn" class="not-logged-in">
       <button ng-click="header.signup()" class="medium-button green-button padding-left-small padding-right-small margin-right-small">SIGN UP</button>
       <button ng-click="header.signup()" class="medium-button blue-button padding-left-small padding-right-small">LOGIN</button>
     </div>

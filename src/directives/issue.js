@@ -4,9 +4,17 @@ module.exports = function($location, issueService) {
     scope: {
       issue: '=',
       example: '=',
+      closable: '&',
+      follow: '=',
+      profile: '=',
     },
     templateUrl: 'partials/directives/issue.html',
     link: function(scope, el, attr) {
+
+      if (attr.$attr.single) {
+        scope.single = true;
+      }
+
       scope.location = $location;
       scope.issueService = issueService;
       scope.eResponse = function(id, emo, issue) {

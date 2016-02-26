@@ -37,6 +37,7 @@ HomeController.prototype.loginWithFacebook = function(){
         if (result) {
           that.rs.user = result;
           that.rs.inApp = true;
+          that.rs.notLoggedIn = false;
           that.location.path('/feed');
         }
       });

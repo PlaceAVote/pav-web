@@ -146,21 +146,26 @@ function UserService($resource, facebookService, authService, userStore) {
 
   var getUserProfile = function(id, callback) {
     var token = authService.getAccessToken();
-    if (!token) {
-      callback({status: 401, message: 'No Auth Token'});
-      return;
-    }
+
     // This has no effect in actual product.
     if (this.user && this.user.loadedFromServer) {
       return callback(undefined, this.user);
     }
 
-    var url = config.users.profile.fromId(id);
-    config.methods.get.headers.Authorization = token;
+    var url;
+
+    if (token) {
+      config.methods.get.headers.Authorization = token;
+      url = config.users.profile.fromId(id);
+    } else {
+      url = config.users.profile.open + id;
+    }
+
     var profileResource = new $resource(url, undefined, {getProfile: config.methods.get});
     var onError = function(err) {
       return callback(err);
     };
+
     var onLoad = function(result) {
       // Be wary of this.
       if (!users || !users.me) {

@@ -13,6 +13,7 @@ function ProfileController($scope, $location, $routeParams, authService, userSer
   if ($routeParams.issueid) {
     this.issueService = issueService;
     this.getIssue($routeParams.issueid);
+    this.showIssue = true;
     this.authenticate();
   } else {
     this.id = $routeParams.id;
@@ -168,6 +169,11 @@ ProfileController.prototype.getIssue = function(issue) {
       that.issue = res;
     }
   });
+};
+
+ProfileController.prototype.closeIssue = function() {
+  this.showIssue = false;
+  this.populate();
 }
 
 module.exports = ProfileController;

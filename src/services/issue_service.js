@@ -136,9 +136,10 @@ function IssueService($resource, authService, callback) {
     var url = config.users.issue.endpoint + '/' + issue_id;
 
     if (token) {
+      console.log(token);
       config.methods.get.headers.Authorization = token;
     }
-    
+
     var request = new $resource(url, undefined, {getIssue: config.methods.get});
 
     request.getIssue(undefined, onLoad, onError);

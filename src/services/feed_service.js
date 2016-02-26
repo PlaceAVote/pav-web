@@ -17,6 +17,7 @@ function FeedService($resource, authService, userService) {
           last_timestamp: response.last_timestamp,
           feed: FeedResponseFactory.getResponses(response.results),
         };
+        console.log(results);
         return callback(undefined, results);
       }
       catch (e) {

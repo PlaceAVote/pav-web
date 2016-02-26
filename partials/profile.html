@@ -55,8 +55,8 @@
 </div>
 
 
-<div class="issue-modal-container" ng-show="profile.issue">
+<div class="issue-modal-container" ng-show="profile.showIssue">
   <div class="card padding-small">
-    <issue issue="profile.issue"></issue>
+    <issue issue="profile.issue" follow="profile.following" profile="profile" single></issue>
   </div>
 </div>
