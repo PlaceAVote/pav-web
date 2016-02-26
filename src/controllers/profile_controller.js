@@ -50,8 +50,10 @@ ProfileController.prototype.populate = function() {
 
 ProfileController.prototype.populateProfile = function() {
   var that = this;
+  console.log(this.id);
   this.userService.getUserProfile(this.id, function(err, result) {
     if (!err) {
+      console.log(this.id, result);
       that.user = result;
       title.profile(that.user);
       that.following = result.following ? 'Unfollow' : 'Follow';
@@ -152,9 +154,9 @@ ProfileController.prototype.follow = function() {
   }
 };
 
-ProfileController.prototype.getIssue = function(id) {
+ProfileController.prototype.getIssue = function(issue) {
   var that = this;
-  this.issueService.getIssue(id, function(err, res) {
+  this.issueService.getIssue(issue, function(err, res) {
     if (err) {
       console.log('error', err);
     }
