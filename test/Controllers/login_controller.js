@@ -263,4 +263,73 @@ describe('LoginCtrl', function() {
 
        });
 
+       it("should set inApp bool to true and notLoggedIn to false if login is successful via facebook ", function() {
+        var mockUserService = {
+          loginWithFacebook: function(callback) {
+            var res = true;
+            return callback(undefined, res);
+          },
+          getUserProfile: function(id, callback) {
+            var res = true;
+            return callback(undefined, res);
+          }
+        };
+
+        var mockRootScope = {
+          inApp: false,
+          notLoggedIn: true,
+        };
+
+        var mockLocation = {
+          path: function() {
+            return;
+          }
+        }
+
+        var scope = {};
+        scope.$on = function() {};
+
+        var subject = new LoginCtrl(scope, mockLocation, mockUserService, authService, mockRootScope, {}, {}, doc);
+        subject.loginWithFacebook();
+        expect(subject.rs.inApp).to.equal(true);
+        expect(subject.rs.notLoggedIn).to.equal(false);
+        expect()
+       });
+
+       it("should set inApp bool to true and notLoggedIn to false if login is successful via email", function() {
+        var mockUserService = {
+          getUserProfile: function(id, callback) {
+            var res = true;
+            return callback(undefined, res);
+          },
+          login: function(user, callback) {
+            var res = true;
+            return callback(undefined, res);
+          },
+        };    
+
+        var mockRootScope = {
+          inApp: false,
+          notLoggedIn: true,
+        };
+
+        var mockLocation = {
+          path: function() {
+            return;
+          }
+        }
+
+        var scope = {};
+        scope.$on = function() {};
+        var mockUser = {
+          password: 'Bl4$hBl$ah',
+          email: 'anema',
+        };
+
+        var subject = new LoginCtrl(scope, mockLocation, mockUserService, authService, mockRootScope, {}, {}, doc);
+        subject.login(mockUser);
+        expect(subject.rs.inApp).to.equal(true);
+        expect(subject.rs.notLoggedIn).to.equal(false);
+       });
+
 });
