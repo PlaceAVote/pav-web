@@ -160,10 +160,11 @@ ProfileController.prototype.getIssue = function(issue) {
   this.issueService.getIssue(issue, function(err, res) {
     if (err) {
       console.log('error', err);
+      // Add Error Message
     }
 
     if (res) {
-      console.log('res', res);
+      // Set Path To Profile Instead
       that.id = res.user_id;
       that.populateProfile();
       that.issue = res;
@@ -174,7 +175,7 @@ ProfileController.prototype.getIssue = function(issue) {
 ProfileController.prototype.closeIssue = function() {
   this.showIssue = false;
   this.populate();
-}
+};
 
 module.exports = ProfileController;
 

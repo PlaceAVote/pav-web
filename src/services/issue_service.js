@@ -117,7 +117,7 @@ function IssueService($resource, authService, callback) {
 
   var getIssue = function(issue_id, callback) {
 
-     if (!issue_id) {
+    if (!issue_id) {
       callback('Issue id is required');
       return;
     }
@@ -143,7 +143,7 @@ function IssueService($resource, authService, callback) {
     var request = new $resource(url, undefined, {getIssue: config.methods.get});
 
     request.getIssue(undefined, onLoad, onError);
-  }
+  };
 
   return {
     saveIssue: saveIssue,

@@ -27,7 +27,6 @@ HomeController.prototype.loginWithFacebook = function(){
         return that.location.path('/');
       }
       that.rs.facebookSignUp = true;
-      console.log(that.rs);
       return that.location.path('/onboarding');
     } else {
       that.userService.getUserProfile('me', function(err, result) {

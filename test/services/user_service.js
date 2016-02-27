@@ -319,20 +319,6 @@ describe("User Service", function() {
         return 'PAV_AUTH_TOKEN CHOUNDFLKAND:ND'
       }
     };
-    it('returns error if user has no access token', function(done) {
-      var auth = {
-        getAccessToken: function() {
-          return undefined;
-        }
-      };
-      var subject = new UserService(undefined, undefined, auth);
-      subject.getUserProfile('id', function(err, result) {
-        expect(err.status).to.eql(401);
-        expect(err.message).to.eql('No Auth Token');
-        expect(result).to.eql(undefined);
-        done();
-      });
-    });
     it('calls get resource with correct params', function(done) {
       function mockResource(url, params, method, options) {
         this.getProfile = function(){};
