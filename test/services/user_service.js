@@ -1040,3 +1040,76 @@ describe("User Service", function() {
   });
 });
 
+
+describe('getUserProfile function', function() {
+  
+  it('should return profile information from a token dependant endpoint when provided with token & id.', function() {
+    
+    var mockResource = function(url, params, method) {
+      expect(url).to.equal('http://userapidev.placeavote.com/user/1234/profile');
+      this.getProfile = function(params, onLoad, onError) {
+        var user = {
+          country_code: "USA",
+          first_name: "Anthony",
+          img_url: "https:www.img.com/img.jpg",
+          last_name: "ONeill",
+          public: true,
+          total_followers: 10,
+          total_following: 10,
+          user_id: "2a4c9d9c-f9b7-4e61-a799-455445a88ce4",         
+        };
+        return onLoad(user);
+      };
+    };
+
+    var mockAuth = {
+      getAccessToken: function() {
+        return 'PAV_AUTH_TOKEN';
+      },
+    };
+
+    var subject = new UserService(mockResource, undefined, mockAuth);
+
+    subject.getUserProfile('1234', function(err, res) {
+      expect(res.first_name).to.equal('Anthony');
+      expect(res.last_name).to.equal('ONeill');
+    });
+
+  });
+
+  it('should return profile information from an open endpoint when provided with only an id and no token.', function() {
+    
+    var mockResourceOpen = function(url, params, method) {
+      expect(url).to.equal('http://userapidev.placeavote.com/user/profile/1234');
+      this.getProfile = function(params, onLoad, onError) {
+        var user = {
+          country_code: "USA",
+          first_name: "Anthony",
+          img_url: "https:www.img.com/img.jpg",
+          last_name: "ONeill",
+          public: true,
+          total_followers: 10,
+          total_following: 10,
+          user_id: "2a4c9d9c-f9b7-4e61-a799-455445a88ce4",         
+        };
+        return onLoad(user);
+      };
+    };
+
+    var mockAuth = {
+      getAccessToken: function() {
+        return undefined;
+      },
+    };
+
+    var subject = new UserService(mockResourceOpen, undefined, mockAuth);
+
+    subject.getUserProfile('1234', function(err, res) {
+      expect(res.first_name).to.equal('Anthony');
+      expect(res.last_name).to.equal('ONeill');
+    });
+
+  });
+
+
+});

@@ -172,6 +172,7 @@ function UserService($resource, facebookService, authService, userStore) {
         users.me = result;
       }
       this.user = User.createFromJson(result);
+
       return callback(undefined, this.user);
     };
     profileResource.getProfile(undefined, onLoad, onError);
