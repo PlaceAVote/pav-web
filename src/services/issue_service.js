@@ -126,6 +126,7 @@ function IssueService($resource, authService, callback) {
 
     var onLoad = function(result) {
       console.log(result);
+      console.log(new Issue(result));
       callback(undefined, new Issue(result));
     };
 

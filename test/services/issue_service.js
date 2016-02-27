@@ -209,4 +209,76 @@ describe("Issue Service", function() {
       });
     });
   });
+
+  it('should return issue if issue ID and Token is provided', function(done) {
+
+    var mockAuth = {
+      getAccessToken: function() {
+        return 'PAV_AUTH_TOKEN';
+      },
+    };
+
+    var mockResource = function(url, params, method) {
+      expect(method.getIssue.headers.Authorization).to.equal('PAV_AUTH_TOKEN');
+      method.getIssue.headers.Authorization = undefined;
+      this.getIssue = function(params, onLoad, onError) {
+        var issue = {
+          comment: "An issue",
+          emotional_response: "positive",
+          first_name: "Cherry",
+          issue_id: "94873662-5d2d-497a-9d30-7c185b042abd",
+          last_name: "Blossom",
+          negative_responses: 1,
+          neutral_responses: 0,
+          positive_responses: 1,
+          timestamp: 1456488082023,
+          user_id: "d31d8314-5659-44a8-b0e0-71a5e10b12c3",          
+        };
+        return onLoad(issue);
+      }
+    }
+    var subject = new IssueService(mockResource, mockAuth);
+    subject.getIssue('1234', function(err, res) {
+      expect(res.comment).to.equal('An issue');
+      expect(res.timestamp).to.equal(1456488082023);
+      done();
+    });
+
+  });
+
+  it('should return issue if issue ID and no Token is provided', function(done) {
+
+    var mockAuthNoToken = {
+      getAccessToken: function() {
+        return undefined;
+      },
+    };
+
+    var mockResourceNoToken = function(url, params, method) {
+      expect(method.getIssue.headers.Authorization).to.equal(undefined);
+      this.getIssue = function(params, onLoad, onError) {
+        var issue = {
+          comment: "An issue",
+          emotional_response: "positive",
+          first_name: "Cherry",
+          issue_id: "94873662-5d2d-497a-9d30-7c185b042abd",
+          last_name: "Blossom",
+          negative_responses: 1,
+          neutral_responses: 0,
+          positive_responses: 1,
+          timestamp: 1456488082023,
+          user_id: "d31d8314-5659-44a8-b0e0-71a5e10b12c3",          
+        };
+        return onLoad(issue);
+      }
+    }
+    var subject = new IssueService(mockResourceNoToken, mockAuthNoToken);
+    subject.getIssue('1234', function(err, res) {
+      expect(res.comment).to.equal('An issue');
+      expect(res.timestamp).to.equal(1456488082023);
+      done();
+    });
+  });
+
+
 });
