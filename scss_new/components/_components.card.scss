@@ -1,0 +1,15 @@
+/*------------------------------------*\
+    #COMPONENT-CARD
+\*------------------------------------*/
+
+/**
+* The card is one of the most common component throughout
+* the PlaceAVote App.
+*/
+
+.card {
+  border: 1px solid $bordercolor;
+  border-radius: $border-radius;
+  background: white;
+  padding: 15px 11px;
+}

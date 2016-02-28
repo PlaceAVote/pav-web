@@ -1,0 +1,21 @@
+/*------------------------------------*\
+    #OBJECT-GRID
+\*------------------------------------*/
+
+/**
+* This is where the grid is defined by
+* a mixin loop.
+*/
+
+@if $viewports {
+    $viewport-list: map-keys($viewports);
+    $viewport-length: length($viewport-list);
+}
+
+@for $i from 1 through $viewport-length {
+    $viewport-width: map-get($viewports, nth($viewport-list, $i));
+    $viewport-name: nth($viewport-list, $i);
+    @include media($viewport-width) {
+        @include grid($viewport-name, 6);
+    }
+}

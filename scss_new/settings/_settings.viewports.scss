@@ -1,0 +1,39 @@
+/*------------------------------------*\
+    #VIEWPORTS
+\*------------------------------------*/
+
+/**
+* Viewport variables for popular devices sizes
+*/
+
+
+$mobile-portrait: 320px;
+
+$mobile-landscape: 480px;
+
+$tablet-portrait: 768px;
+
+
+/**
+* $desktop-small is also usable for tablet landscape
+*/
+
+$desktop-small: 1024px;
+
+$desktop: 1200px;
+
+$desktop-large: 1600px;
+
+
+/**
+* Viewports object/map in order for loops to iterate through
+* each viewport.
+*/
+
+$viewports: (
+    '.m': $mobile-portrait,
+    '.ml': $mobile-landscape,
+    '.t': $tablet-portrait,
+    '.ds': $desktop-small,
+    '.dl': $desktop-large
+);

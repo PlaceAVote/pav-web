@@ -181,7 +181,7 @@ var gulp = require('gulp'),
     .pipe(maps.write('./'))
     .pipe(gulp.dest('./css'));
   });
-
+// outputStyle: 'compressed'
   gulp.task('autoPrefix', ['compileSass'] , function() {
     return gulp.src('css/styles.css')
     .pipe(autoprefix())

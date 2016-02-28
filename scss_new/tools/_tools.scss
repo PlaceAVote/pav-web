@@ -40,3 +40,20 @@
     @content;
   }
 }
+
+
+
+
+
+/**
+* Grid mixin
+*/
+
+@mixin grid($viewport-name, $columns) {
+    @for $x from 1 through $columns {
+        #{$viewport-name}-grid-#{$x} {
+            $col-width: 100/$columns*$x;
+            width: #{$col-width}#{%}; 
+        }
+    }
+}
