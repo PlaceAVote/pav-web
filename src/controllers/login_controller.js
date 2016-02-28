@@ -34,6 +34,10 @@ function LoginCtrl($scope, $location, userService, authService, $rootScope, $rou
   });
 }
 
+LoginCtrl.prototype.goTo = function(path) {
+  this.location.path(path);
+};
+
 LoginCtrl.prototype.loginWithFacebook = function() {
   var that = this;
   this.loaded = false;

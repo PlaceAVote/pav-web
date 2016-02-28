@@ -6,7 +6,7 @@
     <search-bar class="search" placeholder="Search bills or people..." ng-class="{'search-focus':header.focus}" results="header.searchResults" focus="header.focus" query="header.search(q)" searching="header.searching" people bills></search-bar>
     <div ng-show="header.rs.notLoggedIn" class="not-logged-in">
       <button ng-click="header.signup()" class="medium-button green-button padding-left-small padding-right-small margin-right-small">SIGN UP</button>
-      <button ng-click="header.signup()" class="medium-button blue-button padding-left-small padding-right-small">LOGIN</button>
+      <button ng-click="header.goTo('/login');" class="medium-button blue-button padding-left-small padding-right-small">LOGIN</button>
     </div>
 
     <section class="notification row" ng-class="{'header-focus':header.focus}" ng-hide="header.notLoggedIn()">

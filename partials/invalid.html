@@ -10,9 +10,6 @@
       <button class="signup-modal-button green-button margin-bottom-medium" ng-click="invalid.validate(invalid.user, '/onboarding')">Sign Up</button>
       <button class="signup-modal-button blue-button" ng-click="invalid.loginWithFacebook()">Sign Up with Facebook</button>
     </div>
-    <h1 class="text-center margin-top-large">Or <span class="bold">Log In</span></h1>
+    <h1 class="text-center margin-top-large">Or <span ng-click="invalid.goTo('/login'); invalid.showNotRegisteredPartial = false;" class="bold click">Log In</span></h1>
   </div>
 </div>
-
-
-<!-- ng-show="invalid.showNotRegisteredPartial" -->

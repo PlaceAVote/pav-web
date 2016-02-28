@@ -1,12 +1,21 @@
 header {
   transition: all 0.2s ease;
   &.ng-hide-remove {
-    top: -55px;
+    // top: -55px;
+    transform: translateY(-150%);
+  }
+  &.ng-hide-add {
+    // top: 10px;
+    transform: translateY(0);
+  }
+  &.ng-hide-add-active {
+    // top: -55px;
+    transform: translateY(-150%);
   }
 
   &.ng-enter.ng-enter-active {
-    opacity: 0.2;
-    top: 10px;
+    // opacity: 0.2;
+    transform: translateY(0%);
   }
 
   .profile-image-holder {

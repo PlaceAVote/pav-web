@@ -236,5 +236,9 @@ HeaderCtrl.prototype.search = function(q) {
   }, 500);
 };
 
+HeaderCtrl.prototype.goTo = function(path) {
+  this.location.path(path);
+};
+
 module.exports = HeaderCtrl;
 
