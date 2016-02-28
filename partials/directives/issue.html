@@ -8,7 +8,7 @@
       <p class="red click" ng-click="issue.goToProfile(location)">{{issue.author_first_name}} {{issue.author_last_name}} &nbsp;</p><p>shared an &nbsp;<i class="icon-issues blue"></i>&nbsp; Issue</p> 
      </div>
 
-     <span ng-hide="single" class="h-right middle blue timestamp">{{issue.timestamp | amCalendar}}</span>
+     <span ng-hide="single" class="h-right middle blue timestamp click" ng-click="issue.goToIssue(location)">{{issue.timestamp | amCalendar}}</span>
 
      <div ng-show="single" class="h-right row">
        <button ng-hide="profile.isMe() || profile.rs.notLoggedIn" ng-click="profile.follow()" class="click medium-button green-button h-right">{{follow}}</button>

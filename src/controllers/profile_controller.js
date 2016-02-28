@@ -13,6 +13,7 @@ function ProfileController($scope, $location, $routeParams, authService, userSer
   if ($routeParams.issueid) {
     this.issueService = issueService;
     this.getIssue($routeParams.issueid);
+    this.loadingIssue = true;
     this.showIssue = true;
     this.authenticate();
   } else {
@@ -158,13 +159,12 @@ ProfileController.prototype.follow = function() {
 ProfileController.prototype.getIssue = function(issue) {
   var that = this;
   this.issueService.getIssue(issue, function(err, res) {
+    that.loadingIssue = false;
     if (err) {
+      that.issueError = true;
       console.log('error', err);
-      // Add Error Message
     }
-
     if (res) {
-      // Set Path To Profile Instead
       that.id = res.user_id;
       that.populateProfile();
       that.issue = res;
@@ -174,7 +174,7 @@ ProfileController.prototype.getIssue = function(issue) {
 
 ProfileController.prototype.closeIssue = function() {
   this.showIssue = false;
-  this.populate();
+  this.location.path('profile/' + this.id);
 };
 
 module.exports = ProfileController;
