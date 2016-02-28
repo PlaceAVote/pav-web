@@ -3,11 +3,11 @@ module.exports = function() {
     restrict: 'E',
     replace: true,
     scope: {
-        icon: '=',
+      icon: '=',
     },
     template: '<svg class="{{icon}}"><use xlink:href=""/></svg>',
-    link:function(scope, svg, attrs){
-        svg.children().attr('xlink:href', '/img/icons.svg#' + scope.icon);
-    }
+    link: function(scope, svg, attrs) {
+      svg.children().attr('xlink:href', '/img/icons.svg#' + scope.icon);
+    },
   };
 };
