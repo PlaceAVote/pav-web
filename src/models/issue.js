@@ -32,6 +32,6 @@ Issue.prototype.goToProfile = function(location) {
 
 Issue.prototype.goToIssue = function(location) {
   location.path('issue/' + this.issue_id);
-}
+};
 
 module.exports = Issue;
