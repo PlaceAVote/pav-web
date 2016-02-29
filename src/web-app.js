@@ -82,8 +82,11 @@ var feedEventsDirective = require('./directives/feed_events.js');
 var feedBillEventDirective = require('./directives/feed_bill_event.js');
 var infiniteScroll = require('./directives/infinite_scroll.js');
 
+var invalidDirective = require('./directives/invalid.js');
+
 // Thirdparty integrations
 var Facebook = require('./integrations/facebook.js');
+var Twitter = require('./integrations/twitter.js');
 var slider = require('angularjs-slider');
 var draggable = require('angular-ui-tree');
 var textarea = require('angular-elastic');
@@ -146,6 +149,10 @@ app.config(['$routeProvider', function($routeProvider) {
     templateUrl: 'partials/password_reset.html',
     controller: 'PasswordResetCtrl as password',
   })
+  .when('/issue/:issueid', {
+    templateUrl: 'partials/profile.html',
+    controller: 'ProfileCtrl as profile',
+  })
   .otherwise({
     redirectTo: '/',
   });
@@ -155,6 +162,7 @@ app.config(['$routeProvider', function($routeProvider) {
 
 // Services
 app.factory('facebookService', [Facebook]);
+app.factory('twitterService', [Twitter]);
 app.factory('authService', ['$resource', AuthService]);
 app.factory('userService', ['$resource', 'facebookService', 'authService', UserService]);
 app.factory('billService', ['$resource', 'authService', 'userService', BillService]);
@@ -170,13 +178,13 @@ app.factory('questionService', ['$resource', 'authService', QuestionService]);
 app.factory('mailService', ['$resource', MailService]);
 
 // Controllers
-app.controller('TopicRegisterCtrl',['$scope','$location', 'userService', RegisterController]);
+app.controller('TopicRegisterCtrl',['$scope','$location', 'userService', '$rootScope', RegisterController]);
 app.controller('SignUpCtrl',['$rootScope','$scope','$location', 'userService', SignUpController]);
 app.controller('LoginCtrl',['$scope','$location', 'userService', 'authService', '$rootScope', '$routeParams', 'passwordService', LoginController]);
 app.controller('FeedCtrl', ['$scope', '$location', 'userService', 'billService', 'authService', 'feedService', '$rootScope','$timeout', FeedController]);
-app.controller('BillCtrl', ['$scope', '$routeParams', 'billService', 'legislationService', 'voteService', 'commentService', '$location', 'authService', '$rootScope', '$timeout', BillController]);
+app.controller('BillCtrl', ['$scope', '$routeParams', 'billService', 'legislationService', 'voteService', 'commentService', '$location', 'authService', '$rootScope', '$timeout', 'facebookService', BillController]);
 app.controller('HeaderCtrl', ['$rootScope', '$scope', '$location', '$timeout', 'authService', 'userService', 'notificationService', 'searchService', '$window', HeaderController]);
-app.controller('ProfileCtrl', ['$scope', '$location', '$routeParams', 'authService', 'userService', ProfileController]);
+app.controller('ProfileCtrl', ['$scope', '$location', '$routeParams', 'authService', 'userService','issueService', '$rootScope', ProfileController]);
 app.controller('SettingsCtrl', ['$scope', '$location', '$timeout', 'userService', 'authService', '$rootScope','$anchorScroll', SettingsController]);
 app.controller('PasswordResetCtrl', ['$scope','$location','$routeParams','passwordService','authService', PasswordController]);
 app.controller('IssuesCtrl', ['$scope', '$rootScope', 'searchService', '$timeout', 'issueService', IssuesController]);
@@ -221,5 +229,6 @@ app.directive('imageCrop', [imageCropDirective]);
 app.directive('fileread', [fileReadDirective]);
 app.directive('loader', ['$location', preloaderDirective]);
 app.directive('feedEvents', [feedEventsDirective]);
+app.directive('invalid', [invalidDirective]);
 app.directive('feedBillEvent', ['$location', feedBillEventDirective]);
 app.directive('infiniteScroll', ['$rootScope', '$window', '$interval', 'THROTTLE_MILLISECONDS', infiniteScroll]);

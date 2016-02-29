@@ -19,6 +19,7 @@ function Issue(options) {
   this.negative_responses = options.negative_responses;
   this.neutral_responses = options.neutral_responses;
   this.positive_responses = options.positive_responses;
+  this.user_id = options.user_id;
 }
 
 Issue.prototype.goToBill = function(location) {
@@ -27,6 +28,10 @@ Issue.prototype.goToBill = function(location) {
 
 Issue.prototype.goToProfile = function(location) {
   location.path('profile/' + this.author_id);
+};
+
+Issue.prototype.goToIssue = function(location) {
+  location.path('issue/' + this.issue_id);
 };
 
 module.exports = Issue;

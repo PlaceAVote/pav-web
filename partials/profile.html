@@ -53,3 +53,10 @@
     </div>
   </div>
 </div>
+
+
+<div class="issue-modal-container" ng-show="profile.showIssue" loader loader-context="profile.loadingIssue" truthy>
+  <div class="card padding-small" ng-hide="profile.issueError">
+    <issue issue="profile.issue" follow="profile.following" profile="profile" single></issue>
+  </div>
+</div>

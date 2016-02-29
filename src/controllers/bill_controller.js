@@ -1,16 +1,19 @@
 var Comment = require('../models/comment.js');
 var AuthorizeController = require('./autherize_controller.js');
 var title = require('../config/titles.js');
-function BillController($scope, $routeParams, billService, legislatorService, voteService, commentService, $location, authService, $rootScope, $timeout) {
-  AuthorizeController.authorize({error: '/', authorizer: authService, location: $location});
+var tweet = require('../models/tweet.js');
+
+function BillController($scope, $routeParams, billService, legislatorService, voteService, commentService, $location, authService, $rootScope, $timeout, facebook) {
   $scope = $scope || {};
   $scope.bill = this;
   $scope.commentService = commentService;
   this.timeout = $timeout;
   this.rs = $rootScope;
+  this.rs.inApp = true;
   this.authService = authService;
   this.location = $location;
   this.routeParams = $routeParams;
+  this.facebook = facebook;
   this.from = 0;
   this.commentBody = undefined;
   this.commentService = commentService;
@@ -26,9 +29,51 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
   this.voteModal = {};
   this.stats = {};
   this.readmore = false;
+  this.showChart = true;
+  this.authenticate();
 }
 
+BillController.prototype.authenticate = function() {
+  var that = this;
+  if (!that.authService) {
+    return;
+  }
+  that.authService.validateToken(function(result) {
+    that.validated = result;
+    that.rs.notLoggedIn = !result;
+  });
+};
+
+BillController.prototype.getLocation = function() {
+  var t = tweet();
+  return t.generateLink(window.location.href);
+};
+
+BillController.prototype.getShareMessage = function() {
+  var t = tweet();
+  return t.generateMessage('Check out this bill @placeavote');
+};
+
+BillController.prototype.shareToFacebook = function() {
+  var t = tweet();
+  var link = t.generateLink(window.location.href);
+  this.facebook.share(link);
+};
+
+BillController.prototype.validationHandler = function() {
+  if (this.validated) {
+    return true;
+  }
+  var event = new CustomEvent('not-valid', { detail: 'Invalid request', controller: 'Bill' });
+  document.body.dispatchEvent(event);
+  return false;
+};
+
 BillController.prototype.showVoteModal = function(vote) {
+  if (!this.validationHandler(this.validated)) {
+    return;
+  }
+
   if (!this.userVoted) {
     this.vote = vote;
     if (vote) {
@@ -70,6 +115,9 @@ BillController.prototype.getVotes = function(id) {
 
 BillController.prototype.voteOnBill = function() {
   var that = this;
+  if (!this.validationHandler(this.validated)) {
+    return;
+  }
   this.voteService.voteOnBill(this.id, this.vote, function(err, result) {
     if (err) {
       if (err.status && err.status === 409) {
@@ -87,8 +135,21 @@ BillController.prototype.voteConfirmed = function() {
   this.hasVoted = true;
   var vote = this.vote ? this.forComment : this.againstComment;
   this.generateCommentCard(vote);
+  this.voteShareMessage = this.generateVoteShareMessage(vote);
   this.getVotes(this.id);
   this.getBillVotes(this.id);
+};
+
+BillController.prototype.generateVoteShareMessage = function(vote) {
+  var t = tweet();
+  var title = '';
+  if (this.body) {
+    title = this.body.getTitle();
+  }
+  if (vote) {
+    return t.generateMessage('I just voted in favour of ' + title + ' @placeavote');
+  }
+  return t.generateMessage('I just voted against ' + title + ' @placeavote');
 };
 
 BillController.prototype.generateCommentCard = function(comment) {
@@ -176,6 +237,9 @@ BillController.prototype.getComments = function() {
 
 BillController.prototype.postComment = function() {
   var that = this;
+  if (!that.validationHandler()) {
+    return;
+  }
   var r = new RegExp(/<script[\s\S]*?>[\s\S]*?<\/script>/gi);
   if (!this.billService || !this.billService.postComment) {
     return;

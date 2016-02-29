@@ -1,12 +1,21 @@
 header {
   transition: all 0.2s ease;
   &.ng-hide-remove {
-    top: -55px;
+    // top: -55px;
+    transform: translateY(-150%);
+  }
+  &.ng-hide-add {
+    // top: 10px;
+    transform: translateY(0);
+  }
+  &.ng-hide-add-active {
+    // top: -55px;
+    transform: translateY(-150%);
   }
 
   &.ng-enter.ng-enter-active {
-    opacity: 0.2;
-    top: 10px;
+    // opacity: 0.2;
+    transform: translateY(0%);
   }
 
   .profile-image-holder {
@@ -65,5 +74,31 @@ header {
       }
     }
   }
+
+  .not-logged-in {
+
+    .blue-button {
+      border-color: rgba(255,255,255,0.8);
+    }
+
+    @include media(630px) {
+      position: absolute;
+      width: 100%;
+      top: 40px;
+      left: 0;
+      background-color: white;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      padding: 10px;
+      .medium-button {
+        width: 40%;
+      }
+      .blue-button {
+        border-color: darken($blue, 20%);
+      }
+    }
+  }
+
 }
 

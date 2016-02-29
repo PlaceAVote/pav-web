@@ -1,17 +1,39 @@
 var AuthorizeController = require('./autherize_controller.js');
 var title = require('../config/titles.js');
 
-function ProfileController($scope, $location, $routeParams, authService, userService) {
-  AuthorizeController.authorize({error: '/', authorizer: authService, location: $location});
+function ProfileController($scope, $location, $routeParams, authService, userService, issueService, $rootScope) {
   $scope = $scope || {};
   $scope.profile = this;
   this.location = $location;
   this.authService = authService;
   this.userService = userService;
-  this.id = $routeParams.id;
-  this.showFollowers = true;
-  this.populate();
+  this.rs = $rootScope;
+  this.rs.inApp = true;
+  if ($routeParams.issueid) {
+    this.issueService = issueService;
+    this.getIssue($routeParams.issueid);
+    this.loadingIssue = true;
+    this.showIssue = true;
+    this.authenticate();
+  } else {
+    this.id = $routeParams.id;
+    this.showFollowers = true;
+    this.populate();
+  }
+
 }
+
+ProfileController.prototype.authenticate = function() {
+  var that = this;
+  if (!that.authService) {
+    return;
+  }
+  that.authService.validateToken(function(result) {
+    that.validated = result;
+    that.rs.notLoggedIn = !result;
+  });
+};
+
 
 ProfileController.prototype.loadProfile = function(id) {
   if (!id) {
@@ -131,6 +153,26 @@ ProfileController.prototype.follow = function() {
   }
 };
 
+ProfileController.prototype.getIssue = function(issue) {
+  var that = this;
+  this.issueService.getIssue(issue, function(err, res) {
+    that.loadingIssue = false;
+    if (err) {
+      that.issueError = true;
+      console.log('error', err);
+    }
+    if (res) {
+      that.id = res.user_id;
+      that.populateProfile();
+      that.issue = res;
+    }
+  });
+};
+
+ProfileController.prototype.closeIssue = function() {
+  this.showIssue = false;
+  this.location.path('profile/' + this.id);
+};
 
 module.exports = ProfileController;
 

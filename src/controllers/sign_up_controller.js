@@ -19,6 +19,7 @@ function SignUpCtrl($rootScope, $scope, $location, userService, authService) {
   this.rs = $rootScope;
   this.loggedIn = $rootScope.loggedIn;
 
+
   if (!userService.user) {
     this.location.path('/');
   }
@@ -61,7 +62,8 @@ SignUpCtrl.prototype.saveUser = function(user) {
       that.error = true;
       return;
     }
-    that.rs.loggedIn = true;
+    that.rs.notLoggedIn = false;
+    that.rs.inApp = true;
     if (!user.img_url) {
       user.img_url = 'img/profile/profile-picture.png';
     }

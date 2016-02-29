@@ -1,0 +1,15 @@
+<div ng-controller="LoginCtrl as invalid">
+  <div ng-show="invalid.showNotRegisteredPartial" class="fullscreen-user-signup col">
+    <i ng-click="invalid.showNotRegisteredPartial = false" class="icon-close click black h-right padding-large"></i>
+    <h2 class="text-center margin-top-large">You need to sign up or log in to get involved!</h2>
+    <h2 class="text-center margin-bottom-large">It's simple, free and only takes 2 minutes.</h2>
+    <div class="col h-center user-signup-card card padding-large">
+      <h2 class="text-center margin-bottom-medium">Sign Up Free</h2>
+      <input class="input-text margin-bottom-medium padding-left-medium" placeholder="Email" type="text" ng-model="invalid.user.email" >
+      <input class="input-text margin-bottom-medium padding-left-medium" placeholder="Password" type="password" ng-model="invalid.user.password" >
+      <button class="signup-modal-button green-button margin-bottom-medium" ng-click="invalid.validate(invalid.user, '/onboarding')">Sign Up</button>
+      <button class="signup-modal-button blue-button" ng-click="invalid.loginWithFacebook()">Sign Up with Facebook</button>
+    </div>
+    <h1 class="text-center margin-top-large">Or <span ng-click="invalid.goTo('/login'); invalid.showNotRegisteredPartial = false;" class="bold click">Log In</span></h1>
+  </div>
+</div>
