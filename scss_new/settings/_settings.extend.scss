@@ -1,0 +1,26 @@
+/*------------------------------------*\
+    #EXTENDED-CLASSES
+\*------------------------------------*/
+
+/**
+* Extender classes are used with the @extend
+* function provided by SCSS/SASS. It's a great
+* method of saving on file size by removing any
+* repetition.
+*/
+
+
+/**
+* A linear gradient is a commonly used aesthetic in the app
+* for icon backdrops, header and backgrounds. It's a core 
+* aspect of the brand aesthetic.
+*/
+
+%pav-linear-gradient {
+    @include linear-gradient($fadedpurple, $blue);
+}
+
+
+%click {
+  cursor: pointer;
+}

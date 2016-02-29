@@ -1,5 +1,5 @@
 /*------------------------------------*\
-    #COMPONENT-HEADER
+    #COMPONENT-HEADER-ACTIVITY
 \*------------------------------------*/
 
 /**
@@ -10,30 +10,117 @@
 
 
 .header-container {
-    height: 55px;
+    height: 54px;
     width: 100%;
-    background: $blue;
     position: fixed;
     top: 0;
     left: 0;
+    @extend %pav-linear-gradient;
+    box-shadow: 0px 0px 6px 2px rgba(0,0,0,0.4);
+    border-bottom: 1px solid darken($blue, 15%);
+    z-index: 9000;
 }
 
 
-.header-center {
+.header-center, .activity-center {
     max-width: 1200px;
     position: absolute;
     margin: 0 auto;
     left: 0;
     right: 0;
+    top: 9px;
 }
 
 
 .logo {
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
+    z-index: 9001;
+    @extend %click;
 
     img {
-      height: auto;
-      width: 100%
+        height: auto;
+        width: 100%
     }
+
+    /**
+    * Gives logo left gutter on smaller viewports.
+    */
+
+    @include media($desktop) {
+        margin-left: 11px;
+    }
+
+}
+
+
+
+
+/**
+* Activity container holds the elements for the notifications,
+* profile menu, and on mobile the feed button. This area has
+* significant visual change on mobile.
+*
+* The Activity HTML can be found in the activity.html partial.
+*/
+
+.activity-container {
+    height: 54px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    @include media($tablet-portrait) {
+      top: initial;
+      bottom: 0;
+      height: 100px;
+      width: 100%;
+      background: white;
+      border-top: 1px solid $bordercolor;
+      box-shadow: 0px 0px 6px 2px rgba(0,0,0,0.4);
+
+      svg {
+        fill: $blue;
+      }
+    }
+}
+
+
+/**
+* Feed Activity Button
+*/
+.feed-button-container {
+  display: none;
+}
+
+
+/** 
+* Notifications
+*/
+
+.notifications-container {
+  position: absolute;
+  right: 58px;
+  z-index: 9001;
+}
+
+
+.icon-notifications {
+  fill: white;
+  height: 36px;
+  width: 36px;
+  @extend %click;
+}
+
+
+/**
+* Profile
+* Not to be confused with the profile page!
+*/
+
+.profile-menu-container {
+  position: absolute;
+  right: 0px;
+  z-index: 9001;
+  @extend %click;
 }

@@ -1,0 +1,68 @@
+  <!-- Activity Area -->
+    <!-- Notifications -->
+
+  <div class="activity-container" ng-controller="HeaderCtrl as header" ng-show="header.login()">
+
+    <div class="activity-center">
+    
+      <div class="feed-button-container">
+        
+        <svg>
+        <use xlink:href="/img/icon-bolt.svg#icon-bolt"></use>
+        </svg>
+
+      </div>
+
+      <div class="notifications-container">
+
+        <span ng-show="header.unread > 0" class="notification-counter">
+         <p>{{header.unread}}</p>
+        </span>
+
+  <!--       <img style="cursor: pointer;" class="notifications-icon" ng-class="{'no-notifications': header.notifications.results.length < 1 && header.unread < 1}" src="//cdn.placeavote.com/img/notification.svg" ng-click="header.notify()" /> -->
+
+        <svg class="icon-notifications">
+        <use xlink:href="/img/icons.svg#icon-ios-pulse-strong"></use>
+        </svg>
+
+
+        <div ng-mouseleave="header.hideNotifications()"
+        ng-show="header.showNotifications">
+
+          <notifications notifications="header.notifications" unread="header.unread" read-event="header.readEvent(notification)" scroll-trigger="header.notificationCheck();" open="header.showNotifications" scroll="header.loadingScroll"></notifications>
+
+        </div>
+
+      </div>
+
+      <!-- Profile Area -->
+      <div class="profile-menu-container">
+
+        <div ng-click="header.dropDown()" class="user-profile-photo">
+          <div ng-style="{'background-image': 'url(' + header.rs.user.img_url + ')'}">
+          </div>
+        </div>
+
+        <div ng-mouseleave="header.hideDropDown()" ng-show="header.showDropDown">
+          <ul>
+            <li ng-click="header.toProfile()" class="row">
+             <div ng-click="header.dropDown()" class="profile-image-holder margin-right-small">
+               <div ng-style="{'background-image': 'url(' + header.rs.user.img_url + ')'}">
+               </div>
+             </div> 
+             View Profile
+            </li>
+            <li ng-click="header.toSettings()">
+              Account Settings
+            </li>
+            <li ng-click="header.logout()">
+              Logout
+            </li>
+          </ul>
+        </div>
+
+        </div>
+
+    </div>
+
+  </div>
