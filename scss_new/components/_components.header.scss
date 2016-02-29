@@ -1,0 +1,39 @@
+/*------------------------------------*\
+    #COMPONENT-HEADER
+\*------------------------------------*/
+
+/**
+* The header is a constant through out the app
+* when the user is logged in. It is the parent element
+* of the Logo and the Search Bar in the HTML markup
+*/
+
+
+.header-container {
+    height: 55px;
+    width: 100%;
+    background: $blue;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+
+.header-center {
+    max-width: 1200px;
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+}
+
+
+.logo {
+    width: 40px;
+    height: 40px;
+
+    img {
+      height: auto;
+      width: 100%
+    }
+}

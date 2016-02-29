@@ -1,0 +1,22 @@
+/*------------------------------------*\
+    #COMPONENT-SEARCH
+\*------------------------------------*/
+
+/**
+* Search bar is a child of the header component
+* and is the parent of autocomplete search results.
+*/
+
+.search-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 300px;
+}
+
+.search-container input {
+    width: 100%;
+    border-radius: $border-radius;
+}
