@@ -11,3 +11,11 @@
 .vanish {
   display: none;
 }
+
+
+
+#intercom-container .intercom-launcher {
+  @include media($tablet-portrait) {
+    bottom: 100px !important;
+  }
+}

@@ -50,10 +50,10 @@
         <div ng-mouseleave="header.hideDropDown()" ng-show="header.showDropDown" class="profile-menu">
           <ul>
             <li ng-click="header.toProfile()">
-             <div ng-click="header.dropDown()">
-               <div ng-style="{'background-image': 'url(' + header.rs.user.img_url + ')'}">
-               </div>
-             </div> 
+            <div ng-click="header.dropDown()" class="user-profile-photo">
+              <div ng-style="{'background-image': 'url(' + header.rs.user.img_url + ')'}">
+              </div>
+            </div>
              View Profile
             </li>
             <li ng-click="header.toSettings()">

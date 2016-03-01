@@ -167,7 +167,7 @@
       top: initial;
       bottom: 0;
       left: 0;
-      height: 88px;
+      height: 60px;
       width: 100%;
       background: white;
       border-top: 1px solid $bordercolor;
@@ -176,27 +176,43 @@
       .activity-center {
         top: 0;
         height: 100%;
+        // width: 208px;
       }
   }
 }
 
-.profile-menu-container,
-.notifications-container,
 .feed-button-container,
+.notifications-container,
+.profile-menu-container,
 .settings-container {
     @include media($tablet-portrait) {
       position: initial;
       display: flex;
-
-      border: 1px solid $grey;
-
+      width: 25%;
+      padding: 20px;
         svg, .profile-icon {
-          display: block;
+          display: flex;
+          align-self: center;
+          justify-content: center;
+          margin: 0 auto;
           fill: $blue;
-          height: 50px;
-          width: 50px;
+          height: 30px;
+          width: 30px;
           @extend %click;
         }
 
+    }
+}
+
+.notifications-container,
+.profile-menu-container {
+    @include media($tablet-portrait) {
+      border-left: 1px solid $grey;
+    }
+}
+
+.profile-menu-container {
+    @include media($tablet-portrait) {
+      border-right: 1px solid $grey;
     }
 }
