@@ -17,7 +17,6 @@ function HeaderCtrl($rootScope, $scope, $location, $timeout, authService, userSe
     this.rs.notLoggedIn = true;
   }
 
-  
   this.populate();
   this.unread = 0;
   this.notifications = [];

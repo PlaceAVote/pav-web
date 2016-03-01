@@ -1080,7 +1080,7 @@ describe('getUserProfile function', function() {
   it('should return profile information from an open endpoint when provided with only an id and no token.', function() {
     
     var mockResourceOpen = function(url, params, method) {
-      expect(url).to.equal('http://userapidev.placeavote.com/user/profile/1234');
+      expect(url).to.equal('http://userapidev.placeavote.com/user/1234/profile');
       this.getProfile = function(params, onLoad, onError) {
         var user = {
           country_code: "USA",
