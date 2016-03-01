@@ -158,7 +158,7 @@ function UserService($resource, facebookService, authService, userStore) {
       config.methods.get.headers.Authorization = token;
       url = config.users.profile.fromId(id);
     } else {
-      url = config.users.profile.open + id;
+      url = config.users.profile.fromId(id);
     }
 
     var profileResource = new $resource(url, undefined, {getProfile: config.methods.get});

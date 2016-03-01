@@ -12,13 +12,14 @@ function HeaderCtrl($rootScope, $scope, $location, $timeout, authService, userSe
   this.location = $location;
   this.showDropDown = false;
   this.rs = $rootScope;
-
+  console.log(this.rs);
   if (this.rs.notLoggedIn === undefined) {
     this.rs.notLoggedIn = true;
+  } else {
+     this.populate();
   }
 
   this.unread = 0;
-  this.populate();
   this.notifications = [];
   this.userNotifications = [];
   this.newNotification = {};
@@ -205,6 +206,7 @@ HeaderCtrl.prototype.logout = function() {
   that = this;
   this.rs.inApp = false;
   this.rs.user = {};
+  this.rs.notLoggedIn = true;
   this.unread = 0;
   this.notificationService.close(function(res) {
     that.notifications = undefined;
