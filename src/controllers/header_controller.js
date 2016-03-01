@@ -12,6 +12,11 @@ function HeaderCtrl($rootScope, $scope, $location, $timeout, authService, userSe
   this.location = $location;
   this.showDropDown = false;
   this.rs = $rootScope;
+
+  if (this.rs.notLoggedIn === undefined) {
+    this.rs.notLoggedIn = true;
+  }
+
   this.unread = 0;
   this.populate();
   this.notifications = [];
@@ -29,6 +34,7 @@ function HeaderCtrl($rootScope, $scope, $location, $timeout, authService, userSe
     var that = this;
     if (newValue && !oldValue) {
       if (newValue.first_name) {
+        $rootScope.notLoggedIn = false;
         $scope.header.intercomInit(newValue);
         $scope.header.getNotifications();
         $scope.header.startNotifications();
