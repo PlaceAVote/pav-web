@@ -8,7 +8,7 @@
       <div class="feed-button-container">
         
         <svg>
-        <use xlink:href="/img/icon-bolt.svg#icon-bolt"></use>
+        <use xlink:href="/img/icons.svg#icon-bolt"></use>
         </svg>
 
       </div>
@@ -43,10 +43,14 @@
           </div>
         </div>
 
-        <div ng-mouseleave="header.hideDropDown()" ng-show="header.showDropDown">
+        <svg class="profile-icon" ng-click="header.toProfile()">
+        <use xlink:href="/img/icons.svg#icon-person"></use>
+        </svg>
+
+        <div ng-mouseleave="header.hideDropDown()" ng-show="header.showDropDown" class="profile-menu">
           <ul>
-            <li ng-click="header.toProfile()" class="row">
-             <div ng-click="header.dropDown()" class="profile-image-holder margin-right-small">
+            <li ng-click="header.toProfile()">
+             <div ng-click="header.dropDown()">
                <div ng-style="{'background-image': 'url(' + header.rs.user.img_url + ')'}">
                </div>
              </div> 
@@ -62,6 +66,14 @@
         </div>
 
         </div>
+
+      <!-- Settings -->
+
+      <div class="settings-container">
+        <svg ng-click="header.toSettings()">
+        <use xlink:href="/img/icons.svg#icon-gear-a"></use>
+        </svg>        
+      </div>
 
     </div>
 

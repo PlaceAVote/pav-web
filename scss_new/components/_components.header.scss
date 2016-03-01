@@ -16,7 +16,7 @@
     top: 0;
     left: 0;
     @extend %pav-linear-gradient;
-    box-shadow: 0px 0px 6px 2px rgba(0,0,0,0.4);
+    box-shadow: 0 2px 2px -2px rgba(0, 0, 0, .82);
     border-bottom: 1px solid darken($blue, 15%);
     z-index: 9000;
 }
@@ -58,38 +58,46 @@
 
 /**
 * Activity container holds the elements for the notifications,
-* profile menu, and on mobile the feed button. This area has
-* significant visual change on mobile.
+* profile menu, and on mobile the feed button. This area has a
+* significant visual transformation on mobile.
 *
 * The Activity HTML can be found in the activity.html partial.
 */
 
 .activity-container {
     height: 54px;
-    width: 100%;
+    width: 200px;
     position: fixed;
+    margin: 0 auto;
     top: 0;
-    left: 0;
-    @include media($tablet-portrait) {
-      top: initial;
-      bottom: 0;
-      height: 100px;
-      width: 100%;
-      background: white;
-      border-top: 1px solid $bordercolor;
-      box-shadow: 0px 0px 6px 2px rgba(0,0,0,0.4);
+    right: 0;
 
-      svg {
-        fill: $blue;
-      }
-    }
+    /**
+    * Left 1000px enables the activity container to stay in a
+    * fixed position relative to the 1200px max width of the 
+    * headers contents, despite not being a Child of the header
+    * element. The decoupling from the header element is necessary
+    * for the mobile styling a the activity container is fixed to 
+    * the bottom of the viewport.
+    */
+
+    left: 1000px;
+    z-index: 9001;
+}
+
+.activity-center {
+  @include media($tablet-portrait) {
+     display: flex;
+     flex-direction: row;
+  }
 }
 
 
 /**
 * Feed Activity Button
 */
-.feed-button-container {
+
+.feed-button-container, .settings-container {
   display: none;
 }
 
@@ -101,7 +109,6 @@
 .notifications-container {
   position: absolute;
   right: 58px;
-  z-index: 9001;
 }
 
 
@@ -114,13 +121,82 @@
 
 
 /**
-* Profile
+* Profile Menu
 * Not to be confused with the profile page!
 */
 
 .profile-menu-container {
   position: absolute;
   right: 0px;
-  z-index: 9001;
   @extend %click;
+  
+  .profile-icon {
+    display: none;
+  }
+
+}
+
+
+/**
+* This is to replace user profile photo with icon.
+*/
+
+.profile-menu-container .user-profile-photo {
+  @include media($tablet-portrait) {
+    display: none;
+  }
+}
+
+
+/**
+* Profile Menu on mobile is removed an becomes direct link
+* to profile page via the Profile svg icon.
+*/
+.profile-menu {
+  @include media($tablet-portrait) {
+     display: none;
+  }
+}
+
+/**
+* Activity Container Mobile Menu 
+*/
+
+.activity-container {
+    @include media($tablet-portrait) {
+      top: initial;
+      bottom: 0;
+      left: 0;
+      height: 88px;
+      width: 100%;
+      background: white;
+      border-top: 1px solid $bordercolor;
+      box-shadow: 0 1px 2px 2px rgba(0, 0, 0, .1);
+
+      .activity-center {
+        top: 0;
+        height: 100%;
+      }
+  }
+}
+
+.profile-menu-container,
+.notifications-container,
+.feed-button-container,
+.settings-container {
+    @include media($tablet-portrait) {
+      position: initial;
+      display: flex;
+
+      border: 1px solid $grey;
+
+        svg, .profile-icon {
+          display: block;
+          fill: $blue;
+          height: 50px;
+          width: 50px;
+          @extend %click;
+        }
+
+    }
 }
