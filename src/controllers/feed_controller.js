@@ -13,13 +13,16 @@ FeedController = function($scope, $location, userService, billService, authServi
   this.feedService = feedService;
   this.timeout = $timeout;
   this.rs = $rootScope;
+  this.rs.inApp = true;
   this.getTrends();
   this.getUserProfile(function(err, response) {
+    var that = this;
     if (err) {
       if (err.status === 401) {
         $location.path('/');
       }
     } else {
+      $rootScope.notLoggedIn = false;
       $scope.user = response;
       $scope.banner = new Banner(response);
     }

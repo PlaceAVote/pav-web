@@ -12,13 +12,13 @@ function HeaderCtrl($rootScope, $scope, $location, $timeout, authService, userSe
   this.location = $location;
   this.showDropDown = false;
   this.rs = $rootScope;
-  console.log(this.rs);
+
   if (this.rs.notLoggedIn === undefined) {
     this.rs.notLoggedIn = true;
-  } else {
-     this.populate();
   }
 
+  
+  this.populate();
   this.unread = 0;
   this.notifications = [];
   this.userNotifications = [];
@@ -153,16 +153,16 @@ HeaderCtrl.prototype.readEvent = function(res) {
 
 HeaderCtrl.prototype.populate = function() {
   var that = this;
+  if (this.rs.notLoggedIn) {
+    return;
+  }
+
   this.userService.getUserProfile('me', function(err, result) {
-    if (err) {
-      return;
-    }
     if (result) {
       that.rs.user = result;
       that.rs.inApp = true;
     } else {
       that.logout();
-      that.rs.inApp = false;
     }
   });
 };

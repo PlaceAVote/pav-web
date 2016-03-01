@@ -181,5 +181,26 @@
     left: 0;
     right: 0;
     margin: auto;
+    @include media(630px) {
+      top: 150px;
+    }
+  }
+}
+
+
+.reaction-label {
+    position: absolute;
+    right: 142px;
+    bottom: 13px;
+}
+
+.issue-share {
+  a {
+    text-decoration: none;
+  }
+  i {
+    @include font-size(14px);
+    padding-left: 6px;
+    color: $grey;
   }
 }
