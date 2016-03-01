@@ -1,0 +1,42 @@
+/*------------------------------------*\
+    #COMPONENT-PROFILE-MENU
+\*------------------------------------*/
+
+.profile-menu {
+    position: absolute;
+    background: white;
+    top: 50px;
+    right: 0px;
+    width: 130px;
+    border: 1px solid $grey;
+    border-radius: $border-radius;
+    box-shadow: 0px 2px 4px -2px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+.profile-menu li {
+    padding: 10px;
+    text-align: center;
+    @include font-size(12px);
+
+    &:nth-child(1) {
+      @extend %flex;
+      @extend %row;
+    }
+}
+
+.profile-menu:before {
+    top: -10px;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-bottom-color: $white;
+    border-width: 9px;
+    // margin-top: -18px;
+    right: 5px;
+    z-index: 9999;
+}
+
