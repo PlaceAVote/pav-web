@@ -189,9 +189,20 @@
 
 
 .reaction-label {
-    position: absolute;
-    right: 142px;
-    bottom: 13px;
+  position: absolute;
+  right: 157px;
+  bottom: 14px;
+}
+
+.issue-event .reaction-label {
+  bottom: 24px;
+}
+
+
+@include media(360px) {
+  .reaction-label {
+    display: none;   
+  }
 }
 
 .issue-share {

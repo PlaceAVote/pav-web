@@ -73,7 +73,8 @@ module.exports = function($location, issueService, facebook) {
 
       scope.getLocation = function() {
         var t = tweet();
-        return t.generateLink(window.location.href);
+        console.log(scope.issue);
+        return t.generateLink(window.location.hostname + '/' + scope.issue['issue_id']);
       };
 
       scope.getShareMessage = function() {
