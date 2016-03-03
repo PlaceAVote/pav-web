@@ -12,11 +12,9 @@ function HeaderCtrl($rootScope, $scope, $location, $timeout, authService, userSe
   this.location = $location;
   this.showDropDown = false;
   this.rs = $rootScope;
-
   if (this.rs.notLoggedIn === undefined) {
     this.rs.notLoggedIn = true;
   }
-
   this.populate();
   this.unread = 0;
   this.notifications = [];
@@ -27,6 +25,8 @@ function HeaderCtrl($rootScope, $scope, $location, $timeout, authService, userSe
   this.timeout = $timeout;
   this.focus = false;
   this.searching = false;
+
+
   $scope.$watchCollection(function() {
     return $rootScope.user;
   },
@@ -43,6 +43,16 @@ function HeaderCtrl($rootScope, $scope, $location, $timeout, authService, userSe
       }
     }
   }, true);
+
+
+  $scope.$watch(function() {
+    return $rootScope.notLoggedIn;
+  }, function(newValue, oldValue) {
+    if (newValue === false && oldValue === undefined) {
+      $scope.header.populate();
+    }
+  }, true);
+
 }
 
 HeaderCtrl.prototype.intercomInit = function(user) {
@@ -152,10 +162,6 @@ HeaderCtrl.prototype.readEvent = function(res) {
 
 HeaderCtrl.prototype.populate = function() {
   var that = this;
-  if (this.rs.notLoggedIn) {
-    return;
-  }
-
   this.userService.getUserProfile('me', function(err, result) {
     if (result) {
       that.rs.user = result;

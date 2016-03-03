@@ -163,6 +163,7 @@ function UserService($resource, facebookService, authService, userStore) {
 
     var profileResource = new $resource(url, undefined, {getProfile: config.methods.get});
     var onError = function(err) {
+      console.log('this is the errors', err);
       return callback(err);
     };
 

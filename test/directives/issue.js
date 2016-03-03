@@ -22,6 +22,12 @@ describe('Issue Directive', function() {
     return;
   }
 
+  var mockWindow = {
+    location: {
+      origin: 'www.placeavote.com',
+    },
+  };
+
   it('Should hit delete response service function if emotional response is the same', function() {
     var scope = {
       issue: {
@@ -29,7 +35,7 @@ describe('Issue Directive', function() {
         positive_responses: 1,
       },
     };
-    var subject = new Issues(mockLocation, mockIssueService);
+    var subject = new Issues(mockLocation, mockIssueService, undefined, mockWindow);
     subject.link(scope, undefined, mockAttr);
     scope.eResponse(undefined,'positive',scope.issue);
     expect(scope.issue.positive_responses).to.equal(0);
@@ -42,7 +48,7 @@ describe('Issue Directive', function() {
         negative_responses: 0,
       },
     };
-    var subject = new Issues(mockLocation, mockIssueService);
+    var subject = new Issues(mockLocation, mockIssueService, undefined, mockWindow);
     subject.link(scope, undefined, mockAttr);
     scope.eResponse(undefined,'negative',scope.issue);
     expect(scope.issue.negative_responses).to.equal(1);
@@ -57,7 +63,7 @@ describe('Issue Directive', function() {
         neutral_responses: 2,
       },
     };
-    var subject = new Issues(mockLocation, mockIssueService);
+    var subject = new Issues(mockLocation, mockIssueService, undefined, mockWindow);
     subject.link(scope, undefined, mockAttr);
     scope.eResponse(undefined,'negative',scope.issue);
     expect(scope.issue.negative_responses).to.equal(1);

@@ -220,7 +220,7 @@ app.directive('websiteFooter', [websiteFooter]);
 app.directive('searchBar', ['$sce' ,'$location', search]);
 app.directive('termsAndConditions', [termsAndConditionsDirective]);
 app.directive('issuesPost', [issuesPostDirective]);
-app.directive('issue', ['$location', 'issueService', 'facebookService', issueDirective]);
+app.directive('issue', ['$location', 'issueService', 'facebookService', '$window', issueDirective]);
 app.directive('wizard', [wizardDirective]);
 app.directive('slider', ['$timeout', sliderDirective]);
 app.directive('dad', [dragAndDropDirective]);

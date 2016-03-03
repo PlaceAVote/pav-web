@@ -39,6 +39,13 @@ ProfileController.prototype.loadProfile = function(id) {
   if (!id) {
     return;
   }
+
+
+  if (this.rs.notLoggedIn && id === 'me') {
+    this.location.path('/');
+    return;
+  }
+
   this.location.path('/profile/' + id);
 };
 
@@ -51,6 +58,12 @@ ProfileController.prototype.populate = function() {
 
 ProfileController.prototype.populateProfile = function() {
   var that = this;
+
+  if (this.rs.notLoggedIn && this.id === 'me') {
+    this.location.path('/');
+    return;
+  }
+
   this.userService.getUserProfile(this.id, function(err, result) {
     if (!err) {
       that.user = result;

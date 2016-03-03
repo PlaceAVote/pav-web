@@ -1,6 +1,6 @@
 var tweet = require('../models/tweet.js');
 
-module.exports = function($location, issueService, facebook) {
+module.exports = function($location, issueService, facebook, $window) {
   return {
     restrict: 'E',
     scope: {
@@ -71,11 +71,9 @@ module.exports = function($location, issueService, facebook) {
         }
       };
 
-      scope.getLocation = function() {
-        var t = tweet();
-        console.log(scope.issue);
-        return t.generateLink(window.location.hostname + '/' + scope.issue['issue_id']);
-      };
+      if (scope.issue) {
+        scope.issueLocation = $window.location.origin + '/issue/' + scope.issue.issue_id;
+      }
 
       scope.getShareMessage = function() {
         var t = tweet();
@@ -85,8 +83,7 @@ module.exports = function($location, issueService, facebook) {
       scope.facebook = facebook;
       scope.shareToFacebook = function() {
         var t = tweet();
-        var link = t.generateLink(window.location.href);
-        scope.facebook.share(link);
+        scope.facebook.share(scope.issueLocation);
       };
 
     },
