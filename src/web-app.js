@@ -94,7 +94,7 @@ var moment = require('angular-moment');
 var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'pavDirectives', 'rzModule', 'ui.tree', 'monospaced.elastic', 'angularMoment']);
 
 
-app.config(['$routeProvider', function($routeProvider) {
+app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
   $routeProvider
   .when('/', {
     templateUrl: 'partials/website_partials/home.html',
@@ -156,6 +156,9 @@ app.config(['$routeProvider', function($routeProvider) {
   .otherwise({
     redirectTo: '/',
   });
+
+  // $locationProvider.html5Mode(true);
+
 },]);
 
 

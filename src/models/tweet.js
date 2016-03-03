@@ -4,10 +4,9 @@ function generateMessage(message) {
   return encoded;
 }
 
-// Removes the insisten hash angular puts in the url
 function generateLink(link) {
-  var removed = link.replace(/#\//, '');
-  return removed;
+  link = encodeURIComponent(link);
+  return link;
 }
 
 function tweet() {

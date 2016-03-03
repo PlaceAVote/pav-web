@@ -72,7 +72,7 @@ module.exports = function($location, issueService, facebook, $window) {
       };
 
       if (scope.issue) {
-        scope.issueLocation = $window.location.origin + '/issue/' + scope.issue.issue_id;
+        scope.issueLocation = $window.location.origin + encodeURIComponent('/#/issue/') + scope.issue.issue_id;
       }
 
       scope.getShareMessage = function() {
