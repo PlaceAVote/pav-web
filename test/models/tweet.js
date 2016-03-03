@@ -10,6 +10,6 @@ describe('Tweet', function() {
   it('should remove hash from url', function() {
     var subject = tweet();
     var link = subject.generateLink('http://localhost:3000/#/bill/s2058-114');
-    expect(link).to.eql('http://localhost:3000/bill/s2058-114');
+    expect(link).to.eql(encodeURIComponent('http://localhost:3000/#/bill/s2058-114'));
   });
 });
