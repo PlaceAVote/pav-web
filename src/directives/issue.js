@@ -71,10 +71,23 @@ module.exports = function($location, issueService, facebook, $window) {
         }
       };
 
+      var rootHref;
+
       scope.$watch('issue', function(newValue, oldValue) {
         if (newValue) {
-          scope.issueLocationFacebook = 'https://dev.placeavote.com/#/issue/' + scope.issue.issue_id;
-          scope.issueLocation = encodeURIComponent('https://dev.placeavote.com/#/issue/') + scope.issue.issue_id;
+          if ($location.$$host === 'beta.placeavote.com') {
+            rootHref = 'https://beta.placeavote.com';
+          }
+
+          if ($location.$$host === 'dev.placeavote.com' || $location.$$host === 'localhost') {
+            rootHref = 'http://dev.placeavote.com';
+          }
+
+          if ($location.$$host === 'placeavote.com') {
+            rootHref = 'https://www.placeavote.com';
+          }
+          scope.issueLocationFacebook = rootHref + '/#/issue/' + scope.issue.issue_id;
+          scope.issueLocation = encodeURIComponent(rootHref + '/#/issue/') + scope.issue.issue_id;
         }
       });
 
