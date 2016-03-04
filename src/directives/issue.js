@@ -71,10 +71,12 @@ module.exports = function($location, issueService, facebook, $window) {
         }
       };
 
-      if (scope.issue) {
-        scope.issueLocationFacebook = $window.location.origin + '/#/issue/' + scope.issue.issue_id;
-        scope.issueLocation = $window.location.origin + encodeURIComponent('/#/issue/') + scope.issue.issue_id;
-      }
+      scope.$watch('issue', function(newValue, oldValue) {
+        if (newValue) {
+          scope.issueLocationFacebook = 'https://dev.placeavote.com/#/issue/' + scope.issue.issue_id;
+          scope.issueLocation = encodeURIComponent('https://dev.placeavote.com/#/issue/') + scope.issue.issue_id;
+        }
+      });
 
       scope.getShareMessage = function() {
         var t = tweet();
@@ -83,7 +85,6 @@ module.exports = function($location, issueService, facebook, $window) {
 
       scope.facebook = facebook;
       scope.shareToFacebook = function() {
-        var t = tweet();
         scope.facebook.share(scope.issueLocationFacebook);
       };
 
