@@ -72,6 +72,7 @@ module.exports = function($location, issueService, facebook, $window) {
       };
 
       if (scope.issue) {
+        scope.issueLocationFacebook = $window.location.origin + '/#/issue/' + scope.issue.issue_id;
         scope.issueLocation = $window.location.origin + encodeURIComponent('/#/issue/') + scope.issue.issue_id;
       }
 
@@ -83,7 +84,7 @@ module.exports = function($location, issueService, facebook, $window) {
       scope.facebook = facebook;
       scope.shareToFacebook = function() {
         var t = tweet();
-        scope.facebook.share(scope.issueLocation);
+        scope.facebook.share(scope.issueLocationFacebook);
       };
 
     },
