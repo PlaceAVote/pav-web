@@ -1,4 +1,3 @@
-var AuthorizeController = require('./autherize_controller.js');
 var title = require('../config/titles.js');
 
 function ProfileController($scope, $location, $routeParams, authService, userService, issueService, $rootScope) {
@@ -20,7 +19,6 @@ function ProfileController($scope, $location, $routeParams, authService, userSer
     this.showFollowers = true;
     this.populate();
   }
-
 }
 
 ProfileController.prototype.authenticate = function() {
@@ -58,7 +56,7 @@ ProfileController.prototype.populate = function() {
 
 ProfileController.prototype.populateProfile = function() {
   var that = this;
-
+  console.log('populate profile id', this.id);
   if (this.rs.notLoggedIn && this.id === 'me') {
     this.location.path('/');
     return;

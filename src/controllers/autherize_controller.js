@@ -10,10 +10,13 @@ AuthorizeController.authorize = function(options) {
     if (result) {
       if (options.success) {
         options.location.path(options.success);
+        console.log(options.location);
       }
     } else {
       if (options.error) {
-        options.location.path(options.error);
+        if (options.location.$$path === '/feed' || options.location.$$path === '/settings') {
+          options.location.path(options.error);
+        }
       }
     }
   });
