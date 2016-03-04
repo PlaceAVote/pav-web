@@ -34,6 +34,7 @@ describe('Issue Directive', function() {
         emotional_response: 'positive',
         positive_responses: 1,
       },
+      $watch: function() {},
     };
     var subject = new Issues(mockLocation, mockIssueService, undefined, mockWindow);
     subject.link(scope, undefined, mockAttr);
@@ -47,6 +48,7 @@ describe('Issue Directive', function() {
         emotional_response: 'none',
         negative_responses: 0,
       },
+      $watch: function() {},
     };
     var subject = new Issues(mockLocation, mockIssueService, undefined, mockWindow);
     subject.link(scope, undefined, mockAttr);
@@ -62,6 +64,7 @@ describe('Issue Directive', function() {
         negative_responses: 0,
         neutral_responses: 2,
       },
+      $watch: function() {},
     };
     var subject = new Issues(mockLocation, mockIssueService, undefined, mockWindow);
     subject.link(scope, undefined, mockAttr);
