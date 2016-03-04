@@ -162,6 +162,10 @@ HeaderCtrl.prototype.readEvent = function(res) {
 
 HeaderCtrl.prototype.populate = function() {
   var that = this;
+  if (this.rs.notLoggedIn) {
+    return;
+  }
+
   this.userService.getUserProfile('me', function(err, result) {
     if (result) {
       that.rs.user = result;
