@@ -12,7 +12,9 @@ describe('Auth Base', function() {
       path: function(destination) {
         expect(destination).to.eql('/feed');
         done();
-      }
+      },
+
+      $$path: '/',
     }
    AuthorizeController.authorize({success: '/feed', authorizer: authService, location: location});
   });

@@ -9,8 +9,9 @@ AuthorizeController.authorize = function(options) {
   options.authorizer.validateToken(function(result) {
     if (result) {
       if (options.success) {
-        options.location.path(options.success);
-        console.log(options.location);
+        if (options.location.$$path === '/') {
+          options.location.path(options.success);
+        }
       }
     } else {
       if (options.error) {
