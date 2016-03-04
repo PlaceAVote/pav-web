@@ -5,6 +5,7 @@ var mockUserService = {
 };
 var mockScope = {
   $watchCollection: function() {},
+  $watch: function() {},
 };
 var mockTimeout = function(callback, time) {
   callback();

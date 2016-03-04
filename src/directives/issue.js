@@ -1,4 +1,6 @@
-module.exports = function($location, issueService) {
+var tweet = require('../models/tweet.js');
+
+module.exports = function($location, issueService, facebook, $window) {
   return {
     restrict: 'E',
     scope: {
@@ -14,7 +16,6 @@ module.exports = function($location, issueService) {
       if (attr.$attr.single) {
         scope.single = true;
       }
-
       scope.location = $location;
       scope.issueService = issueService;
       scope.eResponse = function(id, emo, issue) {
@@ -69,6 +70,22 @@ module.exports = function($location, issueService) {
           });
         }
       };
+
+      if (scope.issue) {
+        scope.issueLocation = $window.location.origin + encodeURIComponent('/#/issue/') + scope.issue.issue_id;
+      }
+
+      scope.getShareMessage = function() {
+        var t = tweet();
+        return t.generateMessage('Check out this issue @placeavote');
+      };
+
+      scope.facebook = facebook;
+      scope.shareToFacebook = function() {
+        var t = tweet();
+        scope.facebook.share(scope.issueLocation);
+      };
+
     },
   };
 };

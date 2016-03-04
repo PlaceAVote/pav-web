@@ -181,5 +181,37 @@
     left: 0;
     right: 0;
     margin: auto;
+    @include media(630px) {
+      top: 150px;
+    }
+  }
+}
+
+
+.reaction-label {
+  position: absolute;
+  right: 157px;
+  bottom: 14px;
+}
+
+.issue-event .reaction-label {
+  bottom: 24px;
+}
+
+
+@include media(360px) {
+  .reaction-label {
+    display: none;   
+  }
+}
+
+.issue-share {
+  a {
+    text-decoration: none;
+  }
+  i {
+    @include font-size(14px);
+    padding-left: 6px;
+    color: $grey;
   }
 }

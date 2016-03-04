@@ -32,7 +32,19 @@
    </a>
 
    <div class="row margin-top-small">
-     <div class="h-left">
+
+     <div class="h-left row issue-share">
+       <p class="medium middle">
+          Share
+          <i class="icon-facebook click" ng-click="shareToFacebook()"></i>
+
+          <a target="_blank" ng-href="https://twitter.com/intent/tweet?text={{getShareMessage()}}&url={{issueLocation}}" data-size="large">
+            <i class="icon-twitter"></i>
+          </a>
+       </p>
+     </div>
+<!-- reaction-label -->
+     <div class="reaction-label">
         <p class="medium middle">What's your reaction?</p>
      </div>
 
