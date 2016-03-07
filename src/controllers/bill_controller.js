@@ -55,9 +55,7 @@ BillController.prototype.getShareMessage = function() {
 };
 
 BillController.prototype.shareToFacebook = function() {
-  var t = tweet();
-  var link = t.generateLink(window.location.href);
-  this.facebook.share(link);
+  this.facebook.share(window.location.href);
 };
 
 BillController.prototype.validationHandler = function() {
