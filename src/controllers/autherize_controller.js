@@ -8,18 +8,17 @@ AuthorizeController.authorize = function(options) {
   options = options || {};
   options.authorizer.validateToken(function(result) {
     if (result) {
-      console.log('auth cntrl', result, options.success, options.error);
       if (options.success) {
         if (options.location.$$path === '/') {
           options.location.path(options.success);
         }
       }
     } else {
-      if (options.error) {
-        if (options.location.$$path === '/feed' || options.location.$$path === '/settings') {
-          options.location.path(options.error);
-        }
+      if (options.location.$$path === '/feed' || options.location.$$path === '/settings') {
+        options.location.path(options.error);
       }
+
+
     }
   });
 };

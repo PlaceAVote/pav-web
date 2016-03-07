@@ -167,8 +167,6 @@ HeaderCtrl.prototype.populate = function() {
     if (result) {
       that.rs.user = result;
       that.rs.inApp = true;
-    } else {
-      that.logout();
     }
   });
 };

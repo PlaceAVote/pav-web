@@ -8,6 +8,7 @@ function ProfileController($scope, $location, $routeParams, authService, userSer
   this.userService = userService;
   this.rs = $rootScope;
   this.rs.inApp = true;
+  console.log('profile controller');
   if ($routeParams.issueid) {
     this.issueService = issueService;
     this.getIssue($routeParams.issueid);
@@ -22,6 +23,7 @@ function ProfileController($scope, $location, $routeParams, authService, userSer
 }
 
 ProfileController.prototype.authenticate = function() {
+  console.log('hit');
   var that = this;
   if (!that.authService) {
     return;
