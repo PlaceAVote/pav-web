@@ -17,13 +17,13 @@ describe("Users", function(){
         user.img_url = "image.com";
         user.first_name = "paul";
         user.last_name = "barber";
-        user.country_code = "USA";
         user.gender = "male";
+        user.zipcode = 1234;
         var subject = user.toBody();
         var expected = {
-            country_code: "USA",
             first_name: "paul",
             last_name: "barber",
+            zipcode: 1234,
             img_url: "image.com",
             dob: new Date("04/01/1990"),
             email: "paul@test.com",
@@ -39,11 +39,11 @@ describe("Users", function(){
         user.img_url = "image.com";
         user.first_name = "paul";
         user.last_name = "barber";
-        user.country_code = "USA";
+        user.zipcode = 1234;
         user.gender = "male";
         var subject = user.toBody("auth_token", "01010101");
         var expected = {
-            country_code: "USA",
+            zipcode: 1234,
             first_name: "paul",
             last_name: "barber",
             img_url: "image.com",

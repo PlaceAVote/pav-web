@@ -5,7 +5,6 @@ function User(email, password) {
   this.first_name = undefined;
   this.last_name = undefined;
   this.dob = undefined;
-  this.zipcode = undefined;
   this.img_url = undefined;
   this.private = false;
   this.gender = undefined;
