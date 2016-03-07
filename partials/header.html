@@ -4,12 +4,14 @@
   	<img ng-click="header.location.path('/feed')" ng-class="{'header-focus':header.focus}" class="pav-icon" src="//cdn.placeavote.com/img/pav_icon.svg" />
 
     <search-bar class="search" placeholder="Search bills or people..." ng-class="{'search-focus':header.focus}" results="header.searchResults" focus="header.focus" query="header.search(q)" searching="header.searching" people bills></search-bar>
+
+
     <div ng-show="header.rs.notLoggedIn" class="not-logged-in">
       <button ng-click="header.signup()" class="medium-button green-button padding-left-small padding-right-small margin-right-small">SIGN UP</button>
       <button ng-click="header.goTo('/login');" class="medium-button blue-button padding-left-small padding-right-small">LOGIN</button>
     </div>
 
-    <section class="notification row" ng-class="{'header-focus':header.focus}" ng-hide="header.notLoggedIn()">
+    <section class="notification row" ng-class="{'header-focus':header.focus}" ng-hide="header.rs.notLoggedIn">
       <span ng-show="header.unread > 0" class="notification-counter"><p>{{header.unread}}</p></span>
       <img style="cursor: pointer;" class="notifications-icon" ng-class="{'no-notifications': header.notifications.results.length < 1 && header.unread < 1}" src="//cdn.placeavote.com/img/notification.svg" ng-click="header.notify()" />
       <div class="notifications-container" ng-mouseleave="header.hideNotifications()"
