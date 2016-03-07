@@ -17,8 +17,6 @@ AuthorizeController.authorize = function(options) {
       if (options.location.$$path === '/feed' || options.location.$$path === '/settings') {
         options.location.path(options.error);
       }
-
-
     }
   });
 };

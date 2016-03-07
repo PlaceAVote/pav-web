@@ -8,7 +8,6 @@ function ProfileController($scope, $location, $routeParams, authService, userSer
   this.userService = userService;
   this.rs = $rootScope;
   this.rs.inApp = true;
-  console.log('profile controller');
   if ($routeParams.issueid) {
     this.issueService = issueService;
     this.getIssue($routeParams.issueid);
@@ -23,7 +22,6 @@ function ProfileController($scope, $location, $routeParams, authService, userSer
 }
 
 ProfileController.prototype.authenticate = function() {
-  console.log('hit');
   var that = this;
   if (!that.authService) {
     return;
@@ -58,7 +56,6 @@ ProfileController.prototype.populate = function() {
 
 ProfileController.prototype.populateProfile = function() {
   var that = this;
-  console.log('populate profile id', this.id);
   if (this.rs.notLoggedIn && this.id === 'me') {
     this.location.path('/');
     return;
@@ -172,7 +169,6 @@ ProfileController.prototype.getIssue = function(issue) {
     that.loadingIssue = false;
     if (err) {
       that.issueError = true;
-      console.log('error', err);
     }
     if (res) {
       that.id = res.user_id;

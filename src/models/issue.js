@@ -4,6 +4,7 @@ function Issue(options) {
   }
   this.type = 'issue';
   this.issue_id = options.issue_id;
+  this.short_issue_id = options.short_issue_id;
   this.bill_id = options.bill_id;
   this.bill_title = options.bill_title;
   this.comment = options.comment;
@@ -31,7 +32,7 @@ Issue.prototype.goToProfile = function(location) {
 };
 
 Issue.prototype.goToIssue = function(location) {
-  location.path('issue/' + this.issue_id);
+  location.path('issue/' + this.short_issue_id);
 };
 
 module.exports = Issue;
