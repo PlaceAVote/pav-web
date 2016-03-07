@@ -12,8 +12,8 @@ function SignUpCtrl($rootScope, $scope, $location, userService, authService) {
     first_name: user.first_name || '',
     last_name: user.last_name || '',
     dob: user.dob || '',
-    country_code: 'USA',
     gender: user.gender || 'they',
+    zipcode: user.zipcode || '',
   };
   this.country = countryCodes;
   this.rs = $rootScope;

@@ -69,14 +69,14 @@ describe("User Service", function() {
         first_name : "paul",
         last_name : "barber",
         dob : new Date(),
-        country_code: "USA"
+        zipcode : 1234
       };
       subject.addAdditionalInformation(additionalInformation);
       var user = subject.getUser();
       expect(user.first_name).to.eql("paul");
       expect(user.last_name).to.eql("barber");
       expect(user.dob).to.eql(strftime('%m/%d/%Y', new Date()));
-      expect(user.country_code).to.eql("USA");
+      expect(user.zipcode).to.eql(1234);
     });
   });
   describe("Save User", function() {
@@ -90,7 +90,7 @@ describe("User Service", function() {
           expect(user.first_name).to.eql('paul');
           expect(user.last_name).to.eql('barber');
           expect(user.dob).to.eql(strftime('%m/%d/%Y', new Date()));
-          expect(user.country_code).to.eql('804');
+          expect(user.zipcode).to.eql(1234);
           done();
         };
       }
@@ -102,7 +102,7 @@ describe("User Service", function() {
         first_name : "paul",
         last_name : "barber",
         dob : new Date(),
-        country_code: "804"
+        zipcode : 1234,
       };
       subject.addAdditionalInformation(additionalInformation);
       subject.saveUser();
@@ -121,7 +121,7 @@ describe("User Service", function() {
         first_name : "paul",
         last_name : "barber",
         dob : new Date(),
-        country_code: "804"
+        zipcode : 1234,
       };
       subject.addAdditionalInformation(additionalInformation);
       subject.saveUser(function(err, user){
@@ -129,7 +129,7 @@ describe("User Service", function() {
         expect(user.first_name).to.eql('paul');
         expect(user.last_name).to.eql('barber');
         expect(user.dob).to.eql(strftime('%m/%d/%Y', new Date()));
-        expect(user.country_code).to.eql('804');
+        expect(user.zipcode).to.eql(1234);
         done();
       });
     });
@@ -147,7 +147,7 @@ describe("User Service", function() {
         first_name : "paul",
         last_name : "barber",
         dob : new Date(),
-        country_code: "804"
+        zipcode : 1234,
       };
       subject.addAdditionalInformation(additionalInformation);
       subject.saveUser(function(err, user){
@@ -273,7 +273,7 @@ describe("User Service", function() {
           expect(data.first_name).to.eql("paul");
           expect(data.last_name).to.eql("barber");
           expect(!!data.dob).to.eql(true);
-          expect(data.country_code).to.eql("804");
+          expect(data.zipcode).to.eql(1234);
           expect(data.topics[0]).to.eql('guns');
           expect(data.img_url).to.eql('img.com');
           done();
@@ -287,7 +287,7 @@ describe("User Service", function() {
       var additionalInformation = {
         first_name : "paul",
         last_name : "barber",
-        country_code: "804"
+        zipcode : 1234,
       };
       subject.user.topics = [{name:'guns'}];
       subject.user.img_url = 'img.com';
