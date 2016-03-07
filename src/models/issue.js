@@ -28,7 +28,7 @@ Issue.prototype.goToBill = function(location) {
 };
 
 Issue.prototype.goToProfile = function(location) {
-  location.path('profile/' + this.author_id);
+  location.path('profile/' + this.user_id);
 };
 
 Issue.prototype.goToIssue = function(location) {
