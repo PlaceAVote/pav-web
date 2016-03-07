@@ -124,7 +124,12 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
   })
 	.when('/onboarding', {
   templateUrl: 'partials/onboarding.html',
+  controller: 'TopicRegisterCtrl as topicsRegister',
 	})
+  .when('/register', {
+    templateUrl: 'partials/signup.html',
+    controller: 'SignUpCtrl as signup',
+  })
   .when('/feed', {
     templateUrl: 'partials/feed.html',
     controller: 'FeedCtrl as feed',

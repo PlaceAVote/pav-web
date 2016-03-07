@@ -21,6 +21,7 @@ function RegisterController($scope, $location, userService, $rootScope) {
 
 RegisterController.prototype.topicsSubmit = function() {
   this.userService.addTopics(this.getSelected());
+  this.location.path('/register');
 };
 
 RegisterController.prototype.go = function(hash) {

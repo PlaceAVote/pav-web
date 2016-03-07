@@ -5,7 +5,7 @@ function User(email, password) {
   this.first_name = undefined;
   this.last_name = undefined;
   this.dob = undefined;
-  this.country_code = undefined;
+  this.zipcode = undefined;
   this.img_url = undefined;
   this.private = false;
   this.gender = undefined;
@@ -14,6 +14,7 @@ function User(email, password) {
 User.createFromJson = function(json) {
   json = json || {};
   var user = new User();
+  user.zipcode = json.zipcode;
   user.email = json.email;
   user.password = json.password;
   user.topics = json.topics;
@@ -53,7 +54,7 @@ User.prototype.toBody = function(auth, user_id) {
   var body = {
     first_name: this.first_name,
     last_name: this.last_name,
-    country_code: this.country_code,
+    zipcode: this.zipcode,
     dob: this.dob,
     topics: this.getTopicNames(),
     email: this.email,
