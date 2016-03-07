@@ -162,7 +162,10 @@ function UserService($resource, facebookService, authService, userStore) {
     }
 
     var profileResource = new $resource(url, undefined, {getProfile: config.methods.get});
+
     var onError = function(err) {
+      console.log(arguments);
+      console.log(err);
       console.log('this is the errors', err);
       return callback(err);
     };
@@ -176,7 +179,13 @@ function UserService($resource, facebookService, authService, userStore) {
 
       return callback(undefined, this.user);
     };
+
+    if (id === 'me' && !token) {
+      return callback('err');
+    }
+
     profileResource.getProfile(undefined, onLoad, onError);
+
   };
 
 
