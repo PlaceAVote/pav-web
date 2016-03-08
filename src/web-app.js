@@ -170,10 +170,6 @@ app.config(['$routeProvider', 'ngMetaProvider', function($routeProvider, ngMetaP
 },]);
 
 
-app.run(['ngMeta', function(ngMeta) {
-  ngMeta.init();
-},]);
-
 // Services
 app.factory('facebookService', [Facebook]);
 app.factory('twitterService', [Twitter]);
