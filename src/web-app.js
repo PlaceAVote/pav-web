@@ -95,7 +95,7 @@ var metatags = require('ng-meta');
 var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'pavDirectives', 'rzModule', 'ui.tree', 'monospaced.elastic', 'angularMoment', 'ngMeta']);
 
 app.config(['$routeProvider', 'ngMetaProvider', function($routeProvider, ngMetaProvider) {
-  console.log(ngMetaProvider);
+
   $routeProvider
   .when('/', {
     templateUrl: 'partials/website_partials/home.html',
@@ -170,9 +170,9 @@ app.config(['$routeProvider', 'ngMetaProvider', function($routeProvider, ngMetaP
 },]);
 
 
-app.run(function(ngMeta) {
+app.run(['ngMeta', function(ngMeta) {
   ngMeta.init();
-});
+},]);
 
 // Services
 app.factory('facebookService', [Facebook]);
