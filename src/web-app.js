@@ -91,10 +91,11 @@ var slider = require('angularjs-slider');
 var draggable = require('angular-ui-tree');
 var textarea = require('angular-elastic');
 var moment = require('angular-moment');
-var metatags = require('ng-meta');
-var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'pavDirectives', 'rzModule', 'ui.tree', 'monospaced.elastic', 'angularMoment', 'ngMeta']);
 
-app.config(['$routeProvider', 'ngMetaProvider', function($routeProvider, ngMetaProvider) {
+
+var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'pavDirectives', 'rzModule', 'ui.tree', 'monospaced.elastic', 'angularMoment']);
+
+app.config(['$routeProvider', function($routeProvider) {
 
   $routeProvider
   .when('/', {
@@ -138,10 +139,6 @@ app.config(['$routeProvider', 'ngMetaProvider', function($routeProvider, ngMetaP
   .when('/bill/:id', {
     templateUrl: 'partials/bill.html',
     controller: 'BillCtrl as bill',
-    meta: {
-      'description': 'this is the bills page!',
-      'og:image': 'img/pav-logo-color.png',
-    },
   })
   .when('/bill/:id/comment/:commentid', {
     templateUrl: 'partials/bill.html',
@@ -168,7 +165,6 @@ app.config(['$routeProvider', 'ngMetaProvider', function($routeProvider, ngMetaP
   });
 
 },]);
-
 
 // Services
 app.factory('facebookService', [Facebook]);
