@@ -140,7 +140,8 @@ app.config(['$routeProvider', 'ngMetaProvider', function($routeProvider, ngMetaP
     controller: 'BillCtrl as bill',
     meta: {
       'description': 'this is the bills page!',
-    }
+      'og:image': 'img/pav-logo-color.png',
+    },
   })
   .when('/bill/:id/comment/:commentid', {
     templateUrl: 'partials/bill.html',
