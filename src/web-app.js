@@ -91,10 +91,11 @@ var slider = require('angularjs-slider');
 var draggable = require('angular-ui-tree');
 var textarea = require('angular-elastic');
 var moment = require('angular-moment');
-var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'pavDirectives', 'rzModule', 'ui.tree', 'monospaced.elastic', 'angularMoment']);
+var ngMeta = require('ng-meta');
+var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'pavDirectives', 'rzModule', 'ui.tree', 'monospaced.elastic', 'angularMoment', 'ngMeta']);
 
-
-app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+app.config(['$routeProvider', 'ngMetaProvider', function($routeProvider, ngMetaProvider) {
+  console.log(ngMetaProvider);
   $routeProvider
   .when('/', {
     templateUrl: 'partials/website_partials/home.html',
@@ -137,6 +138,10 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
   .when('/bill/:id', {
     templateUrl: 'partials/bill.html',
     controller: 'BillCtrl as bill',
+    meta: {
+      'description': 'this is the bills page!',
+      'og:image': 'img/pav-logo-color.png',
+    },
   })
   .when('/bill/:id/comment/:commentid', {
     templateUrl: 'partials/bill.html',
@@ -162,11 +167,12 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     redirectTo: '/',
   });
 
-  // $locationProvider.html5Mode(true);
-
 },]);
 
 
+app.run(function(ngMeta) {
+  ngMeta.init();
+});
 
 // Services
 app.factory('facebookService', [Facebook]);

@@ -1,6 +1,7 @@
 {
   "preset": "node-style-guide",
   "maximumLineLength": 140,
+  "disallowQuotedKeysInObjects": false,
   "requireCamelCaseOrUpperCaseIdentifiers": false,
   "errorFilter": "./scripts/error_filter.js",
   "excludeFiles": [
