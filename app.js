@@ -4,7 +4,7 @@ var app = express();
 
 app.use('/', express.static(__dirname));
 
-app.use(require('prerender-node')).set('prerenderServiceUrl','http://pav-prerender-695693686.us-east-1.elb.amazonaws.com/');
+// app.use(require('prerender-node')).set('prerenderServiceUrl','http://pav-prerender-695693686.us-east-1.elb.amazonaws.com/');
 
 app.listen(port, function() {
   console.log('listening');
