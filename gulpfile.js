@@ -24,7 +24,7 @@ var gulp = require('gulp'),
   var mustache = require('gulp-mustache');
   var clean = require('gulp-clean');
 
-  var lintedPaths = ['./src/**/*.js', './*.js'];
+  var lintedPaths = ['./src/**/*.js', './*.js', '!./src/utils/metatags.js'];
 
   gulp.task('lint:jshint', function() {
     return gulp.src(lintedPaths)

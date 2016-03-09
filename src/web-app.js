@@ -91,11 +91,11 @@ var slider = require('angularjs-slider');
 var draggable = require('angular-ui-tree');
 var textarea = require('angular-elastic');
 var moment = require('angular-moment');
+var meta = require('./utils/metatags.js');
 
+var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'pavDirectives', 'rzModule', 'ui.tree', 'monospaced.elastic', 'angularMoment', 'metatags']);
 
-var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'pavDirectives', 'rzModule', 'ui.tree', 'monospaced.elastic', 'angularMoment']);
-
-app.config(['$routeProvider', function($routeProvider) {
+app.config(['$routeProvider', 'MetaTagsProvider', function($routeProvider, MetaTagsProvider) {
 
   $routeProvider
   .when('/', {
@@ -164,7 +164,21 @@ app.config(['$routeProvider', function($routeProvider) {
     redirectTo: '/',
   });
 
+  MetaTagsProvider
+  .when('/', {
+    description: 'Cool',
+  })
+  .when('/bill/:id', {
+    description: 'Even cooler',
+    fb_description: 'A bill title',
+    fb_site_name: 'Pavilicious',
+  });
+
 },]);
+
+app.run(function(MetaTags) {
+  MetaTags.initialize();
+});
 
 // Services
 app.factory('facebookService', [Facebook]);
