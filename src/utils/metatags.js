@@ -1,12 +1,8 @@
-/**
- * Author Avraam Mavridis (avr.mav@gmail.com)
- * https://github.com/AvraamMavridis
- */
-angular.module('metatags', [])
-  .provider('MetaTags',function(){
-
+function MetaTags() {
     var routes = {};
     var otherwise = {};
+    var path;
+    var info;
 
     this.when = function(path, metatags){
       routes[path] = metatags;
@@ -122,4 +118,6 @@ angular.module('metatags', [])
           }
         }
     }];
-  });
+  }
+
+module.exports = MetaTags;

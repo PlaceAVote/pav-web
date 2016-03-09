@@ -93,9 +93,11 @@ var textarea = require('angular-elastic');
 var moment = require('angular-moment');
 var meta = require('./utils/metatags.js');
 
-var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'pavDirectives', 'rzModule', 'ui.tree', 'monospaced.elastic', 'angularMoment', 'metatags']);
+var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'pavDirectives', 'rzModule', 'ui.tree', 'monospaced.elastic', 'angularMoment']);
 
-app.config(['$routeProvider', 'MetaTagsProvider', function($routeProvider, MetaTagsProvider) {
+app.provider('MetaTagger', [meta]);
+
+app.config(['$routeProvider', 'MetaTaggerProvider', function($routeProvider, MetaTaggerProvider) {
 
   $routeProvider
   .when('/', {
@@ -164,7 +166,7 @@ app.config(['$routeProvider', 'MetaTagsProvider', function($routeProvider, MetaT
     redirectTo: '/',
   });
 
-  MetaTagsProvider
+  MetaTaggerProvider
   .when('/', {
     description: 'Cool',
   })
@@ -176,9 +178,9 @@ app.config(['$routeProvider', 'MetaTagsProvider', function($routeProvider, MetaT
 
 },]);
 
-app.run(function(MetaTags) {
-  MetaTags.initialize();
-});
+app.run(['MetaTagger', function(meta) {
+  meta.initialize();
+},]);
 
 // Services
 app.factory('facebookService', [Facebook]);
