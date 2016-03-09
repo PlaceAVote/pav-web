@@ -9,6 +9,7 @@
     "src/temp/*",
     "src/controllers/website/*",
     "*gulpfile*",
-    "src/directives/infinite_scroll.js"
+    "src/directives/infinite_scroll.js",
+    "src/utils/metatags.js"
   ]
 }
