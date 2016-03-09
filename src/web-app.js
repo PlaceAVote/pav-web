@@ -94,7 +94,6 @@ var moment = require('angular-moment');
 
 var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'pavDirectives', 'rzModule', 'ui.tree', 'monospaced.elastic', 'angularMoment']);
 
-app.provider('MetaTagger', [meta]);
 
 app.config(['$routeProvider', function($routeProvider) {
 
