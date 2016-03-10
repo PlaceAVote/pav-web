@@ -1,0 +1,96 @@
+
+/*------------------------------------*\
+    #COMPONENT-BILL-BANNER
+\*------------------------------------*/
+
+/**
+* The bill banner is only used on the bills page
+* and can the markup found in partial/bills/bill_wrapper.html
+* it stretchs the entire width of the screen and contains 
+* several elements: Background Image, Overlay, Title, Tags,
+* and Trending label.
+*/
+
+.c-bill-banner {
+  height: 300px;
+  position: relative;
+}
+
+
+.c-bill-banner__bg, 
+.c-bill-banner__overlay {
+  width: 100%;
+  height: 300px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+
+.c-bill-banner__overlay {
+  background: rgba(0,0,0,0.5);
+}
+
+
+/**
+* c-bill-banner__content holds the Title,
+* Tags, and Sharing buttons. On desktop it is
+* offset to left by x px.
+*/
+
+.c-bill-banner__content {
+  position: absolute;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  bottom: 24px;
+  
+  h1 {
+    color: white;
+    @include font-size(28px);
+    @include light();
+    font-weight: 200;
+  }
+
+}
+
+
+.c-bill-banner__tags span {
+  color: white;
+  @include font-size(10px);
+  padding: 3px 0px;
+  margin-right: 17px;
+}
+
+
+.c-bill-banner__tags .c-tag {
+  margin-right: 17px;
+}
+
+
+.c-bill-banner__social {
+  position: absolute;
+  right: 100px;
+  bottom: 0;
+  i {
+    color: white;
+    @include font-size(14px);
+  }
+
+}
+
+
+.c-bill-banner__trending {
+  position: absolute;
+  right: 0px;
+  bottom: 0;
+  color: white;
+  background: rgba(0,0,0,0.8);
+  border-radius: 3px;
+  @include font-size(12px);
+  padding: 3px 10px;
+}
+
+

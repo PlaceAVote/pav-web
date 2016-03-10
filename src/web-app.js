@@ -137,7 +137,7 @@ app.config(['$routeProvider', function($routeProvider) {
     controller: 'FeedCtrl as feed',
   })
   .when('/bill/:id', {
-    templateUrl: 'partials/bill.html',
+    templateUrl: 'partials/bills/bill_wrapper.html',
     controller: 'BillCtrl as bill',
   })
   .when('/bill/:id/comment/:commentid', {
