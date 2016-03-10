@@ -8,7 +8,7 @@
     <div class="c-bill-banner__content">
 
         <!-- Title -->
-        <h1>A Bill Title</h1>
+        <h1>{{bill.body.getTitle()}}</h1>
 
         <!-- Tags Container -->
         <div class="c-bill-banner__tags row">
@@ -44,7 +44,31 @@
 
     </div>
 </div>
-    <!-- Menu -->
+
+
+
+<!-- Menu -->
+<div class="c-bill-menu-wrapper">
+
+    <ul class="c-bill-menu">
+        <li class="c-bill-menu--selected">
+            <p>Summary</p>
+        </li>
+        <li>
+            <p>Bill Info</p>
+        </li>
+        <li>
+            <p>Comments</p>
+        </li>
+        <li>
+            <p>Statistics</p>
+        </li>
+        <li class="c-bill-menu__vote">
+            <p>I'm ready to vote!</p>
+        </li>
+    </ul>
+
+</div>
 
 
 <!-- Content Wrapper -->

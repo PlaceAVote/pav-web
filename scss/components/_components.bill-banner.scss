@@ -40,22 +40,51 @@
 
 .c-bill-banner__content {
   position: absolute;
-  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   left: 0;
   right: 0;
   bottom: 24px;
-  
+  padding-left: 250px;
+
+  @include media(1200px) {
+    width: calc(100% - 20px);
+  }
+
   h1 {
     color: white;
-    @include font-size(28px);
+    @include font-size(24px);
     @include light();
     font-weight: 200;
   }
 
+
+/**
+* The 768px breakpoint initiates the
+* bill menu moving below the banner
+* which give shte banner__content area
+* full width.
+*/
+
+  @include media(768px) {
+    padding-left: 0;
+
+    h1 {
+      @include font-size(18px);
+    }
+
+  }
+
 }
 
+
+.c-bill-banner__tags {
+
+  @include media(768px) {
+    margin-left: 55px;
+  }
+
+}
 
 .c-bill-banner__tags span {
   color: white;
@@ -79,6 +108,18 @@
     @include font-size(14px);
   }
 
+
+/**
+* The following styles within the 768px
+* breakpoint shift the social buttons
+* to left.
+*/
+
+  @include media(768px) {
+    right: initial;
+    left: 0px;
+  }
+
 }
 
 
@@ -91,6 +132,11 @@
   border-radius: 3px;
   @include font-size(12px);
   padding: 3px 10px;
+
+  @include media(768px) {
+    display: none;
+  }
+
 }
 
 
