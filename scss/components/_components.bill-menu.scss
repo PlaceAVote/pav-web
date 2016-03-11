@@ -61,6 +61,9 @@
 .c-bill-menu li {
   border-bottom: 1px solid #edecf1;
   padding: 15px 10px;
+  position: relative;
+  cursor: pointer;
+
 
   @include media(768px) {
     display: inline-block;
@@ -74,15 +77,44 @@
     padding: 19px 5px;
   }
 
+
+  /**
+  * i is the icon element, they are
+  * aligned to the left of the p tags
+  * the icon-arrow-right only shows
+  * when selected.
+  */
+
+  i {
+    position: absolute;
+    @include font-size(20px);
+    color: $blue;
+    left: 17px;
+    top: 12px;
+
+    
+    &.icon-arrow-right {
+      display: none;
+    }
+
+
+     @include media(768px) {
+      display: none;
+    }
+
+  }
+
 }
 
 
 .c-bill-menu li p {
   @include font-size(14px);
+  margin-left: 50px;
 
   @include media(768px) {
     @include font-size(12px);
     color: $blue;
+    margin-left: 0;
   }
 }
 
@@ -91,7 +123,7 @@ li.c-bill-menu__vote {
   border: none;
   background-image: -webkit-linear-gradient( 180deg, rgb(77,110,179) 0%, rgb(107,85,160) 100%);
 
-  p {
+  p, i {
     color: white;
     text-indent: 1px;
     text-shadow: 0px 1px 0.91px rgba(0, 0, 0, 0.46);
@@ -109,6 +141,21 @@ li.c-bill-menu--selected {
   
   p {
     font-weight: 700;
+  }
+
+  i {
+    color: $red;
+
+    &.icon-arrow-right {
+      display: block;
+      right: 16px;
+      top: 19px;
+      left: initial;
+      @include font-size(12px);
+      @include media(768px) {
+        display: none;
+      }
+    }
   }
 
 }
