@@ -84,6 +84,7 @@ var issueDirective = require('./directives/issue.js');
 var feedEventsDirective = require('./directives/feed_events.js');
 var feedBillEventDirective = require('./directives/feed_bill_event.js');
 var infiniteScroll = require('./directives/infinite_scroll.js');
+var billInfoDirective = require('./directives/bills/bill_info.js');
 
 var invalidDirective = require('./directives/invalid.js');
 
@@ -241,3 +242,4 @@ app.directive('feedEvents', [feedEventsDirective]);
 app.directive('invalid', [invalidDirective]);
 app.directive('feedBillEvent', ['$location', feedBillEventDirective]);
 app.directive('infiniteScroll', ['$rootScope', '$window', '$interval', 'THROTTLE_MILLISECONDS', infiniteScroll]);
+app.directive('billInfo', ['$location', billInfoDirective]);

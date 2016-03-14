@@ -1,0 +1,29 @@
+/*------------------------------------*\
+    #COMPONENT-BILL-CONTENT
+\*------------------------------------*/
+
+/**
+* Bill content wrapper can be found in, 
+* you guessed it, bill_wrapper.html partial.
+* this contains the styling which makes the 
+* content center and be offset slight to make
+* room for the side menu on desktop and full
+* width on mobile.
+*/
+
+.c-bill-content-wrapper {
+    width: 100%;
+    position: relative;
+}
+
+
+.c-bill-content {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    margin: 0 auto;
+    max-width: 1200px;
+    width: 100%;
+    padding-left: 250px;
+}
