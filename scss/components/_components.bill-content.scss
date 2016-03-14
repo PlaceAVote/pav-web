@@ -22,8 +22,30 @@
     left: 0;
     right: 0;
     top: 0;
-    margin: 0 auto;
+    margin: 20px auto;
     max-width: 1200px;
     width: 100%;
     padding-left: 250px;
+
+    /**
+    * The 1200px breakpoint is set to
+    * provide margins to the content
+    * body.
+    */
+
+    @include media(1200px) {
+      max-width: calc(100% - 40px);
+    }
+
+    /**
+    * The below spreads the content
+    * the entire width of the view
+    * port.
+    */
+
+    @include media(768px) {
+      padding-left: 0;
+      max-width: 100%;
+      width: 100%;
+    }
 }

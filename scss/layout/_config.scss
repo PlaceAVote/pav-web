@@ -1,6 +1,9 @@
+$tablet: 768px;
+$mobile: 480px;
+
 $viewports: (
-    mobile: 480px,
-    tablet: 900px
+    mobile: $mobile,
+    tablet: $tablet
 );
 
 $margins: (
