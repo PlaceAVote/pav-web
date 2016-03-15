@@ -12,6 +12,22 @@
   border-radius: 3px;
   background: white;
   padding: 15px 11px;
+  overflow: hidden;
+  position: relative;
+
+  /**
+  * On mobile the card is stripped of 
+  * border radius and border style
+  */
+  @include media($tablet) {
+    border-radius: 0;
+    border: none;
+  }
+}
+
+
+.c-card i {
+  position: absolute;
 }
 
 
@@ -23,4 +39,102 @@
   line-height: 11px;
   vertical-align: baseline;
   margin-bottom: 11px;
+  z-index: 1;
+  position: relative;
+}
+
+
+/**
+* Some headers have icons to let
+* of the header title. The icons
+* are absolutely position so we
+* use the below modifier class to
+* adjust the poisition of the h1 tag
+*/
+
+.c-card--icon h1 {
+  padding-left: 20px;
+}
+
+
+
+.c-card hr {
+  margin-bottom: 11px;
+}
+
+
+.c-card .c-card__content p {
+  @include font-size(14px);
+}
+
+
+
+.c-card .c-card__content ul {
+  @include font-size(12px);
+  list-style-type: disc;
+  padding-left: 15px;
+}
+
+
+
+/**
+* Bill card modifier switches header
+* style to $pale pruple on tablet and
+* mobile.
+*/
+
+.c-card--bill {
+  @include media($tablet) {
+    &:before {
+      content: '';
+      background: $pale;
+      height: 38px;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }    
+  }
+}
+
+
+
+/**
+* Footer button can be found on several
+* cards around the application. As I write 
+* it is in two places on Bill Summary and 
+* Bill Information.
+*/
+
+/**
+* footer-btn Modifier class to sit along 
+* side c-card.
+*/
+
+.c-card--footer-btn {
+  padding-bottom: 51px;
+}
+
+
+.c-card__footer-btn {
+  border-top: 1px solid $widgetborder;
+  width: 100%;
+  background: $pale;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+  padding: 10px;
+  color: $blue;
+  @include font-size(12px);
+  cursor: pointer;
+
+  @include media($tablet) {
+    background: transparent;
+    border: none;
+    color: $red;
+    text-align: left;
+    padding: 15px 11px;
+  }
 }

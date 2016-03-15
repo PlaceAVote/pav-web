@@ -1,6 +1,6 @@
 module.exports = function($location) {
   return {
     restict: 'E',
-    templateUrl: 'partials/bills/bill_info.html',
+    templateUrl: 'partials/bills/bill_summary.html',
   };
 };

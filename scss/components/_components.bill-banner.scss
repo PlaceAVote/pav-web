@@ -60,13 +60,13 @@
 
 
 /**
-* The 768px breakpoint initiates the
+* The $tablet breakpoint initiates the
 * bill menu moving below the banner
 * which give shte banner__content area
 * full width.
 */
 
-  @include media(768px) {
+  @include media($tablet) {
     padding-left: 0;
 
     h1 {
@@ -80,7 +80,7 @@
 
 .c-bill-banner__tags {
 
-  @include media(768px) {
+  @include media($tablet) {
     margin-left: 55px;
   }
 
@@ -110,12 +110,12 @@
 
 
 /**
-* The following styles within the 768px
+* The following styles within the $tablet
 * breakpoint shift the social buttons
 * to left.
 */
 
-  @include media(768px) {
+  @include media($tablet) {
     right: initial;
     left: 0px;
   }
@@ -133,7 +133,7 @@
   @include font-size(12px);
   padding: 3px 10px;
 
-  @include media(768px) {
+  @include media($tablet) {
     display: none;
   }
 
