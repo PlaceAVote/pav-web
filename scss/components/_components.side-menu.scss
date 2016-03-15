@@ -48,7 +48,8 @@
   width: 230px;
   overflow: hidden;
   box-shadow: 1.923px 0.551px 0.91px 0.09px rgba(0, 0, 0, 0.02);
-
+  z-index: 3;
+  
   @include media(768px) {
     width: 100%;
   }
@@ -135,6 +136,7 @@
 
 li.c-side-menu__vote {
   border: none;
+  background-image: linear-gradient( 180deg, rgb(77,110,179) 0%, rgb(107,85,160) 100%);
   background-image: -webkit-linear-gradient( 180deg, rgb(77,110,179) 0%, rgb(107,85,160) 100%);
 
   p, i {

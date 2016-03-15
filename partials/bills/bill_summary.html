@@ -1,85 +1,147 @@
 <div class="row tablet-col l-12">
+
+
+
+<!-- Top Row -->
+  <!-- First Col -->
     
-    <div class="
-    l-6 
-    m-12 
-    margin-right-medium 
-    tablet-margin-right-none">
-        
-      <div class="
-      c-card
-      c-card--bill
-      c-card--footer-btn">
+  <div class="l-6 m-12 margin-right-medium tablet-margin-right-none">
+      
+    <div class="c-card c-card--bill c-card--footer-btn">
 
-        <h1>Short Summary</h1>
+      <h1>Short Summary</h1>
 
-        <hr />
+      <hr />
 
-        <div class="c-card__content">
-<p>This bill would establish a Select Committee of the House consisting of six Republicans and six Democrats to investigate on gun violence and report on recommendations and resolutions, including legislative proposals that would increase safety and preventative measures against gun-related criminal activity.  
+      <div class="c-card__content">
 
-Investigations would include causes of mass shootings, methods to improve the background checks on firearm purchasers, closing loopholes that allow some domestic abusers continued access to firearms, and strengthening penalties for gun trafficking and illegal purchasing.</p>
-        </div>
+      <p>
+      This bill would establish a Select Committee of the House consisting of six Republicans and six Democrats to investigate on gun violence and report on recommendations and resolutions, including legislative proposals that would increase safety and preventative measures against gun-related criminal activity. Investigations would include causes of mass shootings, methods to improve the background checks on firearm purchasers, closing loopholes that allow some domestic abusers continued access to firearms, and strengthening penalties for gun trafficking and illegal purchasing.
+      </p>
 
-        <div class="c-card__footer-btn">
-          Read More Information About This Bill >
-        </div>
+      </div>
 
+      <div class="c-card__footer-btn">
+        Read More Information About This Bill >
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- Second Col -->
+
+  <div class="col l-6 m-12">
+      
+    <div class="c-card c-card--bill c-card--icon margin-bottom-medium tablet-margin-bottom-none">
+
+      <i class="icon-passed-house green"
+      style="font-size: 10px;top: 15px;"></i>
+      <h1>Points In Favor</h1>
+      
+      <hr />
+
+      <div class="c-card__content">
+        <ul>
+          <li>Supports research and data collection of gun violence.</li>
+        </ul>
       </div>
 
     </div>
 
 
+    <div class="c-card c-card--bill c-card--icon m-12">
 
-    <div class="
-    col 
-    l-6 
-    m-12">
-        
-        <div class="
-        c-card 
-        c-card--bill
-        c-card--icon
-        margin-bottom-medium
-        tablet-margin-bottom-none">
+      <i class="icon-close red"
+      style="font-size: 13px;top: 13px;"></i>
+      <h1>Points Against</h1>
+      
+      <hr />
 
-          <i class="icon-passed-house green"
-          style="font-size: 10px;top: 15px;"></i>
-          <h1>Points In Favor</h1>
-          
-          <hr />
-
-          <div class="c-card__content">
-            <ul>
-              <li>Supports research and data collection of gun violence.</li>
-            </ul>
-          </div>
-
-        </div>
-
-
-        <div class="
-        c-card
-        c-card--bill 
-        c-card--icon
-        m-12">
-
-          <i class="icon-close red"
-          style="font-size: 13px;top: 13px;"></i>
-          <h1>Points Against</h1>
-          
-          <hr />
-
-          <div class="c-card__content">
-            <ul>
-              <li>Supports research and data collection of gun violence.</li>
-            </ul>
-          </div>
-
-        </div>
+      <div class="c-card__content">
+        <ul>
+          <li>Supports research and data collection of gun violence.</li>
+        </ul>
+      </div>
 
     </div>
 
+  </div>
+
+
+</div>
+
+
+
+
+
+<!-- Bottom Row | Top Comments -->
+
+<div class="row tablet-col l-12 margin-top-medium tablet-margin-top-none">
+
+  <div class="l-6 m-12 margin-right-medium tablet-margin-right-none">
+    
+    <div class="c-card c-card--bill c-card--comment">
+
+      <h1>Top Comment in Favor</h1>
+
+      <hr />
+
+
+      <div class="c-card__content row">
+
+        <div class="c-user-photo">
+          <div ng-style="{'background-image': 'url(' + header.rs.user.img_url + ')'}">
+          </div>
+        </div>
+
+        <div class="c-card__comment-body">
+          
+          <p class="c-card__username">
+            Alan Smith
+          </p>
+
+          <p>
+            This is a random comment blah blah blah blah. 
+            This is a random comment blah blah blah blah. 
+            This is a random comment blah blah blah blah. 
+            This is a random comment blah blah blah blah. 
+            This is a random comment blah blah blah blah. 
+          </p>
+
+          <div class="c-card__comment-vote row">
+
+            <span ng-class="{'red': bill.forComment.score < 0, 'green': bill.forComment.score > 0}">
+            {{bill.forComment.score}}
+            </span>
+
+            <i class="icon-thumbs-up" ng-class="{'score-up': bill.forComment.liked == true}" ng-click="bill.forComment.like(bill.commentService)"></i>
+
+            <i class="icon-thumbs-down" ng-class="{'score-down': bill.forComment.disliked == true}" ng-click="bill.forComment.dislike(bill.commentService)"></i>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  
+  </div>
+
+  <div class="l-6 m-12">
+    
+    <div class="c-card c-card--bill">
+      <h1>Top Comment in Favor</h1>
+      <hr />
+
+      <div class="c-card__content c-card__comment">
+
+      </div>
+    </div>
+
+  </div>
 
 </div>
 
@@ -89,39 +151,8 @@ Investigations would include causes of mass shootings, methods to improve the ba
 
 
 
-<div class="
-row 
-tablet-col 
-l-12 
-margin-top-medium
-tablet-margin-top-none">
 
-    <div class="
-    l-6 
-    m-12 
-    margin-right-medium 
-    tablet-margin-right-none">
-      
-      <div class="
-      c-card
-      c-card--bill">
-        <h1>Top Comment in Favor</h1>
-        <hr />
-      </div>
-    
-    </div>
 
-    <div class="
-    l-6 
-    m-12">
-      
-      <div class="
-      c-card
-      c-card--bill">
-        <h1>Top Comment in Favor</h1>
-        <hr />
-      </div>
 
-    </div>
 
-</div>
+

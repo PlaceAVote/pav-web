@@ -1,0 +1,65 @@
+/*------------------------------------*\
+    #COMPONENT-COMMENT
+\*------------------------------------*/
+
+/**
+* The comment contains the profile
+* picture, the name, the comment, scoring,
+* and reply input. It is present in several
+* areas across the app.
+*/
+
+.c-card--comment .c-user-photo {
+  margin-right: 11px;
+}
+
+
+.c-card__comment-body {
+  position: relative;
+}
+
+
+.c-card__username {
+  color: $red;
+  margin-bottom: 3px;
+  cursor: pointer;
+}
+
+
+.c-card__comment-vote {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+
+/**
+* Score colour
+*/
+
+.c-card__comment-vote span {
+  color: $grey;
+  @include bold();
+  @include font-size(10px);
+
+  &.green {
+    color: $green;
+  }
+
+  &.red {
+    color: $red;
+  }
+}
+
+
+.c-card__comment-vote i {
+  cursor: pointer;
+  @include font-size(13px);
+  color: $grey;
+  margin-left: 10px;
+  height: 15px;
+  text-align: center;
+  width: 15px;
+  transition: all 0.1s ease;
+  line-height: 15px;
+} 
