@@ -1,0 +1,29 @@
+/*------------------------------------*\
+    #COMPONENT-OFFICIAL-SUMMARY-CARD
+\*------------------------------------*/
+
+/**
+* This is c-card modifier that fixes its
+* height and width. 
+*/
+
+.c-card--official-summary {
+  width: calc(100% - 280px);
+  margin-right: 20px;
+  
+
+  .c-card__content {
+    height: 320px;
+    overflow-y: auto;
+    padding-right: 11px;
+    @include media($tablet) {
+      margin-bottom: 34px;
+    }
+  }
+
+  @include media($tablet) {
+    width: 100%;
+    margin-right: 0;
+  }
+}
+

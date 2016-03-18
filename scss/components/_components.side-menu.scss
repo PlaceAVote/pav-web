@@ -36,6 +36,8 @@
   @include media(768px) {
     position: relative;
     padding-left: 0;
+    height: 52px;
+    overflow: hidden;
   }
 
 }
@@ -49,7 +51,7 @@
   overflow: hidden;
   box-shadow: 1.923px 0.551px 0.91px 0.09px rgba(0, 0, 0, 0.02);
   z-index: 3;
-  
+
   @include media(768px) {
     width: 100%;
   }
@@ -78,7 +80,8 @@
   padding: 15px 10px;
   position: relative;
   cursor: pointer;
-
+  transition: border-color 0.3s ease;
+  overflow: hidden;
 
   @include media(768px) {
     display: inline-block;
@@ -109,7 +112,14 @@
 
     
     &.icon-arrow-right {
-      display: none;
+      display: block;
+      right: 16px;
+      top: 19px;
+      left: initial;
+      opacity: 0;
+      color: white;
+      transform: translateX(-50px);
+      transition: all 0.3s ease;
     }
 
 
@@ -153,7 +163,7 @@ li.c-side-menu__vote {
 
 
 li.c-side-menu--selected {
-  border-bottom: 2px solid $red;
+  border-bottom-color: $red;
   
   p {
     font-weight: 700;
@@ -163,10 +173,9 @@ li.c-side-menu--selected {
     color: $red;
 
     &.icon-arrow-right {
-      display: block;
-      right: 16px;
-      top: 19px;
-      left: initial;
+      color: $red;
+      transform: translateX(0px);
+      opacity: 1;
       @include font-size(12px);
       @include media(768px) {
         display: none;

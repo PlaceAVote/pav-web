@@ -1,7 +1,8 @@
 <!-- Banner -->
 <div class="c-bill-banner">
     
-    <div class="c-bill-banner__bg" style="background-image: url('http://www.desotogunrange.com/wp-content/uploads/2016/01/168960072.jpg');"></div>
+    <div class="c-bill-banner__bg" ng-style="{'background-image': 'url(' + bill.body.billData.featured_img_link + ')'}"
+    ng-class="{'purple-bg' : !bill.body.billData.featured_img_link}"></div>
 
     <div class="c-bill-banner__overlay"></div>
 
@@ -39,6 +40,7 @@
 
         <!-- Trending Bill -->
         <div class="c-bill-banner__trending">
+            <i class="icon-ios-pulse-strong"></i>
             Trending Bill
         </div>
 
@@ -51,21 +53,30 @@
 <div class="c-side-menu-wrapper">
 
     <ul class="c-side-menu c-side-menu--bill">
-        <li class="c-side-menu--selected">
+        <li 
+        ng-class="{'c-side-menu--selected': bill.view === 'summary'}"
+        ng-click="bill.view = 'summary'; bill.location.update_path('bill/' + bill.id + '/summary');">
             <i class="icon-document"></i>
             <p>Summary</p>
             <i class="icon-arrow-right"></i>
         </li>
-        <li>
+        <li 
+        ng-class="{'c-side-menu--selected': bill.view === 'info'}"
+        ng-click="bill.view = 'info'; bill.location.update_path('bill/' + bill.id + '/info');">
             <i class="icon-bill-info"></i>
             <p>Bill Info</p>
+            <i class="icon-arrow-right"></i>
         </li>
-        <li>
+        <li 
+        ng-class="{'c-side-menu--selected': bill.view === 'comments'}"
+        ng-click="bill.view = 'comments'; bill.location.update_path('bill/' + bill.id + '/comments');">
             <i class="icon-chat"></i>
             <p>Comments</p>
             <i class="icon-arrow-right"></i>
         </li>
-        <li>
+        <li 
+        ng-class="{'c-side-menu--selected': bill.view === 'statistics'}"
+        ng-click="bill.view = 'statistics'; bill.location.update_path('bill/' + bill.id + '/statistics');">
             <i class="icon-phone-signal-full"></i>
             <p>Statistics</p>
             <i class="icon-arrow-right"></i>
@@ -83,9 +94,15 @@
 
 <div class="c-bill-content-wrapper">
 
-    <div class="c-bill-content">
+    <div class="c-bill-content" ng-switch on="bill.view">
 
-        <bill-summary></bill-summary>
+        <bill-summary ng-switch-when="summary"></bill-summary>
+
+        <bill-info ng-switch-when="info"></bill-info>
+
+        <bill-comments ng-switch-when="comments"></bill-comments>
+
+        <bill-statistics ng-switch-when="statistics"></bill-statistics>
 
     </div>
 

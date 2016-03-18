@@ -3,7 +3,7 @@ var AuthorizeController = require('./autherize_controller.js');
 var title = require('../config/titles.js');
 var tweet = require('../models/tweet.js');
 
-function BillController($scope, $routeParams, billService, legislatorService, voteService, commentService, $location, authService, $rootScope, $timeout, facebook) {
+function BillController($scope, $routeParams, billService, legislatorService, voteService, commentService, $location, authService, $rootScope, $timeout, facebook, $route) {
   $scope = $scope || {};
   $scope.bill = this;
   $scope.commentService = commentService;
@@ -13,6 +13,7 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
   this.authService = authService;
   this.location = $location;
   this.routeParams = $routeParams;
+  this.route = $route;
   this.facebook = facebook;
   this.from = 0;
   this.commentBody = undefined;
@@ -20,6 +21,7 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
   this.billService = billService;
   this.legislatorService = legislatorService;
   this.voteService = voteService;
+  this.views = ['summary', 'comments', 'info', 'statistics'];
   this.Identify($routeParams);
   this.getBill(this.id);
   this.getTopComments(this.id);
@@ -98,7 +100,23 @@ BillController.prototype.hideVoteModal = function() {
 
 BillController.prototype.Identify = function(routeParams) {
   this.id = routeParams.id;
+  this.viewToggle(this.location.$$path);
 };
+
+
+
+BillController.prototype.viewToggle = function(view) {
+  var reg;
+  for (var i = 0; i < this.views.length; i++) {
+    reg = new RegExp(this.views[i], 'g');
+    if (view.match(reg)) {
+      return this.view = this.views[i];
+    }
+  }
+  this.view = 'summary';
+
+};
+
 
 BillController.prototype.getVotes = function(id) {
   var that = this;
@@ -195,6 +213,7 @@ BillController.prototype.getBill = function(id) {
     if (err) {
       that.error = true;
     } else {
+      console.log(result);
       that.body = result;
       title.bill(that.body.billData);
       that.userVotedCheck();

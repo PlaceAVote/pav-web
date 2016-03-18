@@ -85,6 +85,10 @@ var feedEventsDirective = require('./directives/feed_events.js');
 var feedBillEventDirective = require('./directives/feed_bill_event.js');
 var infiniteScroll = require('./directives/infinite_scroll.js');
 var billSummaryDirective = require('./directives/bills/bill_summary.js');
+var billInfoDirective = require('./directives/bills/bill_info.js');
+var billCommentsDirective = require('./directives/bills/bill_comments.js');
+var billStatisticsDirective = require('./directives/bills/bill_statistics.js');
+var billStatusDirective = require('./directives/bills/bill_status.js');
 
 var invalidDirective = require('./directives/invalid.js');
 
@@ -95,9 +99,9 @@ var slider = require('angularjs-slider');
 var draggable = require('angular-ui-tree');
 var textarea = require('angular-elastic');
 var moment = require('angular-moment');
+var locationUpdate = require('./utils/location_update.js');
 
-var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'pavDirectives', 'rzModule', 'ui.tree', 'monospaced.elastic', 'angularMoment']);
-
+var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'pavDirectives', 'rzModule', 'ui.tree', 'monospaced.elastic', 'angularMoment', 'ngLocationUpdate']);
 
 app.config(['$routeProvider', function($routeProvider) {
 
@@ -144,6 +148,22 @@ app.config(['$routeProvider', function($routeProvider) {
     templateUrl: 'partials/bills/bill_wrapper.html',
     controller: 'BillCtrl as bill',
   })
+  .when('/bill/:id/summary', {
+    templateUrl: 'partials/bills/bill_wrapper.html',
+    controller: 'BillCtrl as bill',
+  })
+  .when('/bill/:id/info', {
+    templateUrl: 'partials/bills/bill_wrapper.html',
+    controller: 'BillCtrl as bill',
+  })
+  .when('/bill/:id/comments', {
+    templateUrl: 'partials/bills/bill_wrapper.html',
+    controller: 'BillCtrl as bill',
+  })
+  .when('/bill/:id/statistics', {
+    templateUrl: 'partials/bills/bill_wrapper.html',
+    controller: 'BillCtrl as bill',
+  })
   .when('/bill/:id/comment/:commentid', {
     templateUrl: 'partials/bill.html',
     controller: 'BillCtrl as bill',
@@ -170,6 +190,7 @@ app.config(['$routeProvider', function($routeProvider) {
 
 },]);
 
+
 // Services
 app.factory('facebookService', [Facebook]);
 app.factory('twitterService', [Twitter]);
@@ -192,7 +213,7 @@ app.controller('TopicRegisterCtrl',['$scope','$location', 'userService', '$rootS
 app.controller('SignUpCtrl',['$rootScope','$scope','$location', 'userService', SignUpController]);
 app.controller('LoginCtrl',['$scope','$location', 'userService', 'authService', '$rootScope', '$routeParams', 'passwordService', LoginController]);
 app.controller('FeedCtrl', ['$scope', '$location', 'userService', 'billService', 'authService', 'feedService', '$rootScope','$timeout', FeedController]);
-app.controller('BillCtrl', ['$scope', '$routeParams', 'billService', 'legislationService', 'voteService', 'commentService', '$location', 'authService', '$rootScope', '$timeout', 'facebookService', BillController]);
+app.controller('BillCtrl', ['$scope', '$routeParams', 'billService', 'legislationService', 'voteService', 'commentService', '$location', 'authService', '$rootScope', '$timeout', 'facebookService', '$route', BillController]);
 app.controller('HeaderCtrl', ['$rootScope', '$scope', '$location', '$timeout', 'authService', 'userService', 'notificationService', 'searchService', '$window', HeaderController]);
 app.controller('ProfileCtrl', ['$scope', '$location', '$routeParams', 'authService', 'userService','issueService', '$rootScope', ProfileController]);
 app.controller('SettingsCtrl', ['$scope', '$location', '$timeout', 'userService', 'authService', '$rootScope','$anchorScroll', SettingsController]);
@@ -243,3 +264,7 @@ app.directive('invalid', [invalidDirective]);
 app.directive('feedBillEvent', ['$location', feedBillEventDirective]);
 app.directive('infiniteScroll', ['$rootScope', '$window', '$interval', 'THROTTLE_MILLISECONDS', infiniteScroll]);
 app.directive('billSummary', ['$location', billSummaryDirective]);
+app.directive('billInfo', ['$location', billInfoDirective]);
+app.directive('billComments', ['$location', billCommentsDirective]);
+app.directive('billStatistics', ['$location', billStatisticsDirective]);
+app.directive('billStatus', ['$location', billStatusDirective]);

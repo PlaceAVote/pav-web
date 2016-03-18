@@ -101,7 +101,7 @@
 
 .c-bill-banner__social {
   position: absolute;
-  right: 100px;
+  right: 120px;
   bottom: 0;
   i {
     color: white;
@@ -131,7 +131,14 @@
   background: rgba(0,0,0,0.8);
   border-radius: 3px;
   @include font-size(12px);
-  padding: 3px 10px;
+  padding: 3px 10px 3px 30px;
+
+  i {
+    position: absolute;
+    top: 0;
+    left: 5px;
+    @include font-size(18px);
+  }
 
   @include media($tablet) {
     display: none;

@@ -26,6 +26,7 @@ function BillService($resource, authService, userService) {
       return callback({message: 'Error: No Id Provided'});
     }
     var onLoad = function(result) {
+      console.log(result);
       return callback(undefined, new Bill(result));
     };
     var onError = function(err) {

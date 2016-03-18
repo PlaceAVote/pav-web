@@ -1,86 +1,6 @@
-<div class="row tablet-col l-12">
-
-
-
-<!-- Top Row -->
-  <!-- First Col -->
-    
-  <div class="l-6 m-12 margin-right-medium tablet-margin-right-none"
-  ng-show="bill.body.billData.featured_bill_summary">
-      
-    <div class="c-card c-card--bill c-card--footer-btn">
-
-      <h1>Short Summary</h1>
-
-      <hr />
-
-      <div class="c-card__content">
-
-      <p ng-bind-html="bill.body.billData.featured_bill_summary"></p>
-
-      </div>
-
-      <div class="c-card__footer-btn"
-      ng-click="bill.view = 'info'; bill.location.update_path('bill/' + bill.id + '/info');">
-        Read More Information About This Bill >
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <!-- Second Col -->
-
-  <div
-  ng-class="{'row l-12 tablet-col': !bill.body.billData.featured_bill_summary, 'col l-6 m-12': bill.body.billData.featured_bill_summary}">
-      
-    <div class="c-card c-card--bill c-card--icon tablet-margin-bottom-none m-12"
-      ng-class="{'l-6 margin-right-medium margin-bottom-medium-none' : !bill.body.billData.featured_bill_summary,
-      'margin-bottom-medium' : bill.body.billData.featured_bill_summary}"
-      ng-show="bill.body.billData.points_infavor">
-
-      <i class="icon-passed-house green"
-      style="font-size: 10px;top: 15px;"></i>
-      <h1>Points In Favor</h1>
-      
-      <hr />
-
-      <div class="c-card__content">
-      <p ng-bind-html="bill.body.billData.points_infavor"></p>
-      </div>
-
-    </div>
-
-
-    <div class="c-card c-card--bill c-card--icon m-12"
-      ng-show="bill.body.billData.points_against"
-      ng-class="{'l-6' : !bill.body.billData.featured_bill_summary}">
-
-      <i class="icon-close red"
-      style="font-size: 13px;top: 13px;"></i>
-      <h1>Points Against</h1>
-      
-      <hr />
-
-      <div class="c-card__content">
-      <p ng-bind-html="bill.body.billData.points_against"></p>
-      </div>
-
-    </div>
-
-  </div>
-
-
-</div>
-
-
-
-
-
 <!-- Bottom Row | Top Comments -->
 
-<div class="row tablet-col l-12 margin-top-medium tablet-margin-top-none"
+<div class="row tablet-col l-12"
 ng-show="bill.forComment.author"
 >
 
@@ -188,15 +108,3 @@ ng-show="bill.forComment.author"
   </div>
 
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
