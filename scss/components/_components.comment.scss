@@ -9,8 +9,76 @@
 * areas across the app.
 */
 
+
+.c-comments__wrapper .c-card {
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+  border-top: 0;
+}
+
+
+.c-comment__input {
+
+  position: relative;
+  background: $pale;
+  border: 1px solid $grey;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  padding: 11px;
+
+}
+
+
+.c-comment__input textarea {
+  min-height: 37px;
+  height: auto;
+  width: 100%;
+  outline: none;
+  border-radius: 3px;
+  border: 1px solid $grey;
+  color: $black;
+  font-family: $font;
+  @include light();
+  resize: none;
+  line-height: 14px;
+  @include font-size(12px);
+  padding: 12px 60px 12px 12px;
+  overflow-y:hidden;
+  transition: all 0.3s ease;
+
+  &:focus {
+    border-color: $blue;
+  }
+}
+
+
+.c-comment__post-btn {
+  position: absolute;
+  right: 17px;
+  top: 16px;
+  line-height: 1;
+  width: 50px;
+  border-radius: 3px;
+  height: 30px;
+  border: 1px solid $grey;
+  &:hover {
+    background-color: $green;
+    color: white;
+    border-color: darken($green, 10%);
+  }
+}
+
+.c-comment__input, .c-user-photo {
+  margin-right: 11px;
+}
+
+
 .c-card--comment .c-user-photo {
   margin-right: 11px;
+  min-height: 55px;
+  min-width: 55px;
+  border: 2px solid white;
+  box-shadow: 0px 0px 0px 1px #E8E7EE;
 }
 
 
@@ -50,6 +118,15 @@
   &.red {
     color: $red;
   }
+
+  &.c-card__comment-reply-btn {
+    color: $blue; 
+    text-transform: uppercase;
+    @include font-size(12px);
+    line-height: initial;
+    margin-left: 9px;
+    cursor: pointer;
+  }
 }
 
 
@@ -64,3 +141,48 @@
   transition: all 0.1s ease;
   line-height: 15px;
 } 
+
+.c-card__content--comments {
+  margin-bottom: 15px;
+}
+
+
+.c-comment__reply {
+  margin-top: 10px;
+  width: 100%;
+  textarea {
+    resize: none;
+    width: 100%;
+    min-height: 40px;
+    height: auto;
+    overflow-y: hidden;
+    outline: none;
+    border: 1px solid $greylight;
+    border-radius: 3px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding:10px;
+    font-family:$font;
+    @include medium();
+    color: $black;
+    box-sizing: border-box;
+    @include font-size(12px);
+  }
+  .reply-actions {
+    float: right;
+    .btn-green, .btn-blank {
+      width: 200px;
+      text-align: center;
+      height: 30px !important;
+      line-height: 30px !important;
+      width: 100px;
+      @include media(500px) {
+        padding: 0;
+        display: inline-block;
+        margin-left:4px;
+        margin-right:0;
+      }
+    }
+  }
+}
+

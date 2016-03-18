@@ -27,7 +27,7 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
   this.getTopComments(this.id);
   this.getVotes(this.id);
   this.getBillVotes(this.id);
-  this.getComments();
+  this.fetchComments();
   this.voteModal = {};
   this.stats = {};
   this.readmore = false;
@@ -91,6 +91,7 @@ BillController.prototype.showVoteModal = function(vote) {
   this.showVote = true;
 };
 
+
 BillController.prototype.hideVoteModal = function() {
   if (!this.userVoted) {
     this.vote = undefined;
@@ -98,11 +99,11 @@ BillController.prototype.hideVoteModal = function() {
   this.showVote = false;
 };
 
+
 BillController.prototype.Identify = function(routeParams) {
   this.id = routeParams.id;
   this.viewToggle(this.location.$$path);
 };
-
 
 
 BillController.prototype.viewToggle = function(view) {
@@ -236,19 +237,28 @@ BillController.prototype.getBillVotes = function(id) {
   });
 };
 
-BillController.prototype.getComments = function() {
+// BillController.prototype.getComments = function() {
+//   var that = this;
+//   if (!this.billService || !this.billService.getComments) {
+//     return;
+//   }
+//   this.billService.getComments(this.id, this.from, this.routeParams.commentid, function(err, result) {
+//     if (err) {
+//       that.allCommentError = true;
+//     } else if (result) {
+//       that.comments = result;
+//       that.commentMessage = that.comments.length ? false : true;
+//       that.from = that.from + 10;
+//     }
+//   });
+// };
+
+BillController.prototype.fetchComments = function() {
   var that = this;
-  if (!this.billService || !this.billService.getComments) {
-    return;
-  }
-  this.billService.getComments(this.id, this.from, this.routeParams.commentid, function(err, result) {
-    if (err) {
-      that.allCommentError = true;
-    } else if (result) {
-      that.comments = result;
-      that.commentMessage = that.comments.length ? false : true;
-      that.from = that.from + 10;
-    }
+  this.billService.fetchComments(this.id, this.commentOrder, this.lastComment, this.routeParams.commentid, function(err, res) {
+    console.log('fetchComments Ctrl');
+    console.log(res);
+    that.comments = res;
   });
 };
 

@@ -1,6 +1,6 @@
 <!-- Bottom Row | Top Comments -->
 
-<div class="row tablet-col l-12"
+<div class="row tablet-col l-12 margin-bottom-medium"
 ng-show="bill.forComment.author"
 >
 
@@ -105,6 +105,33 @@ ng-show="bill.forComment.author"
     </div>
     <!-- Top Comment Card -->
 
+  </div>
+
+</div>
+
+<div class="l-12 c-comments__wrapper">
+
+
+  <div class="c-comment__input row l-12">
+
+    <div class="c-user-photo">
+      <div ng-style="{'background-image': 'url(' + bill.rs.user.img_url + ')'}">
+      </div>
+    </div>
+
+    <textarea name='commentOnBillBox' rows="1" ng-model='bill.commentBody' placeholder='Write your comment here' msd-elastic></textarea>
+    <button ng-click="bill.postComment()" class="c-comment__post-btn btn-blank">Post</button>
+  
+  </div>
+
+  <div class="c-card c-card--comment"
+  ng-show="bill.comments" >
+
+    <h1>COMMENTS</h1>
+
+    <hr />
+
+    <comments comments='bill.comments'></comments>
   </div>
 
 </div>

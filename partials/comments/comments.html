@@ -1,0 +1,56 @@
+<div>
+<div class="c-card__content c-card__content--comments row">
+
+  <div class="c-user-photo">
+    <div ng-style="{'background-image': 'url(' + comment.author_img_url + ')'}">
+    </div>
+  </div>
+
+    <div class="c-card__comment-body">
+
+      <p class="c-card__username">{{comment.author_first_name}}</p>
+
+    <div class="c-card__comment-vote row">
+
+      <span ng-class="{'red': comment.score < 0, 'green': comment.score > 0}">
+      {{comment.score}}
+      </span>
+
+      <i class="icon-thumbs-up" ng-class="{'score-up': comment.liked == true}" ng-click="comment.like(commentService)"></i>
+
+      <i class="icon-thumbs-down" ng-class="{'score-down': comment.disliked == true}" ng-click="comment.dislike(commentService)"></i>
+
+      <span class="c-card__comment-reply-btn" ng-click="comment.showReplyInput()">reply</span>
+    </div>
+
+      <p ng-bind="comment.body"></p>
+
+      <div class="c-comment__reply" ng-show="comment.replyInput">
+
+        <textarea type="text" placeholder="Reply" ng-model="comment.replyText" rows="1" msd-elastic></textarea>
+
+        <p style="color: red;" ng-show="comment.errorMessage !== ''">{{comment.errorMessage}}</p>
+
+        <div class="reply-actions">
+         
+        <span class="btn-blank" ng-click="comment.hideReplyInput()">CANCEL</span>
+        
+        <span class="btn-green" ng-click="comment.reply(comment.bill_id, commentService, timeout)">POST</span>
+
+        </div>
+
+      </div>
+
+    </div>
+</div>
+
+<div>
+
+  <div class="reply-btn-container" ng-show='comment.replies.length > 0'>
+      <button class="reply-show-hide" ng-hide='comment.showChildren' ng-click='comment.show()'>{{comment.replies.length}} Replies</button>
+      <button class="reply-show-hide" ng-show='comment.showChildren' ng-click='comment.hide()'>Hide Replies</button>
+  </div>
+
+</div>
+
+</div>

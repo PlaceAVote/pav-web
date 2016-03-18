@@ -6,7 +6,7 @@ module.exports = function($compile, commentService, $anchorScroll, $timeout, $lo
       comment: '=',
       parent: '=',
     },
-    templateUrl: 'partials/comments.html',
+    templateUrl: 'partials/comments/comments.html',
     link: function(scope, element, attrs, controllerAs) {
       scope.commentService = commentService;
       scope.timeout = $timeout;
