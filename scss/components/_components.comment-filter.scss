@@ -1,0 +1,41 @@
+/*------------------------------------*\
+    #COMPONENT-COMMENT-FILTER
+\*------------------------------------*/
+
+/**
+* Comment filter is a small menu style 
+* component that can be found to the top
+* right of the bill comments area.
+*/
+
+
+.c-comment__filter {
+  position: absolute;
+  top: 0;
+  right: 11px;
+  z-index: 2;
+}
+
+
+.c-comment__filter ul li {
+  margin-left: 20px;
+  display: inline-block;
+  color: $blue;
+  @include font-size(12px);
+  @include bold();
+  text-transform: uppercase;
+  padding: 11px 0px 4px;
+  border-bottom: 5px solid transparent;
+  cursor: pointer;
+
+  &:nth-child(1) {
+    color: $greydark;
+    cursor: auto;
+  }
+
+}
+
+
+.c-comment__filter-selected {
+  border-color: $blue !important;
+}
