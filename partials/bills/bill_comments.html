@@ -124,8 +124,7 @@ ng-show="bill.forComment.author"
   
   </div>
 
-  <div class="c-card c-card--comment"
-  ng-show="bill.comments" >
+  <div class="c-card c-card--comment">
 
     <div class="c-comment__filter">
       <ul>
@@ -149,7 +148,7 @@ ng-show="bill.forComment.author"
 
     <hr />
 
-    <comments comments='bill.comments'></comments>
+    <comments ng-show="bill.comments" comments='bill.comments'></comments>
   </div>
 
 </div>

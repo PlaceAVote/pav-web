@@ -256,11 +256,13 @@ BillController.prototype.getBillVotes = function(id) {
 
 BillController.prototype.fetchComments = function() {
   var that = this;
+  this.fetchingComments = true;
   this.billService.fetchComments(this.id, this.commentOrder, this.lastComment, this.routeParams.commentid, function(err, res) {
-    console.log('fetchComments Ctrl');
-    console.log(res);
-    that.comments = res.comments;
-    that.lastComment = res.last_comment_id;
+    that.fetchingComments = false;
+    if (res) {
+      that.comments = res.comments;
+      that.lastComment = res.last_comment_id;      
+    }
   });
 };
 
