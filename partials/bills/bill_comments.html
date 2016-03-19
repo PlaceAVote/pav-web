@@ -127,6 +127,24 @@ ng-show="bill.forComment.author"
   <div class="c-card c-card--comment"
   ng-show="bill.comments" >
 
+    <div class="c-comment__filter">
+      <ul>
+        <li>
+        Filter
+        </li>
+        <li 
+        ng-click="bill.commentOrder = 'highest-score'; bill.fetchComments();"
+        ng-class="{'c-comment__filter-selected': bill.commentOrder === 'highest-score'}">
+        Highest Rated
+        </li>
+        <li 
+        ng-click="bill.commentOrder = 'latest'; bill.fetchComments();"
+        ng-class="{'c-comment__filter-selected': bill.commentOrder === 'latest'}">
+        Most Reecent
+        </li>
+      </ul>
+    </div>
+
     <h1>COMMENTS</h1>
 
     <hr />

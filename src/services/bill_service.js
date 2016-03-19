@@ -96,14 +96,18 @@ var fetchComments = function(id, order, lastComment, reply, callback) {
   }
 
   var onLoad = function(res) {
-    var results = [];
+    var results = {
+      lastComment: res.last_comment_id,
+      comments: [],
+    };
     var comments = res.comments;
     var commentLength = comments.length;
     for (var i = 0; i < commentLength; i++) {
       var comment = new Comment(comments[i]);
       Comment.buildChildren(comment, undefined, reply);
-      results.push(comment);
+      results.comments.push(comment);
     }
+    
     return callback(undefined, results);
   };
 

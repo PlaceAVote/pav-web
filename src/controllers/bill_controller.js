@@ -33,6 +33,7 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
   this.readmore = false;
   this.showChart = true;
   this.authenticate();
+  this.commentOrder = 'highest-score';
 }
 
 BillController.prototype.authenticate = function() {
@@ -258,7 +259,8 @@ BillController.prototype.fetchComments = function() {
   this.billService.fetchComments(this.id, this.commentOrder, this.lastComment, this.routeParams.commentid, function(err, res) {
     console.log('fetchComments Ctrl');
     console.log(res);
-    that.comments = res;
+    that.comments = res.comments;
+    that.lastComment = res.last_comment_id;
   });
 };
 
