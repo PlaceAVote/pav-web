@@ -281,9 +281,8 @@ BillController.prototype.commentsCheck = function() {
   this.billService.fetchComments(this.id, this.commentOrder, this.lastComment, this.routeParams.commentid, function(err, res) {
     that.fetchingComments = false;
     if (res) {
-      // console.log(that.comments, res.comments);
       that.comments.push.apply(that.comments, res.comments);
-      that.lastComment = res.last_comment_id;
+      that.lastComment = res.lastComment;
     }
   });
 };
