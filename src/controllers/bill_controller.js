@@ -112,7 +112,8 @@ BillController.prototype.viewToggle = function(view) {
   for (var i = 0; i < this.views.length; i++) {
     reg = new RegExp(this.views[i], 'g');
     if (view.match(reg)) {
-      return this.view = this.views[i];
+      this.view = this.views[i];
+      return this.view;
     }
   }
   this.view = 'summary';
@@ -238,21 +239,6 @@ BillController.prototype.getBillVotes = function(id) {
   });
 };
 
-// BillController.prototype.getComments = function() {
-//   var that = this;
-//   if (!this.billService || !this.billService.getComments) {
-//     return;
-//   }
-//   this.billService.getComments(this.id, this.from, this.routeParams.commentid, function(err, result) {
-//     if (err) {
-//       that.allCommentError = true;
-//     } else if (result) {
-//       that.comments = result;
-//       that.commentMessage = that.comments.length ? false : true;
-//       that.from = that.from + 10;
-//     }
-//   });
-// };
 
 BillController.prototype.fetchComments = function() {
   var that = this;
@@ -260,9 +246,8 @@ BillController.prototype.fetchComments = function() {
   this.billService.fetchComments(this.id, this.commentOrder, this.lastComment, this.routeParams.commentid, function(err, res) {
     that.fetchingComments = false;
     if (res) {
-      console.log(res);
       that.comments = res.comments;
-      that.lastComment = res.lastComment;      
+      that.lastComment = res.lastComment;
     }
   });
 };
@@ -284,6 +269,11 @@ BillController.prototype.commentsCheck = function() {
       that.comments.push.apply(that.comments, res.comments);
       that.lastComment = res.lastComment;
     }
+
+    if (err) {
+      that.commentError('Sorry there was an error');
+    }
+
   });
 };
 
