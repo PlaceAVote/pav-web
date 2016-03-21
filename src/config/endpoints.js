@@ -166,9 +166,11 @@ module.exports = {
 
       if (lastComment) {
         lastComment = '&last_comment_id=' + lastComment;
+      } else {
+        lastComment = '';
       }
 
-      return urls.CONGRESS + '/bills/' + id + '/comments?sort-by=' + order;
+      return urls.CONGRESS + '/bills/' + id + '/comments?sort-by=' + order + lastComment;
 
     },
     trends: {

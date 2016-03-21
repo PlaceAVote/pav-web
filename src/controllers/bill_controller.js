@@ -260,11 +260,34 @@ BillController.prototype.fetchComments = function() {
   this.billService.fetchComments(this.id, this.commentOrder, this.lastComment, this.routeParams.commentid, function(err, res) {
     that.fetchingComments = false;
     if (res) {
+      console.log(res);
       that.comments = res.comments;
-      that.lastComment = res.last_comment_id;      
+      that.lastComment = res.lastComment;      
     }
   });
 };
+
+
+BillController.prototype.commentsCheck = function() {
+
+  var that = this;
+
+  if (this.fetchingComments || !this.lastComment) {
+    return;
+  }
+
+  this.fetchingComments = true;
+
+  this.billService.fetchComments(this.id, this.commentOrder, this.lastComment, this.routeParams.commentid, function(err, res) {
+    that.fetchingComments = false;
+    if (res) {
+      // console.log(that.comments, res.comments);
+      that.comments.push.apply(that.comments, res.comments);
+      that.lastComment = res.last_comment_id;
+    }
+  });
+};
+
 
 BillController.prototype.postComment = function() {
   var that = this;
