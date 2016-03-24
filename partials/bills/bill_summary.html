@@ -71,10 +71,32 @@
 
   </div>
 
-
 </div>
 
 
+  <!-- Official Bill -->
+    <div 
+    ng-hide="bill.body.billData.featured_bill_summary" 
+    class="c-card c-card--bill c-card--official-summary l-12"
+    style="width: 100%;">
+
+    <h1>Official Summary</h1>
+
+    <hr />
+
+    <div class="c-card__content"
+    style="margin-bottom: 37px;">
+
+      <p ng-bind-html="bill.body.billData.summary"></p>
+
+    </div>
+
+    <div class="c-card__footer-btn">
+      <a target="_blank" ng-href="https://www.gpo.gov/fdsys/pkg/BILLS-{{bill.body.billData.congress}}{{bill.body.billData.bill_type}}{{bill.body.billData.number}}is/pdf/BILLS-{{bill.body.billData.congress}}{{bill.body.billData.bill_type}}{{bill.body.billData.number}}is.pdf">Read Entire Bill
+      </a>
+    </div>
+
+  </div>
 
 
 

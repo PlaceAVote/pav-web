@@ -1,6 +1,6 @@
 <!-- Bottom Row | Top Comments -->
 
-<div class="row tablet-col l-12 margin-bottom-medium"
+<div class="row tablet-col l-12 margin-bottom-medium tablet-margin-bottom-none"
 ng-show="bill.forComment.author"
 >
 
@@ -8,10 +8,7 @@ ng-show="bill.forComment.author"
   
 
    <!-- Top Comment Card -->  
-    <div class="c-card c-card--bill c-card--comment"
-
-    loader loader-context="bill.topLoaded"
-    >
+    <div class="c-card c-card--bill c-card--comment">
 
       <h1>Top Comment in Favor</h1>
 
@@ -59,10 +56,7 @@ ng-show="bill.forComment.author"
   <div class="l-6 m-12">
     
    <!-- Top Comment Card -->  
-    <div class="c-card c-card--bill c-card--comment"
-
-    loader loader-context="bill.topLoaded"
-    >
+    <div class="c-card c-card--bill c-card--comment">
 
       <h1>Top Comment Against</h1>
 
@@ -112,8 +106,8 @@ ng-show="bill.forComment.author"
 <div class="l-12 c-comments__wrapper">
 
 
-  <div class="c-comment__input row l-12">
-
+  <div class="c-comment__input row tablet-col l-12">
+  <h1>Add a Comment</h1>
     <div class="c-user-photo">
       <div ng-style="{'background-image': 'url(' + bill.rs.user.img_url + ')'}">
       </div>
@@ -124,7 +118,12 @@ ng-show="bill.forComment.author"
   
   </div>
 
-  <div class="c-card c-card--comment" infinite-scroll="bill.commentsCheck();">
+  <div 
+  class="c-card c-card--comment" 
+  infinite-scroll="bill.commentsCheck();"
+  loader loader-context="bill.fetchingComments"
+  truthy
+  ng-class="{'c-card--comment--loading': bill.fetchingComments, 'c-comment--scroll-loader': bill.checkingComments }">
 
     <div class="c-comment__filter">
       <ul>
@@ -144,11 +143,11 @@ ng-show="bill.forComment.author"
       </ul>
     </div>
 
-    <h1>COMMENTS</h1>
+    <h1 class="c-card--comment--h1">COMMENTS</h1>
 
     <hr />
 
     <comments ng-show="bill.comments" comments='bill.comments'></comments>
-  </div>
 
+  </div>
 </div>

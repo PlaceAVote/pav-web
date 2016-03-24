@@ -56,12 +56,12 @@
       transition: all 0.3s ease;
     }
     &.ng-hide-add.ng-hide-add-active {
-      transition-delay: 0.3s;
+      // transition-delay: 0.3s;
       opacity: 0;
-      .loader {
-       animation: bounce 0.3s ease;
-       transform: scale(0);
-      }
+      // .loader {
+       // animation: bounce 0.3s ease;
+       // transform: scale(0);
+      // }
     }
 }
 

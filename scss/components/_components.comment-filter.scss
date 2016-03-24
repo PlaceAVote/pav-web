@@ -14,8 +14,18 @@
   top: 0;
   right: 11px;
   z-index: 2;
+
+  @include media($tablet) {
+    position: initial;
+  }
 }
 
+
+.c-comment__filter ul {
+  @include media($tablet) {
+    width: 100%;
+  }
+}
 
 .c-comment__filter ul li {
   margin-left: 20px;
@@ -31,6 +41,25 @@
   &:nth-child(1) {
     color: $greydark;
     cursor: auto;
+  }
+
+  @include media($tablet) {
+    &:nth-child(1) {
+      width: 50%;
+      text-align: left;
+    }
+    width: 25%;
+    margin-left: -3px;
+    text-transform: initial;
+    text-align: center;
+    padding: 0px 4px 12px 3px;
+    margin-bottom: -3px;
+    @include medium();
+    &.c-comment__filter-selected {
+      border-color: $red !important;
+      border-width: 2px;
+      @include bold();
+    }
   }
 
 }

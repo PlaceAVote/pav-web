@@ -242,13 +242,22 @@ BillController.prototype.getBillVotes = function(id) {
 
 BillController.prototype.fetchComments = function() {
   var that = this;
+  if (this.fetchingComments) {
+    return;
+  }
   this.fetchingComments = true;
-  this.billService.fetchComments(this.id, this.commentOrder, this.lastComment, this.routeParams.commentid, function(err, res) {
+  this.billService.fetchComments(this.id, this.commentOrder, undefined, this.routeParams.commentid, function(err, res) {
     that.fetchingComments = false;
     if (res) {
+      console.log(res);
       that.comments = res.comments;
       that.lastComment = res.lastComment;
     }
+
+    if (err) {
+      that.commentError('Sorry there was an error');
+    }
+
   });
 };
 
@@ -257,17 +266,21 @@ BillController.prototype.commentsCheck = function() {
 
   var that = this;
 
-  if (this.fetchingComments || !this.lastComment) {
+  if (this.checkingComments || !this.lastComment) {
     return;
   }
 
+  this.checkingComments = true;
   this.fetchingComments = true;
 
   this.billService.fetchComments(this.id, this.commentOrder, this.lastComment, this.routeParams.commentid, function(err, res) {
+    that.checkingComments = false;
     that.fetchingComments = false;
     if (res) {
-      that.comments.push.apply(that.comments, res.comments);
-      that.lastComment = res.lastComment;
+      that.timeout(function() {
+        that.comments.push.apply(that.comments, res.comments);
+        that.lastComment = res.lastComment;
+      }, 100)
     }
 
     if (err) {
