@@ -40,6 +40,10 @@
   }
   @include media($tablet) {
 
+    border: none;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+
     @include linear-gradient($purple, $blue);
     
     .c-user-photo {
