@@ -15,7 +15,8 @@
     </div>
 
     <div class="c-card__footer-btn">
-      <a target="_blank" ng-href="https://www.gpo.gov/fdsys/pkg/BILLS-{{bill.body.billData.congress}}{{bill.body.billData.bill_type}}{{bill.body.billData.number}}is/pdf/BILLS-{{bill.body.billData.congress}}{{bill.body.billData.bill_type}}{{bill.body.billData.number}}is.pdf">Read Entire Bill
+      <a target="_blank" ng-href="{{bill.body.billData.last_version.urls.pdf}}" ng-click="openPdf()">
+      Read Entire Bill
       </a>
     </div>
 
