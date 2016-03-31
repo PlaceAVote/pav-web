@@ -762,5 +762,48 @@ describe('BillController', function() {
       expect(subject.commentBody).to.equal('');
     });
   });
+
+  it('shoould convert path to correct view', function() {
+    var mockView = {
+       $$path: '/comments',
+    }
+       var mockBillService = {
+      getBillVotes: function(id, callback){
+        callback('Error');
+      },
+        getBill: function(id, callback){
+          callback('Error');
+        },
+        getTopComments: function(id, callback){
+          callback('Error');
+        },
+        fetchComments: function(id, order, from, undefined, callback) {
+          callback(undefined, []);
+        },
+        postComment: function(id, comment, callback) {
+          var c = new Comment();
+          c.id = 1;
+          return callback(undefined, c);
+        },
+      };
+      var mockLegislationService = {
+        getById: function(id, callback){
+          callback('Error');
+        },
+      };
+      var mockVoteService = {
+        getVotesForBill: function(id, callback){
+          callback('Error');
+        },
+        voteOnBill: function(id, vote, callback){
+          callback('Error');
+        },
+      };
+      var mockTimeout = function() {return;};      
+    var subject = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, mockView, mockAuthService, {}, mockTimeout);
+    expect(subject.view).to.equal('comments');
+  });
 });
+
+//viewToggle
 

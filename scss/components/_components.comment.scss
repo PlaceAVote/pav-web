@@ -283,3 +283,25 @@ p.c-card__username {
   }
 
 }
+
+
+.c-comment__button {
+  background: $greylight;
+  position: fixed;
+  bottom: 0;
+  z-index: 5;
+  border: 1px solid $grey;
+  display: none;
+  padding: 10px;
+  width: 100%;
+  h1 {
+    @include bold();
+    color: $blue;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  @include media($tablet) {
+    display: block;
+  }
+}
