@@ -229,6 +229,6 @@ module.exports = {
     change: urls.USER + '/password/change',
   },
   mandrill: {
-    endpoint: 'https://mandrillapp.com/api/1.0//messages/send.json',
+    endpoint: 'https://mandrillapp.com/api/1.0/messages/send.json',
   },
 };

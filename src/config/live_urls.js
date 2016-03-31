@@ -4,6 +4,7 @@ var VOTES = 'https://voteapi.placeavote.com';
 var NOTIFICATION = 'wss://userapi.placeavote.com';
 var SEARCH = 'https://searchapi.placeavote.com';
 var FACEBOOKAPPID = '949301848442473';
+var MANDRILAPIKEY = 'ijV-LsU9RGPbUj1vjdHX_A';
 
 module.exports = {
   CONGRESS: CONGRESS,
@@ -11,5 +12,6 @@ module.exports = {
   VOTES: VOTES,
   NOTIFICATION: NOTIFICATION,
   FACEBOOKAPPID: FACEBOOKAPPID,
+  MANDRILAPIKEY: MANDRILAPIKEY,
   SEARCH: SEARCH,
 };
