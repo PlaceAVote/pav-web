@@ -309,5 +309,14 @@ BillController.prototype.userVotedCheck = function() {
 };
 
 
+BillController.prototype.userVote = function() {
+  var that = this;
+  if (!that.validationHandler()) {
+    return;
+  }
+
+  this.showVoteModal = true;
+};
+
 module.exports = BillController;
 

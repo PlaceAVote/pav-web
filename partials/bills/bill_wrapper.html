@@ -76,7 +76,7 @@
             <i class="icon-arrow-right"></i>
         </li>
         <li class="c-side-menu__vote"
-        ng-click="bill.showVoteModal = true"
+        ng-click="bill.userVote()"
         ng-show="bill.hasVoted === false">
             <i class="icon-logo"></i>
             <p>I'm ready to vote!</p>
@@ -105,7 +105,7 @@
 </div>
 
 <div class="c-comment__button"
-     ng-click="bill.showVoteModal = true"
+     ng-click="bill.userVote()"
      ng-show="bill.hasVoted === false">
   <h1>I'm Raedy To Vote</h1>
 </div>
