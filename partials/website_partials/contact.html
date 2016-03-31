@@ -8,19 +8,22 @@
                 <div class="s-12 m-12 l-4">
                     <h4>Contact Details</h4>
                     <hr />
-                    <span>Placeavote is made in Los Angeles, California</span>
+                    <br />
                     <a href="tel:+1 (844) 427-1000">+1 (844) 427-1000</a>
                     <a href="mailto:hello@placeavote.com">hello@placeavote.com</a>
                 </div>
                 <div class="l-8 m-12 s-12">
                     <span ng-if="contact.sendMailErr" ng-class="{'has-err':contact.sendMailErr}">
-                        Failed to send email, please enter the fields correctly and send again.
+                        Failed to send email, please enter the fields correctly and try again. If all else fails, email us hello@placeavote.com.
                     </span>
                     <span ng-if="contact.sendMailSuccess" ng-class="{'has-success':contact.sendMailSuccess}">
                         Mail is sent successfully.
                     </span>
+                    Name
                     <input type="text" name="FirstName" ng-model="contact.name" placeholder="Your name">
+                    Email Address
                     <input type="email" name="email" ng-model="contact.email" placeholder="Your email address">
+                    Message
                     <textarea rows="10" cols="0" ng-model="contact.mailBody" placeholder="Your message..."></textarea>
                     <button ng-click="contact.toMail();">Send Message</button>
                 </div>

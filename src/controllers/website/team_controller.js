@@ -58,18 +58,25 @@ function TeamController($scope, $location) {
   		role: 'Front End Engineer',
   		twitter: 'HistoireDeBabar',
   		linkedin: '/pub/paul-barber/78/130/8ab'
-  	}
+  	},
+       {
+      img: 'img/web/profile-imgs/ioannis.jpg',
+      name: "Ioannis Kokkinidis",
+      role: 'Mobile App Developer',
+      twitter: 'SudoPlz',
+      linkedin: '/in/sudoplz'
+    }
   ];
 
- // this.campaign = [
- // 		  {
- // 		img: 'img/web/profile-imgs/josh-dennison.jpg',
- // 		name: 'Josh Dennison',
- // 		role: 'Director of Political Strategy',
- // 		twitter: 'JoshDPAV',
- // 		linkedin: false
- //	}
- //];
+  this.campaign = [
+  		  {
+  		img: 'img/web/profile-imgs/amanda.jpg',
+  		name: 'Amanda Stewart',
+  		role: 'Content Writer',
+  		twitter: 'amwilla',
+  		linkedin: '/in/amanda-stewart-771209a',
+ 	}
+ ];
 }
 
 module.exports = TeamController;

@@ -60,12 +60,12 @@ describe("RegisterController", function() {
 	describe("Get Selected", function(){
 		it("returns a list of selected interests", function(){
 			var subject = new RegisterController({}, {}, {}, {});
-			subject.select('Religion');
+			subject.select('Healthcare');
 			subject.select('Drugs');
 			var interest = subject.getSelected();
 			expect(interest.length).to.eql(2);
 			expect(interest[0].name).to.eql('Drugs');
-			expect(interest[1].name).to.eql('Religion');
+			expect(interest[1].name).to.eql('Healthcare');
 		});
 	});
 });

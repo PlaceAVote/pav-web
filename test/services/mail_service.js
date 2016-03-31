@@ -22,7 +22,7 @@ describe('Mail Service', function() {
     it('calls params with correct config', function(done) {
       function mockResource(url, params, method, options) {
         this.send = function(){};
-        expect(url).to.eql('https://mandrillapp.com/api/1.0//messages/send.json');
+        expect(url).to.eql('https://mandrillapp.com/api/1.0/messages/send.json');
         expect(params).to.eql(undefined);
         expect(method.send.isArray).to.eql(true);
         expect(method.send.method).to.eql('POST');
