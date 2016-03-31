@@ -147,7 +147,6 @@ BillController.prototype.generateCommentCard = function(comment) {
     return;
   }
   this.commentCard = new Comment(comment);
-  console.log(this.commentCard);
   this.commentCard.set = true;
   this.commentCard.status = comment.author_first_name.toUpperCase() + ' DISAGREES:';
 };
@@ -221,7 +220,6 @@ BillController.prototype.fetchComments = function() {
   this.billService.fetchComments(this.id, this.commentOrder, undefined, this.routeParams.commentid, function(err, res) {
     that.fetchingComments = false;
     if (res) {
-      console.log(res);
       that.comments = res.comments;
       that.lastComment = res.lastComment;
     }

@@ -55,7 +55,6 @@ FeedController.prototype.getFeed = function() {
     that.loading = false;
     if (!err) {
       title.feed();
-      console.log('feed', response);
       that.events = response.feed;
       that.lastLoaded = response.last_timestamp;
     }
