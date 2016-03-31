@@ -1,0 +1,172 @@
+/*------------------------------------*\
+    #COMPONENT-MODAL
+\*------------------------------------*/
+
+/**
+* The modal is a popup with a fullscreen popup.
+*/
+
+.c-modal__wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.6);
+    z-index: 99999;
+    
+    @include media($tablet) {
+      background: transparent;
+    }
+}
+
+
+.c-modal {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    margin: 0 auto;
+    transform: translateY(-50%);
+}
+
+
+
+
+
+/**
+* Vote modal styling.
+*/
+
+
+.c-modal--vote {
+    max-width: 600px;
+    width: 100%;
+    color: white;
+
+    @include media($tablet) {
+      top: 0;
+      transform: translateY(0);
+      height: 100%;
+      max-width: 100%;
+    }
+
+}
+
+
+.c-modal__vote {
+    width: 100%;
+    background-size: cover;
+
+    @include media($tablet) {
+      height: 100%;
+    }
+}
+
+
+.c-modal__vote__overlay {
+    position: absolute;
+    background: rgba(0,0,0,0.3);
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+
+.c-modal__vote_overlay-gradient {
+    @include linear-gradient($purple, $blue);
+}
+
+
+.c-modal--vote .icon-close-badge {
+    color: white;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+    @include font-size(20px);
+}
+
+.c-modal__vote h1 {
+    padding: 30px;
+    text-align: center;
+    position: relative;
+
+    @include media($tablet) {
+      padding-top: 50px;
+    }
+}
+
+
+.c-modal__vote hr {
+    width: calc(100% - 60px);
+    margin-left: 30px;
+    border-color: #ffffff;
+    position: relative;
+}
+
+
+.c-modal--vote-confirmed {
+  background: #ffffff;
+}
+
+
+.c-modal__vote-confirmed {
+  @include linear-gradient(lighten($purple, 10%), lighten($blue, 10%));
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  padding: 30px;
+}
+
+.c-modal__vote-confirmed img {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 100%;
+  opacity: 0.1;
+  top: 50%;
+  transform: translateY(-50%) scale(1.2, 1.2);
+}
+
+
+.c-modal__vote-confirmed h1,
+.c-modal__vote-confirmed h2 {
+  position: relative;
+}
+
+
+.c-modal__vote-confirmed h1 {
+  @include font-size(28px);
+}
+
+.c-modal__comment {
+  padding: 20px 20px 0px 20px;
+
+  @include media($tablet) {
+    padding: 0;
+  }
+
+}
+
+
+.c-modal__comment .c-card {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom: none;
+}
+
+
+.c-modal__comment .c-comment__input {
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+
+  @include media($tablet) {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}

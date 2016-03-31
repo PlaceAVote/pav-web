@@ -6,6 +6,8 @@ module.exports = function($location) {
       scope.openPdf = function() {
         window.open(scope.$parent.bill.body.billData.last_version.urls.pdf);
       }
+
+      scope.locaation = $location;
     },
   };
 };

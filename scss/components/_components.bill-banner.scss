@@ -24,6 +24,7 @@
   position: absolute;
   top: 0;
   left: 0;
+  background-size: cover;
 }
 
 
@@ -116,7 +117,7 @@
 
 .c-bill-banner__social {
   position: absolute;
-  right: 120px;
+  right: 20px;
   bottom: 0;
   i, a {
     color: white;

@@ -76,7 +76,7 @@ FeedController.prototype.feedCheck = function() {
         for (var i in response.feed) {
           that.events.push(response.feed[i]);
         }
-        that.feedMessage('End of the line.');
+        that.feedMessage('.');
       } else {
         that.lastLoaded = response.last_timestamp;
         for (var x in response.feed) {

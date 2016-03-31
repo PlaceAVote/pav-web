@@ -1,14 +1,17 @@
 <div>
 <div class="c-card__content c-card__content--comments row">
 
-  <div class="c-user-photo">
+  <div class="c-user-photo" 
+      ng-click="location.path('profile/' + comment.author)">
     <div ng-style="{'background-image': 'url(' + comment.author_img_url + ')'}">
     </div>
   </div>
 
     <div class="c-card__comment-body">
 
-      <p class="c-card__username">{{comment.author_first_name}}</p>
+      <p class="c-card__username" 
+         ng-click="location.path('profile/' + comment.author)">
+      {{comment.author_first_name}}</p>
 
     <div class="c-card__comment-vote row">
 

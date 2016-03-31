@@ -127,7 +127,11 @@
 }
 
 
-.c-card__username {
+.c-card__comment-body p {
+  color: $black;
+}
+
+p.c-card__username {
   color: $red;
   margin-bottom: 3px;
   cursor: pointer;

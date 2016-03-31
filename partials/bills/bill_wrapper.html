@@ -40,10 +40,10 @@
         </div>
 
         <!-- Trending Bill -->
-        <div class="c-bill-banner__trending">
+<!--         <div class="c-bill-banner__trending">
             <i class="icon-ios-pulse-strong"></i>
             Trending Bill
-        </div>
+        </div> -->
 
     </div>
 </div>
@@ -69,20 +69,15 @@
             <i class="icon-arrow-right"></i>
         </li>
         <li 
-        ng-class="{'c-side-menu--selected': bill.view === 'comments'}"
+        ng-class="{'c-side-menu--selected': bill.view === 'comments', 'c-side-menu--last-item': bill.hasVoted}"
         ng-click="bill.view = 'comments'; bill.location.update_path('bill/' + bill.id + '/comments');">
             <i class="icon-chat"></i>
             <p>Comments</p>
             <i class="icon-arrow-right"></i>
         </li>
-<!--         <li 
-        ng-class="{'c-side-menu--selected': bill.view === 'statistics'}"
-        ng-click="bill.view = 'statistics'; bill.location.update_path('bill/' + bill.id + '/statistics');">
-            <i class="icon-phone-signal-full"></i>
-            <p>Statistics</p>
-            <i class="icon-arrow-right"></i>
-        </li> -->
-        <li class="c-side-menu__vote">
+        <li class="c-side-menu__vote"
+        ng-click="bill.showVoteModal = true"
+        ng-show="bill.hasVoted === false">
             <i class="icon-logo"></i>
             <p>I'm ready to vote!</p>
         </li>
@@ -108,3 +103,7 @@
     </div>
 
 </div>
+
+<vote-modal></vote-modal>
+
+<vote-confirmed></vote-confirmed>

@@ -89,6 +89,8 @@ var billInfoDirective = require('./directives/bills/bill_info.js');
 var billCommentsDirective = require('./directives/bills/bill_comments.js');
 var billStatisticsDirective = require('./directives/bills/bill_statistics.js');
 var billStatusDirective = require('./directives/bills/bill_status.js');
+var voteModalDirective = require('./directives/bills/vote_modal.js');
+var voteConfirmedDirective = require('./directives/bills/vote_confirmed.js');
 
 var invalidDirective = require('./directives/invalid.js');
 
@@ -268,3 +270,5 @@ app.directive('billInfo', ['$location', billInfoDirective]);
 app.directive('billComments', ['$location', billCommentsDirective]);
 app.directive('billStatistics', ['$location', billStatisticsDirective]);
 app.directive('billStatus', ['$location', billStatusDirective]);
+app.directive('voteModal', ['$location', voteModalDirective]);
+app.directive('voteConfirmed', ['$location', voteConfirmedDirective]);

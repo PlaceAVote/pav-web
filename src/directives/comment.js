@@ -10,6 +10,7 @@ module.exports = function($compile, commentService, $anchorScroll, $timeout, $lo
     link: function(scope, element, attrs, controllerAs) {
       scope.commentService = commentService;
       scope.timeout = $timeout;
+      scope.location = $location;
       if (angular.isArray(scope.comment.replies)) {
         element.append('<div class=\'comment-container comment-reply\' ng-show=\'comment.showChildren\'><comments comments=\'comment.replies\'></comments></div>');
         var html = element.html();

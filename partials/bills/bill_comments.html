@@ -17,14 +17,16 @@ ng-show="bill.forComment.author"
 
       <div class="c-card__content row">
 
-        <div class="c-user-photo">
+        <div class="c-user-photo"
+             ng-click="location.path('profile/' + bill.forComment.author)">
           <div ng-style="{'background-image': 'url(' + bill.forComment.author_img_url + ')'}">
           </div>
         </div>
 
         <div class="c-card__comment-body">
           
-          <p class="c-card__username">
+          <p class="c-card__username" 
+             ng-click="location.path('profile/' + bill.forComment.author)">
             {{bill.forComment.author_first_name}}
           </p>
 
@@ -65,14 +67,16 @@ ng-show="bill.forComment.author"
 
       <div class="c-card__content row">
 
-        <div class="c-user-photo">
+        <div class="c-user-photo"
+             ng-click="location.path('profile/' + bill.againstComment.author)">
           <div ng-style="{'background-image': 'url(' + bill.againstComment.author_img_url + ')'}">
           </div>
         </div>
 
         <div class="c-card__comment-body">
           
-          <p class="c-card__username">
+          <p class="c-card__username"
+             ng-click="location.path('profile/' + bill.againstComment.author)">
             {{bill.againstComment.author_first_name}}
           </p>
 

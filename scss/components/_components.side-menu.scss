@@ -163,7 +163,7 @@ li.c-side-menu__vote {
 
 
 li.c-side-menu--selected {
-  border-bottom-color: $red;
+  border-bottom-color: $red !important;
   
   p {
     font-weight: 700;
@@ -184,3 +184,17 @@ li.c-side-menu--selected {
   }
 
 }
+
+
+// .c-side-menu--last-item {
+//   border-bottom: 1px solid white !important;
+//   @include media()
+// }
+
+.c-side-menu--last-item {
+  border-bottom: 1px solid white !important;
+  @include media($tablet) {
+    border-bottom-color: #ccc !important;
+  }
+}
+
