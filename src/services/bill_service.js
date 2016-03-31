@@ -26,6 +26,7 @@ function BillService($resource, authService, userService) {
       return callback({message: 'Error: No Id Provided'});
     }
     var onLoad = function(result) {
+      console.log(result);
       return callback(undefined, new Bill(result));
     };
     var onError = function(err) {
@@ -57,35 +58,42 @@ function BillService($resource, authService, userService) {
     resource.getComments(undefined, onLoad, onError);
   };
 
-  var getComments = function(id, from, reply, callback) {
+
+  var fetchComments = function(id, order, lastComment, reply, callback) {
+
     reply = reply || false;
+
     if (!id) {
       return callback({message: 'Id Must Be Defined'});
     }
-    if (!from) {
-      from = 0;
-    }
-    var url = config.bills.comments.endpoint(id, from);
-    config.methods.get.headers.Authorization = authService.getAccessToken();
-    var resource = new $resource(url, undefined, {getComments: config.methods.get});
 
-    var onError = function(err) {
-      return callback(err);
-    };
-    var onLoad = function(response) {
-      var results = [];
-      var comments = response.comments;
+    var onLoad = function(res) {
+      var results = {
+        lastComment: res.last_comment_id,
+        comments: [],
+      };
+      var comments = res.comments;
       var commentLength = comments.length;
       for (var i = 0; i < commentLength; i++) {
         var comment = new Comment(comments[i]);
         Comment.buildChildren(comment, undefined, reply);
-        results.push(comment);
+        results.comments.push(comment);
       }
+
       return callback(undefined, results);
     };
-    resource.getComments(undefined, onLoad, onError);
-  };
 
+    var onError = function(err) {
+      console.log('error', err);
+    };
+
+
+    var url = config.bills.fetchComments(id, order, lastComment);
+    config.methods.get.headers.Authorization = authService.getAccessToken();
+    var resource = new $resource(url, undefined, {fetchComments: config.methods.get});
+
+    resource.fetchComments(undefined, onLoad, onError);
+  };
 
   var postComment = function(id, comment, callback) {
     if (!id) {
@@ -139,7 +147,7 @@ function BillService($resource, authService, userService) {
     getBillVotes: getBillVotes,
     getBill: getBill,
     getTopComments: getTopComments,
-    getComments: getComments,
+    fetchComments: fetchComments,
     postComment: postComment,
     getTrends: getTrends,
   };

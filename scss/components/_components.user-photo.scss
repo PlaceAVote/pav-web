@@ -1,0 +1,30 @@
+/*------------------------------------*\
+    #COMPONENT-PROFILE-PHOTO
+\*------------------------------------*/
+
+/**
+* The profile photo is common component througout
+* the app. It can be found in the header, profile, issues
+* comments, etc. This means various modifier classes may exist
+* mostly to alter its dimensions.
+*/
+
+
+.c-user-photo {
+    height: 40px;
+    width: 40px;
+    min-height: 40px;
+    min-width: 40px;
+    border-radius: 3px;
+    overflow: hidden;
+    border: 1px solid #9089b4;
+    div {
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-color: #413B4C;
+      border-radius: 3px;
+    }
+}

@@ -40,8 +40,13 @@ Bill.prototype.getTitle = function() {
   }
   var billType = this.billData.bill_type.toUpperCase();
   var billNumber = this.billData.number;
-  var title = this.billData.short_title || this.billData.official_title || '';
+  var title = this.billData.featured_bill_title || this.billData.short_title || this.billData.official_title || '';
+  if (title === this.billData.featured_bill_title) {
+    return title;
+  }
+
   return format('%s %s: %s', billType, billNumber, title);
+
 };
 
 Bill.prototype.getSummary = function() {

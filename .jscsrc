@@ -10,6 +10,7 @@
     "src/controllers/website/*",
     "*gulpfile*",
     "src/directives/infinite_scroll.js",
-    "src/utils/metatags.js"
+    "src/utils/metatags.js",
+    "src/utils/location_update.js"
   ]
 }

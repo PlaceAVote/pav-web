@@ -1,0 +1,307 @@
+/*------------------------------------*\
+    #COMPONENT-COMMENT
+\*------------------------------------*/
+
+/**
+* The comment contains the profile
+* picture, the name, the comment, scoring,
+* and reply input. It is present in several
+* areas across the app.
+*/
+
+
+.c-comments__wrapper .c-card {
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+  border-top: 0;
+  padding-bottom: 0;
+}
+
+
+.c-comment__input {
+  position: relative;
+  background: $pale;
+  border: 1px solid $grey;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  padding: 11px;
+
+  h1 {
+    display: none;
+    color: white;
+    @include font-size(12px);
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 11px;
+    vertical-align: baseline;
+    margin-bottom: 11px;
+    z-index: 1;
+    position: relative;
+  }
+  @include media($tablet) {
+
+    border: none;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+
+    @include linear-gradient($purple, $blue);
+    
+    .c-user-photo {
+      display: none;
+    }
+
+    h1 {
+      display: inline-block;
+    }
+  }
+
+}
+
+
+.c-comment__input textarea {
+  height: 37px;
+  min-height: 37px !important;
+  // height: auto;
+  width: 100%;
+  outline: none;
+  border-radius: 3px;
+  border: 1px solid $grey;
+  color: $black;
+  font-family: $font;
+  @include light();
+  resize: none;
+  line-height: 14px;
+  @include font-size(12px);
+  padding: 12px 60px 12px 12px;
+  overflow-y:hidden;
+  transition: all 0.3s ease;
+
+  &:focus {
+    border-color: $blue;
+  }
+
+  @include media($tablet) {
+    min-height: 72px;
+  }
+}
+
+
+.c-comment__post-btn {
+  position: absolute;
+  right: 17px;
+  top: 16px;
+  line-height: 1;
+  width: 50px;
+  border-radius: 3px;
+  height: 30px;
+  border: 1px solid $grey;
+  &:hover {
+    background-color: $green;
+    color: white;
+    border-color: darken($green, 10%);
+  }
+
+  @include media($tablet) {
+    bottom: 16px;
+    top: initial;
+  }
+}
+
+.c-comment__input, .c-user-photo {
+  margin-right: 11px;
+}
+
+
+.c-card--comment .c-user-photo {
+  margin-right: 11px;
+  min-height: 55px;
+  min-width: 55px;
+  border: 2px solid white;
+  box-shadow: 0px 0px 0px 1px #E8E7EE;
+}
+
+
+.c-card__comment-body {
+  position: relative;
+  width: 100%;
+}
+
+
+.c-card__comment-body p {
+  color: $black;
+}
+
+p.c-card__username {
+  color: $red;
+  margin-bottom: 3px;
+  cursor: pointer;
+}
+
+
+.c-card__comment-vote {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+
+/**
+* Score colour
+*/
+
+.c-card__comment-vote span {
+  color: $grey;
+  @include bold();
+  @include font-size(10px);
+
+  &.green {
+    color: $green;
+  }
+
+  &.red {
+    color: $red;
+  }
+
+  &.c-card__comment-reply-btn {
+    color: $blue; 
+    text-transform: uppercase;
+    @include font-size(12px);
+    line-height: initial;
+    margin-left: 9px;
+    cursor: pointer;
+  }
+}
+
+
+.c-card__comment-vote i {
+  cursor: pointer;
+  @include font-size(13px);
+  color: $grey;
+  margin-left: 10px;
+  height: 15px;
+  text-align: center;
+  width: 15px;
+  transition: all 0.1s ease;
+  line-height: 15px;
+} 
+
+.c-card__content--comments {
+  padding-bottom: 15px;
+}
+
+
+.c-comment__reply {
+  margin-top: 10px;
+  width: 100%;
+  textarea {
+    resize: none;
+    width: 100%;
+    min-height: 40px;
+    height: auto;
+    overflow-y: hidden;
+    outline: none;
+    border: 1px solid $greylight;
+    border-radius: 3px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding:10px;
+    font-family:$font;
+    @include medium();
+    color: $black;
+    box-sizing: border-box;
+    @include font-size(12px);
+  }
+  .reply-actions {
+    float: right;
+    .btn-green, .btn-blank {
+      width: 200px;
+      text-align: center;
+      height: 30px !important;
+      line-height: 30px !important;
+      width: 100px;
+      @include media(500px) {
+        padding: 0;
+        display: inline-block;
+        margin-left:4px;
+        margin-right:0;
+      }
+    }
+  }
+}
+
+
+.c-card--comment .box-loader {
+  position: absolute;
+  left: 5px;
+  top: 9px;
+  width: 21px;
+  height: 21px;
+  transform: translateY(0px);
+  @include media($tablet) {
+    left: 51px;
+    top: 16px;
+  }
+}
+
+
+.c-card--comment {
+  overflow: initial;
+  h1 {
+    transform: translateX(0px);
+    transition: transform 0.2s ease;
+    @include media($tablet) {
+     &.c-card--comment--h1 {
+      display: none;
+      } 
+    }
+  }
+}
+
+
+.c-card--comment--loading {
+  h1 {
+    transform: translateX(21px);
+  }
+}
+
+
+.c-comment--scroll-loader .box-loader {
+  position: absolute;
+  top: initial !important;
+  bottom: -10px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 28px;
+  height: 28px;
+  background:white;
+  border-radius: 50%;
+  border-bottom: 1px solid $grey;
+  box-shadow: 0px 5px 4px -3px rgba(0,0,0,0.2);
+  .loader {
+      box-shadow: 0px 0px 21 4px white;
+  }
+
+}
+
+
+.c-comment__button {
+  background: $greylight;
+  position: fixed;
+  bottom: 0;
+  z-index: 5;
+  border: 1px solid $grey;
+  display: none;
+  padding: 10px;
+  width: 100%;
+  h1 {
+    @include bold();
+    color: $blue;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  @include media($tablet) {
+    display: block;
+  }
+}

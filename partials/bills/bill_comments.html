@@ -1,0 +1,163 @@
+<!-- Bottom Row | Top Comments -->
+
+<div class="row tablet-col l-12 margin-bottom-medium tablet-margin-bottom-none"
+ng-show="bill.forComment.author"
+>
+
+  <div class="l-6 m-12 margin-right-medium tablet-margin-right-none">
+  
+
+   <!-- Top Comment Card -->  
+    <div class="c-card c-card--bill c-card--comment">
+
+      <h1>Top Comment in Favor</h1>
+
+      <hr />
+
+
+      <div class="c-card__content row">
+
+        <div class="c-user-photo"
+             ng-click="location.path('profile/' + bill.forComment.author)">
+          <div ng-style="{'background-image': 'url(' + bill.forComment.author_img_url + ')'}">
+          </div>
+        </div>
+
+        <div class="c-card__comment-body">
+          
+          <p class="c-card__username" 
+             ng-click="location.path('profile/' + bill.forComment.author)">
+            {{bill.forComment.author_first_name}}
+          </p>
+
+          <p>
+            {{bill.forComment.body}}
+          </p>
+
+          <div class="c-card__comment-vote row">
+
+            <span ng-class="{'red': bill.forComment.score < 0, 'green': bill.forComment.score > 0}">
+            {{bill.forComment.score}}
+            </span>
+
+            <i class="icon-thumbs-up" ng-class="{'score-up': bill.forComment.liked == true}" ng-click="bill.forComment.like(bill.commentService)"></i>
+
+            <i class="icon-thumbs-down" ng-class="{'score-down': bill.forComment.disliked == true}" ng-click="bill.forComment.dislike(bill.commentService)"></i>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+    <!-- Top Comment Card -->
+  
+  </div>
+
+  <div class="l-6 m-12">
+    
+   <!-- Top Comment Card -->  
+    <div class="c-card c-card--bill c-card--comment">
+
+      <h1>Top Comment Against</h1>
+
+      <hr />
+
+
+      <div class="c-card__content row">
+
+        <div class="c-user-photo"
+             ng-click="location.path('profile/' + bill.againstComment.author)">
+          <div ng-style="{'background-image': 'url(' + bill.againstComment.author_img_url + ')'}">
+          </div>
+        </div>
+
+        <div class="c-card__comment-body">
+          
+          <p class="c-card__username"
+             ng-click="location.path('profile/' + bill.againstComment.author)">
+            {{bill.againstComment.author_first_name}}
+          </p>
+
+          <p>
+            {{bill.againstComment.body}}
+          </p>
+
+          <div class="c-card__comment-vote row">
+
+            <span ng-class="{'red': bill.againstComment.score < 0, 'green': bill.againstComment.score > 0}">
+            {{bill.againstComment.score}}
+            </span>
+
+            <i class="icon-thumbs-up" ng-class="{'score-up': bill.againstComment.liked == true}" ng-click="bill.againstComment.like(bill.commentService)"></i>
+
+            <i class="icon-thumbs-down" ng-class="{'score-down': bill.againstComment.disliked == true}" ng-click="bill.againstComment.dislike(bill.commentService)"></i>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+    <!-- Top Comment Card -->
+
+  </div>
+
+</div>
+
+<div class="l-12 c-comments__wrapper">
+
+
+  <div class="c-comment__input row tablet-col l-12">
+  <h1>Add a Comment</h1>
+    <div class="c-user-photo">
+      <div ng-style="{'background-image': 'url(' + bill.rs.user.img_url + ')'}">
+      </div>
+    </div>
+
+    <textarea name='commentOnBillBox' rows="1" ng-model='bill.commentBody' placeholder='Write your comment here' msd-elastic></textarea>
+    <button ng-click="bill.postComment()" class="c-comment__post-btn btn-blank">Post</button>
+  
+  </div>
+
+  <div 
+  class="c-card c-card--comment" 
+  infinite-scroll="bill.commentsCheck();"
+  loader loader-context="bill.fetchingComments"
+  truthy
+  ng-class="{'c-card--comment--loading': bill.fetchingComments, 'c-comment--scroll-loader': bill.checkingComments }">
+
+    <div class="c-comment__filter">
+      <ul>
+        <li>
+        Filter
+        </li>
+        <li 
+        ng-click="bill.commentOrder = 'highest-score'; bill.fetchComments();"
+        ng-class="{'c-comment__filter-selected': bill.commentOrder === 'highest-score'}">
+        Highest Rated
+        </li>
+        <li 
+        ng-click="bill.commentOrder = 'latest'; bill.fetchComments();"
+        ng-class="{'c-comment__filter-selected': bill.commentOrder === 'latest'}">
+        Most Reecent
+        </li>
+      </ul>
+    </div>
+
+    <h1 class="c-card--comment--h1">COMMENTS</h1>
+
+    <hr />
+
+    <comments ng-show="bill.comments" comments='bill.comments'></comments>
+
+    <div class="c-card__message c-card__message--comments" ng-show="bill.comments.length == 0">
+      <h2>
+        No comments yet! Be the first to comment and start the discussion.
+      </h2>
+    </div>
+
+  </div>
+</div>

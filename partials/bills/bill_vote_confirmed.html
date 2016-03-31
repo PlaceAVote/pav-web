@@ -1,0 +1,124 @@
+<div class="c-modal__wrapper" 
+     ng-class="{'c-modal__wrapper--active' : bill.showConfirmationModal}" 
+     ng-show="bill.showConfirmationModal"
+ng-cloak>
+
+    
+    <div class="c-modal c-modal--vote c-modal--vote-confirmed">
+
+    <i class="icon-close-badge click"
+    ng-click="bill.showConfirmationModal = false"></i>
+
+      <div class="c-modal__vote-confirmed">
+
+        <img src="//cdn.placeavote.com/img/pav_icon.svg" />
+        
+        <h1>
+          Congratualtions {{bill.rs.user.first_name}}! 
+        </h1>
+
+        <h2>
+          You have successfully voted on <span class="bold">{{bill.body.billData.bill_id}}</span> 
+        </h2>
+
+      </div>
+
+
+      <div class="c-modal__comment"
+      ng-show="bill.commentCard.set"
+     >
+
+        <div class="c-card c-card--bill c-card--comment">
+
+          <h1>{{bill.commentCard.status}}</h1>
+
+          <hr />
+
+
+          <div class="c-card__content row">
+
+            <div class="c-user-photo">
+              <div ng-style="{'background-image': 'url(' + bill.commentCard.author_img_url + ')'}">
+              </div>
+            </div>
+
+            <div class="c-card__comment-body">
+              
+              <p class="c-card__username">
+                {{bill.commentCard.author_first_name}}
+              </p>
+
+              <p>
+                {{bill.commentCard.body}}
+              </p>
+
+              <div class="c-card__comment-vote row">
+
+                <span ng-class="{'red': bill.commentCard.score < 0, 'green': bill.commentCard.score > 0}">
+                {{bill.commentCard.score}}
+                </span>
+
+                <i class="icon-thumbs-up" ng-class="{'score-up': bill.commentCard.liked == true}" ng-click="bill.commentCard.like(bill.commentService)"></i>
+
+                <i class="icon-thumbs-down" ng-class="{'score-down': bill.commentCard.disliked == true}" ng-click="bill.commentCard.dislike(bill.commentService)"></i>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="c-comment__input row tablet-col l-12">
+
+            <h1>Reply to {{bill.commentCard.author_first_name}}</h1>
+              <div class="c-user-photo">
+                <div ng-style="{'background-image': 'url(' + bill.rs.user.img_url + ')'}">
+                </div>
+              </div>
+
+              <textarea name="commentOnBillBox" rows="1" ng-model="bill.commentCard.replyText" placeholder='Write your reply here' msd-elastic></textarea>
+              <button ng-click="bill.commentCard.reply(bill.id, bill.commentService)" class="c-comment__post-btn btn-blank">Post</button>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- Exit Buttons -->
+        <div class="row 
+                    tablet-col 
+                    l-12
+                    padding-large">
+
+          <button
+          class="c-button 
+                 c-button--large 
+                 c-button--grey
+                 l-6
+                 m-12
+                 margin-right-large
+                 tablet-margin-right-none"
+          ng-click="location('feed');"
+          >Return to Feed</button>
+
+
+          <button
+          class="c-button 
+                 c-button--large 
+                 c-button--blue
+                 l-6
+                 m-12
+                 tablet-margin-top-large"
+          ng-click="bill.showConfirmationModal = false;"
+          >Back to Bill</button>
+
+        </div>
+
+
+    </div>
+
+
+</div>

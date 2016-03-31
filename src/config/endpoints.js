@@ -159,6 +159,20 @@ module.exports = {
         return urls.CONGRESS + '/bills/' + id + '/comments' + '?from=' + from;
       },
     },
+    fetchComments: function(id, order, lastComment) {
+      if (!order) {
+        order = 'highest-score';
+      }
+
+      if (lastComment) {
+        lastComment = '&last_comment_id=' + lastComment;
+      } else {
+        lastComment = '';
+      }
+
+      return urls.CONGRESS + '/bills/' + id + '/comments?sort-by=' + order + lastComment;
+
+    },
     trends: {
       endpoint: urls.CONGRESS + '/bills/trending',
     },

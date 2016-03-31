@@ -1,0 +1,55 @@
+<div class="row tablet-col l-12">
+
+
+  <!-- Top Row -->
+  <div class="c-card c-card--bill c-card--official-summary">
+
+    <h1>Official Summary</h1>
+
+    <hr />
+
+    <div class="c-card__content">
+
+      <p ng-bind-html="bill.body.billData.summary"></p>
+
+    </div>
+
+    <div class="c-card__footer-btn">
+      <a target="_blank" ng-href="{{bill.body.billData.last_version.urls.pdf}}" ng-click="openPdf()">
+      Read Entire Bill
+      </a>
+    </div>
+
+  </div>
+
+
+  <div class="c-card c-card--bill c-card--bill-status">
+
+    <h1>Bill Status</h1>
+
+    <hr />
+    
+      <bill-status></bill-status>
+    
+  </div>
+
+
+</div>
+
+<div class="row margin-top-large tablet-margin-top-none margin-bottom-large tablet-margin-bottom-none">
+
+  <div class="c-card c-card--bill l-12">
+    
+  <h1>Official Bill Title</h1>
+
+  <hr />
+
+  <div class="c-card__content">
+   <p>
+    {{bill.body.billData.official_title}}
+    </p>
+  </div>
+
+  </div>
+
+</div>

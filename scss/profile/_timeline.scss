@@ -1,5 +1,5 @@
 .profile-header {
-	background: darken($purple, 10%);
+	@include linear-gradient($purple, $blue)
 }
 .profile-timeline {
 	display: flex;
