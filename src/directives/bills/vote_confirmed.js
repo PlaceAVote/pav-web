@@ -5,7 +5,7 @@ module.exports = function($location) {
     link: function(scope) {
       scope.location = function(url) {
         $location.path(url);
-      }
-    }
-  };  
+      };
+    },
+  };
 };

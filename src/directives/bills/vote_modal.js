@@ -1,6 +1,6 @@
 module.exports = function() {
-    return {
-        restrict: 'E',
-        templateUrl: 'partials/bills/bill_vote.html',
-    };  
+  return {
+    restrict: 'E',
+    templateUrl: 'partials/bills/bill_vote.html',
+  };
 };

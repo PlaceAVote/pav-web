@@ -5,7 +5,7 @@ module.exports = function($location) {
     link: function(scope, el, attr) {
       scope.openPdf = function() {
         window.open(scope.$parent.bill.body.billData.last_version.urls.pdf);
-      }
+      };
 
       scope.location = $location;
     },

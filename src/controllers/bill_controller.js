@@ -70,36 +70,6 @@ BillController.prototype.validationHandler = function() {
   return false;
 };
 
-// BillController.prototype.showVoteModal = function(vote) {
-//   if (!this.validationHandler(this.validated)) {
-//     return;
-//   }
-
-//   if (!this.userVoted) {
-//     this.vote = vote;
-//     if (vote) {
-//       this.voteModal.message = 'Are you sure you want to vote in favor of this bill';
-//       this.voteModal.button = 'Vote in Favor';
-//       this.voteModal.colour = 'btn-green';
-//       this.voteModal.icon = 'icon-arrow-up';
-//     } else {
-//       this.voteModal.message = 'Are you sure you want to vote against this bill';
-//       this.voteModal.button = 'Vote Against';
-//       this.voteModal.colour = 'btn-red';
-//       this.voteModal.icon = 'icon-arrow-down';
-//     }
-//   }
-//   this.showVote = true;
-// };
-
-
-// BillController.prototype.hideVoteModal = function() {
-//   if (!this.userVoted) {
-//     this.vote = undefined;
-//   }
-//   this.showVote = false;
-// };
-
 
 BillController.prototype.Identify = function(routeParams) {
   this.id = routeParams.id;
@@ -156,22 +126,21 @@ BillController.prototype.voteConfirmed = function(vote) {
   this.hasVoted = true;
   var contrarianComment = vote ? this.forComment : this.againstComment;
   this.generateCommentCard(contrarianComment);
-  // this.voteShareMessage = this.generateVoteShareMessage(vote);
-  // this.getVotes(this.id);
-  // this.getBillVotes(this.id);
 };
 
-// BillController.prototype.generateVoteShareMessage = function(vote) {
-//   var t = tweet();
-//   var title = '';
-//   if (this.body) {
-//     title = this.body.getTitle();
-//   }
-//   if (vote) {
-//     return t.generateMessage('I just voted in favour of ' + title + ' @placeavote');
-//   }
-//   return t.generateMessage('I just voted against ' + title + ' @placeavote');
-// };
+
+BillController.prototype.generateVoteShareMessage = function(vote) {
+  var t = tweet();
+  var title = '';
+  if (this.body) {
+    title = this.body.getTitle();
+  }
+  if (vote) {
+    return t.generateMessage('I just voted in favour of ' + title + ' @placeavote');
+  }
+  return t.generateMessage('I just voted against ' + title + ' @placeavote');
+};
+
 
 BillController.prototype.generateCommentCard = function(comment) {
   if (!comment || !comment.author) {
@@ -283,7 +252,7 @@ BillController.prototype.commentsCheck = function() {
       that.timeout(function() {
         that.comments.push.apply(that.comments, res.comments);
         that.lastComment = res.lastComment;
-      }, 100)
+      }, 100);
     }
 
     if (err) {
@@ -316,8 +285,8 @@ BillController.prototype.postComment = function() {
       }
     } else if (result) {
       that.commentMessage = false;
-      that.comments.push(result);
       that.commentBody = undefined;
+      that.fetchComments();
     }
   });
 };
