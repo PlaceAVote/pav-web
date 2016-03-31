@@ -1,7 +1,7 @@
 <!-- Banner -->
 <div class="c-bill-banner">
     
-    <div class="c-bill-banner__bg" ng-style="{'background-image': 'url(' + bill.body.billData.featured_img_link + ')'}"></div>
+    <div class="c-bill-banner__bg" style="background-image: {{bill.body.billData.featured_img_link_css}}"></div>
 
     <div class="c-bill-banner__overlay"
     ng-class="{'c-bill-banner__overlay-gradient' : !bill.body.billData.featured_img_link }"

@@ -153,5 +153,11 @@ ng-show="bill.forComment.author"
 
     <comments ng-show="bill.comments" comments='bill.comments'></comments>
 
+    <div class="c-card__message c-card__message--comments" ng-show="bill.comments.length == 0">
+      <h2>
+        No comments yet! Be the first to comment and start the discussion.
+      </h2>
+    </div>
+
   </div>
 </div>

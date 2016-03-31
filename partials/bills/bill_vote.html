@@ -1,10 +1,11 @@
 <div class="c-modal__wrapper" 
 ng-show="bill.showVoteModal">
 
-    <div class="c-modal c-modal--vote">
+    <div class="c-modal c-modal--vote"
+    ng-show="bill.showVoteModal">
 
         <div class="c-modal__vote"
-        ng-style="{'background-image': 'url(' + bill.body.billData.featured_img_link + ')'}">
+        style="background-image: {{bill.body.billData.featured_img_link_css}}">
 
             <div class="c-modal__vote__overlay"
             ng-class="{'c-modal__vote_overlay-gradient' : !bill.body.billData.featured_img_link }">

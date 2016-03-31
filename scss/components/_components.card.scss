@@ -141,3 +141,24 @@
     padding: 15px 11px;
   }
 }
+
+
+/**
+* Card messages provide fallbacks when 
+* data is not available.
+*/
+
+.c-card__message {
+  text-align: center;
+  @include font-size(19px);
+  padding: 20px 40px 31px 40px;
+
+  @include media($tablet) {
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+} 
+
+.c-card__message--comments {
+
+}

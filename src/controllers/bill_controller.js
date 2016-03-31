@@ -188,8 +188,10 @@ BillController.prototype.getBill = function(id) {
     if (err) {
       that.error = true;
     } else {
-      console.log(result);
+      // console.log(result);
       that.body = result;
+      that.body.billData.featured_img_link_css = "url('" + result.billData.featured_img_link + "');";
+      console.log(that.body.billData);
       title.bill(that.body.billData);
       that.userVotedCheck();
       that.getLegislator(result.billData.sponsor);
