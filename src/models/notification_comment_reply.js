@@ -16,7 +16,7 @@ function NotificationCommentReply(options) {
 }
 
 NotificationCommentReply.prototype.goTo = function(bill_id, comment_id, location) {
-  location.path('/bill/' + bill_id + '/comment/' + comment_id);
+  location.path('/bill/' + bill_id + '/comments/');
 };
 
 module.exports = NotificationCommentReply;

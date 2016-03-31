@@ -37,11 +37,15 @@
 }
 
 
+
+
+
 /**
 * c-bill-banner__content holds the Title,
 * Tags, and Sharing buttons. On desktop it is
 * offset to left by x px.
 */
+
 
 .c-bill-banner__content {
   position: absolute;
@@ -54,6 +58,7 @@
 
   @include media(1200px) {
     width: calc(100% - 20px);
+    padding-left: 262px;
   }
 
   h1 {

@@ -1,6 +1,8 @@
-<div class="c-modal__wrapper" ng-show="bill.showConfirmationModal">
+<div class="c-modal__wrapper" 
+     ng-class="{'c-modal__wrapper--active' : bill.showConfirmationModal}" 
+     ng-show="bill.showConfirmationModal"
+ng-cloak>
 
- <!-- ng-show="bill.showConfirmationModal" -->
     
     <div class="c-modal c-modal--vote c-modal--vote-confirmed">
 
@@ -21,7 +23,6 @@
 
       </div>
 
- <!-- ng-show="bill.commentCard.set" -->
 
       <div class="c-modal__comment"
       ng-show="bill.commentCard.set"

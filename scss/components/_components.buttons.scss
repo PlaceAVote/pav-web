@@ -64,7 +64,7 @@
 
 .c-button--green {
   border: 1px solid rgb(142, 165, 91);  
-  background-image: -moz-linear-gradient( 90deg, rgb(165,204,113) 0%, rgb(188,230,133) 100%);
+  background-image: linear-gradient( 90deg, rgb(165,204,113) 0%, rgb(188,230,133) 100%);
   background-image: -webkit-linear-gradient( 90deg, rgb(165,204,113) 0%, rgb(188,230,133) 100%);
   background-image: -ms-linear-gradient( 90deg, rgb(165,204,113) 0%, rgb(188,230,133) 100%);
 }
@@ -72,7 +72,7 @@
 
 .c-button--red {
   border: 1px solid rgb(172, 52, 34);
-  background-image: -moz-linear-gradient( 90deg, rgb(230,74,51) 0%, rgb(237,86,64) 100%);
+  background-image: linear-gradient( 90deg, rgb(230,74,51) 0%, rgb(237,86,64) 100%);
   background-image: -webkit-linear-gradient( 90deg, rgb(230,74,51) 0%, rgb(237,86,64) 100%);
   background-image: -ms-linear-gradient( 90deg, rgb(230,74,51) 0%, rgb(237,86,64) 100%);
 }
@@ -80,7 +80,7 @@
 
 .c-button--blue {
   border: 1px solid rgb(65, 79, 124);
-  background-image: -moz-linear-gradient( 90deg, rgb(107,85,160) 0%, rgb(77,110,179) 0%, rgb(68,96,156) 0%, rgb(77,110,179) 100%);
+  background-image: linear-gradient( 90deg, rgb(107,85,160) 0%, rgb(77,110,179) 0%, rgb(68,96,156) 0%, rgb(77,110,179) 100%);
   background-image: -webkit-linear-gradient( 90deg, rgb(107,85,160) 0%, rgb(77,110,179) 0%, rgb(68,96,156) 0%, rgb(77,110,179) 100%);
   background-image: -ms-linear-gradient( 90deg, rgb(107,85,160) 0%, rgb(77,110,179) 0%, rgb(68,96,156) 0%, rgb(77,110,179) 100%);
 }

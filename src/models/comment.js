@@ -81,6 +81,7 @@ Comment.prototype.reply = function(billId, service, timeout) {
       that.replyFailed = true;
     } else if (response) {
       response.deep = that.deep + 1;
+      console.log(response);
       that.replies.push(response);
     }
     that.hideReplyInput();

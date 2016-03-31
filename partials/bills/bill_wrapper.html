@@ -92,13 +92,13 @@
 
     <div class="c-bill-content" ng-switch on="bill.view">
 
-        <bill-summary ng-switch-when="summary"></bill-summary>
+        <bill-summary ng-cloak ng-switch-when="summary"></bill-summary>
 
-        <bill-info ng-switch-when="info"></bill-info>
+        <bill-info ng-cloak ng-switch-when="info"></bill-info>
 
-        <bill-comments ng-switch-when="comments"></bill-comments>
+        <bill-comments ng-cloak ng-switch-when="comments"></bill-comments>
 
-        <bill-statistics ng-switch-when="statistics"></bill-statistics>
+        <bill-statistics ng-cloak ng-switch-when="statistics"></bill-statistics>
 
     </div>
 

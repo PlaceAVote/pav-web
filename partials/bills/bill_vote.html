@@ -1,8 +1,9 @@
 <div class="c-modal__wrapper" 
-ng-show="bill.showVoteModal">
+ng-show="bill.showVoteModal"
+ng-class="{'c-modal__wrapper--active' : bill.showVoteModal}"
+ng-cloak>
 
-    <div class="c-modal c-modal--vote"
-    ng-show="bill.showVoteModal">
+    <div class="c-modal c-modal--vote">
 
         <div class="c-modal__vote"
         style="background-image: {{bill.body.billData.featured_img_link_css}}">
@@ -40,8 +41,6 @@ ng-show="bill.showVoteModal">
               </button>
 
             </div>
-
-
 
         </div>
 
