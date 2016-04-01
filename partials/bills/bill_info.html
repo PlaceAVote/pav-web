@@ -45,9 +45,9 @@
 
     <hr />
 
-    <div class="c-card__content c-card__content--sponsor l-12 row">
+    <div class="c-card__content c-card__content--sponsor l-12 row tablet-col">
 
-      <div class="l-3 m-12 row">
+      <div class="l-4 m-12 row">
 
         <div class="c-user-photo c-user-photo--sponsor"
         ng-click="location.path('profile/' + bill.forComment.author)">
@@ -70,9 +70,24 @@
       </div>
 
 
-      <div class="l-3">
+      <div class="l-8 m-12 tablet-margin-top-small">
+        <h2>
+          BILL CO SPONSORS
+        </h2>
+        <p class="bold">
+          {{bill.body.billData.cosponsors_count.total}}
+        </p>
 
-        <div class="">
+        <div class="l-12 row">
+          <div class="c-sponsor__bar c-sponsor__bar--democrat" style="width: {{bill.body.billData.cosponsors_count.democrat_per}}%;">
+              <span class="tool-tip">{{bill.body.billData.cosponsors_count.democrat}} Democrats</span>
+          </div>
+          <div class="c-sponsor__bar c-sponsor__bar--republican" style="width: {{bill.body.billData.cosponsors_count.republican_per}}%;">
+              <span class="tool-tip">{{bill.body.billData.cosponsors_count.republican}} Republicans</span>
+          </div>
+          <div class="c-sponsor__bar c-sponsor__bar--independent" style="width: {{bill.body.billData.cosponsors_count.independent_per}}%;">
+              <span class="tool-tip">{{bill.body.billData.cosponsors_count.independents}} Independents</span>
+          </div>
         </div>
 
       </div>
