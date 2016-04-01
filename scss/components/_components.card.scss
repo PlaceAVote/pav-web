@@ -68,6 +68,11 @@
 }
 
 
+.c-card .c-card__content h2 {
+  @include font-size(14px);
+  @include medium();
+}
+
 
 .c-card .c-card__content ul {
   @include font-size(12px);
@@ -159,6 +164,3 @@
   }
 } 
 
-.c-card__message--comments {
-
-}
