@@ -1,4 +1,4 @@
-console.log('%c Placeavote | v0.1.34', 'background: #543594; color: #ffffff; padding: 1px 3px; border-radius: 3px; font-size: 12px;font-family: sans-serif; margin-left: calc(100% - 120px);');
+console.log('%cPlaceavote', 'background: #543594; color: #ffffff; padding: 1px 3px; border-radius: 3px; font-size: 12px;font-family: sans-serif; margin-left: calc(100% - 70px);');
 
 
 // Safari, in Private Browsing Mode, looks like it supports localStorage but all calls to setItem

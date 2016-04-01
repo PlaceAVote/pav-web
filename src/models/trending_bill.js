@@ -8,6 +8,7 @@ function TrendingBill(options) {
   this.short_title = options.short_title;
   this.summary = options.summary;
   this.getIcon(options);
+  this.trendTitle = options.featured_bill_title || options.short_title || options.official_title;
 }
 
 TrendingBill.prototype.majorityVote = function() {
