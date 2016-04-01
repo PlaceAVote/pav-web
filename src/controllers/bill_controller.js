@@ -320,7 +320,12 @@ BillController.prototype.userVote = function() {
 
 BillController.prototype.sponsorCount = function(sponsors) {
 
-  var cent, total = 0;
+  if (!sponsors) {
+    return;
+  }
+
+  var cent = 0;
+  var total = 0;
 
   for (var i = 0; i < Object.keys(sponsors).length; i++) {
     total += sponsors[Object.keys(sponsors)[i]];
@@ -333,7 +338,7 @@ BillController.prototype.sponsorCount = function(sponsors) {
   this.body.billData.cosponsors_count.republican_per = sponsors.republican / cent;
   this.body.billData.cosponsors_count.independent_per = sponsors.independent / cent;
 
-}
+};
 
 module.exports = BillController;
 
