@@ -36,6 +36,55 @@
 
 </div>
 
+<!-- Organisations and Congressmen -->
+<div class="row margin-top-large tablet-margin-top-none margin-bottom-large tablet-margin-bottom-none">
+
+  <div class="c-card c-card--bill l-12">
+    
+    <h1>Organisations and Congressmen Involved</h1>
+
+    <hr />
+
+    <div class="c-card__content c-card__content--sponsor l-12 row">
+
+      <div class="l-3 m-12 row">
+
+        <div class="c-user-photo c-user-photo--sponsor"
+        ng-click="location.path('profile/' + bill.forComment.author)">
+          <div ng-style="{'background-image': 'url(' + bill.legislator.properties.img_urls['100px'] + ')'}">
+          </div>
+        </div>
+
+        <div>
+          <h2>
+          BILL SPONSOR
+          </h2>
+          <h3>
+          {{bill.legislator.properties.first_name}} {{bill.legislator.properties.last_name}} 
+          </h3>
+          <h4>
+          {{bill.legislator.properties.current_term.party}}
+          </h4>
+        </div>
+
+      </div>
+
+
+      <div class="l-3">
+
+        <div class="">
+        </div>
+
+      </div>
+
+    </div>
+  
+  </div>
+
+</div>
+
+
+<!-- Official Bill Title -->
 <div class="row margin-top-large tablet-margin-top-none margin-bottom-large tablet-margin-bottom-none">
 
   <div class="c-card c-card--bill l-12">

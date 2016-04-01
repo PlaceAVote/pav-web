@@ -177,6 +177,7 @@ BillController.prototype.getLegislator = function(legislator) {
       that.legislatorError = true;
     } else {
       that.legislator = result;
+      console.log(that.legislator);
     }
   });
 };
@@ -190,6 +191,7 @@ BillController.prototype.getBill = function(id) {
       that.body = result;
       that.body.billData.featured_img_link_css = 'url("' + result.billData.featured_img_link + '");';
       title.bill(that.body.billData);
+      console.log(that.body);
       that.userVotedCheck();
       that.getLegislator(result.billData.sponsor);
     }
