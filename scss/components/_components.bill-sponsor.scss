@@ -1,0 +1,35 @@
+/*------------------------------------*\
+    #COMPONENT-BILL-SPONSOR
+\*------------------------------------*/
+
+/**
+* Styling for the bill sponsor info on the
+* bills page
+*/
+
+
+.c-card__content--sponsor h2 {
+  color: $red;
+  font-size: 12px !important;
+}
+
+
+.c-card__content--sponsor h3 {
+  color: $blue;
+  @include font-size(14px);
+}
+
+
+.c-card__content--sponsor h4 {
+  color: $black;
+  text-transform: uppercase;
+  @include font-size(14px);
+}
+
+
+.c-user-photo--sponsor {
+    height: 60px;
+    width: 60px;
+    min-height: 60px;
+    min-width: 60px;
+}
