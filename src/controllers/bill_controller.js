@@ -189,6 +189,11 @@ BillController.prototype.getBill = function(id) {
     } else {
       that.body = result;
       that.body.billData.featured_img_link_css = 'url("' + result.billData.featured_img_link + '");';
+
+      if (that.body.billData.summary === 'No Summary Present...') {
+        that.body.billData.noSummary = true;
+      }
+
       title.bill(that.body.billData);
       that.userVotedCheck();
       that.getLegislator(result.billData.sponsor);

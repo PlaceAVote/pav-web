@@ -13,7 +13,7 @@
   
 
   .c-card__content {
-    height: 320px;
+    max-height: 320px;
     overflow-y: auto;
     padding-right: 11px;
     @include media($tablet) {
@@ -24,6 +24,14 @@
   @include media($tablet) {
     width: 100%;
     margin-right: 0;
+  }
+}
+
+
+.c-card--no-summary {
+  height: 117px;
+  .c-card__content {
+    height: auto;
   }
 }
 
