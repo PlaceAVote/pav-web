@@ -194,6 +194,7 @@ BillController.prototype.getBill = function(id) {
       console.log(that.body);
       that.userVotedCheck();
       that.getLegislator(result.billData.sponsor);
+      that.sponsorCount(result.billData.cosponsors_count);
     }
   });
 };
@@ -317,6 +318,26 @@ BillController.prototype.userVote = function() {
 
   this.showVoteModal = true;
 };
+
+
+BillController.prototype.sponsorCount = function(sponsors) {
+
+  var cent, total = 0;
+
+  // console.log(this.billData, this);
+
+  for (var i = 0; i < Object.keys(sponsors).length; i++) {
+    total += sponsors[Object.keys(sponsors)[i]];
+  }
+
+  cent = total / 100;
+
+  this.body.billData.cosponsors_count.democrat_per = sponsors.democrat / cent;
+  this.body.billData.cosponsors_count.republican_per = sponsors.republican / cent;
+  this.body.billData.cosponsors_count.independent_per = sponsors.independent / cent;
+
+  console.log(this.body.billData);
+}
 
 module.exports = BillController;
 
