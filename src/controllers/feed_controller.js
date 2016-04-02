@@ -36,6 +36,7 @@ FeedController.prototype.getUserProfile = function(callback) {
 
 };
 
+
 FeedController.prototype.getTrends = function() {
   var that = this;
   this.trendsLoading = true;
