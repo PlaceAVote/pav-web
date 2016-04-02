@@ -1,0 +1,80 @@
+/*------------------------------------*\
+    #COMPONENT-FEED-BILL
+\*------------------------------------*/
+
+/**
+* Feed Bill Card to showcase a bill. If
+* the bill has a featured image it will
+* display this in the background. If not,
+* a gradient background is visible.
+*/
+
+
+.c-card--feed-bill {
+  @include linear-gradient($purple, $blue);
+  overflow: hidden;
+  border: none;
+}
+
+
+.c-card--feed-bill h1,
+.c-card--feed-bill h2 {
+  color: white;
+}
+
+
+.c-card__overlay {
+  background: rgba(0,0,0,0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 30px);
+  border-radius: 3px;
+}
+
+
+.c-card.c-card--feed-bill .c-card__content h2 {
+  @include font-size(20px);
+  @include light();
+  padding: 90px 0px 40px 0px;
+}
+
+
+.c-card--feed-bill hr {
+  border-bottom-color: rgba(255,255,255,0.4);
+}
+
+
+.c-card__background-image {
+  position: absolute;
+  left: 0;
+  top: 0;
+  object-fit: cover;
+  width: 100%;
+  height: calc(100% - 20px);
+  animation: fader 1s ease;
+}
+
+
+.c-feed-bill__info {
+  background: white;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 11px;
+  border: 1px solid $widgetborder;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  color: $blue;
+  @include font-size(12px);
+
+  @include media($tablet) {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-left: none;
+    border-right: none;
+  }
+}
+
