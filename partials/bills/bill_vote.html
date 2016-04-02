@@ -5,8 +5,9 @@ ng-cloak>
 
     <div class="c-modal c-modal--vote">
 
-        <div class="c-modal__vote"
-        style="background-image: {{bill.body.billData.featured_img_link_css}}">
+        <div class="c-modal__vote">
+
+          <image-smart img="bill.body.billData.featured_img_link" class="c-modal__vote-background"></image-smart>
 
             <div class="c-modal__vote__overlay"
             ng-class="{'c-modal__vote_overlay-gradient' : !bill.body.billData.featured_img_link }">

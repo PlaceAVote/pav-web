@@ -188,7 +188,6 @@ BillController.prototype.getBill = function(id) {
       that.error = true;
     } else {
       that.body = result;
-      that.body.billData.featured_img_link_css = 'url("' + result.billData.featured_img_link + '");';
 
       if (that.body.billData.summary === 'No Summary Present...') {
         that.body.billData.noSummary = true;
