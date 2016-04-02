@@ -1,22 +1,36 @@
-<div class="bill-container margin-top-medium">
-    <div class="bill card padding-small">
-    <h1 ng-click='bill.goToPage(location)'>{{bill.subject}}</h1>
-    <hr class="margin-top-small" />
-        <section class="row margin-top-small">
-        <div class="feed-icon margin-right-medium">
-        <i class="{{bill.icon}}"></i>
-        </div>
-        <div class="bill-summary-container">
-        <div class="bill-summary">
-        <h6 ng-click='bill.goToPage(location)'>{{bill.feed_title}}</h6>
-        <p>{{bill.official_title}}</p>
-        </div>
-        </div>
-        </section>
+<div class="c-card c-card--feed-bill margin-top-medium">
+
+    <image-smart img="bill.featured_img_link" class="c-card__background-image"></image-smart>
+
+    <div class="c-card__overlay"
+     ng-show="bill.featured_img_link"></div>
+
+    <div class="click c-card__content"
+         ng-click="bill.goToPage(location)"> 
+
+      <h1 ng-click="bill.goToPage(location)">{{bill.subject}}</h1>
+
+      <hr />
+
+      <h2 ng-click="bill.goToPage(location)">{{bill.feed_title}}</h2>
+
     </div>
-    <div class="stats">
-    <section class="click pale-bg" ng-click='bill.goToPage(location)'>
-    <span class="bold">{{bill.comment_count}} &nbsp;</span> comments</section>
-    <section class="click pale-bg" ng-click='bill.goToPage(location)'><span ng-hide="bill.noVotes"><span class="bold">{{bill.majorityVote().percent}}</span> Vote {{bill.majorityVote().majority}}</span><span ng-show="bill.noVotes">No votes</span></section>
+
+    <div class="c-feed-bill__info">
+
+      <p>
+       <span class="bold">{{bill.comment_count}}</span> comments
+       &nbsp;
+       <span ng-hide="bill.noVotes"><span class="bold">{{bill.majorityVote().percent}}</span> Vote {{bill.majorityVote().majority}}</span><span ng-show="bill.noVotes">No votes</span>     
+      </p>
+
+      <div class="c-feed__social">
+          <i class="icon-facebook click" ng-click="shareToFacebook()"></i>
+
+          <a target="_blank" ng-href="https://twitter.com/intent/tweet?text={{getShareMessage()}}&url={{billLocation}}" data-size="large">
+          <i class="icon-twitter"></i>
+          </a>
+      </div>
     </div>
+
 </div>

@@ -24,7 +24,6 @@ module.exports = function() {
           scope.loading = true;
           image.className = scope.class;
           image.src = scope.img;
-
         }
 
       });

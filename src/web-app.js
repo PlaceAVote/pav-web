@@ -264,7 +264,7 @@ app.directive('fileread', [fileReadDirective]);
 app.directive('loader', ['$location', preloaderDirective]);
 app.directive('feedEvents', [feedEventsDirective]);
 app.directive('invalid', [invalidDirective]);
-app.directive('feedBillEvent', ['$location', feedBillEventDirective]);
+app.directive('feedBillEvent', ['$location', 'facebookService', feedBillEventDirective]);
 app.directive('infiniteScroll', ['$rootScope', '$window', '$interval', 'THROTTLE_MILLISECONDS', infiniteScroll]);
 app.directive('billSummary', ['$location', billSummaryDirective]);
 app.directive('billInfo', ['$location', billInfoDirective]);

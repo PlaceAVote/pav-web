@@ -15,6 +15,7 @@ function Bill(options) {
   this.timestamp = options.timestamp;
   this.getIcon(options);
   this.feed_title = options.featured_bill_title || options.short_title || options.official_title;
+  this.featured_img_link = options.featured_img_link;
 }
 
 Bill.prototype.majorityVote = function() {
