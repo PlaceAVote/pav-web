@@ -18,21 +18,21 @@
   // transform: scaleZ(1,1); 
   animation: clockwise 0.5s linear infinite;
 
-  &.ng-hide-add, &.ng-hide-remove, &.ng-hide-remove-active, &.ng-hide-add-active {
-    transition: all 0.3s ease;
-  }
-  &.ng-hide-add {
-    opacity: 1;
-  }
-  &.ng-hide-add.ng-hide-add-active {
-    opacity: 0;
-  }
-  &.ng-hide-remove {
-    opacity: 0;
-  }
-  &.ng-hide-remove.ng-hide-remove-active {
-    opacity: 1;
-  }
+  // &.ng-hide-add, &.ng-hide-remove, &.ng-hide-remove-active, &.ng-hide-add-active {
+  //   transition: all 0.3s ease;
+  // }
+  // &.ng-hide-add {
+  //   opacity: 1;
+  // }
+  // &.ng-hide-add.ng-hide-add-active {
+  //   opacity: 0;
+  // }
+  // &.ng-hide-remove {
+  //   opacity: 0;
+  // }
+  // &.ng-hide-remove.ng-hide-remove-active {
+  //   opacity: 1;
+  // }
 
 }
 
@@ -52,29 +52,50 @@
       width: 20px;
       // animation: bounceOut 0.5s ease;
     }
-    &.ng-hide-add, &.ng-hide-remove, &.ng-hide-remove-active, &.ng-hide-add-active {
-      transition: all 0.3s ease;
+
+    &.ng-hide-add, 
+    &.ng-hide-remove {
+      transition: 0s linear all
     }
+
+    &.ng-hide-add-active,
+    &.ng-hide-remove-active {
+      transition: 0.3s ease all;
+    }
+
+    &.ng-hide-add {
+      opacity: 1;
+    } 
+
     &.ng-hide-add.ng-hide-add-active {
-      // transition-delay: 0.3s;
       opacity: 0;
-      // .loader {
-       // animation: bounce 0.3s ease;
-       // transform: scale(0);
-      // }
     }
+
+    &.ng-hide-remove {
+      opacity: 0;
+    }
+
+    &.ng-hide-remove.ng-hide-remove-active {
+      opacity: 1;
+    }
+
 }
 
-
+.box-loader.box-loader--white {
+  .loader {
+    border-color: transparentize(#ffffff, 0.75)
+    transparentize(#ffffff, 0.75) transparentize(#ffffff, 0.25) transparentize(#ffffff, 0.25);    
+  }
+}
 
 @keyframes clockwise
 {
   to {transform: rotate(360deg) translatez(0);}
 }
 
-@keyframes bounce {
-  0% { transform: scale(1.1);}
-  50% { transform: scale(1.6);}
-  100% { transform: scale(0);}
-}
+// @keyframes bounce {
+//   0% { transform: scale(1.1);}
+//   50% { transform: scale(1.6);}
+//   100% { transform: scale(0);}
+// }
 
