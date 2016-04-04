@@ -1,6 +1,12 @@
 console.log('%cPlaceavote', 'background: #543594; color: #ffffff; padding: 1px 3px; border-radius: 3px; font-size: 12px;font-family: sans-serif; margin-left: calc(100% - 70px);');
 
 
+// Redirects to https protocol
+
+if (window.location.protocol != 'https:' && window.location.hostname != 'localhost') {
+  window.location.href = window.location.href.replace(/^http:/, 'https:');
+}
+
 // Safari, in Private Browsing Mode, looks like it supports localStorage but all calls to setItem
 // Throw QuotaExceededError. We're going to detect this and just silently drop any calls to setItem
 // To avoid the entire page breaking, without having to do a check at each usage of Storage.
