@@ -112,7 +112,7 @@ var locationUpdate = require('./utils/location_update.js');
 
 var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'rzModule', 'ui.tree', 'monospaced.elastic', 'angularMoment', 'ngLocationUpdate']);
 
-app.config(['$routeProvider', function($routeProvider) {
+app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 
   $routeProvider
   .when('/', {
@@ -196,6 +196,9 @@ app.config(['$routeProvider', function($routeProvider) {
   .otherwise({
     redirectTo: '/',
   });
+
+  $locationProvider
+    .hashPrefix('!');
 
 },]);
 
