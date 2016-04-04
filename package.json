@@ -58,7 +58,6 @@
     "localtunnel": "^1.7.0",
     "moment": "^2.11.2",
     "napa": "^1.2.0",
-    "ng-meta": "^0.3.4",
     "node-sass": "^3.3.3",
     "pretty-bytes": "^2.0.1",
     "strftime": "^0.9.2"
