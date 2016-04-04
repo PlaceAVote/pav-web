@@ -98,6 +98,7 @@ var billStatusDirective = require('./directives/bills/bill_status.js');
 var voteModalDirective = require('./directives/bills/vote_modal.js');
 var voteConfirmedDirective = require('./directives/bills/vote_confirmed.js');
 var imageSmartDirective = require('./directives/image_smart.js');
+var updateMetaDirective = require('./directives/update_meta.js');
 
 var invalidDirective = require('./directives/invalid.js');
 
@@ -110,7 +111,7 @@ var textarea = require('angular-elastic');
 var moment = require('angular-moment');
 var locationUpdate = require('./utils/location_update.js');
 
-var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'rzModule', 'ui.tree', 'monospaced.elastic', 'angularMoment', 'ngLocationUpdate']);
+var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'rzModule', 'ui.tree', 'monospaced.elastic', 'angularMoment']);
 
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 
@@ -202,7 +203,6 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 
 },]);
 
-
 // Services
 app.factory('facebookService', [Facebook]);
 app.factory('twitterService', [Twitter]);
@@ -283,3 +283,4 @@ app.directive('billStatus', ['$location', billStatusDirective]);
 app.directive('voteModal', ['$location', voteModalDirective]);
 app.directive('voteConfirmed', ['$location', voteConfirmedDirective]);
 app.directive('imageSmart', [imageSmartDirective]);
+app.directive('updateMeta', ['$log', updateMetaDirective]);
