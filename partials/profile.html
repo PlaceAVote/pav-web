@@ -25,7 +25,7 @@
                     </div>
                   </div>
                   <div class="top-comment-body">
-                    <h2><a href="#/profile/{{follower.user_id}}">{{follower.first_name}} {{follower.last_name}}</a></h2>
+                    <h2><a ng-click="profile.location.path('profile/' + follower.user_id)">{{follower.first_name}} {{follower.last_name}}</a></h2>
                     <p>{{follower.follower_count}}</p>
                   </div>
                 </section>
@@ -42,7 +42,7 @@
                     </div>
                   </div>
                   <div class="top-comment-body">
-                    <h2><a href="#/profile/{{follower.user_id}}">{{follower.first_name}} {{follower.last_name}}</a></h2>
+                    <h2><a ng-click="profile.location.path('profile/' + follower.user_id)">{{follower.first_name}} {{follower.last_name}}</a></h2>
                     <p>{{follower.follower_count}}</p>
                   </div>
                 </section>

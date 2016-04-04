@@ -1,4 +1,4 @@
-module.exports = function($compile, commentService, $timeout) {
+module.exports = function($compile, commentService, $timeout, $location) {
   return {
     restrict: 'E',
     replace: true,
@@ -7,6 +7,7 @@ module.exports = function($compile, commentService, $timeout) {
     },
     templateUrl: 'partials/comment_event.html',
     link: function(scope, element, attrs) {
+      scope.location = $location;
       scope.commentService = commentService;
       scope.timeout = $timeout;
       if (angular.isArray(scope.comment.replies)) {

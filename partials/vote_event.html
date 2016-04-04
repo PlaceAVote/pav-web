@@ -1,4 +1,5 @@
 
-<p class="event-bill-title"><span class="event-label"><a href="#/profile/{{user.user_id}}">{{user.first_name}} {{user.last_name}}</a></span> voted on the bill <a href="#/bill/{{event.bill_id}}">{{event.bill_title}}</a></p>
+<p class="event-bill-title"><span class="event-label">
+<a ng-click="location.path('profile/' + user.user_id)">{{user.first_name}} {{user.last_name}}</a></span> voted on the bill <a ng-click="location.path('bill/' + event.bill_id)">{{event.bill_title}}</a></p>
 
 
