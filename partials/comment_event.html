@@ -7,8 +7,8 @@
            </div> 
             <div class="top-comment-body">
 
-            <h2><a href="#/profile/{{comment.author}}">{{comment.author_first_name}}</a></h2>
-            <p class="event-bill-title">in <a href="#/bill/{{comment.bill_id}}">{{comment.bill_title}}</a></p>
+            <h2 ng-click="location.path('profile/' + comment.author)"><a>{{comment.author_first_name}}</a></h2>
+            <p class="event-bill-title">in <a ng-click="location.path('bill/' + comment.bill_id)">{{comment.bill_title}}</a></p>
 
             <section class="comment-vote"><span  ng-class="{'score-down': comment.score < 0, 'score-none': comment.score == 0}">{{comment.score}}</span><i class="icon-thumbs-up thumbs" ng-class="{'score-up': comment.liked == true}" ng-click="comment.like(commentService)"></i><i class="icon-thumbs-down thumbs" ng-class="{'score-down': comment.disliked == true}" ng-click="comment.dislike(commentService)"/></i><span class="reply-btn" ng-click="comment.showReplyInput()">reply</span></section>
 

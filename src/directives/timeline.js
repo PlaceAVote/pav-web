@@ -1,4 +1,4 @@
-module.exports = function() {
+module.exports = function($location) {
   return {
     restrict: 'E',
     replace: true,
@@ -7,5 +7,8 @@ module.exports = function() {
       profile: '=',
     },
     templateUrl: 'partials/timeline.html',
+    link: function(scope) {
+      scope.location = $location;
+    },
   };
 };

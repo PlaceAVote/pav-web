@@ -6,4 +6,8 @@ function DislikeCommentEvent(options) {
   this.comment = new Comment(options);
 }
 
+DislikeCommentEvent.prototype.goTo = function(location, url) {
+  location.path(url);
+};
+
 module.exports = DislikeCommentEvent;
