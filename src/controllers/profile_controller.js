@@ -67,6 +67,11 @@ ProfileController.prototype.populateProfile = function() {
       title.profile(that.user);
       that.following = result.following ? 'Unfollow' : 'Follow';
       that.followStatus = result.following;
+      if (!that.issue) {
+        that.metaImage = result.img_url;
+        that.metaTitle = result.first_name + ' ' + result.last_name;
+        that.metaDescription = 'Follow ' + result.first_name + ' ' + result.last_name + ' on Placeavote.';
+      }
     }
   });
 };
@@ -174,6 +179,9 @@ ProfileController.prototype.getIssue = function(issue) {
       that.id = res.user_id;
       that.populateProfile();
       that.issue = res;
+      that.metaImage = res.article_img || 'http://s29.postimg.org/v86d7ur2v/og_fb_img.jpg';
+      that.metaTitle = res.comment;
+      that.metaDescription = 'Do you agree or disagree?';
     }
   });
 };

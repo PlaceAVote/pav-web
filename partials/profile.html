@@ -1,9 +1,27 @@
 <banner user="profile.user" toggle="profile.showFollowStats" followers="profile.showFollowers" following="profile.showFollowing" profile="profile"></banner>
+
+  <update-meta property="og:image" content="{{profile.metaImage}}"></update-meta>
+
+  <update-meta property="og:title" content="{{profile.metaTitle}}"></update-meta>
+
+  <update-meta name="twitter:title" content="{{profile.metaTitle}}"></update-meta>
+
+  <update-meta name="twitter:image:src" content="{{profile.metaImage}}"></update-meta>
+
+  <update-meta name="description" content="{{profile.metaDescription}}"></update-meta>
+
+  <update-meta property="og:description" content="
+{{profile.metaDescription}}"></update-meta>
+
+  <update-meta name="twitter:description" content="{{profile.metaDescription}}"></update-meta>
+
+
+
 <div class="app">
 	<div class="app-body">
 		<div class="timeline-layout">
       <div class="message" ng-show="profile.timeline.timeline.length < 1">
-        <h2>You have no activity</h2>
+        <h2>No activity</h2>
       </div>
       <div class="row tablet-col l-12">
       			<div ng-show="profile.hasActivity" class="activity-container" ng-class="{'tablet-leave-canvas-left': profile.showFollowStats}">
@@ -57,19 +75,8 @@
 
 <div class="issue-modal-container" ng-show="profile.showIssue" loader loader-context="profile.loadingIssue" truthy>
 
-  <update-meta property="og:site_name" content="Placeavote"></update-meta>
-  <update-meta property="og:image" content="{{bill.body.billData.featured_img_link}}"></update-meta>
-  <update-meta property="og:title" content="{{bill.body.getTitle()}}"></update-meta>
-
-
-  <update-meta name="twitter:card" content="summary"></update-meta>
-  <update-meta name="twitter:site" content="@placeavote"></update-meta>
-  <update-meta name="twitter:title" content="{{bill.body.getTitle()}}"></update-meta>
-  <update-meta name="twitter:description" content="Read, debate and vote on every bill before congress."></update-meta>
-  <update-meta name="twitter:image:src" content="{{bill.body.billData.featured_img_link}}"></update-meta>
-
   <div class="card padding-small" ng-hide="profile.issueError">
     <issue issue="profile.issue" follow="profile.following" profile="profile" single></issue>
   </div>
-  
+
 </div>
