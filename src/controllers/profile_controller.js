@@ -70,7 +70,7 @@ ProfileController.prototype.populateProfile = function() {
       if (!that.issue) {
         that.metaImage = result.img_url;
         that.metaTitle = result.first_name + ' ' + result.last_name;
-        that.metaDescription = 'Follow ' + result.first_name + ' ' + result.last_name + ' on Placeavote.';        
+        that.metaDescription = 'Follow ' + result.first_name + ' ' + result.last_name + ' on Placeavote.';
       }
     }
   });
