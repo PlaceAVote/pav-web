@@ -1,10 +1,14 @@
 <!-- Banner -->
 <div class="c-bill-banner">
 
-    <update-meta property="description" content="{{bill.body.getTitle()}}"></update-meta>
-    <update-meta property="og:description" content="{{bill.body.getTitle()}}"></update-meta>
-        <update-meta property="og:title" content="{{bill.body.getTitle()}}"></update-meta>
-    <update-meta property="og:site_name" content="{{bill.body.getTitle()}}"></update-meta>
+  <update-meta property="og:image" content="{{bill.body.billData.featured_img_link}}"></update-meta>
+  <update-meta property="og:title" content="{{bill.body.getTitle()}}"></update-meta>
+
+  <update-meta name="twitter:title" content="{{bill.body.getTitle()}}"></update-meta>
+
+  <update-meta name="twitter:image:src" content="{{bill.body.billData.featured_img_link}}"></update-meta>
+
+
 
     <image-smart img="bill.body.billData.featured_img_link" class="c-bill-banner__bg"></image-smart>
 
