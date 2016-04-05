@@ -68,7 +68,7 @@ ProfileController.prototype.populateProfile = function() {
       that.following = result.following ? 'Unfollow' : 'Follow';
       that.followStatus = result.following;
       if (!that.issue) {
-        that.metaImage = result.img_url;
+        that.metaImage = 'http://s29.postimg.org/v86d7ur2v/og_fb_img.jpg';
         that.metaTitle = result.first_name + ' ' + result.last_name;
         that.metaDescription = 'Follow ' + result.first_name + ' ' + result.last_name + ' on Placeavote.';
       }
