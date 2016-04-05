@@ -67,6 +67,7 @@
 
 .c-card .c-card__content p {
   @include font-size(12px);
+  word-break: break-word;
 }
 
 
