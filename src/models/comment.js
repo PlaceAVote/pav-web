@@ -21,6 +21,7 @@ function Comment(options) {
   this.liked = options.liked;
   this.disliked = options.disliked;
   this.type = options.type || 'comment';
+  this.showChildren = true;
 }
 
 Comment.buildChildren = function(comment, deep, reply) {
