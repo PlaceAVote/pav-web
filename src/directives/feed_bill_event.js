@@ -10,6 +10,7 @@ module.exports = function($location, facebook) {
     link: function(scope, el, attr) {
       scope.location = $location;
       scope.facebook = facebook;
+      var rootHref;
 
       scope.$watch('bill', function(newValue, oldValue) {
         if (newValue) {
