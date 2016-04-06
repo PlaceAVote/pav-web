@@ -24,10 +24,18 @@
       "Properties": {
         "AccessControl": "PublicRead",
         "BucketName": { "Fn::FindInMap" : [ "Environment", { "Ref" : "Environment" }, "bucket"]},
-
         "WebsiteConfiguration": {
           "IndexDocument": "index.html"
         }
+      }
+    },
+
+    "Logs": {
+      "Type": "AWS::S3::Bucket",
+      "DeletionPolicy" : "Retain",
+      "Properties": {
+        "AccessControl": "LogDeliveryWrite",
+        "BucketName": { "Fn::Join" : [ "", [ "access.logs.", { "Fn::FindInMap" : [ "Environment", { "Ref" : "Environment" }, "bucket"]} ] ] }
       }
     },
 
@@ -45,6 +53,11 @@
               "DomainName": {"Fn::GetAtt": ["Site", "DomainName"]}
             }
           ],
+          "Logging": {
+            "Bucket": {"Fn::GetAtt": ["Logs", "DomainName"]},
+            "IncludeCookies": true,
+            "Prefix": "access-logs"
+          },
           "DefaultCacheBehavior": {
             "ForwardedValues": {
               "QueryString": true
