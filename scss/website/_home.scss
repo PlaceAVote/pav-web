@@ -56,6 +56,13 @@
         background-color: $green;
         border: 1px solid darken($green, 20%);
         color: $white;
+        position: relative;
+        .box-loader {
+          // left: 0;
+          margin-left: 10px;
+          justify-content: flex-start;
+
+        }
     }
     .signup-email {
         background-color: rgba(0, 0, 0, 0.0);
