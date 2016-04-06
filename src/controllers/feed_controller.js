@@ -13,13 +13,16 @@ FeedController = function($scope, $location, userService, billService, authServi
   this.feedService = feedService;
   this.timeout = $timeout;
   this.rs = $rootScope;
+  this.rs.inApp = true;
   this.getTrends();
   this.getUserProfile(function(err, response) {
+    var that = this;
     if (err) {
       if (err.status === 401) {
         $location.path('/');
       }
     } else {
+      $rootScope.notLoggedIn = false;
       $scope.user = response;
       $scope.banner = new Banner(response);
     }
@@ -32,6 +35,7 @@ FeedController.prototype.getUserProfile = function(callback) {
   this.userService.getUserProfile('me', callback);
 
 };
+
 
 FeedController.prototype.getTrends = function() {
   var that = this;
@@ -73,7 +77,7 @@ FeedController.prototype.feedCheck = function() {
         for (var i in response.feed) {
           that.events.push(response.feed[i]);
         }
-        that.feedMessage('End of the line.');
+        that.feedMessage('.');
       } else {
         that.lastLoaded = response.last_timestamp;
         for (var x in response.feed) {

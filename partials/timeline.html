@@ -31,7 +31,7 @@
                   <div class="event-icon event-icon-like">
                    <i class="icon-thumbs-up"></i>
                    </div> 
-                    <span class="event-label"><a href="#/profile/{{profile.user.user_id}}">{{profile.user.first_name}} {{profile.user.lastname}}</a> upvoted a comment:</span>
+                    <span class="event-label"><a ng-click="location.path('profile/' + profile.user.user_id)">{{profile.user.first_name}} {{profile.user.lastname}}</a> upvoted a comment:</span>
                     <comment-event comment="event.comment"></comment-event>
                     </div>
                   </div>
@@ -42,7 +42,7 @@
                     <div class="event-icon event-icon-dislike">
                     <i class="icon-thumbs-down"></i>
                     </div>
-                    <span class="event-label"><a href="#/profile/{{profile.user.user_id}}">{{profile.user.first_name}} {{profile.user.lastname}}</a> downvoted a comment:</span>
+                    <span class="event-label"><a ng-click="location.path('profile/' + profile.user.user_id)">{{profile.user.first_name}} {{profile.user.lastname}}</a> downvoted a comment:</span>
                     <comment-event comment="event.comment"></comment-event>
                     </div>
                   </div>
@@ -53,7 +53,7 @@
                     <div class="event-icon event-icon-comment">
                     <i class="icon-comment"></i>
                     </div>
-                   <span class="event-label"><a href="#/profile/{{profile.user.user_id}}">{{profile.user.first_name}} {{profile.user.lastname}}</a> made a comment.</span>
+                   <span class="event-label"><a ng-click="location.path('profile/' + profile.user.user_id)">{{profile.user.first_name}} {{profile.user.lastname}}</a> made a comment.</span>
                     <comment-event comment="event"></comment-event>
                     </div>
                   </div>

@@ -1,10 +1,10 @@
 <div ng-if="!show">
-<div class="box-loader" ng-hide="ctrl.context">
+<div class="box-loader" ng-hide="ctrl.context" ng-class="{'box-loader--white' : white }">
   <i class="loader"></i>
 </div>
 </div>
 <div ng-if="show">
-<div class="box-loader" ng-show="ctrl.context">
+<div class="box-loader" ng-show="ctrl.context" ng-class="{'box-loader--white' : white }">
   <i class="loader"></i>
 </div>
 </div>

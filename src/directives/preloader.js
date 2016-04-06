@@ -15,6 +15,9 @@ module.exports = function(location) {
       if (attr.$attr.falsey) {
         scope.show = false;
       }
+      if (attr.$attr.white) {
+        scope.white = true;
+      }
     },
   };
 };

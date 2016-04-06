@@ -159,6 +159,20 @@ module.exports = {
         return urls.CONGRESS + '/bills/' + id + '/comments' + '?from=' + from;
       },
     },
+    fetchComments: function(id, order, lastComment) {
+      if (!order) {
+        order = 'highest-score';
+      }
+
+      if (lastComment) {
+        lastComment = '&last_comment_id=' + lastComment;
+      } else {
+        lastComment = '';
+      }
+
+      return urls.CONGRESS + '/bills/' + id + '/comments?sort-by=' + order + lastComment;
+
+    },
     trends: {
       endpoint: urls.CONGRESS + '/bills/trending',
     },
@@ -193,6 +207,7 @@ module.exports = {
       fromId: function(id) {
         return urls.USER + '/user/' + id + '/profile';
       },
+      open: urls.USER + '/user/profile/',
     },
     timeline: function(id) {
       return urls.USER + '/user/' + id + '/timeline';
@@ -228,6 +243,6 @@ module.exports = {
     change: urls.USER + '/password/change',
   },
   mandrill: {
-    endpoint: 'https://mandrillapp.com/api/1.0//messages/send.json',
+    endpoint: 'https://mandrillapp.com/api/1.0/messages/send.json',
   },
 };

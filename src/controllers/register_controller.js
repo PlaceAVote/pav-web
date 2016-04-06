@@ -1,18 +1,23 @@
 var Interest = require('./../models/interest.js');
 
-function RegisterController($scope, $location, userService) {
+function RegisterController($scope, $location, userService, $rootScope) {
   $scope = $scope || {};
   $scope.register = this;
+  $rootScope.inApp = false;
   this.userService = userService;
   this.location = $location;
   this.interests = [
-    new Interest('Religion', 'icon-religion'),
-    new Interest('Drugs', 'icon-smoking-area'),
-    new Interest('Defense', 'icon-tank'),
-    new Interest('Politics','icon-building'),
-    new Interest('Gun Rights','icon-gun'),
-    new Interest('Technology','icon-ipad'),
-    new Interest('Economics', 'icon-money'),
+    new Interest('Crime',          'icon-crime'),
+    new Interest('Healthcare',     'icon-healthcare'),
+    new Interest('Taxes',          'icon-taxes'),
+    new Interest('Immigration',    'icon-immigration'),
+    new Interest('Education',      'icon-education'),
+    new Interest('Drugs',          'icon-smoking-area'),
+    new Interest('Defense',        'icon-tank'),
+    new Interest('Politics',       'icon-building'),
+    new Interest('Gun Rights',     'icon-gun'),
+    new Interest('Technology',     'icon-ipad'),
+    new Interest('Economics',      'icon-money'),
     new Interest('Social Interest','icon-police'),
   ];
   this.progressComplete = false;
@@ -20,6 +25,7 @@ function RegisterController($scope, $location, userService) {
 
 RegisterController.prototype.topicsSubmit = function() {
   this.userService.addTopics(this.getSelected());
+  this.location.path('/register');
 };
 
 RegisterController.prototype.go = function(hash) {

@@ -10,7 +10,7 @@
         }
          @include media(480px) {
             padding:0;
-            width:auto;
+            display:block;
          }
         justify-content: center;
         width: 100%;
@@ -56,6 +56,13 @@
         background-color: $green;
         border: 1px solid darken($green, 20%);
         color: $white;
+        position: relative;
+        .box-loader {
+          // left: 0;
+          margin-left: 10px;
+          justify-content: flex-start;
+
+        }
     }
     .signup-email {
         background-color: rgba(0, 0, 0, 0.0);
@@ -130,10 +137,11 @@
             }
             h2 {
                 @include font-size(18px);
-                line-height: 20px;
+                line-height: 40px;
                 font-weight: $font-light;
                 padding: 20px;
                 opacity: 0.9;
+                max-width:900px;
                 @media screen and (max-device-width: 900px), screen and (max-width: 900px) {
                     margin-top: 20px;
                     max-width: 700px;
@@ -216,16 +224,17 @@
         @include media(900px) {
             flex-direction: column;
         }
-        padding: 16px;
+        padding: 0px;
         color: #3b3b3b;
         section {
             border: 1px solid #d6d4e1;
             background: white;
-            padding: 60px 40px;
+            padding: 120px 0px;
             border-radius: 3px;
-            width: calc(50% - 10px);
+            width: calc(100% - 0px);
+            text-align: center;
             &:nth-child(1) {
-                margin-right: 20px;
+                margin-right: 0px;
                 @include media(900px) {
                     margin-bottom: 20px;
                 }
@@ -255,8 +264,16 @@
                 padding-bottom: 40px;
                 font-weight: $font-light;
                 color: $greydark;
-                line-height: 28px;
+                line-height: 38px;
+                max-width:1200px;
+                text-align: center;
+                margin:0px auto;
+                padding:0px 20px;
+                @include media(900px) {
+                    max-width: 700px;
+                }
             }
+            
         }
     }
     .shoutout {
@@ -306,6 +323,7 @@
                 padding: 0px 40px 40px 40px;
             }
             section {
+                        width: calc(33% - 13px);
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
@@ -356,6 +374,9 @@
         align-items: center;
         transition: all 0.5s ease;
         position: relative;
+         @media screen and (max-device-width: 900px), screen and (max-width: 900px) {
+                        height:400px;
+                    }
         .signup-container {
             width: 70%;
             position: absolute;
@@ -372,6 +393,8 @@
                 font-weight: $font-light;
                 text-align: center;
                 margin-bottom: 40px;
+                padding:20px;
+                display: block;
                 @include font-size(28px);
                 color: $black;
                 @media screen and (max-device-width: 900px), screen and (max-width: 900px) {
@@ -385,7 +408,7 @@
                 line-height: 50px;
                 font-size: 16px;
                 font-weight: $font-normal;
-                display: inline-block;
+                display: block;
                 transition: all 0.2s ease;
                 border-radius: $radius;
                 cursor: pointer;

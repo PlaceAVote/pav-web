@@ -4,6 +4,7 @@ function Issue(options) {
   }
   this.type = 'issue';
   this.issue_id = options.issue_id;
+  this.short_issue_id = options.short_issue_id;
   this.bill_id = options.bill_id;
   this.bill_title = options.bill_title;
   this.comment = options.comment;
@@ -19,6 +20,7 @@ function Issue(options) {
   this.negative_responses = options.negative_responses;
   this.neutral_responses = options.neutral_responses;
   this.positive_responses = options.positive_responses;
+  this.user_id = options.user_id;
 }
 
 Issue.prototype.goToBill = function(location) {
@@ -26,7 +28,11 @@ Issue.prototype.goToBill = function(location) {
 };
 
 Issue.prototype.goToProfile = function(location) {
-  location.path('profile/' + this.author_id);
+  location.path('profile/' + this.user_id);
+};
+
+Issue.prototype.goToIssue = function(location) {
+  location.path('issue/' + this.short_issue_id);
 };
 
 module.exports = Issue;

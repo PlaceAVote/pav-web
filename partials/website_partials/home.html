@@ -3,46 +3,49 @@
 	<div class="intro">
 		<section ng-switch on="home.mobileemail">		
 			<h1>
-				Read, debate and vote on every bill before congress.
+				Be loud. Be heard. Be represented.
 			</h1>
-			<h2>A direct link between constituents and their elected representatives in congress</h2>
+			<h2>Welcome to PlaceAVote, a nonpartisan platform that gives you the opportunity to read, debate, and vote on every bill that is presented before Congress.</h2>
 			<div class="home-btns">
-			<a class="signup-facebook" ng-click="home.loginWithFacebook()" value="Sign up with Facebook"><img src="img/web/logo-facebook.svg" alt="Sign up with Facebook" >Sign up with Facebook</a>
-			<a class="signup-email" href="#/signup">Sign up with Email</a>
+			<a class="signup-facebook" ng-click="home.loginWithFacebook()" value="Sign up with Facebook" loader loader-context="home.loading" white truthy><img src="img/web/logo-facebook.svg" alt="Sign up with Facebook" >Sign up with Facebook</a>
+			<a class="signup-email" href="#!/signup">Sign up with Email</a>
 			</div>			
 		</section>
 	</div>
 	<div class="home-box l-12">
-	<section>
+	<!--<section>
 		<img src="img/web/report-problem-circle.png" />
 		<h1>The Problem</h1>
 		<p>Our representatives seem to represent their biggest donors, not us. Our voice is blocked by the money that gets politicians into power.</p>
-	</section>
+	</section>-->
 	<section>
-		<img src="img/web/solution-circle.png" />
-		<h1>The Solution</h1>
-		<p>Let's vote representatives into congress who want to listen and act on the voice of their voters. Let's use technology to prioritize the issues we care about and loudly communicate them to those we put in power as our delegates.</p>
+		<h1>Our Mission</h1>
+		<p>PlaceAVote is committed to restoring real representation by sharing with representatives how their districts are voting on each legislative bill and issue, while encouraging them to vote in Congress based on the majority of their constituents.</p>
 	</section>
 	</div>
 	<div class="l-12 about">
 		<h1>What does Placeavote do?</h1>
 		<div>
 			<section>
-			<h2>Anonymously Vote</h2>
-			<p>We enable you to vote for or against any legislation put in front of congress, no one will know what stance you took on an issue, unless you want them to.</p>
+			<h2>Read</h2>
+			<p>PlaceAVote shares bills in plain, straightforward language that makes them easy to understand and lets you focus on the actual points of the bills.</p>
 			</section>
 			<section>
-			<h2>Publicly Discuss</h2>
-			<p>Choose to voice your opinions on subject matters, or be safe in the knowledge of keeping total anonymity with your vote, like the good old days.</p>
+			<h2>Vote</h2>
+			<p>More convenient than standing in line at the polls and just as secure (if not more) than marking your ballot behind a curtain, your vote on PlaceAVote is 100% anonymous.</p>
+			</section>
+			<section>
+			<h2>Debate</h2>
+			<p>We're a safe and secure forum for not only voting, but also sharing and discussing issues that are important to you.</p>
 			</section>
 		</div>
 	</div>
 	<div2 class="l-12 sign-up-home" id="signup-section">
 		<div ng-switch-when="false" class="signup-container">
-		<h1>Sign up to our early access beta</h1>
+		<h1>Become a PlaceAVoter today and let your representatives know how to represent you.</h1>
 		<div class="home-btns">
 		<a class="signup-facebook" ng-click="home.loginWithFacebook()" value="Sign up with Facebook"><img src="img/web/logo-facebook.svg" alt="Sign up with Facebook" >Sign up with Facebook</a>
-			<a class="signup-email-btm" href="#/signup">Sign up with Email</a>
+			<a class="signup-email-btm" href="#!/signup">Sign up with Email</a>
 		</div>
 	</div>
 		<!-- Begin MailChimp Signup Form -->

@@ -3,5 +3,5 @@
    <i class="icon-add"></i>
    </div> 
 
-  <span class="event-label"><a href="#/profile/{{user.user_id}}">{{user.first_name}} {{user.last_name}}</a> followed <a ng-click="event.loadProfile(event.following_id, location)">{{event.first_name}} {{event.last_name}} </a></span>
+  <span class="event-label"><a ng-click="location.path('profile/' + user.user_id)">{{user.first_name}} {{user.last_name}}</a> followed <a ng-click="location.path('profile/' + event.following_id)">{{event.first_name}} {{event.last_name}} </a></span>
 </div>

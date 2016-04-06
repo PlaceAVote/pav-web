@@ -1,12 +1,21 @@
-module.exports = function($location, issueService) {
+var tweet = require('../models/tweet.js');
+
+module.exports = function($location, issueService, facebook, $window) {
   return {
     restrict: 'E',
     scope: {
       issue: '=',
       example: '=',
+      closable: '&',
+      follow: '=',
+      profile: '=',
     },
     templateUrl: 'partials/directives/issue.html',
     link: function(scope, el, attr) {
+
+      if (attr.$attr.single) {
+        scope.single = true;
+      }
       scope.location = $location;
       scope.issueService = issueService;
       scope.eResponse = function(id, emo, issue) {
@@ -61,6 +70,37 @@ module.exports = function($location, issueService) {
           });
         }
       };
+
+      var rootHref;
+
+      scope.$watch('issue', function(newValue, oldValue) {
+        if (newValue) {
+          if ($location.$$host === 'beta.placeavote.com') {
+            rootHref = 'https://beta.placeavote.com';
+          }
+
+          if ($location.$$host === 'dev.placeavote.com' || $location.$$host === 'localhost') {
+            rootHref = 'http://dev.placeavote.com';
+          }
+
+          if ($location.$$host === 'placeavote.com') {
+            rootHref = 'https://www.placeavote.com';
+          }
+          scope.issueLocationFacebook = rootHref + '/#!/issue/' + scope.issue.short_issue_id;
+          scope.issueLocation = encodeURIComponent(rootHref + '/#!/issue/') + scope.issue.short_issue_id;
+        }
+      });
+
+      scope.getShareMessage = function() {
+        var t = tweet();
+        return t.generateMessage('Check out this issue @placeavote');
+      };
+
+      scope.facebook = facebook;
+      scope.shareToFacebook = function() {
+        scope.facebook.share(scope.issueLocationFacebook);
+      };
+
     },
   };
 };

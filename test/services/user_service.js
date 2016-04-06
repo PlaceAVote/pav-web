@@ -69,14 +69,14 @@ describe("User Service", function() {
         first_name : "paul",
         last_name : "barber",
         dob : new Date(),
-        country_code: "USA"
+        zipcode : 1234
       };
       subject.addAdditionalInformation(additionalInformation);
       var user = subject.getUser();
       expect(user.first_name).to.eql("paul");
       expect(user.last_name).to.eql("barber");
       expect(user.dob).to.eql(strftime('%m/%d/%Y', new Date()));
-      expect(user.country_code).to.eql("USA");
+      expect(user.zipcode).to.eql(1234);
     });
   });
   describe("Save User", function() {
@@ -90,7 +90,7 @@ describe("User Service", function() {
           expect(user.first_name).to.eql('paul');
           expect(user.last_name).to.eql('barber');
           expect(user.dob).to.eql(strftime('%m/%d/%Y', new Date()));
-          expect(user.country_code).to.eql('804');
+          expect(user.zipcode).to.eql(1234);
           done();
         };
       }
@@ -102,7 +102,7 @@ describe("User Service", function() {
         first_name : "paul",
         last_name : "barber",
         dob : new Date(),
-        country_code: "804"
+        zipcode : 1234,
       };
       subject.addAdditionalInformation(additionalInformation);
       subject.saveUser();
@@ -121,7 +121,7 @@ describe("User Service", function() {
         first_name : "paul",
         last_name : "barber",
         dob : new Date(),
-        country_code: "804"
+        zipcode : 1234,
       };
       subject.addAdditionalInformation(additionalInformation);
       subject.saveUser(function(err, user){
@@ -129,7 +129,7 @@ describe("User Service", function() {
         expect(user.first_name).to.eql('paul');
         expect(user.last_name).to.eql('barber');
         expect(user.dob).to.eql(strftime('%m/%d/%Y', new Date()));
-        expect(user.country_code).to.eql('804');
+        expect(user.zipcode).to.eql(1234);
         done();
       });
     });
@@ -147,7 +147,7 @@ describe("User Service", function() {
         first_name : "paul",
         last_name : "barber",
         dob : new Date(),
-        country_code: "804"
+        zipcode : 1234,
       };
       subject.addAdditionalInformation(additionalInformation);
       subject.saveUser(function(err, user){
@@ -273,7 +273,7 @@ describe("User Service", function() {
           expect(data.first_name).to.eql("paul");
           expect(data.last_name).to.eql("barber");
           expect(!!data.dob).to.eql(true);
-          expect(data.country_code).to.eql("804");
+          expect(data.zipcode).to.eql(1234);
           expect(data.topics[0]).to.eql('guns');
           expect(data.img_url).to.eql('img.com');
           done();
@@ -287,7 +287,7 @@ describe("User Service", function() {
       var additionalInformation = {
         first_name : "paul",
         last_name : "barber",
-        country_code: "804"
+        zipcode : 1234,
       };
       subject.user.topics = [{name:'guns'}];
       subject.user.img_url = 'img.com';
@@ -319,20 +319,6 @@ describe("User Service", function() {
         return 'PAV_AUTH_TOKEN CHOUNDFLKAND:ND'
       }
     };
-    it('returns error if user has no access token', function(done) {
-      var auth = {
-        getAccessToken: function() {
-          return undefined;
-        }
-      };
-      var subject = new UserService(undefined, undefined, auth);
-      subject.getUserProfile('id', function(err, result) {
-        expect(err.status).to.eql(401);
-        expect(err.message).to.eql('No Auth Token');
-        expect(result).to.eql(undefined);
-        done();
-      });
-    });
     it('calls get resource with correct params', function(done) {
       function mockResource(url, params, method, options) {
         this.getProfile = function(){};
@@ -1054,3 +1040,76 @@ describe("User Service", function() {
   });
 });
 
+
+describe('getUserProfile function', function() {
+  
+  it('should return profile information from a token dependant endpoint when provided with token & id.', function() {
+    
+    var mockResource = function(url, params, method) {
+      expect(url).to.equal('http://userapidev.placeavote.com/user/1234/profile');
+      this.getProfile = function(params, onLoad, onError) {
+        var user = {
+          country_code: "USA",
+          first_name: "Anthony",
+          img_url: "https:www.img.com/img.jpg",
+          last_name: "ONeill",
+          public: true,
+          total_followers: 10,
+          total_following: 10,
+          user_id: "2a4c9d9c-f9b7-4e61-a799-455445a88ce4",         
+        };
+        return onLoad(user);
+      };
+    };
+
+    var mockAuth = {
+      getAccessToken: function() {
+        return 'PAV_AUTH_TOKEN';
+      },
+    };
+
+    var subject = new UserService(mockResource, undefined, mockAuth);
+
+    subject.getUserProfile('1234', function(err, res) {
+      expect(res.first_name).to.equal('Anthony');
+      expect(res.last_name).to.equal('ONeill');
+    });
+
+  });
+
+  it('should return profile information from an open endpoint when provided with only an id and no token.', function() {
+    
+    var mockResourceOpen = function(url, params, method) {
+      expect(url).to.equal('http://userapidev.placeavote.com/user/1234/profile');
+      this.getProfile = function(params, onLoad, onError) {
+        var user = {
+          country_code: "USA",
+          first_name: "Anthony",
+          img_url: "https:www.img.com/img.jpg",
+          last_name: "ONeill",
+          public: true,
+          total_followers: 10,
+          total_following: 10,
+          user_id: "2a4c9d9c-f9b7-4e61-a799-455445a88ce4",         
+        };
+        return onLoad(user);
+      };
+    };
+
+    var mockAuth = {
+      getAccessToken: function() {
+        return undefined;
+      },
+    };
+
+    var subject = new UserService(mockResourceOpen, undefined, mockAuth);
+
+    subject.getUserProfile('1234', function(err, res) {
+      expect(res.first_name).to.equal('Anthony');
+      expect(res.last_name).to.equal('ONeill');
+    });
+
+  });
+
+
+});

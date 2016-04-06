@@ -1,3 +1,24 @@
+console.log('%cPlaceavote', 'background: #543594; color: #ffffff; padding: 1px 3px; border-radius: 3px; font-size: 12px;font-family: sans-serif; margin-left: calc(100% - 70px);');
+
+
+// Redirects to https protocol
+
+if (window.location.protocol != 'https:' && window.location.hostname != 'localhost') {
+  window.location.href = window.location.href.replace(/^http:/, 'https:');
+}
+
+// Safari, in Private Browsing Mode, looks like it supports localStorage but all calls to setItem
+// Throw QuotaExceededError. We're going to detect this and just silently drop any calls to setItem
+// To avoid the entire page breaking, without having to do a check at each usage of Storage.
+if (typeof localStorage === 'object') {
+  try {
+    localStorage.setItem('localStorage', 1);
+    localStorage.removeItem('localStorage');
+  } catch (e) {
+    Storage.prototype._setItem = Storage.prototype.setItem;
+    Storage.prototype.setItem = function() {};
+  }
+}
 
 // Website Controllers
 var HomeController = require('./controllers/website/home_controller.js');
@@ -69,17 +90,31 @@ var issueDirective = require('./directives/issue.js');
 var feedEventsDirective = require('./directives/feed_events.js');
 var feedBillEventDirective = require('./directives/feed_bill_event.js');
 var infiniteScroll = require('./directives/infinite_scroll.js');
+var billSummaryDirective = require('./directives/bills/bill_summary.js');
+var billInfoDirective = require('./directives/bills/bill_info.js');
+var billCommentsDirective = require('./directives/bills/bill_comments.js');
+var billStatisticsDirective = require('./directives/bills/bill_statistics.js');
+var billStatusDirective = require('./directives/bills/bill_status.js');
+var voteModalDirective = require('./directives/bills/vote_modal.js');
+var voteConfirmedDirective = require('./directives/bills/vote_confirmed.js');
+var imageSmartDirective = require('./directives/image_smart.js');
+var updateMetaDirective = require('./directives/update_meta.js');
+
+var invalidDirective = require('./directives/invalid.js');
 
 // Thirdparty integrations
 var Facebook = require('./integrations/facebook.js');
+var Twitter = require('./integrations/twitter.js');
 var slider = require('angularjs-slider');
 var draggable = require('angular-ui-tree');
 var textarea = require('angular-elastic');
 var moment = require('angular-moment');
-var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'pavDirectives', 'rzModule', 'ui.tree', 'monospaced.elastic', 'angularMoment']);
+var locationUpdate = require('./utils/location_update.js');
 
+var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'rzModule', 'ui.tree', 'monospaced.elastic', 'angularMoment']);
 
-app.config(['$routeProvider', function($routeProvider) {
+app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+
   $routeProvider
   .when('/', {
     templateUrl: 'partials/website_partials/home.html',
@@ -109,13 +144,34 @@ app.config(['$routeProvider', function($routeProvider) {
   })
 	.when('/onboarding', {
   templateUrl: 'partials/onboarding.html',
+  controller: 'TopicRegisterCtrl as topicsRegister',
 	})
+  .when('/register', {
+    templateUrl: 'partials/signup.html',
+    controller: 'SignUpCtrl as signup',
+  })
   .when('/feed', {
     templateUrl: 'partials/feed.html',
     controller: 'FeedCtrl as feed',
   })
   .when('/bill/:id', {
-    templateUrl: 'partials/bill.html',
+    templateUrl: 'partials/bills/bill_wrapper.html',
+    controller: 'BillCtrl as bill',
+  })
+  .when('/bill/:id/summary', {
+    templateUrl: 'partials/bills/bill_wrapper.html',
+    controller: 'BillCtrl as bill',
+  })
+  .when('/bill/:id/info', {
+    templateUrl: 'partials/bills/bill_wrapper.html',
+    controller: 'BillCtrl as bill',
+  })
+  .when('/bill/:id/comments', {
+    templateUrl: 'partials/bills/bill_wrapper.html',
+    controller: 'BillCtrl as bill',
+  })
+  .when('/bill/:id/statistics', {
+    templateUrl: 'partials/bills/bill_wrapper.html',
     controller: 'BillCtrl as bill',
   })
   .when('/bill/:id/comment/:commentid', {
@@ -134,15 +190,22 @@ app.config(['$routeProvider', function($routeProvider) {
     templateUrl: 'partials/password_reset.html',
     controller: 'PasswordResetCtrl as password',
   })
+  .when('/issue/:issueid', {
+    templateUrl: 'partials/profile.html',
+    controller: 'ProfileCtrl as profile',
+  })
   .otherwise({
     redirectTo: '/',
   });
+
+  $locationProvider
+    .hashPrefix('!');
+
 },]);
-
-
 
 // Services
 app.factory('facebookService', [Facebook]);
+app.factory('twitterService', [Twitter]);
 app.factory('authService', ['$resource', AuthService]);
 app.factory('userService', ['$resource', 'facebookService', 'authService', UserService]);
 app.factory('billService', ['$resource', 'authService', 'userService', BillService]);
@@ -158,13 +221,13 @@ app.factory('questionService', ['$resource', 'authService', QuestionService]);
 app.factory('mailService', ['$resource', MailService]);
 
 // Controllers
-app.controller('TopicRegisterCtrl',['$scope','$location', 'userService', RegisterController]);
+app.controller('TopicRegisterCtrl',['$scope','$location', 'userService', '$rootScope', RegisterController]);
 app.controller('SignUpCtrl',['$rootScope','$scope','$location', 'userService', SignUpController]);
 app.controller('LoginCtrl',['$scope','$location', 'userService', 'authService', '$rootScope', '$routeParams', 'passwordService', LoginController]);
 app.controller('FeedCtrl', ['$scope', '$location', 'userService', 'billService', 'authService', 'feedService', '$rootScope','$timeout', FeedController]);
-app.controller('BillCtrl', ['$scope', '$routeParams', 'billService', 'legislationService', 'voteService', 'commentService', '$location', 'authService', '$rootScope', '$timeout', BillController]);
+app.controller('BillCtrl', ['$scope', '$routeParams', 'billService', 'legislationService', 'voteService', 'commentService', '$location', 'authService', '$rootScope', '$timeout', 'facebookService', '$route', BillController]);
 app.controller('HeaderCtrl', ['$rootScope', '$scope', '$location', '$timeout', 'authService', 'userService', 'notificationService', 'searchService', '$window', HeaderController]);
-app.controller('ProfileCtrl', ['$scope', '$location', '$routeParams', 'authService', 'userService', ProfileController]);
+app.controller('ProfileCtrl', ['$scope', '$location', '$routeParams', 'authService', 'userService','issueService', '$rootScope', ProfileController]);
 app.controller('SettingsCtrl', ['$scope', '$location', '$timeout', 'userService', 'authService', '$rootScope','$anchorScroll', SettingsController]);
 app.controller('PasswordResetCtrl', ['$scope','$location','$routeParams','passwordService','authService', PasswordController]);
 app.controller('IssuesCtrl', ['$scope', '$rootScope', 'searchService', '$timeout', 'issueService', IssuesController]);
@@ -186,10 +249,10 @@ app.directive('websiteNav', [websiteNav]);
 app.directive('headerNav', [headerNav]);
 app.directive('mailcheck', ['$compile','$sce', mailcheck]);
 app.directive('comment', ['$compile', 'commentService', '$anchorScroll', '$timeout', '$location', commentDirective]);
-app.directive('commentEvent', ['$compile', 'commentService', '$timeout', commentEventDirective]);
+app.directive('commentEvent', ['$compile', 'commentService', '$timeout','$location', commentEventDirective]);
 app.directive('comments', [commentsDirective]);
 app.directive('banner', [bannerDirective]);
-app.directive('timeline', [timelineDirective]);
+app.directive('timeline', ['$location', timelineDirective]);
 app.directive('following', ['$location', timelineFollowingEventDirective]);
 app.directive('followed', ['$location', timelineFollowedEventDirective]);
 app.directive('vote', ['$location', voteEventDirective]);
@@ -200,7 +263,7 @@ app.directive('websiteFooter', [websiteFooter]);
 app.directive('searchBar', ['$sce' ,'$location', search]);
 app.directive('termsAndConditions', [termsAndConditionsDirective]);
 app.directive('issuesPost', [issuesPostDirective]);
-app.directive('issue', ['$location', 'issueService', issueDirective]);
+app.directive('issue', ['$location', 'issueService', 'facebookService', '$window', issueDirective]);
 app.directive('wizard', [wizardDirective]);
 app.directive('slider', ['$timeout', sliderDirective]);
 app.directive('dad', [dragAndDropDirective]);
@@ -209,5 +272,15 @@ app.directive('imageCrop', [imageCropDirective]);
 app.directive('fileread', [fileReadDirective]);
 app.directive('loader', ['$location', preloaderDirective]);
 app.directive('feedEvents', [feedEventsDirective]);
-app.directive('feedBillEvent', ['$location', feedBillEventDirective]);
+app.directive('invalid', [invalidDirective]);
+app.directive('feedBillEvent', ['$location', 'facebookService', feedBillEventDirective]);
 app.directive('infiniteScroll', ['$rootScope', '$window', '$interval', 'THROTTLE_MILLISECONDS', infiniteScroll]);
+app.directive('billSummary', ['$location', billSummaryDirective]);
+app.directive('billInfo', ['$location', billInfoDirective]);
+app.directive('billComments', ['$location', billCommentsDirective]);
+app.directive('billStatistics', ['$location', billStatisticsDirective]);
+app.directive('billStatus', ['$location', billStatusDirective]);
+app.directive('voteModal', ['$location', voteModalDirective]);
+app.directive('voteConfirmed', ['$location', voteConfirmedDirective]);
+app.directive('imageSmart', [imageSmartDirective]);
+app.directive('updateMeta', ['$log', updateMetaDirective]);

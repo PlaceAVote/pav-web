@@ -1,0 +1,211 @@
+
+/*------------------------------------*\
+    #COMPONENT-BILL-BANNER
+\*------------------------------------*/
+
+/**
+* The bill banner is only used on the bills page
+* and can the markup found in partial/bills/bill_wrapper.html
+* it stretchs the entire width of the screen and contains 
+* several elements: Background Image, Overlay, Title, Tags,
+* and Trending label.
+*/
+
+.c-bill-banner {
+  height: 300px;
+  position: relative;
+  @include linear-gradient($purple, $blue);
+  overflow: hidden;
+}
+
+
+.c-bill-banner__bg {
+  object-fit: cover;
+  animation: fader 1s ease;
+}
+
+@keyframes fader {
+  0% { opacity: 0;  }
+  100% { opacity: 1; }
+}
+
+.c-bill-banner__bg, 
+.c-bill-banner__overlay {
+    height: 300px;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+
+.c-bill-banner__overlay {
+  background: rgba(0,0,0,0.5);
+
+  &.c-bill-banner__overlay-gradient {
+    @include linear-gradient($purple, $blue);
+  }
+}
+
+
+
+
+
+/**
+* c-bill-banner__content holds the Title,
+* Tags, and Sharing buttons. On desktop it is
+* offset to left by x px.
+*/
+
+
+.c-bill-banner__content {
+  position: absolute;
+  max-width: 1200px;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  bottom: 24px;
+  padding-left: 250px;
+
+  @include media(1200px) {
+    width: calc(100% - 20px);
+    padding-left: 262px;
+  }
+
+  h1 {
+    color: white;
+    @include font-size(24px);
+    @include light();
+    font-weight: 200;
+
+    &.h1--no-tags {
+      padding-right: 120px;
+      margin-bottom: -7px;
+
+      @include media($tablet) {
+        padding-bottom: 40px;
+        padding-right: 0px;
+      }
+
+    }
+  }
+
+
+/**
+* The $tablet breakpoint initiates the
+* bill menu moving below the banner
+* which give shte banner__content area
+* full width.
+*/
+
+  @include media($tablet) {
+    padding-left: 0;
+
+    h1 {
+      @include font-size(18px);
+    }
+
+  }
+
+}
+
+
+.c-bill-banner__tags {
+
+  @include media($tablet) {
+    margin-left: 55px;
+  }
+
+}
+
+.c-bill-banner__tags span {
+  color: white;
+  @include font-size(10px);
+  padding: 3px 0px;
+  margin-right: 17px;
+}
+
+
+.c-bill-banner__tags .c-tag {
+  margin-right: 17px;
+}
+
+
+.c-bill-banner__social {
+  position: absolute;
+  right: 20px;
+  bottom: 0;
+  i, a {
+    color: white;
+    @include font-size(14px);
+    text-decoration: none;
+  }
+
+
+/**
+* The following styles within the $tablet
+* breakpoint shift the social buttons
+* to left.
+*/
+
+  @include media($tablet) {
+    right: initial;
+    left: 0px;
+  }
+
+}
+
+
+.c-bill-banner__trending {
+  position: absolute;
+  right: 0px;
+  bottom: 0;
+  color: white;
+  background: rgba(0,0,0,0.8);
+  border-radius: 3px;
+  @include font-size(12px);
+  padding: 3px 10px 3px 30px;
+
+  i {
+    position: absolute;
+    top: 0;
+    left: 5px;
+    @include font-size(18px);
+  }
+
+
+  @include media($tablet) {
+    display: none;
+  }
+
+}
+
+
+.c-bill-banner__overlay,
+.c-bill-banner__content {
+  &.ng-hide-add, 
+  &.ng-hide-remove {
+    transition: 0s linear all
+  }
+
+  &.ng-hide-add-active,
+  &.ng-hide-remove-active {
+    transition: 1s ease all;
+  }
+
+  &.ng-hide-add {
+    opacity: 1;
+  } 
+
+  &.ng-hide-add.ng-hide-add-active {
+    opacity: 0;
+  }
+
+  &.ng-hide-remove {
+    opacity: 0;
+  }
+
+  &.ng-hide-remove.ng-hide-remove-active {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,230 @@
+<div class="row tablet-col l-12">
+
+
+
+<!-- Top Row -->
+  <!-- First Col -->
+    
+  <div class="l-6 m-12 margin-right-medium tablet-margin-right-none"
+  ng-show="bill.body.billData.featured_bill_summary">
+      
+    <div class="c-card c-card--bill c-card--footer-btn">
+
+      <h1>Short Summary</h1>
+
+      <hr />
+
+      <div class="c-card__content">
+
+      <h2 ng-bind-html="bill.body.billData.featured_bill_summary"></h2>
+
+      </div>
+
+      <div class="c-card__footer-btn"
+      ng-click="bill.view = 'info'; bill.location.update_path('bill/' + bill.id + '/info');">
+        Read More Information About This Bill >
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- Second Col -->
+
+  <div
+  ng-class="{'row l-12 tablet-col': !bill.body.billData.featured_bill_summary, 'col l-6 m-12': bill.body.billData.featured_bill_summary}">
+      
+    <div class="c-card c-card--bill c-card--icon tablet-margin-bottom-none m-12"
+      ng-class="{'l-6 margin-right-medium margin-bottom-medium-none' : !bill.body.billData.featured_bill_summary,
+      'margin-bottom-medium' : bill.body.billData.featured_bill_summary}"
+      ng-show="bill.body.billData.points_infavor">
+
+      <i class="icon-passed-house green"
+      style="font-size: 10px;top: 15px;"></i>
+      <h1>Points In Favor</h1>
+      
+      <hr />
+
+      <div class="c-card__content">
+      <p ng-bind-html="bill.body.billData.points_infavor"></p>
+      </div>
+
+    </div>
+
+
+    <div class="c-card c-card--bill c-card--icon m-12"
+      ng-show="bill.body.billData.points_against"
+      ng-class="{'l-6' : !bill.body.billData.featured_bill_summary}">
+
+      <i class="icon-close red"
+      style="font-size: 13px;top: 13px;"></i>
+      <h1>Points Against</h1>
+      
+      <hr />
+
+      <div class="c-card__content">
+      <p ng-bind-html="bill.body.billData.points_against"></p>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+  <!-- Official Bill -->
+    <div 
+    ng-hide="bill.body.billData.featured_bill_summary" 
+    class="c-card c-card--bill c-card--official-summary l-12"
+    style="width: 100%;"
+    ng-cloak>
+
+    <h1>Official Summary</h1>
+
+    <hr />
+
+    <div class="c-card__content"
+    style="margin-bottom: 37px;">
+
+      <p ng-bind-html="bill.body.billData.summary"></p>
+
+    </div>
+
+    <div class="c-card__footer-btn">
+       <a target="_blank" ng-href="{{bill.body.billData.last_version.urls.pdf}}" ng-click="openPdf()"> 
+        Read Entire Bill
+      </a>
+    </div>
+
+  </div>
+
+
+
+<!-- Bottom Row | Top Comments -->
+
+<div class="row tablet-col l-12 margin-top-medium tablet-margin-top-none"
+ng-show="bill.forComment.author"
+>
+
+  <div class="l-6 m-12 margin-right-medium tablet-margin-right-none">
+  
+
+   <!-- Top Comment Card -->  
+    <div class="c-card c-card--bill c-card--comment"
+
+    loader loader-context="bill.topLoaded"
+    >
+
+      <h1>Top Comment in Favor</h1>
+
+      <hr />
+
+
+      <div class="c-card__content row">
+
+        <div class="c-user-photo"
+            ng-click="location.path('profile/' + bill.forComment.author)">
+          <div ng-style="{'background-image': 'url(' + bill.forComment.author_img_url + ')'}">
+          </div>
+        </div>
+
+        <div class="c-card__comment-body">
+          
+          <p class="c-card__username"
+          ng-click="location.path('profile/' + bill.forComment.author)">
+            {{bill.forComment.author_first_name}}
+          </p>
+
+          <p>
+            {{bill.forComment.body}}
+          </p>
+
+          <div class="c-card__comment-vote row">
+
+            <span ng-class="{'red': bill.forComment.score < 0, 'green': bill.forComment.score > 0}">
+            {{bill.forComment.score}}
+            </span>
+
+            <i class="icon-thumbs-up" ng-class="{'score-up': bill.forComment.liked == true}" ng-click="bill.forComment.like(bill.commentService)"></i>
+
+            <i class="icon-thumbs-down" ng-class="{'score-down': bill.forComment.disliked == true}" ng-click="bill.forComment.dislike(bill.commentService)"></i>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+    <!-- Top Comment Card -->
+  
+  </div>
+
+  <div class="l-6 m-12">
+    
+   <!-- Top Comment Card -->  
+    <div class="c-card c-card--bill c-card--comment"
+
+    loader loader-context="bill.topLoaded"
+    >
+
+      <h1>Top Comment Against</h1>
+
+      <hr />
+
+
+      <div class="c-card__content row">
+
+        <div class="c-user-photo"
+               ng-click="location.path('profile/' + bill.againstComment.author)">
+          <div ng-style="{'background-image': 'url(' + bill.againstComment.author_img_url + ')'}">
+          </div>
+        </div>
+
+        <div class="c-card__comment-body">
+          
+          <p class="c-card__username"
+              ng-click="location.path('profile/' + bill.againstComment.author)">
+            {{bill.againstComment.author_first_name}}
+          </p>
+
+          <p>
+            {{bill.againstComment.body}}
+          </p>
+
+          <div class="c-card__comment-vote row">
+
+            <span ng-class="{'red': bill.againstComment.score < 0, 'green': bill.againstComment.score > 0}">
+            {{bill.againstComment.score}}
+            </span>
+
+            <i class="icon-thumbs-up" ng-class="{'score-up': bill.againstComment.liked == true}" ng-click="bill.againstComment.like(bill.commentService)"></i>
+
+            <i class="icon-thumbs-down" ng-class="{'score-down': bill.againstComment.disliked == true}" ng-click="bill.againstComment.dislike(bill.commentService)"></i>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+    <!-- Top Comment Card -->
+
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -131,11 +131,13 @@ button {
 }
 
 .small-button {
+  text-decoration: none;
   border-radius: 3px;
   color: white;
-  height: 20px;
-  line-height: 20px;
-  font-size: 10px;
+  padding: 3px 10px;
+  // height: 20px;
+  // line-height: 20px;
+  @include font-size(10px);
   cursor: pointer;
   outline: none;
   position: relative;
@@ -144,13 +146,15 @@ button {
 }
 
 .medium-button {
+  text-decoration: none;
   border-radius: 3px;
   color: white;
-  height: 30px;
+  padding: 7px 10px;
+  // height: 30px;
   // line-height: 30px;
   @include bold();
   vertical-align: middle;
-  font-size: 10px;
+  @include font-size(10px);
   cursor: pointer;
   outline: none;
   position: relative;
@@ -159,10 +163,12 @@ button {
 }
 
 .large-button {
+  text-decoration: none;
   border-radius: 3px;
   color: white;
-  height: 45px;
-  line-height: 45px;
+  // height: 45px;
+  // line-height: 45px;
+  padding: 5px 10px;
   font-size: 15px;
   cursor: pointer;
   outline: none;
@@ -191,6 +197,68 @@ button {
       text-shadow: 0px 3px 5px transparentize($green, 0.8);
     }
   }
+}
+
+
+
+.twitter-share, .facebook-share {
+  @include font-size(14px);
+  @include light();
+  font-family: $font-normal;
+  border-radius: 3px;
+  text-align: center;
+  // display: inline-block;
+  text-decoration: none;
+  line-height: 28px;
+  padding: 5px 15px 5px 36px;
+  color: white;
+  position: relative;
+    span {
+      position: absolute;
+      top: 7px;
+      left: 10px;
+      @include font-size(20px);
+    }
+
+  @include media(600px) {
+    @include font-size(11px);
+  }
+}
+
+.twitter-share {
+  border: 1px solid darken($twblue, 10%);
+  background: $twblue;
+  &:hover {
+    background: lighten($twblue, 4%);
+    span {
+    text-shadow: 0px 3px 5px transparentize($twblue, 0.8);
+    }
+  }
+}
+
+.facebook-share {
+  border: 1px solid darken($fbblue, 10%);
+  background: $fbblue;
+  &:hover {
+    background: lighten($fbblue, 4%);
+    span {
+    text-shadow: 0px 3px 5px transparentize($fbblue, 0.8);
+    }
+  }
+}
+
+.signup-modal-button {
+  cursor: pointer;
+  @include font-size(14px);
+  @include light();
+  font-family: $font-normal;
+  border-radius: 3px;
+  text-align: center;
+  text-decoration: none;
+  line-height: 28px;
+  padding: 5px 15px 5px 15px;
+  color: white;
+  position: relative;
 }
 
 // .follow-me {

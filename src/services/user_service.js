@@ -65,7 +65,7 @@ function UserService($resource, facebookService, authService, userStore) {
     }
     this.user.first_name = additionalInformation.first_name;
     this.user.last_name = additionalInformation.last_name;
-    this.user.country_code = additionalInformation.country_code;
+    this.user.zipcode = additionalInformation.zipcode;
     this.user.dob = strftime('%m/%d/%Y', additionalInformation.dob);
     this.user.gender = additionalInformation.gender;
   };
@@ -146,30 +146,43 @@ function UserService($resource, facebookService, authService, userStore) {
 
   var getUserProfile = function(id, callback) {
     var token = authService.getAccessToken();
-    if (!token) {
-      callback({status: 401, message: 'No Auth Token'});
-      return;
-    }
+
     // This has no effect in actual product.
     if (this.user && this.user.loadedFromServer) {
       return callback(undefined, this.user);
     }
 
-    var url = config.users.profile.fromId(id);
-    config.methods.get.headers.Authorization = token;
+    var url;
+
+    if (token) {
+      config.methods.get.headers.Authorization = token;
+      url = config.users.profile.fromId(id);
+    } else {
+      url = config.users.profile.fromId(id);
+    }
+
     var profileResource = new $resource(url, undefined, {getProfile: config.methods.get});
+
     var onError = function(err) {
       return callback(err);
     };
+
     var onLoad = function(result) {
       // Be wary of this.
       if (!users || !users.me) {
         users.me = result;
       }
       this.user = User.createFromJson(result);
+
       return callback(undefined, this.user);
     };
+
+    if (id === 'me' && !token) {
+      return callback('err');
+    }
+
     profileResource.getProfile(undefined, onLoad, onError);
+
   };
 
 

@@ -1,0 +1,121 @@
+<div class="row tablet-col l-12" ng-class="{'col': bill.body.billData.noSummary}">
+
+
+  <!-- Top Row -->
+  <div class="c-card c-card--bill"
+       ng-class="{ 'c-card--no-summary margin-bottom-large tablet-margin-bottom-none l-12' : bill.body.billData.noSummary, 'c-card--official-summary' : !bill.body.billData.noSummary }">
+
+    <h1>Official Summary</h1>
+
+    <hr />
+
+    <div class="c-card__content">
+
+      <p ng-bind-html="bill.body.billData.summary"></p>
+
+    </div>
+
+    <div class="c-card__footer-btn">
+      <a target="_blank" ng-href="{{bill.body.billData.last_version.urls.pdf}}" ng-click="openPdf()">
+      Read Entire Bill
+      </a>
+    </div>
+
+  </div>
+
+
+  <div class="c-card c-card--bill"
+       ng-class="{ 'l-12' : bill.body.billData.noSummary, 'c-card--bill-status' : !bill.body.billData.noSummary }">
+
+    <h1>Bill Status</h1>
+
+    <hr />
+    
+      <bill-status></bill-status>
+    
+  </div>
+
+
+</div>
+
+<!-- Organisations and Congressmen -->
+<div class="row margin-top-large tablet-margin-top-none margin-bottom-large tablet-margin-bottom-none">
+
+  <div class="c-card c-card--bill l-12">
+    
+    <h1>Organisations and Congressmen Involved</h1>
+
+    <hr />
+
+    <div class="c-card__content c-card__content--sponsor l-12 row tablet-col">
+
+      <div class="l-4 m-12 row">
+
+        <div class="c-user-photo c-user-photo--sponsor"
+        ng-click="location.path('profile/' + bill.forComment.author)">
+          <div ng-style="{'background-image': 'url(' + bill.legislator.properties.img_urls['100px'] + ')'}">
+          </div>
+        </div>
+
+        <div>
+          <h2>
+          BILL SPONSOR
+          </h2>
+          <h3>
+          {{bill.legislator.properties.first_name}} {{bill.legislator.properties.last_name}} 
+          </h3>
+          <h4>
+          {{bill.legislator.properties.current_term.party}}
+          </h4>
+        </div>
+
+      </div>
+
+
+      <div class="l-8 m-12 tablet-margin-top-small">
+        <h2>
+          BILL CO SPONSORS
+        </h2>
+        <p class="bold">
+          {{bill.body.billData.cosponsors_count.total}}
+        </p>
+
+        <div class="l-12 row">
+          <div class="c-sponsor__bar c-sponsor__bar--democrat" style="width: {{bill.body.billData.cosponsors_count.democrat_per}}%;">
+              <span class="tool-tip">{{bill.body.billData.cosponsors_count.democrat}} Democrats</span>
+          </div>
+          <div class="c-sponsor__bar c-sponsor__bar--republican" style="width: {{bill.body.billData.cosponsors_count.republican_per}}%;">
+              <span class="tool-tip">{{bill.body.billData.cosponsors_count.republican}} Republicans</span>
+          </div>
+          <div class="c-sponsor__bar c-sponsor__bar--independent" style="width: {{bill.body.billData.cosponsors_count.independent_per}}%;">
+              <span class="tool-tip">{{bill.body.billData.cosponsors_count.independent}} Independents</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  
+  </div>
+
+</div>
+
+
+<!-- Official Bill Title -->
+<div class="row margin-top-large tablet-margin-top-none margin-bottom-large tablet-margin-bottom-none">
+
+  <div class="c-card c-card--bill l-12">
+    
+  <h1>Official Bill Title</h1>
+
+  <hr />
+
+  <div class="c-card__content">
+   <p>
+    {{bill.body.billData.official_title}}
+    </p>
+  </div>
+
+  </div>
+
+</div>

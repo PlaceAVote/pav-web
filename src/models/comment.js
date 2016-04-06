@@ -21,6 +21,7 @@ function Comment(options) {
   this.liked = options.liked;
   this.disliked = options.disliked;
   this.type = options.type || 'comment';
+  this.showChildren = true;
 }
 
 Comment.buildChildren = function(comment, deep, reply) {
@@ -81,6 +82,7 @@ Comment.prototype.reply = function(billId, service, timeout) {
       that.replyFailed = true;
     } else if (response) {
       response.deep = that.deep + 1;
+      console.log(response);
       that.replies.push(response);
     }
     that.hideReplyInput();
@@ -196,8 +198,6 @@ Comment.prototype.dislike = function(service) {
   }
 
 };
-
-
 
 
 module.exports = Comment;

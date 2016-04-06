@@ -1,0 +1,67 @@
+/*------------------------------------*\
+    #COMPONENT-BILL-SPONSOR
+\*------------------------------------*/
+
+/**
+* Styling for the bill sponsor info on the
+* bills page
+*/
+
+
+.c-card__content--sponsor h2 {
+  color: $red;
+  font-size: 12px !important;
+}
+
+
+.c-card__content--sponsor h3 {
+  color: $blue;
+  @include font-size(14px);
+}
+
+
+.c-card__content--sponsor h4 {
+  color: $black;
+  text-transform: uppercase;
+  @include font-size(14px);
+}
+
+
+.c-user-photo--sponsor {
+    height: 56px;
+    width: 56px;
+    min-height: 56px;
+    min-width: 56px;
+}
+
+
+
+
+/**
+* Bill Sponsor chart
+*/
+
+.c-sponsor__bar {
+  height: 20px;
+  border-radius: 3px;
+  border: 1px solid white;
+  position: relative;
+
+  &:hover .tool-tip {
+    opacity: 1;
+  }
+}
+
+.c-sponsor__bar--democrat {
+  background: $blue;
+}
+
+
+.c-sponsor__bar--republican {
+  background: $red;
+}
+
+
+.c-sponsor__bar--independent {
+  background: $grey;
+}

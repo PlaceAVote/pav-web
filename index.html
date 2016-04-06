@@ -2,9 +2,27 @@
 <html ng-app="pavApp">
  <head>
   <meta charset="UTF-8">
+
+  <meta name="fragment" content="!">
+
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-  <title>Place A Vote</title>
+  <title>Placeavote</title>  
+
+  <meta name="description" content="Read, debate and vote on every bill before congress.">
+  <meta property="og:description" content="Read, debate and vote on every bill before congress.">
+  <meta property="og:site_name" content="Placeavote">
+  <meta property="og:image" content="http://s29.postimg.org/v86d7ur2v/og_fb_img.jpg">
+  <meta property="og:title" content="Placeavote">
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@placeavote">
+  <meta name="twitter:title" content="Placeavote">
+  <meta name="twitter:description" content="Read, debate and vote on every bill before congress.">
+  <meta name="twitter:image:src" content="http://s29.postimg.org/v86d7ur2v/og_fb_img.jpg">
+
+  
   <meta name="theme-color" content="#564a88">
   <meta name="msapplication-navbutton-color" content="#564a88">
   <meta name="apple-mobile-web-app-status-bar-style" content="#564a88">
@@ -12,6 +30,12 @@
   <link rel="shortcut icon" href="img/favicon_pav.ico" type="image/vnd.microsoft.icon">
   <link rel="stylesheet" type="text/css" href="//cloud.typography.com/6645674/6646752/css/fonts.css" />
   <link rel="stylesheet" href="css/styles.css" type="text/css">
+<script> 
+window.prerenderReady = false; 
+setTimeout(function() {
+  window.prerenderReady = true;
+}, 2000)
+</script>
 <script type="text/javascript">window._trackJs = { token: 'f8330210de6b42559a7120001a198070' };</script>
 <script type="text/javascript" src="https://d2zah9y47r7bi2.cloudfront.net/releases/current/tracker.js"></script>
   <script>
@@ -25,6 +49,7 @@
   <script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/sh17vmbl';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
  </head>
  <body>
+   <invalid> </invalid>
    <header-nav> </header-nav>
 <div ng-view autoscroll id="view">
 </div>

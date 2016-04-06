@@ -1,22 +1,49 @@
-var AuthorizeController = require('./autherize_controller.js');
 var title = require('../config/titles.js');
 
-function ProfileController($scope, $location, $routeParams, authService, userService) {
-  AuthorizeController.authorize({error: '/', authorizer: authService, location: $location});
+function ProfileController($scope, $location, $routeParams, authService, userService, issueService, $rootScope) {
   $scope = $scope || {};
   $scope.profile = this;
   this.location = $location;
   this.authService = authService;
   this.userService = userService;
-  this.id = $routeParams.id;
-  this.showFollowers = true;
-  this.populate();
+  this.rs = $rootScope;
+  this.rs.inApp = true;
+  if ($routeParams.issueid) {
+    this.issueService = issueService;
+    this.getIssue($routeParams.issueid);
+    this.loadingIssue = true;
+    this.showIssue = true;
+    this.authenticate();
+  } else {
+    this.id = $routeParams.id;
+    this.showFollowers = true;
+    this.populate();
+  }
 }
+
+ProfileController.prototype.authenticate = function() {
+  var that = this;
+  if (!that.authService) {
+    return;
+  }
+  that.authService.validateToken(function(result) {
+    that.validated = result;
+    that.rs.notLoggedIn = !result;
+  });
+};
+
 
 ProfileController.prototype.loadProfile = function(id) {
   if (!id) {
     return;
   }
+
+
+  if (this.rs.notLoggedIn && id === 'me') {
+    this.location.path('/');
+    return;
+  }
+
   this.location.path('/profile/' + id);
 };
 
@@ -29,12 +56,22 @@ ProfileController.prototype.populate = function() {
 
 ProfileController.prototype.populateProfile = function() {
   var that = this;
+  if (this.rs.notLoggedIn && this.id === 'me') {
+    this.location.path('/');
+    return;
+  }
+
   this.userService.getUserProfile(this.id, function(err, result) {
     if (!err) {
       that.user = result;
       title.profile(that.user);
       that.following = result.following ? 'Unfollow' : 'Follow';
       that.followStatus = result.following;
+      if (!that.issue) {
+        that.metaImage = 'http://s29.postimg.org/v86d7ur2v/og_fb_img.jpg';
+        that.metaTitle = result.first_name + ' ' + result.last_name;
+        that.metaDescription = 'Follow ' + result.first_name + ' ' + result.last_name + ' on Placeavote.';
+      }
     }
   });
 };
@@ -131,6 +168,28 @@ ProfileController.prototype.follow = function() {
   }
 };
 
+ProfileController.prototype.getIssue = function(issue) {
+  var that = this;
+  this.issueService.getIssue(issue, function(err, res) {
+    that.loadingIssue = false;
+    if (err) {
+      that.issueError = true;
+    }
+    if (res) {
+      that.id = res.user_id;
+      that.populateProfile();
+      that.issue = res;
+      that.metaImage = res.article_img || 'http://s29.postimg.org/v86d7ur2v/og_fb_img.jpg';
+      that.metaTitle = res.comment;
+      that.metaDescription = 'Do you agree or disagree?';
+    }
+  });
+};
+
+ProfileController.prototype.closeIssue = function() {
+  this.showIssue = false;
+  this.location.path('profile/' + this.id);
+};
 
 module.exports = ProfileController;
 

@@ -1,9 +1,27 @@
 <banner user="profile.user" toggle="profile.showFollowStats" followers="profile.showFollowers" following="profile.showFollowing" profile="profile"></banner>
+
+  <update-meta property="og:image" content="{{profile.metaImage}}"></update-meta>
+
+  <update-meta property="og:title" content="{{profile.metaTitle}}"></update-meta>
+
+  <update-meta name="twitter:title" content="{{profile.metaTitle}}"></update-meta>
+
+  <update-meta name="twitter:image:src" content="{{profile.metaImage}}"></update-meta>
+
+  <update-meta name="description" content="{{profile.metaDescription}}"></update-meta>
+
+  <update-meta property="og:description" content="
+{{profile.metaDescription}}"></update-meta>
+
+  <update-meta name="twitter:description" content="{{profile.metaDescription}}"></update-meta>
+
+
+
 <div class="app">
 	<div class="app-body">
 		<div class="timeline-layout">
       <div class="message" ng-show="profile.timeline.timeline.length < 1">
-        <h2>You have no activity</h2>
+        <h2>No activity</h2>
       </div>
       <div class="row tablet-col l-12">
       			<div ng-show="profile.hasActivity" class="activity-container" ng-class="{'tablet-leave-canvas-left': profile.showFollowStats}">
@@ -25,7 +43,7 @@
                     </div>
                   </div>
                   <div class="top-comment-body">
-                    <h2><a href="#/profile/{{follower.user_id}}">{{follower.first_name}} {{follower.last_name}}</a></h2>
+                    <h2><a ng-click="profile.location.path('profile/' + follower.user_id)">{{follower.first_name}} {{follower.last_name}}</a></h2>
                     <p>{{follower.follower_count}}</p>
                   </div>
                 </section>
@@ -42,7 +60,7 @@
                     </div>
                   </div>
                   <div class="top-comment-body">
-                    <h2><a href="#/profile/{{follower.user_id}}">{{follower.first_name}} {{follower.last_name}}</a></h2>
+                    <h2><a ng-click="profile.location.path('profile/' + follower.user_id)">{{follower.first_name}} {{follower.last_name}}</a></h2>
                     <p>{{follower.follower_count}}</p>
                   </div>
                 </section>
@@ -52,4 +70,13 @@
       </div>
     </div>
   </div>
+</div>
+
+
+<div class="issue-modal-container" ng-show="profile.showIssue" loader loader-context="profile.loadingIssue" truthy>
+
+  <div class="card padding-small" ng-hide="profile.issueError">
+    <issue issue="profile.issue" follow="profile.following" profile="profile" single></issue>
+  </div>
+
 </div>

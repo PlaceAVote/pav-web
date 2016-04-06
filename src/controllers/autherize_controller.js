@@ -9,10 +9,12 @@ AuthorizeController.authorize = function(options) {
   options.authorizer.validateToken(function(result) {
     if (result) {
       if (options.success) {
-        options.location.path(options.success);
+        if (options.location.$$path === '/') {
+          options.location.path(options.success);
+        }
       }
     } else {
-      if (options.error) {
+      if (options.location.$$path === '/feed' || options.location.$$path === '/settings') {
         options.location.path(options.error);
       }
     }

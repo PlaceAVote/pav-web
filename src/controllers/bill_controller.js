@@ -1,61 +1,95 @@
 var Comment = require('../models/comment.js');
 var AuthorizeController = require('./autherize_controller.js');
 var title = require('../config/titles.js');
-function BillController($scope, $routeParams, billService, legislatorService, voteService, commentService, $location, authService, $rootScope, $timeout) {
-  AuthorizeController.authorize({error: '/', authorizer: authService, location: $location});
+var tweet = require('../models/tweet.js');
+
+function BillController($scope, $routeParams, billService, legislatorService, voteService, commentService, $location, authService, $rootScope, $timeout, facebook, $route) {
   $scope = $scope || {};
   $scope.bill = this;
   $scope.commentService = commentService;
   this.timeout = $timeout;
   this.rs = $rootScope;
+  this.rs.inApp = true;
   this.authService = authService;
   this.location = $location;
   this.routeParams = $routeParams;
+  this.route = $route;
+  this.facebook = facebook;
   this.from = 0;
   this.commentBody = undefined;
   this.commentService = commentService;
   this.billService = billService;
   this.legislatorService = legislatorService;
   this.voteService = voteService;
+  this.views = ['summary', 'comments', 'info', 'statistics'];
   this.Identify($routeParams);
   this.getBill(this.id);
   this.getTopComments(this.id);
   this.getVotes(this.id);
   this.getBillVotes(this.id);
-  this.getComments();
+  this.fetchComments();
   this.voteModal = {};
   this.stats = {};
   this.readmore = false;
+  this.showChart = true;
+  this.authenticate();
+  this.commentOrder = 'highest-score';
 }
 
-BillController.prototype.showVoteModal = function(vote) {
-  if (!this.userVoted) {
-    this.vote = vote;
-    if (vote) {
-      this.voteModal.message = 'Are you sure you want to vote in favor of this bill';
-      this.voteModal.button = 'Vote in Favor';
-      this.voteModal.colour = 'btn-green';
-      this.voteModal.icon = 'icon-arrow-up';
-    } else {
-      this.voteModal.message = 'Are you sure you want to vote against this bill';
-      this.voteModal.button = 'Vote Against';
-      this.voteModal.colour = 'btn-red';
-      this.voteModal.icon = 'icon-arrow-down';
-    }
+BillController.prototype.authenticate = function() {
+  var that = this;
+  if (!that.authService) {
+    return;
   }
-  this.showVote = true;
+  that.authService.validateToken(function(result) {
+    that.validated = result;
+    that.rs.notLoggedIn = !result;
+  });
 };
 
-BillController.prototype.hideVoteModal = function() {
-  if (!this.userVoted) {
-    this.vote = undefined;
-  }
-  this.showVote = false;
+BillController.prototype.getLocation = function() {
+  var t = tweet();
+  return t.generateLink(window.location.href);
 };
+
+BillController.prototype.getShareMessage = function() {
+  var t = tweet();
+  return t.generateMessage('Check out this bill @placeavote');
+};
+
+BillController.prototype.shareToFacebook = function() {
+  this.facebook.share(window.location.href);
+};
+
+BillController.prototype.validationHandler = function() {
+  if (this.validated) {
+    return true;
+  }
+  var event = new CustomEvent('not-valid', { detail: 'Invalid request', controller: 'Bill' });
+  document.body.dispatchEvent(event);
+  return false;
+};
+
 
 BillController.prototype.Identify = function(routeParams) {
   this.id = routeParams.id;
+  this.viewToggle(this.location.$$path);
 };
+
+
+BillController.prototype.viewToggle = function(view) {
+  var reg;
+  for (var i = 0; i < this.views.length; i++) {
+    reg = new RegExp(this.views[i], 'g');
+    if (view.match(reg)) {
+      this.view = this.views[i];
+      return this.view;
+    }
+  }
+  this.view = 'summary';
+
+};
+
 
 BillController.prototype.getVotes = function(id) {
   var that = this;
@@ -68,9 +102,12 @@ BillController.prototype.getVotes = function(id) {
   });
 };
 
-BillController.prototype.voteOnBill = function() {
+BillController.prototype.voteOnBill = function(vote) {
   var that = this;
-  this.voteService.voteOnBill(this.id, this.vote, function(err, result) {
+  if (!this.validationHandler(this.validated)) {
+    return;
+  }
+  this.voteService.voteOnBill(this.id, vote, function(err, result) {
     if (err) {
       if (err.status && err.status === 409) {
         that.userAlreadyVoted = true;
@@ -78,18 +115,32 @@ BillController.prototype.voteOnBill = function() {
         that.voteFailed = true;
       }
     }
-    that.voteConfirmed();
+    that.voteConfirmed(vote);
   });
 };
 
-BillController.prototype.voteConfirmed = function() {
+BillController.prototype.voteConfirmed = function(vote) {
+  this.showVoteModal = false;
+  this.showConfirmationModal = true;
   this.userVoted = true;
   this.hasVoted = true;
-  var vote = this.vote ? this.forComment : this.againstComment;
-  this.generateCommentCard(vote);
-  this.getVotes(this.id);
-  this.getBillVotes(this.id);
+  var contrarianComment = vote ? this.forComment : this.againstComment;
+  this.generateCommentCard(contrarianComment);
 };
+
+
+BillController.prototype.generateVoteShareMessage = function(vote) {
+  var t = tweet();
+  var title = '';
+  if (this.body) {
+    title = this.body.getTitle();
+  }
+  if (vote) {
+    return t.generateMessage('I just voted in favour of ' + title + ' @placeavote');
+  }
+  return t.generateMessage('I just voted against ' + title + ' @placeavote');
+};
+
 
 BillController.prototype.generateCommentCard = function(comment) {
   if (!comment || !comment.author) {
@@ -137,9 +188,14 @@ BillController.prototype.getBill = function(id) {
       that.error = true;
     } else {
       that.body = result;
+
+      if (that.body.billData.summary === 'No Summary Present...') {
+        that.body.billData.noSummary = true;
+      }
       title.bill(that.body.billData);
       that.userVotedCheck();
       that.getLegislator(result.billData.sponsor);
+      that.sponsorCount(result.billData.cosponsors_count);
     }
   });
 };
@@ -158,24 +214,62 @@ BillController.prototype.getBillVotes = function(id) {
   });
 };
 
-BillController.prototype.getComments = function() {
+
+BillController.prototype.fetchComments = function() {
   var that = this;
-  if (!this.billService || !this.billService.getComments) {
+  if (this.fetchingComments) {
     return;
   }
-  this.billService.getComments(this.id, this.from, this.routeParams.commentid, function(err, result) {
-    if (err) {
-      that.allCommentError = true;
-    } else if (result) {
-      that.comments = result;
-      that.commentMessage = that.comments.length ? false : true;
-      that.from = that.from + 10;
+  this.fetchingComments = true;
+  this.billService.fetchComments(this.id, this.commentOrder, undefined, this.routeParams.commentid, function(err, res) {
+    that.fetchingComments = false;
+    if (res) {
+      that.comments = res.comments;
+      that.lastComment = res.lastComment;
     }
+
+    if (err) {
+      that.commentError('Sorry there was an error');
+    }
+
   });
 };
 
+
+BillController.prototype.commentsCheck = function() {
+
+  var that = this;
+
+  if (this.checkingComments || !this.lastComment) {
+    return;
+  }
+
+  this.checkingComments = true;
+  this.fetchingComments = true;
+
+  this.billService.fetchComments(this.id, this.commentOrder, this.lastComment, this.routeParams.commentid, function(err, res) {
+    that.checkingComments = false;
+    that.fetchingComments = false;
+    if (res) {
+      that.timeout(function() {
+        that.comments.push.apply(that.comments, res.comments);
+        that.lastComment = res.lastComment;
+      }, 100);
+    }
+
+    if (err) {
+      that.commentError('Sorry there was an error');
+    }
+
+  });
+};
+
+
 BillController.prototype.postComment = function() {
   var that = this;
+  if (!that.validationHandler()) {
+    return;
+  }
   var r = new RegExp(/<script[\s\S]*?>[\s\S]*?<\/script>/gi);
   if (!this.billService || !this.billService.postComment) {
     return;
@@ -193,8 +287,8 @@ BillController.prototype.postComment = function() {
       }
     } else if (result) {
       that.commentMessage = false;
-      that.comments.push(result);
       that.commentBody = undefined;
+      that.fetchComments();
     }
   });
 };
@@ -216,6 +310,38 @@ BillController.prototype.userVotedCheck = function() {
   }
 };
 
+
+BillController.prototype.userVote = function() {
+  var that = this;
+  if (!that.validationHandler()) {
+    return;
+  }
+
+  this.showVoteModal = true;
+};
+
+
+BillController.prototype.sponsorCount = function(sponsors) {
+
+  if (!sponsors) {
+    return;
+  }
+
+  var cent = 0;
+  var total = 0;
+
+  for (var i = 0; i < Object.keys(sponsors).length; i++) {
+    total += sponsors[Object.keys(sponsors)[i]];
+  }
+
+  cent = total / 100;
+
+  this.body.billData.cosponsors_count.total = total;
+  this.body.billData.cosponsors_count.democrat_per = sponsors.democrat / cent;
+  this.body.billData.cosponsors_count.republican_per = sponsors.republican / cent;
+  this.body.billData.cosponsors_count.independent_per = sponsors.independent / cent;
+
+};
 
 module.exports = BillController;
 

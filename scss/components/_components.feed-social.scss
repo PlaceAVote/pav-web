@@ -1,0 +1,20 @@
+/*------------------------------------*\
+    #COMPONENT-SOCAIL
+\*------------------------------------*/
+
+/**
+* Socail share buttons for the feed card
+*/
+
+.c-feed__social {
+    position: absolute;
+    right: 11px;
+    top: 11px;
+    
+    i, a {
+      padding-left: 3px;
+      text-decoration: none;
+      color: $grey;
+      @include font-size(15px);
+    }
+}

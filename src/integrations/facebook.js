@@ -84,8 +84,18 @@ Facebook = function() {
     });
   };
 
+  var share = function(url) {
+    facebook.ui({
+      method: 'share',
+      href: url,
+    }, function(response) {
+      console.log(url);
+    });
+  };
+
   return {
     login: login,
+    share: share,
   };
 };
 

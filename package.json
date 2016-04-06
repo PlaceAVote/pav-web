@@ -67,6 +67,7 @@
     "express": "^4.13.3",
     "mailcheck": "^1.1.1",
     "uuid": "^2.0.1",
+    "prerender-node": "^2.2.1",
     "vinyl-source-stream": "^1.1.0"
   },
   "browser": {

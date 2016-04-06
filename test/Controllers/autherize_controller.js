@@ -12,11 +12,13 @@ describe('Auth Base', function() {
       path: function(destination) {
         expect(destination).to.eql('/feed');
         done();
-      }
+      },
+
+      $$path: '/',
     }
    AuthorizeController.authorize({success: '/feed', authorizer: authService, location: location});
   });
-  it('uses error bath when auth fails', function(done) {
+  it('redirects to / if no token and tries to hit /feed', function(done) {
     var authService = {
       validateToken: function(callback) {
         callback(false);
@@ -26,10 +28,30 @@ describe('Auth Base', function() {
       path: function(destination) {
         expect(destination).to.eql('/');
         done();
-      }
+      },
+
+      $$path: '/feed', 
     }
    AuthorizeController.authorize({error: '/', authorizer: authService, location: location});
   });
+
+  it('redirects to / if no token and tries to hit /settings', function(done) {
+    var authService = {
+      validateToken: function(callback) {
+        callback(false);
+      }
+    };
+    var location = {
+      path: function(destination) {
+        expect(destination).to.eql('/');
+        done();
+      },
+
+      $$path: '/settings', 
+    }
+   AuthorizeController.authorize({error: '/', authorizer: authService, location: location});
+  });
+
   it('does not go to path if the success option is not defined', function(done){
     var called = false;
     var authService = {

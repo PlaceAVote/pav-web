@@ -1,6 +1,7 @@
 {
   "preset": "node-style-guide",
   "maximumLineLength": 140,
+  "disallowQuotedKeysInObjects": false,
   "requireCamelCaseOrUpperCaseIdentifiers": false,
   "errorFilter": "./scripts/error_filter.js",
   "excludeFiles": [
@@ -8,6 +9,8 @@
     "src/temp/*",
     "src/controllers/website/*",
     "*gulpfile*",
-    "src/directives/infinite_scroll.js"
+    "src/directives/infinite_scroll.js",
+    "src/utils/metatags.js",
+    "src/utils/location_update.js"
   ]
 }

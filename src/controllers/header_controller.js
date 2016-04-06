@@ -12,9 +12,11 @@ function HeaderCtrl($rootScope, $scope, $location, $timeout, authService, userSe
   this.location = $location;
   this.showDropDown = false;
   this.rs = $rootScope;
-  this.loggedIn = $rootScope.loggedIn;
-  this.unread = 0;
+  if (this.rs.notLoggedIn === undefined) {
+    this.rs.notLoggedIn = true;
+  }
   this.populate();
+  this.unread = 0;
   this.notifications = [];
   this.userNotifications = [];
   this.newNotification = {};
@@ -23,6 +25,8 @@ function HeaderCtrl($rootScope, $scope, $location, $timeout, authService, userSe
   this.timeout = $timeout;
   this.focus = false;
   this.searching = false;
+
+
   $scope.$watchCollection(function() {
     return $rootScope.user;
   },
@@ -30,6 +34,7 @@ function HeaderCtrl($rootScope, $scope, $location, $timeout, authService, userSe
     var that = this;
     if (newValue && !oldValue) {
       if (newValue.first_name) {
+        $rootScope.notLoggedIn = false;
         $scope.header.intercomInit(newValue);
         $scope.header.getNotifications();
         $scope.header.startNotifications();
@@ -38,6 +43,16 @@ function HeaderCtrl($rootScope, $scope, $location, $timeout, authService, userSe
       }
     }
   }, true);
+
+
+  $scope.$watch(function() {
+    return $rootScope.notLoggedIn;
+  }, function(newValue, oldValue) {
+    if (newValue === false && oldValue === undefined) {
+      $scope.header.populate();
+    }
+  }, true);
+
 }
 
 HeaderCtrl.prototype.intercomInit = function(user) {
@@ -119,6 +134,11 @@ HeaderCtrl.prototype.startNotifications = function() {
   });
 };
 
+HeaderCtrl.prototype.signup = function() {
+  var event = new CustomEvent('not-valid', { detail: 'Sign Up Button', controller: 'Header' });
+  document.body.dispatchEvent(event);
+};
+
 HeaderCtrl.prototype.readEvent = function(res) {
   if (!this.notificationService) {
     return;
@@ -142,21 +162,21 @@ HeaderCtrl.prototype.readEvent = function(res) {
 
 HeaderCtrl.prototype.populate = function() {
   var that = this;
+
   this.userService.getUserProfile('me', function(err, result) {
-    if (err) {
-      return;
-    }
     if (result) {
       that.rs.user = result;
-      that.rs.loggedIn = true;
-    } else {
-      that.logout();
+      that.rs.inApp = true;
     }
   });
 };
 
-HeaderCtrl.prototype.login = function() {
-  return this.rs.loggedIn;
+HeaderCtrl.prototype.inPlatform = function() {
+  return this.rs.inApp;
+};
+
+HeaderCtrl.prototype.notLoggedIn = function() {
+  return this.rs.notLoggedIn;
 };
 
 HeaderCtrl.prototype.hideDropDown = function() {
@@ -188,8 +208,9 @@ HeaderCtrl.prototype.notify = function() {
 
 HeaderCtrl.prototype.logout = function() {
   that = this;
-  this.rs.loggedIn = false;
+  this.rs.inApp = false;
   this.rs.user = {};
+  this.rs.notLoggedIn = true;
   this.unread = 0;
   this.notificationService.close(function(res) {
     that.notifications = undefined;
@@ -227,4 +248,9 @@ HeaderCtrl.prototype.search = function(q) {
   }, 500);
 };
 
+HeaderCtrl.prototype.goTo = function(path) {
+  this.location.path(path);
+};
+
 module.exports = HeaderCtrl;
+

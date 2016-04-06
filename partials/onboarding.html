@@ -1,4 +1,4 @@
-<div class="onboarding-container l-7 m-10 s-12" ng-controller="TopicRegisterCtrl as topicsRegister" ng-hide="register.userService.getTopics()">
+<div class="onboarding-container l-7 m-10 s-12">
 	<div class="ob-header">
 		<img src="img/pav-logo-color.png" />
 		<span class="progress-bar">
@@ -8,7 +8,7 @@
 	<div class="border"></div>
 	<section>
 	<h2>Welcome to Placeavote!</h2>
-	<p>To get you started, please select the topics that interest you</p>
+	<p>What bill categories are you interested in reading about and voting on?</p>
 	<div class="topics">
 			<div class="topic-container" ng-repeat="interest in register.interests" ng-class="{'topic-selected': interest.selected}" ng-click="register.select(interest.name)">
 				<div class="topic">
@@ -21,61 +21,3 @@
 	</div>
 	</section>
 </div>
-
-<div class="onboarding-container l-7 m-10 s-12" ng-controller="SignUpCtrl as signup" ng-show="signup.userService.getTopics()">
-  <div class="ob-header">
-    <img src="img/pav-logo-color.png" />
-    <span class="progress-bar">
-      <span ng-class="{'complete': signup.userService.getTopics()}"></span>
-    </span>
-  </div>
-  <div class="border"></div>
-	<section loader loader-context="signup.loaded">
-		<h2>We just need a few more details and then you'll be ready to go.</h2>
-		<form ng-submit="signup.test();">
-		<label class="firstname">First Name
-		<input type="text" ng-model='signup.additionalInformation["first_name"]' placeholder="First name" required/>
-		</label>
-		
-
-		<label>Last Name
-		<input class="surname" ng-model='signup.additionalInformation["last_name"]' type="text"  placeholder="Surname" required/>
-		</label>
-		
-
-		<label class="signupdob" >Date of Birth
-		<input type="date" ng-model='signup.additionalInformation["dob"]' placeholder="MM-DD-YYYY" max="{{signup.max}}" min="1900-01-01" required/>
-		</label>
-		
-
-		<label>Country
-		<select ng-model='signup.additionalInformation["country_code"]' ng-options="country['alpha-3'] as country.name for country in signup.country">
-		</select>
-		</label>
-
-		<section class="row gender-select-container">
-		<label class="gender-label">Preferred Pronoun</label>
-		<div class="row">
-			<div class="gender-select" ng-repeat="gender in signup.gender_options">
-				<input ng-model='signup.additionalInformation["gender"]' type="radio" id="{{gender.name}}" value="{{gender.name}}" name="gender" checked="true">
-				<label class="gender" for="{{gender.name}}">
-				{{gender.des}}
-				</label>
-			</div>
-		</div>	
-		</section>	
-
-
-		
-
-		
-
-
-        <p class="register-error" ng-class="{'show': signup.user_exists_error}">A User with this email has already been created.</p>
-        <p class="register-error" ng-class="{'show': signup.error}">Oops! An unexpected error occured.</p>
-        <p class="register-error" ng-class="{'show': signup.invalid_user}">The User details you entered are invalid.</p>
-		<button type="submit">Continue</button>
-		</form>
-        </section>
-</div>
-

@@ -12,6 +12,10 @@ var mockAuthService = {
     return callback(true);
   }
 }
+
+var mockLocation = {
+  $$path: '/',
+}
 describe('BillController', function() {
   var scope = {};
   var routeParams = {
@@ -32,13 +36,16 @@ describe('BillController', function() {
         };
         callback(undefined, result);
       },
+      fetchComments: function() {
+        return;
+      }
     };
     var mockVoteService = {
       getVotesForBill: function(id, callback){
         callback(undefined, new CurrentVote('hr2-114', 100, 180));
       },
     };
-    var billController = new BillController(undefined, routeParams, mockBillService, undefined, mockVoteService, undefined, undefined, mockAuthService);
+    var billController = new BillController(undefined, routeParams, mockBillService, undefined, mockVoteService, undefined, mockLocation, mockAuthService, {});
     expect(billController.id).to.eql('100');
   });
 
@@ -57,6 +64,9 @@ describe('BillController', function() {
         };
         callback(undefined, result);
       },
+      fetchComments: function() {
+        return;
+      }
     };
     var mockLegislationService = {
       getById: function(id, callback){
@@ -68,7 +78,7 @@ describe('BillController', function() {
         callback(undefined, new CurrentVote('hr2-114', 100, 180));
       },
     };
-    var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, undefined, mockAuthService);
+    var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, mockLocation, mockAuthService, {});
     expect(scope.bill.id).to.eql('100');
   });
   it('sets scope.body to result of BillService callback', function(done){
@@ -92,6 +102,9 @@ describe('BillController', function() {
         }
         callback(undefined, result);
       },
+      fetchComments: function() {
+        return;
+      }
     };
     var mockLegislationService = {
       getById: function(id, callback){
@@ -103,7 +116,7 @@ describe('BillController', function() {
         callback(undefined, new CurrentVote('hr2-114', 100, 180));
       },
     };
-    var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, undefined, mockAuthService);
+    var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, mockLocation, mockAuthService, {});
     billController.getBill('100');
     expect(scope.bill.body).to.eql(bill);
     done();
@@ -123,13 +136,16 @@ describe('BillController', function() {
         }
         callback(undefined, result);
       },
+      fetchComments: function() {
+        return;
+      }
     };
     var mockVoteService = {
       getVotesForBill: function(id, callback){
         callback(undefined, new CurrentVote('hr2-114', 100, 180));
       },
     };
-    var billController = new BillController(scope, routeParams, mockBillService, undefined, mockVoteService, undefined, undefined, mockAuthService);
+    var billController = new BillController(scope, routeParams, mockBillService, undefined, mockVoteService, undefined, mockLocation, mockAuthService, {});
     billController.getBill('100');
     expect(scope.bill.error).to.eql(true);
     done();
@@ -150,13 +166,16 @@ describe('BillController', function() {
           }
           callback(undefined, result);
         },
+      fetchComments: function() {
+        return;
+      }
       };
       var mockVoteService = {
         getVotesForBill: function(id, callback){
           callback(undefined, new CurrentVote('hr2-114', 100, 180));
         },
       };
-      var billController = new BillController(scope, routeParams, mockBillService, undefined, mockVoteService, undefined, undefined, mockAuthService);
+      var billController = new BillController(scope, routeParams, mockBillService, undefined, mockVoteService, undefined, mockLocation, mockAuthService, {});
       billController.getTopComments('100');
       expect(scope.bill.forComment).to.eql(new Comment(topCommentsFixtures['for-comment']));
       expect(scope.bill.againstComment).to.eql(new Comment(topCommentsFixtures['against-comment']));
@@ -176,13 +195,16 @@ describe('BillController', function() {
         getTopComments: function(id, callback){
           callback('Error');
         },
+      fetchComments: function() {
+        return;
+      }
       };
       var mockVoteService = {
         getVotesForBill: function(id, callback){
           callback(undefined, new CurrentVote('hr2-114', 100, 180));
         },
       };
-      var billController = new BillController(scope, routeParams, mockBillService, undefined, mockVoteService, undefined, undefined, mockAuthService);
+      var billController = new BillController(scope, routeParams, mockBillService, undefined, mockVoteService, undefined, mockLocation, mockAuthService, {});
       billController.getTopComments('100');
       expect(scope.bill.forComment).to.eql(undefined);
       expect(scope.bill.topCommentError).to.eql(true);
@@ -202,6 +224,9 @@ describe('BillController', function() {
         getTopComments: function(id, callback){
           callback('Error');
         },
+      fetchComments: function() {
+        return;
+      }
       };
       var mockLegislationService = {
         getById: function(id, callback){
@@ -213,7 +238,7 @@ describe('BillController', function() {
           callback(undefined, new CurrentVote('hr2-114', 100, 180));
         },
       };
-      var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, undefined, mockAuthService);
+      var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, mockLocation, mockAuthService, {});
       billController.getLegislator({thomas_id: '10'});
       expect(scope.bill.legislator.properties).to.eql(legislationJSON);
     });
@@ -228,6 +253,9 @@ describe('BillController', function() {
         getTopComments: function(id, callback){
           callback('Error');
         },
+      fetchComments: function() {
+        return;
+      }
       };
       var mockLegislationService = {
         getById: function(id, callback){
@@ -239,7 +267,7 @@ describe('BillController', function() {
           callback(undefined, new CurrentVote('hr2-114', 100, 180));
         },
       };
-      var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, undefined, mockAuthService);
+      var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, mockLocation, mockAuthService, {});
       billController.getLegislator({thomas_id: '10'});
       expect(scope.bill.legislator).to.eql(undefined);
       expect(scope.bill.legislatorError).to.eql(true);
@@ -257,6 +285,9 @@ describe('BillController', function() {
         getTopComments: function(id, callback){
           callback('Error');
         },
+      fetchComments: function() {
+        return;
+      }
       };
       var mockLegislationService = {
         getById: function(id, callback){
@@ -268,7 +299,7 @@ describe('BillController', function() {
           callback(undefined, new CurrentVote('hr2-114', 100, 180));
         },
       };
-      var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, undefined, mockAuthService);
+      var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, mockLocation, mockAuthService, {});
       billController.getVotes('hr2-114');
       expect(scope.bill.voteError).to.eql(undefined);
       expect(scope.bill.currentVotes.yes).to.eql(100);
@@ -285,6 +316,9 @@ describe('BillController', function() {
         getTopComments: function(id, callback){
           callback('Error');
         },
+      fetchComments: function() {
+        return;
+      }
       };
       var mockLegislationService = {
         getById: function(id, callback){
@@ -296,7 +330,7 @@ describe('BillController', function() {
           callback('ERROR!');
         },
       };
-      var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, undefined, mockAuthService);
+      var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, mockLocation, mockAuthService, {});
       billController.getVotes('hr2-114');
       expect(scope.bill.voteError).to.eql(true);
       expect(scope.bill.currentVotes).to.eql(undefined);
@@ -318,6 +352,9 @@ describe('BillController', function() {
         getTopComments: function(id, callback){
           callback('Error');
         },
+      fetchComments: function() {
+        return;
+      }
       };
       var mockLegislationService = {
         getById: function(id, callback){
@@ -334,10 +371,9 @@ describe('BillController', function() {
           callback({status: 409});
         },
       };
-      var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, undefined, mockAuthService);
+      var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, mockLocation, mockAuthService, {});
       billController.vote = true;
-      billController.voteOnBill();
-      expect(scope.bill.userAlreadyVoted).to.eql(true);
+      billController.voteOnBill(true);
       expect(scope.bill.userVoted).to.eql(true);
       done();
     });
@@ -358,6 +394,9 @@ describe('BillController', function() {
         getTopComments: function(id, callback){
           callback('Error');
         },
+        fetchComments: function() {
+          return;
+        }
       };
       var mockLegislationService = {
         getById: function(id, callback){
@@ -374,55 +413,14 @@ describe('BillController', function() {
           callback(undefined, true);
         },
       };
-      var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, undefined, mockAuthService);
+      var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, mockLocation, mockAuthService, {});
       billController.vote = true;
-      billController.voteOnBill();
+      billController.voteOnBill(true);
       expect(scope.bill.voteFailed).to.eql(undefined);
       expect(scope.bill.userVoted).to.eql(true);
       done();
     });
-    it('vote modal changes state when called', function(){
-      var mockBillService = {
-      getBillVotes: function(id, callback){
-        callback('Error');
-      },
-        getBill: function(id, callback){
-          var bill = new Bill({
-            id: 100,
-            sponsor: {
-              thomas_id: '99'
-            },
-          });
-          return callback(undefined, bill);
-        },
-        getTopComments: function(id, callback){
-          callback('Error');
-        },
-      };
-      var mockLegislationService = {
-        getById: function(id, callback){
-          callback('Error');
-        },
-      };
-      var mockVoteService = {
-        getVotesForBill: function(id, callback){
-          callback('ERROR!');
-        },
-        voteOnBill: function(id, vote, callback){
-        },
-      };
-      var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, undefined, mockAuthService);
-      expect(scope.bill.showVote).to.eql(undefined);
-      billController.showVoteModal(true);
-      expect(scope.bill.showVote).to.eql(true);
-      expect(scope.bill.voteModal.message).to.eql('Are you sure you want to vote in favor of this bill');
-      expect(scope.bill.voteModal.button).to.eql('Vote in Favor');
-      expect(scope.bill.vote).to.eql(true);
-      billController.showVoteModal(false);
-      expect(scope.bill.voteModal.message).to.eql('Are you sure you want to vote against this bill');
-      expect(scope.bill.voteModal.button).to.eql('Vote Against');
-      expect(scope.bill.showVote).to.eql(true);
-    });
+
     it('hide modal and reset vote state', function(){
       var mockBillService = {
       getBillVotes: function(id, callback){
@@ -440,6 +438,9 @@ describe('BillController', function() {
         getTopComments: function(id, callback){
           callback('Error');
         },
+        fetchComments: function() {
+          return;
+        }
       };
       var mockLegislationService = {
         getById: function(id, callback){
@@ -453,93 +454,8 @@ describe('BillController', function() {
         voteOnBill: function(id, vote, callback){
         },
       };
-      var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, undefined, mockAuthService);
-      expect(scope.bill.showVote).to.eql(undefined);
-      billController.hideVoteModal();
-      expect(scope.bill.showVote).to.eql(false);
+      var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, mockLocation, mockAuthService, {});
       expect(scope.bill.vote).to.eql(undefined);
-    });
-    it('show modal doesnt change state of vote after the vote has been processed', function(){
-      var mockBillService = {
-      getBillVotes: function(id, callback){
-        callback('Error');
-      },
-        getBill: function(id, callback){
-          var bill = new Bill({
-            id: 100,
-            sponsor: {
-              thomas_id: '99'
-            },
-          });
-          return callback(undefined, bill);
-        },
-        getTopComments: function(id, callback){
-          callback('Error');
-        },
-      };
-      var mockLegislationService = {
-        getById: function(id, callback){
-          callback('Error');
-        },
-      };
-      var mockVoteService = {
-        getVotesForBill: function(id, callback){
-          callback('ERROR!');
-        },
-        voteOnBill: function(id, vote, callback){
-        },
-      };
-      var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, undefined, mockAuthService);
-      expect(scope.bill.showVote).to.eql(undefined);
-      expect(scope.bill.userVoted).to.eql(undefined);
-      billController.showVoteModal(false);
-      expect(scope.bill.showVote).to.eql(true);
-      expect(scope.bill.vote).to.eql(false);
-      billController.userVoted = true;
-      expect(scope.bill.showVote).to.eql(true);
-      expect(scope.bill.vote).to.eql(false);
-    });
-    it('hide modal only changes vote state when user has not voted', function(){
-      var mockBillService = {
-      getBillVotes: function(id, callback){
-        callback('Error');
-      },
-        getBill: function(id, callback){
-          var bill = new Bill({
-            id: 100,
-            sponsor: {
-              thomas_id: '99'
-            },
-          });
-          return callback(undefined, bill);
-        },
-        getTopComments: function(id, callback){
-          callback('Error');
-        },
-      };
-      var mockLegislationService = {
-        getById: function(id, callback){
-          callback('Error');
-        },
-      };
-      var mockVoteService = {
-        getVotesForBill: function(id, callback){
-          callback('ERROR!');
-        },
-        voteOnBill: function(id, vote, callback){
-        },
-      };
-      var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, undefined, mockAuthService);
-      expect(scope.bill.showVote).to.eql(undefined);
-      expect(scope.bill.userVoted).to.eql(undefined);
-      expect(scope.bill.vote).to.eql(undefined);
-      billController.showVoteModal(false);
-      expect(scope.bill.showVote).to.eql(true);
-      expect(scope.bill.vote).to.eql(false);
-      billController.userVoted = true;
-      billController.hideVoteModal();
-      expect(scope.bill.showVote).to.eql(false);
-      expect(scope.bill.vote).to.eql(false);
     });
     it('does not set comment card if comment is not defined', function(){
       var mockBillService = {
@@ -562,6 +478,9 @@ describe('BillController', function() {
           };
           callback(undefined, result);
         },
+        fetchComments: function() {
+          return;
+        }
       };
       var mockLegislationService = {
         getById: function(id, callback){
@@ -575,7 +494,7 @@ describe('BillController', function() {
         voteOnBill: function(id, vote, callback){
         },
       };
-      var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, undefined, mockAuthService);
+      var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, mockLocation, mockAuthService, {});
       billController.generateCommentCard();
       expect(billController.commentCard).to.eql(undefined);
     });
@@ -600,6 +519,9 @@ describe('BillController', function() {
           };
           callback(undefined, result);
         },
+        fetchComments: function() {
+          return;
+        }
       };
       var mockLegislationService = {
         getById: function(id, callback){
@@ -613,7 +535,7 @@ describe('BillController', function() {
         voteOnBill: function(id, vote, callback){
         },
       };
-      var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, undefined, mockAuthService);
+      var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, mockLocation, mockAuthService, {});
       var options = {
         author_first_name: 'Paul',
         body: 'This Comment',
@@ -659,6 +581,11 @@ describe('BillController', function() {
           };
           callback(undefined, result);
         },
+
+        fetchComments: function() {
+          return;
+        }
+
       };
       var mockLegislationService = {
         getById: function(id, callback){
@@ -672,7 +599,7 @@ describe('BillController', function() {
         voteOnBill: function(id, vote, callback){
         },
       };
-      var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, undefined, mockAuthService);
+      var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, mockLocation, mockAuthService, {});
       var options = {
         body: 'This Comment',
         bill_id: '10',
@@ -682,38 +609,6 @@ describe('BillController', function() {
       var com = new Comment(options);
       billController.generateCommentCard(com);
       expect(billController.commentCard).to.eql(undefined);
-    });
-    it('get comments sets all comment error to true if error from server', function(){
-      var mockBillService = {
-      getBillVotes: function(id, callback){
-        callback('Error');
-      },
-        getBill: function(id, callback){
-          callback('Error');
-        },
-        getTopComments: function(id, callback){
-          callback('Error');
-        },
-        getComments: function(id, from, undefined, callback) {
-          callback('Error');
-        }
-      };
-      var mockLegislationService = {
-        getById: function(id, callback){
-          callback('Error');
-        },
-      };
-      var mockVoteService = {
-        getVotesForBill: function(id, callback){
-          callback('Error');
-        },
-        voteOnBill: function(id, vote, callback){
-          callback('Error');
-        },
-      };
-      var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, undefined, mockAuthService);
-      billController.getComments();
-      expect(billController.allCommentError).to.eql(true);
     });
     it('On Success Adds Comments to Scope and Increases from by 10', function(){
       var mockBillService = {
@@ -726,8 +621,8 @@ describe('BillController', function() {
         getTopComments: function(id, callback){
           callback('Error');
         },
-        getComments: function(id, from, undefined, callback) {
-          callback(undefined, [new Comment({id: 1}), new Comment({id: 2})]);
+        fetchComments: function(id, order, from, undefined, callback) {
+          callback(undefined, {comments: [new Comment({id: 1}), new Comment({id: 2})]});
         }
       };
       var mockLegislationService = {
@@ -743,10 +638,9 @@ describe('BillController', function() {
           callback('Error');
         },
       };
-      var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, undefined, mockAuthService);
+      var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, mockLocation, mockAuthService, {});
       expect(billController.comments.length).to.eql(2);
       expect(billController.comments[0].id).to.eql(1);
-      expect(billController.from).to.eql(10);
       expect(billController.comments[1].id).to.eql(2);
     });
   });
@@ -762,7 +656,7 @@ describe('BillController', function() {
         getTopComments: function(id, callback){
           callback('Error');
         },
-        getComments: function(id, from, undefined, callback) {
+        fetchComments: function(id, order, from, undefined, callback) {
           callback('Error');
         },
         postComment: function(id, comment, callback) {
@@ -782,7 +676,10 @@ describe('BillController', function() {
           callback('Error');
         },
       };
-      var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, undefined, mockAuthService);
+      var mockTimeout = function(c) {
+        return c;
+      }
+      var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, mockLocation, mockAuthService, {}, mockTimeout);
       billController.postComment();
       expect(billController.postCommentError).to.eql(true);
     });
@@ -797,7 +694,7 @@ describe('BillController', function() {
         getTopComments: function(id, callback){
           callback('Error');
         },
-        getComments: function(id, from, undefined, callback) {
+        fetchComments: function(id, order, from, undefined, callback) {
           callback(undefined, []);
         },
         postComment: function(id, comment, callback) {
@@ -819,11 +716,10 @@ describe('BillController', function() {
           callback('Error');
         },
       };
-      var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, undefined, mockAuthService);
+      var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, mockLocation, mockAuthService, {});
       billController.postComment();
       expect(billController.commentBody).to.eql(undefined);
-      expect(billController.comments.length).to.eql(1);
-      expect(billController.comments[0].id).to.eql(1);
+      expect(billController.commentMessage).to.eql(false);
     });
 
     it('should return error if comment contains script tag', function() {
@@ -837,7 +733,7 @@ describe('BillController', function() {
         getTopComments: function(id, callback){
           callback('Error');
         },
-        getComments: function(id, from, undefined, callback) {
+        fetchComments: function(id, order, from, undefined, callback) {
           callback(undefined, []);
         },
         postComment: function(id, comment, callback) {
@@ -860,11 +756,54 @@ describe('BillController', function() {
         },
       };
       var mockTimeout = function() {return;};      
-      var subject = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, undefined, mockAuthService, {}, mockTimeout);
+      var subject = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, mockLocation, mockAuthService, {}, mockTimeout);
       subject.commentBody = '<script></script>';
       subject.postComment();
       expect(subject.commentBody).to.equal('');
     });
   });
+
+  it('shoould convert path to correct view', function() {
+    var mockView = {
+       $$path: '/comments',
+    }
+       var mockBillService = {
+      getBillVotes: function(id, callback){
+        callback('Error');
+      },
+        getBill: function(id, callback){
+          callback('Error');
+        },
+        getTopComments: function(id, callback){
+          callback('Error');
+        },
+        fetchComments: function(id, order, from, undefined, callback) {
+          callback(undefined, []);
+        },
+        postComment: function(id, comment, callback) {
+          var c = new Comment();
+          c.id = 1;
+          return callback(undefined, c);
+        },
+      };
+      var mockLegislationService = {
+        getById: function(id, callback){
+          callback('Error');
+        },
+      };
+      var mockVoteService = {
+        getVotesForBill: function(id, callback){
+          callback('Error');
+        },
+        voteOnBill: function(id, vote, callback){
+          callback('Error');
+        },
+      };
+      var mockTimeout = function() {return;};      
+    var subject = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, mockView, mockAuthService, {}, mockTimeout);
+    expect(subject.view).to.equal('comments');
+  });
 });
+
+//viewToggle
 

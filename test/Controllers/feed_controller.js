@@ -146,7 +146,7 @@ describe("FeedController", function() {
         subject.lastLoaded = '1412';
         subject.feedCheck();
         expect(subject.lastLoaded).to.equal('1412');
-        expect(subject.scrollMessage).to.equal('End of the line.');
+        expect(subject.scrollMessage).to.equal('.');
         done();
     });
 });

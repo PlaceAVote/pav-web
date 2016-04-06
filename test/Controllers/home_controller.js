@@ -48,9 +48,16 @@ describe('HomeCtrl', function() {
           callback(undefined, true);
         }
       };
-      var subject = new HomeCtrl(scope, location, {}, userService, {}, authService);
+      var mockRootScope = {
+        inApp: false,
+        notLoggedIn: true,
+      };
+
+      var subject = new HomeCtrl(scope, location, {}, userService, mockRootScope, authService);
       subject.loginWithFacebook();
       expect(called).to.eql(true);
+      expect(subject.rs.inApp).to.equal(true);
+      expect(subject.rs.notLoggedIn).to.equal(false);
     });
   });
 });

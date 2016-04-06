@@ -1,0 +1,96 @@
+
+/*------------------------------------*\
+    #COMPONENT-BILL-STATUS
+\*------------------------------------*/
+
+/**
+* Bill Status containings a stacked list
+* of potential bill statuses. It can be found
+* in it's own bill_status.html partial 
+*/
+
+
+.c-card--bill-status {
+  width: 260px;
+  @include media($tablet) {
+    width: 100%;
+  }
+
+}
+
+
+.c-card__bill-status {
+  height: 350px;
+  overflow: hidden;
+  overflow-y: scroll;
+  @include media($tablet) {
+    height: auto;
+    overflow-y: visible;
+  }
+}
+
+.c-card__bill-status ul {
+  padding-left: 0;
+  border-left: 2px solid $red;
+  margin-left: 26px;
+}
+
+
+.c-card__bill-status ul li {
+  list-style-type: none;
+  position: relative;
+  padding-bottom: 20px;
+  padding-left: 42px;
+  padding-right: 11px;
+  width: 100%;
+  h2, p, i {
+    transition: all 0.3s ease;
+  }
+}
+
+
+.c-card__bill-status ul li h2 {
+  @include font-size(14px);
+  @include bold();
+  color: $grey;
+}
+
+
+.c-card__bill-status ul li p {
+  @include font-size(12px);
+  line-height: 22px;
+  color: $grey;
+}
+
+
+.c-card__status-icon {
+  position: absolute;
+  left: -28px;
+  top: 0;
+  border-width: 1px;
+  border-color: rgb(214, 212, 225);
+  border-style: solid;
+  border-radius: 3px;
+  background-color: rgb(232, 231, 238);
+  width: 55px;
+  height: 55px;
+
+  i {
+    color: $grey;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    text-align: center;
+    top: 50%;
+    line-height: 0.9;
+    transform: translateY(-50%);
+    @include font-size(24px);
+  }
+}
+
+.c-card__status-icon--active,
+.c-card__bill-status li:hover {
+  i { color: $blue; }
+  h2, p { color: $black !important; }
+}
