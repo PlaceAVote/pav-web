@@ -20,7 +20,9 @@ function HomeController($scope, $location, $anchorScroll, userService, $rootScop
 
 HomeController.prototype.loginWithFacebook = function(){
   var that = this;
+  this.loading = true;
   this.userService.loginWithFacebook(function(err, response){
+    this.loading = false;
     if (err) {
       if (err.status === 999) {
         that.loaded = true;
