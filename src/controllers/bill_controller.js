@@ -192,6 +192,7 @@ BillController.prototype.getBill = function(id) {
       if (that.body.billData.summary === 'No Summary Present...') {
         that.body.billData.noSummary = true;
       }
+      that.metaImage = that.body.billData.featured_img_link || 'http://s29.postimg.org/v86d7ur2v/og_fb_img.jpg';
       title.bill(that.body.billData);
       that.userVotedCheck();
       that.getLegislator(result.billData.sponsor);
