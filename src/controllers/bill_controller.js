@@ -192,7 +192,6 @@ BillController.prototype.getBill = function(id) {
       if (that.body.billData.summary === 'No Summary Present...') {
         that.body.billData.noSummary = true;
       }
-
       title.bill(that.body.billData);
       that.userVotedCheck();
       that.getLegislator(result.billData.sponsor);
