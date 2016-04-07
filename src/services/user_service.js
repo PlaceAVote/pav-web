@@ -97,6 +97,7 @@ function UserService($resource, facebookService, authService, userStore) {
     };
 
     var onError = function(err) {
+      console.log(err.status + 'Unable to save user', 'Facebook Sign Up:' + facebook);
       callback(err);
     };
 
@@ -111,13 +112,13 @@ function UserService($resource, facebookService, authService, userStore) {
       var userId = authService.getFacebookId();
       url = getSaveConfig(token);
       toSave = this.user.toBody(token, userId);
-    } else {
-      url = getSaveConfig();
-      toSave = this.user.toBody();
     }
 
-    authService.setFacebookAuth(undefined);
-
+    if (!facebook) {
+      url = getSaveConfig();
+      toSave = this.user.toBody();
+      authService.setFacebookAuth(undefined);
+    }
     var saveUser = new $resource(url, undefined, {create: config.methods.put});
     saveUser.create(toSave, onLoad, onError);
   };

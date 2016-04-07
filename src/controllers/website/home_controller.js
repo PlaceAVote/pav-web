@@ -18,7 +18,7 @@ function HomeController($scope, $location, $anchorScroll, userService, $rootScop
 
 }
 
-HomeController.prototype.loginWithFacebook = function(){
+HomeController.prototype.loginWithFacebook = function() {
   var that = this;
   this.loading = true;
   this.userService.loginWithFacebook(function(err, response){
@@ -28,8 +28,12 @@ HomeController.prototype.loginWithFacebook = function(){
         that.loaded = true;
         return that.location.path('/');
       }
+
+      console.log(err.status + ': User does not have linked facebook account, directing to onboarding');
       that.rs.facebookSignUp = true;
       return that.location.path('/onboarding');
+
+
     } else {
       that.userService.getUserProfile('me', function(err, result) {
         if (err) {

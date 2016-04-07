@@ -69,7 +69,6 @@ SignUpCtrl.prototype.saveUser = function(user) {
     }
     user.newUser = true;
     that.rs.user = user;
-    that.rs.facebookSignUp = false;
     that.location.path('/feed');
   }, that.rs.facebookSignUp);
 };
