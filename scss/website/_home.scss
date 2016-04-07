@@ -125,6 +125,7 @@
                 font-weight: $font-normal;
                 line-height: 72px;
                 max-width: 1000px;
+                opacity:0.8;
                 margin: 0px auto;
                 text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.23);
                 @media screen and (max-device-width: 900px), screen and (max-width: 900px) {
@@ -136,11 +137,10 @@
                 }
             }
             h2 {
-                @include font-size(18px);
+                @include font-size(22px);
                 line-height: 40px;
                 font-weight: $font-light;
                 padding: 20px;
-                opacity: 0.9;
                 max-width:900px;
                 @media screen and (max-device-width: 900px), screen and (max-width: 900px) {
                     margin-top: 20px;
@@ -318,9 +318,10 @@
         }
         div {
             display: flex;
-            @media screen and (max-device-width: 900px), screen and (max-width: 900px) {
+            @media screen and (max-device-width: 1000px), screen and (max-width: 1000px) {
                 flex-direction: column;
                 padding: 0px 40px 40px 40px;
+
             }
             section {
                         width: calc(33% - 13px);
@@ -329,19 +330,18 @@
                 justify-content: center;
                 &:last-child {
                     margin: 0px 70px 70px 35px;
-                    @media screen and (max-device-width: 900px), screen and (max-width: 900px) {
+                    @media screen and (max-device-width: 1000px), screen and (max-width: 1000px) {
                         margin: 0px;
                     }
                 }
-                height: 300px;
-                @media screen and (max-device-width: 900px),
-                screen and (max-width: 900px) {
+                @media screen and (max-device-width: 1000px),
+                screen and (max-width: 1000px) {
                     height: auto;
                     max-height: 100%;
                     margin: 0px 0px 40px 0px;
                     width: 100%;
                 }
-                margin: 0px 35px 70px 70px;
+                margin: 0px 35px 70px 35px;
                 color: $black;
                 border: 1px solid #d6d4e1;
                 background: white;
