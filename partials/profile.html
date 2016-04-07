@@ -1,3 +1,23 @@
+<div class="modal" ng-show="profile.showModal">
+<div class="card padding-small profile-picture-edit" loader loader-context="profile.profilePicture.saving">
+<div class="row">
+<h1>CHANGE PROFILE PICTURE</h1><i class="icon-close h-right" ng-click="profile.showModal = false"></i>
+</div>
+<hr />
+  <div class="uploaded-image-container margin-top-medium">
+  <image-crop image="profile.image" crop="profile.profilePicture.cropped" save-Image="profile.saveProfilePicture({img: img});"></image-crop>
+  </div>
+   <p ng-show="profile.profilePicture.error">There was an error uploading your profile picture</p>
+  <div class="row margin-bottom-medium margin-top-small">
+  <p>Upload a photo here:</p>
+  <label for="uploadFile" class="btn-blue upload-btn text-center">CHOOSE FILE</label>
+  <input style="position: absolute; left: -99999px;" type="file" accept="image/*" id="uploadFile" fileread="profile.image">
+  </div>
+  <a class="btn-green text-center l-12" ng-click="profile.hasCropped();">SAVE CHANGES</a>
+</div>
+</div>
+
+
 <banner user="profile.user" toggle="profile.showFollowStats" followers="profile.showFollowers" following="profile.showFollowing" profile="profile"></banner>
 
   <update-meta property="og:image" content="{{profile.metaImage}}"></update-meta>
