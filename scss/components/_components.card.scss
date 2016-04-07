@@ -71,6 +71,12 @@
 }
 
 
+.c-card .c-card__content_bill-id {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+}
+
 .c-card .c-card__content h2 {
   @include font-size(14px);
   @include medium();

@@ -19,6 +19,10 @@ function ProfileController($scope, $location, $routeParams, authService, userSer
     this.showFollowers = true;
     this.populate();
   }
+
+  this.profilePicture = {
+    saving: true,
+  };
 }
 
 ProfileController.prototype.authenticate = function() {
@@ -191,5 +195,27 @@ ProfileController.prototype.closeIssue = function() {
   this.location.path('profile/' + this.id);
 };
 
+ProfileController.prototype.hasCropped = function() {
+  this.profilePicture.cropped = true;
+};
+
+ProfileController.prototype.saveProfilePicture = function(img) {
+  var that = this;
+  this.profilePicture.saving = false;
+  this.userService.profilePicture(img.img, function(err, res) {
+    if (err) {
+      that.profilePicture.error = true;
+      that.profilePicture.saving = true;
+    }
+
+    if (res) {
+      that.profilePicture.saving = true;
+      that.profilePicture.success = true;
+      that.rs.user.img_url = res.img_url;
+      that.user.img_url = res.img_url;
+      that.showModal = false;
+    }
+  });
+};
 module.exports = ProfileController;
 
