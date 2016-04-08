@@ -102,6 +102,7 @@ BillController.prototype.getVotes = function(id) {
   });
 };
 
+
 BillController.prototype.voteOnBill = function(vote) {
   var that = this;
   if (!this.validationHandler(this.validated)) {
@@ -119,12 +120,13 @@ BillController.prototype.voteOnBill = function(vote) {
   });
 };
 
+
 BillController.prototype.voteConfirmed = function(vote) {
   this.showVoteModal = false;
   this.showConfirmationModal = true;
   this.userVoted = true;
   this.hasVoted = true;
-  var contrarianComment = vote ? this.forComment : this.againstComment;
+  var contrarianComment = vote ? this.againstComment : this.forComment;
   this.generateCommentCard(contrarianComment);
 };
 
