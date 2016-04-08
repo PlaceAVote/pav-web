@@ -184,7 +184,6 @@ BillController.prototype.getLegislator = function(legislator) {
 BillController.prototype.getBill = function(id) {
   var that = this;
   this.billService.getBill(id, function(err, result) {
-    console.log(result);
     if (err) {
       that.error = true;
     } else {
