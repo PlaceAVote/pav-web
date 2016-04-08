@@ -1,11 +1,26 @@
 <div class="c-card__bill-status" ng-switch on="bill.body.billData.status">
   <ul>
     <li 
+    class="c-card__status-icon--active" ng-switch-when="REFERRED">
+      <div class="row">
+        <div class="c-card__status-icon">
+          <i class="icon-introduced"></i>
+        </div>
+      
+      <h2>Bill Introduced</h2>
+      </div>
+      <p>
+        Meaning: This bill has been introduced by its sponsors.
+      </p>
+    </li>
+    <li 
     class="c-card__status-icon--active" ng-switch-when="INTRODUCED">
+    <div class="row">
       <div class="c-card__status-icon">
         <i class="icon-introduced"></i>
       </div>
       <h2>Bill Introduced</h2>
+      </div>
       <p>
         Meaning: This bill has been introduced by its sponsors.
       </p>
@@ -25,31 +40,37 @@
     </li>
     <li
       class="c-card__status-icon--active" ng-switch-when="CONFERENCE:PASSED:SENATE">
-      <div class="c-card__status-icon">
-        <i class="icon-passed-senate"
-        style="font-size: 32px;"></i>
+      <div class="row">
+        <div class="c-card__status-icon">
+          <i class="icon-passed-senate"
+          style="font-size: 32px;"></i>
+        </div>
+        <h2>Passed Senate</h2>
       </div>
-      <h2>Passed Senate</h2>
       <p>
       Meaning: The bill was passed in a vote in the Senate. It goes to the House next. The vote was by Unanimous Consent so no record of individual votes 
       </p>
     </li>
     <li
       class="c-card__status-icon--active" ng-switch-when="CONFERENCE:PASSED:HOUSE">
-      <div class="c-card__status-icon">
-        <i class="icon-passed-house"></i>
+      <div class="row">  
+        <div class="c-card__status-icon">
+          <i class="icon-passed-house"></i>
+        </div>
+        <h2>Passed House</h2>
       </div>
-      <h2>Passed House</h2>
       <p>
       Meaning: The bill was passed by both chambers in identical form. It goes to the President next who may sign or veto the bill. The vote was by voice vote so no record of individual votes was made.
       </p>
     </li>
     <li
       class="c-card__status-icon--active" ng-switch-when="ENACTED:SIGNED">
-      <div class="c-card__status-icon">
-        <i class="icon-enacted"></i>
+      <div class="row">
+        <div class="c-card__status-icon">
+          <i class="icon-enacted"></i>
+        </div>
+        <h2>Enacted</h2>
       </div>
-      <h2>Enacted</h2>
       <p>
       Meaning: The President signed the bill and it became law.
       </p>

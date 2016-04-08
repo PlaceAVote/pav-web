@@ -1,7 +1,7 @@
 var AuthorizeController = require('./autherize_controller.js');
 var title = require('../config/titles.js');
 
-function HeaderCtrl($rootScope, $scope, $location, $timeout, authService, userService, notificationService, searchService, $window) {
+function HeaderCtrl($rootScope, $scope, $location, $timeout, authService, userService, notificationService, searchService, $window, $route) {
   $scope = $scope || {};
   $scope.header = this;
   this.scope = $scope;
@@ -25,6 +25,7 @@ function HeaderCtrl($rootScope, $scope, $location, $timeout, authService, userSe
   this.timeout = $timeout;
   this.focus = false;
   this.searching = false;
+  this.route = $route;
 
 
   $scope.$watchCollection(function() {
@@ -251,6 +252,13 @@ HeaderCtrl.prototype.search = function(q) {
 HeaderCtrl.prototype.goTo = function(path) {
   this.location.path(path);
 };
+
+
+HeaderCtrl.prototype.feedRefresh = function() {
+  this.location.path('/feed');
+  this.route.reload();
+};
+
 
 module.exports = HeaderCtrl;
 
