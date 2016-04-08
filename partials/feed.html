@@ -28,7 +28,7 @@
 		<div class='feed-column l-7 m-12 s-12' infinite-scroll="feed.feedCheck();" infinite-scroll-distance="0.5">
         <issues-post posted="feed.getFeed()"></issues-post>
         <div class="feed-event-loader row" ng-show="feed.loading" loader loader-context="feed.loading" truthy></div>
-        <feed-events events="feed.events" refresh="feed.loading" scroll="feed.loadingScroll" message="feed.scrollMessage"></feed-events>
+        <feed-events events="feed.events" refresh="feed.loading" ng-show="feed.events" class="feed-events" scroll="feed.loadingScroll" message="feed.scrollMessage"></feed-events>
 		</div>
     <div class="l-5 m-12 s-12">
   		<div class="trends-container">
