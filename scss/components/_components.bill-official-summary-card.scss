@@ -14,8 +14,10 @@
 
   .c-card__content {
     max-height: 320px;
+    height: auto;
     overflow-y: auto;
     padding-right: 11px;
+    margin-bottom: 35px;
     @include media($tablet) {
       margin-bottom: 34px;
     }
