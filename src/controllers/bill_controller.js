@@ -148,7 +148,7 @@ BillController.prototype.generateCommentCard = function(comment) {
   }
   this.commentCard = new Comment(comment);
   this.commentCard.set = true;
-  this.commentCard.status = comment.author_first_name.toUpperCase() + ' DISAGREES:';
+  this.commentCard.status = comment.author_first_name.toUpperCase() + ' DISAGREES WITH YOU';
 };
 
 BillController.prototype.getTopComments = function(id) {
@@ -227,6 +227,7 @@ BillController.prototype.fetchComments = function() {
     if (res) {
       that.comments = res.comments;
       that.lastComment = res.lastComment;
+      console.log('first lastComment: ' + that.lastComment);
     }
 
     if (err) {
@@ -245,17 +246,24 @@ BillController.prototype.commentsCheck = function() {
     return;
   }
 
+
+
   this.checkingComments = true;
   this.fetchingComments = true;
 
+  // console.log('second req' + that.lastComment);
+
   this.billService.fetchComments(this.id, this.commentOrder, this.lastComment, this.routeParams.commentid, function(err, res) {
+    console.log('scroll req: ' + that.lastComment);
     that.checkingComments = false;
     that.fetchingComments = false;
     if (res) {
-      that.timeout(function() {
+      // that.timeout(function() {
+        console.log(res.comments);
         that.comments.push.apply(that.comments, res.comments);
         that.lastComment = res.lastComment;
-      }, 100);
+        console.log('req: ' + that.lastComment);
+      // }, 100);
     }
 
     if (err) {
