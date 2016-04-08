@@ -11,6 +11,9 @@ function Bill(options) {
   this.yesVote = options['yes-count'];
   this.noVote = options['no-count'];
   this.bill_id = options.bill_id;
+  if (RegExp('-').test(options.bill_id)) {
+    this.bill_id_short = options.bill_id.split('-')[0];
+  }
   this.summary = options.summary;
   this.timestamp = options.timestamp;
   this.getIcon(options);
