@@ -151,6 +151,7 @@ BillController.prototype.generateCommentCard = function(comment) {
   this.commentCard.status = comment.author_first_name.toUpperCase() + ' DISAGREES WITH YOU';
 };
 
+
 BillController.prototype.getTopComments = function(id) {
   var that = this;
   this.billService.getTopComments(id, function(err, result) {
@@ -166,6 +167,7 @@ BillController.prototype.getTopComments = function(id) {
   });
 };
 
+
 BillController.prototype.getLegislator = function(legislator) {
   var that = this;
   if (!legislator) {
@@ -180,6 +182,7 @@ BillController.prototype.getLegislator = function(legislator) {
     }
   });
 };
+
 
 BillController.prototype.getBill = function(id) {
   var that = this;
@@ -200,6 +203,7 @@ BillController.prototype.getBill = function(id) {
     }
   });
 };
+
 
 BillController.prototype.getBillVotes = function(id) {
   var that = this;
@@ -292,6 +296,7 @@ BillController.prototype.postComment = function() {
   });
 };
 
+
 BillController.prototype.commentError = function(message) {
   var that = this;
   this.errorMessage = message;
@@ -299,6 +304,7 @@ BillController.prototype.commentError = function(message) {
     that.errorMessage = '';
   }, 2000);
 };
+
 
 BillController.prototype.userVotedCheck = function() {
   var that = this;

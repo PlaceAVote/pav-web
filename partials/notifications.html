@@ -1,7 +1,7 @@
 <div class="notifications-boundary" id="notifications" infinite-scroll="scrollTrigger();">
 <div infinite-scroll="scrollTrigger();">
 <div ng-repeat="notification in notifications" ng-switch on="notification.type">
-  <!-- comment Reply -->
+
   <div class="notification-event notification-comment-reply" ng-switch-when="commentreply">
      <div class="profile-image-holder comments notification-marker">
      <span ng-hide="notification.read" class="notification-new-event">new</span>
@@ -24,11 +24,23 @@
     </div>
     <div class="notification-comment-reply-info">
       <p>
-       <a class="profile-link" ng-click="location.path('profile/' + notification.author)">{{notification.first_name}} {{notification.last_name}}</a> added a reaction to your issue.
+       <a class="profile-link" ng-click="location.path('profile/' + notification.author);hideNotifications();">{{notification.first_name}} {{notification.last_name}}</a> added a reaction to your issue.
       </p>
       <span class="time-stamp">{{notification.timestamp | date:'medium'}}</span>
     </div>
   </div>
+
+  <div ng-mouseover="readEvent({notification: notification});" class="notification-event row notification-comment-reply" ng-switch-when="vote">
+
+    <img class="logo" src="img/mark_full_color.svg" />
+    <div class="notification-comment-reply-info middle">
+      <p>
+      Nice! You just voted on <span class="blue bold click" ng-click="location.path('bill/' + notification.bill_id + '/comments');hideNotifications();">{{notification.bill_id}}</span>, keep voting!
+      </p>
+     </div> 
+  </div>
+
+
 </div>
 </div>
 </div>
