@@ -252,8 +252,8 @@ BillController.prototype.commentsCheck = function() {
     that.checkingComments = false;
     that.fetchingComments = false;
     if (res) {
-        that.comments.push.apply(that.comments, res.comments);
-        that.lastComment = res.lastComment;
+      that.comments.push.apply(that.comments, res.comments);
+      that.lastComment = res.lastComment;
     }
 
     if (err) {

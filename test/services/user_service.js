@@ -1046,7 +1046,7 @@ describe('getUserProfile function', function() {
   it('should return profile information from a token dependant endpoint when provided with token & id.', function() {
     
     var mockResource = function(url, params, method) {
-      expect(url).to.equal('http://userapidev.placeavote.com/user/1234/profile');
+      expect(url).to.equal('https://apidev.placeavote.com/user/1234/profile');
       this.getProfile = function(params, onLoad, onError) {
         var user = {
           country_code: "USA",
@@ -1080,7 +1080,7 @@ describe('getUserProfile function', function() {
   it('should return profile information from an open endpoint when provided with only an id and no token.', function() {
     
     var mockResourceOpen = function(url, params, method) {
-      expect(url).to.equal('http://userapidev.placeavote.com/user/1234/profile');
+      expect(url).to.equal('https://apidev.placeavote.com/user/1234/profile');
       this.getProfile = function(params, onLoad, onError) {
         var user = {
           country_code: "USA",
