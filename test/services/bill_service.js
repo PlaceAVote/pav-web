@@ -232,7 +232,7 @@ describe("Bill Service", function(){
     it('calls new resource with correct params', function(done) {
       function mockResource(url, params, method) {
         this.getTrends = function(){};
-        expect(url).to.eql('http://congressapidev.placeavote.com/bills/trending');
+        expect(url).to.eql('https://apidev.placeavote.com/bills/trending');
         expect(params).to.eql(undefined);
         expect(method.getTrends.headers.Authorization).to.eql('HELLO');
         done();

@@ -148,7 +148,7 @@ BillController.prototype.generateCommentCard = function(comment) {
   }
   this.commentCard = new Comment(comment);
   this.commentCard.set = true;
-  this.commentCard.status = comment.author_first_name.toUpperCase() + ' DISAGREES:';
+  this.commentCard.status = comment.author_first_name.toUpperCase() + ' DISAGREES WITH YOU';
 };
 
 BillController.prototype.getTopComments = function(id) {
@@ -252,10 +252,8 @@ BillController.prototype.commentsCheck = function() {
     that.checkingComments = false;
     that.fetchingComments = false;
     if (res) {
-      that.timeout(function() {
-        that.comments.push.apply(that.comments, res.comments);
-        that.lastComment = res.lastComment;
-      }, 100);
+      that.comments.push.apply(that.comments, res.comments);
+      that.lastComment = res.lastComment;
     }
 
     if (err) {

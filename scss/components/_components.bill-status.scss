@@ -20,27 +20,18 @@
 
 
 .c-card__bill-status {
-  height: 350px;
-  overflow: hidden;
-  overflow-y: scroll;
-  @include media($tablet) {
-    height: auto;
-    overflow-y: visible;
-  }
+
 }
 
 .c-card__bill-status ul {
   padding-left: 0;
-  border-left: 2px solid $red;
-  margin-left: 26px;
 }
 
 
 .c-card__bill-status ul li {
   list-style-type: none;
   position: relative;
-  padding-bottom: 20px;
-  padding-left: 42px;
+  // padding-bottom: 20px;
   padding-right: 11px;
   width: 100%;
   h2, p, i {
@@ -53,6 +44,8 @@
   @include font-size(14px);
   @include bold();
   color: $grey;
+  align-self: center;
+  padding-left: 8px;
 }
 
 
@@ -60,20 +53,21 @@
   @include font-size(12px);
   line-height: 22px;
   color: $grey;
+  padding-top: 6px;
 }
 
 
 .c-card__status-icon {
-  position: absolute;
-  left: -28px;
-  top: 0;
+  position: relative;
+  // left: -28px;
+  // top: 0;
   border-width: 1px;
   border-color: rgb(214, 212, 225);
   border-style: solid;
   border-radius: 3px;
   background-color: rgb(232, 231, 238);
-  width: 55px;
-  height: 55px;
+  width: 40px;
+  height: 40px;
 
   i {
     color: $grey;
@@ -85,7 +79,7 @@
     top: 50%;
     line-height: 0.9;
     transform: translateY(-50%);
-    @include font-size(24px);
+    @include font-size(18px);
   }
 }
 
@@ -93,4 +87,9 @@
 .c-card__bill-status li:hover {
   i { color: $blue; }
   h2, p { color: $black !important; }
+}
+
+
+.c-bill-info {
+  align-items: flex-start;
 }
