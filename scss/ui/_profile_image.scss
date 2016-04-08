@@ -17,6 +17,9 @@
       position: absolute;
       bottom: 11px;
       right: 11px;
+      @include media($tablet) {
+        display: none;
+      }
     }
 }
 
