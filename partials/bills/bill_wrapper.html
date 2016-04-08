@@ -95,9 +95,9 @@ Do you agree or disagree? Join the discussion and place your vote today!"></upda
 
 <!-- Content Wrapper -->
 
-<div class="c-bill-content-wrapper">
+<div class="c-bill-content-wrapper" loader loader-context="bill.body.billData">
 
-    <div class="c-bill-content" ng-switch on="bill.view">
+    <div class="c-bill-content" ng-switch on="bill.view" ng-show="bill.body.billData">
 
         <bill-summary ng-cloak ng-switch-when="summary"></bill-summary>
 
