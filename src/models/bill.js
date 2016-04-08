@@ -31,6 +31,9 @@ Bill.prototype.getStatusClass = function() {
     case 'CONFERENCE:PASSED:SENATE': {
       return PASSEDSENATE;
     }
+    case 'PASS_OVER:SENATE': {
+      return PASSEDSENATE;
+    }
   }
 };
 
