@@ -12,9 +12,11 @@ function HeaderCtrl($rootScope, $scope, $location, $timeout, authService, userSe
   this.location = $location;
   this.showDropDown = false;
   this.rs = $rootScope;
+
   if (this.rs.notLoggedIn === undefined) {
     this.rs.notLoggedIn = true;
   }
+
   this.populate();
   this.unread = 0;
   this.notifications = [];
@@ -65,9 +67,11 @@ HeaderCtrl.prototype.intercomInit = function(user) {
 
 };
 
+
 HeaderCtrl.prototype.intercomShutdown = function(user) {
   window.Intercom('shutdown');
 };
+
 
 HeaderCtrl.prototype.getNotifications = function() {
   var that = this;
@@ -87,6 +91,7 @@ HeaderCtrl.prototype.getNotifications = function() {
     title.notifications(that.unread);
   });
 };
+
 
 HeaderCtrl.prototype.notificationCheck = function() {
   var that = this;
@@ -118,6 +123,7 @@ HeaderCtrl.prototype.notificationCheck = function() {
   });
 };
 
+
 HeaderCtrl.prototype.startNotifications = function() {
   if (!this.notificationService) {
     return;
@@ -135,10 +141,12 @@ HeaderCtrl.prototype.startNotifications = function() {
   });
 };
 
+
 HeaderCtrl.prototype.signup = function() {
   var event = new CustomEvent('not-valid', { detail: 'Sign Up Button', controller: 'Header' });
   document.body.dispatchEvent(event);
 };
+
 
 HeaderCtrl.prototype.readEvent = function(res) {
   if (!this.notificationService) {
@@ -161,6 +169,7 @@ HeaderCtrl.prototype.readEvent = function(res) {
   }
 };
 
+
 HeaderCtrl.prototype.populate = function() {
   var that = this;
 
@@ -172,40 +181,53 @@ HeaderCtrl.prototype.populate = function() {
   });
 };
 
+
 HeaderCtrl.prototype.inPlatform = function() {
   return this.rs.inApp;
 };
+
 
 HeaderCtrl.prototype.notLoggedIn = function() {
   return this.rs.notLoggedIn;
 };
 
+
 HeaderCtrl.prototype.hideDropDown = function() {
   this.showDropDown = false;
 };
+
 
 HeaderCtrl.prototype.dropDown = function() {
   this.hideNotifications();
   this.showDropDown = this.showDropDown ? false : true;
 };
 
+
 HeaderCtrl.prototype.hideNotifications = function() {
   this.notificationReceived = false;
   this.showNotifications = false;
 };
 
+
 HeaderCtrl.prototype.notify = function() {
+
   var that = this;
+
   if (this.notifications.length < 1 && this.unread < 1) {
     return;
   }
+
   that.hideDropDown();
+
   that.showNotifications = that.showNotifications ? false : true;
+
   if (that.showNotifications) {
     that.unread = 0;
     title.notifications(that.unread);
   }
+
 };
+
 
 HeaderCtrl.prototype.logout = function() {
   that = this;
@@ -219,6 +241,7 @@ HeaderCtrl.prototype.logout = function() {
   AuthorizeController.logout({authorizer: this.authService, location: this.location});
 };
 
+
 HeaderCtrl.prototype.toProfile = function() {
   this.hideDropDown();
   this.location.path('/profile/me');
@@ -229,6 +252,7 @@ HeaderCtrl.prototype.toSettings = function() {
   this.hideDropDown();
   this.location.path('/settings');
 };
+
 
 HeaderCtrl.prototype.search = function(q) {
   var that = this;
@@ -248,6 +272,7 @@ HeaderCtrl.prototype.search = function(q) {
     });
   }, 500);
 };
+
 
 HeaderCtrl.prototype.goTo = function(path) {
   this.location.path(path);

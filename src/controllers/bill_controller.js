@@ -102,6 +102,7 @@ BillController.prototype.getVotes = function(id) {
   });
 };
 
+
 BillController.prototype.voteOnBill = function(vote) {
   var that = this;
   if (!this.validationHandler(this.validated)) {
@@ -119,12 +120,13 @@ BillController.prototype.voteOnBill = function(vote) {
   });
 };
 
+
 BillController.prototype.voteConfirmed = function(vote) {
   this.showVoteModal = false;
   this.showConfirmationModal = true;
   this.userVoted = true;
   this.hasVoted = true;
-  var contrarianComment = vote ? this.forComment : this.againstComment;
+  var contrarianComment = vote ? this.againstComment : this.forComment;
   this.generateCommentCard(contrarianComment);
 };
 
@@ -151,6 +153,7 @@ BillController.prototype.generateCommentCard = function(comment) {
   this.commentCard.status = comment.author_first_name.toUpperCase() + ' DISAGREES WITH YOU';
 };
 
+
 BillController.prototype.getTopComments = function(id) {
   var that = this;
   this.billService.getTopComments(id, function(err, result) {
@@ -166,6 +169,7 @@ BillController.prototype.getTopComments = function(id) {
   });
 };
 
+
 BillController.prototype.getLegislator = function(legislator) {
   var that = this;
   if (!legislator) {
@@ -180,6 +184,7 @@ BillController.prototype.getLegislator = function(legislator) {
     }
   });
 };
+
 
 BillController.prototype.getBill = function(id) {
   var that = this;
@@ -200,6 +205,7 @@ BillController.prototype.getBill = function(id) {
     }
   });
 };
+
 
 BillController.prototype.getBillVotes = function(id) {
   var that = this;
@@ -292,6 +298,7 @@ BillController.prototype.postComment = function() {
   });
 };
 
+
 BillController.prototype.commentError = function(message) {
   var that = this;
   this.errorMessage = message;
@@ -299,6 +306,7 @@ BillController.prototype.commentError = function(message) {
     that.errorMessage = '';
   }, 2000);
 };
+
 
 BillController.prototype.userVotedCheck = function() {
   var that = this;

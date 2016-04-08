@@ -99,6 +99,12 @@
           display: flex;
           flex-direction: row;
           border-bottom: 1px solid $grey;
+
+          img.logo {
+            height: 54px;
+            width: 54px;
+          }
+
           &:hover {
             background: lighten($grey, 18%);
           }
