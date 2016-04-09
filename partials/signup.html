@@ -9,7 +9,7 @@
     <section loader loader-context="signup.loaded">
         <h2>Before we begin, we’ll just need to confirm a few details. This will help avoid duplicate accounts, ensuring each vote is counted equally. </h2>
         <i>*All personal information is 100% secure and confidential.</i>
-        <form ng-submit="signup.test();">
+    <form ng-submit="signup.test();">
         <label class="firstname">First Name
         <input type="text" ng-model='signup.additionalInformation["first_name"]' placeholder="First name" required/>
         </label>
@@ -34,7 +34,7 @@
         <label class="gender-label">Preferred Pronoun</label>
         <div class="row">
             <div class="gender-select" ng-repeat="gender in signup.gender_options">
-                <input ng-model='signup.additionalInformation["gender"]' type="radio" id="{{gender.name}}" value="{{gender.name}}" name="gender" checked="true">
+                <input ng-model='signup.additionalInformation["gender"]' type="radio" id="{{gender.name}}" value="{{gender.name}}" name="gender">
                 <label class="gender" for="{{gender.name}}">
                 {{gender.des}}
                 </label>
@@ -49,6 +49,7 @@
 
 
         <p class="register-error" ng-class="{'show': signup.user_exists_error}">A User with this email has already been created.</p>
+        <p class="register-error" ng-class="{'show': signup.no_gender}">Please choose a prefered pronoun</p>
         <p class="register-error" ng-class="{'show': signup.error}">Oops! An unexpected error occured.</p>
         <p class="register-error" ng-class="{'show': signup.invalid_user}">The User details you entered are invalid.</p>
         <button type="submit">Continue</button>

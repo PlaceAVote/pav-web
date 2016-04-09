@@ -12,7 +12,7 @@ function SignUpCtrl($rootScope, $scope, $location, userService, authService) {
     first_name: user.first_name || '',
     last_name: user.last_name || '',
     dob: user.dob || '',
-    gender: user.gender || 'they',
+    gender: user.gender,
     zipcode: user.zipcode || '',
   };
   this.country = countryCodes;
@@ -44,6 +44,11 @@ SignUpCtrl.prototype.test = function() {
   var user = this.userService.getUser();
   if (!user) {
     this.invalid_user = true;
+    return;
+  }
+
+  if (!this.additionalInformation.gender) {
+    this.no_gender = true;
     return;
   }
   this.saveUser(user);
