@@ -25,7 +25,7 @@ describe("SignUpController", function(){
 		last_name : "",
 		dob : "",
 		zipcode : "",
-    gender: "they"
+    gender: undefined,
 	};
 	expect(subject.additionalInformation).to.eql(blankUser);
 
@@ -42,7 +42,8 @@ describe("SignUpController", function(){
              };
              this.getUser = function() {
                 return {
-                    name : "paul"
+                    name : "paul",
+                    gender : 'they'
                 }
              };
              this.user = function() {
@@ -77,6 +78,7 @@ describe("SignUpController", function(){
         function mockUserService() {
             var that = this;
             that.user = {
+                gender: 'they',
                 first_name: "paul",
                 last_name:"barber",
                 email:"test@test.com",
