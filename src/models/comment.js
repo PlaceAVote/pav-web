@@ -82,7 +82,6 @@ Comment.prototype.reply = function(billId, service, timeout) {
       that.replyFailed = true;
     } else if (response) {
       response.deep = that.deep + 1;
-      console.log(response);
       that.replies.push(response);
     }
     that.hideReplyInput();
@@ -92,7 +91,6 @@ Comment.prototype.reply = function(billId, service, timeout) {
 Comment.prototype.commentError = function(message, timeout) {
   var that = this;
   this.errorMessage = message;
-  console.log(this.errorMessage);
   timeout(function() {
     that.errorMessage = '';
   }, 2000);
