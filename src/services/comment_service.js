@@ -1,7 +1,10 @@
 var config = require('../config/endpoints.js');
 var Comment = require('../models/comment.js');
+var postingReply = false;
 
 function CommentService($resource, userService, authService) {
+
+  var that = this;
 
   var reply = function(comment, billId, parentId, callback) {
     if (!comment) {
@@ -17,13 +20,22 @@ function CommentService($resource, userService, authService) {
       bill_id: billId,
       body: comment,
     };
+
+    if (postingReply) {
+      return;
+    }
+
+    postingReply = true;
+
     config.methods.put.headers.Authorization = authService.getAccessToken();
     var url = config.comments.reply.endpoint(parentId);
     var resource = new $resource(url, undefined, {reply: config.methods.put});
     var onError = function(err) {
+      postingReply = false;
       return callback(err);
     };
     var onLoad = function(response) {
+      postingReply = false;
       return callback(undefined, new Comment(response));
     };
     resource.reply(body, onLoad, onError);
