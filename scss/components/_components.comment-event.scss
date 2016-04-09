@@ -1,0 +1,14 @@
+/*------------------------------------*\
+    #COMPONENT-COMMENT-EVENT
+\*------------------------------------*/
+
+/**
+* The comment event is found in the user time line
+* it uses a lot of the same styling as the comments on the
+* bills page but with a few style changes 
+*/
+
+.c-card--comment-event {
+  border: 0;
+  box-shadow: none;
+}
