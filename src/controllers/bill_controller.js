@@ -291,7 +291,7 @@ BillController.prototype.postComment = function() {
 
   this.postingComment = true;
   this.billService.postComment(this.id, this.commentBody, function(err, result) {
-    this.postingComment = false;
+    that.postingComment = false;
     if (err) {
       that.postCommentError = true;
       if (err.message === 'Login Required') {

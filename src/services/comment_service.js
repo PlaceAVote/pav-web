@@ -1,9 +1,8 @@
 var config = require('../config/endpoints.js');
 var Comment = require('../models/comment.js');
-var postingReply = false;
 
 function CommentService($resource, userService, authService) {
-
+  var postingReply = false;
   var that = this;
 
   var reply = function(comment, billId, parentId, callback) {
