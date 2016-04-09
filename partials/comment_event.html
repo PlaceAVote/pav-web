@@ -16,7 +16,9 @@
 
             </div>
         </section>
+
         <p class="event-comment-body" ng-bind="comment.body"></p>
+        
             <div class="c-comment__reply" ng-show="comment.replyInput">
             <textarea type="text" placeholder="Reply" rows="1" ng-model="comment.replyText" msd-elastic></textarea>
             <p style="color: red;" ng-show="comment.errorMessage !== ''">{{comment.errorMessage}}</p>
