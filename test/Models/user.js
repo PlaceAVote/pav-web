@@ -39,6 +39,8 @@ describe("Users", function(){
         user.img_url = "image.com";
         user.first_name = "paul";
         user.last_name = "barber";
+        user.facebookId = "test id";
+        user.facebookToken = "test token";
         user.zipcode = 1234;
         user.gender = "male";
         var subject = user.toBody("auth_token", "01010101");
@@ -49,9 +51,9 @@ describe("Users", function(){
             img_url: "image.com",
             dob: new Date("04/01/1990"),
             email: "paul@test.com",
-            token: "auth_token",
+            token: "test token",
             gender: "male",
-            id: "01010101",
+            id: "test id",
             topics: []
         };
         expect(subject).to.eql(expected);

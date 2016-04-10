@@ -28,6 +28,9 @@ function UserService($resource, facebookService, authService, userStore) {
       that.user.last_name = resource.last_name;
       that.user.img_url = resource.picture.data.url;
       that.user.gender = resource.gender;
+      that.user.setFacebookToken(auth.accessToken);
+      that.user.setFaceBookId(resource.id);
+
       var authToken = authService.getFacebookAccessToken();
       config.methods.post.headers.Authorization = authToken;
       var facebookUserLoginResource = new $resource(config.users.facebookLoginUrl, undefined, {login: config.methods.post});
@@ -81,14 +84,23 @@ function UserService($resource, facebookService, authService, userStore) {
     }
   };
 
-  var getSaveConfig = function(token) {
-    if (token) {
+  var getSaveConfig = function(user) {
+    if (user.facebookId && user.facebookToken) {
       return config.users.facebookCreateUrl;
     }
     return config.users.endpoint;
   };
 
-  var saveUser = function(callback, facebook) {
+  function generateSaveUserRequest(user) {
+    url = getSaveConfig(user);
+    payload = user.toBody(user);
+    return {
+      url: url,
+      payload: payload,
+    };
+  }
+
+  var saveUser = function(callback) {
     var that = this;
     var onLoad = function(user) {
       users.me = user;
@@ -97,7 +109,7 @@ function UserService($resource, facebookService, authService, userStore) {
     };
 
     var onError = function(err) {
-      console.log(err.status + 'Unable to save user', 'Facebook Sign Up:' + facebook);
+      console.log(err.status + 'Unable to save user', 'Facebook Sign Up:');
       callback(err);
     };
 
@@ -105,22 +117,10 @@ function UserService($resource, facebookService, authService, userStore) {
       return;
     }
 
-    var url, toSave;
+    var request = generateSaveUserRequest(this.user);
 
-    if (facebook) {
-      var token = authService.getFacebookAccessToken();
-      var userId = authService.getFacebookId();
-      url = getSaveConfig(token);
-      toSave = this.user.toBody(token, userId);
-    }
-
-    if (!facebook) {
-      url = getSaveConfig();
-      toSave = this.user.toBody();
-      authService.setFacebookAuth(undefined);
-    }
-    var saveUser = new $resource(url, undefined, {create: config.methods.put});
-    saveUser.create(toSave, onLoad, onError);
+    var save = new $resource(request.url, undefined, {create: config.methods.put});
+    save.create(request.payload, onLoad, onError);
   };
 
 
