@@ -2,58 +2,82 @@ var SignUpController = require('../../src/controllers/sign_up_controller.js');
 var expect = require('chai').expect;
 
 describe("SignUpController", function(){
-    function mockUserService() {
-        this.getUser = function() {
-            return {
-                name : "paul"
-            }
-        };
-        this.user = function() {
-            return {}
-        }
+  function mockUserService() {
+    this.getUser = function() {
+      return {
+        name : "paul"
+      }
+    };
+    this.user = function() {
+      return {}
     }
-    function rs() {
-        return {
-        loggedIn : false
-        }
+  }
+
+  function rs() {
+    return {
+      loggedIn : false
     }
+  }
+
 	it("has a user object", function(){
     var mockUS = new mockUserService();
-	var subject = new SignUpController(rs, undefined, undefined, mockUS);
-	var blankUser = {
-		first_name : "",
-		last_name : "",
-		dob : "",
-		zipcode : "",
-    gender: undefined,
-	};
-	expect(subject.additionalInformation).to.eql(blankUser);
-
+    var subject = new SignUpController(rs, undefined, undefined, mockUS);
+    var blankUser = {
+      first_name : "",
+      last_name : "",
+      dob : "",
+      zipcode : "",
+      gender: undefined,
+    };
+    expect(subject.additionalInformation).to.eql(blankUser);
 	});
-    it("when service returns error, set scope.error to be true", function(done){
-        function mockUserService() {
-             this.saveUser = function(callback){
-                callback("Server returned error");
-                expect(subject.error).to.eql(true);
-                done();
-             };
-             this.addAdditionalInformation = function() {
 
-             };
-             this.getUser = function() {
-                return {
-                    name : "paul",
-                    gender : 'they'
-                }
-             };
-             this.user = function() {
-                return
-             }
+	it("returns zip to false if is missing", function(){
+    var mockUS = new mockUserService();
+    var subject = new SignUpController(rs, undefined, undefined, mockUS);
+    var result = subject.zipFormat();
+    expect(result).to.eql(false);
+  });
+
+	it("returns zip to true if is in correct format", function(){
+    var mockUS = new mockUserService();
+    var subject = new SignUpController(rs, undefined, undefined, mockUS);
+    var result = subject.zipFormat('90210');
+    expect(result).to.eql(true);
+  });
+
+	it("returns zip to true if is in incorrect format", function(){
+    var mockUS = new mockUserService();
+    var subject = new SignUpController(rs, undefined, undefined, mockUS);
+    var result = subject.zipFormat('cat stevens');
+    expect(result).to.eql(false);
+  });
+
+  it("when service returns error, set scope.error to be true", function(done){
+    function mockUserService() {
+      this.saveUser = function(callback){
+        callback("Server returned error");
+        expect(subject.error).to.eql(true);
+        done();
+      };
+      this.addAdditionalInformation = function() {
+
+      };
+      this.getUser = function() {
+        return {
+          name : "paul",
+          gender : 'they'
         }
-        var mockUS = new mockUserService();
-        var subject = new SignUpController(rs, undefined, undefined, mockUS);
-        subject.test();
-     });
+      };
+      this.user = function() {
+        return
+      }
+    }
+    var mockUS = new mockUserService();
+    var subject = new SignUpController(rs, undefined, undefined, mockUS);
+    subject.additionalInformation.zipcode = '90210';
+    subject.signup();
+  });
     it("prepopulates user data from service if user data is found", function() {
         function mockUserService() {
             var that = this;
@@ -75,32 +99,65 @@ describe("SignUpController", function(){
         expect(subject.additionalInformation.dob).to.eql(new Date("04/01/1990"));
     });
     it("calls location path to feed when user has been created", function(done){
-        function mockUserService() {
-            var that = this;
-            that.user = {
-                gender: 'they',
-                first_name: "paul",
-                last_name:"barber",
-                email:"test@test.com",
-                dob: new Date("04/01/1990")
-            };
-            that.getUser = function() {
-                return that.user;
-            };
-            that.saveUser = function(callback){
-                return callback(undefined);
-            };
-            that.addAdditionalInformation = function() {};
-        }
-        function location() {
-            this.path = function(route){
-                    expect(route).to.eql("/feed");
-                    done();
-                  }
+      function mockUserService() {
+        var that = this;
+        that.user = {
+          gender: 'they',
+          first_name: "paul",
+          last_name:"barber",
+          email:"test@test.com",
+          dob: new Date("04/01/1990")
         };
-        var l = new location();
-        var mockUS = new mockUserService();
-        var subject = new SignUpController(rs, undefined, l, mockUS);
-        subject.test();
+        that.getUser = function() {
+          return that.user;
+        };
+        that.saveUser = function(callback){
+          return callback(undefined);
+        };
+        that.addAdditionalInformation = function() {};
+      }
+      function location() {
+        this.path = function(route){
+          expect(route).to.eql("/feed");
+          done();
+        }
+      };
+      var l = new location();
+      var mockUS = new mockUserService();
+      var subject = new SignUpController(rs, undefined, l, mockUS);
+      subject.additionalInformation.zipcode = '90210';
+      subject.signup();
+    });
+
+    it("doesnt call service when zip is not defined", function(){
+      var called = false;
+      function mockUserService() {
+        var that = this;
+        that.user = {
+          gender: 'they',
+          first_name: "paul",
+          last_name:"barber",
+          email:"test@test.com",
+          dob: new Date("04/01/1990")
+        };
+        that.getUser = function() {
+          return that.user;
+        };
+        that.saveUser = function(callback){
+          called = true;
+          return callback(undefined);
+        };
+        that.addAdditionalInformation = function() {};
+      }
+      function location() {
+        this.path = function(route){
+          expect(route).to.eql("/feed");
+        }
+      };
+      var l = new location();
+      var mockUS = new mockUserService();
+      var subject = new SignUpController(rs, undefined, l, mockUS);
+      subject.signup();
+      expect(called).to.eql(false);
     });
 });
