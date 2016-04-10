@@ -244,4 +244,4 @@ var gulp = require('gulp'),
     gulp.watch(['src/**/*_ionic.js', 'src/*_ionic.js', 'src/ionic-app.js', 'partials/*_ionic.html'], ['ionicise']);
   });
 
-  gulp.task('default', ['check', 'autoPrefix', 'watchFiles', 'browserify-web', 'template-dev']);
+  gulp.task('default', ['autoPrefix', 'watchFiles', 'browserify-web', 'template-dev']);

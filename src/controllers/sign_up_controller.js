@@ -18,7 +18,7 @@ function SignUpCtrl($rootScope, $scope, $location, userService, authService) {
   this.country = countryCodes;
   this.rs = $rootScope;
   this.loggedIn = $rootScope.loggedIn;
-
+  this.zipExpression = /^\d{5}(?:[-\s]\d{4})?$/;
 
   if (!userService.user) {
     this.location.path('/');
@@ -39,18 +39,32 @@ function SignUpCtrl($rootScope, $scope, $location, userService, authService) {
   ];
 }
 
-SignUpCtrl.prototype.test = function() {
+SignUpCtrl.prototype.signup = function() {
   this.userService.addAdditionalInformation(this.additionalInformation);
   var user = this.userService.getUser();
+
   if (!user) {
     this.invalid_user = true;
-    return;
+  } else {
+    this.invalid_user = false;
   }
 
   if (!this.additionalInformation.gender) {
     this.no_gender = true;
+  } else {
+    this.no_gender = false;
+  }
+
+  if (!this.zipFormat(this.additionalInformation.zipcode)) {
+    this.invalid_zip = true;
+  } else {
+    this.invalid_zip = false;
+  }
+
+  if (this.invalid_user || this.no_gender || this.invalid_zip) {
     return;
   }
+
   this.saveUser(user);
 };
 
@@ -76,6 +90,13 @@ SignUpCtrl.prototype.saveUser = function(user) {
     that.rs.user = user;
     that.location.path('/feed');
   });
+};
+
+SignUpCtrl.prototype.zipFormat = function(zip) {
+  if (!zip) {
+    return false;
+  }
+  return this.zipExpression.test(zip);
 };
 
 SignUpCtrl.prototype.maxDate = function() {
