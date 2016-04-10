@@ -317,7 +317,10 @@ BillController.prototype.commentError = function(message) {
 
 BillController.prototype.userVotedCheck = function() {
   var that = this;
-  if (this.body.billData.voted_for || this.body.billData.voted_against) {
+  if (!this.body) {
+    return;
+  }
+  if (this.body.billData.user_voted) {
     that.hasVoted = true;
   } else {
     that.hasVoted = false;
