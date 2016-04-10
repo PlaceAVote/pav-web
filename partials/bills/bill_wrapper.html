@@ -9,7 +9,7 @@
   <update-meta name="twitter:image:src" content="{{bill.metaImage}}"></update-meta>
 
   <update-meta name="description" content="Do you agree or disagree? Join the discussion and place your vote today!"></update-meta>
-  
+
   <update-meta property="og:description" content="
 Do you agree or disagree? Join the discussion and place your vote today!"></update-meta>
   <update-meta name="twitter:description" content="Do you agree or disagree? Join the discussion and place your vote today!"></update-meta>
@@ -28,13 +28,13 @@ Do you agree or disagree? Join the discussion and place your vote today!"></upda
         >{{bill.body.getTitle()}}</h1>
 
         <!-- Tags Container -->
-        <div 
+        <div
         class="c-bill-banner__tags row"
         ng-show="bill.body.billData.pav_tags">
 
             <span>Tags:</span>
 
-            <div class="c-tag" 
+            <div class="c-tag"
             ng-repeat="tag in bill.body.billData.pav_tags">
                 {{tag}}
             </div>
@@ -61,21 +61,21 @@ Do you agree or disagree? Join the discussion and place your vote today!"></upda
 <div class="c-side-menu-wrapper">
 
     <ul class="c-side-menu c-side-menu--bill">
-        <li 
+        <li
         ng-class="{'c-side-menu--selected': bill.view === 'summary'}"
         ng-click="bill.view = 'summary'; bill.location.update_path('bill/' + bill.id + '/summary');">
             <i class="icon-document"></i>
             <p>Summary</p>
             <i class="icon-arrow-right"></i>
         </li>
-        <li 
+        <li
         ng-class="{'c-side-menu--selected': bill.view === 'info'}"
         ng-click="bill.view = 'info'; bill.location.update_path('bill/' + bill.id + '/info');">
             <i class="icon-bill-info"></i>
             <p>Bill Info</p>
             <i class="icon-arrow-right"></i>
         </li>
-        <li 
+        <li
         ng-class="{'c-side-menu--selected': bill.view === 'comments', 'c-side-menu--last-item': bill.hasVoted}"
         ng-click="bill.view = 'comments'; bill.location.update_path('bill/' + bill.id + '/comments');">
             <i class="icon-chat"></i>
@@ -87,6 +87,13 @@ Do you agree or disagree? Join the discussion and place your vote today!"></upda
         ng-show="bill.hasVoted === false">
             <i class="icon-logo"></i>
             <p>I'm ready to vote!</p>
+
+        </li>
+
+        <li class="c-side-menu__vote"
+        ng-show="bill.hasVoted === true">
+            <i class="icon-logo"></i>
+            <p>You already voted on this bill</p>
         </li>
     </ul>
 
