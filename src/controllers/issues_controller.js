@@ -1,3 +1,5 @@
+var issueValidator = require('../utils/validate_issue.js')();
+
 function IssuesController($scope, $rootScope, searchService, $timeout, issueService) {
   this.rs = $rootScope;
   this.scope = $scope;
@@ -114,10 +116,6 @@ IssuesController.prototype.validateUrl = function() {
 
 IssuesController.prototype.postIssue = function() {
   var that = this;
-  if (this.issue.comment === '' || !this.issue.comment) {
-    that.setError('You need to enter a comment before posting');
-    return;
-  }
   for (var i in this.attachments) {
     if (that.attachments[i]) {
       if (that.attachments[i].type === 'Article') {
@@ -127,6 +125,11 @@ IssuesController.prototype.postIssue = function() {
         that.issue.bill_id = that.attachments[i].bill_id;
       }
     }
+  }
+  var valid = issueValidator.validate(this.issue);
+  if (!valid) {
+    that.setError('You need to enter a comment before posting');
+    return;
   }
   this.loading = true;
   this.issueService.saveIssue(this.issue, function(err, res) {
