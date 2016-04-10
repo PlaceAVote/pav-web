@@ -266,7 +266,8 @@ describe("User Service", function() {
       });
     });
     it("create from facebook should only have specific params", function(done){
-      mockResource = function(){
+      mockResource = function(url){
+        expect(url).to.contain('facebook');
         this.create = function(data, onLoad, onError){
           expect(data.email).to.eql("test@email.com");
           expect(data.password).to.eql(undefined);
@@ -276,6 +277,49 @@ describe("User Service", function() {
           expect(data.zipcode).to.eql(1234);
           expect(data.topics[0]).to.eql('guns');
           expect(data.img_url).to.eql('img.com');
+          expect(data.id).to.eql('TestId');
+          expect(data.token).to.eql('TestToken');
+          done();
+        };
+      };
+      facebook = new MockFacebook();
+      authService = new AuthService(undefined, authOptions);
+      authService.setFacebookAuth({accessToken: 'hello'});
+      var subject = new UserService(mockResource, facebook, authService);
+      subject.createUser("test@email.com", "p4SSw0rD!");
+      var additionalInformation = {
+        first_name : "paul",
+        last_name : "barber",
+        zipcode : 1234,
+      };
+      subject.user.topics = [{name:'guns'}];
+      subject.user.img_url = 'img.com';
+      subject.user.dob = new Date('04/01/1990');
+      subject.user.facebookId = 'TestId'
+      subject.user.facebookToken = 'TestToken'
+      subject.addAdditionalInformation(additionalInformation);
+      subject.userToken = {
+        accessToken: "AUTHT0k3n"
+      };
+      var mockCallback = function() {return};
+      subject.saveUser(mockCallback);
+    });
+
+    it("create from email should only have specific params", function(done){
+      mockResource = function(url){
+        expect(url).to.contain('user');
+        expect(url).to.not.contain('facebook');
+        this.create = function(data, onLoad, onError){
+          expect(data.email).to.eql("test@email.com");
+          expect(data.password).to.eql('p4SSw0rD!');
+          expect(data.first_name).to.eql("paul");
+          expect(data.last_name).to.eql("barber");
+          expect(!!data.dob).to.eql(true);
+          expect(data.zipcode).to.eql(1234);
+          expect(data.topics[0]).to.eql('guns');
+          expect(data.img_url).to.eql('img.com');
+          expect(data.id).to.eql(undefined);
+          expect(data.token).to.eql(undefined);
           done();
         };
       };
@@ -293,12 +337,11 @@ describe("User Service", function() {
       subject.user.img_url = 'img.com';
       subject.user.dob = new Date('04/01/1990');
       subject.addAdditionalInformation(additionalInformation);
-      subject.createdFB = true;
       subject.userToken = {
         accessToken: "AUTHT0k3n"
       };
       var mockCallback = function() {return};
-      subject.saveUser(mockCallback, true);
+      subject.saveUser(mockCallback);
     });
     describe("User public perception", function(){
       it("can be changed to be public", function(){
