@@ -36,6 +36,15 @@ User.prototype.setToken = function(token) {
   this.password = undefined;
 };
 
+User.prototype.setFacebookToken = function(token) {
+  this.facebookToken = token;
+  this.password = undefined;
+};
+
+User.prototype.setFaceBookId = function(id) {
+  this.facebookId = id;
+};
+
 
 User.prototype.getTopicNames = function() {
   var names = [];
@@ -49,7 +58,7 @@ User.prototype.getTopicNames = function() {
 };
 
 
-User.prototype.toBody = function(auth, user_id) {
+User.prototype.toBody = function() {
   var body = {
     first_name: this.first_name,
     last_name: this.last_name,
@@ -59,12 +68,14 @@ User.prototype.toBody = function(auth, user_id) {
     email: this.email,
     gender: this.gender,
   };
-  if (auth) {
-    body.token = auth;
-    body.id = user_id;
+
+  if (this.facebookId && this.facebookToken) {
+    body.token = this.facebookToken;
+    body.id = this.facebookId;
   } else {
     body.password = this.password;
   }
+
   if (this.img_url) {
     body.img_url = this.img_url;
   }
