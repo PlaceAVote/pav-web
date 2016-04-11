@@ -80,7 +80,7 @@ Do you agree or disagree? Join the discussion and place your vote today!"></upda
         ng-click="bill.view = 'comments'; bill.location.update_path('bill/' + bill.id + '/comments');">
             <i class="icon-chat"></i>
             <p>Comments <span class="bold"
-                              ng-show="bill.body.billData.comment_count > 0">{{bill.body.billData.comment_count}}</span></p>
+                              ng-show="bill.body.billData.comment_count > 0">({{bill.body.billData.comment_count}})</span></p>
             <i class="icon-arrow-right"></i>
         </li>
         <li class="c-side-menu__vote"
