@@ -197,8 +197,15 @@ BillController.prototype.getBill = function(id) {
       if (that.body.billData.summary === 'No Summary Present...') {
         that.body.billData.noSummary = true;
       }
-      that.metaImageFacebook = that.body.billData.featured_img_links.facebook_url || 'http://s29.postimg.org/v86d7ur2v/og_fb_img.jpg';
-      that.metaImageTwitter = that.body.billData.featured_img_links.twitter_url || 'http://s29.postimg.org/v86d7ur2v/og_fb_img.jpg';
+
+      if (that.body.billData.featured_img_links) {
+        that.metaImageFacebook = that.body.billData.featured_img_links.facebook_url;
+        that.metaImageTwitter = that.body.billData.featured_img_links.twitter_url;
+      } else {
+        that.metaImageFacebook = 'http://s29.postimg.org/v86d7ur2v/og_fb_img.jpg';
+        that.metaImageTwitter = 'http://s29.postimg.org/v86d7ur2v/og_fb_img.jpg';
+      }
+
       title.bill(that.body.billData);
       that.userVotedCheck();
       that.getLegislator(result.billData.sponsor);
