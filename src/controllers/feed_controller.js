@@ -81,7 +81,7 @@ FeedController.prototype.feedCheck = function() {
       } else {
         that.lastLoaded = response.last_timestamp;
         for (var x in response.feed) {
-          that.events.shift(response.feed[x]);
+          that.events.push(response.feed[x]);
         }
       }
     }
