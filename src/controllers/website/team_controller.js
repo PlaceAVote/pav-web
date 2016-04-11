@@ -69,6 +69,13 @@ function TeamController($scope, $location) {
   ];
 
   this.campaign = [
+  {
+      img: 'img/web/profile-imgs/kelly.jpg',
+      name: 'Kelly Ricci',
+      role: 'Head of Marketing & Communications',
+      twitter: 'kellbell175',
+      linkedin: '/in/kelly-ricci-b573918',
+  },
   		  {
   		img: 'img/web/profile-imgs/amanda.jpg',
   		name: 'Amanda Stewart',
