@@ -209,7 +209,7 @@ describe('Issues Controller', function() {
     };
     subject.postIssue();
     expect(subject.loading).to.equal(false)
-    expect(subject.errorMessage).to.equal('There was an error when uploading your Issue');
+    expect(subject.errorMessage).to.equal('There was an error when posting your Issue');
   });
 
 });

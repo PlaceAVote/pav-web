@@ -1,4 +1,5 @@
 var issueValidator = require('../utils/validate_issue.js')();
+var Issue = require('../models/issue.js');
 
 function IssuesController($scope, $rootScope, searchService, $timeout, issueService) {
   this.rs = $rootScope;
@@ -8,6 +9,7 @@ function IssuesController($scope, $rootScope, searchService, $timeout, issueServ
   this.issue = {};
   this.attachments = [];
   this.issueService = issueService;
+  this.myIssues = [];
 }
 
 IssuesController.prototype.search = function(q) {
@@ -135,12 +137,12 @@ IssuesController.prototype.postIssue = function() {
   this.issueService.saveIssue(this.issue, function(err, res) {
     that.loading = false;
     if (err) {
-      that.setError('There was an error when uploading your Issue');
+      that.setError('There was an error when posting your Issue');
     }
     if (res) {
       that.issue = {};
       that.attachments = [];
-      that.scope.$parent.posted();
+      that.myIssues.unshift(new Issue(res));
     }
   });
 };
