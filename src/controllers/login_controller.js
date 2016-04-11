@@ -131,7 +131,8 @@ LoginCtrl.prototype.emailValidation = function(email) {
 };
 
 LoginCtrl.prototype.passwordValidation = function(password) {
-  if (password.length > 5) {
+  var passwordTrimmed = password.trim();
+  if (password.length > 5 && passwordTrimmed === password) {
     return true;
   }
 };
