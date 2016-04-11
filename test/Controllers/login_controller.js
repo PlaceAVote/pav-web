@@ -322,7 +322,7 @@ describe('LoginCtrl', function() {
         var scope = {};
         scope.$on = function() {};
         var mockUser = {
-          password: 'Bl4$hBl$ah',
+          password: 'P4ssword',
           email: 'anema',
         };
 

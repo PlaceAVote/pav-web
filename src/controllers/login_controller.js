@@ -131,7 +131,9 @@ LoginCtrl.prototype.emailValidation = function(email) {
 };
 
 LoginCtrl.prototype.passwordValidation = function(password) {
-  return true;
+
+  var p = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/);
+  return p.test(password);
 };
 
 LoginCtrl.prototype.passwordReset = function(email) {
