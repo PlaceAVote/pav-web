@@ -30,16 +30,17 @@
     <input type="text" placeholder="eg. 90210" ng-model='signup.additionalInformation["zipcode"]' required>
         </label>
 
-        <section class="row gender-select-container">
-        <label class="gender-label">Preferred Pronoun</label>
-        <div class="row">
-            <div class="gender-select" ng-repeat="gender in signup.gender_options">
-                <input ng-model='signup.additionalInformation["gender"]' type="radio" id="{{gender.name}}" value="{{gender.name}}" name="gender">
-                <label class="gender" for="{{gender.name}}">
-                {{gender.des}}
-                </label>
-            </div>
-        </div>
+        <section class="col gender-select-container">
+        <label class="gender-label padding-bottom-small">Gender</label>
+          <div class="row padding-bottom-medium">
+              <div class="row" ng-repeat="gender in signup.gender_options">
+                  <input ng-model='signup.additionalInformation["gender"]' type="radio" id="{{gender.name}}" value="{{gender.name}}" name="gender">
+                  <label class="gender padding-right-small" for="{{gender.name}}">
+                  {{gender.des}}
+                  </label>
+              </div>
+          </div>
+        
         </section>
 
 
