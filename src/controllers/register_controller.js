@@ -21,6 +21,10 @@ function RegisterController($scope, $location, userService, $rootScope) {
     new Interest('Social Interest','icon-police'),
   ];
   this.progressComplete = false;
+  var user = this.userService.getUser();
+  if (!user) {
+    this.location.path('/');
+  }
 }
 
 RegisterController.prototype.topicsSubmit = function() {
