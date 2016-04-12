@@ -26,9 +26,9 @@ function Comment(options) {
 
 
 Comment.prototype.bodyText = function(options) {
-
+  var that = this;
   var exp = /([a-z]+\:\/+)([^\/\s]*)([a-z0-9\-@\^=%&;\/~\+]*)[\?]?([^ \#]*)#?([^ \#]*)/ig;
-  var links = [];
+  this.links = [];
 
   while ((link = exp.exec(options.body)) !== null) {
 
@@ -36,11 +36,11 @@ Comment.prototype.bodyText = function(options) {
       exp.lastIndex++;
     }
 
-    links.push({formatted: '<span class="blue click" ng-click="goToLink(\'' + link[0] + '\')">' + link[0] + '</span>', original: link[0]});
+    that.links.push({formatted: '<span class="blue click" ng-click="goToLink(\'' + link[0] + '\')">' + link[0] + '</span>', original: link[0]});
   }
 
-  for (var i = 0; i < links.length; i++) {
-    options.body = options.body.replace(links[i].original, links[i].formatted);
+  for (var i = 0; i < this.links.length; i++) {
+    options.body = options.body.replace(this.links[i].original, this.links[i].formatted);
   }
 
   this.body = options.body;
