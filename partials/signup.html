@@ -30,14 +30,14 @@
     <input type="text" placeholder="eg. 90210" ng-model='signup.additionalInformation["zipcode"]' required>
         </label>
 
-        <section class="col gender-select-container">
+        <section class="col l-12 gender-select-container">
         <label class="gender-label padding-bottom-small">Gender</label>
           <div class="row padding-bottom-medium">
               <div class="row" ng-repeat="gender in signup.gender_options">
                   <input ng-model='signup.additionalInformation["gender"]' type="radio" id="{{gender.name}}" value="{{gender.name}}" name="gender">
-                  <label class="gender padding-right-small" for="{{gender.name}}">
-                  {{gender.des}}
-                  </label>
+                  <p style="font-size: 12px;" class="padding-right-small">
+                    {{gender.des}}
+                  </p>
               </div>
           </div>
         
