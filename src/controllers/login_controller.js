@@ -1,6 +1,6 @@
 var AuthorizeController = require('./autherize_controller.js');
 
-function LoginCtrl($scope, $location, userService, authService, $rootScope, $routeParams, passwordService, doc) {
+function LoginCtrl($scope, $location, userService, authService, $rootScope, $routeParams, passwordService, $timeout, doc) {
   AuthorizeController.authorize({success: '/feed', authorizer: authService, location: $location});
   $scope = $scope || {};
   this.loaded = true;
@@ -12,6 +12,7 @@ function LoginCtrl($scope, $location, userService, authService, $rootScope, $rou
   this.forgot = false;
   this.passwordSent = false;
   this.rs.inApp = false;
+  this.timeout = $timeout;
   this.user = {
     email: '',
     emailValid: true,
@@ -21,6 +22,11 @@ function LoginCtrl($scope, $location, userService, authService, $rootScope, $rou
 
   if (this.location.$$path === '/signup') {
     this.signup = true;
+  }
+
+
+  if (this.location.$$search.forgot) {
+    this.forgot = true;
   }
 
   var that = this;
@@ -150,6 +156,7 @@ LoginCtrl.prototype.passwordReset = function(email) {
       that.loaded = true;
       that.resetFailed = false;
       that.resetSuccess = true;
+      that.timeout(function() {that.location.search('');}, 1000);
     }
   });
 };
