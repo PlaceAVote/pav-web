@@ -26,15 +26,15 @@ function SignUpCtrl($rootScope, $scope, $location, userService, authService) {
   this.gender_options = [
     {
       name: 'male',
-      des: 'His',
+      des: 'Male',
     },
     {
       name: 'female',
-      des: 'Her',
+      des: 'Female',
     },
     {
       name: 'they',
-      des: 'They',
+      des: 'Non-Binary',
     },
   ];
 }

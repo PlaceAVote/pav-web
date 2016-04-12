@@ -1,4 +1,4 @@
-module.exports = function($compile, commentService, $anchorScroll, $timeout, $location) {
+module.exports = function($compile, commentService, $anchorScroll, $timeout, $location, $window) {
   return {
     restrict: 'E',
     replace: true,
@@ -11,6 +11,8 @@ module.exports = function($compile, commentService, $anchorScroll, $timeout, $lo
       scope.commentService = commentService;
       scope.timeout = $timeout;
       scope.location = $location;
+      scope.window = $window;
+
       if (angular.isArray(scope.comment.replies)) {
         element.append('<div class=\'comment-container comment-reply\' ng-show=\'comment.showChildren\'><comments comments=\'comment.replies\'></comments></div>');
         var html = element.html();

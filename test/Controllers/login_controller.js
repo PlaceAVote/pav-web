@@ -8,10 +8,16 @@ var authService = {
 };
 describe('LoginCtrl', function() {
 
+    var mockLocationGlobal = {
+      $$search: {
+        forgot: false,
+      },
+    };
+
 		it('Should make sure the email fail if not valid', function() {
 			var scope = {};
 			scope.$on = function() {};
-      var subject = new LoginCtrl(scope, {}, {}, authService, {}, {}, {}, doc);
+      var subject = new LoginCtrl(scope, mockLocationGlobal, {}, authService, {}, {}, {}, {}, doc);
 			subject.user.email = "anthony.com";
 			expect(subject.emailValidation(subject.user.email)).to.be.false;
 		});
@@ -19,7 +25,7 @@ describe('LoginCtrl', function() {
 		it('Should return true if valid', function() {
 			var scope = {};
 			scope.$on = function() {};
-      var subject = new LoginCtrl(scope, {}, {}, authService, {}, {}, {}, doc);
+      var subject = new LoginCtrl(scope, mockLocationGlobal, {}, authService, {}, {}, {}, {}, doc);
 			subject.user.email = "anthonyemail@test.com";
 			expect(subject.emailValidation(subject.user.email)).to.be.true;
 		});
@@ -27,13 +33,13 @@ describe('LoginCtrl', function() {
 
 		// it('Should make sure the password fails client side validation', function() {
 		// 	var scope = {};
-		// 	var subject = new LoginCtrl(scope, {}, {}, authService, {});
+		// 	var subject = new LoginCtrl(scope, mockLocationGlobal, {}, authService, {});
 		// 	expect(subject.passwordValidation("password")).to.be.false;
 		// });
 
 		// it('Should return true is password is valid', function() {
 		// 	var scope = {};
-		// 	var subject = new LoginCtrl(scope, {}, {}, authService, {});
+		// 	var subject = new LoginCtrl(scope, mockLocationGlobal, {}, authService, {});
 		// 	expect(subject.passwordValidation("p455worD")).to.be.true;
 		// });
 
@@ -42,7 +48,7 @@ describe('LoginCtrl', function() {
 		// 	var changed = false;
 		// 	var created = false;
 		// 	var scope = {};
-		// 	var subject = new LoginCtrl(scope, {}, {}, authService, {});
+		// 	var subject = new LoginCtrl(scope, mockLocationGlobal, {}, authService, {});
 		// 	var user = {
 		// 		email : "anthonyemail.com",
 		// 		password : "password"
@@ -69,7 +75,7 @@ describe('LoginCtrl', function() {
 		// 	var created = false;
 		// 	var changed = false;
 		// 	var scope = {};
-		// 	var subject = new LoginCtrl(scope, {}, {}, authService, {});
+		// 	var subject = new LoginCtrl(scope, mockLocationGlobal, {}, authService, {});
 		// 	var user = {
 		// 		email : "testing.test1@test.com",
 		// 		password : "p34swOrD1"
@@ -96,11 +102,14 @@ describe('LoginCtrl', function() {
                 path: function(dest){
                   expect(dest).to.eql('/onboarding');
                   done();
-                }
+                },
+                $$search: {
+                  forgot: false,
+                },
               };
               var scope = {}
               scope.$on = function() {};
-              var subject = new LoginCtrl(scope, location, {}, authService, {}, {}, {}, doc);
+              var subject = new LoginCtrl(scope, location, {}, authService, {}, {}, {}, {}, doc);
               subject.userService = {
                 loginWithFacebook : function(callback){
                   callback({status:400, message:"User Not Found"});
@@ -117,11 +126,14 @@ describe('LoginCtrl', function() {
                 path: function(dest){
                   expect(dest).to.eql('/');
                   done();
-                }
+                },
+                 $$search: {
+                  forgot: false,
+                 },
               };
               var scope = {}
               scope.$on = function() {};
-              var subject = new LoginCtrl(scope, location, {}, authService, {}, {}, {}, doc);
+              var subject = new LoginCtrl(scope, location, {}, authService, {}, {}, {}, {}, doc);
               subject.userService = {
                 loginWithFacebook : function(callback){
                   callback({status:999, message:"User Not Found"});
@@ -138,12 +150,15 @@ describe('LoginCtrl', function() {
                 path: function(dest){
                   expect(dest).to.eql('/feed');
                   done();
-                }
+                },
+                $$search: {
+                  forgot: false,
+                },
               };
               var scope = {};
               scope.$on = function() {};
               var called = false;
-              var subject = new LoginCtrl(scope, location, {}, authService, {}, {}, {}, doc);
+              var subject = new LoginCtrl(scope, location, {}, authService, {}, {}, {}, {}, doc);
               subject.userService = {
                 loginWithFacebook : function(callback){
                   callback();
@@ -161,7 +176,7 @@ describe('LoginCtrl', function() {
         it("sets loginInvalid to false", function(done){
         	var scope = {};
         	scope.$on = function() {};
-          var subject = new LoginCtrl(scope, {}, {}, authService, {}, {}, {}, doc);
+          var subject = new LoginCtrl(scope, mockLocationGlobal, {}, authService, {}, {}, {}, {}, doc);
             subject.userService = {
                 login : function(params, callback){
                     callback({status:401});
@@ -180,8 +195,9 @@ describe('LoginCtrl', function() {
        describe("Forgot password", function() {
         it("Should return status 200 when password reset is successful", function() {
           var scope = {};
+          var mockTimeOut = function() {return};
           scope.$on = function() {};
-          var subject = new LoginCtrl(scope, {}, {}, authService, {}, {}, {}, doc);
+          var subject = new LoginCtrl(scope, mockLocationGlobal, {}, authService, {}, {}, {}, mockTimeOut, doc);
           subject.passwordService = {
             passwordReset : function(params, callback) {
               callback(undefined, {status: '200'});
@@ -196,7 +212,7 @@ describe('LoginCtrl', function() {
         it("Should return status 401 when password reset has failed", function() {
           var scope = {};
           scope.$on = function() {};
-          var subject = new LoginCtrl(scope, {}, {}, authService, {}, {}, {}, doc);
+          var subject = new LoginCtrl(scope, mockLocationGlobal, {}, authService, {}, {}, {}, {}, doc);
           subject.passwordService = {
             passwordReset : function(params, callback) {
               callback({status: '401'});
@@ -224,13 +240,16 @@ describe('LoginCtrl', function() {
         var mockLocation = {
           path: function() {
             return;
-          }
+          },
+          $$search: {
+            forgot: false,
+          },
         }
 
         var scope = {};
         scope.$on = function() {};
 
-        var subject = new LoginCtrl(scope, mockLocation, mockUserService, authService, mockRootScope, {}, {}, doc);
+        var subject = new LoginCtrl(scope, mockLocation, mockUserService, authService, mockRootScope, mockLocationGlobal, {}, {}, doc);
         subject.loginWithFacebook();
         expect(subject.rs.facebookSignUp).to.equal(true);
 
@@ -250,13 +269,16 @@ describe('LoginCtrl', function() {
         var mockLocation = {
           path: function() {
             return;
-          }
+          },
+          $$search: {
+            forgot: false,
+          },
         }
 
         var scope = {};
         scope.$on = function() {};
 
-        var subject = new LoginCtrl(scope, mockLocation, mockUserService, authService, mockRootScope, {}, {}, doc);
+        var subject = new LoginCtrl(scope, mockLocation, mockUserService, authService, mockRootScope, mockLocationGlobal, {}, {}, doc);
         subject.loginWithFacebook();
         expect(subject.rs.facebookSignUp).to.equal(false);
         expect(subject.loaded).to.equal(true);
@@ -283,13 +305,16 @@ describe('LoginCtrl', function() {
         var mockLocation = {
           path: function() {
             return;
-          }
+          },
+          $$search: {
+            forgot: false,
+          },
         }
 
         var scope = {};
         scope.$on = function() {};
 
-        var subject = new LoginCtrl(scope, mockLocation, mockUserService, authService, mockRootScope, {}, {}, doc);
+        var subject = new LoginCtrl(scope, mockLocation, mockUserService, authService, mockRootScope, mockLocationGlobal, {}, {}, doc);
         subject.loginWithFacebook();
         expect(subject.rs.inApp).to.equal(true);
         expect(subject.rs.notLoggedIn).to.equal(false);
@@ -316,7 +341,10 @@ describe('LoginCtrl', function() {
         var mockLocation = {
           path: function() {
             return;
-          }
+          },
+          $$search: {
+            forgot: false,
+          },
         }
 
         var scope = {};
@@ -326,7 +354,7 @@ describe('LoginCtrl', function() {
           email: 'anema',
         };
 
-        var subject = new LoginCtrl(scope, mockLocation, mockUserService, authService, mockRootScope, {}, {}, doc);
+        var subject = new LoginCtrl(scope, mockLocation, mockUserService, authService, mockRootScope, mockLocationGlobal, {}, {}, doc);
         subject.login(mockUser);
         expect(subject.rs.inApp).to.equal(true);
         expect(subject.rs.notLoggedIn).to.equal(false);

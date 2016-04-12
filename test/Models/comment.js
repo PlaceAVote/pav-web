@@ -346,5 +346,38 @@ describe("comment model", function(){
       subject.reply(undefined,undefined, mockTimeout);
       expect(subject.replyText).to.equal('');
     });
+
+    it('should add urls in comments into object containing link and formatted version', function() {
+      var mockComment = {
+        "author": "tony@pl.com",
+        "bill_id": "hr2-114",
+        "body": "comment 2 here http://www.google.com http://www.facebook.com",
+        "has_children": true,
+        "id": "comments:9e9b0180-c5ab-4806-a8b5-ee37b9867626",
+        "parent_id": null,
+        "replies": [
+          {
+            "author": "tony@pl.com",
+            "bill_id": "hr2-114",
+            "body": "Reply to comment 2",
+            "has_children": false,
+            "id": "comments:1e97cac2-30df-46f2-80c8-5ed4a36feb46",
+            "parent_id": "comments:9e9b0180-c5ab-4806-a8b5-ee37b9867626",
+            "replies": [],
+            "score": "2",
+            "timestamp": "1444764060968",
+          },
+        ],
+        "score": 100,
+        "scored": false,
+        "timestamp": 1444764009809,
+      };
+
+      var subject = new Comment(mockComment);
+      expect(subject.links.length).to.equal(2);
+      expect(subject.links[0].formatted).to.equal('<span class="blue click" ng-click="goToLink(\'http://www.google.com\')">http://www.google.com</span>')
+
+    });
+
   });
 });

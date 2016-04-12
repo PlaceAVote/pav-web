@@ -56,6 +56,10 @@ font-weight: 400;
   text-align: right;
 }
 
+.text-small {
+  @include font-size(14px);
+}
+
 .bold {
   @include bold();
 }

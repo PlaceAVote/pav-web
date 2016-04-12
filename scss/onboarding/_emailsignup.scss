@@ -109,7 +109,8 @@
           color: $purple;
           border-radius: 3px;
         }
-        input {
+        input[type=date],
+        input[type=text] {
           @include light();
           margin-top: 10px;
           margin-bottom: 15px;
@@ -198,53 +199,53 @@
     margin-bottom: 20px;
     }
   }
-  input[type="radio"] {
-    position: absolute;
-    left: -9999px;
-  }
-  .gender-select-container {
-    align-items: center;
-    width: calc(50% - 13px);
-    padding-bottom: 20px;
-    padding-top: 5px;
-    @include media(800px) {
-      padding-left: 0 !important;
-      padding-right: 0 !important;
-      width: 100%;
-    }
-    .gender-label {
-      padding-right: 15px;
-    }
-  }
-  .row {
-    & .gender-select:first-child .gender {
-      border-left: 1px solid $grey;
-      border-right: none;
-      border-top-left-radius: 3px;
-      border-bottom-left-radius: 3px;
-    }
-    & .gender-select:last-child .gender {
-      border-left: none;
-      border-right: 1px solid $grey;
-      border-top-right-radius: 3px;
-      border-bottom-right-radius: 3px;
-    }
-  }
-  .gender {
-    cursor: pointer;
-    background-color: white;
-    border: 1px solid $grey;
-    border-left: none;
-    border-right: none;
-    color: $black;
-    height: 30px;
-    width: 70px;
-    line-height: 30px;
-    text-align: center;
-    @include font-size(12px);
-  }
-    input[type="radio"]:checked + .gender {
-     background-color: $greylight;
-     border: 1px solid $grey !important;
-  }
+  // input[type="radio"] {
+  //   position: absolute;
+  //   left: -9999px;
+  // }
+  // .gender-select-container {
+  //   align-items: center;
+  //   width: calc(50% - 13px);
+  //   padding-bottom: 20px;
+  //   padding-top: 5px;
+  //   @include media(800px) {
+  //     padding-left: 0 !important;
+  //     padding-right: 0 !important;
+  //     width: 100%;
+  //   }
+  //   .gender-label {
+  //     padding-right: 15px;
+  //   }
+  // }
+  // .row {
+  //   & .gender-select:first-child .gender {
+  //     border-left: 1px solid $grey;
+  //     border-right: none;
+  //     border-top-left-radius: 3px;
+  //     border-bottom-left-radius: 3px;
+  //   }
+  //   & .gender-select:last-child .gender {
+  //     border-left: none;
+  //     border-right: 1px solid $grey;
+  //     border-top-right-radius: 3px;
+  //     border-bottom-right-radius: 3px;
+  //   }
+  // }
+  // .gender {
+  //   cursor: pointer;
+  //   background-color: white;
+  //   border: 1px solid $grey;
+  //   border-left: none;
+  //   border-right: none;
+  //   color: $black;
+  //   height: 30px;
+  //   width: 70px;
+  //   line-height: 30px;
+  //   text-align: center;
+  //   @include font-size(12px);
+  // }
+  //   input[type="radio"]:checked + .gender {
+  //    background-color: $greylight;
+  //    border: 1px solid $grey !important;
+  // }
 }

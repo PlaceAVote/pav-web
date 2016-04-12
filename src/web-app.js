@@ -99,6 +99,7 @@ var voteModalDirective = require('./directives/bills/vote_modal.js');
 var voteConfirmedDirective = require('./directives/bills/vote_confirmed.js');
 var imageSmartDirective = require('./directives/image_smart.js');
 var updateMetaDirective = require('./directives/update_meta.js');
+var compileDirective = require('./directives/compile.js');
 
 var invalidDirective = require('./directives/invalid.js');
 
@@ -111,7 +112,7 @@ var textarea = require('angular-elastic');
 var moment = require('angular-moment');
 var locationUpdate = require('./utils/location_update.js');
 
-var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'rzModule', 'ui.tree', 'monospaced.elastic', 'angularMoment']);
+var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'rzModule', 'ui.tree', 'monospaced.elastic', 'angularMoment', 'ngLocationUpdate']);
 
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 
@@ -223,7 +224,7 @@ app.factory('mailService', ['$resource', MailService]);
 // Controllers
 app.controller('TopicRegisterCtrl',['$scope','$location', 'userService', '$rootScope', RegisterController]);
 app.controller('SignUpCtrl',['$rootScope','$scope','$location', 'userService', SignUpController]);
-app.controller('LoginCtrl',['$scope','$location', 'userService', 'authService', '$rootScope', '$routeParams', 'passwordService', LoginController]);
+app.controller('LoginCtrl',['$scope','$location', 'userService', 'authService', '$rootScope', '$routeParams', 'passwordService', '$timeout', LoginController]);
 app.controller('FeedCtrl', ['$scope', '$location', 'userService', 'billService', 'authService', 'feedService', '$rootScope','$timeout', FeedController]);
 app.controller('BillCtrl', ['$scope', '$routeParams', 'billService', 'legislationService', 'voteService', 'commentService', '$location', 'authService', '$rootScope', '$timeout', 'facebookService', '$route', BillController]);
 app.controller('HeaderCtrl', ['$rootScope', '$scope', '$location', '$timeout', 'authService', 'userService', 'notificationService', 'searchService', '$window', '$route', HeaderController]);
@@ -248,7 +249,7 @@ app.value('THROTTLE_MILLISECONDS', null);
 app.directive('websiteNav', [websiteNav]);
 app.directive('headerNav', [headerNav]);
 app.directive('mailcheck', ['$compile','$sce', mailcheck]);
-app.directive('comment', ['$compile', 'commentService', '$anchorScroll', '$timeout', '$location', commentDirective]);
+app.directive('comment', ['$compile', 'commentService', '$anchorScroll', '$timeout', '$location', '$window', commentDirective]);
 app.directive('commentEvent', ['$compile', 'commentService', '$timeout','$location', commentEventDirective]);
 app.directive('comments', [commentsDirective]);
 app.directive('banner', [bannerDirective]);
@@ -284,3 +285,4 @@ app.directive('voteModal', ['$location', voteModalDirective]);
 app.directive('voteConfirmed', ['$location', voteConfirmedDirective]);
 app.directive('imageSmart', [imageSmartDirective]);
 app.directive('updateMeta', ['$log', updateMetaDirective]);
+app.directive('compile', ['$compile', compileDirective]);
