@@ -99,6 +99,7 @@ var voteModalDirective = require('./directives/bills/vote_modal.js');
 var voteConfirmedDirective = require('./directives/bills/vote_confirmed.js');
 var imageSmartDirective = require('./directives/image_smart.js');
 var updateMetaDirective = require('./directives/update_meta.js');
+var compileDirective = require('./directives/compile.js');
 
 var invalidDirective = require('./directives/invalid.js');
 
@@ -248,7 +249,7 @@ app.value('THROTTLE_MILLISECONDS', null);
 app.directive('websiteNav', [websiteNav]);
 app.directive('headerNav', [headerNav]);
 app.directive('mailcheck', ['$compile','$sce', mailcheck]);
-app.directive('comment', ['$compile', 'commentService', '$anchorScroll', '$timeout', '$location', commentDirective]);
+app.directive('comment', ['$compile', 'commentService', '$anchorScroll', '$timeout', '$location', '$window', commentDirective]);
 app.directive('commentEvent', ['$compile', 'commentService', '$timeout','$location', commentEventDirective]);
 app.directive('comments', [commentsDirective]);
 app.directive('banner', [bannerDirective]);
@@ -284,3 +285,4 @@ app.directive('voteModal', ['$location', voteModalDirective]);
 app.directive('voteConfirmed', ['$location', voteConfirmedDirective]);
 app.directive('imageSmart', [imageSmartDirective]);
 app.directive('updateMeta', ['$log', updateMetaDirective]);
+app.directive('compile', ['$compile', compileDirective]);
