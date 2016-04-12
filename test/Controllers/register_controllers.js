@@ -2,6 +2,15 @@ var RegisterController = require('../../src/controllers/register_controller.js')
 var Interest = require('../../src/models/interest.js');
 var expect = require('chai').expect;
 
+var mockUserService = {
+  getUser: function() {},
+};
+var mockLocation = {
+  path: function() {},
+}
+
+function undefinedUser(){}
+
 describe("RegisterController", function() {
 	it("go function calls location.path", function() {
 		var called, args, added;
@@ -14,7 +23,8 @@ describe("RegisterController", function() {
 		var userService = {
 			addTopics : function(interests) {
 				added = true;
-			}
+			},
+      getUser: undefinedUser,
 		};
 		var subject = new RegisterController({}, location, userService, {});
 		subject.go('test');
@@ -23,22 +33,22 @@ describe("RegisterController", function() {
 		expect(args).to.eql('test');
 	});
 	it("has a list of topics", function() {
-		var subject = new RegisterController({}, {}, {}, {});
+		var subject = new RegisterController({}, mockLocation, mockUserService, {});
 		expect(!!subject.interests).to.be.true;
 	});
 	describe("Select", function(){
 		it("selects the correct interest based upon name", function() {
-			var subject = new RegisterController({}, {}, {}, {});
+			var subject = new RegisterController({}, mockLocation, mockUserService, {});
 			subject.interests = [new Interest('test', '.test')];
 			expect(subject.getInterest('test').name).to.eql('test');
 		});
 		it("returns undefined if interest can't be found", function() {
-			var subject = new RegisterController({}, {}, {}, {});
+			var subject = new RegisterController({}, mockLocation, mockUserService, {});
 			expect(!!subject.getInterest('test')).to.be.false;
 		});
 		it("calls select on the selected interest", function() {
 			var called = false;
-			var subject = new RegisterController({}, {}, {}, {});
+			var subject = new RegisterController({}, mockLocation, mockUserService, {});
 			subject.interests = [new Interest('test', '.test')];
 			subject.interests[0].select = function(){
 				called = true;
@@ -48,7 +58,7 @@ describe("RegisterController", function() {
 		});
 		it("doesn't call select if getInterest returns undefined", function() {
 			var called = false;
-			var subject = new RegisterController({}, {}, {}, {});
+			var subject = new RegisterController({}, mockLocation, mockUserService, {});
 			subject.interests = [new Interest('test', '.test')];
 			subject.interests[0].select = function(){
 				called = true;
@@ -59,7 +69,7 @@ describe("RegisterController", function() {
 	});
 	describe("Get Selected", function(){
 		it("returns a list of selected interests", function(){
-			var subject = new RegisterController({}, {}, {}, {});
+			var subject = new RegisterController({}, mockLocation, mockUserService, {});
 			subject.select('Healthcare');
 			subject.select('Drugs');
 			var interest = subject.getSelected();
@@ -68,4 +78,18 @@ describe("RegisterController", function() {
 			expect(interest[1].name).to.eql('Healthcare');
 		});
 	});
+	describe("Instantiation", function(){
+		it("redirects to path if no user is returned from user service", function(){
+      var recievedPath, called;
+      var mockLocation = {
+        path: function(route) {
+          recievedPath = route;
+          called = true;
+        }
+      }
+			var subject = new RegisterController({}, mockLocation, mockUserService, {});
+      expect(called).to.eql(true);
+      expect(recievedPath).to.eql('/');
+		});
+  });
 });
