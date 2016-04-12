@@ -112,6 +112,7 @@ describe("User Service", function() {
         this.create = function(user, succeed, error){
           expect(user.first_name).to.eql('paul');
           expect(user.last_name).to.eql('barber');
+          expect(user.email).to.eql('test@email.com');
           expect(user.dob).to.eql(strftime('%m/%d/%Y', new Date()));
           expect(user.zipcode).to.eql(1234);
           done();
@@ -120,7 +121,7 @@ describe("User Service", function() {
       var authService = new AuthService(undefined, authOptions);
       authService.getAccessToken = function(){return "Hello"};
       var subject = new UserService(mockResource, undefined, authService);
-      subject.createUser("test@email.com", "p4SSw0rD!");
+      subject.createUser("TEST@EMAIL.COM", "p4SSw0rD!");
       var additionalInformation = {
         first_name : "paul",
         last_name : "barber",
