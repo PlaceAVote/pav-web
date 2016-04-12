@@ -47,7 +47,30 @@ describe("User Service", function() {
       var user = subject.getUser();
       expect(user).to.eql(undefined);
     });
-
+  });
+  describe("Get Topics", function(){
+    it("adds interests to the user object", function(){
+      var fn = function(){
+        var subject = new UserService();
+        subject.getTopics();
+      }
+      expect(fn).to.not.throw(Error);
+    });
+    it("getTopics ReturnsUndefinedIfUsersIsNotDefined", function(){
+      var subject = new UserService();
+      var result = subject.getTopics();
+      expect(result).to.eql(undefined);
+    });
+    it("getTopics returns topic when user is defined", function(){
+      var subject = new UserService();
+      subject.createUser("test@email.com", "p4SSw0rD!");
+      var interest = new Interest("test", ".test-icon");
+      var interests = [interest];
+      subject.addTopics(interests);
+      var result = subject.getTopics();
+      expect(result.length).to.eql(1);
+      expect(result[0]).to.eql(interest);
+    });
   });
   describe("Add additional information", function(){
     it("returns undefined if user isn't created", function(){

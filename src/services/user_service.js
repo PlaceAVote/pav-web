@@ -59,6 +59,9 @@ function UserService($resource, facebookService, authService, userStore) {
   };
 
   var getTopics = function() {
+    if (!this.user) {
+      return;
+    }
     return this.user.topics;
   };
 
