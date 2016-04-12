@@ -20,6 +20,7 @@ function LoginCtrl($scope, $location, userService, authService, $rootScope, $rou
     passwordValid: true,
   };
 
+
   if (this.location.$$path === '/signup') {
     this.signup = true;
   }
