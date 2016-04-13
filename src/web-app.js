@@ -20,6 +20,13 @@ if (typeof localStorage === 'object') {
   }
 }
 
+
+// Polyfil Shims
+
+var objectFitIe = require('./utils/fitie.js');
+
+objectFitIe();
+
 // Website Controllers
 var HomeController = require('./controllers/website/home_controller.js');
 var FaqController = require('./controllers/website/faq_controller.js');
