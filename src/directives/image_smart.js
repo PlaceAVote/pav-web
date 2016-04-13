@@ -1,3 +1,5 @@
+var objectFitImages = require('object-fit-images');
+
 module.exports = function() {
   return {
     restrict: 'E',
@@ -19,10 +21,12 @@ module.exports = function() {
             el[0].appendChild(image);
             scope.loading = false;
             scope.$apply();
+            objectFitImages('ie_object_fit-shim');
           };
 
           scope.loading = true;
           image.className = scope.class;
+          image.className += ' ie_object_fit-shim';
           image.src = scope.img;
         }
 
