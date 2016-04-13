@@ -194,6 +194,7 @@ BillController.prototype.getBill = function(id) {
     } else {
       if (!result.billData || !result.billData.bill_id) {
         that.location.path('/feed');
+        return;
       }
       that.body = result;
 

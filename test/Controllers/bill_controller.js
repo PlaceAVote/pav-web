@@ -15,6 +15,7 @@ var mockAuthService = {
 
 var mockLocation = {
   $$path: '/',
+  path: function() {},
 }
 describe('BillController', function() {
   var scope = {};
@@ -81,9 +82,51 @@ describe('BillController', function() {
     var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, mockLocation, mockAuthService, {});
     expect(scope.bill.id).to.eql('100');
   });
+  it('redirects to feed if mill service returns empty bill', function(done){
+    var bill = new Bill();
+    var redirectUrl;
+    var mockLocation = {
+      $$path: '/',
+      path: function(id) {
+        redirectUrl = id;
+      },
+    }
+    var mockBillService = {
+      getBillVotes: function(id, callback){
+        callback('Error');
+      },
+      getBill: function(id, callback){
+        callback(undefined, bill);
+      },
+      getTopComments: function(id, callback){
+        var result = {
+          forComment: new Comment(topCommentsFixtures['for-comment']),
+          againstComment: new Comment(topCommentsFixtures['against-comment']),
+        }
+        callback(undefined, result);
+      },
+      fetchComments: function() {
+        return;
+      }
+    };
+    var mockLegislationService = {
+      getById: function(id, callback){
+        callback('Error');
+      },
+    };
+    var mockVoteService = {
+      getVotesForBill: function(id, callback){
+        callback(undefined, new CurrentVote('hr2-114', 100, 180));
+      },
+    };
+    var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, mockLocation, mockAuthService, {});
+    billController.getBill('100');
+    expect(redirectUrl).to.eql('/feed');
+    done();
+  });
   it('sets scope.body to result of BillService callback', function(done){
     var bill = new Bill({
-      id: 10,
+      bill_id: 10,
       sponsor: {
         thomas_id: '99'
       },
@@ -755,7 +798,7 @@ describe('BillController', function() {
           callback('Error');
         },
       };
-      var mockTimeout = function() {return;};      
+      var mockTimeout = function() {return;};
       var subject = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, mockLocation, mockAuthService, {}, mockTimeout);
       subject.commentBody = '<script></script>';
       subject.postComment();
@@ -799,7 +842,7 @@ describe('BillController', function() {
           callback('Error');
         },
       };
-      var mockTimeout = function() {return;};      
+      var mockTimeout = function() {return;};
     var subject = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, mockView, mockAuthService, {}, mockTimeout);
     expect(subject.view).to.equal('comments');
   });
