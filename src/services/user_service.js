@@ -143,7 +143,7 @@ function UserService($resource, facebookService, authService, userStore) {
     if (!user || !user.email || !user.password) {
       return callback({message: 'User has no password or username'});
     }
-
+    user.email = user.email.toLowerCase();
     var loginResource = new $resource(config.users.loginEndpoint, undefined, {login: config.methods.post});
     loginResource.login(user, onLoad, onError);
   };
