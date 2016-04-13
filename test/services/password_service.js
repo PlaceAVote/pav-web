@@ -10,7 +10,7 @@ var mockError = {status: '401'};
 var email = 'user@gmail.com';
 
 var reset = {
-    reset_token: 'token', 
+    reset_token: 'token',
     new_password: 'newpassword',
   };
 
@@ -36,11 +36,28 @@ describe('Password Reset Service', function() {
 		});
 	});
 
+	it('Should use lowercase email in url', function() {
+    var usedUrl;
+    var mockResource = function(url) {
+      usedUrl = url;
+      this.post = function(onLoad, onError) {
+        onLoad(mockResponse);
+      }
+    }
+		var subject = new passwordService(mockResource);
+		subject.passwordReset('TEST@test.com', function(err, res) {
+			expect(err).to.equal(undefined);
+			expect(res).to.equal(mockResponse);
+      expect(usedUrl).to.contain('test@test.com');
+      expect(usedUrl).to.not.contain('TEST@test.com');
+		});
+	});
+
 	it('Should return an status 401 object', function() {
 		var subject = new passwordService(mockErrorResource);
 		subject.passwordReset(email, function(err, res) {
 			expect(err).to.equal(mockError);
-		});		
+		});
 	});
 
 });
@@ -61,13 +78,13 @@ describe('Password Reset Confirm Token', function() {
     var subject = new passwordService(mockResource);
     subject.newPassword(reset, function(err, res) {
       expect(err).to.equal(undefined);
-      expect(res).to.equal(mockResponse);      
+      expect(res).to.equal(mockResponse);
     });
   });
   it('Should return an status 401 object', function() {
     var subject = new passwordService(mockErrorResource);
     subject.newPassword(reset, function(err, res) {
       expect(err).to.equal(mockError);
-    });   
+    });
   });
 })

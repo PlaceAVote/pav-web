@@ -11,7 +11,7 @@ function PasswordService($resource) {
       return callback(err);
     };
 
-    var url = config.password.reset(email);
+    var url = config.password.reset(email.toLowerCase());
     reset = new $resource(url, undefined, {post: config.methods.post});
     reset.post(onLoad, onError);
   };
