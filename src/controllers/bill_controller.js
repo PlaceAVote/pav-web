@@ -192,6 +192,9 @@ BillController.prototype.getBill = function(id) {
     if (err) {
       that.error = true;
     } else {
+      if (!result.billData || !result.billData.bill_id) {
+        that.location.path('/feed');
+      }
       that.body = result;
 
       if (that.body.billData.summary === 'No Summary Present...') {
