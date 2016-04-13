@@ -200,7 +200,7 @@ describe("User Service", function() {
       };
       var subject = new UserService(mockResource, undefined, undefined);
       subject.login({
-        email: 'paul',
+        email: 'PAUl',
         password: 'TEST555'
       });
     });
