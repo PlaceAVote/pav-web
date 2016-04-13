@@ -146,6 +146,9 @@ ProfileController.prototype.populateFollowing = function() {
 };
 
 ProfileController.prototype.isMe = function() {
+  if (this.rs.notLoggedIn) {
+    return false;
+  }
   var me = this.userService.isUserMe(this.id);
   return me;
 };
