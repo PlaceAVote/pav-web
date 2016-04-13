@@ -65,7 +65,7 @@ User.prototype.toBody = function() {
     zipcode: this.zipcode,
     dob: this.dob,
     topics: this.getTopicNames(),
-    email: this.email,
+    email: this.email.toLowerCase(),
     gender: this.gender,
   };
 
