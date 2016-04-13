@@ -26,3 +26,8 @@
     outline: none;
   }
 }
+
+input[type=radio] {
+  -webkit-tap-highlight-color: initial !important;
+  -webkit-appearance: radio;
+}

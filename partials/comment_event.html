@@ -17,7 +17,7 @@
             </div>
         </section>
 
-        <p class="event-comment-body" ng-bind="comment.body"></p>
+        <p class="event-comment-body" compile="comment.body"></p>
         
             <div class="c-comment__reply" ng-show="comment.replyInput">
             <textarea type="text" placeholder="Reply" rows="1" ng-model="comment.replyText" msd-elastic></textarea>

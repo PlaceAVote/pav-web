@@ -5,7 +5,7 @@ function Comment(options) {
   this.author = options.author;
   this.author_first_name = options.author_first_name;
   this.author_last_name = options.author_last_name;
-  this.body = options.body;
+  this.bodyText(options);
   this.has_children = options.has_children;
   this.bill_id = options.bill_id;
   this.bill_title = options.bill_title;
@@ -23,6 +23,29 @@ function Comment(options) {
   this.type = options.type || 'comment';
   this.showChildren = true;
 }
+
+
+Comment.prototype.bodyText = function(options) {
+  var that = this;
+  var exp = /([a-z]+\:\/+)([^\/\s]*)([a-z0-9\-@\^=%&;\/~\+]*)[\?]?([^ \#]*)#?([^ \#]*)/ig;
+  this.links = [];
+
+  while ((link = exp.exec(options.body)) !== null) {
+
+    if (link.index === exp.lastIndex) {
+      exp.lastIndex++;
+    }
+
+    that.links.push({formatted: '<span class="blue click" ng-click="goToLink(\'' + link[0] + '\')">' + link[0] + '</span>', original: link[0]});
+  }
+
+  for (var i = 0; i < this.links.length; i++) {
+    options.body = options.body.replace(this.links[i].original, this.links[i].formatted);
+  }
+
+  this.body = options.body;
+};
+
 
 Comment.buildChildren = function(comment, deep, reply) {
   if (!deep) {

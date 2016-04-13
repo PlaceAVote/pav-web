@@ -160,6 +160,9 @@
       border-radius: 3px;
       border: 1px solid $grey;
       padding: 25px;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
       @include media(600px){
       padding: 10px;
       }
