@@ -4,7 +4,7 @@
        <div class="row">
           <div class="profile-image-holder profile-picture click">
             <div ng-style="{'background-image': 'url(' + user.img_url + ')'}">
-                   <span ng-show="profile.isMe()" class="edit-btn" ng-click="profile.showModal = true">Edit</span>
+                   <span ng-show="!profile.rs.notLoggedIn && profile.isMe()" class="edit-btn" ng-click="profile.showModal = true">Edit</span>
             </div>
           </div>
             <div class="user-title">
