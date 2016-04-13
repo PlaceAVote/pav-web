@@ -285,4 +285,4 @@ app.directive('voteModal', ['$location', voteModalDirective]);
 app.directive('voteConfirmed', ['$location', voteConfirmedDirective]);
 app.directive('imageSmart', [imageSmartDirective]);
 app.directive('updateMeta', ['$log', updateMetaDirective]);
-app.directive('compile', ['$compile', compileDirective]);
+app.directive('compile', ['$compile', '$window', compileDirective]);
