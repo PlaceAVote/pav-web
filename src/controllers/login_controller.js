@@ -58,6 +58,9 @@ LoginCtrl.prototype.loginWithFacebook = function() {
         that.loaded = true;
         return that.location.path('/');
       }
+      if (that.rs.notLoggedIn) {
+        that.showNotRegisteredPartial = false;
+      }
       that.rs.facebookSignUp = true;
       return that.location.path('/onboarding');
     }
