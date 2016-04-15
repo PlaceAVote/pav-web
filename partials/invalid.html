@@ -6,9 +6,9 @@
     <div class="col h-center user-signup-card card padding-large">
       <h2 class="text-center margin-bottom-medium">Sign Up Free</h2>
       <input class="input-text margin-bottom-medium padding-left-medium" placeholder="Email" type="text" ng-model="invalid.user.email" required>
-      <p class="error-message" ng-class="{'show': !invalid.user.emailValid}">Email address is invalid, please try again.</p>
+      <p class="error-message small" ng-class="{'show': !invalid.user.emailValid}">Email address is invalid, please try again.</p>
       <input class="input-text margin-bottom-medium padding-left-medium" placeholder="Password" type="password" ng-model="invalid.user.password" >
-      <p class="error-message" ng-class="{'show': !invalid.user.passwordValid}">Password requires at least one digit and one capital letter.</p>
+      <p class="error-message small" ng-class="{'show': !invalid.user.passwordValid}">Password requires at least one digit and one capital letter.</p>
       <button class="signup-modal-button green-button margin-bottom-medium" ng-click="invalid.validate(invalid.user, '/onboarding')">Sign Up</button>
       <button class="signup-modal-button blue-button" ng-click="invalid.loginWithFacebook()">Sign Up with Facebook</button>
     </div>
