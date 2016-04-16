@@ -454,9 +454,7 @@ function UserService($resource, facebookService, authService, userStore) {
       return callback(false);
     };
     resource.execute(undefined, onLoad, onError);
-
-
-    };
+  };
 
   var isUserMe = function(id, users) {
     if (id === 'me') {
