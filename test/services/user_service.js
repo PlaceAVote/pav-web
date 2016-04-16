@@ -1109,9 +1109,7 @@ describe("User Service", function() {
 
 
 describe('getUserProfile function', function() {
-  
   it('should return profile information from a token dependant endpoint when provided with token & id.', function() {
-    
     var mockResource = function(url, params, method) {
       expect(url).to.equal('https://apidev.placeavote.com/user/1234/profile');
       this.getProfile = function(params, onLoad, onError) {
@@ -1136,16 +1134,14 @@ describe('getUserProfile function', function() {
     };
 
     var subject = new UserService(mockResource, undefined, mockAuth);
-
     subject.getUserProfile('1234', function(err, res) {
       expect(res.first_name).to.equal('Anthony');
       expect(res.last_name).to.equal('ONeill');
     });
-
   });
 
   it('should return profile information from an open endpoint when provided with only an id and no token.', function() {
-    
+
     var mockResourceOpen = function(url, params, method) {
       expect(url).to.equal('https://apidev.placeavote.com/user/1234/profile');
       this.getProfile = function(params, onLoad, onError) {

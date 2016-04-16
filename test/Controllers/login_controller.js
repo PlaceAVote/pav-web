@@ -88,7 +88,7 @@ describe('LoginCtrl', function() {
       checkEmail: function(email, callback) {
         checkedEmail = email;
         emailChecked = true;
-        callback(null, true);
+        callback(true);
       },
     };
     subject.location = {
@@ -118,7 +118,7 @@ describe('LoginCtrl', function() {
         created = true;
       },
       checkEmail: function(email, callback) {
-        callback(null, false);
+        callback(false);
       },
     };
     subject.location = {

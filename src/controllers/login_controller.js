@@ -90,7 +90,7 @@ LoginCtrl.prototype.validate = function(u, hash) {
   if (!this.user.emailValid && !this.user.passwordValid) {
     return;
   }
-  this.userService.checkEmail(email, function(err, succeeded) {
+  this.userService.checkEmail(email, function(succeeded) {
     if (succeeded) {
       that.userService.createUser(email, password);
       that.showNotRegisteredPartial = false;
