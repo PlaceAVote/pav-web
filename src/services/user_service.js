@@ -453,7 +453,7 @@ function UserService($resource, facebookService, authService, userStore) {
     var onError = function() {
       return callback(false);
     };
-    resource.execute(undefined, onLoad, onError);
+    resource.execute({email: email}, onLoad, onError);
   };
 
   var isUserMe = function(id, users) {
