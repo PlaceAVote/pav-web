@@ -435,6 +435,29 @@ function UserService($resource, facebookService, authService, userStore) {
     resource.execute(body,onLoad, onError);
   };
 
+  /**
+   * Check whether the email is in use.
+   * returns false if the email can not be used
+   * or true if the email can be used.
+   */
+  var checkEmail = function(email, callback) {
+    if (!email) {
+      return callback(false);
+    }
+    var url = config.users.validate;
+    var resource = new $resource(url, undefined, { execute: config.methods.post});
+
+    var onLoad = function() {
+      return callback(true);
+    };
+    var onError = function() {
+      return callback(false);
+    };
+    resource.execute(undefined, onLoad, onError);
+
+
+    };
+
   var isUserMe = function(id, users) {
     if (id === 'me') {
       return true;
@@ -458,6 +481,7 @@ function UserService($resource, facebookService, authService, userStore) {
     login: login,
     loginWithFacebook: loginWithFacebook,
     makeProfilePublic: makeProfilePublic,
+    checkEmail: checkEmail,
     getUserProfile: getUserProfile,
     getUserSettings: getUserSettings,
     saveUserSettings: saveUserSettings,
