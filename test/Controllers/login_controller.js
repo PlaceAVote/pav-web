@@ -51,27 +51,60 @@ describe('LoginCtrl', function() {
     var subject = new LoginCtrl(scope, mockLocationGlobal, {}, authService, {}, {}, {}, {}, {body:{ addEventListener: function(){}}}, {});
     var user = {
       email : 'anthonyemail.com',
-    password : 'dog'
+      password : 'dog'
     }
     subject.userService = {
       createUser : function(){
-                     created = true;
-                   }
+        created = true;
+      },
     };
     subject.location = {
       path : function() {
-               changed = true;
-             }
-    }
+        changed = true;
+      },
+    };
     subject.validate(user);
-    expect(changed).to.be.false;
-    expect(created).to.be.false;
-    expect(subject.user.emailValid).to.be.false;
-    expect(subject.user.passwordValid).to.be.false;
-
+    expect(changed).to.eql(false);
+    expect(created).to.eql(false);
+    expect(subject.user.emailValid).to.eql(false);
+    expect(subject.user.passwordValid).to.eql(false);
   });
 
   it('Should allow valid email address and password to pass client side validation', function() {
+    var created = false;
+    var changed = false;
+    var emailChecked = false;
+    var checkedEmail;
+    var scope = { $on: function() {}};
+    var subject = new LoginCtrl(scope, mockLocationGlobal, {}, authService, {}, {}, {}, {}, {body:{ addEventListener: function(){}}}, {});
+    var user = {
+      email : "testing.test1@test.com",
+      password : "p34swOrD1"
+    };
+    subject.userService = {
+      createUser : function(){
+        created = true;
+      },
+      checkEmail: function(email, callback) {
+        checkedEmail = email;
+        emailChecked = true;
+        callback(null, true);
+      },
+    };
+    subject.location = {
+      path : function() {
+        changed = true;
+      },
+    };
+    subject.validate(user);
+    expect(subject.user.emailValid).to.eql(true);
+    expect(subject.user.passwordValid).to.eql(true);
+    expect(checkedEmail).to.eql('testing.test1@test.com');
+    expect(changed).to.eql(true);
+    expect(created).to.eql(true);
+    expect(emailChecked).to.eql(true);
+  });
+  it('Should not call location or create if checkEmail returns false', function() {
     var created = false;
     var changed = false;
     var scope = { $on: function() {}};
@@ -83,7 +116,10 @@ describe('LoginCtrl', function() {
     subject.userService = {
       createUser : function(){
         created = true;
-      }
+      },
+      checkEmail: function(email, callback) {
+        callback(null, false);
+      },
     };
     subject.location = {
       path : function() {
@@ -91,10 +127,9 @@ describe('LoginCtrl', function() {
       },
     };
     subject.validate(user);
-    expect(subject.user.emailValid).to.be.true;
-    expect(subject.user.passwordValid).to.be.true;
-    expect(changed).to.be.true;
-    expect(created).to.be.true;
+    expect(changed).to.eql(false);
+    expect(created).to.eql(false);
+    expect(subject.emailUsed).to.eql(true);
   });
   describe("Facebook login", function(){
     it("should call go with 'topics' if user is undefined", function(done){
