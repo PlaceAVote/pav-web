@@ -145,6 +145,7 @@ LoginCtrl.prototype.passwordValidation = function(password) {
   if (password.length > 5 && passwordTrimmed === password) {
     return true;
   }
+  return false;
 };
 
 LoginCtrl.prototype.passwordReset = function(email) {
