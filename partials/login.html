@@ -12,7 +12,7 @@
             </div>
             <section class="s-12">
                 <div class="login-form-container" ng-hide="login.signup" loader loader-context="login.loaded">
-                    
+
                     <form name="emailForm" ng-hide="login.forgot">
                         <h1>Welcome back! Sign in below</h1>
                         <label>Email</label>
@@ -38,11 +38,12 @@
                     <h1>Register today!</h1>
                     <form name="emailForm">
                         <label>Email</label>
-                        <input id="email" name="email" type="text" ng-class="{'login-error': !login.user.emailValid}" ng-model="login.user.email" placeholder="yourname@example.com" required/>
+                        <input id="email" name="email" type="text" ng-class="{'login-error': !login.user.emailValid, 'login-error': login.emailUsed}" ng-model="login.user.email" placeholder="yourname@example.com" required/>
                         <p class="error-message" ng-class="{'show': !login.user.emailValid}">Email address is invalid, please try again.</p>
                         <label>Password (must be at least 6 characters long)</label>
                         <input name="password" type="password" ng-class="{'login-error': !login.user.passwordValid}" ng-model="login.user.password" placeholder="*******" />
                         <p class="error-message" ng-class="{'show': !login.user.passwordValid}">Password must be at least 6 characters long.</p>
+                        <p class="error-message" ng-class="{'show': login.emailUsed}">This email is already in use.</p>
                         <button ng-click="login.validate(login.user, '/onboarding');">Register</button>
                     </form>
                 </div>

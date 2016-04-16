@@ -1109,9 +1109,7 @@ describe("User Service", function() {
 
 
 describe('getUserProfile function', function() {
-  
   it('should return profile information from a token dependant endpoint when provided with token & id.', function() {
-    
     var mockResource = function(url, params, method) {
       expect(url).to.equal('https://apidev.placeavote.com/user/1234/profile');
       this.getProfile = function(params, onLoad, onError) {
@@ -1123,7 +1121,7 @@ describe('getUserProfile function', function() {
           public: true,
           total_followers: 10,
           total_following: 10,
-          user_id: "2a4c9d9c-f9b7-4e61-a799-455445a88ce4",         
+          user_id: "2a4c9d9c-f9b7-4e61-a799-455445a88ce4",
         };
         return onLoad(user);
       };
@@ -1136,16 +1134,14 @@ describe('getUserProfile function', function() {
     };
 
     var subject = new UserService(mockResource, undefined, mockAuth);
-
     subject.getUserProfile('1234', function(err, res) {
       expect(res.first_name).to.equal('Anthony');
       expect(res.last_name).to.equal('ONeill');
     });
-
   });
 
   it('should return profile information from an open endpoint when provided with only an id and no token.', function() {
-    
+
     var mockResourceOpen = function(url, params, method) {
       expect(url).to.equal('https://apidev.placeavote.com/user/1234/profile');
       this.getProfile = function(params, onLoad, onError) {
@@ -1157,7 +1153,7 @@ describe('getUserProfile function', function() {
           public: true,
           total_followers: 10,
           total_following: 10,
-          user_id: "2a4c9d9c-f9b7-4e61-a799-455445a88ce4",         
+          user_id: "2a4c9d9c-f9b7-4e61-a799-455445a88ce4",
         };
         return onLoad(user);
       };
@@ -1170,13 +1166,65 @@ describe('getUserProfile function', function() {
     };
 
     var subject = new UserService(mockResourceOpen, undefined, mockAuth);
-
     subject.getUserProfile('1234', function(err, res) {
       expect(res.first_name).to.equal('Anthony');
       expect(res.last_name).to.equal('ONeill');
     });
-
+  });
+});
+describe('check email', function() {
+  it('returns false if email is not provided', function(done) {
+    var subject = new UserService();
+    subject.checkEmail(undefined, function(success) {
+      expect(success).to.eql(false);
+      done();
+    });
+  });
+  it('calls the resource with the correct params', function(done) {
+    var called = false;
+    var receivedUrl;
+    var receivedPath = 1;
+    var receivedExpect;
+    var body;
+    function mr(url, path, func) {
+      receivedUrl = url;
+      receivedPath = path;
+      receivedExpect = func;
+      called = true;
+    };
+    mr.prototype.execute = function(emailBody, success, error) {
+      body = emailBody;
+      success(true);
+    };
+    var subject = new UserService(mr);
+    subject.checkEmail('email', function(success) {
+      expect(called).to.eql(true);
+      expect(success).to.eql(true);
+      expect(receivedUrl).to.contain('validate');
+      expect(receivedPath).to.eql(undefined);
+      expect(receivedExpect.execute.method).to.eql('POST');
+      expect(receivedExpect.execute.headers['Content-Type']).to.eql('application/json');
+      expect(receivedExpect.execute.headers['Accept']).to.eql('application/json');
+      expect(receivedExpect.execute.withCredentials).to.eql(false);
+      done();
+    });
   });
 
-
+  it('returns false on error', function(done) {
+    var called = false;
+    var body;
+    function mr(url, path, func) {
+      called = true;
+    };
+    mr.prototype.execute = function(emailBody, success, error) {
+      body = emailBody;
+      error(false);
+    };
+    var subject = new UserService(mr);
+    subject.checkEmail('email', function(success) {
+      expect(called).to.eql(true);
+      expect(success).to.eql(false);
+      done();
+    });
+  });
 });
