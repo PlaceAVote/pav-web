@@ -1,7 +1,6 @@
 FROM nginx:alpine
 
 COPY index.html /usr/share/nginx/html/
-COPY 404.html /usr/share/nginx/html/
 
 COPY dist /usr/share/nginx/html/dist/
 COPY css /usr/share/nginx/html/css/
