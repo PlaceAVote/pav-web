@@ -782,7 +782,6 @@ describe("User Service", function() {
       function uR(url, params, method) {}
       uR.prototype.getTimeline = function(body, onLoad) {
           var r = {
-            ['last_timestamp']: 10293,
             results: [
               {
                 type: 'comment'
