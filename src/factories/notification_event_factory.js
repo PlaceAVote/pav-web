@@ -7,9 +7,7 @@ function NotificationEventFactory() {}
 
 NotificationEventFactory.getResponse = function(response) {
   if (!response || !response.type) {
-    throw {
-      message: 'No Type Defined',
-    };
+    return;
   }
   switch (response.type) {
     case 'commentreply': {
@@ -22,7 +20,7 @@ NotificationEventFactory.getResponse = function(response) {
       return new NotificationVoteEvent(response);
     }
     default: {
-      return response;
+      return;
     }
   }
 };
@@ -33,7 +31,10 @@ NotificationEventFactory.getResponses = function(responses) {
     return results;
   }
   for (var i in responses) {
-    results.push(NotificationEventFactory.getResponse(responses[i]));
+    var notification = NotificationEventFactory.getResponse(responses[i]);
+    if (notification) {
+      results.push(notification);
+    }
   }
   return results;
 };
