@@ -40,10 +40,10 @@
                         <label>Email</label>
                         <input id="email" name="email" type="text" ng-class="{'login-error': !login.user.emailValid, 'login-error': login.emailUsed}" ng-model="login.user.email" placeholder="yourname@example.com" required/>
                         <p class="error-message" ng-class="{'show': !login.user.emailValid}">Email address is invalid, please try again.</p>
+                        <p class="error-message" ng-class="{'show': login.emailUsed}">This email is already in use.</p>
                         <label>Password (must be at least 6 characters long)</label>
                         <input name="password" type="password" ng-class="{'login-error': !login.user.passwordValid}" ng-model="login.user.password" placeholder="*******" />
                         <p class="error-message" ng-class="{'show': !login.user.passwordValid}">Password must be at least 6 characters long.</p>
-                        <p class="error-message" ng-class="{'show': login.emailUsed}">This email is already in use.</p>
                         <button ng-click="login.validate(login.user, '/onboarding');">Register</button>
                     </form>
                 </div>
