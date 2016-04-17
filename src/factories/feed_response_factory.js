@@ -5,9 +5,7 @@ function FeedResponseFactory() {}
 
 FeedResponseFactory.getResponse = function(response) {
   if (!response || !response.type) {
-    throw {
-      message: 'No Type Defined',
-    };
+    return;
   }
   switch (response.type) {
     case 'bill': {
@@ -17,9 +15,7 @@ FeedResponseFactory.getResponse = function(response) {
       return new Issue(response);
     }
     default: {
-      throw {
-        message: 'Type Not Supported',
-      };
+      return;
     }
   }
 };
@@ -27,7 +23,10 @@ FeedResponseFactory.getResponse = function(response) {
 FeedResponseFactory.getResponses = function(responses) {
   var results = [];
   for (var i = 0; i < responses.length; i++) {
-    results.push(FeedResponseFactory.getResponse(responses[i]));
+    var feedResponse = FeedResponseFactory.getResponse(responses[i]);
+    if (feedResponse) {
+      results.push(feedResponse);
+    }
   }
   return results;
 };
