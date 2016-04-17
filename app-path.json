@@ -1,5 +1,6 @@
 {
   "path": "app-min.js",
   "server": "placeavote.com",
-  "fb_app_id": "949301848442473"
+  "fb_app_id": "949301848442473",
+  "prerender": "prerender.placeavote.com"
 }

@@ -75,9 +75,9 @@ http {
       if ($prerender = 1) {
 
 #setting prerender as a variable forces DNS resolution since nginx caches IPs and doesnt play well with load balancing
-        set $prerender "service.prerender.io";
+        set $prerender "{{prerender}}";
         rewrite .* /$scheme://$host$request_uri? break;
-        proxy_pass http://$prerender;
+        proxy_pass https://$prerender;
       }
       if ($prerender = 0) {
         rewrite .* /index.html break;
