@@ -1,16 +1,16 @@
-FROM node:latest
+FROM nginx:alpine
 
-# use changes to package.json to force Docker not to use the cache
-# when we change our application's nodejs dependencies:
-ADD package.json /tmp/package.json
-RUN cd /tmp && npm install --production
-RUN mkdir -p /app && cp -a /tmp/node_modules /app/
+COPY index.html /usr/share/nginx/html/
+COPY 404.html /usr/share/nginx/html/
 
-# From here we load our application's code in, therefore the previous docker
-# "layer" thats been cached will be used if possible
-WORKDIR /app
-COPY . /app
+COPY dist /usr/share/nginx/html/dist/
+COPY css /usr/share/nginx/html/css/
+COPY img /usr/share/nginx/html/img/
+COPY partials /usr/share/nginx/html/partials/
+COPY font /usr/share/ngnix/html/font/
 
-RUN ls -ltr
+COPY conf /etc/nginx
 
-CMD ["node", "app.js"]
+EXPOSE 80 443
+
+CMD ["nginx", "-g", "daemon off;"]

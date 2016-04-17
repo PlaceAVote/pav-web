@@ -83,6 +83,18 @@ var gulp = require('gulp'),
       .pipe(gulp.dest('./'));
   });
 
+  gulp.task('template-dev-server', function() {
+    return gulp.src('./conf/nginx.mustache')
+      .pipe(mustache('./app-path-dev.json', { extension: '.conf' }))
+      .pipe(gulp.dest('./conf/'));
+  });
+
+  gulp.task('template-prod-server', function() {
+    return gulp.src('./conf/nginx.mustache')
+      .pipe(mustache('./app-path.json', { extension: '.conf' }))
+      .pipe(gulp.dest('./conf/'));
+  });
+
   gulp.task('live-config', function() {
     gulp.src(['./src/config/live_urls.js'])
     .pipe(rename('urls.js'))
