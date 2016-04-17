@@ -87,7 +87,7 @@ LoginCtrl.prototype.validate = function(u, hash) {
   var password = u.password;
   this.user.emailValid = this.emailValidation(email);
   this.user.passwordValid = this.passwordValidation(password);
-  if (!this.user.emailValid && !this.user.passwordValid) {
+  if (!this.user.emailValid || !this.user.passwordValid) {
     return;
   }
   this.userService.checkEmail(email, function(succeeded) {
