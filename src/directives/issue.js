@@ -101,6 +101,8 @@ module.exports = function($location, issueService, facebook, $window) {
         scope.facebook.share(scope.issueLocationFacebook);
       };
 
+      //scope.issueService.editIsse();
+
     },
   };
 };

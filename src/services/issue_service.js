@@ -28,6 +28,34 @@ function IssueService($resource, authService, callback) {
     request.save(issue, onLoad, onError);
   };
 
+
+  var editIssue = function(issue, callback) {
+    if (!issue) {
+      callback('Issue is required');
+      return;
+    }
+
+    var token = authService.getAccessToken();
+    if (!token) {
+      callback('Token is needed to save a issue');
+      return;
+    }
+
+    var onLoad = function(result) {
+      callback(undefined, result);
+    };
+
+    var onError = function(err) {
+      callback(err);
+    };
+
+    var url = config.users.issue.endpoint;
+    var request = new $resource(url, undefined, {save: config.methods.postData(issue, token)});
+
+    request.save(issue, onLoad, onError);
+  };
+
+
   var setIssueResponse = function(issue_id, response_value, callback) {
     if (!issue_id || response_value === undefined) {
       callback('Issue id and response value is required');
