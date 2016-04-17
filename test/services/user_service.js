@@ -779,23 +779,24 @@ describe("User Service", function() {
       });
     });
     it('returns onError when factory fails', function(done) {
-      function userResource(url, params, method) {
-        this.getTimeline = function(params, onLoad, onError){
-          var r = {results: [
-            {
-              type: 'comment'
-            },
-            {
-              type: 'cat'
-            },
-          ]}
-          r['next-page'] = 1;
+      function uR(url, params, method) {}
+      uR.prototype.getTimeline = function(body, onLoad) {
+          var r = {
+            ['last_timestamp']: 10293,
+            results: [
+              {
+                type: 'comment'
+              },
+              {
+                type: 'cat'
+              },
+            ]
+          };
           return onLoad(r);
-        };
-      }
-      var subject = new UserService(userResource, undefined, authService);
+      };
+      var subject = new UserService(uR, undefined, authService);
       subject.getUserTimeline(undefined,'me', function(err, response){
-        expect(err.message).to.eql('Type Not Supported');
+        expect(response.timeline.length).to.eql(1);
         done();
       });
     });
