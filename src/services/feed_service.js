@@ -12,11 +12,13 @@ function FeedService($resource, authService, userService) {
     }
 
     var onLoad = function(response) {
+      console.log(response);
       try {
         var results = {
           last_timestamp: response.last_timestamp,
           feed: FeedResponseFactory.getResponses(response.results),
         };
+        
         return callback(undefined, results);
       }
       catch (e) {

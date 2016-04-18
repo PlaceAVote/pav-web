@@ -42,6 +42,14 @@
 .c-card__content {
   position: relative;
 }
+
+.c-card__content--vertical-center {
+  display: table;
+  p {
+    display: table-cell;
+    vertical-align: middle;
+  }
+}
 /**
 * Some headers have icons to let
 * of the header title. The icons
@@ -173,3 +181,18 @@
   }
 } 
 
+
+
+
+
+/**
+* Timestamps are in the top right of a card
+*/
+
+.c-card__timestamp {
+  position: absolute;
+  right: 11px;
+  top: 13px;
+  @include font-size(10px);
+  color: $blue;
+}

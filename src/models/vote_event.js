@@ -8,6 +8,12 @@ function VoteEvent(options) {
   this.user_id = options.user_id;
   this.type = options.type;
   this.bill_title = options.bill_title;
+  this.event_id = options.event_id;
+  this.voter_first_name = options.voter_first_name;
+  this.voter_last_name = options.voter_last_name;
+  this.voter_id = options.voter_id;
+  this.voter_img_url = options.voter_img_url || '//cdn.placeavote.com/img/profile/profile-picture.png';
+  this.read = options.read;
 }
 
 module.exports = VoteEvent;
