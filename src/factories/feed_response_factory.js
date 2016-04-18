@@ -1,6 +1,7 @@
 var BillSummary = require('../models/bill_summary.js');
 var Issue = require('../models/issue.js');
 var VoteEvent = require('../models/vote_event.js');
+var Comment = require('../models/comment.js');
 
 function FeedResponseFactory() {}
 
@@ -17,6 +18,9 @@ FeedResponseFactory.getResponse = function(response) {
     }
     case 'vote' : {
       return new VoteEvent(response);
+    }
+    case 'comment' : {
+      return new Comment(response);
     }
     default: {
       return;

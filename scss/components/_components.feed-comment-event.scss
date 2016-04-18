@@ -1,0 +1,26 @@
+/*------------------------------------*\
+    #COMPONENT-FEED-COMMENT
+\*------------------------------------*/
+
+/**
+* Shows comments of users you are following
+* in the feed page. Small mods on the comment
+* styling.
+*/
+
+.c-card__feed-comment {
+    
+}
+
+.c-card__feed-comment .c-card__content--comments {
+    padding-bottom: 0;
+}
+
+
+.c-card__feed-comment .reply-show-hide {
+  width: 100%;
+}
+
+.c-card__feed-comment .comment-reply {
+  padding-left: 0;
+}
