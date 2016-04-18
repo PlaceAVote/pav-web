@@ -1,13 +1,13 @@
 var BillSummary = require('../models/bill_summary.js');
 var Issue = require('../models/issue.js');
+var VoteEvent = require('../models/vote_event.js');
+var Comment = require('../models/comment.js');
 
 function FeedResponseFactory() {}
 
 FeedResponseFactory.getResponse = function(response) {
   if (!response || !response.type) {
-    throw {
-      message: 'No Type Defined',
-    };
+    return;
   }
   switch (response.type) {
     case 'bill': {
@@ -16,10 +16,14 @@ FeedResponseFactory.getResponse = function(response) {
     case 'userissue': {
       return new Issue(response);
     }
+    case 'vote' : {
+      return new VoteEvent(response);
+    }
+    case 'comment' : {
+      return new Comment(response);
+    }
     default: {
-      throw {
-        message: 'Type Not Supported',
-      };
+      return;
     }
   }
 };
@@ -27,7 +31,10 @@ FeedResponseFactory.getResponse = function(response) {
 FeedResponseFactory.getResponses = function(responses) {
   var results = [];
   for (var i = 0; i < responses.length; i++) {
-    results.push(FeedResponseFactory.getResponse(responses[i]));
+    var feedResponse = FeedResponseFactory.getResponse(responses[i]);
+    if (feedResponse) {
+      results.push(feedResponse);
+    }
   }
   return results;
 };

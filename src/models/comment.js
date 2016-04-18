@@ -24,7 +24,6 @@ function Comment(options) {
   this.showChildren = true;
 }
 
-
 Comment.prototype.bodyText = function(options) {
   var that = this;
   var exp = /([a-z]+\:\/+)([^\/\s]*)([a-z0-9\-@\^=%&;\/~\+]*)[\?]?([^ \#]*)#?([^ \#]*)/ig;

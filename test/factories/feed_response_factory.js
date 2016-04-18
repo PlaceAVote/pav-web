@@ -14,11 +14,11 @@ var mockBill = {
 };
 
 describe('Single Response', function(){
-  it('throws error if no type is defined', function(){
+  it('does not throw error if no type is defined', function(){
     var fn = function() {
       var result = FeedResponseFactory.getResponse();
     }
-    expect(fn).to.throw({message:'No Type Defined'});
+    expect(fn).to.not.throw({message:'No Type Defined'});
   });
 
   it('returns a Bill for Bill type', function(){
@@ -33,11 +33,16 @@ describe('Single Response', function(){
     expect(result.bill_id).to.eql('hr2-114');
   });
 
-  it('throws error when default', function(){
+  it('does not throw error when default', function(){
     var fn = function() {
       var result = FeedResponseFactory.getResponse({type: 'cat'});
     }
-    expect(fn).to.throw({message:'Type Not Supported'});
+    expect(fn).to.not.throw({message:'Type Not Supported'});
+  });
+  it('does not add unsuppored types to responses', function(){
+      var data = [{type: 'bill'}, {type: 'userissue'}, {type: 'cat'}];
+      var results = FeedResponseFactory.getResponses(data);
+      expect(results.length).to.eql(2);
   });
 });
 

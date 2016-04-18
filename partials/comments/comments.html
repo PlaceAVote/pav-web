@@ -1,7 +1,7 @@
 <div>
 <div class="c-card__content c-card__content--comments row">
 
-  <div class="c-user-photo" 
+  <div class="c-user-photo c-user-photo--large" 
       ng-click="location.path('profile/' + comment.author)">
     <div ng-style="{'background-image': 'url(' + comment.author_img_url + ')'}">
     </div>
@@ -11,7 +11,14 @@
 
       <p class="c-card__username" 
          ng-click="location.path('profile/' + comment.author)">
-      {{comment.author_first_name}}</p>
+      {{comment.author_first_name}} <span ng-show="feed">{{comment.author_last_name}}</span></p>
+      
+      <p ng-show="feed">
+       in <span class="c-bill-title"
+                ng-click="location.path('bill/' + comment.bill_id)">
+                {{comment.bill_title}}
+                </span>
+      </p>
 
     <div class="c-card__comment-vote row">
 
@@ -26,9 +33,17 @@
       <span class="c-card__comment-reply-btn" ng-click="comment.showReplyInput()">reply</span>
     </div>
 
-      <p compile="comment.body"></p>
+      <p ng-hide="feed" compile="comment.body"></p>
 
-      <div class="c-comment__reply" ng-show="comment.replyInput">
+    </div>
+</div>
+  
+  <div class="c-card__content margin-top-medium" ng-show="feed">
+    <p>"<span compile="comment.body"></span>"</p>
+  </div>
+
+  <div class="l-12 group" ng-class="{'margin-bottom-large' : !feed}" ng-show="comment.replyInput">
+      <div class="c-comment__reply">
 
         <textarea type="text" placeholder="Reply" ng-model="comment.replyText" rows="1" msd-elastic></textarea>
 
@@ -43,9 +58,7 @@
         </div>
 
       </div>
-
-    </div>
-</div>
+  </div>
 
 <div>
 

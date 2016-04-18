@@ -58,6 +58,9 @@ LoginCtrl.prototype.loginWithFacebook = function() {
         that.loaded = true;
         return that.location.path('/');
       }
+      if (that.rs.notLoggedIn) {
+        that.showNotRegisteredPartial = false;
+      }
       that.rs.facebookSignUp = true;
       return that.location.path('/onboarding');
     }
@@ -79,15 +82,23 @@ LoginCtrl.prototype.loginWithFacebook = function() {
 };
 
 LoginCtrl.prototype.validate = function(u, hash) {
+  var that = this;
   var email = u.email;
   var password = u.password;
   this.user.emailValid = this.emailValidation(email);
   this.user.passwordValid = this.passwordValidation(password);
-  if (this.user.emailValid && this.user.passwordValid) {
-    this.userService.createUser(email, password);
-    this.showNotRegisteredPartial = false;
-    this.location.path(hash);
+  if (!this.user.emailValid || !this.user.passwordValid) {
+    return;
   }
+  this.userService.checkEmail(email, function(succeeded) {
+    if (succeeded) {
+      that.userService.createUser(email, password);
+      that.showNotRegisteredPartial = false;
+      that.location.path(hash);
+    } else {
+      that.emailUsed = true;
+    }
+  });
 };
 
 LoginCtrl.prototype.login = function(u, hash) {
@@ -142,6 +153,7 @@ LoginCtrl.prototype.passwordValidation = function(password) {
   if (password.length > 5 && passwordTrimmed === password) {
     return true;
   }
+  return false;
 };
 
 LoginCtrl.prototype.passwordReset = function(email) {
