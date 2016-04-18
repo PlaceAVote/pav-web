@@ -1,0 +1,15 @@
+/*------------------------------------*\
+    #COMPONENT-BILL-TITLE
+\*------------------------------------*/
+
+/**
+* This is a small type based component when the bill title is
+* used across a site, usually with in a card.
+*/
+
+.c-bill-title {
+    color: $blue;
+    font-style: italic;
+    font-weight: 500;
+    cursor: pointer;
+  }

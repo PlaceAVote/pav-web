@@ -1,0 +1,15 @@
+/*------------------------------------*\
+    #COMPONENT-USERNAME
+\*------------------------------------*/
+
+/**
+* This is a small type based component when the username is
+* used across a site, usually with in a card.
+*/
+
+.c-username {
+    color: $red;
+    font-style: normal;
+    font-weight: 500;
+    cursor: pointer;
+  }

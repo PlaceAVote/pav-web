@@ -1,0 +1,27 @@
+<div class="c-card margin-top-medium">
+
+  <h1>New Vote</h1>
+
+  <p class="c-card__timestamp">
+    {{vote.timestamp | amCalendar}}
+  </p>
+  
+  <hr />
+
+  <div class="c-card__content c-card__content--vertical-center row">
+
+  <div class="c-user-photo c-user-photo--large click" 
+       ng-click="location.path('profile/' + vote.voter_id)">
+    
+    <div ng-style="{'background-image': 'url(' + vote.voter_img_url + ')'}">
+    </div>
+
+  </div>
+
+  <p>
+    <span class="c-username" ng-click="location.path('profile/' + vote.voter_id)">{{vote.voter_first_name}} {{vote.voter_last_name}}</span>&nbsp;voted on the bill&nbsp;<span class="c-bill-title" ng-click="location.path('bill/' + vote.bill_id)">{{vote.bill_title}}</span>
+  </p>
+
+  </div>
+
+</div>

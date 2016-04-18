@@ -100,7 +100,7 @@ var voteConfirmedDirective = require('./directives/bills/vote_confirmed.js');
 var imageSmartDirective = require('./directives/image_smart.js');
 var updateMetaDirective = require('./directives/update_meta.js');
 var compileDirective = require('./directives/compile.js');
-
+var feedVoteEventDirective = require('./directives/feed_vote_event.js');
 var invalidDirective = require('./directives/invalid.js');
 
 // Thirdparty integrations
@@ -286,3 +286,4 @@ app.directive('voteConfirmed', ['$location', voteConfirmedDirective]);
 app.directive('imageSmart', [imageSmartDirective]);
 app.directive('updateMeta', ['$log', updateMetaDirective]);
 app.directive('compile', ['$compile', '$window', compileDirective]);
+app.directive('feedVoteEvent', ['$location', feedVoteEventDirective]);
