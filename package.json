@@ -2,10 +2,10 @@
   "name": "pav",
   "version": "0.0.1",
   "description": "Front End for Place a Vote",
-  "main": "app.js",
+  "main": "gulp& gulp browser-sync",
   "scripts": {
     "test": "gulp check",
-    "start": "node app.js",
+    "start": "gulp& gulp browser-sync",
     "install": "napa"
   },
   "napa": {
