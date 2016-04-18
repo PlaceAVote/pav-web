@@ -25,6 +25,8 @@
    <p ng-bind="issue.comment"></p>
    </div>
 
+   <div ng-show="edit"><textarea ng-model="issue.comment"></textarea><button ng-click="editIssue();">update</button></div>
+
    <a ng-if="issue.article_link" ng-href="{{issue.article_link}}" target="_blank" class="column issue-article padding-small margin-bottom-small" ng-style="{'background-image': 'url(' + issue.article_img + ')'}">
       <h2>{{issue.article_title}}</h2>
       <p>view link</p>

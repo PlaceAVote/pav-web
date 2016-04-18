@@ -1,6 +1,6 @@
 var tweet = require('../models/tweet.js');
 
-module.exports = function($location, issueService, facebook, $window) {
+module.exports = function($location, issueService, facebook, $window, userService) {
   return {
     restrict: 'E',
     scope: {
@@ -18,6 +18,10 @@ module.exports = function($location, issueService, facebook, $window) {
       }
       scope.location = $location;
       scope.issueService = issueService;
+      scope.userService = userService;
+
+      scope.edit = scope.userService.isUserMe(scope.issue.user_id);
+
       scope.eResponse = function(id, emo, issue) {
         var that = this;
         if (scope.example) {
@@ -101,7 +105,17 @@ module.exports = function($location, issueService, facebook, $window) {
         scope.facebook.share(scope.issueLocationFacebook);
       };
 
-      //scope.issueService.editIsse();
+      scope.editIssue = function() {
+        var body = {comment: scope.issue.comment};
+        scope.issueService.editIssue(scope.issue.issue_id, body, function(err, res) {
+          if (err) {
+            console.log('error', err);
+          }
+          if (res) {
+            console.log('res', res);
+          }
+        })
+      };
 
     },
   };

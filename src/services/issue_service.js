@@ -29,7 +29,8 @@ function IssueService($resource, authService, callback) {
   };
 
 
-  var editIssue = function(issue, callback) {
+  var editIssue = function(issue_id, issue, callback) {
+    console.log('editing: ', issue);
     if (!issue) {
       callback('Issue is required');
       return;
@@ -42,6 +43,7 @@ function IssueService($resource, authService, callback) {
     }
 
     var onLoad = function(result) {
+      console.log(result);
       callback(undefined, result);
     };
 
@@ -49,7 +51,7 @@ function IssueService($resource, authService, callback) {
       callback(err);
     };
 
-    var url = config.users.issue.endpoint;
+    var url = config.users.issue.endpoint + '/' + issue_id;
     var request = new $resource(url, undefined, {save: config.methods.postData(issue, token)});
 
     request.save(issue, onLoad, onError);
@@ -177,6 +179,7 @@ function IssueService($resource, authService, callback) {
     getIssueResponse: getIssueResponse,
     deleteIssueResponse: deleteIssueResponse,
     getIssue: getIssue,
+    editIssue: editIssue,
   };
 }
 
