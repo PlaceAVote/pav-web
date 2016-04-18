@@ -102,6 +102,7 @@ var updateMetaDirective = require('./directives/update_meta.js');
 var compileDirective = require('./directives/compile.js');
 var feedVoteEventDirective = require('./directives/feed_vote_event.js');
 var invalidDirective = require('./directives/invalid.js');
+var feedCommentEventDirective = require('./directives/feed_comment_event.js');
 
 // Thirdparty integrations
 var Facebook = require('./integrations/facebook.js');
@@ -287,3 +288,4 @@ app.directive('imageSmart', [imageSmartDirective]);
 app.directive('updateMeta', ['$log', updateMetaDirective]);
 app.directive('compile', ['$compile', '$window', compileDirective]);
 app.directive('feedVoteEvent', ['$location', feedVoteEventDirective]);
+app.directive('feedCommentEvent', ['$location', feedCommentEventDirective]);

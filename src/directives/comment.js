@@ -5,6 +5,7 @@ module.exports = function($compile, commentService, $anchorScroll, $timeout, $lo
     scope: {
       comment: '=',
       parent: '=',
+      feed: '=',
     },
     templateUrl: 'partials/comments/comments.html',
     link: function(scope, element, attrs, controllerAs) {
@@ -13,6 +14,14 @@ module.exports = function($compile, commentService, $anchorScroll, $timeout, $lo
       scope.location = $location;
       scope.window = $window;
 
+      // This enables bill title to display if comment is for feed.
+      scope.$watch('feed', function(o,n) {
+        if (n) {
+          scope.feed = n;
+        }
+      });
+      
+      
       if (angular.isArray(scope.comment.replies)) {
         element.append('<div class=\'comment-container comment-reply\' ng-show=\'comment.showChildren\'><comments comments=\'comment.replies\'></comments></div>');
         var html = element.html();
