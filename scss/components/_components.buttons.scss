@@ -54,6 +54,18 @@
 }
 
 
+.c-button--medium {
+  padding: 5px 10px;
+  @include font-size(12px);
+}
+
+
+.c-button--small {
+  padding: 3px 7px;
+  @include font-size(10px);
+}
+
+
 
 
 

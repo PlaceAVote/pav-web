@@ -30,7 +30,6 @@ function IssueService($resource, authService, callback) {
 
 
   var editIssue = function(issue_id, issue, callback) {
-    console.log('editing: ', issue);
     if (!issue) {
       callback('Issue is required');
       return;
@@ -43,7 +42,6 @@ function IssueService($resource, authService, callback) {
     }
 
     var onLoad = function(result) {
-      console.log(result);
       callback(undefined, result);
     };
 

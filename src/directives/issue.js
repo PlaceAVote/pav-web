@@ -17,6 +17,8 @@ module.exports = function($location, issueService, facebook, $window, userServic
         scope.single = true;
       }
 
+      scope.original = scope.issue.comment;
+
       scope.location = $location;
 
       scope.issueService = issueService;
@@ -28,14 +30,19 @@ module.exports = function($location, issueService, facebook, $window, userServic
       scope.edit = scope.userService.isUserMe(scope.issue.user_id);
 
       scope.eResponse = function(id, emo, issue) {
+
         var that = this;
+        
         if (scope.example) {
           return;
         }
+
         if (this.loading) {
           return;
         }
+
         this.loading = true;
+
         if (emo === issue.emotional_response) {
           scope.issueService.deleteIssueResponse(id, emo, function(err, res) {
             if (err) {
@@ -114,17 +121,37 @@ module.exports = function($location, issueService, facebook, $window, userServic
 
       // Issue Editing
 
+      scope.cancelIssue = function() {
+        scope.issue.comment = scope.original;
+        scope.showEditTools = false;
+      }
+
       scope.editIssue = function() {
+
         var body = {comment: scope.issue.comment};
+
+        if(scope.editLoading || scope.original === scope.issue.comment) {
+          return;
+        }
+
+        scope.editLoading = true;
+
         scope.issueService.editIssue(scope.issue.issue_id, body, function(err, res) {
+        
+          scope.editLoading = false;  
+
           if (err) {
-            console.log('error', err);
+            scope.setAlertMessage('There was a problem updataing your Issue', false);
           }
+
           if (res) {
-            console.log('res', res);
-            scope.setAlertMessage('Your message has been edited', 'green')
+            scope.showEditTools = false;
+            scope.original = res.comment;
+            scope.setAlertMessage('Your message has been edited', true)
           }
-        })
+
+        });
+
       };
 
       scope.setAlertMessage = function(message, success) {
@@ -135,7 +162,7 @@ module.exports = function($location, issueService, facebook, $window, userServic
 
         scope.timeout(function() {
           scope.alertMessage = {};
-        }, 1000);
+        }, 3000);
       }
 
 
