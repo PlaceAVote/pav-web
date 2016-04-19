@@ -1,7 +1,7 @@
 var config = require('../config/endpoints.js');
 
 Facebook = function() {
-  var facebook;
+  var facebook, auth, status;
   // The fields we request from facebook.
   var fields = {
     fields: 'first_name, last_name, picture, email, birthday, hometown, cover, gender',
@@ -18,6 +18,10 @@ Facebook = function() {
         version: 'v2.4',
       });
       facebook = FB;
+      facebook.getLoginStatus(function(response) {
+        auth = response.authResponse;
+        status = response.status;
+      });
     };
     (function(d, s, id) {
       var js;
@@ -67,6 +71,7 @@ Facebook = function() {
       var auth = response.authResponse;
       getUserProfile(auth, callback);
     }, scope);
+
   };
 
   /**
@@ -74,14 +79,10 @@ Facebook = function() {
    * user for permissions.  Return user object
    */
   var login = function(callback) {
-    facebook.getLoginStatus(function(response) {
-      var auth = response.authResponse;
-      if (response.status === 'connected') {
-        getUserProfile(auth, callback);
-      } else {
-        loginToFacebook(callback);
-      }
-    });
+    if (auth && status === 'connected') {
+      return getUserProfile(auth, callback);
+    }
+    loginToFacebook(callback);
   };
 
   var share = function(url) {
