@@ -1,6 +1,6 @@
 var tweet = require('../models/tweet.js');
 
-module.exports = function($location, issueService, facebook, $window, userService) {
+module.exports = function($location, issueService, facebook, $window, userService, $timeout) {
   return {
     restrict: 'E',
     scope: {
@@ -16,9 +16,14 @@ module.exports = function($location, issueService, facebook, $window, userServic
       if (attr.$attr.single) {
         scope.single = true;
       }
+
       scope.location = $location;
+
       scope.issueService = issueService;
+
       scope.userService = userService;
+
+      scope.timeout = $timeout;
 
       scope.edit = scope.userService.isUserMe(scope.issue.user_id);
 
@@ -105,6 +110,10 @@ module.exports = function($location, issueService, facebook, $window, userServic
         scope.facebook.share(scope.issueLocationFacebook);
       };
 
+
+
+      // Issue Editing
+
       scope.editIssue = function() {
         var body = {comment: scope.issue.comment};
         scope.issueService.editIssue(scope.issue.issue_id, body, function(err, res) {
@@ -113,9 +122,22 @@ module.exports = function($location, issueService, facebook, $window, userServic
           }
           if (res) {
             console.log('res', res);
+            scope.setAlertMessage('Your message has been edited', 'green')
           }
         })
       };
+
+      scope.setAlertMessage = function(message, success) {
+        scope.alertMessage = {
+            message: message,
+            success: success,
+          };
+
+        scope.timeout(function() {
+          scope.alertMessage = {};
+        }, 1000);
+      }
+
 
     },
   };
