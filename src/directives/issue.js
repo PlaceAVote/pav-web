@@ -32,7 +32,7 @@ module.exports = function($location, issueService, facebook, $window, userServic
       scope.eResponse = function(id, emo, issue) {
 
         var that = this;
-        
+
         if (scope.example) {
           return;
         }
@@ -124,21 +124,20 @@ module.exports = function($location, issueService, facebook, $window, userServic
       scope.cancelIssue = function() {
         scope.issue.comment = scope.original;
         scope.showEditTools = false;
-      }
+      };
 
       scope.editIssue = function() {
 
         var body = {comment: scope.issue.comment};
 
-        if(scope.editLoading || scope.original === scope.issue.comment) {
+        if (scope.editLoading || scope.original === scope.issue.comment) {
           return;
         }
 
         scope.editLoading = true;
-
         scope.issueService.editIssue(scope.issue.issue_id, body, function(err, res) {
-        
-          scope.editLoading = false;  
+
+          scope.editLoading = false;
 
           if (err) {
             scope.setAlertMessage('There was a problem updataing your Issue', false);
@@ -147,7 +146,7 @@ module.exports = function($location, issueService, facebook, $window, userServic
           if (res) {
             scope.showEditTools = false;
             scope.original = res.comment;
-            scope.setAlertMessage('Your message has been edited', true)
+            scope.setAlertMessage('Your message has been edited', true);
           }
 
         });
@@ -163,7 +162,7 @@ module.exports = function($location, issueService, facebook, $window, userServic
         scope.timeout(function() {
           scope.alertMessage = {};
         }, 3000);
-      }
+      };
 
 
     },
