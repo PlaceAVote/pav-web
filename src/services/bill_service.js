@@ -5,7 +5,7 @@ var config = require('../config/endpoints.js');
 var TrendingBill = require('../models/trending_bill.js');
 
 /**
- * maps a trend response to a trend model
+ * Maps a trend response to a trend model
  */
 
 function toTrend(response) {
