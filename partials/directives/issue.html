@@ -20,12 +20,16 @@
         ng-show="edit"
         ng-click="editMenu = !editMenu"></i>
 
-     <ul 
-          class="c-card__menu"
+     <div class="c-card__menu"
           ng-show="editMenu">
-      <li class="click"
-          ng-click="showEditTools = !showEditTools; editMenu = false">Edit Issue</li>
-     </ul>
+
+       <div class="c-card__menu-arrow"></div>
+       
+       <ul>
+        <li class="click"
+            ng-click="showEditTools = !showEditTools; editMenu = false">Edit Issue</li>
+       </ul>
+     </div>
 
      <div ng-show="single" class="h-right row">
        <button ng-hide="profile.isMe() || profile.rs.notLoggedIn" ng-click="profile.follow()" class="click medium-button green-button h-right">{{follow}}</button>
@@ -68,7 +72,7 @@
                        c-button--medium
                        c-button--grey
                        margin-left-small"
-                       
+
                 ng-click="cancelIssue();">
                           Cancel</button>
            </div>

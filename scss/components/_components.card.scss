@@ -209,18 +209,26 @@
 .c-card__menu {
   position: absolute;
   background: white;
-  padding: 10px;
   box-shadow: 0px 2px 10px -2px rgba(0,0,0,0.2);
   top: 37px;
-  right: 10px;
+  right: 6px;
   border-radius: 3px;
   border: 1px solid $widgetborder;
+}
+
+.c-card__menu ul {
+  padding: 10px;
+  z-index: 11;
+  position: relative;
+  background: white;
+  border-radius: 3px;
 }
 
 .c-card__menu li {
   @include font-size(10px);
   color: $blue;
 }
+
 
 .c-card__menu-icon {
   color: $blue;
@@ -231,6 +239,18 @@
 }
 
 
+.c-card__menu-arrow {
+  position: absolute;
+  height: 10px;
+  width: 10px;
+  background: white;
+  z-index: 10;
+  top: -5px;
+  right: 5px;
+  border-top: 1px solid $widgetborder;
+  border-right: 1px solid $widgetborder;
+  transform: rotateZ(-45deg);
+}
 
 
 
@@ -260,5 +280,4 @@
 */
 
 .c-card__response-message {
-
 }
