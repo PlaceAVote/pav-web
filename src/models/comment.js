@@ -27,6 +27,17 @@ function Comment(options) {
 Comment.prototype.bodyText = function(options) {
   var that = this;
   var exp = /([a-z]+\:\/+)([^\/\s]*)([a-z0-9\-@\^=%&;\/~\+]*)[\?]?([^ \#]*)#?([^ \#]*)/ig;
+  var scriptExp = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
+  var objectExp = /<object\b[^<]*(?:(?!<\/object>)<[^<]*)*<\/object>/gi;
+
+  if (options.body) {
+
+    options.body = options.body.replace(scriptExp, '');
+
+    options.body = options.body.replace(objectExp, '');
+
+  }
+
   this.links = [];
 
   while ((link = exp.exec(options.body)) !== null) {
@@ -92,8 +103,10 @@ Comment.prototype.hideReplyInput = function() {
 
 Comment.prototype.reply = function(billId, service, timeout) {
   var that = this;
-  var r = new RegExp(/<script[\s\S]*?>[\s\S]*?<\/script>/gi);
-  if (r.test(this.replyText)) {
+  var scriptExp = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
+  var objectExp = /<object\b[^<]*(?:(?!<\/object>)<[^<]*)*<\/object>/gi;
+
+  if (scriptExp.test(this.replyText) || objectExp.test(this.replyText)) {
     this.commentError('Sorry, there was an error.', timeout);
     this.replyText = '';
     return;

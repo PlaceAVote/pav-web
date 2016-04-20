@@ -119,7 +119,10 @@ ng-show="bill.forComment.author"
 
     <textarea name='commentOnBillBox' rows="1" ng-model='bill.commentBody' placeholder='Write your comment here' msd-elastic></textarea>
     <button ng-click="bill.postComment()" class="c-comment__post-btn btn-blank">Post</button>
-  
+  </div>
+
+  <div class="red-bg" ng-show="bill.errorMessage">
+  <p class="white padding-small">{{bill.errorMessage}}</p>
   </div>
 
   <div 
