@@ -172,6 +172,7 @@ module.exports = function($location, issueService, facebook, $window, userServic
 
         scope.issueService.deleteIssue(scope.issue.issue_id, function(err, res) {
           scope.deleteLoading = false;
+          scope.showDelete = false;
 
           if (err) {
             scope.setAlertMessage('There was a problem deleting your issue', false);

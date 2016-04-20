@@ -199,6 +199,7 @@ describe('Issue Directive', function() {
       },
       original: 'This comment has been edited by the user but no posted.',
       deleteLoading: false,
+      showDelete: true,
       $watch: function() {},
       $apply: function() {},
     };
@@ -208,6 +209,7 @@ describe('Issue Directive', function() {
     scope.deleteIssue();
         expect(scope.deleteLoading).to.equal(false);
         expect(scope.issue.issueDelete).to.equal(true);
+        expect(scope.showDelete).to.equal(false);
         done();
   });
 
