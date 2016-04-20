@@ -149,12 +149,43 @@ function CommentService($resource, userService, authService) {
 
   }; 
 
+
+
+  var deleteComment = function(comment_id, callback) {
+
+    if (!comment_id) {
+      return;
+    }
+
+    var onError = function(err) {
+      console.log(err, 'error')
+      return callback(err);
+    };
+ 
+
+    var onLoad = function(res) {
+      console.log(res, 'res');
+      return callback(undefined, res);
+    };
+
+    // var body = {body: comment};
+
+    var url = config.comments.comments + comment_id;
+    config.methods.delete.headers.Authorization = authService.getAccessToken();
+    // var token = authService.getAccessToken();
+
+    var editComment = new $resource(url, {}, {edit: config.methods.delete});
+
+    editComment.edit(onLoad, onError);
+
+  }; 
   return {
     revoke: revoke,
     reply: reply,
     like: like,
     dislike: dislike,
     edit: edit,
+    deleteComment: deleteComment,
   };
 }
 

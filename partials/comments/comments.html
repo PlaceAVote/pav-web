@@ -58,8 +58,46 @@
 
     </div>
 
-      <p ng-hide="feed || showEditTools" compile="comment.body"></p>
+      <p ng-hide="feed || showEditTools || showDelete" compile="comment.body"></p>
             
+
+
+        <!-- Delete Comment -->
+
+        <div ng-show="edit && showDelete" class="col" >
+
+          <p class="bold">
+            Are you sure you want to delete this Comment?
+          </p>
+
+          <p style="font-style: italic;" ng-bind="comment.body"></p>
+
+           <div class="row 
+                       h-right
+                       margin-top-small">
+                <button 
+                class="c-button 
+                      c-button--medium 
+                      c-button--red"
+
+                ng-click="deleteComment();">
+                          Delete Comment</button>
+
+                <button 
+                class="c-button
+                       c-button--medium
+                       c-button--grey
+                       margin-left-small"
+
+                ng-click="cancelDelete();">
+                          Cancel</button>
+           </div>
+
+        </div>
+
+
+
+        <!-- Edit Comment -->
         <div ng-show="edit && showEditTools" class="col">
            <textarea 
               ng-show="showEditTools"

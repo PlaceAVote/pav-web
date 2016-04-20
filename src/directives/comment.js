@@ -66,10 +66,46 @@ module.exports = function($compile, commentService, $anchorScroll, $timeout, $lo
           }
 
           if (res) {
+            console.log(res);
             scope.showEditTools = false;
             scope.original = res.body;
             scope.setAlertMessage('Your comment has been edited', true);
           }
+        });
+
+      };
+
+      scope.cancelDelete = function() {
+        scope.showDelete = false;
+      };
+
+
+      scope.deleteComment = function() {
+
+        if (scope.deleteLoading) {
+          return;
+        }
+
+        scope.deleteLoading = true;
+
+        scope.commentService.deleteComment(scope.comment.id, function(err, res) {
+          scope.deleteLoading = false;
+          scope.showDelete = false;
+
+          if (err) {
+            scope.setAlertMessage('Sorry, there was a problem deleting your comment', false);
+          }
+
+          if (res) {
+            scope.setAlertMessage('Comment deleted.', false);
+            scope.timeout(function() {
+              scope.comment.commentDelete = true;
+              // scope.$apply();
+              return;
+            }, 1000);
+
+          }
+
         });
 
       };
