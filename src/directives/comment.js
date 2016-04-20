@@ -35,6 +35,15 @@ module.exports = function($compile, commentService, $anchorScroll, $timeout, $lo
           }, 1000);
         }
       }
+
+
+      // Edit Method
+
+      scope.editComment = function() {
+        console.log(scope.comment);
+        // scope.commentService.edit(comment.comment_id)
+      };
+
     },
   };
 };

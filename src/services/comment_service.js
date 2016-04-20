@@ -115,13 +115,73 @@ function CommentService($resource, userService, authService) {
     resource.dislike(body, onLoad, onError);
   };
 
+  // Edit Comments
+
+  var edit = function(comment_id, callback) {
+    if (!comment_id) {
+      return;
+    }
+
+    var onError = function(err) {
+      console.log('err')
+      return callback(err);
+    };
+ 
+
+    var onLoad = function(res) {
+      console.log('res');
+      return callback(res);
+    };
+
+    var url = config.comments.edit + '/' + comment_id;
+    config.methods.post.headers.Authorization = authService.getAccessToken();
+
+    var editComment = new $resource(url, {}, {edit: config.methods.post});
+
+    editComment.edit(onError, onLoad);
+
+  }; 
+
   return {
     revoke: revoke,
     reply: reply,
     like: like,
     dislike: dislike,
+    edit: edit,
   };
 }
 
 module.exports = CommentService;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
