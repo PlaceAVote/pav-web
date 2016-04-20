@@ -10,10 +10,13 @@ describe('Issue Directive', function() {
     setIssueResponse: function(id, emo, callback) {
       callback(undefined, {emotional_response: 'negative'});
     },
+    deleteIssue: function(id, callback) {
+      callback(undefined, true);
+    },
   };
 
   var mockTimeOut = function(f) {
-    return f;
+    return f();
   }
 
   var mockAttr = {
@@ -167,6 +170,46 @@ describe('Issue Directive', function() {
         done();
   });
 
+
+  it('deleteIssue() should return if deleting is occuring', function(done) {
+      var scope = {
+      issue: {
+        issue_id: '12345',
+        comment: 'This comment has been edited by the user but no posted.',
+      },
+      original: 'This comment has been edited by the user but no posted.',
+      deleteLoading: true,
+      $watch: function() {},
+    };
+
+    var subject = new Issues(mockLocation, mockIssueService, undefined, mockWindow, mockUserServiceSuccess, mockTimeOut);  
+    subject.link(scope, undefined, mockAttr);
+    scope.issue.comment += ' Edited.';
+    scope.deleteIssue();
+        expect(scope.deleteLoading).to.equal(true);
+        done();
+  });
+
+
+  it('deleteIssue() should set deleteLoading back to false and issueDelete to true', function(done) {
+      var scope = {
+      issue: {
+        issue_id: '12345',
+        comment: 'This comment has been edited by the user but no posted.',
+      },
+      original: 'This comment has been edited by the user but no posted.',
+      deleteLoading: false,
+      $watch: function() {},
+      $apply: function() {},
+    };
+
+    var subject = new Issues(mockLocation, mockIssueService, undefined, mockWindow, mockUserServiceSuccess, mockTimeOut);  
+    subject.link(scope, undefined, mockAttr);
+    scope.deleteIssue();
+        expect(scope.deleteLoading).to.equal(false);
+        expect(scope.issue.issueDelete).to.equal(true);
+        done();
+  });
 
 });
 

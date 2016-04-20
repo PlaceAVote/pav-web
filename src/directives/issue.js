@@ -159,7 +159,7 @@ module.exports = function($location, issueService, facebook, $window, userServic
 
       scope.cancelDelete = function() {
         scope.showDelete = false;
-      }
+      };
 
 
       scope.deleteIssue = function() {
@@ -179,7 +179,6 @@ module.exports = function($location, issueService, facebook, $window, userServic
 
           if (res) {
             scope.setAlertMessage('Issue deleted.', false);
-            // scope.issue.issueDelete = true;
             scope.timeout(function() {
               scope.issue.issueDelete = true;
               scope.$apply();
