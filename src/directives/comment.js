@@ -1,4 +1,4 @@
-module.exports = function($compile, commentService, $anchorScroll, $timeout, $location, $window) {
+module.exports = function($compile, commentService, $anchorScroll, $timeout, $location, $window, userService) {
   return {
     restrict: 'E',
     replace: true,
@@ -13,6 +13,7 @@ module.exports = function($compile, commentService, $anchorScroll, $timeout, $lo
       scope.timeout = $timeout;
       scope.location = $location;
       scope.window = $window;
+      scope.userService = userService;
 
       // This enables bill title to display if comment is for feed.
       scope.$watch('feed', function(o,n) {
@@ -38,10 +39,52 @@ module.exports = function($compile, commentService, $anchorScroll, $timeout, $lo
 
 
       // Edit Method
+      if (scope.comment) {
+        scope.original = scope.comment.body;
+        scope.edit = scope.userService.isUserMe(scope.comment.author);
+      }
 
+
+      scope.cancelEdit = function() {
+        scope.comment.body = scope.original;
+        scope.showEditTools = false;
+      };
+        
       scope.editComment = function() {
-        console.log(scope.comment);
-        // scope.commentService.edit(comment.comment_id)
+
+        if (scope.editLoading) {
+          return;
+        }
+
+        scope.editLoading = true;
+
+        scope.commentService.edit(scope.comment.id, scope.comment.body, function(err, res) {
+          scope.editLoading = false;
+
+          if (err) {
+            scope.setAlertMessage('There was a problem editing your comment', false);
+          }
+
+          if (res) {
+            scope.showEditTools = false;
+            scope.original = res.body;
+            scope.setAlertMessage('Your comment has been edited', true);
+          }
+        });
+
+      };
+
+
+      scope.setAlertMessage = function(message, success) {
+        scope.alertMessage = {
+            visible: true,
+            message: message,
+            success: success,
+          };
+
+        scope.timeout(function() {
+          scope.alertMessage.visible = false;
+        }, 3000);
       };
 
     },

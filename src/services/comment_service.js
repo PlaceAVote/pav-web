@@ -117,7 +117,9 @@ function CommentService($resource, userService, authService) {
 
   // Edit Comments
 
-  var edit = function(comment_id, callback) {
+  var edit = function(comment_id, comment, callback) {
+
+    console.log('service', comment_id);
     if (!comment_id) {
       return;
     }
@@ -130,15 +132,20 @@ function CommentService($resource, userService, authService) {
 
     var onLoad = function(res) {
       console.log('res');
-      return callback(res);
+      return callback(undefined, res);
     };
 
-    var url = config.comments.edit + '/' + comment_id;
+    console.log('service');
+
+    var body = {body: comment};
+
+    var url = config.comments.comments + comment_id;
     config.methods.post.headers.Authorization = authService.getAccessToken();
+    var token = authService.getAccessToken();
 
     var editComment = new $resource(url, {}, {edit: config.methods.post});
 
-    editComment.edit(onError, onLoad);
+    editComment.edit(body, onLoad, onError);
 
   }; 
 

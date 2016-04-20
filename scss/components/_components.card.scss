@@ -221,9 +221,12 @@
   position: relative;
   background: white;
   border-radius: 3px;
+  padding-left: 0px !important;
 }
 
 .c-card__menu li {
+  list-style-type: none;
+  margin: 0;
   padding: 5px 10px;
   @include font-size(10px);
   color: $blue;
