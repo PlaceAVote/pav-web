@@ -30,8 +30,7 @@ ng-show="bill.forComment.author"
             {{bill.forComment.author_first_name}}
           </p>
 
-          <p>
-            {{bill.forComment.body}}
+          <p compile="bill.forComment.body">
           </p>
 
           <div class="c-card__comment-vote row">
@@ -80,8 +79,7 @@ ng-show="bill.forComment.author"
             {{bill.againstComment.author_first_name}}
           </p>
 
-          <p>
-            {{bill.againstComment.body}}
+          <p compile="bill.againstComment.body">
           </p>
 
           <div class="c-card__comment-vote row">
