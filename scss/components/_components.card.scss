@@ -227,6 +227,7 @@
   padding: 5px 10px;
   @include font-size(10px);
   color: $blue;
+  cursor: pointer;
 }
 
 
@@ -236,6 +237,9 @@
   top: 18px;
   right: 11px;
   font-size: 12px;
+  cursor: pointer;
+  z-index: 9;
+  display: block;
   @include media($mobile) {
     top: 21px;
   }
