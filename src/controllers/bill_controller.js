@@ -287,12 +287,17 @@ BillController.prototype.postComment = function() {
   if (!that.validationHandler()) {
     return;
   }
-  var r = new RegExp(/<script[\s\S]*?>[\s\S]*?<\/script>/gi);
+
   if (!this.billService || !this.billService.postComment) {
     return;
   }
-  if (r.test(this.commentBody)) {
+
+  var scriptExp = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
+  var objectExp = /<object\b[^<]*(?:(?!<\/object>)<[^<]*)*<\/object>/gi;
+
+  if (scriptExp.test(this.commentBody) || objectExp.test(this.commentBody)) {
     this.commentError('Sorry, there was an error.');
+    console.log('caught');
     this.commentBody = '';
     return;
   }

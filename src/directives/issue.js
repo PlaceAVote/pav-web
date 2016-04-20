@@ -17,8 +17,6 @@ module.exports = function($location, issueService, facebook, $window, userServic
         scope.single = true;
       }
 
-      scope.original = scope.issue.comment;
-
       scope.location = $location;
 
       scope.issueService = issueService;
@@ -27,7 +25,12 @@ module.exports = function($location, issueService, facebook, $window, userServic
 
       scope.timeout = $timeout;
 
-      scope.edit = scope.userService.isUserMe(scope.issue.user_id);
+
+      if (scope.issue) {
+        scope.original = scope.issue.comment;
+        scope.edit = scope.userService.isUserMe(scope.issue.user_id);        
+      }
+
 
       scope.eResponse = function(id, emo, issue) {
 
@@ -140,7 +143,7 @@ module.exports = function($location, issueService, facebook, $window, userServic
           scope.editLoading = false;
 
           if (err) {
-            scope.setAlertMessage('There was a problem updataing your Issue', false);
+            scope.setAlertMessage('There was a problem updating your Issue', false);
           }
 
           if (res) {
@@ -155,12 +158,13 @@ module.exports = function($location, issueService, facebook, $window, userServic
 
       scope.setAlertMessage = function(message, success) {
         scope.alertMessage = {
+            visible: true,
             message: message,
             success: success,
           };
 
         scope.timeout(function() {
-          scope.alertMessage = {};
+          scope.alertMessage.visible = false;
         }, 3000);
       };
 

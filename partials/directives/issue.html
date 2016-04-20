@@ -24,7 +24,7 @@
           ng-show="editMenu">
 
        <div class="c-card__menu-arrow"></div>
-       
+
        <ul>
         <li class="click"
             ng-click="showEditTools = !showEditTools; editMenu = false">Edit Issue</li>
@@ -80,7 +80,7 @@
    </div>
 
 
-    <div ng-show="alertMessage.message" class="c-card__response-message">
+    <div ng-show="alertMessage.visible" class="c-card__response-message">
       <p ng-class="{'red': !alertMessage.success, 'green': alertMessage.success}">{{alertMessage.message}}</p>
     </div>
 
