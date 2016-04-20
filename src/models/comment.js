@@ -27,7 +27,6 @@ function Comment(options) {
 Comment.prototype.bodyText = function(options) {
   var that = this;
   var exp = /([a-z]+\:\/+)([^\/\s]*)([a-z0-9\-@\^=%&;\/~\+]*)[\?]?([^ \#]*)#?([^ \#]*)/ig;
-  
   var scriptExp = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
   var objectExp = /<object\b[^<]*(?:(?!<\/object>)<[^<]*)*<\/object>/gi;
 
@@ -38,7 +37,7 @@ Comment.prototype.bodyText = function(options) {
     options.body = options.body.replace(objectExp, '');
 
   }
-  
+
   this.links = [];
 
   while ((link = exp.exec(options.body)) !== null) {

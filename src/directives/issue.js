@@ -28,7 +28,7 @@ module.exports = function($location, issueService, facebook, $window, userServic
 
       if (scope.issue) {
         scope.original = scope.issue.comment;
-        scope.edit = scope.userService.isUserMe(scope.issue.user_id);        
+        scope.edit = scope.userService.isUserMe(scope.issue.user_id);
       }
 
 
