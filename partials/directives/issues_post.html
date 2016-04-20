@@ -59,7 +59,9 @@
       </issue>
     </div>
 
-    <div ng-repeat="x in issues.myIssues" class="margin-top-medium card padding-small"> 
+    <div ng-repeat="x in issues.myIssues" 
+         class="margin-top-medium card padding-small"
+         ng-hide="x.issueDelete">
       <issue issue="x"></issue>
     </div>
 </div>

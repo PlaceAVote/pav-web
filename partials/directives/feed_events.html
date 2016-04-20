@@ -3,7 +3,9 @@
   <feed-bill-event ng-switch-when="bill" bill="event">
   </feed-bill-event>
 
-  <div ng-switch-when="issue" class="margin-top-medium card padding-small">
+  <div ng-switch-when="issue"
+       ng-hide="event.issueDelete"
+       class="margin-top-medium card padding-small c-issue">
     <issue issue="event"></issue>
   </div>
 
