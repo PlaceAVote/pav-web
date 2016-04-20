@@ -56,6 +56,36 @@ function IssueService($resource, authService, callback) {
   };
 
 
+  var deleteIssue = function(issue_id, callback) {
+    if (!issue_id) {
+      callback('Issue is required');
+      return;
+    }
+
+    var token = authService.getAccessToken();
+    if (!token) {
+      callback('Token is needed to  a issue');
+      return;
+    }
+
+    var onLoad = function(result) {
+      callback(undefined, result);
+    };
+
+    var onError = function(err) {
+      callback(err);
+    };
+
+    config.methods.deleteData.headers.Authorization = token;
+
+    var url = config.users.issue.endpoint + '/' + issue_id;
+    var request = new $resource(url, undefined, {delete: config.methods.deleteData});
+
+    request.delete(onLoad, onError);
+  };
+
+
+
   var setIssueResponse = function(issue_id, response_value, callback) {
     if (!issue_id || response_value === undefined) {
       callback('Issue id and response value is required');
@@ -106,9 +136,6 @@ function IssueService($resource, authService, callback) {
       callback(err);
     };
 
-    var body = {
-      emotional_response: response_value,
-    };
 
     var url = config.users.issue.response(issue_id);
     var request = new $resource(url, undefined, {setResponse: config.methods.del.delete(body, token)});
@@ -178,6 +205,7 @@ function IssueService($resource, authService, callback) {
     deleteIssueResponse: deleteIssueResponse,
     getIssue: getIssue,
     editIssue: editIssue,
+    deleteIssue: deleteIssue,
   };
 }
 

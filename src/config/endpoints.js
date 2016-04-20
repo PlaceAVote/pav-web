@@ -30,6 +30,15 @@ module.exports = {
       },
       withCredentials: false,
     },
+    deleteData: {
+      method: 'DELETE',
+      isArray: false,
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      withCredentials: false,
+    },
     del: {
       delete: function(id, token) {
         req = {

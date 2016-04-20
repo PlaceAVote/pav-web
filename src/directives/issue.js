@@ -11,7 +11,7 @@ module.exports = function($location, issueService, facebook, $window, userServic
       profile: '=',
     },
     templateUrl: 'partials/directives/issue.html',
-    link: function(scope, el, attr) {
+    link: function(scope, el, attr, controller) {
 
       if (attr.$attr.single) {
         scope.single = true;
@@ -150,6 +150,42 @@ module.exports = function($location, issueService, facebook, $window, userServic
             scope.showEditTools = false;
             scope.original = res.comment;
             scope.setAlertMessage('Your message has been edited', true);
+          }
+
+        });
+
+      };
+
+
+      scope.cancelDelete = function() {
+        scope.showDelete = false;
+      }
+
+
+      scope.deleteIssue = function() {
+
+        if (scope.deleteLoading) {
+          return;
+        }
+
+        scope.deleteLoading = true;
+
+        scope.issueService.deleteIssue(scope.issue.issue_id, function(err, res) {
+          scope.deleteLoading = false;
+
+          if (err) {
+            scope.setAlertMessage('There was a problem deleting your issue', false);
+          }
+
+          if (res) {
+            scope.setAlertMessage('Issue deleted.', false);
+            // scope.issue.issueDelete = true;
+            scope.timeout(function() {
+              scope.issue.issueDelete = true;
+              scope.$apply();
+              return;
+            }, 1000);
+
           }
 
         });

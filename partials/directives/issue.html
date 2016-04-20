@@ -1,4 +1,5 @@
-<div class="issue-card">
+<div class="issue-card"
+     ng-hide="issueDeleted">
   <div class="row event-description">
      <div class="profile-image-holder middle margin-right-small click" ng-click="issue.goToProfile(location)">
         <div ng-style="{'background-image': 'url(' + issue.author_img_url + ')'}">
@@ -17,18 +18,27 @@
      <i class="c-card__menu-icon 
               icon-arrow-down 
               click"
-        ng-show="edit"
+        ng-show="edit || edit && !single"
         ng-click="editMenu = !editMenu"></i>
 
      <div class="c-card__menu"
-          ng-show="editMenu">
+          ng-show="editMenu"
+          ng-mouseleave="editMenu = false">
 
        <div class="c-card__menu-arrow"></div>
 
        <ul>
-        <li class="click"
-            ng-click="showEditTools = !showEditTools; editMenu = false">Edit Issue</li>
-       </ul>
+          <li class="click"
+              ng-click="showEditTools = !showEditTools;
+                        editMenu = false">
+              Edit Issue
+          </li>
+          <li class="click"
+              ng-click="showDelete = !showDelete;
+                        editMenu = false">
+              Delete Issue
+          </li>
+        </ul>
      </div>
 
      <div ng-show="single" class="h-right row">
@@ -42,9 +52,52 @@
     <p class="title">Talking About: <span ng-click="issue.goToBill(location)" class="bill-ref blue pale-bg margin-left-small mobile-margin-left-none mobile-margin-top-small medium click">{{issue.bill_title}}</span></p> 
    </div>
    
-   <div ng-hide="showEditTools" class="row issue-comment margin-bottom-small">
+   <div ng-hide="showEditTools || showDelete" class="row issue-comment margin-bottom-small">
    <p ng-bind="issue.comment"></p>
    </div>
+
+
+
+
+
+   <!-- Delete -->
+
+   <div ng-show="edit && showDelete" class="col" 
+        loader
+        loader-context="deleteLoading" 
+        truthy>
+
+          <p class="bold">
+            Are you sure you want to delete this issue?
+          </p>
+
+          <p style="font-style: italic;" ng-bind="issue.comment"></p>
+
+           <div class="row 
+                       h-right
+                       margin-top-small">
+                <button 
+                class="c-button 
+                      c-button--medium 
+                      c-button--red"
+
+                ng-click="deleteIssue();">
+                          Delete Issue</button>
+
+                <button 
+                class="c-button
+                       c-button--medium
+                       c-button--grey
+                       margin-left-small"
+
+                ng-click="cancelDelete();">
+                          Cancel</button>
+           </div>
+
+   </div>
+
+
+   <!-- Edit Tools -->
 
    <div ng-show="edit && showEditTools" class="col" 
         loader
@@ -85,7 +138,7 @@
     </div>
 
    <a ng-if="issue.article_link" ng-href="{{issue.article_link}}" target="_blank" class="column issue-article padding-small margin-bottom-small" ng-style="{'background-image': 'url(' + issue.article_img + ')'}"
-   ng-class="{'margin-top-medium': showEditTools}">
+   ng-class="{'margin-top-medium': showEditTools || showDelete}">
       <h2>{{issue.article_title}}</h2>
       <p>view link</p>
       <div class="backdrop"></div>

@@ -217,7 +217,6 @@
 }
 
 .c-card__menu ul {
-  padding: 10px;
   z-index: 11;
   position: relative;
   background: white;
@@ -225,6 +224,7 @@
 }
 
 .c-card__menu li {
+  padding: 5px 10px;
   @include font-size(10px);
   color: $blue;
 }
@@ -236,6 +236,9 @@
   top: 18px;
   right: 11px;
   font-size: 12px;
+  @include media($mobile) {
+    top: 21px;
+  }
 }
 
 
