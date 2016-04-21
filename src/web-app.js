@@ -250,7 +250,7 @@ app.value('THROTTLE_MILLISECONDS', null);
 app.directive('websiteNav', [websiteNav]);
 app.directive('headerNav', [headerNav]);
 app.directive('mailcheck', ['$compile','$sce', mailcheck]);
-app.directive('comment', ['$compile', 'commentService', '$anchorScroll', '$timeout', '$location', '$window', commentDirective]);
+app.directive('comment', ['$compile', 'commentService', '$anchorScroll', '$timeout', '$location', '$window', 'userService', commentDirective]);
 app.directive('commentEvent', ['$compile', 'commentService', '$timeout','$location', commentEventDirective]);
 app.directive('comments', [commentsDirective]);
 app.directive('banner', [bannerDirective]);
