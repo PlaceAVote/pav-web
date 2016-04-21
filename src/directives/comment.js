@@ -70,7 +70,6 @@ module.exports = function($compile, commentService, $anchorScroll, $timeout, $lo
           }
 
           if (res) {
-            console.log(res);
             scope.showEditTools = false;
             scope.comment.body = res.body;
             scope.original = res.body;
