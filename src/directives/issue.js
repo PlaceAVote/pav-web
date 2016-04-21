@@ -113,12 +113,6 @@ module.exports = function($location, issueService, facebook, $window, userServic
             scope.issueLocationFacebook = rootHref + '/#!/issue/' + scope.issue.short_issue_id;
             scope.issueLocation = encodeURIComponent(rootHref + '/#!/issue/') + scope.issue.short_issue_id;
           }
-<<<<<<< HEAD
-=======
-
-          scope.issueLocationFacebook = rootHref + '/#!/issue/' + scope.issue.short_issue_id;
-          scope.issueLocation = encodeURIComponent(rootHref + '/#!/issue/') + scope.issue.short_issue_id;
->>>>>>> 5c078ed5d477cf0e9b23404b49282acf37f8efb4
         }
       });
 
