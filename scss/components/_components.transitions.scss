@@ -13,6 +13,8 @@
 * Fade Toggle
 */
 
+.c-issue,
+.c-card__response-message,
 .feed-events,
 .c-bill-content,
 .c-bill-banner__overlay,
@@ -43,3 +45,38 @@
     opacity: 1;
   }
 }
+
+
+/**
+* Fade and Height Toggle
+*/
+// .c-card__response-message {
+//   overflow: hidden;
+//   &.ng-hide-add, 
+//   &.ng-hide-remove {
+//     transition: 0s linear all
+//   }
+
+//   &.ng-hide-add-active,
+//   &.ng-hide-remove-active {
+//     transition: 0.2s ease all;
+//   }
+
+//   &.ng-hide-add {
+//     opacity: 1;
+//     height: 20px;
+//   } 
+
+//   &.ng-hide-add.ng-hide-add-active {
+//     opacity: 0;
+//     height: 0;
+//   }
+
+//   &.ng-hide-remove {
+//     opacity: 0;
+//   }
+
+//   &.ng-hide-remove.ng-hide-remove-active {
+//     opacity: 1;
+//   }
+// }

@@ -10,9 +10,7 @@ function TimelineResponseFactory() {}
 
 TimelineResponseFactory.getResponse = function(response) {
   if (!response || !response.type) {
-    throw {
-      message: 'No Type Defined',
-    };
+    return;
   }
   switch (response.type) {
     case 'comment': {
@@ -40,9 +38,7 @@ TimelineResponseFactory.getResponse = function(response) {
       return new IssueEvent(response);
     }
     default: {
-      throw {
-        message: 'Type Not Supported',
-      };
+      return;
     }
   }
 };
@@ -50,7 +46,10 @@ TimelineResponseFactory.getResponse = function(response) {
 TimelineResponseFactory.getResponses = function(responses) {
   var results = [];
   for (var i = 0; i < responses.length; i++) {
-    results.push(TimelineResponseFactory.getResponse(responses[i]));
+    var timeEvent = TimelineResponseFactory.getResponse(responses[i]);
+    if (timeEvent) {
+      results.push(timeEvent);
+    }
   }
   return results;
 };

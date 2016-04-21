@@ -9,8 +9,15 @@ describe('Issue Directive', function() {
     },
     setIssueResponse: function(id, emo, callback) {
       callback(undefined, {emotional_response: 'negative'});
-    }
+    },
+    deleteIssue: function(id, callback) {
+      callback(undefined, true);
+    },
   };
+
+  var mockTimeOut = function(f) {
+    return f();
+  }
 
   var mockAttr = {
     $attr: function() {
@@ -28,6 +35,18 @@ describe('Issue Directive', function() {
     },
   };
 
+  var mockUserServiceSuccess = {
+    isUserMe: function() {
+      return true;
+    },
+  };
+
+  var mockUserServiceError = {
+    isUserMe: function() {
+      return false;
+    },
+  };
+
   it('Should hit delete response service function if emotional response is the same', function() {
     var scope = {
       issue: {
@@ -36,7 +55,7 @@ describe('Issue Directive', function() {
       },
       $watch: function() {},
     };
-    var subject = new Issues(mockLocation, mockIssueService, undefined, mockWindow);
+    var subject = new Issues(mockLocation, mockIssueService, undefined, mockWindow, mockUserServiceSuccess);
     subject.link(scope, undefined, mockAttr);
     scope.eResponse(undefined,'positive',scope.issue);
     expect(scope.issue.positive_responses).to.equal(0);
@@ -50,7 +69,7 @@ describe('Issue Directive', function() {
       },
       $watch: function() {},
     };
-    var subject = new Issues(mockLocation, mockIssueService, undefined, mockWindow);
+    var subject = new Issues(mockLocation, mockIssueService, undefined, mockWindow, mockUserServiceSuccess);
     subject.link(scope, undefined, mockAttr);
     scope.eResponse(undefined,'negative',scope.issue);
     expect(scope.issue.negative_responses).to.equal(1);
@@ -66,7 +85,7 @@ describe('Issue Directive', function() {
       },
       $watch: function() {},
     };
-    var subject = new Issues(mockLocation, mockIssueService, undefined, mockWindow);
+    var subject = new Issues(mockLocation, mockIssueService, undefined, mockWindow, mockUserServiceSuccess);
     subject.link(scope, undefined, mockAttr);
     scope.eResponse(undefined,'negative',scope.issue);
     expect(scope.issue.negative_responses).to.equal(1);
@@ -74,4 +93,154 @@ describe('Issue Directive', function() {
     expect(scope.issue.emotional_response).to.equal('negative');
   });
 
+
+  it('should cancel issue editting, and revert to original comment', function() {
+      var scope = {
+      issue: {
+        comment: 'This comment has been edited by the user but no posted',
+      },
+      original: 'This is the original comment before the user started making changed',
+      $watch: function() {},
+    };
+    var subject = new Issues(mockLocation, mockIssueService, undefined, mockWindow, mockUserServiceSuccess);  
+    subject.link(scope, undefined, mockAttr);
+    scope.cancelIssue();
+    expect(scope.original).to.equal(scope.issue.comment);
+  });
+
+
+  it('editIssue() should return without posting if the original comment and new comment are the same', function(done) {
+      var scope = {
+      issue: {
+        comment: 'This comment has been edited by the user but no posted',
+      },
+      original: 'This comment has been edited by the user but no posted',
+      $watch: function() {},
+    };
+    var subject = new Issues(mockLocation, mockIssueService, undefined, mockWindow, mockUserServiceSuccess);  
+    subject.link(scope, undefined, mockAttr);
+    scope.editIssue();
+    expect(scope.original).to.equal(scope.issue.comment);
+    done();
+  });
+
+
+  it('editIssue() should return without posting if the update is loading', function(done) {
+      var scope = {
+      issue: {
+        comment: 'This comment has been edited by the user but no posted.',
+      },
+      original: 'This comment has been edited by the user but no posted.',
+      editLoading: true,
+      $watch: function() {},
+    };
+    var subject = new Issues(mockLocation, mockIssueService, undefined, mockWindow, mockUserServiceSuccess);  
+    subject.link(scope, undefined, mockAttr);
+    scope.issue.comment += ' Edited.';
+    scope.editIssue();
+    expect(scope.editLoading).to.equal(scope.editLoading);
+    done();
+    var scope = {};
+  });
+
+  it('editIssue() should post updated issue content', function(done) {
+      var scope = {
+      issue: {
+        issue_id: '12345',
+        comment: 'This comment has been edited by the user but no posted.',
+      },
+      original: 'This comment has been edited by the user but no posted.',
+      editLoading: false,
+      $watch: function() {},
+    };
+
+    var mockIssueEditService = {
+      editIssue: function(id, body, callback) {
+        callback(undefined, body);
+      }
+    };
+
+    var subject = new Issues(mockLocation, mockIssueEditService, undefined, mockWindow, mockUserServiceSuccess, mockTimeOut);  
+    subject.link(scope, undefined, mockAttr);
+    scope.issue.comment += ' Edited.';
+    scope.editIssue();
+         expect(scope.editLoading).to.equal(scope.editLoading);
+         expect(scope.original).to.equal(scope.issue.comment);
+         expect(scope.showEditTools).to.equal(false);
+        done();
+  });
+
+
+  it('deleteIssue() should return if deleting is occuring', function(done) {
+      var scope = {
+      issue: {
+        issue_id: '12345',
+        comment: 'This comment has been edited by the user but no posted.',
+      },
+      original: 'This comment has been edited by the user but no posted.',
+      deleteLoading: true,
+      $watch: function() {},
+    };
+
+    var subject = new Issues(mockLocation, mockIssueService, undefined, mockWindow, mockUserServiceSuccess, mockTimeOut);  
+    subject.link(scope, undefined, mockAttr);
+    scope.issue.comment += ' Edited.';
+    scope.deleteIssue();
+        expect(scope.deleteLoading).to.equal(true);
+        done();
+  });
+
+
+  it('deleteIssue() should set deleteLoading back to false and issueDelete to true', function(done) {
+      var scope = {
+      issue: {
+        issue_id: '12345',
+        comment: 'This comment has been edited by the user but no posted.',
+      },
+      original: 'This comment has been edited by the user but no posted.',
+      deleteLoading: false,
+      showDelete: true,
+      $watch: function() {},
+      $apply: function() {},
+    };
+
+    var subject = new Issues(mockLocation, mockIssueService, undefined, mockWindow, mockUserServiceSuccess, mockTimeOut);  
+    subject.link(scope, undefined, mockAttr);
+    scope.deleteIssue();
+        expect(scope.deleteLoading).to.equal(false);
+        expect(scope.issue.issueDelete).to.equal(true);
+        expect(scope.showDelete).to.equal(false);
+        done();
+  });
+
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

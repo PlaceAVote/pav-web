@@ -93,8 +93,7 @@ Do you agree or disagree? Join the discussion and place your vote today!"></upda
 
         <li class="c-side-menu__vote"
         ng-show="bill.hasVoted === true">
-            <i class="icon-logo"></i>
-            <p>You already voted on this bill</p>
+            <p style="margin-left: 0px;">You already voted on this bill</p>
         </li>
     </ul>
 
@@ -123,6 +122,12 @@ Do you agree or disagree? Join the discussion and place your vote today!"></upda
      ng-click="bill.userVote()"
      ng-show="bill.hasVoted === false">
   <h1>I'm Ready To Vote</h1>
+</div>
+
+<div class="c-comment__button"
+     ng-click="bill.userVote()"
+     ng-show="bill.hasVoted === true">
+  <h1>You already voted on this bill</h1>
 </div>
 
 <vote-modal></vote-modal>

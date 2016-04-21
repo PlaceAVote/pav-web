@@ -59,7 +59,7 @@
                     </div>
                   </div>
                   <!-- issue event -->
-                  <div ng-switch-when="issue" class="issue-event">
+                  <div ng-switch-when="issue" class="issue-event" ng-hide="event.issueDelete">
                     <span class="time-stamp">{{event.timestamp | date:'medium'}}</span>
                     <div class="event-card">
                       <div class="event-icon event-icon-issue">

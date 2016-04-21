@@ -4,6 +4,40 @@ var Comment = require('../models/comment.js');
 var config = require('../config/endpoints.js');
 var TrendingBill = require('../models/trending_bill.js');
 
+/**
+ * Maps a trend response to a trend model
+ */
+
+function toTrend(response) {
+  return new TrendingBill(response);
+}
+
+/**
+ * Removes trending bills which have no comments.
+ */
+function withoutComments(trend) {
+  if (trend.comment_count === 0) {
+    return false;
+  }
+  return true;
+}
+
+/**
+ * Sort method for sorting trends by the
+ * order of comment counts.
+ */
+function byCommentCount(trendA, trendB) {
+  var trendACommentCount = parseInt(trendA.comment_count);
+  var trendBCommentCount = parseInt(trendB.comment_count);
+  if (trendACommentCount > trendBCommentCount) {
+    return -1;
+  }
+  if (trendACommentCount < trendBCommentCount) {
+    return 1;
+  }
+  return 0;
+}
+
 function BillService($resource, authService, userService) {
   var getBillVotes = function(id, callback) {
     if (!id) {
@@ -133,10 +167,9 @@ function BillService($resource, authService, userService) {
     };
 
     var onLoad = function(result) {
-      var trends = result.map(function(t) {
-        var trend = new TrendingBill(t);
-        return trend;
-      });
+      var trends = result.map(toTrend)
+        .sort(byCommentCount)
+        .filter(withoutComments);
       callback(undefined, trends);
     };
     resource.getTrends(undefined, onLoad, onError);
@@ -151,6 +184,5 @@ function BillService($resource, authService, userService) {
     getTrends: getTrends,
   };
 }
-
 
 module.exports = BillService;

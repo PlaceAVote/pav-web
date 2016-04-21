@@ -94,8 +94,9 @@ var voteConfirmedDirective = require('./directives/bills/vote_confirmed.js');
 var imageSmartDirective = require('./directives/image_smart.js');
 var updateMetaDirective = require('./directives/update_meta.js');
 var compileDirective = require('./directives/compile.js');
-
+var feedVoteEventDirective = require('./directives/feed_vote_event.js');
 var invalidDirective = require('./directives/invalid.js');
+var feedCommentEventDirective = require('./directives/feed_comment_event.js');
 
 // Thirdparty integrations
 var Facebook = require('./integrations/facebook.js');
@@ -243,7 +244,7 @@ app.value('THROTTLE_MILLISECONDS', null);
 app.directive('websiteNav', [websiteNav]);
 app.directive('headerNav', [headerNav]);
 app.directive('mailcheck', ['$compile','$sce', mailcheck]);
-app.directive('comment', ['$compile', 'commentService', '$anchorScroll', '$timeout', '$location', '$window', commentDirective]);
+app.directive('comment', ['$compile', 'commentService', '$anchorScroll', '$timeout', '$location', '$window', 'userService', commentDirective]);
 app.directive('commentEvent', ['$compile', 'commentService', '$timeout','$location', commentEventDirective]);
 app.directive('comments', [commentsDirective]);
 app.directive('banner', [bannerDirective]);
@@ -258,7 +259,7 @@ app.directive('websiteFooter', [websiteFooter]);
 app.directive('searchBar', ['$sce' ,'$location', search]);
 app.directive('termsAndConditions', [termsAndConditionsDirective]);
 app.directive('issuesPost', [issuesPostDirective]);
-app.directive('issue', ['$location', 'issueService', 'facebookService', '$window', issueDirective]);
+app.directive('issue', ['$location', 'issueService', 'facebookService', '$window', 'userService', '$timeout', issueDirective]);
 app.directive('wizard', [wizardDirective]);
 app.directive('slider', ['$timeout', sliderDirective]);
 app.directive('dad', [dragAndDropDirective]);
@@ -279,4 +280,6 @@ app.directive('voteModal', ['$location', voteModalDirective]);
 app.directive('voteConfirmed', ['$location', voteConfirmedDirective]);
 app.directive('imageSmart', [imageSmartDirective]);
 app.directive('updateMeta', ['$log', updateMetaDirective]);
-app.directive('compile', ['$compile', '$window', compileDirective]);
+app.directive('compile', ['$compile', '$window', '$sce', '$sanitize', compileDirective]);
+app.directive('feedVoteEvent', ['$location', feedVoteEventDirective]);
+app.directive('feedCommentEvent', ['$location', feedCommentEventDirective]);

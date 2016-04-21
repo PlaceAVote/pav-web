@@ -1,7 +1,7 @@
 <div>
-<div class="c-card__content c-card__content--comments row">
+<div class="click c-card__content c-card__content--comments row">
 
-  <div class="c-user-photo" 
+  <div class="c-user-photo c-user-photo--large" 
       ng-click="location.path('profile/' + comment.author)">
     <div ng-style="{'background-image': 'url(' + comment.author_img_url + ')'}">
     </div>
@@ -11,9 +11,43 @@
 
       <p class="c-card__username" 
          ng-click="location.path('profile/' + comment.author)">
-      {{comment.author_first_name}}</p>
+      {{comment.author_first_name}} <span ng-show="feed">{{comment.author_last_name}}</span></p>
 
-    <div class="c-card__comment-vote row">
+
+    <i class="c-card__menu-icon
+      c-card__menu-icon--comment 
+      icon-arrow-down 
+      click"
+    ng-show="edit && !comment.comment_deleted"
+    ng-click="editMenu = !editMenu"></i>
+
+      <div class="c-card__menu c-card__menu--comment"
+      ng-show="editMenu"
+      ng-mouseleave="editMenu = false">
+
+      <div class="c-card__menu-arrow"></div>
+
+      <ul>
+      <li class="click"
+          ng-click="showEditTools = !showEditTools;
+                    showDelete = false;
+                    editMenu = false">
+          Edit Comment
+      </li>
+      <li class="click"
+          ng-click="showDelete = !showDelete;
+                    showEditTools = false;
+                    editMenu = false">
+          Delete Comment
+      </li>
+      </ul>
+      </div>
+
+
+      
+    <div class="c-card__comment-vote row" 
+          ng-class="{'c-card__comment-vote--editor': edit}"
+          ng-hide="comment.comment_deleted">
 
       <span ng-class="{'red': comment.score < 0, 'green': comment.score > 0}">
       {{comment.score}}
@@ -24,11 +58,101 @@
       <i class="icon-thumbs-down" ng-class="{'score-down': comment.disliked == true}" ng-click="comment.dislike(commentService)"></i>
 
       <span class="c-card__comment-reply-btn" ng-click="comment.showReplyInput()">reply</span>
+
     </div>
 
-      <p compile="comment.body"></p>
+      <p ng-hide="feed || showEditTools || showDelete || comment.comment_deleted" compile="comment.body"></p>
 
-      <div class="c-comment__reply" ng-show="comment.replyInput">
+
+      <div class="c-comment--deleted" ng-show="comment.comment_deleted">
+      Comment Deleted
+      </div>
+            
+
+
+        <!-- Delete Comment -->
+
+        <div ng-show="edit && showDelete" class="col" >
+
+          <p class="bold">
+            Are you sure you want to delete this Comment?
+          </p>
+
+          <p style="font-style: italic;" ng-bind="comment.body_sanitized"></p>
+
+           <div class="row 
+                       h-right
+                       margin-top-small">
+                <button 
+                class="c-button 
+                      c-button--medium 
+                      c-button--red"
+
+                ng-click="deleteComment();">
+                          Delete Comment</button>
+
+                <button 
+                class="c-button
+                       c-button--medium
+                       c-button--grey
+                       margin-left-small"
+
+                ng-click="cancelDelete();">
+                          Cancel</button>
+           </div>
+
+        </div>
+
+
+
+        <!-- Edit Comment -->
+        <div ng-show="edit && showEditTools" class="col">
+           <textarea 
+              ng-show="showEditTools"
+              class="c-card__edit--textarea"
+              ng-model="comment.body_sanitized"
+              msd-elastic>
+            </textarea>
+
+           <div class="row 
+                       h-right
+                       margin-top-small">
+                <button 
+                class="c-button 
+                      c-button--medium 
+                      c-button--green"
+
+                ng-click="editComment();">Update</button>
+
+                <button 
+                class="c-button
+                       c-button--medium
+                       c-button--grey
+                       margin-left-small"
+
+                ng-click="cancelEdit();">
+                          Cancel</button>
+           </div>
+
+        </div>
+        <div ng-show="alertMessage.visible" class="c-card__response-message">
+          <span style="font-size: 14px;" ng-class="{'red': !alertMessage.success, 'green': alertMessage.success}">{{alertMessage.message}}</span>
+        </div>
+
+    </div>
+</div>
+  
+  <div class="c-card__content margin-top-medium" ng-show="feed">
+    
+    <p ng-hide="comment.comment_deleted">"<span compile="comment.body"></span>"</p>
+
+    <div class="c-comment--deleted" ng-show="comment.comment_deleted">
+      Comment Deleted
+    </div>
+  </div>
+
+  <div class="l-12 group" ng-class="{'margin-bottom-large' : !feed}" ng-show="comment.replyInput">
+      <div class="c-comment__reply">
 
         <textarea type="text" placeholder="Reply" ng-model="comment.replyText" rows="1" msd-elastic></textarea>
 
@@ -43,9 +167,9 @@
         </div>
 
       </div>
+  </div>
 
-    </div>
-</div>
+
 
 <div>
 

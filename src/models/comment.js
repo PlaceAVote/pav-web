@@ -1,10 +1,12 @@
 function Comment(options) {
+  var that = this;
   if (!options) {
     return;
   }
   this.author = options.author;
   this.author_first_name = options.author_first_name;
   this.author_last_name = options.author_last_name;
+  this.body_sanitized = options.body;
   this.bodyText(options);
   this.has_children = options.has_children;
   this.bill_id = options.bill_id;
@@ -22,12 +24,25 @@ function Comment(options) {
   this.disliked = options.disliked;
   this.type = options.type || 'comment';
   this.showChildren = true;
+  if (!options.body) {
+    that.comment_deleted = true;
+  }
 }
-
 
 Comment.prototype.bodyText = function(options) {
   var that = this;
   var exp = /([a-z]+\:\/+)([^\/\s]*)([a-z0-9\-@\^=%&;\/~\+]*)[\?]?([^ \#]*)#?([^ \#]*)/ig;
+  var scriptExp = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
+  var objectExp = /<object\b[^<]*(?:(?!<\/object>)<[^<]*)*<\/object>/gi;
+
+  if (options.body) {
+
+    options.body = options.body.replace(scriptExp, '');
+
+    options.body = options.body.replace(objectExp, '');
+
+  }
+
   this.links = [];
 
   while ((link = exp.exec(options.body)) !== null) {
@@ -45,7 +60,6 @@ Comment.prototype.bodyText = function(options) {
 
   this.body = options.body;
 };
-
 
 Comment.buildChildren = function(comment, deep, reply) {
   if (!deep) {
@@ -93,8 +107,10 @@ Comment.prototype.hideReplyInput = function() {
 
 Comment.prototype.reply = function(billId, service, timeout) {
   var that = this;
-  var r = new RegExp(/<script[\s\S]*?>[\s\S]*?<\/script>/gi);
-  if (r.test(this.replyText)) {
+  var scriptExp = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
+  var objectExp = /<object\b[^<]*(?:(?!<\/object>)<[^<]*)*<\/object>/gi;
+
+  if (scriptExp.test(this.replyText) || objectExp.test(this.replyText)) {
     this.commentError('Sorry, there was an error.', timeout);
     this.replyText = '';
     return;
@@ -220,6 +236,47 @@ Comment.prototype.dislike = function(service) {
 
 };
 
-
 module.exports = Comment;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

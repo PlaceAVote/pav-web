@@ -262,11 +262,11 @@ describe("Bill Service", function(){
         done();
       });
     });
-    it('returns a list of Trend Responses', function(done) {
+    it('returns a list of sorted Trend Responses', function(done) {
       function mockResource(url, params, method) {
       };
       mockResource.prototype.getTrends = function(body, onLoad, onError) {
-        onLoad([require('../fixtures/trending_bill_records')]);
+        onLoad(require('../fixtures/trending_bill_records'));
       };
       var mockAuthService = {
         getAccessToken: function() {
@@ -276,8 +276,10 @@ describe("Bill Service", function(){
       var subject = new BillService(mockResource, mockAuthService);
       subject.getTrends(function(err, result) {
         expect(err).to.eql(undefined);
-        expect(result.length).to.eql(1);
+        expect(result.length).to.eql(2);
         expect(result[0]).to.be.instanceof(TrendingBill);
+        expect(result[1]).to.be.instanceof(TrendingBill);
+        expect(result[2]).to.eql(undefined);
         done();
       });
     });
