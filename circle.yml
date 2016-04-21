@@ -12,7 +12,7 @@ deployment:
       - "rm -rf node_modules"
       - convox login $CONVOX_GRID_HOST --password $CONVOX_API_KEY
       - convox switch development
-      - convox deploy --app pav-web-cloudfront
+      - convox deploy
   development:
     branch: master
     commands:
