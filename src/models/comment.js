@@ -1,4 +1,5 @@
 function Comment(options) {
+  var that = this;
   if (!options) {
     return;
   }
@@ -22,6 +23,9 @@ function Comment(options) {
   this.disliked = options.disliked;
   this.type = options.type || 'comment';
   this.showChildren = true;
+  if (!options.body) {
+    that.comment_deleted = true;
+  }
 }
 
 Comment.prototype.bodyText = function(options) {

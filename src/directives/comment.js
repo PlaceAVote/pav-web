@@ -15,13 +15,13 @@ module.exports = function($compile, commentService, $anchorScroll, $timeout, $lo
       scope.window = $window;
       scope.userService = userService;
 
-      // This enables bill title to display if comment is for feed.
       scope.$watch('feed', function(o,n) {
         if (n) {
           scope.feed = n;
         }
       });
-      if (angular.isArray(scope.comment.replies)) {
+
+      if (scope.comment.replies) {
         element.append('<div class=\'comment-container comment-reply\' ng-show=\'comment.showChildren\'><comments comments=\'comment.replies\'></comments></div>');
         var html = element.html();
         element.contents().remove();
@@ -38,6 +38,8 @@ module.exports = function($compile, commentService, $anchorScroll, $timeout, $lo
       }
 
 
+
+
       // Edit Method
       if (scope.comment) {
         scope.original = scope.comment.body;
@@ -49,7 +51,7 @@ module.exports = function($compile, commentService, $anchorScroll, $timeout, $lo
         scope.comment.body = scope.original;
         scope.showEditTools = false;
       };
-        
+
       scope.editComment = function() {
 
         if (scope.editLoading) {
@@ -66,7 +68,6 @@ module.exports = function($compile, commentService, $anchorScroll, $timeout, $lo
           }
 
           if (res) {
-            console.log(res);
             scope.showEditTools = false;
             scope.original = res.body;
             scope.setAlertMessage('Your comment has been edited', true);
@@ -99,8 +100,7 @@ module.exports = function($compile, commentService, $anchorScroll, $timeout, $lo
           if (res) {
             scope.setAlertMessage('Comment deleted.', false);
             scope.timeout(function() {
-              scope.comment.commentDelete = true;
-              // scope.$apply();
+              scope.comment.comment_deleted = true;
               return;
             }, 1000);
 

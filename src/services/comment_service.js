@@ -118,24 +118,17 @@ function CommentService($resource, userService, authService) {
   // Edit Comments
 
   var edit = function(comment_id, comment, callback) {
-
-    console.log('service', comment_id);
     if (!comment_id) {
       return;
     }
 
     var onError = function(err) {
-      console.log('err')
       return callback(err);
     };
- 
 
     var onLoad = function(res) {
-      console.log('res');
       return callback(undefined, res);
     };
-
-    console.log('service');
 
     var body = {body: comment};
 
@@ -147,7 +140,7 @@ function CommentService($resource, userService, authService) {
 
     editComment.edit(body, onLoad, onError);
 
-  }; 
+  };
 
 
 
@@ -158,27 +151,21 @@ function CommentService($resource, userService, authService) {
     }
 
     var onError = function(err) {
-      console.log(err, 'error')
       return callback(err);
     };
- 
 
     var onLoad = function(res) {
-      console.log(res, 'res');
       return callback(undefined, res);
     };
 
-    // var body = {body: comment};
-
     var url = config.comments.comments + comment_id;
-    config.methods.delete.headers.Authorization = authService.getAccessToken();
-    // var token = authService.getAccessToken();
+    config.methods.deleteData.headers.Authorization = authService.getAccessToken();
 
-    var editComment = new $resource(url, {}, {edit: config.methods.delete});
+    var editComment = new $resource(url, {}, {edit: config.methods.deleteData});
 
     editComment.edit(onLoad, onError);
 
-  }; 
+  };
   return {
     revoke: revoke,
     reply: reply,

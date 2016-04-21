@@ -93,7 +93,6 @@ module.exports = function($location, issueService, facebook, $window, userServic
       var rootHref = 'https://placeavote.com';
 
       scope.$watch('issue', function(newValue, oldValue) {
-        console.log(newValue, oldValue);
         if (newValue) {
           if ($location.$$host === 'beta.placeavote.com') {
             rootHref = 'https://beta.placeavote.com';
@@ -106,7 +105,7 @@ module.exports = function($location, issueService, facebook, $window, userServic
           if ($location.$$host === 'placeavote.com') {
             rootHref = 'https://www.placeavote.com';
           }
-          
+
           scope.issueLocationFacebook = rootHref + '/#!/issue/' + scope.issue.short_issue_id;
           scope.issueLocation = encodeURIComponent(rootHref + '/#!/issue/') + scope.issue.short_issue_id;
         }

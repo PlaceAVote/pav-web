@@ -1,5 +1,4 @@
 <div>
-
 <div class="click c-card__content c-card__content--comments row">
 
   <div class="c-user-photo c-user-photo--large" 
@@ -19,7 +18,7 @@
       c-card__menu-icon--comment 
       icon-arrow-down 
       click"
-    ng-show="edit"
+    ng-show="edit && !comment.comment_deleted"
     ng-click="editMenu = !editMenu"></i>
 
       <div class="c-card__menu c-card__menu--comment"
@@ -31,11 +30,13 @@
       <ul>
       <li class="click"
           ng-click="showEditTools = !showEditTools;
+                    showDelete = false;
                     editMenu = false">
           Edit Comment
       </li>
       <li class="click"
           ng-click="showDelete = !showDelete;
+                    showEditTools = false;
                     editMenu = false">
           Delete Comment
       </li>
@@ -44,7 +45,9 @@
 
 
       
-    <div class="c-card__comment-vote row" ng-class="{'c-card__comment-vote--editor': edit}">
+    <div class="c-card__comment-vote row" 
+          ng-class="{'c-card__comment-vote--editor': edit}"
+          ng-hide="comment.comment_deleted">
 
       <span ng-class="{'red': comment.score < 0, 'green': comment.score > 0}">
       {{comment.score}}
@@ -58,7 +61,12 @@
 
     </div>
 
-      <p ng-hide="feed || showEditTools || showDelete" compile="comment.body"></p>
+      <p ng-hide="feed || showEditTools || showDelete || comment.comment_deleted" compile="comment.body"></p>
+
+
+      <div class="c-comment--deleted" ng-show="comment.comment_deleted">
+      Comment Deleted
+      </div>
             
 
 
@@ -135,7 +143,12 @@
 </div>
   
   <div class="c-card__content margin-top-medium" ng-show="feed">
-    <p>"<span compile="comment.body"></span>"</p>
+    
+    <p ng-hide="comment.comment_deleted">"<span compile="comment.body"></span>"</p>
+
+    <div class="c-comment--deleted" ng-show="comment.comment_deleted">
+      Comment Deleted
+    </div>
   </div>
 
   <div class="l-12 group" ng-class="{'margin-bottom-large' : !feed}" ng-show="comment.replyInput">
