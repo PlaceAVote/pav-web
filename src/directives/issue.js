@@ -90,7 +90,7 @@ module.exports = function($location, issueService, facebook, $window, userServic
         }
       };
 
-      var rootHref;
+      var rootHref = 'https://placeavote.com';
 
       scope.$watch('issue', function(newValue, oldValue) {
         console.log(newValue, oldValue);
