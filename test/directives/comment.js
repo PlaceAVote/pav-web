@@ -104,7 +104,6 @@ describe('Comment Directive', function() {
 
     scope.showEditTools = true;
     scope.original = 'hey';
-
   
     scope.comment.replies = undefined;  
     var subject = new Comment(d.$compile, d.commentService, d.$anchorScroll, d.$timeout, d.$location, d.$window, d.userService);
@@ -113,7 +112,6 @@ describe('Comment Directive', function() {
     expect(scope.comment.body).to.equal(scope.original);
     expect(scope.showEditTools).to.equal(false);
   });
-
 
 
 });
