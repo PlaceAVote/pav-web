@@ -45,6 +45,7 @@ http {
 
     root   /usr/share/nginx/html;
     index  index.html;
+
     error_page  404              /404.html;
     location /50x.html {
       root /usr/share/nginx/html;
@@ -58,9 +59,9 @@ http {
     }
 
     location / {
-      try_files $uri @prerender;
       root   /usr/share/nginx/html;
       index  index.html index.htm;
+      try_files $uri @prerender;
     }
 
     location @prerender {
