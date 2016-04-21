@@ -60,7 +60,9 @@ module.exports = function($compile, commentService, $anchorScroll, $timeout, $lo
 
         scope.editLoading = true;
 
-        scope.commentService.edit(scope.comment.id, scope.comment.body, function(err, res) {
+
+
+        scope.commentService.edit(scope.comment.id, scope.comment.body_sanitized, function(err, res) {
           scope.editLoading = false;
 
           if (err) {
@@ -68,8 +70,11 @@ module.exports = function($compile, commentService, $anchorScroll, $timeout, $lo
           }
 
           if (res) {
+            console.log(res);
             scope.showEditTools = false;
+            scope.comment.body = res.body;
             scope.original = res.body;
+            scope.comment.bodyText(scope.comment);
             scope.setAlertMessage('Your comment has been edited', true);
           }
         });

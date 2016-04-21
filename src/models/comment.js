@@ -6,6 +6,7 @@ function Comment(options) {
   this.author = options.author;
   this.author_first_name = options.author_first_name;
   this.author_last_name = options.author_last_name;
+  this.body_sanitized = options.body;
   this.bodyText(options);
   this.has_children = options.has_children;
   this.bill_id = options.bill_id;
@@ -59,7 +60,6 @@ Comment.prototype.bodyText = function(options) {
 
   this.body = options.body;
 };
-
 
 Comment.buildChildren = function(comment, deep, reply) {
   if (!deep) {

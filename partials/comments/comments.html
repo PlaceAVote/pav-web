@@ -78,7 +78,7 @@
             Are you sure you want to delete this Comment?
           </p>
 
-          <p style="font-style: italic;" ng-bind="comment.body"></p>
+          <p style="font-style: italic;" ng-bind="comment.body_sanitized"></p>
 
            <div class="row 
                        h-right
@@ -110,7 +110,7 @@
            <textarea 
               ng-show="showEditTools"
               class="c-card__edit--textarea"
-              ng-model="comment.body"
+              ng-model="comment.body_sanitized"
               msd-elastic>
             </textarea>
 
