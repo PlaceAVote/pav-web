@@ -5,14 +5,15 @@ dependencies:
   post:
     - "sudo pip install awscli==1.7.43"
 deployment:
-  development:
+  feature:
     branch: change-server
     commands:
       - ". ./scripts/deploy_dev.sh"
       - "rm -rf node_modules"
       - convox login $CONVOX_GRID_HOST --password $CONVOX_API_KEY
       - convox switch development
-      - convox deploy
+      - convox deploy --app pav-web-cloudfront
+  development:
     branch: master
     commands:
       - ". ./scripts/deploy_dev.sh"
