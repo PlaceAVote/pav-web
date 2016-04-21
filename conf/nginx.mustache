@@ -33,7 +33,12 @@ http {
   server {
     listen       3000;
     server_name  {{server}};
-    return       301 https://$server_name$request_uri;
+    #return       301 https://$server_name$request_uri;
+
+    location / {
+      root   /usr/share/nginx/html;
+      index  index.html index.htm;
+    }
   }
 
   server {
