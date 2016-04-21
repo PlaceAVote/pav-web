@@ -115,13 +115,98 @@ function CommentService($resource, userService, authService) {
     resource.dislike(body, onLoad, onError);
   };
 
+  // Edit Comments
+
+  var edit = function(comment_id, comment, callback) {
+    if (!comment_id) {
+      return;
+    }
+
+    var onError = function(err) {
+      return callback(err);
+    };
+
+    var onLoad = function(res) {
+      return callback(undefined, res);
+    };
+
+    var body = {body: comment};
+
+    var url = config.comments.comments + comment_id;
+    config.methods.post.headers.Authorization = authService.getAccessToken();
+    var token = authService.getAccessToken();
+
+    var editComment = new $resource(url, {}, {edit: config.methods.post});
+
+    editComment.edit(body, onLoad, onError);
+
+  };
+
+
+
+  var deleteComment = function(comment_id, callback) {
+
+    if (!comment_id) {
+      return;
+    }
+
+    var onError = function(err) {
+      return callback(err);
+    };
+
+    var onLoad = function(res) {
+      return callback(undefined, res);
+    };
+
+    var url = config.comments.comments + comment_id;
+    config.methods.deleteData.headers.Authorization = authService.getAccessToken();
+
+    var editComment = new $resource(url, {}, {edit: config.methods.deleteData});
+
+    editComment.edit(onLoad, onError);
+
+  };
   return {
     revoke: revoke,
     reply: reply,
     like: like,
     dislike: dislike,
+    edit: edit,
+    deleteComment: deleteComment,
   };
 }
 
 module.exports = CommentService;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -161,6 +161,7 @@ module.exports = {
         return urls.CONGRESS + '/comments/' + id + '/dislike';
       },
     },
+    comments: urls.CONGRESS + '/comments/',
   },
   bills: {
     comments: {
