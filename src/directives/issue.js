@@ -1,4 +1,5 @@
 var tweet = require('../models/tweet.js');
+var Issue = require('../models/issue.js');
 
 module.exports = function($location, issueService, facebook, $window, userService, $timeout) {
   return {
@@ -27,7 +28,7 @@ module.exports = function($location, issueService, facebook, $window, userServic
 
 
       if (scope.issue) {
-        scope.original = scope.issue.comment;
+        scope.original = scope.issue.comment_sanitized;
         scope.edit = scope.userService.isUserMe(scope.issue.user_id);
       }
 
@@ -131,15 +132,15 @@ module.exports = function($location, issueService, facebook, $window, userServic
       // Issue Editing
 
       scope.cancelIssue = function() {
-        scope.issue.comment = scope.original;
+        scope.issue.comment_sanitized = scope.original;
         scope.showEditTools = false;
       };
 
       scope.editIssue = function() {
 
-        var body = {comment: scope.issue.comment};
+        var body = {comment: scope.issue.comment_sanitized};
 
-        if (scope.editLoading || scope.original === scope.issue.comment) {
+        if (scope.editLoading || scope.original === scope.issue.comment_sanitized) {
           return;
         }
 
@@ -153,8 +154,10 @@ module.exports = function($location, issueService, facebook, $window, userServic
           }
 
           if (res) {
+            res = new Issue(res);
             scope.showEditTools = false;
-            scope.original = res.comment;
+            scope.issue.comment_sanitized = res.comment_sanitized;
+            scope.issue.comment = res.comment;
             scope.setAlertMessage('Your message has been edited', true);
           }
 

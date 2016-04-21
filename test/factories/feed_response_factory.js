@@ -6,6 +6,7 @@ var FeedResponseFactory = require('../../src/factories/feed_response_factory.js'
 var mockIssue = {
   bill_id: "hr2-114",
   type: "userissue",
+  'comment': 'Ear mate'
 };
 
 var mockBill = {

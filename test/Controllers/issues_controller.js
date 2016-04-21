@@ -1,5 +1,6 @@
 var expect = require('chai').expect;
 var IssuesController = require('../../src/controllers/issues_controller.js');
+var Issue = require('../../src/models/issue.js');
 
 describe('Issues Controller', function() {
   var mockTimeout = function(func) {
@@ -140,9 +141,9 @@ describe('Issues Controller', function() {
 
   it('should posts issue without attachments', function() {
     var subject = new IssuesController(scope,undefined,undefined,undefined,mockIssueService);
-    subject.issue = {
+    subject.issue = new Issue({
       comment: 'Hello World',
-    };
+    });
     subject.attachments = [];
     subject.postIssue();
     expect(subject.issue).to.be.empty;

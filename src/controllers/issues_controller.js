@@ -117,6 +117,14 @@ IssuesController.prototype.validateUrl = function() {
 };
 
 IssuesController.prototype.postIssue = function() {
+
+  var scriptExp = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
+  var objectExp = /<object\b[^<]*(?:(?!<\/object>)<[^<]*)*<\/object>/gi;
+
+  if (scriptExp.test(this.issue.comment) || objectExp.test(this.issue.comment)) {
+    this.setError('There was an error posting your issue');
+    return;
+  }
   var that = this;
   for (var i in this.attachments) {
     if (that.attachments[i]) {

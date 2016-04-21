@@ -7,7 +7,7 @@ function Issue(options) {
   this.short_issue_id = options.short_issue_id;
   this.bill_id = options.bill_id;
   this.bill_title = options.bill_title;
-  this.comment = options.comment;
+  this.comment_sanitized = options.comment;
   this.article_link = options.article_link;
   this.article_title = options.article_title;
   this.article_img = options.article_img;
@@ -21,6 +21,7 @@ function Issue(options) {
   this.neutral_responses = options.neutral_responses;
   this.positive_responses = options.positive_responses;
   this.user_id = options.user_id;
+  this.bodyText(options);
 }
 
 Issue.prototype.goToBill = function(location) {
@@ -35,4 +36,47 @@ Issue.prototype.goToIssue = function(location) {
   location.path('issue/' + this.short_issue_id);
 };
 
+
+Issue.prototype.bodyText = function(options) {
+  if (!options) {
+    return;
+  }
+  var that = this;
+  var exp = /([a-z]+\:\/+)([^\/\s]*)([a-z0-9\-@\^=%&;\/~\+]*)[\?]?([^ \#]*)#?([^ \#]*)/ig;
+  var scriptExp = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
+  var objectExp = /<object\b[^<]*(?:(?!<\/object>)<[^<]*)*<\/object>/gi;
+  var regex = new RegExp(/\n/gi);
+  options.comment = options.comment.replace(scriptExp, '');
+  options.comment = options.comment.replace(objectExp, '');
+  this.comment = options.comment.replace(regex, '<br />');
+};
+
 module.exports = Issue;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
