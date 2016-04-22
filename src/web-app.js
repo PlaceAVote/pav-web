@@ -40,6 +40,7 @@ var SettingsController = require('./controllers/settings_controller.js');
 var PasswordController = require('./controllers/password_controller.js');
 var WizardController = require('./controllers/wizard_controller.js');
 var IssuesController = require('./controllers/issues_controller.js');
+var initPreloaderController = require('./controllers/init-preloader_controller.js');
 
 // Services
 var UserService = require('./services/user_service.js');
@@ -234,6 +235,7 @@ app.controller('SettingsCtrl', ['$scope', '$location', '$timeout', 'userService'
 app.controller('PasswordResetCtrl', ['$scope','$location','$routeParams','passwordService','authService', PasswordController]);
 app.controller('IssuesCtrl', ['$scope', '$rootScope', 'searchService', '$timeout', 'issueService', IssuesController]);
 app.controller('WizardCtrl', ['$scope', 'questionService','$rootScope', WizardController]);
+app.controller('initPreloaderCtrl', ['$scope', '$rootScope', initPreloaderController]);
 
 // Web controllers
 app.controller('HomeCtrl', ['$scope', '$location','$anchorScroll', 'userService', '$rootScope', 'authService', HomeController]);

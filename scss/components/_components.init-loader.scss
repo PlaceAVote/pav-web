@@ -1,0 +1,112 @@
+/*------------------------------------*\
+    #COMPONENT-FEED-BILL
+\*------------------------------------*/
+
+.c-init-preloader {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  @include linear-gradient-vertical(darken($purple, 10%), darken($blue, 10%));
+  box-shadow: inset 0px 0px 200px 0px darken($purple, 20%), inset 0px 0px 100px 0px darken($purple, 30%);
+  z-index: 99999;
+}
+
+
+.c-init-preloader__loader-content {
+  position: fixed;
+  top: 30%;
+  transform: translateY(-50%);
+  width: 100%;
+}
+
+
+.c-init-preloader .c-spinner {
+  border-color: transparentize($white, 0.75)
+    transparentize($white, 0.75) transparentize($white, 0.25) transparentize($white, 0.25);
+  height: 50px;
+  width: 50px;
+  position: fixed;
+  top: 80px;
+  border-width: 5px;
+  border-style: solid;
+  border-radius: 100%;
+  transform: rotate(0deg) translatez(0);
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  animation: spinny 4s ease infinite;
+}
+
+@keyframes spinny
+{
+  to {transform:rotate(360deg) translatez(0);}
+}
+
+.c-init-preloader h1 {
+  position: fixed;
+  width: 100%;
+  text-align: center;
+  color: white;
+  @include medium();
+  @include font-size(14px);
+  top: 150px;
+  // transform: translateY(-50%);
+}
+
+
+.c-init-preloader img {
+  position: fixed;
+  width: 250px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  // top: 50%;
+  // transform: translateY(-50%);
+  // padding-bottom: 250px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
