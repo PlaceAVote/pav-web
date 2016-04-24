@@ -3,6 +3,7 @@ var AuthorizeController = require('./autherize_controller.js');
 var title = require('../config/titles.js');
 var BillSummary = require('../models/bill_summary.js');
 var Issue = require('../models/issue.js');
+var SubFeedController = require('./sub_feed_controller.js');
 
 FeedController = function($scope, $location, userService, billService, authService, feedService, $rootScope, $timeout) {
   AuthorizeController.authorize({error: '/', authorizer: authService, location: $location});
@@ -14,6 +15,24 @@ FeedController = function($scope, $location, userService, billService, authServi
   this.timeout = $timeout;
   this.rs = $rootScope;
   this.rs.inApp = true;
+  this.categories = {
+    all: new SubFeedController({name: 'all', title: 'All Activity',}),
+    discovery: new SubFeedController({
+      name: 'discovery',
+      title: 'Discovery',
+      categories:
+        [
+          new SubFeedController({name: 'trends', title: 'Trends',}),
+          new SubFeedController({name: 'justice', title: 'Justice',}),
+          new SubFeedController({name: 'technology', title: 'Technology',}),
+          new SubFeedController({name: 'guns', title: 'Guns',}),
+          new SubFeedController({name: 'education', title: 'Education',}),
+          new SubFeedController({name: 'healthcare', title: 'Healthcare',}),
+        ],
+    }),
+  };
+  this.categories.discovery.selectedCategory = this.categories.discovery.categories.trends;
+  this.selectedCategory = this.categories.all;
   this.getTrends();
   this.getUserProfile(function(err, response) {
     var that = this;
@@ -36,6 +55,47 @@ FeedController.prototype.getUserProfile = function(callback) {
 
 };
 
+FeedController.prototype.categoryCount = function(name) {
+  var cat = this.categories[name];
+  if (!cat) {
+    return 0;
+  }
+  switch (name) {
+    case 'discovery': {
+      return cat.categories.trends.count;
+    }
+    default: {
+      return cat.count;
+    }
+  }
+};
+
+FeedController.prototype.subCount = function(catName, subName) {
+  var cat = this.categories[catName];
+  if (!cat) {
+    return;
+  }
+  switch (catName) {
+    case 'discovery': {
+      if (subName === 'trends') {
+        return cat.categories.trends.count;
+      }
+      return;
+    }
+    default: {
+      return cat.count;
+    }
+  }
+};
+
+FeedController.prototype.categoryClick = function(name) {
+  this.selectedCategory.showCategories = false;
+  this.selectedCategory = this.categories[name] || this.categories.all;
+  if (this.selectedCategory.categories) {
+    this.selectedCategory.showCategories = true;
+  }
+};
+
 
 FeedController.prototype.getTrends = function() {
   var that = this;
@@ -45,6 +105,7 @@ FeedController.prototype.getTrends = function() {
     that.trends = false;
     if (!err) {
       that.trends = res;
+      that.categories.discovery.categories.trends.update(res);
     }
   });
 };
@@ -56,7 +117,7 @@ FeedController.prototype.getFeed = function() {
     that.loading = false;
     if (!err) {
       title.feed();
-      that.events = response.feed;
+      that.categories.all.update(response.feed);
       that.lastLoaded = response.last_timestamp;
     }
   });
@@ -74,15 +135,11 @@ FeedController.prototype.feedCheck = function() {
     if (!err) {
       title.feed();
       if (response.last_timestamp === null) {
-        for (var i in response.feed) {
-          that.events.push(response.feed[i]);
-        }
+        that.categories.all.update(response.feed);
         that.feedMessage('.');
       } else {
         that.lastLoaded = response.last_timestamp;
-        for (var x in response.feed) {
-          that.events.push(response.feed[x]);
-        }
+        that.categories.all.update(response.feed);
       }
     }
   });

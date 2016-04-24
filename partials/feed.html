@@ -25,12 +25,25 @@
 	        </section>
 	    </div>
 	    <section class="feed-wrapper">
-		<div class='feed-column l-7 m-12 s-12' infinite-scroll="feed.feedCheck();" infinite-scroll-distance="0.5">
-        <issues-post posted="feed.getFeed()"></issues-post>
-        <div class="feed-event-loader row" ng-show="feed.loading" loader loader-context="feed.loading" truthy></div>
-        <feed-events events="feed.events" refresh="feed.loading" ng-show="feed.events" class="feed-events" scroll="feed.loadingScroll" message="feed.scrollMessage"></feed-events>
-		</div>
-    <div class="l-5 m-12 s-12">
+      <div class="category-column l-2 m-12 s-12">
+        <div ng-repeat="(cat, value) in feed.categories">
+          <p ng-click="feed.categoryClick(value.name)"><span>{{value.icon}}</span>{{value.title}} <span class="grey-bg count">{{feed.categoryCount(value.name)}}</span></p>
+          <div ng-show="value.showCategories">
+            <p class="sub-category" ng-repeat="(sub, subValue) in value.categories">{{subValue.title}} <span ng-show="{{feed.subCount(value.name, subValue.name) !== undefined}}" class="grey-bg count">{{feed.subCount(value.name, subValue.name)}}</span></p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class='feed-column l-12 m-12 s-12' infinite-scroll="feed.feedCheck();" infinite-scroll-distance="0.5">
+          <issues-post posted="feed.getFeed()"></issues-post>
+          <div ng-switch on="feed.selectedCategory.name">
+            <allactivityfeed ng-switch-when="all" feed="feed"></allactivityfeed>
+            <trendsactivityfeed ng-switch-when="discovery" feed="feed"></trendsactivityfeed>
+            <div ng-switch-when="following" feed="feed"></div>
+          </div>
+        </div>
+      </div>
+    <div class="l-4 m-12 s-12">
   		<div class="trends-container">
   			<h2><i class="icon-trending-graph"></i>TRENDING GLOBALLY</h2>
   			<hr class="margin-bottom-small margin-top-small" />
