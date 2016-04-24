@@ -3,9 +3,11 @@
 function SubFeedController(dependencies) {
   var options = dependencies || {};
   this.name = options.name;
+  this.title = options.title;
   this.items = options.items || [];
   this.count = this.items.length;
   this.categories = this.initCategories(options);
+  this.showCategories = false;
 }
 
 SubFeedController.prototype.initCategories = function(options) {

@@ -8,6 +8,23 @@
     // flex-direction: column;
     display: block;
   }
+  .category-column {
+    padding-top: 5%;
+    padding-left: 1%;
+    span.count {
+      font-weight: bold;
+      font-size:65%;
+      border-radius: 3px;
+      margin-top: 2%;
+      margin-right: 10%;
+      padding-left: 6px;
+      padding-right: 6px;
+      float: right;
+    }
+    .sub-category {
+      padding-left: 5%;
+    }
+  }
   .feed-column {
     height: 100%;
     position: relative;
