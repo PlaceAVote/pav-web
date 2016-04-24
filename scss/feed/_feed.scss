@@ -11,24 +11,40 @@
   .category-column {
     padding-top: 5%;
     padding-left: 1%;
+    font-size: 90%;
+    margin-right: 2%;
+    p {
+      padding-left: 15%;
+    }
     span.count {
       font-weight: bold;
       font-size:65%;
       border-radius: 3px;
       margin-top: 2%;
-      margin-right: 10%;
       padding-left: 6px;
       padding-right: 6px;
       float: right;
     }
+    p.category-selected {
+      border-radius: 3px;
+      background-color: $grey;
+    }
+    span.sub-category-select {
+      font-weight: bold;
+    }
     .sub-category {
-      padding-left: 5%;
+      padding-left: 20%;
     }
   }
   .feed-column {
     height: 100%;
     position: relative;
     margin-bottom: 20px;
+    .feed-title {
+      padding-top: 4%;
+      margin-left: 2%;
+      font-size: 90%;
+    }
     .bill-container {
       position: relative;
       // margin-top: 20px;

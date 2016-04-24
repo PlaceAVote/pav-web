@@ -149,4 +149,94 @@ describe("FeedController", function() {
         expect(subject.scrollMessage).to.equal('.');
         done();
     });
+    describe('get trends', function() {
+      it('wont call service for discovery/trends', function() {
+        var called = false;
+        var mockSearchService = {
+          bills: function(query, callback) {
+            called = true;
+            callback();
+          },
+        };
+        var subject = new FeedController({}, {}, new mockUserService(), new mockBillService(), new mockAuthService(), new mockFeedServiceEventsError(), {}, {}, mockSearchService);
+        subject.subCategoryClick('discovery', 'trends');
+        expect(called).to.eql(false);
+      });
+      it('wont call for not discovery catergories', function() {
+        var called = false;
+        var mockSearchService = {
+          bills: function(query, callback) {
+            called = true;
+            callback();
+          },
+        };
+        var subject = new FeedController({}, {}, new mockUserService(), new mockBillService(), new mockAuthService(), new mockFeedServiceEventsError(), {}, {}, mockSearchService);
+        subject.subCategoryClick('all', 'trends');
+        expect(called).to.eql(false);
+      });
+      it('calls for discovery catergories', function() {
+        var called = false;
+        var mockSearchService = {
+          bills: function(query, callback) {
+            called = true;
+            callback();
+          },
+        };
+        var subject = new FeedController({}, {}, new mockUserService(), new mockBillService(), new mockAuthService(), new mockFeedServiceEventsError(), {}, {}, mockSearchService);
+        subject.subCategoryClick('discovery', 'technology');
+        expect(called).to.eql(true);
+      });
+      it('assigns selected sub category to selected category', function() {
+        var called = false;
+        var mockSearchService = {
+          bills: function(query, callback) {
+            called = true;
+            callback();
+          },
+        };
+        var subject = new FeedController({}, {}, new mockUserService(), new mockBillService(), new mockAuthService(), new mockFeedServiceEventsError(), {}, {}, mockSearchService);
+        subject.subCategoryClick('discovery', 'technology');
+        expect(called).to.eql(true);
+        expect(subject.selectedCategory.name).to.eql('discovery');
+        expect(subject.selectedCategory.selectedCategory.name).to.eql('technology');
+      });
+
+      it('wont call search service if the sub category is undefined', function() {
+        var called = false;
+        var mockSearchService = {
+          bills: function(query, callback) {
+            called = true;
+            callback();
+          },
+        };
+        var subject = new FeedController({}, {}, new mockUserService(), new mockBillService(), new mockAuthService(), new mockFeedServiceEventsError(), {}, {}, mockSearchService);
+        subject.subCategoryClick('discovery', 'cats');
+        expect(called).to.eql(false);
+        expect(subject.selectedCategory.name).to.eql('discovery');
+        expect(subject.selectedCategory.selectedCategory).to.eql(undefined);
+      });
+
+      it('pushes items from service onto categories items list', function() {
+        var mockSearchService = {
+          bills: function(query, callback) {
+            callback(null, ['a', 'b', 'c']);
+          },
+        };
+        var subject = new FeedController({}, {}, new mockUserService(), new mockBillService(), new mockAuthService(), new mockFeedServiceEventsError(), {}, {}, mockSearchService);
+        subject.subCategoryClick('discovery', 'technology');
+        expect(subject.selectedCategory.name).to.eql('discovery');
+        expect(subject.selectedCategory.selectedCategory.items.length).to.eql(3);
+      });
+      it('does not update if service returns error', function() {
+        var mockSearchService = {
+          bills: function(query, callback) {
+            callback(new Error('NOT TODAY'), null);
+          },
+        };
+        var subject = new FeedController({}, {}, new mockUserService(), new mockBillService(), new mockAuthService(), new mockFeedServiceEventsError(), {}, {}, mockSearchService);
+        subject.subCategoryClick('discovery', 'technology');
+        expect(subject.selectedCategory.name).to.eql('discovery');
+        expect(subject.selectedCategory.selectedCategory.items.length).to.eql(0);
+      });
+    });
 });

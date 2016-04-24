@@ -228,7 +228,7 @@ app.factory('mailService', ['$resource', MailService]);
 app.controller('TopicRegisterCtrl',['$scope','$location', 'userService', '$rootScope', RegisterController]);
 app.controller('SignUpCtrl',['$rootScope','$scope','$location', 'userService', SignUpController]);
 app.controller('LoginCtrl',['$scope','$location', 'userService', 'authService', '$rootScope', '$routeParams', 'passwordService', '$timeout', LoginController]);
-app.controller('FeedCtrl', ['$scope', '$location', 'userService', 'billService', 'authService', 'feedService', '$rootScope','$timeout', FeedController]);
+app.controller('FeedCtrl', ['$scope', '$location', 'userService', 'billService', 'authService', 'feedService', '$rootScope','$timeout', 'searchService', FeedController]);
 app.controller('BillCtrl', ['$scope', '$routeParams', 'billService', 'legislationService', 'voteService', 'commentService', '$location', 'authService', '$rootScope', '$timeout', 'facebookService', '$route', BillController]);
 app.controller('HeaderCtrl', ['$rootScope', '$scope', '$location', '$timeout', 'authService', 'userService', 'notificationService', 'searchService', '$window', '$route', HeaderController]);
 app.controller('ProfileCtrl', ['$scope', '$location', '$routeParams', 'authService', 'userService','issueService', '$rootScope', ProfileController]);

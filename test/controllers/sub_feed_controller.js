@@ -33,12 +33,13 @@ describe('sub feed', function() {
     expect(sub.categories.undefined).to.eql(undefined);
   });
   it('update will not override the existing items', function() {
-    var items = ['a', 'b', 'c'];
+    var items = ['a', 'b'];
     var sub = new SubFeedController({items: items});
-    sub.update(['d', 'e', 'f']);
     expect(sub.items[0]).to.eql('a');
-    expect(sub.items[5]).to.eql('f');
-    expect(sub.items.length).to.eql(6);
-    expect(sub.count).to.eql(6);
+    expect(sub.count).to.eql(2);
+    sub.update(['d', 'e', 'f']);
+    expect(sub.items[0]).to.eql('d');
+    expect(sub.items.length).to.eql(3);
+    expect(sub.count).to.eql(3);
   });
 });

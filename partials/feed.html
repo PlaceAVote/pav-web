@@ -27,9 +27,11 @@
 	    <section class="feed-wrapper">
       <div class="category-column l-2 m-12 s-12">
         <div ng-repeat="(cat, value) in feed.categories">
-          <p ng-click="feed.categoryClick(value.name)"><span>{{value.icon}}</span>{{value.title}} <span class="grey-bg count">{{feed.categoryCount(value.name)}}</span></p>
+          <p ng-click="feed.categoryClick(value.name)" ng-class="{'category-selected': feed.isSelectedCategory(value.name)}"><span>{{value.icon}}</span>{{value.title}} <span class="grey-bg count">{{feed.categoryCount(value.name)}}</span></p>
           <div ng-show="value.showCategories">
-            <p class="sub-category" ng-repeat="(sub, subValue) in value.categories">{{subValue.title}} <span ng-show="{{feed.subCount(value.name, subValue.name) !== undefined}}" class="grey-bg count">{{feed.subCount(value.name, subValue.name)}}</span></p>
+            <div class="sub-category" ng-click="feed.subCategoryClick(value.name, subValue.name)"  ng-repeat="(sub, subValue) in value.categories">
+              <span ng-class="{'sub-category-select': feed.isSelectedSubCategory(value.name, subValue.name)}" >{{subValue.title}}</span> <span ng-show="{{feed.subCount(value.name, subValue.name) !== undefined}}" class="grey-bg count">{{feed.subCount(value.name, subValue.name)}}</span>
+            </div>
           </div>
         </div>
       </div>
