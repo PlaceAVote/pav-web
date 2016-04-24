@@ -1,5 +1,6 @@
 var config = require('../config/endpoints.js');
-var SearchResults = require('../models/search_results');
+var SearchResults = require('../models/search_results.js');
+var BillSummary = require('../models/bill_summary.js');
 
 function bills($resource, query, callback) {
   if (!query) {
@@ -9,7 +10,10 @@ function bills($resource, query, callback) {
   var resource = new $resource(url, undefined, {call: config.methods.getArray});
 
   function onLoad(results) {
-    return callback(null, results);
+    var mapped = results.map(function(result) {
+      return new BillSummary(result);
+    });
+    return callback(null, mapped);
   }
   function onError() {
     callback(null, []);

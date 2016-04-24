@@ -1,3 +1,10 @@
-<div class="feed-event-loader row" ng-show="feed.loading" loader loader-context="feed.loading" truthy></div>
-<feed-events events="feed.selectedCategory.selectedCategory.items" refresh="feed.loading" ng-show="feed.selectedCategory.selectedCategory.items" class="feed-events" scroll="feed.loadingScroll" message="feed.scrollMessage"></feed-events>
+<p class="feed-title">
+  {{feed.selectedCategory.selectedCategory.title}}
+</p>
+
+<div class="feed-event-loader row" ng-show="feed.itemsLoading" loader loader-context="feed.itemsLoading" truthy></div>
+<feed-events events="feed.selectedCategory.selectedCategory.items" ng-show="feed.selectedCategory.selectedCategory.items" class="feed-events"></feed-events>
+</div>
+<div ng-show="feed.selectedCategory.selectedCategory.count === 0 && feed.itemsLoading === false">
+  <p> There was bills found for the topic {{feed.selectedCategory.selectedCategory.title}}</p>
 </div>

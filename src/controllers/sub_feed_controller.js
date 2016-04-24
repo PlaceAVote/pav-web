@@ -26,8 +26,11 @@ SubFeedController.prototype.initCategories = function(options) {
 };
 
 SubFeedController.prototype.update = function(items) {
-  this.items = this.items.concat(items);
-  this.count = this.items.length;
+  if (!items) {
+    return;
+  }
+  this.items = items;
+  this.count = items.length;
 };
 
 module.exports = SubFeedController;

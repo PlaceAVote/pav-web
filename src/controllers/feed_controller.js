@@ -5,13 +5,14 @@ var BillSummary = require('../models/bill_summary.js');
 var Issue = require('../models/issue.js');
 var SubFeedController = require('./sub_feed_controller.js');
 
-FeedController = function($scope, $location, userService, billService, authService, feedService, $rootScope, $timeout) {
+FeedController = function($scope, $location, userService, billService, authService, feedService, $rootScope, $timeout, searchService) {
   AuthorizeController.authorize({error: '/', authorizer: authService, location: $location});
   this.$scope = $scope || {};
   $scope.$location = $location || {};
   this.billService = billService;
   this.userService = userService;
   this.feedService = feedService;
+  this.searchService = searchService;
   this.timeout = $timeout;
   this.rs = $rootScope;
   this.rs.inApp = true;
@@ -70,6 +71,49 @@ FeedController.prototype.categoryCount = function(name) {
   }
 };
 
+FeedController.prototype.subCategoryClick = function(categoryName, subCategoryName) {
+  var that = this;
+  this.itemsLoading = true;
+  if (categoryName !== 'discovery') {
+    return;
+  }
+  if (categoryName === 'discovery' && subCategoryName === 'trends') {
+    this.itemsLoading = false;
+    this.selectedCategory.selectedCategory = this.categories[categoryName].categories[subCategoryName];
+    return;
+  }
+  this.selectedCategory = this.categories[categoryName];
+  this.selectedCategory.selectedCategory = this.categories[categoryName].categories[subCategoryName];
+  if (!this.selectedCategory.selectedCategory) {
+    return;
+  }
+  this.searchService.bills(subCategoryName, function(err, results) {
+    if (err) {
+      return;
+    }
+    that.selectedCategory.selectedCategory.update(results);
+    that.itemsLoading = false;
+  });
+
+};
+
+FeedController.prototype.isSelectedCategory = function(category) {
+  if (this.selectedCategory.name !== category) {
+    return false;
+  }
+  return true;
+};
+
+FeedController.prototype.isSelectedSubCategory = function(category, sub) {
+  if (this.selectedCategory.name !== category) {
+    return false;
+  }
+  if (this.selectedCategory.selectedCategory && this.selectedCategory.selectedCategory.name === sub) {
+    return true;
+  }
+  return false;
+};
+
 FeedController.prototype.subCount = function(catName, subName) {
   var cat = this.categories[catName];
   if (!cat) {
@@ -105,7 +149,10 @@ FeedController.prototype.getTrends = function() {
     that.trends = false;
     if (!err) {
       that.trends = res;
-      that.categories.discovery.categories.trends.update(res);
+      var mappedTrends = res.map(function(re) {
+        return new BillSummary(re);
+      });
+      that.categories.discovery.categories.trends.update(mappedTrends);
     }
   });
 };
@@ -117,7 +164,9 @@ FeedController.prototype.getFeed = function() {
     that.loading = false;
     if (!err) {
       title.feed();
-      that.categories.all.update(response.feed);
+      if (!response.feed || response.feed.length > 0) {
+        that.categories.all.update(response.feed);
+      }
       that.lastLoaded = response.last_timestamp;
     }
   });
@@ -135,7 +184,6 @@ FeedController.prototype.feedCheck = function() {
     if (!err) {
       title.feed();
       if (response.last_timestamp === null) {
-        that.categories.all.update(response.feed);
         that.feedMessage('.');
       } else {
         that.lastLoaded = response.last_timestamp;

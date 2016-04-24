@@ -7,6 +7,7 @@ function TrendingBill(options) {
   this.official_title = options.official_title;
   this.short_title = options.short_title;
   this.summary = options.summary;
+  this.featured_img_link = options.featured_img_link;
   this.getIcon(options);
   this.trendTitle = options.featured_bill_title || options.short_title || options.official_title;
 }
