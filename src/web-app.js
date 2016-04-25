@@ -203,8 +203,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
   });
 
   $locationProvider
-    .hashPrefix('!');
-
+    .html5Mode(true);
 },]);
 
 // Services

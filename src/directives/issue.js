@@ -91,30 +91,32 @@ module.exports = function($location, issueService, facebook, $window, userServic
       };
 
       var rootHref = 'https://placeavote.com';
-      scope.issueLocationFacebook = rootHref + '/#!/issue/' + scope.issue.short_issue_id;
-      scope.issueLocation = encodeURIComponent(rootHref + '/#!/issue/') + scope.issue.short_issue_id;
+      if (scope.issue) {
+        scope.issueLocationFacebook = rootHref + '/issue/' + scope.issue.short_issue_id;
+        scope.issueLocation = encodeURIComponent(rootHref + '/issue/') + scope.issue.short_issue_id;
 
-      scope.$watch('issue', function(newValue, oldValue) {
-        if (newValue) {
-          if ($location.$$host === 'beta.placeavote.com') {
-            rootHref = 'https://beta.placeavote.com';
-            scope.issueLocationFacebook = rootHref + '/#!/issue/' + scope.issue.short_issue_id;
-            scope.issueLocation = encodeURIComponent(rootHref + '/#!/issue/') + scope.issue.short_issue_id;
-          }
+        scope.$watch('issue', function(newValue, oldValue) {
+          if (newValue) {
+            if ($location.$$host === 'beta.placeavote.com') {
+              rootHref = 'https://beta.placeavote.com';
+              scope.issueLocationFacebook = rootHref + '/issue/' + scope.issue.short_issue_id;
+              scope.issueLocation = encodeURIComponent(rootHref + '/issue/') + scope.issue.short_issue_id;
+            }
 
-          if ($location.$$host === 'dev.placeavote.com' || $location.$$host === 'localhost') {
-            rootHref = 'http://dev.placeavote.com';
-            scope.issueLocationFacebook = rootHref + '/#!/issue/' + scope.issue.short_issue_id;
-            scope.issueLocation = encodeURIComponent(rootHref + '/#!/issue/') + scope.issue.short_issue_id;
-          }
+            if ($location.$$host === 'dev.placeavote.com' || $location.$$host === 'localhost') {
+              rootHref = 'http://dev.placeavote.com';
+              scope.issueLocationFacebook = rootHref + '/issue/' + scope.issue.short_issue_id;
+              scope.issueLocation = encodeURIComponent(rootHref + '/issue/') + scope.issue.short_issue_id;
+            }
 
-          if ($location.$$host === 'placeavote.com') {
-            rootHref = 'https://www.placeavote.com';
-            scope.issueLocationFacebook = rootHref + '/#!/issue/' + scope.issue.short_issue_id;
-            scope.issueLocation = encodeURIComponent(rootHref + '/#!/issue/') + scope.issue.short_issue_id;
+            if ($location.$$host === 'placeavote.com') {
+              rootHref = 'https://www.placeavote.com';
+              scope.issueLocationFacebook = rootHref + '/issue/' + scope.issue.short_issue_id;
+              scope.issueLocation = encodeURIComponent(rootHref + '/issue/') + scope.issue.short_issue_id;
+            }
           }
-        }
-      });
+        });
+      }
 
       scope.getShareMessage = function() {
         var t = tweet();
