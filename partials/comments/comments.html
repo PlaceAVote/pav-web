@@ -12,7 +12,13 @@
       <p class="c-card__username" 
          ng-click="location.path('profile/' + comment.author)">
       {{comment.author_first_name}} <span ng-show="feed">{{comment.author_last_name}}</span></p>
-
+      
+      <p ng-show="feed">
+       in <span class="c-bill-title"
+                ng-click="location.path('bill/' + comment.bill_id)">
+                {{comment.bill_title}}
+                </span>
+      </p>
 
     <i class="c-card__menu-icon
       c-card__menu-icon--comment 
