@@ -40,8 +40,8 @@ describe('Single Response', function(){
     }
     expect(fn).to.not.throw({message:'Type Not Supported'});
   });
-  it('does not add unsuppored types to responses', function(){
-      var data = [{type: 'bill'}, {type: 'userissue'}, {type: 'cat'}];
+  it('does not add unsupported types to responses', function(){
+      var data = [{type: 'bill'}, {type: 'userissue', comment: 'test comment'}, {type: 'cat'}];
       var results = FeedResponseFactory.getResponses(data);
       expect(results.length).to.eql(2);
   });
@@ -54,4 +54,3 @@ describe('Multiple Responses', function() {
     expect(results.length).to.eql(2);
   });
 });
-

@@ -69,8 +69,6 @@ describe("Feed Service", function() {
     it('returns array of BillSummary and Issue if server response successfully', function(done) {
       var subject = new FeedService(mockResource, mockAuth);
       subject.getFeed('23423423', function(err, result) {
-        console.log('from feed service');
-        console.log(err, result.feed.length);
         expect(result.feed.length).to.eql(2);
         expect(result.feed[1]).to.be.an.instanceof(BillSummary);
         expect(result.feed[0]).to.be.an.instanceof(Issue);

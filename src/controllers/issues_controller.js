@@ -153,6 +153,7 @@ IssuesController.prototype.postIssue = function() {
       that.myIssues.unshift(new Issue(res));
     }
   });
+
 };
 
 module.exports = IssuesController;

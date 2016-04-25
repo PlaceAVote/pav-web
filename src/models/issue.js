@@ -38,7 +38,7 @@ Issue.prototype.goToIssue = function(location) {
 
 
 Issue.prototype.bodyText = function(options) {
-  if (!options) {
+  if (!options || !options.comment) {
     return;
   }
   var that = this;
@@ -52,31 +52,3 @@ Issue.prototype.bodyText = function(options) {
 };
 
 module.exports = Issue;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
