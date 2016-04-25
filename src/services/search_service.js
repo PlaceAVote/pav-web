@@ -6,6 +6,7 @@ function bills($resource, query, callback) {
   if (!query) {
     return callback(null, []);
   }
+  query = query.replace('-', '%20');
   var url = config.search.bills(query);
   var resource = new $resource(url, undefined, {call: config.methods.getArray});
 

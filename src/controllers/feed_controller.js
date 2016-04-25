@@ -24,9 +24,9 @@ FeedController = function($scope, $location, userService, billService, authServi
       categories:
         [
           new SubFeedController({name: 'trends', title: 'Trends',}),
-          new SubFeedController({name: 'justice', title: 'Justice',}),
+          new SubFeedController({name: 'politics', title: 'Politics',}),
           new SubFeedController({name: 'technology', title: 'Technology',}),
-          new SubFeedController({name: 'guns', title: 'Guns',}),
+          new SubFeedController({name: 'gun', title: 'Guns',}),
           new SubFeedController({name: 'education', title: 'Education',}),
           new SubFeedController({name: 'healthcare', title: 'Healthcare',}),
         ],

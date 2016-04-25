@@ -97,6 +97,29 @@ describe('Search Service', function() {
       });
     });
 
+    it('returns an array of bills', function(done) {
+      var expectedParams = {};
+      var tagResource = function(url, params, method) {
+        expectedParams.url = url;
+        expectedParams.params = params;
+        expectedParams.method = method;
+        this.call = function(body, onLoad, onError) {
+          expectedParams.body = body;
+          onLoad(fixtures.bills);
+        }
+      }
+      var subject = new SearchService(tagResource, mockAuthservice);
+      subject.bills('gun-rights', function(err, results) {
+        expect(err).to.eql(null);
+        expect(expectedParams.url).to.contain('/bills?tag=gun%20rights');
+        expect(expectedParams.params).to.eql(undefined);
+        expect(expectedParams.body).to.eql(undefined);
+        expect(expectedParams.method.call.method).to.eql('GET');
+        expect(results.length).to.eql(6);
+        done();
+      });
+    });
+
     it('returns an empty array on error', function(done) {
       var tagResource = function(url, params, method) {
         this.call = function(body, onLoad, onError) {
