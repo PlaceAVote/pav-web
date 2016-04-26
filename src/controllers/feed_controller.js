@@ -17,9 +17,9 @@ FeedController = function($scope, $location, userService, billService, authServi
   this.rs = $rootScope;
   this.rs.inApp = true;
   this.categories = {
-    all: new SubFeedController({name: 'all', title: 'All Activity',}),
-    following: new SubFeedController({name: 'following', title: 'Following'}),
-    billActivity: new SubFeedController({name: 'billActivity', title: 'Bill Activity'}),
+    all: new SubFeedController({name: 'all', title: 'All Activity', noun: 'everything'}),
+    following: new SubFeedController({name: 'following', title: 'Following', noun: 'people'}),
+    billActivity: new SubFeedController({name: 'billActivity', title: 'Bill Activity', noun: 'bills'}),
     discovery: new SubFeedController({
       name: 'discovery',
       title: 'Discovery',
@@ -139,6 +139,9 @@ FeedController.prototype.categoryClick = function(name) {
   this.selectedCategory = this.categories[name] || this.categories.all;
   if (this.selectedCategory.categories) {
     this.selectedCategory.showCategories = true;
+  }
+  if (this.selectedCategory.count === 0) {
+    this.feedCheck();
   }
 };
 

@@ -8,6 +8,7 @@ function SubFeedController(dependencies) {
   var options = dependencies || {};
   this.name = options.name;
   this.title = options.title;
+  this.noun = options.noun;
   this.items = options.items || [];
   this.count = this.items.length;
   this.categories = this.initCategories(options);
