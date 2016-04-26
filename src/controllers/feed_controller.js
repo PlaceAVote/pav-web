@@ -18,6 +18,8 @@ FeedController = function($scope, $location, userService, billService, authServi
   this.rs.inApp = true;
   this.categories = {
     all: new SubFeedController({name: 'all', title: 'All Activity',}),
+    following: new SubFeedController({name: 'following', title: 'Following'}),
+    billActivity: new SubFeedController({name: 'billActivity', title: 'Bill Activity'}),
     discovery: new SubFeedController({
       name: 'discovery',
       title: 'Discovery',
@@ -165,12 +167,18 @@ FeedController.prototype.getFeed = function() {
     if (!err) {
       title.feed();
       if (!response.feed || response.feed.length > 0) {
-        that.categories.all.push(response.feed);
+        that.populateFeed(response);
       }
       that.lastLoaded = response.last_timestamp;
     }
   });
 };
+
+FeedController.prototype.populateFeed = function(response) {
+  this.categories.all.push(response.feed);
+  this.categories.following.filter(response.feed, ['issue']);
+  this.categories.billActivity.filter(response.feed, ['bill', 'vote', 'comment']);
+}
 
 FeedController.prototype.feedCheck = function() {
   var that = this;
@@ -187,7 +195,7 @@ FeedController.prototype.feedCheck = function() {
         that.feedMessage('.');
       } else {
         that.lastLoaded = response.last_timestamp;
-        that.categories.all.push(response.feed);
+        that.populateFeed(response);
       }
     }
   });

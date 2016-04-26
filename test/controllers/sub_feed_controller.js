@@ -73,4 +73,70 @@ describe('sub feed', function() {
     expect(sub.items.length).to.eql(2);
     expect(sub.count).to.eql(2);
   });
+  describe('filter', function() {
+    it('given no list it will no push any items on to the current items list', function() {
+      var items = ['a', 'b'];
+      var sub = new SubFeedController({items: items});
+      expect(sub.items[0]).to.eql('a');
+      expect(sub.count).to.eql(2);
+      sub.filter();
+      expect(sub.items[0]).to.eql('a');
+      expect(sub.items.length).to.eql(2);
+      expect(sub.count).to.eql(2);
+    });
+    it('given an empty list it will no push any items on to the current items list', function() {
+      var items = ['a', 'b'];
+      var sub = new SubFeedController({items: items});
+      expect(sub.items[0]).to.eql('a');
+      expect(sub.count).to.eql(2);
+      sub.filter([]);
+      expect(sub.items[0]).to.eql('a');
+      expect(sub.items.length).to.eql(2);
+      expect(sub.count).to.eql(2);
+    });
+    it('given a list it will push no items on to the current items list if type is not defined', function() {
+      var items = ['a', 'b'];
+      var sub = new SubFeedController({items: items});
+      expect(sub.items[0]).to.eql('a');
+      expect(sub.count).to.eql(2);
+      sub.filter([{type: 'userissue'}]);
+      expect(sub.items[0]).to.eql('a');
+      expect(sub.items.length).to.eql(2);
+      expect(sub.count).to.eql(2);
+    });
+    it('given a list it will push items on to the current items list if type matches', function() {
+      var items = ['a', 'b'];
+      var sub = new SubFeedController({items: items});
+      expect(sub.items[0]).to.eql('a');
+      expect(sub.count).to.eql(2);
+      sub.filter([{type: 'userissue'}], ['userissue']);
+      expect(sub.items[0]).to.eql('a');
+      expect(sub.items[2].type).to.eql('userissue');
+      expect(sub.items.length).to.eql(3);
+      expect(sub.count).to.eql(3);
+    });
+    it('given a list it will not push items on to the current items list if type does not match', function() {
+      var items = ['a', 'b'];
+      var sub = new SubFeedController({items: items});
+      expect(sub.items[0]).to.eql('a');
+      expect(sub.count).to.eql(2);
+      sub.filter([{type: 'comment'}], ['userissue']);
+      expect(sub.items[0]).to.eql('a');
+      expect(sub.items.length).to.eql(2);
+      expect(sub.count).to.eql(2);
+    });
+    it('given a list of multiple types apply filter accoringly', function() {
+      var items = ['a', 'b'];
+      var sub = new SubFeedController({items: items});
+      expect(sub.items[0]).to.eql('a');
+      expect(sub.count).to.eql(2);
+      sub.filter([{type: 'comment'}, {type: 'comment'}, {type: 'userissue'}, {type: 'userissue'}], ['userissue']);
+      expect(sub.items[0]).to.eql('a');
+      expect(sub.items[1]).to.eql('b');
+      expect(sub.items[2].type).to.eql('userissue');
+      expect(sub.items[3].type).to.eql('userissue');
+      expect(sub.items.length).to.eql(4);
+      expect(sub.count).to.eql(4);
+    });
+  });
 });

@@ -39,8 +39,8 @@
         <div class='feed-column l-12 m-12 s-12' infinite-scroll="feed.feedCheck();" infinite-scroll-distance="0.5">
           <issues-post posted="feed.getFeed()"></issues-post>
           <div ng-switch on="feed.selectedCategory.name">
-            <allactivityfeed ng-switch-when="all" feed="feed"></allactivityfeed>
             <trendsactivityfeed ng-switch-when="discovery" feed="feed"></trendsactivityfeed>
+            <allactivityfeed ng-switch-default feed="feed"></allactivityfeed>
             <div ng-switch-when="following" feed="feed"></div>
           </div>
         </div>
