@@ -127,7 +127,7 @@ function CommentService($resource, userService, authService) {
     };
 
     var onLoad = function(res) {
-      return callback(undefined, res);
+      return callback(undefined, new Comment(res));
     };
 
     var body = {body: comment};
@@ -177,36 +177,3 @@ function CommentService($resource, userService, authService) {
 }
 
 module.exports = CommentService;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

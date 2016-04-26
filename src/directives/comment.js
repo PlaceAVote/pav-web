@@ -60,8 +60,6 @@ module.exports = function($compile, commentService, $anchorScroll, $timeout, $lo
 
         scope.editLoading = true;
 
-
-
         scope.commentService.edit(scope.comment.id, scope.comment.body_sanitized, function(err, res) {
           scope.editLoading = false;
 
@@ -71,9 +69,7 @@ module.exports = function($compile, commentService, $anchorScroll, $timeout, $lo
 
           if (res) {
             scope.showEditTools = false;
-            scope.comment.body = res.body;
-            scope.original = res.body;
-            scope.comment.bodyText(scope.comment);
+            scope.comment = res;
             scope.setAlertMessage('Your comment has been edited', true);
           }
         });
@@ -130,4 +126,3 @@ module.exports = function($compile, commentService, $anchorScroll, $timeout, $lo
     },
   };
 };
-

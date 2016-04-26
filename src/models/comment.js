@@ -37,12 +37,11 @@ Comment.prototype.bodyText = function(options) {
   var regex = new RegExp(/\n/gi);
 
   if (options.body) {
+    options.body = options.body.replace(regex, ' <br /> ');
 
-    options.body = options.body.replace(scriptExp, '');
+    options.body = options.body.replace(scriptExp, ' ');
 
-    options.body = options.body.replace(objectExp, '');
-
-    options.body = options.body.replace(regex, '<br />');
+    options.body = options.body.replace(objectExp, ' ');
 
   }
 
@@ -60,6 +59,7 @@ Comment.prototype.bodyText = function(options) {
   for (var i = 0; i < this.links.length; i++) {
     options.body = options.body.replace(this.links[i].original, this.links[i].formatted);
   }
+
 
   this.body = options.body;
 };
