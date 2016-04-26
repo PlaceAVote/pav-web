@@ -1,0 +1,36 @@
+/*------------------------------------*\
+    #COMPONENT-FEED
+\*------------------------------------*/
+
+/**
+* The feed page currently has consists of
+* three columns on desktop and one on mobile
+*/
+
+.c-feed {
+  max-width: 1200px;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 42px auto 0;
+}
+
+.c-feed__column {
+  width: 600px;
+  margin-left: 160px;
+}
+
+.c-feed__menu-container {
+  position: fixed;
+  margin: 0 auto;
+  max-width: 1200px;
+  width: 100%;
+  left: 0;
+  right: 0;
+  top: 62px;
+}
+
+.c-feed__menu {
+  width: 150px;
+}
