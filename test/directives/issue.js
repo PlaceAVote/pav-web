@@ -97,15 +97,16 @@ describe('Issue Directive', function() {
   it('should cancel issue editting, and revert to original comment', function() {
       var scope = {
       issue: {
-        comment: 'This comment has been edited by the user but no posted',
+        comment: 'This is the original comment before the user started making changed',
+        comment_sanitized: 'This comment has been edited by the user but no posted',
       },
       original: 'This is the original comment before the user started making changed',
       $watch: function() {},
     };
-    var subject = new Issues(mockLocation, mockIssueService, undefined, mockWindow, mockUserServiceSuccess);  
+    var subject = new Issues(mockLocation, mockIssueService, undefined, mockWindow, mockUserServiceSuccess);
     subject.link(scope, undefined, mockAttr);
     scope.cancelIssue();
-    expect(scope.original).to.equal(scope.issue.comment);
+    expect(scope.issue.comment_sanitized).to.equal(scope.original);
   });
 
 
@@ -113,11 +114,12 @@ describe('Issue Directive', function() {
       var scope = {
       issue: {
         comment: 'This comment has been edited by the user but no posted',
+        comment_sanitized: 'This comment has been edited by the user but no posted',
       },
       original: 'This comment has been edited by the user but no posted',
       $watch: function() {},
     };
-    var subject = new Issues(mockLocation, mockIssueService, undefined, mockWindow, mockUserServiceSuccess);  
+    var subject = new Issues(mockLocation, mockIssueService, undefined, mockWindow, mockUserServiceSuccess);
     subject.link(scope, undefined, mockAttr);
     scope.editIssue();
     expect(scope.original).to.equal(scope.issue.comment);
@@ -129,12 +131,13 @@ describe('Issue Directive', function() {
       var scope = {
       issue: {
         comment: 'This comment has been edited by the user but no posted.',
+        comment_sanitized: 'This comment has been edited by the user but no posted',
       },
       original: 'This comment has been edited by the user but no posted.',
       editLoading: true,
       $watch: function() {},
     };
-    var subject = new Issues(mockLocation, mockIssueService, undefined, mockWindow, mockUserServiceSuccess);  
+    var subject = new Issues(mockLocation, mockIssueService, undefined, mockWindow, mockUserServiceSuccess);
     subject.link(scope, undefined, mockAttr);
     scope.issue.comment += ' Edited.';
     scope.editIssue();
@@ -148,6 +151,7 @@ describe('Issue Directive', function() {
       issue: {
         issue_id: '12345',
         comment: 'This comment has been edited by the user but no posted.',
+        comment_sanitized: 'This comment has been edited by the user but no posted.',
       },
       original: 'This comment has been edited by the user but no posted.',
       editLoading: false,
@@ -160,12 +164,12 @@ describe('Issue Directive', function() {
       }
     };
 
-    var subject = new Issues(mockLocation, mockIssueEditService, undefined, mockWindow, mockUserServiceSuccess, mockTimeOut);  
+    var subject = new Issues(mockLocation, mockIssueEditService, undefined, mockWindow, mockUserServiceSuccess, mockTimeOut);
     subject.link(scope, undefined, mockAttr);
-    scope.issue.comment += ' Edited.';
+    scope.issue.comment_sanitized += ' Edited.';
     scope.editIssue();
          expect(scope.editLoading).to.equal(scope.editLoading);
-         expect(scope.original).to.equal(scope.issue.comment);
+         expect('This comment has been edited by the user but no posted. Edited.').to.equal(scope.issue.comment);
          expect(scope.showEditTools).to.equal(false);
         done();
   });
@@ -182,7 +186,7 @@ describe('Issue Directive', function() {
       $watch: function() {},
     };
 
-    var subject = new Issues(mockLocation, mockIssueService, undefined, mockWindow, mockUserServiceSuccess, mockTimeOut);  
+    var subject = new Issues(mockLocation, mockIssueService, undefined, mockWindow, mockUserServiceSuccess, mockTimeOut);
     subject.link(scope, undefined, mockAttr);
     scope.issue.comment += ' Edited.';
     scope.deleteIssue();
@@ -204,7 +208,7 @@ describe('Issue Directive', function() {
       $apply: function() {},
     };
 
-    var subject = new Issues(mockLocation, mockIssueService, undefined, mockWindow, mockUserServiceSuccess, mockTimeOut);  
+    var subject = new Issues(mockLocation, mockIssueService, undefined, mockWindow, mockUserServiceSuccess, mockTimeOut);
     subject.link(scope, undefined, mockAttr);
     scope.deleteIssue();
         expect(scope.deleteLoading).to.equal(false);
@@ -214,33 +218,3 @@ describe('Issue Directive', function() {
   });
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
