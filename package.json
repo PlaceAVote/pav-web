@@ -33,6 +33,7 @@
     "chai": "^3.2.0",
     "cordova": "^5.3.1",
     "d3": "^3.5.6",
+    "darkroom": "^2.0.0",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^2.3.1",
     "gulp-clean": "^0.3.1",

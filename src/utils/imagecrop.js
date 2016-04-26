@@ -182,6 +182,7 @@ module.exports = (function() {
     }
 
     src_el.addEventListener('mousedown', document_mousedown);
+    src_el.addEventListener('touchstart', document_mousedown);
 
     initialized = true;
     //  Reset dim
@@ -209,6 +210,7 @@ module.exports = (function() {
     if (src_el) {
       src_el.removeEventListener('DOMNodeRemovedFromDocument', this.destroy);
       src_el.removeEventListener('mousedown', document_mousedown);
+      src_el.removeEventListener('touchstart', document_mousedown);
 
       while (src_el.firstChild) { src_el.removeChild(src_el.firstChild); }
       src_el = img = handles_wrap = overlay_el = null;
@@ -235,8 +237,17 @@ module.exports = (function() {
 
   function convertGlobalToLocal(e) {
     var d = src_el.getBoundingClientRect();
-    var x = e.clientX - d.left;
-    var y = e.clientY - d.top;
+    var y;
+    var x;
+    console.log('convertGlobal', e.type, e);
+    if(e.type === 'touchmove') {
+      x = e.touches[0].clientX - d.left;
+      y = e.touches[0].clientY - d.top;
+    } else {
+      x = e.clientX - d.left;
+      y = e.clientY - d.top;
+    }
+
     return {
       x: x < 0 ? 0 : (x > d.width ? d.width : x),
       y: y < 0 ? 0 : (y > d.height ? d.height : y),
@@ -282,22 +293,29 @@ module.exports = (function() {
 
   function update(e) {
     e = convertGlobalToLocal(e);
+    console.log(e.type);
     dim.x = e.x - dim.w * 0.5;
     dim.y = e.y - dim.h * 0.5;
     dim.x2 = e.x + dim.w * 0.5;
     dim.y2 = e.y + dim.h * 0.5;
-    render();
-  }
+   }
 
   function document_mousedown(e) {
     document.addEventListener('mousemove', document_mousemove);
     document.addEventListener('mouseup', window_blur);
+    document.addEventListener('touchend', window_blur);
+    document.addEventListener('touchmove', document_mousemove);
+    document.addEventListener('touchcancel', window_blur);
+
     update(e);
   }
 
   function window_blur(e) {
     document.removeEventListener('mouseup', window_blur);
     document.removeEventListener('mousemove', document_mousemove);
+    document.removeEventListener('touchmove', document_mousemove);
+    document.removeEventListener('touchcancel', window_blur);
+    document.removeEventListener('touchend', window_blur);
   }
 
   function document_mousemove(e) {
@@ -307,8 +325,12 @@ module.exports = (function() {
   function Handle(t, i, cb) {
     function handle_down(e) {
       e.stopPropagation();
+      console.log('handle_down', e);
       document.addEventListener('mouseup', handle_up);
       document.addEventListener('mousemove', handle_move);
+      document.addEventListener('touchend', handle_up);
+      document.addEventListener('touchcancel', handle_up);
+      document.addEventListener('touchmove', handle_move);
     }
 
     function handle_move(e) {
@@ -322,11 +344,15 @@ module.exports = (function() {
       e.stopPropagation();
       document.removeEventListener('mouseup', handle_up);
       document.removeEventListener('mousemove', handle_move);
+      document.removeEventListener('touchmove', handle_move);
+      document.removeEventListener('touchend', handle_up);
+      document.removeEventListener('touchcancel', handle_up);
     }
 
     var el = document.createElement('span');
     el.className = 'imgc-handles-el-' + t + '-' + i;
     el.addEventListener('mousedown', handle_down);
+    el.addEventListener('touchstart', handle_down);
     return el;
   }
 
