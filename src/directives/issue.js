@@ -92,8 +92,10 @@ module.exports = function($location, issueService, facebook, $window, userServic
       };
 
       var rootHref = 'https://placeavote.com';
-      scope.issueLocationFacebook = rootHref + '/#!/issue/' + scope.issue.short_issue_id;
-      scope.issueLocation = encodeURIComponent(rootHref + '/#!/issue/') + scope.issue.short_issue_id;
+      if (scope.issue) {
+        scope.issueLocationFacebook = rootHref + '/#!/issue/' + scope.issue.short_issue_id;
+        scope.issueLocation = encodeURIComponent(rootHref + '/#!/issue/') + scope.issue.short_issue_id;
+      }
 
       scope.$watch('issue', function(newValue, oldValue) {
         if (newValue) {
