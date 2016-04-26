@@ -138,5 +138,20 @@ describe('sub feed', function() {
       expect(sub.items.length).to.eql(4);
       expect(sub.count).to.eql(4);
     });
+    it('given a list of multiple types apply multiple filters accoringly', function() {
+      var items = ['a', 'b'];
+      var sub = new SubFeedController({items: items});
+      expect(sub.items[0]).to.eql('a');
+      expect(sub.count).to.eql(2);
+      sub.filter([{type: 'comment'}, {type: 'comment'}, {type: 'userissue'}, {type: 'userissue'}], ['userissue', 'comment']);
+      expect(sub.items[0]).to.eql('a');
+      expect(sub.items[1]).to.eql('b');
+      expect(sub.items[2].type).to.eql('comment');
+      expect(sub.items[3].type).to.eql('comment');
+      expect(sub.items[4].type).to.eql('userissue');
+      expect(sub.items[5].type).to.eql('userissue');
+      expect(sub.items.length).to.eql(6);
+      expect(sub.count).to.eql(6);
+    });
   });
 });

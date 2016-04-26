@@ -178,7 +178,7 @@ FeedController.prototype.populateFeed = function(response) {
   this.categories.all.push(response.feed);
   this.categories.following.filter(response.feed, ['issue']);
   this.categories.billActivity.filter(response.feed, ['bill', 'vote', 'comment']);
-}
+};
 
 FeedController.prototype.feedCheck = function() {
   var that = this;

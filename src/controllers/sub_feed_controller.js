@@ -68,7 +68,7 @@ SubFeedController.prototype.filter = function(items, filters) {
     var passed = false;
     filters.forEach(function(filter) {
       if (item.type === filter) {
-        passed = true;;
+        passed = true;
       }
     });
     return passed;
