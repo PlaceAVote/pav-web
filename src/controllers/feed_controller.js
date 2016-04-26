@@ -140,6 +140,9 @@ FeedController.prototype.categoryClick = function(name) {
   if (this.selectedCategory.categories) {
     this.selectedCategory.showCategories = true;
   }
+  if (this.selectedCategory.count === 0) {
+    this.feedCheck();
+  }
 };
 
 
