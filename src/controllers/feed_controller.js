@@ -165,7 +165,7 @@ FeedController.prototype.getFeed = function() {
     if (!err) {
       title.feed();
       if (!response.feed || response.feed.length > 0) {
-        that.categories.all.update(response.feed);
+        that.categories.all.push(response.feed);
       }
       that.lastLoaded = response.last_timestamp;
     }
@@ -187,7 +187,7 @@ FeedController.prototype.feedCheck = function() {
         that.feedMessage('.');
       } else {
         that.lastLoaded = response.last_timestamp;
-        that.categories.all.update(response.feed);
+        that.categories.all.push(response.feed);
       }
     }
   });

@@ -42,4 +42,35 @@ describe('sub feed', function() {
     expect(sub.items.length).to.eql(3);
     expect(sub.count).to.eql(3);
   });
+  it('update will add items to existing list', function() {
+    var items = ['a', 'b'];
+    var sub = new SubFeedController({items: items});
+    expect(sub.items[0]).to.eql('a');
+    expect(sub.count).to.eql(2);
+    sub.push(['d', 'e', 'f']);
+    expect(sub.items[0]).to.eql('a');
+    expect(sub.items[4]).to.eql('f');
+    expect(sub.items.length).to.eql(5);
+    expect(sub.count).to.eql(5);
+  });
+  it('can handle null items', function() {
+    var items = ['a', 'b'];
+    var sub = new SubFeedController({items: items});
+    expect(sub.items[0]).to.eql('a');
+    expect(sub.count).to.eql(2);
+    sub.push();
+    expect(sub.items[0]).to.eql('a');
+    expect(sub.items.length).to.eql(2);
+    expect(sub.count).to.eql(2);
+  });
+  it('can handle an empty list of items', function() {
+    var items = ['a', 'b'];
+    var sub = new SubFeedController({items: items});
+    expect(sub.items[0]).to.eql('a');
+    expect(sub.count).to.eql(2);
+    sub.push([]);
+    expect(sub.items[0]).to.eql('a');
+    expect(sub.items.length).to.eql(2);
+    expect(sub.count).to.eql(2);
+  });
 });

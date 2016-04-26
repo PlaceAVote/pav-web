@@ -33,4 +33,12 @@ SubFeedController.prototype.update = function(items) {
   this.count = items.length;
 };
 
+SubFeedController.prototype.push = function(items) {
+  if (!items) {
+    return;
+  }
+  this.items = this.items.concat(items);
+  this.count += items.length;
+};
+
 module.exports = SubFeedController;
