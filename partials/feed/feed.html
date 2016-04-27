@@ -18,18 +18,27 @@
 <div class="c-feed__menu-container">
   <ul class="c-feed__menu">
 
-    <li ng-repeat="(cat, value) in feed.categories">
-      <p ng-click="feed.categoryClick(value.name)"
-      ng-class="{'category-selected': feed.isSelectedCategory(value.name)}">
+    <li ng-repeat="(cat, value) in feed.categories"
+        ng-class="{'c-feed__menu-item--selected': feed.isSelectedCategory(value.name)}">
+      <i class="red icon-globe"></i>
+      <p ng-click="feed.categoryClick(value.name)">
         <span>{{value.icon}}</span>{{value.title}}
-        <span>{{feed.categoryCount(value.name)}}</span>
+        <span class="c-feed__menu-item__count">{{feed.categoryCount(value.name)}}</span>
       </p>
-      <ul ng-show="value.showCategories">
-        <li class="sub-category" ng-click="feed.subCategoryClick(value.name, subValue.name)"  ng-repeat="(sub, subValue) in value.categories">
-          <span ng-class="{'sub-category-select': feed.isSelectedSubCategory(value.name, subValue.name)}" >{{subValue.title}}</span>
-          <span ng-show="{{feed.subCount(value.name, subValue.name) !== undefined}}">{{feed.subCount(value.name, subValue.name)}}</span>
-        </li>
-      </ul>
+      <i class="icon-arrow-right"></i>
+
+        <ul class="c-feed__menu c-feed__menu--sub" ng-show="value.showCategories">
+          <li class="sub-category"
+              ng-click="feed.subCategoryClick(value.name, subValue.name)"
+              ng-repeat="(sub, subValue) in value.categories"
+              ng-class="{'c-feed__menu-item--selected': feed.isSelectedSubCategory(value.name, subValue.name)}">
+            <p>
+              <span>{{subValue.title}}</span>
+              <span class="c-feed__menu-item__count" ng-show="{{feed.subCount(value.name, subValue.name) !== undefined}}">{{feed.subCount(value.name, subValue.name)}}</span>
+            </p>
+          </li>
+        </ul>
+
     </li>
 
   </ul>
@@ -47,7 +56,7 @@
   </div>
 </div>
 
-<div class="l-4 m-12 s-12">
+<div class="l-4 m-12 s-12" style="display: none;">
 <div class="trends-container">
 	<h2><i class="icon-trending-graph"></i>TRENDING GLOBALLY</h2>
 	<hr class="margin-bottom-small margin-top-small" />

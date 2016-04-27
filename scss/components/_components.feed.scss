@@ -18,7 +18,7 @@
 
 .c-feed__column {
   width: 600px;
-  margin-left: 160px;
+  margin-left: 220px;
 }
 
 .c-feed__menu-container {
@@ -31,6 +31,85 @@
   top: 62px;
 }
 
+
 .c-feed__menu {
-  width: 150px;
+  width: 200px;
+}
+
+
+.c-feed__menu li {
+  position: relative;
+  margin: 8px 0px;
+  padding: 2px 0px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.c-feed__menu--sub {
+  position: absolute;
+  top: 25px;
+  right: 0;
+}
+
+
+.c-feed__menu i:nth-child(1) {
+  @include font-size(16px);
+  position: absolute;
+  left: 5px;
+  top: 4px;
+  line-height: 1;
+}
+
+.c-feed__menu li p {
+  @include font-size(14px);
+  margin-left: 30px;
+}
+
+.c-feed__menu--sub li p {
+  @include font-size(12px);
+  margin-left: 30px;
+  @include medium();
+}
+
+.c-feed__menu-item__count {
+  position: absolute;
+  right: 20px;
+  top: 3px;
+  background: darken($grey, 5%);
+  border-radius: 3px;
+  padding: 2px 4px;
+  @include bold();
+  @include font-size(10px);
+  transition: all 0.2s ease;
+}
+
+.c-feed__menu li .icon-arrow-right {
+  position: absolute;
+  right: 3px;
+  top: 5px;
+  @include font-size(12px);
+  color: $blue;
+}
+
+.c-feed__menu-item--selected {
+  border-radius: 3px;
+  background: lighten($grey, 5%);
+  p {
+    @include medium();
+  }
+  .c-feed__menu-item__count {
+    opacity: 0;
+  }
+}
+
+.c-feed__menu--sub {
+  .c-feed__menu-item--selected  {
+    background: none;
+    p {
+      @include bold();
+    }
+  }
+  .c-feed__menu-item__count {
+    opacity: 1 !important;
+  }
 }
