@@ -15,13 +15,19 @@
 <section class="c-feed row tablet-col">
 
 
-<div class="c-feed__menu-container">
+<div class="c-feed__menu-container"
+    css-scroll
+    css-scroll-when="1"
+    css-scroll-bool="feed.scrolling"
+    ng-class="{'c-feed__menu--scrolling': feed.scrolling}">
+
   <ul class="c-feed__menu">
 
     <li ng-repeat="(cat, value) in feed.categories"
+        ng-click="feed.categoryClick(value.name)"
         ng-class="{'c-feed__menu-item--selected': feed.isSelectedCategory(value.name)}">
       <i class="red icon-globe"></i>
-      <p ng-click="feed.categoryClick(value.name)">
+      <p>
         <span>{{value.icon}}</span>{{value.title}}
         <span class="c-feed__menu-item__count">{{feed.categoryCount(value.name)}}</span>
       </p>
@@ -56,11 +62,13 @@
   </div>
 </div>
 
+
+
 <div class="l-4 m-12 s-12" style="display: none;">
-<div class="trends-container">
-	<h2><i class="icon-trending-graph"></i>TRENDING GLOBALLY</h2>
-	<hr class="margin-bottom-small margin-top-small" />
-	<trends data="feed.trends" refresh="feed.trendsLoading"></trends>
-</div>
+  <div class="trends-container">
+  	<h2><i class="icon-trending-graph"></i>TRENDING GLOBALLY</h2>
+  	<hr class="margin-bottom-small margin-top-small" />
+  	<trends data="feed.trends" refresh="feed.trendsLoading"></trends>
+  </div>
 </div>
 </section>

@@ -3,9 +3,9 @@ console.log('%cPlaceavote', 'background: #543594; color: #ffffff; padding: 1px 3
 
 // Redirects to https protocol
 
-if (window.location.protocol != 'https:' && window.location.hostname != 'localhost') {
-  window.location.href = window.location.href.replace(/^http:/, 'https:');
-}
+// if (window.location.protocol != 'https:' && window.location.hostname != 'localhost') {
+//   window.location.href = window.location.href.replace(/^http:/, 'https:');
+// }
 
 // Safari, in Private Browsing Mode, looks like it supports localStorage but all calls to setItem
 // Throw QuotaExceededError. We're going to detect this and just silently drop any calls to setItem
@@ -105,6 +105,7 @@ var invalidDirective = require('./directives/invalid.js');
 var feedCommentEventDirective = require('./directives/feed_comment_event.js');
 var allActivityFeedDirective = require('./directives/all_activity_feed.js');
 var trendsActivityFeedDirective = require('./directives/trends_activity_feed.js');
+var cssScrollDirective = require('./directives/css_scroll.js');
 
 // Thirdparty integrations
 var Facebook = require('./integrations/facebook.js');
@@ -293,3 +294,4 @@ app.directive('feedVoteEvent', ['$location', feedVoteEventDirective]);
 app.directive('feedCommentEvent', ['$location', feedCommentEventDirective]);
 app.directive('allactivityfeed', [allActivityFeedDirective]);
 app.directive('trendsactivityfeed', [trendsActivityFeedDirective]);
+app.directive('cssScroll', [cssScrollDirective]);
