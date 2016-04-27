@@ -1,11 +1,11 @@
-Here's whats new from the {{feed.selectedCategory.noun}} you follow.
+<p class="c-feed__title">Here's whats new from the {{feed.selectedCategory.noun}} you follow.</p>
 
-<div class="feed-event-loader row" ng-show="feed.loading" loader loader-context="feed.loading" truthy></div>
-<feed-events
-  events="feed.selectedCategory.items"
-  refresh="feed.loading"
-  ng-show="feed.selectedCategory.items"
-  class="feed-events"
-  scroll="feed.loadingScroll"
-  message="feed.scrollMessage">
-</feed-events>
+<div class="c-feed__loader row" ng-show="feed.loading" loader loader-context="feed.loading" truthy></div>
+<div class="c-feed__events-container">
+  <feed-events
+    events="feed.selectedCategory.items"
+    refresh="feed.loading"
+    scroll="feed.loadingScroll"
+    message="feed.scrollMessage">
+  </feed-events>
+</div>

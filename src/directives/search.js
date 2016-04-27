@@ -4,7 +4,7 @@ module.exports = function($sce, $location) {
     scope: {
       results: '<',
       query: '&',
-      focus: '<',
+      focus: '=',
       searching: '<',
       placeholder: '@',
       attachBill: '&',

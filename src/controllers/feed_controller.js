@@ -151,7 +151,6 @@ FeedController.prototype.subCount = function(catName, subName) {
 };
 
 FeedController.prototype.categoryClick = function(name) {
-  this.selectedCategory.showCategories = false;
   this.selectedCategory = this.categories[name] || this.categories.all;
   if (this.selectedCategory.categories) {
     this.selectedCategory.showCategories = true;

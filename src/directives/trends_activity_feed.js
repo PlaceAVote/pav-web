@@ -4,6 +4,6 @@ module.exports = function() {
     scope: {
       feed: '<',
     },
-    templateUrl: 'partials/trends_activity_feed.html',
+    templateUrl: 'partials/feed/trends_activity_feed.html',
   };
 };
