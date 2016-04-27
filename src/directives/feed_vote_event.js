@@ -4,7 +4,7 @@ module.exports = function($location) {
     scope: {
       vote: '=',
     },
-    templateUrl: 'partials/directives/feed_vote_event.html',
+    templateUrl: 'partials/feed/feed_vote_event.html',
     link: function(scope) {
       scope.location = $location;
     },

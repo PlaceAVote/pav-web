@@ -155,7 +155,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     controller: 'SignUpCtrl as signup',
   })
   .when('/feed', {
-    templateUrl: 'partials/feed.html',
+    templateUrl: 'partials/feed/feed.html',
     controller: 'FeedCtrl as feed',
   })
   .when('/bill/:id', {

@@ -7,6 +7,6 @@ module.exports = function() {
       scroll: '=',
       message: '=',
     },
-    templateUrl: 'partials/directives/feed_events.html',
+    templateUrl: 'partials/feed/feed_events.html',
   };
 };
