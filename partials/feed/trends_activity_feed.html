@@ -1,0 +1,12 @@
+<p class="c-feed__title">
+  <span ng-show="feed.itemsLoading">Loading</span>
+  {{feed.selectedCategory.selectedCategory.title}}
+</p>
+
+
+  <div class="row c-feed__loader" ng-show="feed.itemsLoading" loader loader-context="feed.itemsLoading" truthy></div>
+    <feed-events events="feed.selectedCategory.selectedCategory.items" ng-show="feed.selectedCategory.selectedCategory.items" class="c-feed__events-container"></feed-events>
+  </div>
+<div ng-show="feed.selectedCategory.selectedCategory.count === 0 && feed.itemsLoading === false">
+  <p> There was bills found for the topic {{feed.selectedCategory.selectedCategory.title}}</p>
+</div>
