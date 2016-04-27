@@ -3,7 +3,7 @@ module.exports = function($compile, commentService, $timeout, $location) {
     restrict: 'E',
     replace: true,
     scope: {
-      comment: '=',
+      comment: '<',
     },
     templateUrl: 'partials/comment_event.html',
     link: function(scope, element, attrs) {
@@ -20,4 +20,3 @@ module.exports = function($compile, commentService, $timeout, $location) {
     },
   };
 };
-

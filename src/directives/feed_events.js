@@ -2,7 +2,7 @@ module.exports = function() {
   return {
     restrict: 'E',
     scope: {
-      events: '=',
+      events: '<',
       refresh: '=',
       scroll: '=',
       message: '=',

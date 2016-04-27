@@ -4,7 +4,7 @@ module.exports = function($location, facebook) {
   return {
     restrict: 'E',
     scope: {
-      bill: '=',
+      bill: '<',
     },
     templateUrl: 'partials/feed/feed_bill_event.html',
     link: function(scope, el, attr) {

@@ -5,11 +5,11 @@ module.exports = function($location, issueService, facebook, $window, userServic
   return {
     restrict: 'E',
     scope: {
-      issue: '=',
-      example: '=',
+      issue: '<',
+      example: '<',
       closable: '&',
-      follow: '=',
-      profile: '=',
+      follow: '<',
+      profile: '<',
     },
     templateUrl: 'partials/directives/issue.html',
     link: function(scope, el, attr, controller) {

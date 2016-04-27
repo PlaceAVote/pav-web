@@ -2,10 +2,10 @@ module.exports = function($sce, $location) {
   return {
     restrict: 'E',
     scope: {
-      results: '=',
+      results: '<',
       query: '&',
-      focus: '=',
-      searching: '=',
+      focus: '<',
+      searching: '<',
       placeholder: '@',
       attachBill: '&',
     },

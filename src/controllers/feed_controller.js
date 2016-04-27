@@ -17,11 +17,12 @@ FeedController = function($scope, $location, userService, billService, authServi
   this.rs = $rootScope;
   this.rs.inApp = true;
   this.categories = {
-    all: new SubFeedController({name: 'all', title: 'All Activity', noun: 'everything'}),
-    following: new SubFeedController({name: 'following', title: 'Following', noun: 'people'}),
-    billActivity: new SubFeedController({name: 'billActivity', title: 'Bill Activity', noun: 'bills'}),
+    all: new SubFeedController({name: 'all', icon: 'icon-globe', title: 'All Activity', noun: 'everything'}),
+    following: new SubFeedController({name: 'following', icon: 'icon-add', title: 'Following', noun: 'people'}),
+    billActivity: new SubFeedController({name: 'billActivity', icon: 'icon-bills', title: 'Bill Activity', noun: 'bills'}),
     discovery: new SubFeedController({
       name: 'discovery',
+      icon: 'icon-binoculars',
       title: 'Discovery',
       categories:
         [
@@ -72,6 +73,21 @@ FeedController.prototype.categoryCount = function(name) {
     }
   }
 };
+
+
+// FeedController.prototype.getIcon = function(name) {
+//   var cat = this.categories[name];
+//   if (!cat) {
+//     return 0;
+//   }
+//   console.log(name, cat);
+//   return cat.icon;
+//   // switch (name) {
+//   //   default: {
+//   //     return cat.count;
+//   //   }
+//   // }
+// };
 
 FeedController.prototype.subCategoryClick = function(categoryName, subCategoryName) {
   var that = this;

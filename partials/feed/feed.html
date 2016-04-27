@@ -25,10 +25,11 @@
 
     <li ng-repeat="(cat, value) in feed.categories"
         ng-click="feed.categoryClick(value.name)"
+        ng-touchstart="feed.categoryClick(value.name)"
         ng-class="{'c-feed__menu-item--selected': feed.isSelectedCategory(value.name)}">
-      <i class="red icon-globe"></i>
+      <i class="red" ng-class="value.icon"></i>
       <p>
-        <span>{{value.icon}}</span>{{value.title}}
+        {{value.title}}
         <span class="c-feed__menu-item__count">{{feed.categoryCount(value.name)}}</span>
       </p>
       <i class="icon-arrow-right"></i>
@@ -55,7 +56,7 @@
 <div class="c-feed__column">
   <div infinite-scroll="feed.feedCheck();" infinite-scroll-distance="0.5">
     <issues-post posted="feed.getFeed()"></issues-post>
-    <div ng-switch on="feed.selectedCategory.name">
+  <div ng-switch on="feed.selectedCategory.name">
       <trendsactivityfeed ng-switch-when="discovery" feed="feed"></trendsactivityfeed>
       <allactivityfeed ng-switch-default feed="feed"></allactivityfeed>
     </div>

@@ -2,7 +2,7 @@ module.exports = function() {
   return {
     restrict: 'E',
     scope: {
-      feed: '=',
+      feed: '<',
     },
     templateUrl: 'partials/trends_activity_feed.html',
   };

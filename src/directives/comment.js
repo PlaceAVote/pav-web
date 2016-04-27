@@ -3,12 +3,12 @@ module.exports = function($compile, commentService, $anchorScroll, $timeout, $lo
     restrict: 'E',
     replace: true,
     scope: {
-      comment: '=',
-      parent: '=',
-      feed: '=',
+      comment: '<',
+      parent: '<',
+      feed: '<',
     },
     templateUrl: 'partials/comments/comments.html',
-    link: function(scope, element, attrs, controllerAs) {
+    link: function(scope, element, attrs) {
       scope.commentService = commentService;
       scope.timeout = $timeout;
       scope.location = $location;
