@@ -87,6 +87,10 @@
   position: relative;
   margin-top: 30px;
   margin-bottom: 30px;
+
+  @include media($tablet) {
+    margin-top: 45px;
+  }
 }
 
 
