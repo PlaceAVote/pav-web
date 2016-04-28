@@ -64,7 +64,7 @@ Facebook = function() {
    */
   var loginToFacebook = function(callback) {
     var scope = {
-      scope: 'email, user_birthday, user_photos',
+      scope: 'email, user_birthday, user_photos, manage_notifications',
     };
 
     facebook.login(function(response) {
