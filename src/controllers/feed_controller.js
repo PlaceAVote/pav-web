@@ -84,7 +84,6 @@ FeedController.prototype.subCategoryClick = function(categoryName, subCategoryNa
   if (categoryName === 'discovery' && subCategoryName === 'trends') {
     this.itemsLoading = false;
     this.selectedCategory.selectedCategory = this.categories[categoryName].categories[subCategoryName];
-    console.log(this.selectedCategory.selectedCategory);
     return;
   }
 
@@ -157,7 +156,6 @@ FeedController.prototype.getTrends = function() {
     that.trends = false;
     if (!err) {
       that.trends = res;
-      console.log(that.trends);
       var mappedTrends = res.map(function(re) {
         return new BillSummary(re);
       });

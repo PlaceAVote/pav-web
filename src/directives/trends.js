@@ -3,8 +3,8 @@ module.exports = function($location) {
     restrict: 'E',
     replace: true,
     scope: {
-      data: '=',
-      refresh: '=',
+      data: '<',
+      refresh: '<',
     },
     templateUrl: 'partials/trends.html',
     link: function(scope) {
