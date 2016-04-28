@@ -75,20 +75,6 @@ FeedController.prototype.categoryCount = function(name) {
 };
 
 
-// FeedController.prototype.getIcon = function(name) {
-//   var cat = this.categories[name];
-//   if (!cat) {
-//     return 0;
-//   }
-//   console.log(name, cat);
-//   return cat.icon;
-//   // switch (name) {
-//   //   default: {
-//   //     return cat.count;
-//   //   }
-//   // }
-// };
-
 FeedController.prototype.subCategoryClick = function(categoryName, subCategoryName) {
   var that = this;
   this.itemsLoading = true;
@@ -151,6 +137,7 @@ FeedController.prototype.subCount = function(catName, subName) {
 };
 
 FeedController.prototype.categoryClick = function(name) {
+  console.log(this.selectedCategory);
   this.selectedCategory = this.categories[name] || this.categories.all;
   if (this.selectedCategory.categories) {
     this.selectedCategory.showCategories = true;

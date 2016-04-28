@@ -19,6 +19,7 @@
     css-scroll
     css-scroll-when="1"
     css-scroll-bool="feed.scrolling"
+    css-scroll-target="c-feed"
     ng-class="{'c-feed__menu--scrolling': feed.scrolling}">
 
   <ul class="c-feed__menu">
@@ -56,9 +57,9 @@
 <div class="c-feed__column">
   <div infinite-scroll="feed.feedCheck();" infinite-scroll-distance="0.5">
     <issues-post posted="feed.getFeed()"></issues-post>
-  <div ng-switch on="feed.selectedCategory.name">
-      <trendsactivityfeed ng-switch-when="discovery" feed="feed"></trendsactivityfeed>
-      <allactivityfeed ng-switch-default feed="feed"></allactivityfeed>
+    <div ng-switch on="feed.selectedCategory.name">
+      <trendsactivityfeed ng-show="feed.selectedCategory.name === 'discovery'" class="c-feed__events-container" feed="feed"></trendsactivityfeed>
+      <allactivityfeed ng-hide="feed.selectedCategory.name === 'discovery'" class="c-feed__events-container" feed="feed"></allactivityfeed>
     </div>
   </div>
 </div>

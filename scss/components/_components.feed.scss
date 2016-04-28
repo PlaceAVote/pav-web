@@ -14,12 +14,17 @@
   left: 0;
   right: 0;
   margin: 42px auto 0;
+  display: block;
+
+  @include media($tablet) {
+    overflow-x:hidden;
+    height: 100vh;
+  };
 }
 
 .c-feed__column {
   width: 600px;
   margin-left: 220px;
-
   @include media($tablet) {
     margin-left: 0;
     width: 100%;
@@ -33,7 +38,7 @@
   @include font-size(16px);
   margin: 15px 11px 0px 11px;
   @include media($tablet) {
-    @include font-size(14px);
+    @include font-size(12px);
   }
 }
 
@@ -70,11 +75,23 @@
 
 .c-feed__loader {
   position: relative;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
+
 
 
 .c-feed__events-container {
   display: block;
+  position: relative;
+  width: 100%;
+}
+
+.c-feed__events {
+  display: block;
+  position: absolute;
+  width: 100%;
+  top: 23px;
 }
 
 
