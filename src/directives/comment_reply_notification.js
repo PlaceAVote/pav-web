@@ -3,7 +3,7 @@ module.exports = function($location) {
     restrict: 'E',
     replace: true,
     scope: {
-      notification: '=',
+      notification: '<',
     },
     templateUrl: 'partials/comment_reply_notification.html',
     link: function(scope) {

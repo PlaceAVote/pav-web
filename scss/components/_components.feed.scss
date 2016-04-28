@@ -1,0 +1,300 @@
+/*------------------------------------*\
+    #COMPONENT-FEED
+\*------------------------------------*/
+
+/**
+* The feed page currently has consists of
+* three columns on desktop and one on mobile
+*/
+
+.c-feed {
+  max-width: 1200px;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 42px auto 0;
+  display: block;
+
+  @include media($tablet) {
+    // overflow-x:hidden;
+    // min-height: 100vh;
+
+  };
+}
+
+.c-feed__column {
+  width: 600px;
+  margin-left: 220px;
+  @include media(1200px) {
+    margin-left: 231px;
+  }
+
+  @include media($tablet) {
+    margin-left: 0;
+    width: 100%;
+    position: absolute;
+    top: 49px;
+  }
+}
+
+
+.c-feed__title {
+  @include font-size(16px);
+  margin: 18px 11px 0px 11px;
+  @include media($tablet) {
+    @include font-size(12px);
+  }
+}
+
+/**
+* Feed Menu, quite a lot of styling
+* goes into this small component.
+* This is large to due with the
+* transformation on mobile.
+*/
+
+.c-feed__menu-container {
+  position: fixed;
+  margin: 0 auto;
+  max-width: 1200px;
+  width: 100%;
+  left: 0;
+  right: 0;
+  top: 62px;
+  transition: all 0.2s ease;
+
+  @include media(1200px) {
+    margin-left: 20px;
+  }
+
+  @include media($tablet) {
+    margin: 0 auto;
+    top: 50px;
+    z-index: 20;
+  }
+  background: rgba(0,0,0,0);
+
+  @include media($tablet) {
+    &.c-feed__menu--scrolling {
+      background: rgba(0,0,0,0.7);
+    }
+  }
+}
+
+
+.c-feed__loader {
+  position: relative;
+  margin-top: 30px;
+  margin-bottom: 30px;
+
+  @include media($tablet) {
+    margin-top: 45px;
+  }
+}
+
+
+
+.c-feed__events-container {
+  display: block;
+  position: relative;
+  width: 100%;
+}
+
+.c-feed__events {
+  display: block;
+  position: absolute;
+  width: 100%;
+  top: 23px;
+}
+
+
+.c-feed__menu {
+  width: 200px;
+
+  @include media($tablet) {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 0px 8px;
+  }
+}
+
+
+.c-feed__menu li {
+  position: relative;
+  margin: 8px 0px;
+  padding: 2px 0px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  @include media($tablet) {
+    transition: none;
+    background: white;
+    box-shadow: 0px 2px 4px -2px rgba(0,0,0,0.2);
+    border-radius: 3px;
+    width: 20%;
+    height: 40px;
+    overflow: hidden;
+    margin: 8px 2px;
+    &:nth-child(1) {
+      margin-left: 0;
+    }
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+.c-feed__menu--sub {
+  position: absolute;
+  top: 25px;
+  right: 0;
+  @include media($tablet) {
+    transition: none !important;
+    position: fixed;
+    width: 100vw;
+    left: 0;
+    top: 104px;
+    height: 50px;
+    padding: 0;
+
+    li {
+      transition: none !important;
+      border-bottom: 2px solid $greydark;
+      border-radius: 0px !important;
+      margin: 0px;
+      box-shadow: inset -6px 4px 5px -6px rgba(0,0,0,0.1);
+      height: 44px;
+      p {
+        transition: none !important;
+      }
+
+      &.c-feed__menu-item--selected {
+        background: white;
+        border-bottom-color: $red;
+        position: relative;
+        z-index: 20;
+        box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.1);
+        p {
+          margin-left: 0 !important;
+        }
+      }
+    }
+    // background: blue;
+  }
+}
+
+
+.c-feed__menu i:nth-child(1) {
+  @include font-size(16px);
+  position: absolute;
+  left: 5px;
+  top: 4px;
+  line-height: 1;
+
+  @include media($tablet) {
+    @include font-size(25px);
+    color: $blue;
+    width: 25px;
+    top: 8px;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    // transition: all 0.2s ease;
+  }
+}
+
+.c-feed__menu li p {
+  @include font-size(14px);
+  margin-left: 30px;
+
+  @include media($tablet) {
+    margin-left: 40px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: all 0.2s ease;
+    @include font-size(12px);
+    @include bold();
+    position: absolute;
+    top: 50%;
+    text-align: center;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    transform:translateY(-50%);
+  }
+}
+
+.c-feed__menu--sub li p {
+  @include font-size(12px);
+  margin-left: 30px;
+  @include medium();
+}
+
+.c-feed__menu-item__count {
+  position: absolute;
+  right: 20px;
+  top: 3px;
+  background: darken($grey, 5%);
+  border-radius: 3px;
+  padding: 2px 4px;
+  @include bold();
+  @include font-size(10px);
+  transition: all 0.2s ease;
+
+  @include media($tablet) {
+    display: none;
+  }
+}
+
+.c-feed__menu li .icon-arrow-right {
+  position: absolute;
+  right: 3px;
+  top: 5px;
+  @include font-size(12px);
+  color: $blue;
+  @include media($tablet) {
+    display: none;
+  }
+}
+
+.c-feed__menu
+.c-feed__menu-item--selected {
+  border-radius: 3px;
+  background: lighten($grey, 5%);
+  p {
+    @include medium();
+  }
+  .c-feed__menu-item__count {
+    opacity: 0;
+  }
+
+  @include media($tablet) {
+    background: white;
+    width: 50%;
+    p {
+      @include bold();
+      opacity: 1;
+      margin-left: 11px;
+    }
+
+    i:nth-child(1) {
+      left: 11px;
+      margin-left: 0;
+      color: $red;
+    }
+  }
+}
+
+.c-feed__menu--sub {
+  .c-feed__menu-item--selected  {
+    background: none;
+    p {
+      @include bold();
+    }
+  }
+  .c-feed__menu-item__count {
+    opacity: 1 !important;
+  }
+}

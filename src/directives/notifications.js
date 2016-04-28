@@ -2,9 +2,9 @@ module.exports = function($location) {
   return {
     restrict: 'E',
     scope: {
-      unread: '=',
-      open: '=',
-      notifications: '=',
+      unread: '<',
+      open: '<',
+      notifications: '<',
       readEvent: '&',
       scrollTrigger: '&',
       scroll: '=',

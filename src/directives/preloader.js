@@ -5,7 +5,7 @@ module.exports = function(location) {
     controller: function() {},
     controllerAs: 'ctrl',
     bindToController: {
-      context: '=loaderContext',
+      context: '<loaderContext',
     },
     templateUrl: 'partials/directives/preloader.html',
     link: function(scope, el, attr) {
@@ -21,8 +21,3 @@ module.exports = function(location) {
     },
   };
 };
-
-
-
-
-

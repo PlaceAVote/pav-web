@@ -103,6 +103,9 @@ var compileDirective = require('./directives/compile.js');
 var feedVoteEventDirective = require('./directives/feed_vote_event.js');
 var invalidDirective = require('./directives/invalid.js');
 var feedCommentEventDirective = require('./directives/feed_comment_event.js');
+var allActivityFeedDirective = require('./directives/all_activity_feed.js');
+var trendsActivityFeedDirective = require('./directives/trends_activity_feed.js');
+var cssScrollDirective = require('./directives/css_scroll.js');
 
 // Thirdparty integrations
 var Facebook = require('./integrations/facebook.js');
@@ -153,7 +156,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     controller: 'SignUpCtrl as signup',
   })
   .when('/feed', {
-    templateUrl: 'partials/feed.html',
+    templateUrl: 'partials/feed/feed.html',
     controller: 'FeedCtrl as feed',
   })
   .when('/bill/:id', {
@@ -226,7 +229,7 @@ app.factory('mailService', ['$resource', MailService]);
 app.controller('TopicRegisterCtrl',['$scope','$location', 'userService', '$rootScope', RegisterController]);
 app.controller('SignUpCtrl',['$rootScope','$scope','$location', 'userService', SignUpController]);
 app.controller('LoginCtrl',['$scope','$location', 'userService', 'authService', '$rootScope', '$routeParams', 'passwordService', '$timeout', LoginController]);
-app.controller('FeedCtrl', ['$scope', '$location', 'userService', 'billService', 'authService', 'feedService', '$rootScope','$timeout', FeedController]);
+app.controller('FeedCtrl', ['$scope', '$location', 'userService', 'billService', 'authService', 'feedService', '$rootScope','$timeout', 'searchService', FeedController]);
 app.controller('BillCtrl', ['$scope', '$routeParams', 'billService', 'legislationService', 'voteService', 'commentService', '$location', 'authService', '$rootScope', '$timeout', 'facebookService', '$route', BillController]);
 app.controller('HeaderCtrl', ['$rootScope', '$scope', '$location', '$timeout', 'authService', 'userService', 'notificationService', 'searchService', '$window', '$route', HeaderController]);
 app.controller('ProfileCtrl', ['$scope', '$location', '$routeParams', 'authService', 'userService','issueService', '$rootScope', ProfileController]);
@@ -289,3 +292,6 @@ app.directive('updateMeta', ['$log', updateMetaDirective]);
 app.directive('compile', ['$compile', '$window', '$sce', '$sanitize', compileDirective]);
 app.directive('feedVoteEvent', ['$location', feedVoteEventDirective]);
 app.directive('feedCommentEvent', ['$location', feedCommentEventDirective]);
+app.directive('allactivityfeed', [allActivityFeedDirective]);
+app.directive('trendsactivityfeed', [trendsActivityFeedDirective]);
+app.directive('cssScroll', [cssScrollDirective]);

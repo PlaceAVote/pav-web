@@ -2,11 +2,11 @@ module.exports = function() {
   return {
     restrict: 'E',
     scope: {
-      events: '=',
+      events: '<',
       refresh: '=',
       scroll: '=',
       message: '=',
     },
-    templateUrl: 'partials/directives/feed_events.html',
+    templateUrl: 'partials/feed/feed_events.html',
   };
 };

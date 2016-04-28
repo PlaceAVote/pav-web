@@ -245,6 +245,9 @@ module.exports = {
   },
   search: {
     endpoint: urls.SEARCH + '/search',
+    bills: function(tag) {
+      return urls.SEARCH + '/search/bills?tag=' + tag;
+    },
   },
   password: {
     reset: function(email) {

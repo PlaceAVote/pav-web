@@ -2,9 +2,9 @@ module.exports = function() {
   return {
     restrict: 'E',
     scope: {
-      comment: '=',
+      comment: '<',
     },
-    templateUrl: 'partials/directives/feed_comment_event.html',
+    templateUrl: 'partials/feed/feed_comment_event.html',
     link: function(scope) {
       scope.feed = true;
     },

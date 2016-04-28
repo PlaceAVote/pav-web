@@ -3,8 +3,8 @@ module.exports = function($location) {
     restrict: 'E',
     replace: true,
     scope: {
-      timeline: '=',
-      profile: '=',
+      timeline: '<',
+      profile: '<',
     },
     templateUrl: 'partials/timeline.html',
     link: function(scope) {
