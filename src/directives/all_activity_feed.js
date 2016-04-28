@@ -2,8 +2,8 @@ module.exports = function() {
   return {
     restrict: 'E',
     scope: {
-      feed: '=',
+      feed: '<',
     },
-    templateUrl: 'partials/all_activity_feed.html',
+    templateUrl: 'partials/feed/all_activity_feed.html',
   };
 };

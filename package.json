@@ -58,7 +58,7 @@
     "localtunnel": "^1.7.0",
     "moment": "^2.11.2",
     "napa": "^1.2.0",
-    "node-sass": "^3.6.0",
+    "node-sass": "~3.4.2",
     "object-fit-images": "^2.3.0",
     "pretty-bytes": "^2.0.1",
     "strftime": "^0.9.2"

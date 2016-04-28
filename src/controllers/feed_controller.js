@@ -17,11 +17,12 @@ FeedController = function($scope, $location, userService, billService, authServi
   this.rs = $rootScope;
   this.rs.inApp = true;
   this.categories = {
-    all: new SubFeedController({name: 'all', title: 'All Activity',}),
-    following: new SubFeedController({name: 'following', title: 'Following'}),
-    billActivity: new SubFeedController({name: 'billActivity', title: 'Bill Activity'}),
+    all: new SubFeedController({name: 'all', icon: 'icon-globe', title: 'All Activity', noun: 'everything'}),
+    following: new SubFeedController({name: 'following', icon: 'icon-add', title: 'Following', noun: 'people'}),
+    billActivity: new SubFeedController({name: 'billActivity', icon: 'icon-bills', title: 'Bill Activity', noun: 'bills'}),
     discovery: new SubFeedController({
       name: 'discovery',
+      icon: 'icon-binoculars',
       title: 'Discovery',
       categories:
         [
@@ -73,6 +74,7 @@ FeedController.prototype.categoryCount = function(name) {
   }
 };
 
+
 FeedController.prototype.subCategoryClick = function(categoryName, subCategoryName) {
   var that = this;
   this.itemsLoading = true;
@@ -84,6 +86,7 @@ FeedController.prototype.subCategoryClick = function(categoryName, subCategoryNa
     this.selectedCategory.selectedCategory = this.categories[categoryName].categories[subCategoryName];
     return;
   }
+
   this.selectedCategory = this.categories[categoryName];
   this.selectedCategory.selectedCategory = this.categories[categoryName].categories[subCategoryName];
   if (!this.selectedCategory.selectedCategory) {
@@ -135,10 +138,12 @@ FeedController.prototype.subCount = function(catName, subName) {
 };
 
 FeedController.prototype.categoryClick = function(name) {
-  this.selectedCategory.showCategories = false;
   this.selectedCategory = this.categories[name] || this.categories.all;
   if (this.selectedCategory.categories) {
     this.selectedCategory.showCategories = true;
+  }
+  if (this.selectedCategory.count === 0) {
+    this.feedCheck();
   }
 };
 

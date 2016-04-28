@@ -4,7 +4,7 @@ module.exports = function() {
   return {
     restrict: 'E',
     scope: {
-      img: '=',
+      img: '<',
       class: '@',
     },
     templateUrl: 'partials/directives/image_smart.html',

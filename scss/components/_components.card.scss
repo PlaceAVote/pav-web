@@ -17,7 +17,7 @@
   box-shadow: 0px 2px 4px -2px rgba(0, 0, 0, 0.2);
 
   /**
-  * On mobile the card is stripped of 
+  * On mobile the card is stripped of
   * border radius and border style
   */
   @include media($tablet) {
@@ -50,6 +50,7 @@
     vertical-align: middle;
   }
 }
+
 /**
 * Some headers have icons to let
 * of the header title. The icons
@@ -116,7 +117,7 @@
       top: 0;
       left: 0;
       z-index: 0;
-    }    
+    }
   }
 }
 
@@ -124,13 +125,13 @@
 
 /**
 * Footer button can be found on several
-* cards around the application. As I write 
-* it is in two places on Bill Summary and 
+* cards around the application. As I write
+* it is in two places on Bill Summary and
 * Bill Information.
 */
 
 /**
-* footer-btn Modifier class to sit along 
+* footer-btn Modifier class to sit along
 * side c-card.
 */
 
@@ -165,8 +166,9 @@
 }
 
 
+
 /**
-* Card messages provide fallbacks when 
+* Card messages provide fallbacks when
 * data is not available.
 */
 
@@ -179,7 +181,7 @@
     padding-left: 25px;
     padding-right: 25px;
   }
-} 
+}
 
 
 

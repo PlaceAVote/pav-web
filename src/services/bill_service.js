@@ -167,6 +167,7 @@ function BillService($resource, authService, userService) {
     };
 
     var onLoad = function(result) {
+      console.log(result);
       var trends = result.map(toTrend)
         .sort(byCommentCount)
         .filter(withoutComments);

@@ -1,5 +1,7 @@
 var Icon = require('./icon.js');
 function TrendingBill(options) {
+  this.type = 'bill';
+  this.subject = options.subject;
   this.bill_id = options.bill_id;
   this.comment_count = options.comment_count;
   this.noVote = options['no-count'];
@@ -8,8 +10,12 @@ function TrendingBill(options) {
   this.short_title = options.short_title;
   this.summary = options.summary;
   this.featured_img_link = options.featured_img_link;
+  if (RegExp('-').test(options.bill_id)) {
+    this.bill_id_short = options.bill_id.split('-')[0];
+  }
   this.getIcon(options);
   this.trendTitle = options.featured_bill_title || options.short_title || options.official_title;
+  this.feed_title = this.trendTitle;
 }
 
 TrendingBill.prototype.majorityVote = function() {

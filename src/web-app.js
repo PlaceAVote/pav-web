@@ -105,6 +105,7 @@ var invalidDirective = require('./directives/invalid.js');
 var feedCommentEventDirective = require('./directives/feed_comment_event.js');
 var allActivityFeedDirective = require('./directives/all_activity_feed.js');
 var trendsActivityFeedDirective = require('./directives/trends_activity_feed.js');
+var cssScrollDirective = require('./directives/css_scroll.js');
 
 // Thirdparty integrations
 var Facebook = require('./integrations/facebook.js');
@@ -155,7 +156,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     controller: 'SignUpCtrl as signup',
   })
   .when('/feed', {
-    templateUrl: 'partials/feed.html',
+    templateUrl: 'partials/feed/feed.html',
     controller: 'FeedCtrl as feed',
   })
   .when('/bill/:id', {
@@ -293,3 +294,4 @@ app.directive('feedVoteEvent', ['$location', feedVoteEventDirective]);
 app.directive('feedCommentEvent', ['$location', feedCommentEventDirective]);
 app.directive('allactivityfeed', [allActivityFeedDirective]);
 app.directive('trendsactivityfeed', [trendsActivityFeedDirective]);
+app.directive('cssScroll', [cssScrollDirective]);

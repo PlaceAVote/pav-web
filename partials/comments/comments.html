@@ -1,7 +1,7 @@
 <div>
 <div class="click c-card__content c-card__content--comments row">
 
-  <div class="c-user-photo c-user-photo--large" 
+  <div class="c-user-photo c-user-photo--large"
       ng-click="location.path('profile/' + comment.author)">
     <div ng-style="{'background-image': 'url(' + comment.author_img_url + ')'}">
     </div>
@@ -9,10 +9,10 @@
 
     <div class="c-card__comment-body">
 
-      <p class="c-card__username" 
+      <p class="c-card__username"
          ng-click="location.path('profile/' + comment.author)">
       {{comment.author_first_name}} <span ng-show="feed">{{comment.author_last_name}}</span></p>
-      
+
       <p ng-show="feed">
        in <span class="c-bill-title"
                 ng-click="location.path('bill/' + comment.bill_id)">
@@ -21,8 +21,8 @@
       </p>
 
     <i class="c-card__menu-icon
-      c-card__menu-icon--comment 
-      icon-arrow-down 
+      c-card__menu-icon--comment
+      icon-arrow-down
       click"
     ng-show="edit && !comment.comment_deleted"
     ng-click="editMenu = !editMenu"></i>
@@ -50,8 +50,8 @@
       </div>
 
 
-      
-    <div class="c-card__comment-vote row" 
+
+    <div class="c-card__comment-vote row"
           ng-class="{'c-card__comment-vote--editor': edit}"
           ng-hide="comment.comment_deleted">
 
@@ -73,7 +73,7 @@
       <div class="c-comment--deleted" ng-show="comment.comment_deleted">
       Comment Deleted
       </div>
-            
+
 
 
         <!-- Delete Comment -->
@@ -86,18 +86,18 @@
 
           <p style="font-style: italic;" ng-bind="comment.body_sanitized"></p>
 
-           <div class="row 
+           <div class="row
                        h-right
                        margin-top-small">
-                <button 
-                class="c-button 
-                      c-button--medium 
+                <button
+                class="c-button
+                      c-button--medium
                       c-button--red"
 
                 ng-click="deleteComment();">
                           Delete Comment</button>
 
-                <button 
+                <button
                 class="c-button
                        c-button--medium
                        c-button--grey
@@ -113,24 +113,24 @@
 
         <!-- Edit Comment -->
         <div ng-show="edit && showEditTools" class="col">
-           <textarea 
+           <textarea
               ng-show="showEditTools"
               class="c-card__edit--textarea"
               ng-model="comment.body_sanitized"
               msd-elastic>
             </textarea>
 
-           <div class="row 
+           <div class="row
                        h-right
                        margin-top-small">
-                <button 
-                class="c-button 
-                      c-button--medium 
+                <button
+                class="c-button
+                      c-button--medium
                       c-button--green"
 
                 ng-click="editComment();">Update</button>
 
-                <button 
+                <button
                 class="c-button
                        c-button--medium
                        c-button--grey
@@ -147,9 +147,9 @@
 
     </div>
 </div>
-  
+
   <div class="c-card__content margin-top-medium" ng-show="feed">
-    
+
     <p ng-hide="comment.comment_deleted">"<span compile="comment.body"></span>"</p>
 
     <div class="c-comment--deleted" ng-show="comment.comment_deleted">
@@ -165,9 +165,9 @@
         <p style="color: red;" ng-show="comment.errorMessage !== ''">{{comment.errorMessage}}</p>
 
         <div class="reply-actions">
-         
+
         <span class="btn-blank" ng-click="comment.hideReplyInput()">CANCEL</span>
-        
+
         <span class="btn-green" ng-click="comment.reply(comment.bill_id, commentService, timeout)">POST</span>
 
         </div>
