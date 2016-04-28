@@ -19,7 +19,6 @@
     css-scroll
     css-scroll-when="1"
     css-scroll-bool="feed.scrolling"
-    css-scroll-target="c-feed"
     ng-class="{'c-feed__menu--scrolling': feed.scrolling}">
 
   <ul class="c-feed__menu">
@@ -27,7 +26,7 @@
     <li ng-repeat="(cat, value) in feed.categories"
         ng-click="feed.categoryClick(value.name)"
         ng-touchstart="feed.categoryClick(value.name)"
-        ng-class="{'c-feed__menu-item--selected': feed.isSelectedCategory(value.name)}">
+        ng-class="{'c-feed__menu-item--selected': feed.isSelectedCategory(value.name), 'c-feed__menu-item--parent': value.showCategories}">
       <i class="red" ng-class="value.icon"></i>
       <p>
         {{value.title}}
@@ -35,14 +34,14 @@
       </p>
       <i class="icon-arrow-right"></i>
 
-        <ul class="c-feed__menu c-feed__menu--sub" ng-show="value.showCategories">
+        <ul class="c-feed__menu c-feed__menu--sub" ng-if="value.showCategories && feed.selectedCategory.name === 'discovery'">
           <li class="sub-category"
               ng-click="feed.subCategoryClick(value.name, subValue.name)"
               ng-repeat="(sub, subValue) in value.categories"
               ng-class="{'c-feed__menu-item--selected': feed.isSelectedSubCategory(value.name, subValue.name)}">
             <p>
               <span>{{subValue.title}}</span>
-              <span class="c-feed__menu-item__count" ng-show="{{feed.subCount(value.name, subValue.name) !== undefined}}">{{feed.subCount(value.name, subValue.name)}}</span>
+              <span class="c-feed__menu-item__count" ng-if="feed.subCount(value.name, subValue.name) !== undefined">{{feed.subCount(value.name, subValue.name)}}</span>
             </p>
           </li>
         </ul>
@@ -55,13 +54,11 @@
 
 
 <div class="c-feed__column">
-  <div infinite-scroll="feed.feedCheck();" infinite-scroll-distance="0.5">
-    <issues-post posted="feed.getFeed()"></issues-post>
-    <div ng-switch on="feed.selectedCategory.name">
+    <issues-post posted="feed.getFeed()" ng-if="feed.selectedCategory.name !== 'discovery'"></issues-post>
+    <div ng-switch on="feed.selectedCategory.name" infinite-scroll="feed.feedCheck();" infinite-scroll-distance="2">
       <trendsactivityfeed ng-show="feed.selectedCategory.name === 'discovery'" class="c-feed__events-container" feed="feed"></trendsactivityfeed>
       <allactivityfeed ng-hide="feed.selectedCategory.name === 'discovery'" class="c-feed__events-container" feed="feed"></allactivityfeed>
     </div>
-  </div>
 </div>
 
 

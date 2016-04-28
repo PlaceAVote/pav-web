@@ -12,7 +12,6 @@
 /**
 * Fade Toggle
 */
-.c-feed__events-container,
 .c-issue,
 .c-card__response-message,
 .c-bill-content,
@@ -71,29 +70,29 @@
 }
 
 
-@include media($tablet) {
-  .c-feed__events {
-    &.ng-enter, &.ng-leave {
-       transition: 0.2s linear all;
-    }
-    &.ng-enter {
-       opacity:1;
-       transform: translateX(100%);
-    }
-
-    &.ng-enter.ng-enter-active {
-       opacity:1;
-       transform: translateX(0);
-    }
-
-    &.ng-leave {
-       opacity:1;
-       transform: translateX(0);
-    }
-
-    &.ng-leave.ng-leave-active {
-       opacity:1;
-       transform: translateX(-100%);
-    }
-  }
-}
+// @include media($tablet) {
+//   .c-feed__events {
+//     &.ng-enter, &.ng-leave {
+//        transition: 0.2s linear all;
+//     }
+//     &.ng-enter {
+//        opacity:1;
+//        transform: translateX(100%);
+//     }
+//
+//     &.ng-enter.ng-enter-active {
+//        opacity:1;
+//        transform: translateX(0);
+//     }
+//
+//     &.ng-leave {
+//        opacity:1;
+//        transform: translateX(0);
+//     }
+//
+//     &.ng-leave.ng-leave-active {
+//        opacity:1;
+//        transform: translateX(-100%);
+//     }
+//   }
+// }

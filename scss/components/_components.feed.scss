@@ -17,14 +17,19 @@
   display: block;
 
   @include media($tablet) {
-    overflow-x:hidden;
-    height: 100vh;
+    // overflow-x:hidden;
+    // min-height: 100vh;
+
   };
 }
 
 .c-feed__column {
   width: 600px;
   margin-left: 220px;
+  @include media(1200px) {
+    margin-left: 231px;
+  }
+
   @include media($tablet) {
     margin-left: 0;
     width: 100%;
@@ -36,7 +41,7 @@
 
 .c-feed__title {
   @include font-size(16px);
-  margin: 15px 11px 0px 11px;
+  margin: 18px 11px 0px 11px;
   @include media($tablet) {
     @include font-size(12px);
   }
@@ -59,15 +64,20 @@
   top: 62px;
   transition: all 0.2s ease;
 
+  @include media(1200px) {
+    margin-left: 20px;
+  }
+
   @include media($tablet) {
+    margin: 0 auto;
     top: 50px;
-    z-index: 9999;
+    z-index: 20;
   }
   background: rgba(0,0,0,0);
 
   @include media($tablet) {
     &.c-feed__menu--scrolling {
-      background: transparentize(darken($greydark, 5%), 0.4);
+      background: rgba(0,0,0,0.7);
     }
   }
 }
@@ -136,6 +146,39 @@
   position: absolute;
   top: 25px;
   right: 0;
+  @include media($tablet) {
+    transition: none !important;
+    position: fixed;
+    width: 100vw;
+    left: 0;
+    top: 104px;
+    height: 50px;
+    padding: 0;
+
+    li {
+      transition: none !important;
+      border-bottom: 2px solid $greydark;
+      border-radius: 0px !important;
+      margin: 0px;
+      box-shadow: inset -6px 4px 5px -6px rgba(0,0,0,0.1);
+      height: 44px;
+      p {
+        transition: none !important;
+      }
+
+      &.c-feed__menu-item--selected {
+        background: white;
+        border-bottom-color: $red;
+        position: relative;
+        z-index: 20;
+        box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.1);
+        p {
+          margin-left: 0 !important;
+        }
+      }
+    }
+    // background: blue;
+  }
 }
 
 
