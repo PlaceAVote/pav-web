@@ -4,10 +4,10 @@
 
 <!-- Top Row -->
   <!-- First Col -->
-    
+
   <div class="l-6 m-12 margin-right-medium tablet-margin-right-none"
   ng-show="bill.body.billData.featured_bill_summary">
-      
+
     <div class="c-card c-card--bill c-card--footer-btn">
 
       <h1>Short Summary</h1>
@@ -34,7 +34,7 @@
 
   <div
   ng-class="{'row l-12 tablet-col': !bill.body.billData.featured_bill_summary, 'col l-6 m-12': bill.body.billData.featured_bill_summary}">
-      
+
     <div class="c-card c-card--bill c-card--icon tablet-margin-bottom-none m-12"
       ng-class="{'l-6 margin-right-medium margin-bottom-medium-none' : !bill.body.billData.featured_bill_summary,
       'margin-bottom-medium' : bill.body.billData.featured_bill_summary}"
@@ -43,7 +43,7 @@
       <i class="icon-passed-house green"
       style="font-size: 10px;top: 15px;"></i>
       <h1>Points In Favor</h1>
-      
+
       <hr />
 
       <div class="c-card__content">
@@ -60,7 +60,7 @@
       <i class="icon-close red"
       style="font-size: 13px;top: 13px;"></i>
       <h1>Points Against</h1>
-      
+
       <hr />
 
       <div class="c-card__content">
@@ -75,8 +75,8 @@
 
 
   <!-- Official Bill -->
-    <div 
-    ng-hide="bill.body.billData.featured_bill_summary" 
+    <div
+    ng-hide="bill.body.billData.featured_bill_summary"
     class="c-card c-card--bill c-card--official-summary l-12"
     style="width: 100%;"
     ng-cloak>
@@ -93,7 +93,7 @@
     </div>
 
     <div class="c-card__footer-btn">
-       <a target="_blank" ng-href="{{bill.body.billData.last_version.urls.pdf}}" ng-click="openPdf()"> 
+       <a target="_blank" ng-href="{{bill.body.billData.last_version.urls.pdf}}" ng-click="openPdf()">
         Download Full Bill as PDF
       </a>
     </div>
@@ -109,9 +109,9 @@ ng-show="bill.forComment.author"
 >
 
   <div class="l-6 m-12 margin-right-medium tablet-margin-right-none">
-  
 
-   <!-- Top Comment Card -->  
+
+   <!-- Top Comment Card -->
     <div class="c-card c-card--bill c-card--comment"
 
     loader loader-context="bill.topLoaded"
@@ -131,7 +131,7 @@ ng-show="bill.forComment.author"
         </div>
 
         <div class="c-card__comment-body">
-          
+
           <p class="c-card__username"
           ng-click="location.path('profile/' + bill.forComment.author)">
             {{bill.forComment.author_first_name}}
@@ -158,12 +158,12 @@ ng-show="bill.forComment.author"
 
     </div>
     <!-- Top Comment Card -->
-  
+
   </div>
 
   <div class="l-6 m-12">
-    
-   <!-- Top Comment Card -->  
+
+   <!-- Top Comment Card -->
     <div class="c-card c-card--bill c-card--comment"
 
     loader loader-context="bill.topLoaded"
@@ -183,7 +183,7 @@ ng-show="bill.forComment.author"
         </div>
 
         <div class="c-card__comment-body">
-          
+
           <p class="c-card__username"
               ng-click="location.path('profile/' + bill.againstComment.author)">
             {{bill.againstComment.author_first_name}}
@@ -214,15 +214,3 @@ ng-show="bill.forComment.author"
   </div>
 
 </div>
-
-
-
-
-
-
-
-
-
-
-
-

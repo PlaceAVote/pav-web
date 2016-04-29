@@ -6,7 +6,7 @@ module.exports = function($compile, $window, $sce, $sanitize) {
     },
     link: function(scope, element, attrs) {
       scope.window = $window;
-      scope.$watch('compile', function(o, n) {
+      scope.$watch('compile', function(n, o) {
         if (n) {
           element.html(scope.compile);
           $compile(element.contents())(scope);
