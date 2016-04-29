@@ -1,5 +1,5 @@
 <div class="issue-card"
-     ng-if="issueDeleted !== true">
+     ng-if="issueDeleted !== true || issue">
   <div class="row event-description">
      <div class="profile-image-holder middle margin-right-small click" ng-click="issue.goToProfile(location)">
         <div ng-style="{'background-image': 'url(' + issue.author_img_url + ')'}">
@@ -9,39 +9,40 @@
       <p class="red click" ng-click="issue.goToProfile(location)">{{issue.author_first_name}} {{issue.author_last_name}} &nbsp;</p><p>shared an &nbsp;<i class="icon-issues blue"></i>&nbsp; Issue</p>
      </div>
 
-     <span ng-hide="single"
+     <span ng-if="!context.single"
             class="h-right middle blue timestamp click" ng-click="issue.goToIssue(location)"
-            ng-class="{'margin-right-large': edit}">
+            ng-class="{'margin-right-large': user.edit}">
             {{issue.timestamp | amCalendar}}
      </span>
 
      <i class="c-card__menu-icon
               icon-arrow-down
               click"
-        ng-click="editMenu = !editMenu"></i>
+        ng-if="!context.single"
+        ng-click="user.editMenu = !user.editMenu"></i>
 
      <div class="c-card__menu"
-          ng-show="editMenu"
-          ng-mouseleave="editMenu = false">
+          ng-if="user.editMenu"
+          ng-mouseleave="user.editMenu = false">
 
        <div class="c-card__menu-arrow"></div>
 
        <ul>
           <li class="click"
-              ng-click="showEditTools = !showEditTools;
+              ng-click="user.showEditTools = !user.showEditTools;
                         editMenu = false">
               Edit Issue
           </li>
           <li class="click"
-              ng-click="showDelete = !showDelete;
+              ng-click="user.showDelete = !user.showDelete;
                         editMenu = false">
               Delete Issue
           </li>
         </ul>
      </div>
 
-     <div ng-if="single" class="h-right row">
-       <button ng-if="profile.isMe() === false || profile.rs.notLoggedIn !== true" ng-click="profile.follow()" class="click medium-button green-button h-right">{{follow}}</button>
+     <div ng-if="context.single" class="h-right row">
+       <button ng-if="!context.isUserMe" ng-hide="profile.rs.notLoggedIn" ng-click="profile.follow()" class="click medium-button green-button h-right">{{follow}}</button>
        <i ng-click="profile.closeIssue()" class="margin-left-small icon-close middle grey click"></i>
      </div>
 
@@ -51,8 +52,8 @@
     <p class="title">Talking About: <span ng-click="issue.goToBill(location)" class="bill-ref blue pale-bg margin-left-small mobile-margin-left-none mobile-margin-top-small medium click">{{issue.bill_title}}</span></p>
    </div>
 
-   <div ng-hide="showEditTools || showDelete" class="row issue-comment margin-bottom-small">
-   <p compile="issue.comment"></p>
+   <div ng-if="user.showEditTools === false || user.showDelete === false" class="row issue-comment margin-bottom-small">
+     <p compile="issue.comment"></p>
    </div>
 
 
@@ -61,7 +62,7 @@
 
    <!-- Delete -->
 
-   <div ng-if="edit && showDelete" class="col"
+   <div ng-if="user.edit && user.showDelete" class="col"
         loader
         loader-context="deleteLoading"
         truthy>
@@ -98,7 +99,7 @@
 
    <!-- Edit Tools -->
 
-   <div ng-if="edit && showEditTools" class="col"
+   <div ng-if="user.edit && user.showEditTools" class="col"
         loader
         loader-context="editLoading"
         truthy>
@@ -137,7 +138,7 @@
     </div>
 
    <a ng-if="issue.article_link" ng-href="{{issue.article_link}}" target="_blank" class="column issue-article padding-small margin-bottom-small" ng-style="{'background-image': 'url(' + issue.article_img + ')'}"
-   ng-class="{'margin-top-medium': showEditTools || showDelete}">
+   ng-class="{'margin-top-medium': user.showEditTools || user.showDelete}">
       <h2>{{issue.article_title}}</h2>
       <p>view link</p>
       <div class="backdrop"></div>

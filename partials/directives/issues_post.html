@@ -1,7 +1,7 @@
 <div ng-controller="IssuesCtrl as issues">
     <div class="issues-container">
       <div class="row issues-title margin-bottom-small margin-top-large">
-        <i class="middle icon-issues tablet-margin-left-small"></i> <p class="margin-left-small">Create an Issue</p>  
+        <i class="middle icon-issues tablet-margin-left-small"></i> <p class="margin-left-small">Create an Issue</p>
       </div>
       <div class="card padding-small" loader loader-context="issues.loading" truthy>
         <div class="profile-image-holder">
@@ -11,25 +11,25 @@
 
         <textarea msd-elastic ng-model="issues.issue.comment" ng-class="{'flat-bottom': issues.billSearch || issues.linkAdd || issues.attachments.length > 0}" class="padding-small post-message" placeholder="Share your opinions with people and rally around a bill or cause" rows="1"></textarea>
 
-        <div class="row issue-attachments l-12" ng-show="issues.attachments.length > 0" ng-class="{'flat-bottom': issues.billSearch || issues.linkAdd}">
+        <div class="row issue-attachments l-12" ng-if="issues.attachments.length > 0" ng-class="{'flat-bottom': issues.billSearch || issues.linkAdd}">
             <div class="attachment row padding-left-small padding-right-small" ng-repeat="attachment in issues.attachments">
               <i class="icon-close click" ng-click="issues.deleteAttachment($index)"></i>
               <p class="middle">{{attachment.type}}: {{attachment.title}}</p>
             </div>
         </div>
 
-        <div class="row" ng-show="issues.billSearch">
+        <div class="row" ng-if="issues.billSearch">
           <search-bar class="bill-search" placeholder="Start typing to search for a bill" results="issues.searchResults" focus="issues.focus" query="issues.search(q)" searching="issues.searching" attach-bill="issues.attach(bill);" bills issues></search-bar>
         </div>
 
-        <div class="row link-add-container" ng-show="issues.linkAdd">
+        <div class="row link-add-container" ng-if="issues.linkAdd">
           <form class="l-12" ng-submit="issues.validateUrl()">
             <button class="link-add-button">Add Link</button>
             <input class="link-add" type="text" ng-model="issues.url" placeholder="Paste website link here" />
           </form>
         </div>
 
-        <div class="row" ng-show="issues.errorMessage">
+        <div class="row" ng-if="issues.errorMessage">
           <p class="red message-error margin-top-small margin-bottom-small">{{issues.errorMessage}}</p>
         </div>
 
@@ -45,23 +45,23 @@
               <div ng-click="issues.toggleSearch();" ng-class="{'option-selected': issues.billSearch}" class="row padding-left-small padding-right-small">
               <span class="tool-tip">Attach a bill to this issue</span>
                 <i class="middle icon-bills"></i>
-              </div>  
+              </div>
           </div>
-            <h2 ng-hide="dirty" ng-click="showExample();" class="show-example-button red bold click">SHOW ME AN EXAMPLE</h2>
+            <h2 ng-show="!dirty" ng-click="showExample();" class="show-example-button red bold click">SHOW ME AN EXAMPLE</h2>
             <button ng-show="dirty" class="green-button medium-button padding-left-large padding-right-large" ng-click="issues.postIssue();">POST</button>
         </div>
 
       </div>
     </div>
 
-    <div ng-cloak ng-show="example" class="ng-cloak margin-top-medium card padding-small example-issue">
+    <div ng-if="example" class="ng-cloak margin-top-medium card padding-small example-issue">
       <issue issue="exampleIssue" example="theExample">
       </issue>
     </div>
 
-    <div ng-repeat="x in issues.myIssues" 
+    <div ng-repeat="x in issues.myIssues"
          class="margin-top-medium card padding-small"
-         ng-hide="x.issueDelete">
+         ng-if="!x.issueDelete">
       <issue issue="x"></issue>
     </div>
 </div>
