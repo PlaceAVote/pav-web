@@ -15,14 +15,14 @@ module.exports = function($compile, commentService, $anchorScroll, $timeout, $lo
       scope.window = $window;
       scope.userService = userService;
 
-      scope.$watch('feed', function(o,n) {
+      scope.$watch('feed', function(n,o) {
         if (n) {
           scope.feed = n;
         }
       });
 
       if (scope.comment.replies) {
-        element.append('<div class=\'comment-container comment-reply\' ng-show=\'comment.showChildren\'><comments comments=\'comment.replies\'></comments></div>');
+        element.append('<div class=\'comment-container comment-reply\' ng-if=\'comment.showChildren\'><comments comments=\'comment.replies\'></comments></div>');
         var html = element.html();
         element.contents().remove();
         element.html(html);

@@ -38,6 +38,10 @@
   }
 }
 
+// .c-feed__feed_events .c-card:last-child {
+//   margin-bottom: 50px;
+// }
+
 
 .c-feed__title {
   @include font-size(16px);
@@ -106,6 +110,7 @@
   position: absolute;
   width: 100%;
   top: 23px;
+  margin-bottom: 15px;
 }
 
 
