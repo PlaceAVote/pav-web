@@ -13,10 +13,8 @@ module.exports = function($location, issueService, facebook, $window, userServic
     },
     templateUrl: 'partials/directives/issue.html',
     link: function(scope, el, attr, controller) {
-
-      if (attr.$attr.single) {
-        scope.single = true;
-      }
+      var that = this;
+      scope.context = {};
 
       scope.location = $location;
 
@@ -26,12 +24,26 @@ module.exports = function($location, issueService, facebook, $window, userServic
 
       scope.timeout = $timeout;
 
+      scope.user = {};
 
       if (scope.issue) {
         scope.original = scope.issue.comment_sanitized;
-        scope.edit = scope.userService.isUserMe(scope.issue.user_id);
+        scope.user.edit = scope.userService.isUserMe(scope.issue.user_id);
+        scope.user.showEditTools = false;
+        scope.user.showDeleteTools = false;
       }
 
+      if (attr.$attr.single) {
+        scope.context.single = true;
+        scope.$watchCollection('issue', function(n, o) {
+          if (n) {
+            scope.context.isUserMe = scope.userService.isUserMe(scope.issue.user_id);
+            scope.original = scope.issue.comment_sanitized;
+            scope.user.showEditTools = false;
+            scope.user.showDeleteTools = false;
+          }
+        });
+      }
 
       scope.eResponse = function(id, emo, issue) {
 
@@ -135,7 +147,7 @@ module.exports = function($location, issueService, facebook, $window, userServic
 
       scope.cancelIssue = function() {
         scope.issue.comment_sanitized = scope.original;
-        scope.showEditTools = false;
+        scope.user.showEditTools = false;
       };
 
       scope.editIssue = function() {
@@ -157,7 +169,7 @@ module.exports = function($location, issueService, facebook, $window, userServic
 
           if (res) {
             res = new Issue(res);
-            scope.showEditTools = false;
+            scope.user.showEditTools = false;
             scope.issue.comment_sanitized = res.comment_sanitized;
             scope.issue.comment = res.comment;
             scope.setAlertMessage('Your message has been edited', true);
@@ -169,7 +181,7 @@ module.exports = function($location, issueService, facebook, $window, userServic
 
 
       scope.cancelDelete = function() {
-        scope.showDelete = false;
+        scope.user.showDelete = false;
       };
 
 
@@ -183,7 +195,7 @@ module.exports = function($location, issueService, facebook, $window, userServic
 
         scope.issueService.deleteIssue(scope.issue.issue_id, function(err, res) {
           scope.deleteLoading = false;
-          scope.showDelete = false;
+          scope.user.showDelete = false;
 
           if (err) {
             scope.setAlertMessage('There was a problem deleting your issue', false);

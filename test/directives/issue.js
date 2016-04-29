@@ -170,7 +170,7 @@ describe('Issue Directive', function() {
     scope.editIssue();
          expect(scope.editLoading).to.equal(scope.editLoading);
          expect('This comment has been edited by the user but no posted. Edited.').to.equal(scope.issue.comment);
-         expect(scope.showEditTools).to.equal(false);
+         expect(scope.user.showEditTools).to.equal(false);
         done();
   });
 
@@ -213,7 +213,7 @@ describe('Issue Directive', function() {
     scope.deleteIssue();
         expect(scope.deleteLoading).to.equal(false);
         expect(scope.issue.issueDelete).to.equal(true);
-        expect(scope.showDelete).to.equal(false);
+        expect(scope.user.showDelete).to.equal(false);
         done();
   });
 
