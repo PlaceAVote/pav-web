@@ -15,6 +15,7 @@
   right: 0;
   margin: 42px auto 0;
   display: block;
+  z-index: 30;
 
   @include media($tablet) {
     // overflow-x:hidden;
