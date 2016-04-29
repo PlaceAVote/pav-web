@@ -8,13 +8,13 @@
 */
 
 .c-trends__container {
-  position: fixed;
+  position: absolute;
   margin: 0 auto;
   width: 100%;
   max-width: 1200px;
   right: 0;
   left: 0;
-  top: 62px;
+  top: 26px;
 
   @include media(1200px) {
     display: none;
