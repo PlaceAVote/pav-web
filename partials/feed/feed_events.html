@@ -1,8 +1,9 @@
-  <div ng-repeat="event in events track by event.timestamp" ng-switch on="event.type" class="c-feed__event">
+<div ng-repeat="event in events | filter:(!!eventFilter || undefined) && {category: eventFilter} track by $index " ng-switch on="event.type" class="c-feed__event">
  <!-- track by event.id -->
     <div ng-switch-when="issue"
          ng-hide="event.issueDelete"
-         class="margin-top-medium card padding-small c-issue">
+         class="margin-top-medium card padding-small c-issue"
+        >
       <issue issue="event"></issue>
     </div>
 
@@ -15,6 +16,5 @@
     <feed-bill-event ng-switch-default bill="event"></feed-bill-event>
 
   </div>
-
   <div class="c-feed__loader row" ng-show="scroll" loader loader-context="scroll" truthy></div>
   <h1 ng-show="message" class="text-center grey margin-top-medium margin-bottom-small" style="font-size:16px;"><i class="icon-logo"></i></h1>

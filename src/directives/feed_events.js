@@ -6,13 +6,15 @@ module.exports = function() {
       refresh: '=',
       scroll: '=',
       message: '=',
+      eventFilter: '<'
     },
     templateUrl: 'partials/feed/feed_events.html',
     link: function(scope, el, attr) {
-      // console.log(scope.events);
-      scope.$watch('events', function(n, o) {
-        console.log(scope.events);
-      })
+      scope.size = '200';
+      // console.log('widnow', window);
+      // window.onscroll = function() {
+      //   console.log('widnow', window.outerHeight);
+      // }
     }
   };
 };

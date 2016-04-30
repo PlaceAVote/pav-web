@@ -2,10 +2,16 @@ var BillSummary = require('../models/bill_summary.js');
 var Issue = require('../models/issue.js');
 var VoteEvent = require('../models/vote_event.js');
 var Comment = require('../models/comment.js');
+var Category = require('../models/category.js');
 
 function FeedResponseFactory() {}
 
 FeedResponseFactory.getResponse = function(response) {
+
+  new Category(response.type, function(cat) {
+    response.category = cat;
+  });
+
   if (!response || !response.type) {
     return;
   }
@@ -40,4 +46,3 @@ FeedResponseFactory.getResponses = function(responses) {
 };
 
 module.exports = FeedResponseFactory;
-

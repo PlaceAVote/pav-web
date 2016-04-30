@@ -1,5 +1,6 @@
 function VoteEvent(options) {
   options = options || {};
+  this.category = options.category;
   this.bill_id = options.bill_id;
   this.vote = options.vote;
   this.vote_id = options['vote-id'];

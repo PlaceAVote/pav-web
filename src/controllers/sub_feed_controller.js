@@ -8,6 +8,7 @@ function SubFeedController(dependencies) {
   var options = dependencies || {};
   this.name = options.name;
   this.title = options.title;
+  this.filterBy = options.filterBy;
   this.noun = options.noun;
   this.icon = options.icon;
   this.items = options.items || [];

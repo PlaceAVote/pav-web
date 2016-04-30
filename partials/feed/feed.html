@@ -24,9 +24,8 @@
   <ul class="c-feed__menu">
 
     <li ng-repeat="(cat, value) in feed.categories"
-        ng-click="feed.categoryClick(value.name)"
-        ng-touchstart="feed.categoryClick(value.name)"
-        ng-class="{'c-feed__menu-item--selected': feed.isSelectedCategory(value.name), 'c-feed__menu-item--parent': value.showCategories}">
+        ng-click="feed.eventFilter = value.filterBy"
+        ng-class="{'c-feed__menu-item--selected': feed.eventFilter === value.filterBy, 'c-feed__menu-item--parent': value.showCategories}">
       <i class="red" ng-class="value.icon"></i>
       <p>
         {{value.title}}

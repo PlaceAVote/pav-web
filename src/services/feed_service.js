@@ -43,4 +43,3 @@ function FeedService($resource, authService, userService) {
 }
 
 module.exports = FeedService;
-

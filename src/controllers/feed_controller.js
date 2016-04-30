@@ -17,9 +17,9 @@ FeedController = function($scope, $location, userService, billService, authServi
   this.rs = $rootScope;
   this.rs.inApp = true;
   this.categories = {
-    all: new SubFeedController({name: 'all', icon: 'icon-globe', title: 'All Activity', noun: 'everything'}),
-    following: new SubFeedController({name: 'following', icon: 'icon-add', title: 'Following', noun: 'people'}),
-    billActivity: new SubFeedController({name: 'billActivity', icon: 'icon-bills', title: 'Bill Activity', noun: 'bills'}),
+    all: new SubFeedController({name: 'all', filterBy: undefined, icon: 'icon-globe', title: 'All Activity', noun: 'everything'}),
+    following: new SubFeedController({name: 'following', filterBy: 'following', icon: 'icon-add', title: 'Following', noun: 'people'}),
+    billActivity: new SubFeedController({name: 'billActivity', filterBy: 'bill', icon: 'icon-bills', title: 'Bill Activity', noun: 'bills'}),
     discovery: new SubFeedController({
       name: 'discovery',
       icon: 'icon-binoculars',
@@ -172,7 +172,9 @@ FeedController.prototype.getFeed = function() {
     if (!err) {
       title.feed();
       if (!response.feed || response.feed.length > 0) {
-        that.populateFeed(response);
+        that.feedItems = response.feed;
+        // console.log('feed items', that.feedItems);
+        // that.populateFeed(response);
       }
       that.lastLoaded = response.last_timestamp;
     }
@@ -200,7 +202,9 @@ FeedController.prototype.feedCheck = function() {
         that.feedMessage('.');
       } else {
         that.lastLoaded = response.last_timestamp;
-        that.populateFeed(response);
+        // that.populateFeed(response);
+        // console.log('woops', response)
+        that.feedItems = that.feedItems.concat(response.feed);
       }
     }
   });

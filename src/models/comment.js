@@ -3,6 +3,7 @@ function Comment(options) {
   if (!options) {
     return;
   }
+  this.category = options.category;
   this.author = options.author;
   this.author_first_name = options.author_first_name;
   this.author_last_name = options.author_last_name;
