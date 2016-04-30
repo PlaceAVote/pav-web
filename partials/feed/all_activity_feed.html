@@ -3,34 +3,7 @@
 <div class="c-feed__loader row" ng-show="feed.loading" loader loader-context="feed.loading" truthy></div>
 
 
-<div class="c-feed__events"
-     ng-if="feed.selectedCategory.name === 'all'">
-
-  <feed-events
-    events="feed.selectedCategory.items"
-    refresh="feed.loading"
-    scroll="feed.loadingScroll"
-    message="feed.scrollMessage">
-  </feed-events>
-
-</div>
-
-
-<div class="c-feed__events"
-      ng-if="feed.selectedCategory.name === 'following'">
-
-  <feed-events
-    events="feed.selectedCategory.items"
-    refresh="feed.loading"
-    scroll="feed.loadingScroll"
-    message="feed.scrollMessage">
-  </feed-events>
-
-</div>
-
-
-<div class="c-feed__events"
-      ng-if="feed.selectedCategory.name === 'billActivity'">
+<div class="c-feed__events">
 
   <feed-events
     events="feed.selectedCategory.items"
