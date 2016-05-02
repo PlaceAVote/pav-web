@@ -37,7 +37,6 @@ FeedController = function($scope, $location, userService, billService, authServi
           new SubFeedController({name: 'immigration', title: 'Immigration',}),
           new SubFeedController({name: 'social', title: 'Social Interest',}),
           new SubFeedController({name: 'taxes', title: 'Taxes',}),
-          new SubFeedController({name: 'religion', title: 'Religion',}),
           new SubFeedController({name: 'healthcare', title: 'Healthcare',}),
         ],
     }),
