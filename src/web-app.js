@@ -106,6 +106,7 @@ var feedCommentEventDirective = require('./directives/feed_comment_event.js');
 var allActivityFeedDirective = require('./directives/all_activity_feed.js');
 var trendsActivityFeedDirective = require('./directives/trends_activity_feed.js');
 var cssScrollDirective = require('./directives/css_scroll.js');
+var issueModalDirective = require('./directives/issue_modal.js');
 
 // Thirdparty integrations
 var Facebook = require('./integrations/facebook.js');
@@ -268,7 +269,7 @@ app.directive('websiteFooter', [websiteFooter]);
 app.directive('searchBar', ['$sce' ,'$location', search]);
 app.directive('termsAndConditions', [termsAndConditionsDirective]);
 app.directive('issuesPost', [issuesPostDirective]);
-app.directive('issue', ['$location', 'issueService', 'facebookService', '$window', 'userService', '$timeout', issueDirective]);
+app.directive('issue', ['$location', 'issueService', 'facebookService', '$window', 'userService', '$timeout', '$compile', issueDirective]);
 app.directive('wizard', [wizardDirective]);
 app.directive('slider', ['$timeout', sliderDirective]);
 app.directive('dad', [dragAndDropDirective]);
@@ -295,3 +296,4 @@ app.directive('feedCommentEvent', ['$location', feedCommentEventDirective]);
 app.directive('allactivityfeed', [allActivityFeedDirective]);
 app.directive('trendsactivityfeed', [trendsActivityFeedDirective]);
 app.directive('cssScroll', [cssScrollDirective]);
+app.directive('issueModal', [issueModalDirective]);

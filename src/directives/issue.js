@@ -1,7 +1,7 @@
 var tweet = require('../models/tweet.js');
 var Issue = require('../models/issue.js');
 
-module.exports = function($location, issueService, facebook, $window, userService, $timeout) {
+module.exports = function($location, issueService, facebook, $window, userService, $timeout, $compile) {
   return {
     restrict: 'E',
     scope: {
@@ -226,6 +226,17 @@ module.exports = function($location, issueService, facebook, $window, userServic
           scope.alertMessage.visible = false;
         }, 3000);
       };
+
+
+      // Issues Modal and Comments
+
+      scope.testClick = function() {
+        el.append('<issue-modal issue="issue"></issue-modal>');
+        var html = el.html();
+        el.contents().remove();
+        el.html(html);
+        $compile(el.contents())(scope);
+      }
 
 
     },
