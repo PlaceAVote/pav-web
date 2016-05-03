@@ -1,7 +1,7 @@
 <website-nav></website-nav>
 <div class="home" ng-controller="HomeCtrl as home" ng-switch on="home.email">
 	<div class="intro">
-		<section ng-switch on="home.mobileemail">		
+		<section ng-switch on="home.mobileemail">
 			<h1>
 				Be loud. Be heard. Be represented.
 			</h1>
@@ -9,7 +9,7 @@
 			<div class="home-btns">
 			<a class="signup-facebook" ng-click="home.loginWithFacebook()" value="Sign up with Facebook" loader loader-context="home.loading" white truthy><img src="img/web/logo-facebook.svg" alt="Sign up with Facebook" >Register with Facebook</a>
 			<a class="signup-email" href="#!/signup">Register with Email</a>
-			</div>			
+			</div>
 		</section>
 	</div>
 	<div class="home-box l-12">
@@ -43,7 +43,7 @@
 	<div2 class="l-12 sign-up-home" id="signup-section">
 		<div ng-switch-when="false" class="signup-container">
 		<h1>Become a PlaceAVoter today and let your representatives know how to represent you.</h1>
-		<div class="home-btns">
+		<div class="home-btns--footer">
 		<a class="signup-facebook" ng-click="home.loginWithFacebook()" value="Sign up with Facebook"><img src="img/web/logo-facebook.svg" alt="Sign up with Facebook">Register with Facebook</a>
 			<a class="signup-email-btm" href="#!/signup">Sign up with Email</a>
 		</div>
@@ -55,5 +55,5 @@
 	</div>
 
 	<website-footer></website-footer>
-	
+
 </div>
