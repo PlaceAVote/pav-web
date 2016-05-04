@@ -9,6 +9,17 @@ module.exports = function($compile, commentService, $anchorScroll, $timeout, $lo
     },
     templateUrl: 'partials/comments/comments.html',
     link: function(scope, element, attrs) {
+      scope.context = {};
+      if (scope.comment.bill_id) {
+        scope.context.type = 'bill';
+        scope.context.id = scope.comment.bill_id;
+      }
+
+      if (scope.comment.issue_id) {
+        scope.context.type = 'issue';
+        scope.context.id = scope.comment.issue_id;
+      }
+
       scope.commentService = commentService;
       scope.timeout = $timeout;
       scope.location = $location;
@@ -22,11 +33,9 @@ module.exports = function($compile, commentService, $anchorScroll, $timeout, $lo
       });
 
       if (scope.comment.replies) {
-        element.append('<div class=\'comment-container comment-reply\' ng-if=\'comment.showChildren\'><comments comments=\'comment.replies\'></comments></div>');
-        var html = element.html();
-        element.contents().remove();
-        element.html(html);
-        $compile(element.contents())(scope);
+        $compile('<div class="comment-container comment-reply" ng-if="comment.showChildren"><comments comments="comment.replies"></comments></div>')(scope, function(cloned, scope){
+           element.append(cloned);
+        });
 
 
         if (scope.comment.selected) {
@@ -60,8 +69,8 @@ module.exports = function($compile, commentService, $anchorScroll, $timeout, $lo
         }
 
         scope.editLoading = true;
-
-        scope.commentService.edit(scope.comment.id, scope.comment.body_sanitized, function(err, res) {
+        scope.context.comment = scope.comment.body_sanitized;
+        scope.commentService.edit(scope.comment.id, scope.context, function(err, res) {
           scope.editLoading = false;
 
           if (err) {
@@ -90,7 +99,7 @@ module.exports = function($compile, commentService, $anchorScroll, $timeout, $lo
 
         scope.deleteLoading = true;
 
-        scope.commentService.deleteComment(scope.comment.id, function(err, res) {
+        scope.commentService.deleteComment(scope.comment.id, scope.context, function(err, res) {
           scope.deleteLoading = false;
           scope.showDelete = false;
 

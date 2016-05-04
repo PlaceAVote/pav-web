@@ -5,20 +5,35 @@ function CommentService($resource, userService, authService) {
   var postingReply = false;
   var that = this;
 
-  var reply = function(comment, billId, parentId, callback) {
+  var reply = function(comment, context, parentId, callback) {
     if (!comment) {
       return callback('No Comment');
     }
-    if (!billId) {
-      return callback('No Bill Id');
+    if (!context) {
+      return callback('No Id');
     }
     if (!parentId) {
       return callback('No Parent Id');
     }
-    var body = {
-      bill_id: billId,
-      body: comment,
-    };
+
+    var body = {};
+    var url;
+
+    if (context.type === 'bill') {
+      body = {
+        bill_id: context.id,
+        body: comment,
+      };
+      url = config.comments.reply.endpoint(parentId);
+    }
+
+    if (context.type === 'issue') {
+      body = {
+        issue_id: context.id,
+        body: comment,
+      };
+      url = config.issue.comments.reply.endpoint(parentId);
+    }
 
     if (postingReply) {
       return;
@@ -27,7 +42,6 @@ function CommentService($resource, userService, authService) {
     postingReply = true;
 
     config.methods.put.headers.Authorization = authService.getAccessToken();
-    var url = config.comments.reply.endpoint(parentId);
     var resource = new $resource(url, undefined, {reply: config.methods.put});
     var onError = function(err) {
       postingReply = false;
@@ -40,18 +54,31 @@ function CommentService($resource, userService, authService) {
     resource.reply(body, onLoad, onError);
   };
 
-  var revoke = function(commentId, billId, kind, callback) {
+  var revoke = function(commentId, context, kind, callback) {
     if (!commentId) {
       return callback('No Comment Id');
     }
-    if (!billId) {
-      return callback('No Bill Defined');
+    if (!context) {
+      return callback('No Context Defined');
     }
 
-    var url = config.comments[kind].endpoint(commentId);
-    var body = {
-      bill_id: billId,
-    };
+    var body = {};
+    var url;
+
+    if (context.type === 'bill') {
+      body = {
+        bill_id: context.id,
+      };
+      url = config.comments[kind].endpoint(commentId);
+    }
+
+    if (context.type === 'issue') {
+      body = {
+        issue_id: context.id,
+      };
+      url = config.issue.comments[kind].endpoint(commentId);
+    }
+
     var resource = new $resource(url, undefined, {revoke: config.methods.del.delete(body, authService.getAccessToken())});
 
     var onError = function(err) {
@@ -66,19 +93,36 @@ function CommentService($resource, userService, authService) {
 
 
 
-  var like = function(commentId, billId, callback) {
+  var like = function(commentId, context, callback) {
     if (!commentId) {
       return callback('No Comment Id');
     }
-    if (!billId) {
-      return callback('No Bill Defined');
+
+    if (!context) {
+      return callback('No Context Defined');
     }
-    var url = config.comments.like.endpoint(commentId);
+
+    var body = {};
+    var url;
+
+    if (context.type === 'bill') {
+      body = {
+        bill_id: context.id,
+      };
+      url = config.comments.like.endpoint(commentId);
+    }
+
+
+    if (context.type === 'issue') {
+      body = {
+        issue_id: context.id,
+      };
+      url = config.issue.comments.like.endpoint(commentId);
+    }
+
+
     config.methods.post.headers.Authorization = authService.getAccessToken();
     var resource = new $resource(url, undefined, {like: config.methods.post});
-    var body = {
-      bill_id: billId,
-    };
 
     var onError = function(err) {
       return callback(err);
@@ -91,19 +135,33 @@ function CommentService($resource, userService, authService) {
   };
 
 
-  var dislike = function(commentId, billId, callback) {
+  var dislike = function(commentId, context, callback) {
     if (!commentId) {
       return callback('No Comment Id');
     }
-    if (!billId) {
-      return callback('No Bill Defined');
+    if (!context) {
+      return callback('No Context Defined');
     }
-    var url = config.comments.dislike.endpoint(commentId);
+
+    var body = {};
+    var url;
+
+    if (context.type === 'bill') {
+      body = {
+        bill_id: context.id,
+      };
+      url = config.comments.dislike.endpoint(commentId);
+    }
+
+    if (context.type === 'issue') {
+      body = {
+        issue_id: context.id,
+      };
+      url = config.issue.comments.dislike.endpoint(commentId);
+    }
+
     config.methods.post.headers.Authorization = authService.getAccessToken();
     var resource = new $resource(url, undefined, {dislike: config.methods.post});
-    var body = {
-      bill_id: billId,
-    };
 
     var onError = function(err) {
       return callback(err);
@@ -117,7 +175,7 @@ function CommentService($resource, userService, authService) {
 
   // Edit Comments
 
-  var edit = function(comment_id, comment, callback) {
+  var edit = function(comment_id, context, callback) {
     if (!comment_id) {
       return;
     }
@@ -130,9 +188,18 @@ function CommentService($resource, userService, authService) {
       return callback(undefined, new Comment(res));
     };
 
-    var body = {body: comment};
+    var url;
 
-    var url = config.comments.comments + comment_id;
+    var body = {body: context.comment};
+
+    if (context.type === 'bill') {
+       url = config.comments.comments + comment_id;
+    }
+
+    if (context.type === 'issue') {
+       url = config.issue.comments.comments + comment_id;
+    }
+
     config.methods.post.headers.Authorization = authService.getAccessToken();
     var token = authService.getAccessToken();
 
@@ -144,10 +211,24 @@ function CommentService($resource, userService, authService) {
 
 
 
-  var deleteComment = function(comment_id, callback) {
+  var deleteComment = function(comment_id, context, callback) {
+
+    if (!context) {
+      return;
+    }
 
     if (!comment_id) {
       return;
+    }
+
+    var url;
+
+    if (context.type === 'bill') {
+       url = config.comments.comments + comment_id;
+    }
+
+    if (context.type === 'issue') {
+       url = config.issues.comments.comments + comment_id;
     }
 
     var onError = function(err) {
@@ -158,7 +239,6 @@ function CommentService($resource, userService, authService) {
       return callback(undefined, res);
     };
 
-    var url = config.comments.comments + comment_id;
     config.methods.deleteData.headers.Authorization = authService.getAccessToken();
 
     var editComment = new $resource(url, {}, {edit: config.methods.deleteData});
@@ -166,6 +246,8 @@ function CommentService($resource, userService, authService) {
     editComment.edit(onLoad, onError);
 
   };
+
+
   return {
     revoke: revoke,
     reply: reply,

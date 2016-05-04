@@ -59,9 +59,9 @@
       {{comment.score}}
       </span>
 
-      <i class="icon-thumbs-up" ng-class="{'score-up': comment.liked == true}" ng-click="comment.like(commentService)"></i>
+      <i class="icon-thumbs-up" ng-class="{'score-up': comment.liked == true}" ng-click="comment.like(commentService, context)"></i>
 
-      <i class="icon-thumbs-down" ng-class="{'score-down': comment.disliked == true}" ng-click="comment.dislike(commentService)"></i>
+      <i class="icon-thumbs-down" ng-class="{'score-down': comment.disliked == true}" ng-click="comment.dislike(commentService, context)"></i>
 
       <span class="c-card__comment-reply-btn" ng-click="comment.showReplyInput()">reply</span>
 
@@ -168,7 +168,7 @@
 
         <span class="btn-blank" ng-click="comment.hideReplyInput()">CANCEL</span>
 
-        <span class="btn-green" ng-click="comment.reply(comment.bill_id, commentService, timeout)">POST</span>
+        <span class="btn-green" ng-click="comment.reply(context, commentService, timeout)">POST</span>
 
         </div>
 

@@ -10,6 +10,7 @@ function Comment(options) {
   this.bodyText(options);
   this.has_children = options.has_children;
   this.bill_id = options.bill_id;
+  this.issue_id = options.issue_id;
   this.bill_title = options.bill_title;
   this.score = options.score;
   this.timestamp = options.timestamp;
@@ -108,7 +109,7 @@ Comment.prototype.hideReplyInput = function() {
   this.replyText = undefined;
 };
 
-Comment.prototype.reply = function(billId, service, timeout) {
+Comment.prototype.reply = function(context, service, timeout) {
   var that = this;
   var scriptExp = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
   var objectExp = /<object\b[^<]*(?:(?!<\/object>)<[^<]*)*<\/object>/gi;
@@ -119,7 +120,7 @@ Comment.prototype.reply = function(billId, service, timeout) {
     return;
   }
 
-  service.reply(this.replyText, billId, this.id, function(err, response) {
+  service.reply(this.replyText, context, this.id, function(err, response) {
     if (err) {
       that.replyFailed = true;
     } else if (response) {
@@ -138,11 +139,11 @@ Comment.prototype.commentError = function(message, timeout) {
   }, 2000);
 };
 
-Comment.prototype.like = function(service) {
+Comment.prototype.like = function(service, context) {
   var that = this;
   if (this.liked && !this.scoring) {
     that.scoring = true;
-    service.revoke(this.id, this.bill_id, 'like', function(err, response) {
+    service.revoke(this.id, context, 'like', function(err, response) {
       if (err) {
         that.likeFailed = true;
         that.scoring = false;
@@ -158,7 +159,7 @@ Comment.prototype.like = function(service) {
 
   if (this.disliked && !this.scoring) {
     that.scoring = true;
-    service.revoke(this.id, this.bill_id,'dislike', function(err, response) {
+    service.revoke(this.id, context, 'dislike', function(err, response) {
       if (err) {
         that.dislikeFailed = true;
         that.scoring = false;
@@ -173,7 +174,7 @@ Comment.prototype.like = function(service) {
 
   if (!this.liked && !this.scoring) {
     that.scoring = true;
-    service.like(this.id, this.bill_id, function(err, response) {
+    service.like(this.id, context, function(err, response) {
       that.scoring = false;
       if (err) {
         that.likeFailed = true;
@@ -189,12 +190,12 @@ Comment.prototype.like = function(service) {
 };
 
 
-Comment.prototype.dislike = function(service) {
+Comment.prototype.dislike = function(service, context) {
   var that = this;
 
   if (this.disliked && !this.scoring) {
     that.scoring = true;
-    service.revoke(this.id, this.bill_id,'dislike', function(err, response) {
+    service.revoke(this.id, context, 'dislike', function(err, response) {
       that.scoring = false;
       if (err) {
         that.dislikeFailed = true;
@@ -210,7 +211,7 @@ Comment.prototype.dislike = function(service) {
 
   if (this.liked && !this.scoring) {
     that.scoring = true;
-    service.revoke(this.id, this.bill_id, 'like', function(err, response) {
+    service.revoke(this.id, context, 'like', function(err, response) {
       that.scoring = false;
       if (err) {
         that.likeFailed = true;
@@ -225,7 +226,7 @@ Comment.prototype.dislike = function(service) {
 
   if (!this.disliked && !this.scoring) {
     that.scoring = true;
-    service.dislike(this.id, this.bill_id, function(err, response) {
+    service.dislike(this.id, context, function(err, response) {
       that.scoring = false;
       if (err) {
         that.dislikeFailed = true;

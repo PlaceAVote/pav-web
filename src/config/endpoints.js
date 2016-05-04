@@ -239,6 +239,27 @@ module.exports = {
       response: function(id) {
         return urls.USER + '/user/issue/' + id + '/response';
       },
+      comments: {
+        reply: {
+          endpoint: function(id) {
+            id = id.trim();
+            return urls.USER + '/user/issue/comments/' + id + '/reply';
+          },
+        },
+        like: {
+          endpoint: function(id) {
+            id = id.trim();
+            return urls.USER + '/user/issue/comments/' + id + '/like';
+          },
+        },
+        dislike: {
+          endpoint: function(id) {
+            id = id.trim();
+            return urls.USER + '/user/issue/comments/' + id + '/dislike';
+          },
+        },
+        comments: urls.USER + '/user/issue/comments/',
+      },
     },
     settings: urls.USER + '/user/me/settings',
     profilePicture: urls.USER + '/user/me/profile/image',
