@@ -104,6 +104,10 @@ FeedController.prototype.subCategoryClick = function(categoryName, subCategoryNa
     if (err) {
       return;
     }
+    // Sorts by comment count in DESC
+    results.sort(function(a, b) {
+      return b.comment_count - a.comment_count;
+    });
     that.selectedCategory.selectedCategory.update(results);
     that.itemsLoading = false;
   });
