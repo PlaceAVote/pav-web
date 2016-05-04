@@ -35,6 +35,9 @@ module.exports = function($location, issueService, facebook, $window, userServic
 
       if (attr.$attr.single) {
         scope.context.single = true;
+        if(attr.$attr.modal) {
+          scope.context.modal = true;
+        }
         scope.$watchCollection('issue', function(n, o) {
           if (n) {
             scope.context.isUserMe = scope.userService.isUserMe(scope.issue.user_id);
@@ -231,13 +234,14 @@ module.exports = function($location, issueService, facebook, $window, userServic
       // Issues Modal and Comments
 
       scope.testClick = function() {
-        el.append('<issue-modal issue="issue"></issue-modal>');
-        var html = el.html();
-        el.contents().remove();
-        el.html(html);
-        $compile(el.contents())(scope);
-      }
+        $compile('<issue-modal issue="issue"></issue-modal>')(scope, function(cloned, scope){
+           el.append(cloned);
+        });
+      };
 
+      scope.closeIssue = function() {
+        el[0].offsetParent.offsetParent.offsetParent.remove();
+      };
 
     },
   };

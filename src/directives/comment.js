@@ -28,6 +28,7 @@ module.exports = function($compile, commentService, $anchorScroll, $timeout, $lo
         element.html(html);
         $compile(element.contents())(scope);
 
+
         if (scope.comment.selected) {
           $timeout(function() {
             $location.hash('comment-selected');

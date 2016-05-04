@@ -6,7 +6,8 @@ module.exports = function() {
       issue: '<',
     },
     templateUrl: 'partials/issues/issue_modal.html',
+    link: function(scope, el) {
+      console.log(scope, el);
+    },
   };
 };
-
-// ng-if="issue.issue_selected"

@@ -1,5 +1,61 @@
-<div class="c-modal__wrapper c-modal__wrapper--active">
-  <div class="c-card c-card--modal">
-    <issue issue="issue"></issue>
-  </div>
+<div class="c-modal__wrapper c-modal__wrapper--active c-issue--modal">
+  <div class="c-card--modal">
+    <div class="c-card">
+      <issue issue="issue" modal single></issue>
+    </div>
+    <!-- Comments -->
+      <div class="c-comment__input row tablet-col l-12">
+      <h1>Add a Comment</h1>
+        <div class="c-user-photo">
+          <div ng-style="{'background-image': 'url(' + bill.rs.user.img_url + ')'}">
+          </div>
+        </div>
+
+        <textarea name='commentOnBillBox' rows="1" ng-model='bill.commentBody' placeholder='Write your comment here' msd-elastic></textarea>
+        <button ng-click="bill.postComment()" class="c-comment__post-btn btn-blank">Post</button>
+      </div>
+
+      <div class="red-bg" ng-show="bill.errorMessage">
+      <p class="white padding-small">{{bill.errorMessage}}</p>
+      </div>
+
+      <div
+      class="c-card c-card--comment"
+      infinite-scroll="commentsCheck();"
+      loader loader-context="fetchingComments"
+      truthy
+      ng-class="{'c-card--comment--loading': fetchingComments, 'c-comment--scroll-loader': checkingComments }">
+
+        <div class="c-comment__filter">
+          <ul>
+            <li>
+            Sort By
+            </li>
+            <li
+            ng-click="commentOrder = 'highest-score'; fetchComments();"
+            ng-class="{'c-comment__filter-selected': commentOrder === 'highest-score'}">
+            Highest Rated
+            </li>
+            <li
+            ng-click="commentOrder = 'latest'; fetchComments();"
+            ng-class="{'c-comment__filter-selected': commentOrder === 'latest'}">
+            Most Recent
+            </li>
+          </ul>
+        </div>
+
+        <h1 class="c-card--comment--h1">COMMENTS</h1>
+
+        <hr />
+
+        <comments ng-show="comments" comments='comments'></comments>
+
+        <div class="c-card__message c-card__message--comments" ng-show="comments.length == 0">
+          <h2>
+            No comments yet! Be the first to comment and start the discussion.
+          </h2>
+        </div>
+
+      </div>
+    </div>
 </div>

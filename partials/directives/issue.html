@@ -41,9 +41,13 @@
         </ul>
      </div>
 
-     <div ng-if="context.single" class="h-right row">
+     <div ng-if="context.single && profile" class="h-right row">
        <button ng-if="!context.isUserMe" ng-hide="profile.rs.notLoggedIn" ng-click="profile.follow()" class="click medium-button green-button h-right">{{follow}}</button>
        <i ng-click="profile.closeIssue()" class="margin-left-small icon-close middle grey click"></i>
+     </div>
+
+     <div ng-if="context.modal" class="h-right row">
+       <i ng-click="closeIssue()" class="margin-left-small icon-close middle red click"></i>
      </div>
 
    </div>
@@ -181,10 +185,3 @@
 
    </div>
 </div>
-
-
-<!-- <div ng-if="issue.issue_selected" class="c-modal__wrapper c-modal__wrapper--active">
-    <div class="c-card">
-      <issue issue="issue"></issue>
-    </div>
-</div> -->

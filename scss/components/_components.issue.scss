@@ -6,6 +6,13 @@
 * Issues are present on the feed.
 */
 
+.c-issue__comments-wrapper {
+  width: 100%;
+  // background: blue;
+}
 
 
-
+.c-issue--modal {
+  overflow-y: scroll;
+  // padding-bottom: 60px;
+}
