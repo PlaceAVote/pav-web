@@ -196,13 +196,30 @@
   width: 100%;
   position: absolute;
   margin: 0 auto;
-  top: 20%;
+  top: 100px;
   left: 0;
   right: 0;
   @include media($tablet) {
     top: 0;
   }
 }
+
+
+
+
+/**
+* Added to body when modal is
+* active to prevent scrolling
+*/
+
+.c-modal__body--active {
+  position: fixed;
+  overflow: hidden;
+}
+
+
+
+
 
 
 /**

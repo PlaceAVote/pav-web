@@ -32,7 +32,7 @@ function CommentService($resource, userService, authService) {
         issue_id: context.id,
         body: comment,
       };
-      url = config.issue.comments.reply.endpoint(parentId);
+      url = config.users.issue.comments.reply.endpoint(parentId);
     }
 
     if (postingReply) {
@@ -76,7 +76,7 @@ function CommentService($resource, userService, authService) {
       body = {
         issue_id: context.id,
       };
-      url = config.issue.comments[kind].endpoint(commentId);
+      url = config.users.issue.comments[kind].endpoint(commentId);
     }
 
     var resource = new $resource(url, undefined, {revoke: config.methods.del.delete(body, authService.getAccessToken())});
@@ -117,7 +117,7 @@ function CommentService($resource, userService, authService) {
       body = {
         issue_id: context.id,
       };
-      url = config.issue.comments.like.endpoint(commentId);
+      url = config.users.issue.comments.like.endpoint(commentId);
     }
 
 
@@ -157,7 +157,7 @@ function CommentService($resource, userService, authService) {
       body = {
         issue_id: context.id,
       };
-      url = config.issue.comments.dislike.endpoint(commentId);
+      url = config.users.issue.comments.dislike.endpoint(commentId);
     }
 
     config.methods.post.headers.Authorization = authService.getAccessToken();
@@ -197,7 +197,7 @@ function CommentService($resource, userService, authService) {
     }
 
     if (context.type === 'issue') {
-       url = config.issue.comments.comments + comment_id;
+       url = config.users.issue.comments.comments + comment_id;
     }
 
     config.methods.post.headers.Authorization = authService.getAccessToken();
@@ -228,7 +228,7 @@ function CommentService($resource, userService, authService) {
     }
 
     if (context.type === 'issue') {
-       url = config.issues.comments.comments + comment_id;
+       url = config.users.issue.comments.comments + comment_id;
     }
 
     var onError = function(err) {

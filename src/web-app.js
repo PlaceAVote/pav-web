@@ -3,9 +3,9 @@ console.log('%cPlaceavote', 'background: #543594; color: #ffffff; padding: 1px 3
 
 // Redirects to https protocol
 
-if (window.location.protocol != 'https:' && window.location.hostname != 'localhost') {
-  window.location.href = window.location.href.replace(/^http:/, 'https:');
-}
+// if (window.location.protocol != 'https:' && window.location.hostname != 'localhost') {
+//   window.location.href = window.location.href.replace(/^http:/, 'https:');
+// }
 
 // Safari, in Private Browsing Mode, looks like it supports localStorage but all calls to setItem
 // Throw QuotaExceededError. We're going to detect this and just silently drop any calls to setItem
@@ -118,7 +118,7 @@ var locationUpdate = require('./utils/location_update.js');
 
 var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'rzModule', 'ui.tree', 'monospaced.elastic', 'angularMoment', 'ngLocationUpdate']);
 
-app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+app.config(['$routeProvider', '$locationProvider', '$compileProvider', function($routeProvider, $locationProvider, $compileProvider) {
 
   $routeProvider
   .when('/', {
@@ -205,6 +205,8 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 
   $locationProvider
     .hashPrefix('!');
+
+  $compileProvider.debugInfoEnabled(false);
 
 },]);
 
@@ -294,4 +296,4 @@ app.directive('feedCommentEvent', ['$location', feedCommentEventDirective]);
 app.directive('allactivityfeed', [allActivityFeedDirective]);
 app.directive('trendsactivityfeed', [trendsActivityFeedDirective]);
 app.directive('cssScroll', [cssScrollDirective]);
-app.directive('issueModal', [issueModalDirective]);
+app.directive('issueModal', ['$location', '$timeout', 'issueService', '$rootScope', issueModalDirective]);

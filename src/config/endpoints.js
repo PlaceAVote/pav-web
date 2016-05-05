@@ -259,6 +259,21 @@ module.exports = {
           },
         },
         comments: urls.USER + '/user/issue/comments/',
+        comment: urls.USER + '/user/issue/comment/',
+        fetchComments: function(id, order, lastComment) {
+          if (!order) {
+            order = 'highest-score';
+          }
+
+          if (lastComment) {
+            lastComment = '&last_comment_id=' + lastComment;
+          } else {
+            lastComment = '';
+          }
+
+          return urls.USER + '/user/issue/' + id + '/comments?sort-by=' + order + lastComment;
+
+        },
       },
     },
     settings: urls.USER + '/user/me/settings',

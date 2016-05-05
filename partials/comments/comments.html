@@ -63,7 +63,7 @@
 
       <i class="icon-thumbs-down" ng-class="{'score-down': comment.disliked == true}" ng-click="comment.dislike(commentService, context)"></i>
 
-      <span class="c-card__comment-reply-btn" ng-click="comment.showReplyInput()">reply</span>
+      <span ng-if="context.type !== 'issue'" class="c-card__comment-reply-btn" ng-click="comment.showReplyInput()">reply</span>
 
     </div>
 
