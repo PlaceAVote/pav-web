@@ -1,7 +1,7 @@
 var tweet = require('../models/tweet.js');
 var Issue = require('../models/issue.js');
 
-module.exports = function($location, issueService, facebook, $window, userService, $timeout) {
+module.exports = function($location, issueService, facebook, $window, userService, $timeout, $compile) {
   return {
     restrict: 'E',
     scope: {
@@ -35,6 +35,9 @@ module.exports = function($location, issueService, facebook, $window, userServic
 
       if (attr.$attr.single) {
         scope.context.single = true;
+        if (attr.$attr.modal) {
+          scope.context.modal = true;
+        }
         scope.$watchCollection('issue', function(n, o) {
           if (n) {
             scope.context.isUserMe = scope.userService.isUserMe(scope.issue.user_id);
@@ -227,6 +230,22 @@ module.exports = function($location, issueService, facebook, $window, userServic
         }, 3000);
       };
 
+
+      // Issues Modal and Comments
+
+      scope.showModal = function() {
+        scope.body = angular.element(document.body);
+        $compile('<issue-modal issue="issue"></issue-modal>')(scope, function(cloned, scope) {
+          scope.body.append(cloned);
+          scope.body.addClass('c-modal__body--active');
+        });
+      };
+
+      scope.closeIssue = function() {
+        scope.body = angular.element(document.body);
+        scope.body.removeClass('c-modal__body--active');
+        el[0].offsetParent.offsetParent.offsetParent.remove();
+      };
 
     },
   };

@@ -66,7 +66,6 @@ var pavDirectives = require('./directives/directives.js');
 var websiteNav = require('./directives/website_nav.js');
 var commentsDirective = require('./directives/comments.js');
 var commentDirective = require('./directives/comment.js');
-var commentEventDirective = require('./directives/comment_event.js');
 var bannerDirective = require('./directives/banner.js');
 var timelineDirective = require('./directives/timeline.js');
 var timelineFollowingEventDirective = require('./directives/following_event.js');
@@ -106,6 +105,7 @@ var feedCommentEventDirective = require('./directives/feed_comment_event.js');
 var allActivityFeedDirective = require('./directives/all_activity_feed.js');
 var trendsActivityFeedDirective = require('./directives/trends_activity_feed.js');
 var cssScrollDirective = require('./directives/css_scroll.js');
+var issueModalDirective = require('./directives/issue_modal.js');
 
 // Thirdparty integrations
 var Facebook = require('./integrations/facebook.js');
@@ -118,7 +118,7 @@ var locationUpdate = require('./utils/location_update.js');
 
 var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'rzModule', 'ui.tree', 'monospaced.elastic', 'angularMoment', 'ngLocationUpdate']);
 
-app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+app.config(['$routeProvider', '$locationProvider', '$compileProvider', function($routeProvider, $locationProvider, $compileProvider) {
 
   $routeProvider
   .when('/', {
@@ -206,6 +206,8 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
   $locationProvider
     .hashPrefix('!');
 
+  $compileProvider.debugInfoEnabled(false);
+
 },]);
 
 // Services
@@ -254,7 +256,6 @@ app.directive('websiteNav', [websiteNav]);
 app.directive('headerNav', [headerNav]);
 app.directive('mailcheck', ['$compile','$sce', mailcheck]);
 app.directive('comment', ['$compile', 'commentService', '$anchorScroll', '$timeout', '$location', '$window', 'userService', commentDirective]);
-app.directive('commentEvent', ['$compile', 'commentService', '$timeout','$location', commentEventDirective]);
 app.directive('comments', [commentsDirective]);
 app.directive('banner', [bannerDirective]);
 app.directive('timeline', ['$location', timelineDirective]);
@@ -268,7 +269,7 @@ app.directive('websiteFooter', [websiteFooter]);
 app.directive('searchBar', ['$sce' ,'$location', search]);
 app.directive('termsAndConditions', [termsAndConditionsDirective]);
 app.directive('issuesPost', [issuesPostDirective]);
-app.directive('issue', ['$location', 'issueService', 'facebookService', '$window', 'userService', '$timeout', issueDirective]);
+app.directive('issue', ['$location', 'issueService', 'facebookService', '$window', 'userService', '$timeout', '$compile', issueDirective]);
 app.directive('wizard', [wizardDirective]);
 app.directive('slider', ['$timeout', sliderDirective]);
 app.directive('dad', [dragAndDropDirective]);
@@ -295,3 +296,4 @@ app.directive('feedCommentEvent', ['$location', feedCommentEventDirective]);
 app.directive('allactivityfeed', [allActivityFeedDirective]);
 app.directive('trendsactivityfeed', [trendsActivityFeedDirective]);
 app.directive('cssScroll', [cssScrollDirective]);
+app.directive('issueModal', ['$location', '$timeout', 'issueService', '$rootScope', issueModalDirective]);

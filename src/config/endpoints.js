@@ -239,6 +239,42 @@ module.exports = {
       response: function(id) {
         return urls.USER + '/user/issue/' + id + '/response';
       },
+      comments: {
+        reply: {
+          endpoint: function(id) {
+            id = id.trim();
+            return urls.USER + '/user/issue/comments/' + id + '/reply';
+          },
+        },
+        like: {
+          endpoint: function(id) {
+            id = id.trim();
+            return urls.USER + '/user/issue/comments/' + id + '/like';
+          },
+        },
+        dislike: {
+          endpoint: function(id) {
+            id = id.trim();
+            return urls.USER + '/user/issue/comments/' + id + '/dislike';
+          },
+        },
+        comments: urls.USER + '/user/issue/comments/',
+        comment: urls.USER + '/user/issue/comment/',
+        fetchComments: function(id, order, lastComment) {
+          if (!order) {
+            order = 'highest-score';
+          }
+
+          if (lastComment) {
+            lastComment = '&last_comment_id=' + lastComment;
+          } else {
+            lastComment = '';
+          }
+
+          return urls.USER + '/user/issue/' + id + '/comments?sort-by=' + order + lastComment;
+
+        },
+      },
     },
     settings: urls.USER + '/user/me/settings',
     profilePicture: urls.USER + '/user/me/profile/image',

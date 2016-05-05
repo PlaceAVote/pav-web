@@ -30,9 +30,9 @@
                   <div class="event-card c-card--comment c-card c-card--comment-event">
                   <div class="event-icon event-icon-like">
                    <i class="icon-thumbs-up"></i>
-                   </div> 
+                   </div>
                     <span class="event-label"><a ng-click="location.path('profile/' + profile.user.user_id)">{{profile.user.first_name}} {{profile.user.lastname}}</a> upvoted a comment:</span>
-                    <comment-event comment="event.comment"></comment-event>
+                    <comment comment="event.comment" feed="true"></comment>
                     </div>
                   </div>
                   <!-- comment disliked -->
@@ -43,19 +43,19 @@
                     <i class="icon-thumbs-down"></i>
                     </div>
                     <span class="event-label"><a ng-click="location.path('profile/' + profile.user.user_id)">{{profile.user.first_name}} {{profile.user.lastname}}</a> downvoted a comment:</span>
-                    <comment-event comment="event.comment"></comment-event>
+                    <!-- <comment-event comment="event.comment"></comment-event> -->
+                    <comment comment="event.comment" feed="true"></comment>
                     </div>
                   </div>
                   <!-- comment post -->
                   <div class="timeline-comment" ng-switch-when="comment">
                   <span class="time-stamp">{{event.timestamp | date:'medium'}}</span>
                   <div class="event-card c-card--comment c-card c-card--comment-event">
-                
                     <div class="event-icon event-icon-comment">
                     <i class="icon-comment"></i>
                     </div>
                    <span class="event-label"><a ng-click="location.path('profile/' + profile.user.user_id)">{{profile.user.first_name}} {{profile.user.lastname}}</a> made a comment.</span>
-                    <comment-event comment="event"></comment-event>
+                    <comment comment="event" feed="true"></comment>
                     </div>
                   </div>
                   <!-- issue event -->

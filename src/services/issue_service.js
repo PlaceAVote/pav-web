@@ -1,5 +1,6 @@
 var config = require('../config/endpoints.js');
-var Issue = require('../../src/models/issue.js');
+var Issue = require('../models/issue.js');
+var Comment = require('../models/comment.js');
 
 function IssueService($resource, authService, callback) {
   var saveIssue = function(issue, callback) {
@@ -198,7 +199,80 @@ function IssueService($resource, authService, callback) {
     request.getIssue(undefined, onLoad, onError);
   };
 
+
+  var postComment = function(id, comment, callback) {
+
+    if (!id) {
+      return callback({message: 'Issue Id is required to post a comment on an Issue'});
+    }
+
+    if (!comment) {
+      return callback({message: 'A Comment is required to post'});
+    }
+
+    var postBody = {
+      issue_id: id,
+      body: comment,
+    };
+
+    var url = config.users.issue.comments.comment;
+    config.methods.put.headers.Authorization = authService.getAccessToken();
+    var resource = new $resource(url, undefined, {postComment: config.methods.put});
+
+    var onError = function(err) {
+      return callback(err);
+    };
+
+    var onLoad = function(response) {
+      var comment = new Comment(response);
+      return callback(undefined, comment);
+    };
+
+    resource.postComment(postBody, onLoad, onError);
+
+  };
+
+
+  var fetchComments = function(id, order, lastComment, reply, callback) {
+
+    reply = reply || false;
+
+    if (!id) {
+      return callback({message: 'Id Must Be Defined'});
+    }
+
+    var onLoad = function(res) {
+      var results = {
+        lastComment: res.last_comment_id,
+        comments: [],
+      };
+      var comments = res.comments;
+      var commentLength = comments.length;
+      for (var i = 0; i < commentLength; i++) {
+        var comment = new Comment(comments[i]);
+        Comment.buildChildren(comment, undefined, reply);
+        results.comments.push(comment);
+      }
+
+      return callback(undefined, results);
+    };
+
+    var onError = function(err) {
+      console.log('error', err);
+    };
+
+
+    var url = config.users.issue.comments.fetchComments(id, order, lastComment);
+    config.methods.get.headers.Authorization = authService.getAccessToken();
+    var resource = new $resource(url, undefined, {fetchComments: config.methods.get});
+
+    resource.fetchComments(undefined, onLoad, onError);
+  };
+
+
   return {
+    fetchComments: fetchComments,
+    postComment: postComment,
     saveIssue: saveIssue,
     setIssueResponse: setIssueResponse,
     getIssueResponse: getIssueResponse,
@@ -210,4 +284,3 @@ function IssueService($resource, authService, callback) {
 }
 
 module.exports = IssueService;
-
