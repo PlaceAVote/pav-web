@@ -13,7 +13,6 @@ module.exports = function($location, $timeout, issueService, $rootScope) {
       scope.timeout = $timeout;
       scope.commentOrder = 'highest-score';
       scope.img_url = $rootScope.user.img_url;
-      console.log($rootScope);
 
       scope.postComment = function() {
         var that = this;
@@ -68,7 +67,6 @@ module.exports = function($location, $timeout, issueService, $rootScope) {
         scope.issueService.fetchComments(scope.issue.issue_id, scope.commentOrder, undefined, undefined, function(err, res) {
           scope.fetchingComments = false;
           if (res) {
-            console.log(res);
             scope.comments = res.comments;
             scope.lastComment = res.lastComment;
           }

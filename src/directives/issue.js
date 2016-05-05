@@ -232,14 +232,12 @@ module.exports = function($location, issueService, facebook, $window, userServic
 
 
       // Issues Modal and Comments
-      // var body;
-      scope.testClick = function() {
-        console.log(document);
+
+      scope.showModal = function() {
         scope.body = angular.element(document.body);
         $compile('<issue-modal issue="issue"></issue-modal>')(scope, function(cloned, scope){
           scope.body.append(cloned);
           scope.body.addClass('c-modal__body--active');
-          //  document.body.append(cloned);?
         });
       };
 

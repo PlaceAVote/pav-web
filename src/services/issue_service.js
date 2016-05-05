@@ -224,7 +224,6 @@ function IssueService($resource, authService, callback) {
     };
 
     var onLoad = function(response) {
-      console.log(response);
       var comment = new Comment(response);
       return callback(undefined, comment);
     };

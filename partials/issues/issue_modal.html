@@ -23,6 +23,7 @@
       ng-if="comments.length > 0"
       class="c-card c-card--comment"
       infinite-scroll="commentsCheck();"
+      infinite-scroll-distance="0.5"
       loader loader-context="fetchingComments"
       truthy
       ng-class="{'c-card--comment--loading': fetchingComments, 'c-comment--scroll-loader': checkingComments }">

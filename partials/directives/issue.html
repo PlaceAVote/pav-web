@@ -152,35 +152,36 @@
 
      <div class="h-left row issue-share">
        <p class="medium middle">
-          Share
           <i class="icon-facebook click" ng-click="shareToFacebook()"></i>
 
           <a target="_blank" ng-href="https://twitter.com/intent/tweet?text={{getShareMessage()}}&url={{issueLocation}}" data-size="large">
             <i class="icon-social-twitter"></i>
           </a>
        </p>
-     </div>
-<!-- reaction-label -->
-     <div class="reaction-label">
-        <p class="medium middle click" ng-click="testClick();">What's your reaction?</p>
+       <div class="margin-left-medium h-left reactions">
+         <div class="reaction click" ng-class="{'reaction-positive': issue.emotional_response === 'positive', 'reaction-active': issue.positive_responses > 0}" ng-click="eResponse(issue.issue_id, 'positive', issue)">
+           <img ng-if="issue.emotional_response !== 'positive'" src="img/reactions/smile-inactive.svg" />
+           <img ng-if="issue.emotional_response === 'positive'" src="img/reactions/smile-active.svg" />
+           <span ng-if="issue.positive_responses > 1 || issue.positive_responses" class="bold black">{{issue.positive_responses}}</span>
+         </div>
+         <div class="reaction click" ng-class="{'reaction-neutral': issue.emotional_response === 'neutral', 'reaction-active': issue.neutral_responses > 0}" ng-click="eResponse(issue.issue_id, 'neutral', issue)">
+           <img ng-if="issue.emotional_response !== 'neutral'" src="img/reactions/straightface-inactive.svg" />
+           <img ng-if="issue.emotional_response === 'neutral'" src="img/reactions/straightface-active.svg" />
+           <span ng-if="issue.neutral_responses > 1 || issue.neutral_responses" class="bold black">{{issue.neutral_responses}}</span>
+         </div>
+         <div class="reaction click" ng-class="{'reaction-negative': issue.emotional_response === 'negative', 'reaction-active': issue.negative_responses > 0}" ng-click="eResponse(issue.issue_id, 'negative', issue)">
+           <img ng-if="issue.emotional_response !== 'negative'" src="img/reactions/sadface-inactive.svg" />
+           <img ng-if="issue.emotional_response === 'negative'" src="img/reactions/sadface-active.svg" />
+           <span ng-if="issue.negative_responses > 1 || issue.negative_responses" class="bold black">{{issue.negative_responses}}</span>
+         </div>
      </div>
 
-     <div class="h-right reactions">
-        <div class="reaction click" ng-class="{'reaction-positive': issue.emotional_response === 'positive', 'reaction-active': issue.positive_responses > 0}" ng-click="eResponse(issue.issue_id, 'positive', issue)">
-          <img ng-if="issue.emotional_response !== 'positive'" src="img/reactions/smile-inactive.svg" />
-          <img ng-if="issue.emotional_response === 'positive'" src="img/reactions/smile-active.svg" />
-          <span ng-if="issue.positive_responses > 1 || issue.positive_responses" class="bold black">{{issue.positive_responses}}</span>
-        </div>
-        <div class="reaction click" ng-class="{'reaction-neutral': issue.emotional_response === 'neutral', 'reaction-active': issue.neutral_responses > 0}" ng-click="eResponse(issue.issue_id, 'neutral', issue)">
-          <img ng-if="issue.emotional_response !== 'neutral'" src="img/reactions/straightface-inactive.svg" />
-          <img ng-if="issue.emotional_response === 'neutral'" src="img/reactions/straightface-active.svg" />
-          <span ng-if="issue.neutral_responses > 1 || issue.neutral_responses" class="bold black">{{issue.neutral_responses}}</span>
-        </div>
-        <div class="reaction click" ng-class="{'reaction-negative': issue.emotional_response === 'negative', 'reaction-active': issue.negative_responses > 0}" ng-click="eResponse(issue.issue_id, 'negative', issue)">
-          <img ng-if="issue.emotional_response !== 'negative'" src="img/reactions/sadface-inactive.svg" />
-          <img ng-if="issue.emotional_response === 'negative'" src="img/reactions/sadface-active.svg" />
-          <span ng-if="issue.negative_responses > 1 || issue.negative_responses" class="bold black">{{issue.negative_responses}}</span>
-        </div>
+     </div>
+
+     <div class="h-right" ng-if="!context.modal">
+        <p class="middle blue click"
+           ng-click="showModal()"
+           style="font-size: 15px;">Comments <i class="blue icon-reply margin-left-small" style="font-size:18px;"></i></p>
      </div>
 
    </div>
