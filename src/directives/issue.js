@@ -35,7 +35,7 @@ module.exports = function($location, issueService, facebook, $window, userServic
 
       if (attr.$attr.single) {
         scope.context.single = true;
-        if(attr.$attr.modal) {
+        if (attr.$attr.modal) {
           scope.context.modal = true;
         }
         scope.$watchCollection('issue', function(n, o) {
@@ -235,7 +235,7 @@ module.exports = function($location, issueService, facebook, $window, userServic
 
       scope.showModal = function() {
         scope.body = angular.element(document.body);
-        $compile('<issue-modal issue="issue"></issue-modal>')(scope, function(cloned, scope){
+        $compile('<issue-modal issue="issue"></issue-modal>')(scope, function(cloned, scope) {
           scope.body.append(cloned);
           scope.body.addClass('c-modal__body--active');
         });

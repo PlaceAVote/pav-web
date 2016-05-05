@@ -193,11 +193,11 @@ function CommentService($resource, userService, authService) {
     var body = {body: context.comment};
 
     if (context.type === 'bill') {
-       url = config.comments.comments + comment_id;
+      url = config.comments.comments + comment_id;
     }
 
     if (context.type === 'issue') {
-       url = config.users.issue.comments.comments + comment_id;
+      url = config.users.issue.comments.comments + comment_id;
     }
 
     config.methods.post.headers.Authorization = authService.getAccessToken();
@@ -224,11 +224,11 @@ function CommentService($resource, userService, authService) {
     var url;
 
     if (context.type === 'bill') {
-       url = config.comments.comments + comment_id;
+      url = config.comments.comments + comment_id;
     }
 
     if (context.type === 'issue') {
-       url = config.users.issue.comments.comments + comment_id;
+      url = config.users.issue.comments.comments + comment_id;
     }
 
     var onError = function(err) {

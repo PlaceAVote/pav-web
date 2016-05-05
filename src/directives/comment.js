@@ -33,8 +33,8 @@ module.exports = function($compile, commentService, $anchorScroll, $timeout, $lo
       });
 
       if (scope.comment.replies) {
-        $compile('<div class="comment-container comment-reply" ng-if="comment.showChildren"><comments comments="comment.replies"></comments></div>')(scope, function(cloned, scope){
-           element.append(cloned);
+        $compile('<div class="comment-container comment-reply" ng-if="comment.showChildren"><comments comments="comment.replies"></comments></div>')(scope, function(cloned, scope) {
+          element.append(cloned);
         });
 
 

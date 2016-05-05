@@ -8,7 +8,7 @@ var d = {
     return a;
   })(this),
   commentService: {
-    deleteComment: function(id, callback) {
+    deleteComment: function(id, context, callback) {
       return callback(undefined, true);
     },
     edit: function(id, body, callback) {
@@ -70,8 +70,8 @@ describe('Comment Directive', function() {
 
     scope.showDelete = true;
 
-  
-    scope.comment.replies = undefined;  
+
+    scope.comment.replies = undefined;
     var subject = new Comment(d.$compile, d.commentService, d.$anchorScroll, d.$timeout, d.$location, d.$window, d.userService);
     subject.link(scope, element, {}, {});
     scope.cancelDelete();
@@ -87,8 +87,8 @@ describe('Comment Directive', function() {
 
     scope.original = 'hey';
 
-  
-    scope.comment.replies = undefined;  
+
+    scope.comment.replies = undefined;
     var subject = new Comment(d.$compile, d.commentService, d.$anchorScroll, d.$timeout, d.$location, d.$window, d.userService);
     subject.link(scope, element, {}, {});
     scope.editComment();
@@ -104,8 +104,8 @@ describe('Comment Directive', function() {
 
     scope.showEditTools = true;
     scope.original = 'hey';
-  
-    scope.comment.replies = undefined;  
+
+    scope.comment.replies = undefined;
     var subject = new Comment(d.$compile, d.commentService, d.$anchorScroll, d.$timeout, d.$location, d.$window, d.userService);
     subject.link(scope, element, {}, {});
     scope.cancelEdit();
