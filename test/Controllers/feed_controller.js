@@ -179,7 +179,7 @@ describe("FeedController", function() {
         var mockSearchService = {
           bills: function(query, callback) {
             called = true;
-            callback();
+            callback(undefined, [{comment_count: 3}, {comment_count: 5}]);
           },
         };
         var subject = new FeedController({}, {}, new mockUserService(), new mockBillService(), new mockAuthService(), new mockFeedServiceEventsError(), {}, {}, mockSearchService);
@@ -191,7 +191,7 @@ describe("FeedController", function() {
         var mockSearchService = {
           bills: function(query, callback) {
             called = true;
-            callback();
+            callback(undefined, [{comment_count: 3}, {comment_count: 5}]);
           },
         };
         var subject = new FeedController({}, {}, new mockUserService(), new mockBillService(), new mockAuthService(), new mockFeedServiceEventsError(), {}, {}, mockSearchService);

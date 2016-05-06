@@ -16,6 +16,7 @@ FeedController = function($scope, $location, userService, billService, authServi
   this.timeout = $timeout;
   this.rs = $rootScope;
   this.rs.inApp = true;
+
   this.categories = {
     all: new SubFeedController({name: 'all', icon: 'icon-globe', title: 'All Activity', noun: 'everything'}),
     following: new SubFeedController({name: 'following', icon: 'icon-add', title: 'Following', noun: 'people'}),
@@ -103,6 +104,10 @@ FeedController.prototype.subCategoryClick = function(categoryName, subCategoryNa
     if (err) {
       return;
     }
+    // Sorts by comment count in DESC
+    results.sort(function(a, b) {
+      return b.comment_count - a.comment_count;
+    });
     that.selectedCategory.selectedCategory.update(results);
     that.itemsLoading = false;
   });
@@ -164,7 +169,7 @@ FeedController.prototype.getTrends = function() {
     if (!err) {
       that.trends = res;
       var mappedTrends = res.map(function(re) {
-        return new BillSummary(re);
+        return re;
       });
       that.categories.discovery.categories.trends.update(mappedTrends);
     }
