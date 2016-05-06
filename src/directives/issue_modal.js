@@ -43,6 +43,7 @@ module.exports = function($location, $timeout, issueService, $rootScope) {
               scope.location.path('/');
             }
           } else if (result) {
+            scope.issue.comment_count += 1;
             scope.commentMessage = false;
             scope.commentBody = undefined;
             scope.fetchComments();
