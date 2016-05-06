@@ -28,6 +28,7 @@ function Comment(options) {
   if (!options.body) {
     that.comment_deleted = true;
   }
+  that.comment_deleted = options.deleted;
 }
 
 Comment.prototype.bodyText = function(options) {
