@@ -59,10 +59,15 @@ module.exports = function($location, $timeout, issueService, $rootScope) {
         }, 2000);
       };
 
-      scope.fetchComments = function() {
+      scope.fetchComments = function(order) {
         if (scope.fetchingComments) {
           return;
         }
+
+        if (order) {
+          scope.commentOrder = order;
+        }
+
         scope.fetchingComments = true;
         scope.issueService.fetchComments(scope.issue.issue_id, scope.commentOrder, undefined, undefined, function(err, res) {
           scope.fetchingComments = false;

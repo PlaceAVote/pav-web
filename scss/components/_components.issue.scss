@@ -38,5 +38,8 @@
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
   border-bottom: 1px solid $widgetborder;
+  @include media($tablet) {
+    margin-bottom: 0;
+  }
 
 }
