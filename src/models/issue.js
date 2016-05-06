@@ -3,6 +3,7 @@ function Issue(options) {
     return this;
   }
   this.type = 'issue';
+  this.comment_count = options.comment_count;
   this.issue_id = options.issue_id;
   this.short_issue_id = options.short_issue_id;
   this.bill_id = options.bill_id;

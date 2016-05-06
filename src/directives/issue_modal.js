@@ -7,7 +7,6 @@ module.exports = function($location, $timeout, issueService, $rootScope) {
     },
     templateUrl: 'partials/issues/issue_modal.html',
     link: function(scope, el) {
-
       scope.issueService = issueService;
       scope.location = $location;
       scope.timeout = $timeout;
@@ -44,6 +43,7 @@ module.exports = function($location, $timeout, issueService, $rootScope) {
               scope.location.path('/');
             }
           } else if (result) {
+            scope.issue.comment_count += 1;
             scope.commentMessage = false;
             scope.commentBody = undefined;
             scope.fetchComments();
@@ -59,10 +59,15 @@ module.exports = function($location, $timeout, issueService, $rootScope) {
         }, 2000);
       };
 
-      scope.fetchComments = function() {
+      scope.fetchComments = function(order) {
         if (scope.fetchingComments) {
           return;
         }
+
+        if (order) {
+          scope.commentOrder = order;
+        }
+
         scope.fetchingComments = true;
         scope.issueService.fetchComments(scope.issue.issue_id, scope.commentOrder, undefined, undefined, function(err, res) {
           scope.fetchingComments = false;

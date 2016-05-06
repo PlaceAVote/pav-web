@@ -18,12 +18,9 @@
       <div class="red-bg" ng-show="errorMessage">
       <p class="white padding-small">{{errorMessage}}</p>
       </div>
-
       <div
       ng-if="comments.length > 0"
       class="c-card c-card--comment"
-      infinite-scroll="commentsCheck();"
-      infinite-scroll-distance="0.5"
       loader loader-context="fetchingComments"
       truthy
       ng-class="{'c-card--comment--loading': fetchingComments, 'c-comment--scroll-loader': checkingComments }">
@@ -34,12 +31,12 @@
             Sort By
             </li>
             <li
-            ng-click="commentOrder = 'highest-score'; fetchComments();"
+            ng-click="fetchComments('highest-score');"
             ng-class="{'c-comment__filter-selected': commentOrder === 'highest-score'}">
             Highest Rated
             </li>
             <li
-            ng-click="commentOrder = 'latest'; fetchComments();"
+            ng-click="fetchComments('latest');"
             ng-class="{'c-comment__filter-selected': commentOrder === 'latest'}">
             Most Recent
             </li>
@@ -51,7 +48,7 @@
         <hr />
 
         <comments ng-show="comments" comments='comments'></comments>
-
+        <button ng-click="commentsCheck()" ng-if="lastComment" class="c-button c-button--grey c-button--medium l-12">More comments</button>
       </div>
     </div>
 </div>
