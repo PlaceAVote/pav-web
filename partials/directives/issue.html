@@ -181,7 +181,7 @@
      <div class="h-right" ng-if="!context.modal">
         <p class="middle blue click"
            ng-click="showModal()"
-           style="font-size: 15px;">Comments <i class="blue icon-reply margin-left-small" style="font-size:18px;"></i></p>
+           style="font-size: 12px;line-height:21px;">Comments <span ng-if="issue.comment_count" class="bold" style="padding-left: 4px;">({{issue.comment_count}})</span> <i class="blue icon-reply margin-left-small" style="font-size:18px;"></i></p>
      </div>
 
    </div>

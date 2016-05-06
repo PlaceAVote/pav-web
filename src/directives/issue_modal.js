@@ -7,7 +7,6 @@ module.exports = function($location, $timeout, issueService, $rootScope) {
     },
     templateUrl: 'partials/issues/issue_modal.html',
     link: function(scope, el) {
-
       scope.issueService = issueService;
       scope.location = $location;
       scope.timeout = $timeout;
