@@ -116,9 +116,11 @@ var textarea = require('angular-elastic');
 var moment = require('angular-moment');
 var locationUpdate = require('./utils/location_update.js');
 
-var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'rzModule', 'ui.tree', 'monospaced.elastic', 'angularMoment', 'ngLocationUpdate']);
+var GoogleAnalytics = require('angular-google-analytics');
 
-app.config(['$routeProvider', '$locationProvider', '$compileProvider', function($routeProvider, $locationProvider, $compileProvider) {
+var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'rzModule', 'ui.tree', 'monospaced.elastic', 'angularMoment', 'ngLocationUpdate', 'angular-google-analytics']);
+
+app.config(['$routeProvider', '$locationProvider', '$compileProvider', 'AnalyticsProvider', function($routeProvider, $locationProvider, $compileProvider, AnalyticsProvider) {
 
   $routeProvider
   .when('/', {
@@ -207,6 +209,8 @@ app.config(['$routeProvider', '$locationProvider', '$compileProvider', function(
     .hashPrefix('!');
 
   $compileProvider.debugInfoEnabled(false);
+
+  AnalyticsProvider.setAccount('UA-48538409-1');
 
 },]);
 

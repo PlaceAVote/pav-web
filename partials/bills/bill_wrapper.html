@@ -85,6 +85,7 @@ Do you agree or disagree? Join the discussion and place your vote today!"></upda
         </li>
         <li class="c-side-menu__vote"
         ng-click="bill.userVote()"
+        ga-track-event="['vote']"
         ng-show="bill.hasVoted === false">
             <i class="icon-logo"></i>
             <p>I'm ready to vote!</p>
