@@ -208,13 +208,13 @@ app.config(['$routeProvider', '$locationProvider', '$compileProvider', 'Analytic
   $locationProvider
     .hashPrefix('!');
 
-  $compileProvider.debugInfoEnabled(true);
+  $compileProvider.debugInfoEnabled(false);
 
   AnalyticsProvider.setAccount('UA-48538409-1');
 
 },]);
 
-app.run(function(Analytics) {});
+app.run(['Analytics', function(Analytics) {}]);
 
 // Services
 app.factory('facebookService', Facebook);
