@@ -208,11 +208,13 @@ app.config(['$routeProvider', '$locationProvider', '$compileProvider', 'Analytic
   $locationProvider
     .hashPrefix('!');
 
-  $compileProvider.debugInfoEnabled(false);
+  $compileProvider.debugInfoEnabled(true);
 
   AnalyticsProvider.setAccount('UA-48538409-1');
 
 },]);
+
+app.run(function(Analytics) {});
 
 // Services
 app.factory('facebookService', Facebook);
@@ -248,9 +250,9 @@ MailService.$inject = ['$resource'];
 app.controller('TopicRegisterCtrl', RegisterController);
 RegisterController.$inject = ['$scope','$location', 'userService', '$rootScope'];
 app.controller('SignUpCtrl', SignUpController);
-SignUpController.$inject = ['$rootScope','$scope','$location', 'userService'];
+SignUpController.$inject = ['$rootScope','$scope','$location', 'userService', 'authService', 'Analytics'];
 app.controller('LoginCtrl', LoginController);
-LoginController.$inject = ['$scope','$location', 'userService', 'authService', '$rootScope', '$routeParams', 'passwordService', '$timeout'];
+LoginController.$inject = ['$scope','$location', 'userService', 'authService', '$rootScope', '$routeParams', 'passwordService', '$timeout', '$window', 'Analytics'];
 app.controller('FeedCtrl', FeedController);
 FeedController.$inject = ['$scope', '$location', 'userService', 'billService', 'authService', 'feedService', '$rootScope','$timeout', 'searchService'];
 app.controller('BillCtrl', BillController);

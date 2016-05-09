@@ -59,9 +59,15 @@
       {{comment.score}}
       </span>
 
-      <i class="icon-thumbs-up" ng-class="{'score-up': comment.liked == true}" ng-click="comment.like(commentService, context)"></i>
+      <i class="icon-thumbs-up"
+         ng-class="{'score-up': comment.liked == true}"
+         ng-click="comment.like(commentService, context)"
+         ga-track-event="['Comment', 'Up Vote']"></i>
 
-      <i class="icon-thumbs-down" ng-class="{'score-down': comment.disliked == true}" ng-click="comment.dislike(commentService, context)"></i>
+      <i class="icon-thumbs-down"
+         ng-class="{'score-down': comment.disliked == true}"
+         ng-click="comment.dislike(commentService, context)"
+         ga-track-event="['Comment', 'Down Vote']"></i>
 
       <span ng-if="context.type !== 'issue'" class="c-card__comment-reply-btn" ng-click="comment.showReplyInput()">reply</span>
 
@@ -94,7 +100,8 @@
                       c-button--medium
                       c-button--red"
 
-                ng-click="deleteComment();">
+                ng-click="deleteComment();"
+                ga-track-event="['Comment', 'Deleted']">
                           Delete Comment</button>
 
                 <button
@@ -128,7 +135,8 @@
                       c-button--medium
                       c-button--green"
 
-                ng-click="editComment();">Update</button>
+                ng-click="editComment();"
+                ga-track-event="['Comment', 'Edited']">Update</button>
 
                 <button
                 class="c-button
