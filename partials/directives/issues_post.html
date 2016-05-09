@@ -24,7 +24,8 @@
 
         <div class="row link-add-container" ng-if="issues.linkAdd">
           <form class="l-12" ng-submit="issues.validateUrl()">
-            <button class="link-add-button">Add Link</button>
+            <button class="link-add-button"
+                    ga-track-event="['Issue: Add Link']">Add Link</button>
             <input class="link-add" type="text" ng-model="issues.url" placeholder="Paste website link here" />
           </form>
         </div>
@@ -47,8 +48,14 @@
                 <i class="middle icon-bills"></i>
               </div>
           </div>
-            <h2 ng-show="!dirty" ng-click="showExample();" class="show-example-button red bold click">SHOW ME AN EXAMPLE</h2>
-            <button ng-show="dirty" class="green-button medium-button padding-left-large padding-right-large" ng-click="issues.postIssue();">POST</button>
+            <h2 ng-if="!dirty"
+                ng-click="showExample();"
+                ga-track-event="['Issue: Example']"
+                class="show-example-button red bold click">SHOW ME AN EXAMPLE</h2>
+            <button ng-show="dirty"
+                    class="green-button medium-button padding-left-large padding-right-large"
+                    ng-click="issues.postIssue();"
+                    ga-track-event="['Issue: Post']">POST</button>
         </div>
 
       </div>

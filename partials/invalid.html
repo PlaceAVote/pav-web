@@ -10,8 +10,12 @@
       <input class="input-text margin-bottom-medium padding-left-medium" ng-class="{'login-error': !login.user.passwordValid}" placeholder="Password" type="password" ng-model="invalid.user.password" >
       <p class="error-message small" ng-class="{'show': !invalid.user.passwordValid}">Password requires at least one digit and one capital letter.</p>
       <p class="error-message small" ng-class="{'show': invalid.emailUsed}">This email is already in use.</p>
-      <button class="signup-modal-button green-button margin-bottom-medium" ng-click="invalid.validate(invalid.user, '/onboarding')">Sign Up</button>
-      <button class="signup-modal-button blue-button" ng-click="invalid.loginWithFacebook()">Sign Up with Facebook</button>
+      <button class="signup-modal-button green-button margin-bottom-medium"
+              ng-click="invalid.validate(invalid.user, '/onboarding')"
+              ga-track-event="['Signup', 'Start: Popup: Email']">Sign Up</button>
+      <button class="signup-modal-button blue-button"
+              ng-click="invalid.loginWithFacebook()"
+              ga-track-event="['Signup', 'Start: Popup: Facebook']">Sign Up with Facebook</button>
     </div>
     <h1 class="text-center margin-top-large">Or <span ng-click="invalid.goTo('/login'); invalid.showNotRegisteredPartial = false;" class="bold click">Log In</span></h1>
   </div>

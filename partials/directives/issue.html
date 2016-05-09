@@ -85,7 +85,8 @@
                       c-button--medium
                       c-button--red"
 
-                ng-click="deleteIssue();">
+                ng-click="deleteIssue();"
+                ga-track-event="['Issue: Delete Issue']">
                           Delete Issue</button>
 
                 <button
@@ -152,24 +153,38 @@
 
      <div class="h-left row issue-share">
        <p class="medium middle">
-          <i class="icon-facebook click" ng-click="shareToFacebook()"></i>
+          <i class="icon-facebook click"
+             ng-click="shareToFacebook()"
+             ga-track-event="['Issue', 'Share: Facebook']"></i>
 
-          <a target="_blank" ng-href="https://twitter.com/intent/tweet?text={{getShareMessage()}}&url={{issueLocation}}" data-size="large">
+          <a target="_blank"
+            ng-href="https://twitter.com/intent/tweet?text={{getShareMessage()}}&url={{issueLocation}}"
+            data-size="large"
+            ga-track-event="['Issue', 'Share: Twitter']">
             <i class="icon-social-twitter"></i>
           </a>
        </p>
        <div class="margin-left-medium h-left reactions">
-         <div class="reaction click" ng-class="{'reaction-positive': issue.emotional_response === 'positive', 'reaction-active': issue.positive_responses > 0}" ng-click="eResponse(issue.issue_id, 'positive', issue)">
+         <div class="reaction click"
+              ng-class="{'reaction-positive': issue.emotional_response === 'positive', 'reaction-active': issue.positive_responses > 0}"
+              ng-click="eResponse(issue.issue_id, 'positive', issue)"
+              ga-track-event="['Issue', 'Reaction: Positive']">
            <img ng-if="issue.emotional_response !== 'positive'" src="img/reactions/smile-inactive.svg" />
            <img ng-if="issue.emotional_response === 'positive'" src="img/reactions/smile-active.svg" />
            <span ng-if="issue.positive_responses > 1 || issue.positive_responses" class="bold black">{{issue.positive_responses}}</span>
          </div>
-         <div class="reaction click" ng-class="{'reaction-neutral': issue.emotional_response === 'neutral', 'reaction-active': issue.neutral_responses > 0}" ng-click="eResponse(issue.issue_id, 'neutral', issue)">
+         <div class="reaction click"
+              ng-class="{'reaction-neutral': issue.emotional_response === 'neutral', 'reaction-active': issue.neutral_responses > 0}"
+              ng-click="eResponse(issue.issue_id, 'neutral', issue)"
+              ga-track-event="['Issue', 'Reaction: Neutral']">
            <img ng-if="issue.emotional_response !== 'neutral'" src="img/reactions/straightface-inactive.svg" />
            <img ng-if="issue.emotional_response === 'neutral'" src="img/reactions/straightface-active.svg" />
            <span ng-if="issue.neutral_responses > 1 || issue.neutral_responses" class="bold black">{{issue.neutral_responses}}</span>
          </div>
-         <div class="reaction click" ng-class="{'reaction-negative': issue.emotional_response === 'negative', 'reaction-active': issue.negative_responses > 0}" ng-click="eResponse(issue.issue_id, 'negative', issue)">
+         <div class="reaction click"
+              ng-class="{'reaction-negative': issue.emotional_response === 'negative', 'reaction-active': issue.negative_responses > 0}"
+              ng-click="eResponse(issue.issue_id, 'negative', issue)"
+              ga-track-event="['Issue', 'Reaction: Negative']">
            <img ng-if="issue.emotional_response !== 'negative'" src="img/reactions/sadface-inactive.svg" />
            <img ng-if="issue.emotional_response === 'negative'" src="img/reactions/sadface-active.svg" />
            <span ng-if="issue.negative_responses > 1 || issue.negative_responses" class="bold black">{{issue.negative_responses}}</span>
@@ -181,6 +196,7 @@
      <div class="h-right" ng-if="!context.modal">
         <p class="middle blue click"
            ng-click="showModal()"
+           ga-track-event="['Issue', 'Read Comments: Comment Total: ' + issue.comment_count]"
            style="font-size: 12px;line-height:21px;">Comments <span ng-if="issue.comment_count" class="bold" style="padding-left: 4px;">({{issue.comment_count}})</span> <i class="blue icon-reply margin-left-small" style="font-size:18px;"></i></p>
      </div>
 

@@ -116,9 +116,11 @@ var textarea = require('angular-elastic');
 var moment = require('angular-moment');
 var locationUpdate = require('./utils/location_update.js');
 
-var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'rzModule', 'ui.tree', 'monospaced.elastic', 'angularMoment', 'ngLocationUpdate']);
+var GoogleAnalytics = require('angular-google-analytics');
 
-app.config(['$routeProvider', '$locationProvider', '$compileProvider', function($routeProvider, $locationProvider, $compileProvider) {
+var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'rzModule', 'ui.tree', 'monospaced.elastic', 'angularMoment', 'ngLocationUpdate', 'angular-google-analytics']);
+
+app.config(['$routeProvider', '$locationProvider', '$compileProvider', 'AnalyticsProvider', function($routeProvider, $locationProvider, $compileProvider, AnalyticsProvider) {
 
   $routeProvider
   .when('/', {
@@ -206,9 +208,13 @@ app.config(['$routeProvider', '$locationProvider', '$compileProvider', function(
   $locationProvider
     .hashPrefix('!');
 
-  $compileProvider.debugInfoEnabled(false);
+  $compileProvider.debugInfoEnabled(true);
+
+  AnalyticsProvider.setAccount('UA-48538409-1');
 
 },]);
+
+app.run(function(Analytics) {});
 
 // Services
 app.factory('facebookService', Facebook);
@@ -244,9 +250,9 @@ MailService.$inject = ['$resource'];
 app.controller('TopicRegisterCtrl', RegisterController);
 RegisterController.$inject = ['$scope','$location', 'userService', '$rootScope'];
 app.controller('SignUpCtrl', SignUpController);
-SignUpController.$inject = ['$rootScope','$scope','$location', 'userService'];
+SignUpController.$inject = ['$rootScope','$scope','$location', 'userService', 'authService', 'Analytics'];
 app.controller('LoginCtrl', LoginController);
-LoginController.$inject = ['$scope','$location', 'userService', 'authService', '$rootScope', '$routeParams', 'passwordService', '$timeout'];
+LoginController.$inject = ['$scope','$location', 'userService', 'authService', '$rootScope', '$routeParams', 'passwordService', '$timeout', '$window', 'Analytics'];
 app.controller('FeedCtrl', FeedController);
 FeedController.$inject = ['$scope', '$location', 'userService', 'billService', 'authService', 'feedService', '$rootScope','$timeout', 'searchService'];
 app.controller('BillCtrl', BillController);

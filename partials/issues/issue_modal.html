@@ -12,7 +12,9 @@
         </div>
 
         <textarea rows="1" ng-model="commentBody" placeholder="Write your comment here" msd-elastic></textarea>
-        <button ng-click="postComment()" class="c-comment__post-btn btn-blank">Post</button>
+        <button ng-click="postComment()"
+                class="c-comment__post-btn btn-blank"
+                ga-track-event="['Issue: Commented']">Post</button>
       </div>
 
       <div class="red-bg" ng-show="errorMessage">
@@ -48,7 +50,10 @@
         <hr />
 
         <comments ng-show="comments" comments='comments'></comments>
-        <button ng-click="commentsCheck()" ng-if="lastComment" class="c-button c-button--grey c-button--medium l-12">More comments</button>
+        <button ng-click="commentsCheck()"
+                ng-if="lastComment"
+                class="c-button c-button--grey c-button--medium l-12"
+                ga-track-event="['Issue: Read More Comments']">More comments</button>
       </div>
     </div>
 </div>

@@ -1,11 +1,12 @@
 var countryCodes = require('../utils/countrycodes.json');
 
-function SignUpCtrl($rootScope, $scope, $location, userService, authService) {
+function SignUpCtrl($rootScope, $scope, $location, userService, authService, Analytics) {
   $scope = $scope || {};
   $scope.signup = this;
   this.loaded = true;
   this.userService = userService;
   this.location = $location;
+  this.analytics = Analytics;
   this.max = this.maxDate();
   var user = this.userService.getUser() || {};
   this.additionalInformation = {
@@ -76,11 +77,14 @@ SignUpCtrl.prototype.saveUser = function(user) {
     if (err) {
       if (err.status === 409) {
         that.user_exists_error = true;
+        that.analytics.trackEvent('Signup', 'Failed: already exists');
         return;
       }
+      that.analytics.trackEvent('Signup', 'Failed: Error: ' + err.status);
       that.error = true;
       return;
     }
+    that.analytics.trackEvent('Signup', 'Success');
     that.rs.notLoggedIn = false;
     that.rs.inApp = true;
     if (!user.img_url) {

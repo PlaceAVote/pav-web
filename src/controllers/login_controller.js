@@ -1,12 +1,13 @@
 var AuthorizeController = require('./autherize_controller.js');
 
-function LoginCtrl($scope, $location, userService, authService, $rootScope, $routeParams, passwordService, $timeout, doc) {
+function LoginCtrl($scope, $location, userService, authService, $rootScope, $routeParams, passwordService, $timeout, $window, Analytics) {
   AuthorizeController.authorize({success: '/feed', authorizer: authService, location: $location});
   $scope = $scope || {};
   this.loaded = true;
   this.rs = $rootScope;
   this.userService = userService;
   this.passwordService = passwordService;
+  this.analytics = Analytics;
   $scope.login = this;
   this.location = $location;
   this.forgot = false;
@@ -32,7 +33,7 @@ function LoginCtrl($scope, $location, userService, authService, $rootScope, $rou
 
   var that = this;
   that.showNotRegisteredPartial = false;
-  doc = doc || document;
+  var doc = $window.document || document;
   doc.body.addEventListener('not-valid', function() {
     that.showNotRegisteredPartial = true;
   });
@@ -62,6 +63,7 @@ LoginCtrl.prototype.loginWithFacebook = function() {
         that.showNotRegisteredPartial = false;
       }
       that.rs.facebookSignUp = true;
+      that.analytics.trackEvent('Signup', 'Onboarding: Facebook');
       return that.location.path('/onboarding');
     }
 
@@ -75,6 +77,7 @@ LoginCtrl.prototype.loginWithFacebook = function() {
         that.rs.inApp = true;
         that.rs.notLoggedIn = false;
         that.loaded = true;
+        that.analytics.trackEvent('Login', 'Facebook');
         that.location.path('/feed');
       }
     });
@@ -120,6 +123,7 @@ LoginCtrl.prototype.login = function(u, hash) {
     if (err) {
       that.loaded = true;
       that.loginInvalid = true;
+      that.analytics.trackEvent('Login Failed', 'Email: ' + validUser.email);
       return;
     }
     that.userService.getUserProfile('me', function(err, result) {
@@ -131,6 +135,7 @@ LoginCtrl.prototype.login = function(u, hash) {
       that.rs.user = result;
       that.rs.inApp = true;
       that.rs.notLoggedIn = false;
+      that.analytics.trackEvent('Login', 'Email');
       that.location.path('/feed');
     });
   });
@@ -164,8 +169,10 @@ LoginCtrl.prototype.passwordReset = function(email) {
       that.loaded = true;
       that.resetFailed = true;
       that.resetSuccess = false;
+      that.analytics.trackEvent('Password Reset', 'Fail: ' + email);
     }
     if (res) {
+      that.analytics.trackEvent('Password Reset', 'Success: ' + email);
       that.loaded = true;
       that.resetFailed = false;
       that.resetSuccess = true;
