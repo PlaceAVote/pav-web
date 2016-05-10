@@ -39,9 +39,9 @@ ng-show="bill.forComment.author"
             {{bill.forComment.score}}
             </span>
 
-            <i class="icon-thumbs-up" ng-class="{'score-up': bill.forComment.liked == true}" ng-click="bill.forComment.like(bill.commentService)"></i>
+            <i class="icon-thumbs-up" ng-class="{'score-up': bill.forComment.liked == true}" ng-click="bill.forComment.like(bill.commentService, {id: bill.body.billData.bill_id, type: 'bill'})"></i>
 
-            <i class="icon-thumbs-down" ng-class="{'score-down': bill.forComment.disliked == true}" ng-click="bill.forComment.dislike(bill.commentService)"></i>
+            <i class="icon-thumbs-down" ng-class="{'score-down': bill.forComment.disliked == true}" ng-click="bill.forComment.dislike(bill.commentService, {id: bill.body.billData.bill_id, type: 'bill'})"></i>
 
           </div>
 
@@ -88,9 +88,9 @@ ng-show="bill.forComment.author"
             {{bill.againstComment.score}}
             </span>
 
-            <i class="icon-thumbs-up" ng-class="{'score-up': bill.againstComment.liked == true}" ng-click="bill.againstComment.like(bill.commentService)"></i>
+            <i class="icon-thumbs-up" ng-class="{'score-up': bill.againstComment.liked == true}" ng-click="bill.againstComment.like(bill.commentService, {id: bill.body.billData.bill_id, type: 'bill'})"></i>
 
-            <i class="icon-thumbs-down" ng-class="{'score-down': bill.againstComment.disliked == true}" ng-click="bill.againstComment.dislike(bill.commentService)"></i>
+            <i class="icon-thumbs-down" ng-class="{'score-down': bill.againstComment.disliked == true}" ng-click="bill.againstComment.dislike(bill.commentService, {id: bill.body.billData.bill_id, type: 'bill'})"></i>
 
           </div>
 
