@@ -63,6 +63,17 @@ module.exports = {
       },
       withCredentials: false,
     },
+    reply: {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      withCredentials: false,
+      transformResponse: function(data, headers) {
+        return angular.fromJson(data);
+      },
+    },
     putNoBody: {
       method: 'PUT',
       transformResponse: [],

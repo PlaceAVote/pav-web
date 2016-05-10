@@ -41,8 +41,8 @@ function CommentService($resource, userService, authService) {
 
     postingReply = true;
 
-    config.methods.put.headers.Authorization = authService.getAccessToken();
-    var resource = new $resource(url, undefined, {reply: config.methods.put});
+    config.methods.reply.headers.Authorization = authService.getAccessToken();
+    var resource = new $resource(url, undefined, {reply: config.methods.reply});
     var onError = function(err) {
       postingReply = false;
       return callback(err);
