@@ -25,8 +25,8 @@ module.exports = function($location, facebook) {
           if ($location.$$host === 'placeavote.com') {
             rootHref = 'https://www.placeavote.com';
           }
-          scope.billLocationFacebook = rootHref + '/bill/' + scope.bill.bill_id;
-          scope.billLocation = encodeURIComponent(rootHref + '/bill/') + scope.bill.bill_id;
+          scope.billLocationFacebook = rootHref + '/#!/bill/' + scope.bill.bill_id;
+          scope.billLocation = encodeURIComponent(rootHref + '/#!/bill/') + scope.bill.bill_id;
         }
       });
 
