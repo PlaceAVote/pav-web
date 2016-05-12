@@ -206,7 +206,7 @@ app.config(['$routeProvider', '$locationProvider', '$compileProvider', 'Analytic
   });
 
   $locationProvider
-    .hashPrefix('!');
+    .html5Mode(true);
 
   $compileProvider.debugInfoEnabled(false);
 
