@@ -13,7 +13,7 @@ app.use(require('prerender-node').set('prerenderToken', prerenderToken).set('pro
 app.use('/', express.static(__dirname));
 
 app.all('/*', function(req, res) {
-  res.sendfile('index.html', { root: __dirname + '/' });
+  res.sendFile('index.html', { root: __dirname + '/' });
 });
 
 app.listen(port, function() {

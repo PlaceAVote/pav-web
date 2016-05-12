@@ -8,12 +8,12 @@
 
 @if $margins {
   $marginList: map-keys($margins);
-  $marginLength: length($marginList); 
+  $marginLength: length($marginList);
 }
 
 @if $padding {
   $paddingList: map-keys($padding);
-  $paddingLength: length($paddingList); 
+  $paddingLength: length($paddingList);
 }
 
 @if $grid {
@@ -43,7 +43,7 @@
         @content;
       }
   }
-  
+
   @if $mobileFirst == true {
     @media only screen and (min-width: $width) {
         @content;
@@ -90,7 +90,7 @@
       $mediaExtend: '%' + nth($viewportList, $i) + '-';
       $mediaName: '.' + nth($viewportList, $i) + '-';
       $mediaWidth: map-get($viewports, nth($viewportList, $i));
-      
+
       @include media($mediaWidth) {
 
         @include flex($mediaExtend);
@@ -99,7 +99,7 @@
         @if $margins {
           @include marginEngine($mediaName);
         }
-        
+
         @if $padding {
           @include paddingEngine($mediaName);
         }
@@ -119,7 +119,7 @@
         @if $orientationLayout {
           @include orientationLayoutEngine($mediaName, $mediaExtend);
         }
-      
+
       } //@include media
     }//@for loop
   }//@if $viewports
@@ -134,13 +134,13 @@
       margin-top: map-get($margins, $className);
       margin-right: map-get($margins, $className);
       margin-bottom: map-get($margins, $className);
-      margin-left: map-get($margins, $className);   
+      margin-left: map-get($margins, $className);
     }
     @for $n from 1 through length($directions) {
       $d: nth($directions, $n);
       #{$mediaName}margin-#{$d}-#{$className} {
         margin-#{$d}: map-get($margins, $className);
-      } 
+      }
     }
   }
 }
@@ -158,7 +158,7 @@
       $d: nth($directions, $n);
       #{$mediaName}padding-#{$d}-#{$className} {
         padding-#{$d}: map-get($padding, $className);
-      } 
+      }
     }
   }
 }
@@ -170,7 +170,7 @@
     @for $x from 1 through $columns {
       #{$mediaName}#{$name}-#{$x} {
           $col-width: 100/$columns*$x;
-          max-width:#{$col-width}#{%}; 
+          max-width:#{$col-width}#{%};
           flex-basis:#{$col-width}#{%};
           }
     }
@@ -193,7 +193,7 @@
       @if map-get($alignHorizontalChildren, $name) == 'right' {
         justify-content: flex-end;
         margin-left: auto;
-      }     
+      }
     }
   }
 }
@@ -226,9 +226,9 @@
       }
       @if map-get($alignVerticalChildren, $name) == 'bottom' {
         align-self: flex-end;
-      }     
+      }
     }
-  } 
+  }
 }
 
 @mixin flex($mediaExtend) {

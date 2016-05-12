@@ -1,59 +1,63 @@
 <div class="issue-card"
-     ng-hide="issueDeleted">
+     ng-if="issueDeleted !== true || issue">
   <div class="row event-description">
      <div class="profile-image-holder middle margin-right-small click" ng-click="issue.goToProfile(location)">
         <div ng-style="{'background-image': 'url(' + issue.author_img_url + ')'}">
         </div>
      </div>
      <div class="row mobile-col middle">
-      <p class="red click" ng-click="issue.goToProfile(location)">{{issue.author_first_name}} {{issue.author_last_name}} &nbsp;</p><p>shared an &nbsp;<i class="icon-issues blue"></i>&nbsp; Issue</p> 
+      <p class="red click" ng-click="issue.goToProfile(location)">{{issue.author_first_name}} {{issue.author_last_name}} &nbsp;</p><p>shared an &nbsp;<i class="icon-issues blue"></i>&nbsp; Issue</p>
      </div>
 
-     <span ng-hide="single" 
+     <span ng-if="!context.single"
             class="h-right middle blue timestamp click" ng-click="issue.goToIssue(location)"
-            ng-class="{'margin-right-large': edit}">
+            ng-class="{'margin-right-large': user.edit}">
             {{issue.timestamp | amCalendar}}
      </span>
 
-     <i class="c-card__menu-icon 
-              icon-arrow-down 
+     <i class="c-card__menu-icon
+              icon-arrow-down
               click"
-        ng-show="edit || edit && !single"
-        ng-click="editMenu = !editMenu"></i>
+        ng-if="!context.single && user.edit"
+        ng-click="user.editMenu = !user.editMenu"></i>
 
      <div class="c-card__menu"
-          ng-show="editMenu"
-          ng-mouseleave="editMenu = false">
+          ng-if="user.editMenu"
+          ng-mouseleave="user.editMenu = false">
 
        <div class="c-card__menu-arrow"></div>
 
        <ul>
           <li class="click"
-              ng-click="showEditTools = !showEditTools;
+              ng-click="user.showEditTools = !user.showEditTools;
                         editMenu = false">
               Edit Issue
           </li>
           <li class="click"
-              ng-click="showDelete = !showDelete;
+              ng-click="user.showDelete = !user.showDelete;
                         editMenu = false">
               Delete Issue
           </li>
         </ul>
      </div>
 
-     <div ng-show="single" class="h-right row">
-       <button ng-hide="profile.isMe() || profile.rs.notLoggedIn" ng-click="profile.follow()" class="click medium-button green-button h-right">{{follow}}</button>
+     <div ng-if="context.single && profile" class="h-right row">
+       <button ng-if="!context.isUserMe" ng-hide="profile.rs.notLoggedIn" ng-click="profile.follow()" class="click medium-button green-button h-right">{{follow}}</button>
        <i ng-click="profile.closeIssue()" class="margin-left-small icon-close middle grey click"></i>
+     </div>
+
+     <div ng-if="context.modal" class="h-right row">
+       <i ng-click="closeIssue()" class="margin-left-small icon-close middle red click"></i>
      </div>
 
    </div>
    <hr class="margin-top-small margin-bottom-small" />
    <div class="row margin-bottom-small" ng-if="issue.bill_id">
-    <p class="title">Talking About: <span ng-click="issue.goToBill(location)" class="bill-ref blue pale-bg margin-left-small mobile-margin-left-none mobile-margin-top-small medium click">{{issue.bill_title}}</span></p> 
+    <p class="title">Talking About: <span ng-click="issue.goToBill(location)" class="bill-ref blue pale-bg margin-left-small mobile-margin-left-none mobile-margin-top-small medium click">{{issue.bill_title}}</span></p>
    </div>
-   
-   <div ng-hide="showEditTools || showDelete" class="row issue-comment margin-bottom-small">
-   <p ng-bind="issue.comment"></p>
+
+   <div ng-if="user.showEditTools === false || user.showDelete === false" class="row issue-comment margin-bottom-small">
+     <p compile="issue.comment"></p>
    </div>
 
 
@@ -62,29 +66,30 @@
 
    <!-- Delete -->
 
-   <div ng-show="edit && showDelete" class="col" 
+   <div ng-if="user.edit && user.showDelete" class="col"
         loader
-        loader-context="deleteLoading" 
+        loader-context="deleteLoading"
         truthy>
 
           <p class="bold">
             Are you sure you want to delete this issue?
           </p>
 
-          <p style="font-style: italic;" ng-bind="issue.comment"></p>
+          <p style="font-style: italic;" compile="issue.comment_sanitized"></p>
 
-           <div class="row 
+           <div class="row
                        h-right
                        margin-top-small">
-                <button 
-                class="c-button 
-                      c-button--medium 
+                <button
+                class="c-button
+                      c-button--medium
                       c-button--red"
 
-                ng-click="deleteIssue();">
+                ng-click="deleteIssue();"
+                ga-track-event="['Issue: Delete Issue']">
                           Delete Issue</button>
 
-                <button 
+                <button
                 class="c-button
                        c-button--medium
                        c-button--grey
@@ -99,28 +104,28 @@
 
    <!-- Edit Tools -->
 
-   <div ng-show="edit && showEditTools" class="col" 
+   <div ng-if="user.edit && user.showEditTools" class="col"
         loader
-        loader-context="editLoading" 
+        loader-context="editLoading"
         truthy>
 
-         <textarea 
+         <textarea
           class="c-card__edit--textarea"
-          ng-model="issue.comment"
+          ng-model="issue.comment_sanitized"
           msd-elastic>
          </textarea>
 
-           <div class="row 
+           <div class="row
                        h-right
                        margin-top-small">
-                <button 
-                class="c-button 
-                      c-button--medium 
+                <button
+                class="c-button
+                      c-button--medium
                       c-button--green"
 
                 ng-click="editIssue();">Update</button>
 
-                <button 
+                <button
                 class="c-button
                        c-button--medium
                        c-button--grey
@@ -133,12 +138,12 @@
    </div>
 
 
-    <div ng-show="alertMessage.visible" class="c-card__response-message">
+    <div ng-if="alertMessage.visible" class="c-card__response-message">
       <p ng-class="{'red': !alertMessage.success, 'green': alertMessage.success}">{{alertMessage.message}}</p>
     </div>
 
    <a ng-if="issue.article_link" ng-href="{{issue.article_link}}" target="_blank" class="column issue-article padding-small margin-bottom-small" ng-style="{'background-image': 'url(' + issue.article_img + ')'}"
-   ng-class="{'margin-top-medium': showEditTools || showDelete}">
+   ng-class="{'margin-top-medium': user.showEditTools || user.showDelete}">
       <h2>{{issue.article_title}}</h2>
       <p>view link</p>
       <div class="backdrop"></div>
@@ -148,53 +153,52 @@
 
      <div class="h-left row issue-share">
        <p class="medium middle">
-          Share
-          <i class="icon-facebook click" ng-click="shareToFacebook()"></i>
+          <i class="icon-facebook click"
+             ng-click="shareToFacebook()"
+             ga-track-event="['Issue', 'Share: Facebook']"></i>
 
-          <a target="_blank" ng-href="https://twitter.com/intent/tweet?text={{getShareMessage()}}&url={{issueLocation}}" data-size="large">
-            <i class="icon-twitter"></i>
+          <a target="_blank"
+            ng-href="https://twitter.com/intent/tweet?text={{getShareMessage()}}&url={{issueLocation}}"
+            data-size="large"
+            ga-track-event="['Issue', 'Share: Twitter']">
+            <i class="icon-social-twitter"></i>
           </a>
        </p>
-     </div>
-<!-- reaction-label -->
-     <div class="reaction-label">
-        <p class="medium middle">What's your reaction?</p>
+       <div class="margin-left-medium h-left reactions">
+         <div class="reaction click"
+              ng-class="{'reaction-positive': issue.emotional_response === 'positive', 'reaction-active': issue.positive_responses > 0}"
+              ng-click="eResponse(issue.issue_id, 'positive', issue)"
+              ga-track-event="['Issue', 'Reaction: Positive']">
+           <img ng-if="issue.emotional_response !== 'positive'" src="img/reactions/smile-inactive.svg" />
+           <img ng-if="issue.emotional_response === 'positive'" src="img/reactions/smile-active.svg" />
+           <span ng-if="issue.positive_responses > 1 || issue.positive_responses" class="bold black">{{issue.positive_responses}}</span>
+         </div>
+         <div class="reaction click"
+              ng-class="{'reaction-neutral': issue.emotional_response === 'neutral', 'reaction-active': issue.neutral_responses > 0}"
+              ng-click="eResponse(issue.issue_id, 'neutral', issue)"
+              ga-track-event="['Issue', 'Reaction: Neutral']">
+           <img ng-if="issue.emotional_response !== 'neutral'" src="img/reactions/straightface-inactive.svg" />
+           <img ng-if="issue.emotional_response === 'neutral'" src="img/reactions/straightface-active.svg" />
+           <span ng-if="issue.neutral_responses > 1 || issue.neutral_responses" class="bold black">{{issue.neutral_responses}}</span>
+         </div>
+         <div class="reaction click"
+              ng-class="{'reaction-negative': issue.emotional_response === 'negative', 'reaction-active': issue.negative_responses > 0}"
+              ng-click="eResponse(issue.issue_id, 'negative', issue)"
+              ga-track-event="['Issue', 'Reaction: Negative']">
+           <img ng-if="issue.emotional_response !== 'negative'" src="img/reactions/sadface-inactive.svg" />
+           <img ng-if="issue.emotional_response === 'negative'" src="img/reactions/sadface-active.svg" />
+           <span ng-if="issue.negative_responses > 1 || issue.negative_responses" class="bold black">{{issue.negative_responses}}</span>
+         </div>
      </div>
 
-     <div class="h-right reactions" ng-hide="example">
-        <div class="reaction click" ng-class="{'reaction-positive': issue.emotional_response === 'positive', 'reaction-active': issue.positive_responses > 0}" ng-click="eResponse(issue.issue_id, 'positive', issue)">
-          <img ng-hide="issue.emotional_response === 'positive'" src="img/reactions/smile-inactive.svg" />
-          <img ng-show="issue.emotional_response === 'positive'" src="img/reactions/smile-active.svg" />
-          <span ng-hide="issue.positive_responses < 1 || !issue.positive_responses" class="bold black">{{issue.positive_responses}}</span>
-        </div>
-        <div class="reaction click" ng-class="{'reaction-neutral': issue.emotional_response === 'neutral', 'reaction-active': issue.neutral_responses > 0}" ng-click="eResponse(issue.issue_id, 'neutral', issue)">
-          <img ng-hide="issue.emotional_response === 'neutral'" src="img/reactions/straightface-inactive.svg" />
-          <img ng-show="issue.emotional_response === 'neutral'" src="img/reactions/straightface-active.svg" />
-          <span ng-hide="issue.neutral_responses < 1 || !issue.neutral_responses" class="bold black">{{issue.neutral_responses}}</span>
-        </div>
-        <div class="reaction click" ng-class="{'reaction-negative': issue.emotional_response === 'negative', 'reaction-active': issue.negative_responses > 0}" ng-click="eResponse(issue.issue_id, 'negative', issue)">
-          <img ng-hide="issue.emotional_response === 'negative'" src="img/reactions/sadface-inactive.svg" />
-          <img ng-show="issue.emotional_response === 'negative'" src="img/reactions/sadface-active.svg" />
-          <span ng-hide="issue.negative_responses < 1 || !issue.negative_responses" class="bold black">{{issue.negative_responses}}</span>
-        </div>
      </div>
 
-       <div class="h-right reactions" ng-show="example">
-        <div class="reaction click" ng-class="{'reaction-positive': issue.emotional_response === 'positive', 'reaction-active': issue.positive_responses > 0}">
-          <img ng-hide="issue.emotional_response === 'positive'" src="img/reactions/smile-inactive.svg" />
-          <img ng-show="issue.emotional_response === 'positive'" src="img/reactions/smile-active.svg" />
-          <span ng-hide="issue.positive_responses < 1 || !issue.positive_responses" class="bold black">{{issue.positive_responses}}</span>
-        </div>
-        <div class="reaction click" ng-class="{'reaction-neutral': issue.emotional_response === 'neutral', 'reaction-active': issue.neutral_responses > 0}">
-          <img ng-hide="issue.emotional_response === 'neutral'" src="img/reactions/straightface-inactive.svg" />
-          <img ng-show="issue.emotional_response === 'neutral'" src="img/reactions/straightface-active.svg" />
-          <span ng-hide="issue.neutral_responses < 1 || !issue.neutral_responses" class="bold black">{{issue.neutral_responses}}</span>
-        </div>
-        <div class="reaction click" ng-class="{'reaction-negative': issue.emotional_response === 'negative', 'reaction-active': issue.negative_responses > 0}">
-          <img ng-hide="issue.emotional_response === 'negative'" src="img/reactions/sadface-inactive.svg" />
-          <img ng-show="issue.emotional_response === 'negative'" src="img/reactions/sadface-active.svg" />
-          <span ng-hide="issue.negative_responses < 1 || !issue.negative_responses" class="bold black">{{issue.negative_responses}}</span>
-        </div>
+     <div class="h-right" ng-if="!context.modal">
+        <p class="middle blue click"
+           ng-click="showModal()"
+           ga-track-event="['Issue', 'Read Comments: Comment Total: ' + issue.comment_count]"
+           style="font-size: 12px;line-height:21px;">Comments <span ng-if="issue.comment_count" class="bold" style="padding-left: 4px;">({{issue.comment_count}})</span> <i class="blue icon-reply margin-left-small" style="font-size:18px;"></i></p>
      </div>
+
    </div>
 </div>

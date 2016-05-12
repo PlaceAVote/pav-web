@@ -1,4 +1,4 @@
-<div class="c-modal__wrapper" 
+<div class="c-modal__wrapper"
 ng-show="bill.showVoteModal"
 ng-class="{'c-modal__wrapper--active' : bill.showVoteModal}"
 ng-cloak>
@@ -24,11 +24,12 @@ ng-cloak>
 
             <div class="row tablet-col padding-large">
 
-              <button 
+              <button
               class="
               c-button c-button--large c-button--green
                l-6 m-12 margin-right-large tablet-margin-right-none"
-               ng-click="bill.voteOnBill(true)">
+               ng-click="bill.voteOnBill(true)"
+               ga-track-event="['Voted: In Favor', bill.body.billData.bill_id]">
               <span class="icon-arrow-up"></span>
               Vote In Favor
               </button>
@@ -36,7 +37,8 @@ ng-cloak>
               <button class="
               c-button c-button--large c-button--red m-12
               l-6 tablet-margin-top-large"
-              ng-click="bill.voteOnBill(false)">
+              ng-click="bill.voteOnBill(false)"
+              ga-track-event="['Voted: Against', bill.body.billData.bill_id]">
               <span class="icon-arrow-down"></span>
               Vote Against
               </button>
@@ -48,6 +50,3 @@ ng-cloak>
     </div>
 
 </div>
-
-
-

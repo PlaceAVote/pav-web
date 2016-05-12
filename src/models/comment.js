@@ -10,6 +10,7 @@ function Comment(options) {
   this.bodyText(options);
   this.has_children = options.has_children;
   this.bill_id = options.bill_id;
+  this.issue_id = options.issue_id;
   this.bill_title = options.bill_title;
   this.score = options.score;
   this.timestamp = options.timestamp;
@@ -27,6 +28,7 @@ function Comment(options) {
   if (!options.body) {
     that.comment_deleted = true;
   }
+  that.comment_deleted = options.deleted;
 }
 
 Comment.prototype.bodyText = function(options) {
@@ -34,12 +36,14 @@ Comment.prototype.bodyText = function(options) {
   var exp = /([a-z]+\:\/+)([^\/\s]*)([a-z0-9\-@\^=%&;\/~\+]*)[\?]?([^ \#]*)#?([^ \#]*)/ig;
   var scriptExp = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
   var objectExp = /<object\b[^<]*(?:(?!<\/object>)<[^<]*)*<\/object>/gi;
+  var regex = new RegExp(/\n/gi);
 
   if (options.body) {
+    options.body = options.body.replace(regex, ' <br /> ');
 
-    options.body = options.body.replace(scriptExp, '');
+    options.body = options.body.replace(scriptExp, ' ');
 
-    options.body = options.body.replace(objectExp, '');
+    options.body = options.body.replace(objectExp, ' ');
 
   }
 
@@ -57,6 +61,7 @@ Comment.prototype.bodyText = function(options) {
   for (var i = 0; i < this.links.length; i++) {
     options.body = options.body.replace(this.links[i].original, this.links[i].formatted);
   }
+
 
   this.body = options.body;
 };
@@ -105,7 +110,7 @@ Comment.prototype.hideReplyInput = function() {
   this.replyText = undefined;
 };
 
-Comment.prototype.reply = function(billId, service, timeout) {
+Comment.prototype.reply = function(context, service, timeout) {
   var that = this;
   var scriptExp = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
   var objectExp = /<object\b[^<]*(?:(?!<\/object>)<[^<]*)*<\/object>/gi;
@@ -116,7 +121,7 @@ Comment.prototype.reply = function(billId, service, timeout) {
     return;
   }
 
-  service.reply(this.replyText, billId, this.id, function(err, response) {
+  service.reply(this.replyText, context, this.id, function(err, response) {
     if (err) {
       that.replyFailed = true;
     } else if (response) {
@@ -135,11 +140,11 @@ Comment.prototype.commentError = function(message, timeout) {
   }, 2000);
 };
 
-Comment.prototype.like = function(service) {
+Comment.prototype.like = function(service, context) {
   var that = this;
   if (this.liked && !this.scoring) {
     that.scoring = true;
-    service.revoke(this.id, this.bill_id, 'like', function(err, response) {
+    service.revoke(this.id, context, 'like', function(err, response) {
       if (err) {
         that.likeFailed = true;
         that.scoring = false;
@@ -155,7 +160,7 @@ Comment.prototype.like = function(service) {
 
   if (this.disliked && !this.scoring) {
     that.scoring = true;
-    service.revoke(this.id, this.bill_id,'dislike', function(err, response) {
+    service.revoke(this.id, context, 'dislike', function(err, response) {
       if (err) {
         that.dislikeFailed = true;
         that.scoring = false;
@@ -170,7 +175,7 @@ Comment.prototype.like = function(service) {
 
   if (!this.liked && !this.scoring) {
     that.scoring = true;
-    service.like(this.id, this.bill_id, function(err, response) {
+    service.like(this.id, context, function(err, response) {
       that.scoring = false;
       if (err) {
         that.likeFailed = true;
@@ -186,12 +191,12 @@ Comment.prototype.like = function(service) {
 };
 
 
-Comment.prototype.dislike = function(service) {
+Comment.prototype.dislike = function(service, context) {
   var that = this;
 
   if (this.disliked && !this.scoring) {
     that.scoring = true;
-    service.revoke(this.id, this.bill_id,'dislike', function(err, response) {
+    service.revoke(this.id, context, 'dislike', function(err, response) {
       that.scoring = false;
       if (err) {
         that.dislikeFailed = true;
@@ -207,7 +212,7 @@ Comment.prototype.dislike = function(service) {
 
   if (this.liked && !this.scoring) {
     that.scoring = true;
-    service.revoke(this.id, this.bill_id, 'like', function(err, response) {
+    service.revoke(this.id, context, 'like', function(err, response) {
       that.scoring = false;
       if (err) {
         that.likeFailed = true;
@@ -222,7 +227,7 @@ Comment.prototype.dislike = function(service) {
 
   if (!this.disliked && !this.scoring) {
     that.scoring = true;
-    service.dislike(this.id, this.bill_id, function(err, response) {
+    service.dislike(this.id, context, function(err, response) {
       that.scoring = false;
       if (err) {
         that.dislikeFailed = true;
@@ -237,46 +242,3 @@ Comment.prototype.dislike = function(service) {
 };
 
 module.exports = Comment;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

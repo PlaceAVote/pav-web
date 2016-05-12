@@ -5,9 +5,9 @@ ng-show="bill.forComment.author"
 >
 
   <div class="l-6 m-12 margin-right-medium tablet-margin-right-none">
-  
 
-   <!-- Top Comment Card -->  
+
+   <!-- Top Comment Card -->
     <div class="c-card c-card--bill c-card--comment">
 
       <h1>Top Comment in Favor</h1>
@@ -24,8 +24,8 @@ ng-show="bill.forComment.author"
         </div>
 
         <div class="c-card__comment-body">
-          
-          <p class="c-card__username" 
+
+          <p class="c-card__username"
              ng-click="location.path('profile/' + bill.forComment.author)">
             {{bill.forComment.author_first_name}}
           </p>
@@ -39,9 +39,9 @@ ng-show="bill.forComment.author"
             {{bill.forComment.score}}
             </span>
 
-            <i class="icon-thumbs-up" ng-class="{'score-up': bill.forComment.liked == true}" ng-click="bill.forComment.like(bill.commentService)"></i>
+            <i class="icon-thumbs-up" ng-class="{'score-up': bill.forComment.liked == true}" ng-click="bill.forComment.like(bill.commentService, {id: bill.body.billData.bill_id, type: 'bill'})"></i>
 
-            <i class="icon-thumbs-down" ng-class="{'score-down': bill.forComment.disliked == true}" ng-click="bill.forComment.dislike(bill.commentService)"></i>
+            <i class="icon-thumbs-down" ng-class="{'score-down': bill.forComment.disliked == true}" ng-click="bill.forComment.dislike(bill.commentService, {id: bill.body.billData.bill_id, type: 'bill'})"></i>
 
           </div>
 
@@ -51,12 +51,12 @@ ng-show="bill.forComment.author"
 
     </div>
     <!-- Top Comment Card -->
-  
+
   </div>
 
   <div class="l-6 m-12">
-    
-   <!-- Top Comment Card -->  
+
+   <!-- Top Comment Card -->
     <div class="c-card c-card--bill c-card--comment">
 
       <h1>Top Comment Against</h1>
@@ -73,7 +73,7 @@ ng-show="bill.forComment.author"
         </div>
 
         <div class="c-card__comment-body">
-          
+
           <p class="c-card__username"
              ng-click="location.path('profile/' + bill.againstComment.author)">
             {{bill.againstComment.author_first_name}}
@@ -88,9 +88,9 @@ ng-show="bill.forComment.author"
             {{bill.againstComment.score}}
             </span>
 
-            <i class="icon-thumbs-up" ng-class="{'score-up': bill.againstComment.liked == true}" ng-click="bill.againstComment.like(bill.commentService)"></i>
+            <i class="icon-thumbs-up" ng-class="{'score-up': bill.againstComment.liked == true}" ng-click="bill.againstComment.like(bill.commentService, {id: bill.body.billData.bill_id, type: 'bill'})"></i>
 
-            <i class="icon-thumbs-down" ng-class="{'score-down': bill.againstComment.disliked == true}" ng-click="bill.againstComment.dislike(bill.commentService)"></i>
+            <i class="icon-thumbs-down" ng-class="{'score-down': bill.againstComment.disliked == true}" ng-click="bill.againstComment.dislike(bill.commentService, {id: bill.body.billData.bill_id, type: 'bill'})"></i>
 
           </div>
 
@@ -116,15 +116,18 @@ ng-show="bill.forComment.author"
     </div>
 
     <textarea name='commentOnBillBox' rows="1" ng-model='bill.commentBody' placeholder='Write your comment here' msd-elastic></textarea>
-    <button ng-click="bill.postComment()" class="c-comment__post-btn btn-blank">Post</button>
+    <button
+    ng-click="bill.postComment()"
+    class="c-comment__post-btn btn-blank"
+    ga-track-event="['Bill: Commented']">Post</button>
   </div>
 
   <div class="red-bg" ng-show="bill.errorMessage">
   <p class="white padding-small">{{bill.errorMessage}}</p>
   </div>
 
-  <div 
-  class="c-card c-card--comment" 
+  <div
+  class="c-card c-card--comment"
   infinite-scroll="bill.commentsCheck();"
   loader loader-context="bill.fetchingComments"
   truthy
@@ -135,12 +138,12 @@ ng-show="bill.forComment.author"
         <li>
         Filter
         </li>
-        <li 
+        <li
         ng-click="bill.commentOrder = 'highest-score'; bill.fetchComments();"
         ng-class="{'c-comment__filter-selected': bill.commentOrder === 'highest-score'}">
         Highest Rated
         </li>
-        <li 
+        <li
         ng-click="bill.commentOrder = 'latest'; bill.fetchComments();"
         ng-class="{'c-comment__filter-selected': bill.commentOrder === 'latest'}">
         Most Recent

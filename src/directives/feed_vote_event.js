@@ -2,9 +2,9 @@ module.exports = function($location) {
   return {
     retsrict: 'E',
     scope: {
-      vote: '=',
+      vote: '<',
     },
-    templateUrl: 'partials/directives/feed_vote_event.html',
+    templateUrl: 'partials/feed/feed_vote_event.html',
     link: function(scope) {
       scope.location = $location;
     },

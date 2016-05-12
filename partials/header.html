@@ -1,14 +1,22 @@
 <header ng-controller="HeaderCtrl as header" ng-show="header.rs.inApp">
 
 	<div class="row-header">
-  	<img ng-click="header.feedRefresh()" ng-class="{'header-focus':header.focus}" class="pav-icon" src="//cdn.placeavote.com/img/pav_icon.svg" />
+  	<img ng-click="header.feedRefresh()"
+				 ng-class="{'header-focus':header.focus}"
+				 class="pav-icon"
+				 src="//cdn.placeavote.com/img/pav_icon.svg"
+				 ga-track-event="['Header', 'Logo Click']" />
 
     <search-bar class="search" placeholder="Search bills or people..." ng-class="{'search-focus':header.focus}" results="header.searchResults" focus="header.focus" query="header.search(q)" searching="header.searching" people bills></search-bar>
 
 
     <div ng-show="header.rs.notLoggedIn" class="not-logged-in">
-      <button ng-click="header.signup()" class="medium-button green-button padding-left-small padding-right-small margin-right-small">SIGN UP</button>
-      <button ng-click="header.goTo('/login');" class="medium-button blue-button padding-left-small padding-right-small">LOGIN</button>
+      <button ng-click="header.signup()"
+							ga-track-event="['Signup', 'Start: Header']"
+							class="medium-button green-button padding-left-small padding-right-small margin-right-small">SIGN UP</button>
+      <button ng-click="header.goTo('/login');"
+							ga-track-event="['Login', 'Start: Header']"
+							class="medium-button blue-button padding-left-small padding-right-small">LOGIN</button>
     </div>
 
     <section class="notification row" ng-class="{'header-focus':header.focus}" ng-hide="header.rs.notLoggedIn">
@@ -29,7 +37,7 @@
            <div ng-click="header.dropDown()" class="profile-image-holder margin-right-small">
              <div ng-style="{'background-image': 'url(' + header.rs.user.img_url + ')'}">
              </div>
-           </div> 
+           </div>
            View Profile
           </li>
           <li ng-click="header.toSettings()">

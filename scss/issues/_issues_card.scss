@@ -201,7 +201,7 @@
 
 @include media(360px) {
   .reaction-label {
-    display: none;   
+    display: none;
   }
 }
 
@@ -210,8 +210,12 @@
     text-decoration: none;
   }
   i {
-    @include font-size(14px);
-    padding-left: 6px;
+    @include font-size(17px);
+    // padding-left: 6px;
     color: $grey;
+    &.icon-social-twitter {
+      @include font-size(18px);
+      padding-left: 8px;
+    }
   }
 }

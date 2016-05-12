@@ -16,6 +16,13 @@
         width: 100%;
         margin-bottom: 40px;
     }
+
+    .home-btns--footer {
+      align-items: center;
+      a {
+        margin-right: 0 !important;
+      }
+    }
     .intro a {
         &:nth-child(1) {
             margin-right: 20px;
@@ -273,7 +280,7 @@
                     max-width: 700px;
                 }
             }
-            
+
         }
     }
     .shoutout {
@@ -322,6 +329,9 @@
                 flex-direction: column;
                 padding: 0px 40px 40px 40px;
 
+            }
+            @include media(768px) {
+              padding: 0 0 40px 0 !important;
             }
             section {
                         width: calc(33% - 13px);
@@ -379,6 +389,9 @@
                     }
         .signup-container {
             width: 70%;
+            @include media(768px) {
+              width: 100%;
+            }
             position: absolute;
             margin: auto;
             left: 0;
@@ -399,6 +412,9 @@
                 color: $black;
                 @media screen and (max-device-width: 900px), screen and (max-width: 900px) {
                     line-height: 38px;
+                }
+                @include media(768px) {
+                  margin-bottom: 0;
                 }
             }
             a {

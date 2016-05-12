@@ -35,7 +35,7 @@ describe("Issues", function(){
   });
 
   it("Issue to have default article image url if not provided", function() {
-    var options = {};
+    var options = {comment: "Comment Body goes here"};
     var subject = new Issue(options);
     expect(subject.author_img_url).to.eql("//cdn.placeavote.com/img/profile/profile-picture.png");
   });

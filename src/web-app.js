@@ -66,7 +66,6 @@ var pavDirectives = require('./directives/directives.js');
 var websiteNav = require('./directives/website_nav.js');
 var commentsDirective = require('./directives/comments.js');
 var commentDirective = require('./directives/comment.js');
-var commentEventDirective = require('./directives/comment_event.js');
 var bannerDirective = require('./directives/banner.js');
 var timelineDirective = require('./directives/timeline.js');
 var timelineFollowingEventDirective = require('./directives/following_event.js');
@@ -105,6 +104,8 @@ var invalidDirective = require('./directives/invalid.js');
 var feedCommentEventDirective = require('./directives/feed_comment_event.js');
 var allActivityFeedDirective = require('./directives/all_activity_feed.js');
 var trendsActivityFeedDirective = require('./directives/trends_activity_feed.js');
+var cssScrollDirective = require('./directives/css_scroll.js');
+var issueModalDirective = require('./directives/issue_modal.js');
 
 // Thirdparty integrations
 var Facebook = require('./integrations/facebook.js');
@@ -115,9 +116,11 @@ var textarea = require('angular-elastic');
 var moment = require('angular-moment');
 var locationUpdate = require('./utils/location_update.js');
 
-var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'rzModule', 'ui.tree', 'monospaced.elastic', 'angularMoment', 'ngLocationUpdate']);
+var GoogleAnalytics = require('angular-google-analytics');
 
-app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'rzModule', 'ui.tree', 'monospaced.elastic', 'angularMoment', 'ngLocationUpdate', 'angular-google-analytics']);
+
+app.config(['$routeProvider', '$locationProvider', '$compileProvider', 'AnalyticsProvider', function($routeProvider, $locationProvider, $compileProvider, AnalyticsProvider) {
 
   $routeProvider
   .when('/', {
@@ -155,7 +158,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     controller: 'SignUpCtrl as signup',
   })
   .when('/feed', {
-    templateUrl: 'partials/feed.html',
+    templateUrl: 'partials/feed/feed.html',
     controller: 'FeedCtrl as feed',
   })
   .when('/bill/:id', {
@@ -204,45 +207,82 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 
   $locationProvider
     .html5Mode(true);
+
+  $compileProvider.debugInfoEnabled(false);
+
+  AnalyticsProvider.setAccount('UA-48538409-1');
+
 },]);
 
+app.run(['Analytics', function(Analytics) {}]);
+
 // Services
-app.factory('facebookService', [Facebook]);
-app.factory('twitterService', [Twitter]);
-app.factory('authService', ['$resource', AuthService]);
-app.factory('userService', ['$resource', 'facebookService', 'authService', UserService]);
-app.factory('billService', ['$resource', 'authService', 'userService', BillService]);
-app.factory('commentService', ['$resource', 'userService', 'authService', CommentService]);
-app.factory('legislationService', ['$resource', 'authService', LegislatorService]);
-app.factory('voteService', ['$resource', 'authService', 'userService', VoteService]);
-app.factory('notificationService', ['$resource', 'authService', NotificationService]);
-app.factory('searchService', ['$resource', 'authService', SearchService]);
-app.factory('passwordService', ['$resource', PasswordService]);
-app.factory('feedService', ['$resource', 'authService', 'userService', FeedService]);
-app.factory('issueService', ['$resource', 'authService', IssueService]);
-app.factory('questionService', ['$resource', 'authService', QuestionService]);
-app.factory('mailService', ['$resource', MailService]);
+app.factory('facebookService', Facebook);
+app.factory('twitterService', Twitter);
+app.factory('authService', AuthService);
+AuthService.$inject = ['$resource'];
+app.factory('userService', UserService);
+UserService.$inject = ['$resource', 'facebookService', 'authService'];
+app.factory('billService', BillService);
+BillService.$inject = ['$resource', 'authService', 'userService'];
+app.factory('commentService', CommentService);
+CommentService.$inject = ['$resource', 'userService', 'authService'];
+app.factory('legislationService', LegislatorService);
+LegislatorService.$inject = ['$resource', 'authService'];
+app.factory('voteService', VoteService);
+VoteService.$inject = ['$resource', 'authService', 'userService'];
+app.factory('notificationService', NotificationService);
+NotificationService.$inject = ['$resource', 'authService'];
+app.factory('searchService', SearchService);
+SearchService.$inject = ['$resource', 'authService'];
+app.factory('passwordService', PasswordService);
+PasswordService.$inject = ['$resource'];
+app.factory('feedService', FeedService);
+FeedService.$inject = ['$resource', 'authService', 'userService'];
+app.factory('issueService', IssueService);
+IssueService.$inject = ['$resource', 'authService'];
+app.factory('questionService', QuestionService);
+QuestionService.$inject = ['$resource', 'authService'];
+app.factory('mailService', MailService);
+MailService.$inject = ['$resource'];
 
 // Controllers
-app.controller('TopicRegisterCtrl',['$scope','$location', 'userService', '$rootScope', RegisterController]);
-app.controller('SignUpCtrl',['$rootScope','$scope','$location', 'userService', SignUpController]);
-app.controller('LoginCtrl',['$scope','$location', 'userService', 'authService', '$rootScope', '$routeParams', 'passwordService', '$timeout', LoginController]);
-app.controller('FeedCtrl', ['$scope', '$location', 'userService', 'billService', 'authService', 'feedService', '$rootScope','$timeout', 'searchService', FeedController]);
-app.controller('BillCtrl', ['$scope', '$routeParams', 'billService', 'legislationService', 'voteService', 'commentService', '$location', 'authService', '$rootScope', '$timeout', 'facebookService', '$route', BillController]);
-app.controller('HeaderCtrl', ['$rootScope', '$scope', '$location', '$timeout', 'authService', 'userService', 'notificationService', 'searchService', '$window', '$route', HeaderController]);
-app.controller('ProfileCtrl', ['$scope', '$location', '$routeParams', 'authService', 'userService','issueService', '$rootScope', ProfileController]);
-app.controller('SettingsCtrl', ['$scope', '$location', '$timeout', 'userService', 'authService', '$rootScope','$anchorScroll', SettingsController]);
-app.controller('PasswordResetCtrl', ['$scope','$location','$routeParams','passwordService','authService', PasswordController]);
-app.controller('IssuesCtrl', ['$scope', '$rootScope', 'searchService', '$timeout', 'issueService', IssuesController]);
-app.controller('WizardCtrl', ['$scope', 'questionService','$rootScope', WizardController]);
+app.controller('TopicRegisterCtrl', RegisterController);
+RegisterController.$inject = ['$scope','$location', 'userService', '$rootScope'];
+app.controller('SignUpCtrl', SignUpController);
+SignUpController.$inject = ['$rootScope','$scope','$location', 'userService', 'authService', 'Analytics'];
+app.controller('LoginCtrl', LoginController);
+LoginController.$inject = ['$scope','$location', 'userService', 'authService', '$rootScope', '$routeParams', 'passwordService', '$timeout', '$window', 'Analytics'];
+app.controller('FeedCtrl', FeedController);
+FeedController.$inject = ['$scope', '$location', 'userService', 'billService', 'authService', 'feedService', '$rootScope','$timeout', 'searchService'];
+app.controller('BillCtrl', BillController);
+BillController.$inject = ['$scope', '$routeParams', 'billService', 'legislationService', 'voteService', 'commentService', '$location', 'authService', '$rootScope', '$timeout', 'facebookService', '$route'];
+app.controller('HeaderCtrl', HeaderController);
+HeaderController.$inject = ['$rootScope', '$scope', '$location', '$timeout', 'authService', 'userService', 'notificationService', 'searchService', '$window', '$route'];
+app.controller('ProfileCtrl', ProfileController);
+ProfileController.$inject = ['$scope', '$location', '$routeParams', 'authService', 'userService','issueService', '$rootScope'];
+app.controller('SettingsCtrl', SettingsController);
+SettingsController.$inject = ['$scope', '$location', '$timeout', 'userService', 'authService', '$rootScope','$anchorScroll'];
+app.controller('PasswordResetCtrl', PasswordController);
+PasswordController.$inject = ['$scope','$location','$routeParams','passwordService', 'authService'];
+app.controller('IssuesCtrl', IssuesController);
+IssuesController.$inject = ['$scope', '$rootScope', 'searchService', '$timeout', 'issueService'];
+app.controller('WizardCtrl', WizardController);
+WizardController.$inject = ['$scope', 'questionService','$rootScope'];
 
 // Web controllers
-app.controller('HomeCtrl', ['$scope', '$location','$anchorScroll', 'userService', '$rootScope', 'authService', HomeController]);
-app.controller('FaqCtrl', ['$scope', '$location', FaqController]);
-app.controller('TeamCtrl', ['$scope', '$location', TeamController]);
-app.controller('PressCtrl', ['$scope', '$location', PressController]);
-app.controller('MenuCtrl', ['$scope', '$location', '$routeParams', MenuController]);
-app.controller('ContactCtrl', ['$scope', '$timeout', 'mailService', ContactController]);
+app.controller('HomeCtrl', HomeController);
+HomeController.$inject = ['$scope', '$location','$anchorScroll', 'userService', '$rootScope', 'authService'];
+app.controller('FaqCtrl', FaqController);
+FaqController.$inject = ['$scope', '$location'];
+app.controller('TeamCtrl', TeamController);
+TeamController.$inject = ['$scope', '$location'];
+app.controller('PressCtrl', PressController);
+PressController.$inject = ['$scope', '$location'];
+app.controller('MenuCtrl', MenuController);
+MenuController.$inject = ['$scope', '$location', '$routeParams'];
+app.controller('ContactCtrl', ContactController);
+ContactController.$inject = ['$scope', '$timeout', 'mailService'];
 
 // Values
 app.value('THROTTLE_MILLISECONDS', null);
@@ -250,45 +290,74 @@ app.value('THROTTLE_MILLISECONDS', null);
 // Directives
 app.directive('websiteNav', [websiteNav]);
 app.directive('headerNav', [headerNav]);
-app.directive('mailcheck', ['$compile','$sce', mailcheck]);
-app.directive('comment', ['$compile', 'commentService', '$anchorScroll', '$timeout', '$location', '$window', 'userService', commentDirective]);
-app.directive('commentEvent', ['$compile', 'commentService', '$timeout','$location', commentEventDirective]);
+app.directive('mailcheck', mailcheck);
+mailcheck.$inject = ['$compile','$sce'];
+app.directive('comment', commentDirective);
+commentDirective.$inject = ['$compile', 'commentService', '$anchorScroll', '$timeout', '$location', '$window', 'userService'];
 app.directive('comments', [commentsDirective]);
 app.directive('banner', [bannerDirective]);
-app.directive('timeline', ['$location', timelineDirective]);
-app.directive('following', ['$location', timelineFollowingEventDirective]);
-app.directive('followed', ['$location', timelineFollowedEventDirective]);
-app.directive('vote', ['$location', voteEventDirective]);
-app.directive('notifications', ['$location', notificationsDirective]);
-app.directive('commentreply', ['$location', commentReplyNotificationDirective]);
-app.directive('trends', ['$location',trendsDirective]);
+app.directive('timeline', timelineDirective);
+timelineDirective.$inject = ['$location'];
+app.directive('following', timelineFollowingEventDirective);
+timelineFollowingEventDirective.$inject = ['$location'];
+app.directive('followed', timelineFollowedEventDirective);
+timelineFollowedEventDirective.$inject = ['$location'];
+app.directive('vote', voteEventDirective);
+voteEventDirective.$inject = ['$location'];
+app.directive('notifications', notificationsDirective);
+notificationsDirective.$inject = ['$location'];
+app.directive('commentreply', commentReplyNotificationDirective);
+commentReplyNotificationDirective.$inject = ['$location'];
+app.directive('trends', trendsDirective);
+trendsDirective.$inject = ['$location'];
 app.directive('websiteFooter', [websiteFooter]);
-app.directive('searchBar', ['$sce' ,'$location', search]);
+app.directive('searchBar', search);
+search.$inject = ['$sce' ,'$location'];
 app.directive('termsAndConditions', [termsAndConditionsDirective]);
 app.directive('issuesPost', [issuesPostDirective]);
-app.directive('issue', ['$location', 'issueService', 'facebookService', '$window', 'userService', '$timeout', issueDirective]);
+app.directive('issue', issueDirective);
+issueDirective.$inject = ['$location', 'issueService', 'facebookService', '$window', 'userService', '$timeout', '$compile'];
 app.directive('wizard', [wizardDirective]);
-app.directive('slider', ['$timeout', sliderDirective]);
+app.directive('slider', sliderDirective);
+sliderDirective.$inject = ['$timeout'];
 app.directive('dad', [dragAndDropDirective]);
-app.directive('tax', ['$filter', '$location','$anchorScroll',taxMultiDirective]);
+app.directive('tax', taxMultiDirective);
+taxMultiDirective.$inject = ['$filter', '$location','$anchorScroll'];
 app.directive('imageCrop', [imageCropDirective]);
 app.directive('fileread', [fileReadDirective]);
-app.directive('loader', ['$location', preloaderDirective]);
+app.directive('loader', preloaderDirective);
+preloaderDirective.$inject = ['$location'];
 app.directive('feedEvents', [feedEventsDirective]);
 app.directive('invalid', [invalidDirective]);
-app.directive('feedBillEvent', ['$location', 'facebookService', feedBillEventDirective]);
-app.directive('infiniteScroll', ['$rootScope', '$window', '$interval', 'THROTTLE_MILLISECONDS', infiniteScroll]);
-app.directive('billSummary', ['$location', billSummaryDirective]);
-app.directive('billInfo', ['$location', billInfoDirective]);
-app.directive('billComments', ['$location', billCommentsDirective]);
-app.directive('billStatistics', ['$location', billStatisticsDirective]);
-app.directive('billStatus', ['$location', billStatusDirective]);
-app.directive('voteModal', ['$location', voteModalDirective]);
-app.directive('voteConfirmed', ['$location', voteConfirmedDirective]);
+app.directive('feedBillEvent', feedBillEventDirective);
+feedBillEventDirective.$inject = ['$location', 'facebookService'];
+app.directive('infiniteScroll', infiniteScroll);
+infiniteScroll.$inject = ['$rootScope', '$window', '$interval', 'THROTTLE_MILLISECONDS'];
+app.directive('billSummary', billSummaryDirective);
+billSummaryDirective.$inject = ['$location'];
+app.directive('billInfo', billInfoDirective);
+billInfoDirective.$inject = ['$location'];
+app.directive('billComments', billCommentsDirective);
+billCommentsDirective.$inject = ['$location'];
+app.directive('billStatistics', billStatisticsDirective);
+billStatisticsDirective.$inject = ['$location'];
+app.directive('billStatus', billStatusDirective);
+billStatusDirective.$inject = ['$location'];
+app.directive('voteModal', voteModalDirective);
+voteModalDirective.$inject = ['$location'];
+app.directive('voteConfirmed', voteConfirmedDirective);
+voteConfirmedDirective.$inject = ['$location'];
 app.directive('imageSmart', [imageSmartDirective]);
-app.directive('updateMeta', ['$log', updateMetaDirective]);
-app.directive('compile', ['$compile', '$window', '$sce', '$sanitize', compileDirective]);
-app.directive('feedVoteEvent', ['$location', feedVoteEventDirective]);
-app.directive('feedCommentEvent', ['$location', feedCommentEventDirective]);
+app.directive('updateMeta', updateMetaDirective);
+updateMetaDirective.$inject = ['$log'];
+app.directive('compile', compileDirective);
+compileDirective.$inject = ['$compile', '$window', '$sce', '$sanitize'];
+app.directive('feedVoteEvent', feedVoteEventDirective);
+feedVoteEventDirective.$inject = ['$location'];
+app.directive('feedCommentEvent', feedCommentEventDirective);
+feedCommentEventDirective.$inject = ['$location'];
 app.directive('allactivityfeed', [allActivityFeedDirective]);
 app.directive('trendsactivityfeed', [trendsActivityFeedDirective]);
+app.directive('cssScroll', [cssScrollDirective]);
+app.directive('issueModal', issueModalDirective);
+issueModalDirective.$inject = ['$location', '$timeout', 'issueService', '$rootScope'];

@@ -1,19 +1,17 @@
-<div class="data-trends">
-<div loader loader-context="refresh" truthy></div>
-<div class="data-trending" ng-repeat="trend in data">
-<div class="row">
-<div class="feed-icon">
-	<i class="{{trend.icon}}"></i>
+<div class="c-trends__content">
+	<div loader loader-context="refresh" truthy></div>
+	<div class="c-trends__data" ng-repeat="trend in data">
+		<div class="row">
+			<div class="feed-icon">
+				<i class="{{trend.icon}}"></i>
+			</div>
+			<div>
+			<h3 ng-click="trend.goToPage(location, this.bill_id)">
+			  {{trend.trendTitle}}
+			</h3>
+			<p ng-click="trend.goToPage(location, this.bill_id)"><span>{{trend.comment_count}}</span> comments / <span>{{trend.majorityVote().percent}}</span> Vote {{trend.majorityVote().majority}}</p>
+			</div>
+		</div>
+		<hr class="margin-bottom-small margin-top-small" />
+	</div>
 </div>
-<div>
-<h3 ng-click="trend.goToPage(location, this.bill_id)">
-  {{trend.trendTitle}}
-</h3>
-<p ng-click="trend.goToPage(location, this.bill_id)"><span>{{trend.comment_count}}</span> comments / <span>{{trend.majorityVote().percent}}</span> Vote {{trend.majorityVote().majority}}</p>
-</div>
-</div>
-<hr class="margin-bottom-small margin-top-small" />
-</div>
-</div>
-
-

@@ -1,21 +1,20 @@
 var tweet = require('../models/tweet.js');
+var Issue = require('../models/issue.js');
 
-module.exports = function($location, issueService, facebook, $window, userService, $timeout) {
+module.exports = function($location, issueService, facebook, $window, userService, $timeout, $compile) {
   return {
     restrict: 'E',
     scope: {
-      issue: '=',
-      example: '=',
+      issue: '<',
+      example: '<',
       closable: '&',
-      follow: '=',
-      profile: '=',
+      follow: '<',
+      profile: '<',
     },
     templateUrl: 'partials/directives/issue.html',
     link: function(scope, el, attr, controller) {
-
-      if (attr.$attr.single) {
-        scope.single = true;
-      }
+      var that = this;
+      scope.context = {};
 
       scope.location = $location;
 
@@ -25,12 +24,29 @@ module.exports = function($location, issueService, facebook, $window, userServic
 
       scope.timeout = $timeout;
 
+      scope.user = {};
 
       if (scope.issue) {
-        scope.original = scope.issue.comment;
-        scope.edit = scope.userService.isUserMe(scope.issue.user_id);
+        scope.original = scope.issue.comment_sanitized;
+        scope.user.edit = scope.userService.isUserMe(scope.issue.user_id);
+        scope.user.showEditTools = false;
+        scope.user.showDeleteTools = false;
       }
 
+      if (attr.$attr.single) {
+        scope.context.single = true;
+        if (attr.$attr.modal) {
+          scope.context.modal = true;
+        }
+        scope.$watchCollection('issue', function(n, o) {
+          if (n) {
+            scope.context.isUserMe = scope.userService.isUserMe(scope.issue.user_id);
+            scope.original = scope.issue.comment_sanitized;
+            scope.user.showEditTools = false;
+            scope.user.showDeleteTools = false;
+          }
+        });
+      }
 
       scope.eResponse = function(id, emo, issue) {
 
@@ -133,15 +149,15 @@ module.exports = function($location, issueService, facebook, $window, userServic
       // Issue Editing
 
       scope.cancelIssue = function() {
-        scope.issue.comment = scope.original;
-        scope.showEditTools = false;
+        scope.issue.comment_sanitized = scope.original;
+        scope.user.showEditTools = false;
       };
 
       scope.editIssue = function() {
 
-        var body = {comment: scope.issue.comment};
+        var body = {comment: scope.issue.comment_sanitized};
 
-        if (scope.editLoading || scope.original === scope.issue.comment) {
+        if (scope.editLoading || scope.original === scope.issue.comment_sanitized) {
           return;
         }
 
@@ -155,8 +171,10 @@ module.exports = function($location, issueService, facebook, $window, userServic
           }
 
           if (res) {
-            scope.showEditTools = false;
-            scope.original = res.comment;
+            res = new Issue(res);
+            scope.user.showEditTools = false;
+            scope.issue.comment_sanitized = res.comment_sanitized;
+            scope.issue.comment = res.comment;
             scope.setAlertMessage('Your message has been edited', true);
           }
 
@@ -166,7 +184,7 @@ module.exports = function($location, issueService, facebook, $window, userServic
 
 
       scope.cancelDelete = function() {
-        scope.showDelete = false;
+        scope.user.showDelete = false;
       };
 
 
@@ -180,7 +198,7 @@ module.exports = function($location, issueService, facebook, $window, userServic
 
         scope.issueService.deleteIssue(scope.issue.issue_id, function(err, res) {
           scope.deleteLoading = false;
-          scope.showDelete = false;
+          scope.user.showDelete = false;
 
           if (err) {
             scope.setAlertMessage('There was a problem deleting your issue', false);
@@ -212,6 +230,22 @@ module.exports = function($location, issueService, facebook, $window, userServic
         }, 3000);
       };
 
+
+      // Issues Modal and Comments
+
+      scope.showModal = function() {
+        scope.body = angular.element(document.body);
+        $compile('<issue-modal issue="issue"></issue-modal>')(scope, function(cloned, scope) {
+          scope.body.append(cloned);
+          scope.body.addClass('c-modal__body--active');
+        });
+      };
+
+      scope.closeIssue = function() {
+        scope.body = angular.element(document.body);
+        scope.body.removeClass('c-modal__body--active');
+        el[0].offsetParent.offsetParent.offsetParent.remove();
+      };
 
     },
   };

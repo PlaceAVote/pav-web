@@ -6,7 +6,7 @@
      ng-show="bill.featured_img_link"></div>
 
     <div class="click c-card__content"
-         ng-click="bill.goToPage(location)"> 
+         ng-click="bill.goToPage(location)">
 
       <h1 ng-click="bill.goToPage(location)">{{bill.subject}}</h1>
       <h1 class="c-card__content_bill-id" ng-click="bill.goToPage(location)">{{bill.bill_id_short}}</h1>
@@ -22,14 +22,14 @@
       <p>
        <span class="bold">{{bill.comment_count}}</span> comments
        &nbsp;
-       <span ng-hide="bill.noVotes"><span class="bold">{{bill.majorityVote().percent}}</span> Vote {{bill.majorityVote().majority}}</span><span ng-show="bill.noVotes">No votes</span>     
+       <span ng-if="!bill.noVotes"><span class="bold">{{bill.majorityVote().percent}}</span> Vote {{bill.majorityVote().majority}}</span><span ng-show="bill.noVotes">No votes</span>
       </p>
 
       <div class="c-feed__social">
           <i class="icon-facebook click" ng-click="shareToFacebook()"></i>
 
           <a target="_blank" ng-href="https://twitter.com/intent/tweet?text={{getShareMessage()}}&url={{billLocation}}" data-size="large">
-          <i class="icon-twitter"></i>
+          <i class="icon-social-twitter"></i>
           </a>
       </div>
     </div>

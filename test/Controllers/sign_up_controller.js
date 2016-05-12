@@ -19,9 +19,13 @@ describe("SignUpController", function(){
     }
   }
 
+  var Analytics = {
+    trackEvent: function() {return;}
+  };
+
 	it("has a user object", function(){
     var mockUS = new mockUserService();
-    var subject = new SignUpController(rs, undefined, undefined, mockUS);
+    var subject = new SignUpController(rs, undefined, undefined, mockUS, {}, Analytics);
     var blankUser = {
       first_name : "",
       last_name : "",
@@ -34,21 +38,21 @@ describe("SignUpController", function(){
 
 	it("returns zip to false if is missing", function(){
     var mockUS = new mockUserService();
-    var subject = new SignUpController(rs, undefined, undefined, mockUS);
+    var subject = new SignUpController(rs, undefined, undefined, mockUS, {}, Analytics);
     var result = subject.zipFormat();
     expect(result).to.eql(false);
   });
 
 	it("returns zip to true if is in correct format", function(){
     var mockUS = new mockUserService();
-    var subject = new SignUpController(rs, undefined, undefined, mockUS);
+    var subject = new SignUpController(rs, undefined, undefined, mockUS, {}, Analytics);
     var result = subject.zipFormat('90210');
     expect(result).to.eql(true);
   });
 
 	it("returns zip to true if is in incorrect format", function(){
     var mockUS = new mockUserService();
-    var subject = new SignUpController(rs, undefined, undefined, mockUS);
+    var subject = new SignUpController(rs, undefined, undefined, mockUS, {}, Analytics);
     var result = subject.zipFormat('cat stevens');
     expect(result).to.eql(false);
   });
@@ -74,7 +78,7 @@ describe("SignUpController", function(){
       }
     }
     var mockUS = new mockUserService();
-    var subject = new SignUpController(rs, undefined, undefined, mockUS);
+    var subject = new SignUpController(rs, undefined, undefined, mockUS, {}, Analytics);
     subject.additionalInformation.zipcode = '90210';
     subject.signup();
   });
@@ -93,7 +97,7 @@ describe("SignUpController", function(){
             };
         }
         var mockUS = new mockUserService();
-        var subject = new SignUpController(rs, undefined, undefined, mockUS);
+        var subject = new SignUpController(rs, undefined, undefined, mockUS, {}, Analytics);
         expect(subject.additionalInformation.first_name).to.eql("paul");
         expect(subject.additionalInformation.last_name).to.eql("barber");
         expect(subject.additionalInformation.dob).to.eql(new Date("04/01/1990"));
@@ -124,7 +128,7 @@ describe("SignUpController", function(){
       };
       var l = new location();
       var mockUS = new mockUserService();
-      var subject = new SignUpController(rs, undefined, l, mockUS);
+      var subject = new SignUpController(rs, undefined, l, mockUS, {}, Analytics);
       subject.additionalInformation.zipcode = '90210';
       subject.signup();
     });
@@ -156,7 +160,7 @@ describe("SignUpController", function(){
       };
       var l = new location();
       var mockUS = new mockUserService();
-      var subject = new SignUpController(rs, undefined, l, mockUS);
+      var subject = new SignUpController(rs, undefined, l, mockUS, {}, Analytics);
       subject.signup();
       expect(called).to.eql(false);
     });

@@ -6,6 +6,40 @@
 * Issues are present on the feed.
 */
 
+.c-issue__comments-wrapper {
+  width: 100%;
+}
 
 
+.c-issue--modal {
+  overflow-y: scroll;
+  height: 100vh;
+  @include media($tablet) {
+    z-index: 99999;
+    background: white;
+  }
+}
 
+.c-issue--modal .c-card {
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-bottom: none;
+}
+
+.c-issue--modal .c-comment__input {
+  border-radius: 0;
+}
+
+.c-issue--modal .c-card--comment {
+  border-top: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  margin-bottom: 100px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-bottom: 1px solid $widgetborder;
+  @include media($tablet) {
+    margin-bottom: 0;
+  }
+
+}

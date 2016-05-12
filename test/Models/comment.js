@@ -270,13 +270,14 @@ describe("comment model", function(){
     it('Sets LikeError to true if service returns error', function(done) {
       var subject = new Comment(comment);
       var service = {
-        like: function(object, billId, callback) {
-           expect(billId).to.eql('hr2-114');
+        like: function(object, context, callback) {
+           expect(context.bill_id).to.eql('hr2-114');
+           expect(context.type).to.eql('bill');
            expect(object).to.eql('comments:9e9b0180-c5ab-4806-a8b5-ee37b9867626');
            return callback('Error');
         },
       };
-      subject.like(service);
+      subject.like(service, {type: 'bill', bill_id: 'hr2-114'});
       expect(subject.likeFailed).to.eql(true);
       done();
     });

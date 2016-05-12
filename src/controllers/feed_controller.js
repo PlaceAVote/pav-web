@@ -16,10 +16,14 @@ FeedController = function($scope, $location, userService, billService, authServi
   this.timeout = $timeout;
   this.rs = $rootScope;
   this.rs.inApp = true;
+
   this.categories = {
-    all: new SubFeedController({name: 'all', title: 'All Activity',}),
+    all: new SubFeedController({name: 'all', icon: 'icon-globe', title: 'All Activity', noun: 'everything'}),
+    following: new SubFeedController({name: 'following', icon: 'icon-add', title: 'Following', noun: 'people'}),
+    billActivity: new SubFeedController({name: 'billActivity', icon: 'icon-bills', title: 'Bill Activity', noun: 'bills'}),
     discovery: new SubFeedController({
       name: 'discovery',
+      icon: 'icon-binoculars',
       title: 'Discovery',
       categories:
         [
@@ -29,9 +33,16 @@ FeedController = function($scope, $location, userService, billService, authServi
           new SubFeedController({name: 'gun', title: 'Guns',}),
           new SubFeedController({name: 'education', title: 'Education',}),
           new SubFeedController({name: 'healthcare', title: 'Healthcare',}),
+          new SubFeedController({name: 'defense', title: 'Defense',}),
+          new SubFeedController({name: 'economics', title: 'Economics',}),
+          new SubFeedController({name: 'immigration', title: 'Immigration',}),
+          new SubFeedController({name: 'social', title: 'Social Interest',}),
+          new SubFeedController({name: 'taxes', title: 'Taxes',}),
+          new SubFeedController({name: 'healthcare', title: 'Healthcare',}),
         ],
     }),
   };
+
   this.categories.discovery.selectedCategory = this.categories.discovery.categories.trends;
   this.selectedCategory = this.categories.all;
   this.getTrends();
@@ -71,6 +82,7 @@ FeedController.prototype.categoryCount = function(name) {
   }
 };
 
+
 FeedController.prototype.subCategoryClick = function(categoryName, subCategoryName) {
   var that = this;
   this.itemsLoading = true;
@@ -82,6 +94,7 @@ FeedController.prototype.subCategoryClick = function(categoryName, subCategoryNa
     this.selectedCategory.selectedCategory = this.categories[categoryName].categories[subCategoryName];
     return;
   }
+
   this.selectedCategory = this.categories[categoryName];
   this.selectedCategory.selectedCategory = this.categories[categoryName].categories[subCategoryName];
   if (!this.selectedCategory.selectedCategory) {
@@ -91,6 +104,10 @@ FeedController.prototype.subCategoryClick = function(categoryName, subCategoryNa
     if (err) {
       return;
     }
+    // Sorts by comment count in DESC
+    results.sort(function(a, b) {
+      return b.comment_count - a.comment_count;
+    });
     that.selectedCategory.selectedCategory.update(results);
     that.itemsLoading = false;
   });
@@ -133,10 +150,12 @@ FeedController.prototype.subCount = function(catName, subName) {
 };
 
 FeedController.prototype.categoryClick = function(name) {
-  this.selectedCategory.showCategories = false;
   this.selectedCategory = this.categories[name] || this.categories.all;
   if (this.selectedCategory.categories) {
     this.selectedCategory.showCategories = true;
+  }
+  if (this.selectedCategory.count === 0) {
+    this.feedCheck();
   }
 };
 
@@ -150,7 +169,7 @@ FeedController.prototype.getTrends = function() {
     if (!err) {
       that.trends = res;
       var mappedTrends = res.map(function(re) {
-        return new BillSummary(re);
+        return re;
       });
       that.categories.discovery.categories.trends.update(mappedTrends);
     }
@@ -165,11 +184,17 @@ FeedController.prototype.getFeed = function() {
     if (!err) {
       title.feed();
       if (!response.feed || response.feed.length > 0) {
-        that.categories.all.update(response.feed);
+        that.populateFeed(response);
       }
       that.lastLoaded = response.last_timestamp;
     }
   });
+};
+
+FeedController.prototype.populateFeed = function(response) {
+  this.categories.all.push(response.feed);
+  this.categories.following.filter(response.feed, ['issue']);
+  this.categories.billActivity.filter(response.feed, ['bill', 'vote', 'comment']);
 };
 
 FeedController.prototype.feedCheck = function() {
@@ -187,7 +212,7 @@ FeedController.prototype.feedCheck = function() {
         that.feedMessage('.');
       } else {
         that.lastLoaded = response.last_timestamp;
-        that.categories.all.update(response.feed);
+        that.populateFeed(response);
       }
     }
   });

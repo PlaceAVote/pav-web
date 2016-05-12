@@ -1,0 +1,73 @@
+  <update-meta name="description" content="Read, debate and vote on every bill before congress."></update-meta>
+  <update-meta property="og:description" content="Read, debate and vote on every bill before congress."></update-meta>
+  <update-meta property="og:site_name" content="Placeavote"></update-meta>
+  <update-meta property="og:image" content="http://s29.postimg.org/v86d7ur2v/og_fb_img.jpg"></update-meta>
+  <update-meta property="og:title" content="Placeavote"></update-meta>
+
+
+  <update-meta name="twitter:card" content="summary"></update-meta>
+  <update-meta name="twitter:site" content="@placeavote"></update-meta>
+  <update-meta name="twitter:title" content="Placeavote"></update-meta>
+  <update-meta name="twitter:description" content="Read, debate and vote on every bill before congress."></update-meta>
+  <update-meta name="twitter:image:src" content="http://s29.postimg.org/v86d7ur2v/og_fb_img.jpg">
+</update-meta>
+
+<section class="c-feed row tablet-col">
+
+
+<div class="c-feed__menu-container"
+    css-scroll
+    css-scroll-when="1"
+    css-scroll-bool="feed.scrolling"
+    ng-class="{'c-feed__menu--scrolling': feed.scrolling}">
+
+  <ul class="c-feed__menu">
+
+    <li ng-repeat="(cat, value) in feed.categories"
+        ng-click="feed.categoryClick(value.name)"
+        ng-touchstart="feed.categoryClick(value.name)"
+        ng-class="{'c-feed__menu-item--selected': feed.isSelectedCategory(value.name), 'c-feed__menu-item--parent': value.showCategories}">
+      <i class="red" ng-class="value.icon"></i>
+      <p>
+        {{value.title}}
+        <span class="c-feed__menu-item__count">{{feed.categoryCount(value.name)}}</span>
+      </p>
+      <i class="icon-arrow-right"></i>
+
+        <ul class="c-feed__menu c-feed__menu--sub" ng-if="value.showCategories && feed.selectedCategory.name === 'discovery'">
+          <li class="sub-category"
+              ng-click="feed.subCategoryClick(value.name, subValue.name)"
+              ng-repeat="(sub, subValue) in value.categories"
+              ng-class="{'c-feed__menu-item--selected': feed.isSelectedSubCategory(value.name, subValue.name)}">
+            <p>
+              <span>{{subValue.title}}</span>
+              <span class="c-feed__menu-item__count" ng-if="feed.subCount(value.name, subValue.name) !== undefined">{{feed.subCount(value.name, subValue.name)}}</span>
+            </p>
+          </li>
+        </ul>
+
+    </li>
+
+  </ul>
+</div>
+
+
+
+<div class="c-feed__column">
+    <issues-post posted="feed.getFeed()" ng-if="feed.selectedCategory.name !== 'discovery'"></issues-post>
+    <div ng-switch on="feed.selectedCategory.name" infinite-scroll="feed.feedCheck();" infinite-scroll-distance="2">
+      <trendsactivityfeed ng-show="feed.selectedCategory.name === 'discovery'" class="c-feed__events-container" feed="feed"></trendsactivityfeed>
+      <allactivityfeed ng-hide="feed.selectedCategory.name === 'discovery'" class="c-feed__events-container" feed="feed"></allactivityfeed>
+    </div>
+</div>
+
+
+
+<div class="c-trends__container">
+  <div class="c-trends">
+  	<h2><i class="icon-trending-graph"></i>TRENDING GLOBALLY</h2>
+  	<hr class="margin-bottom-small margin-top-small" />
+  	<trends data="feed.trends" refresh="feed.trendsLoading"></trends>
+  </div>
+</div>
+</section>

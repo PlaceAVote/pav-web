@@ -68,21 +68,6 @@
 .icon-tank:before {
   content: "\6a";
 }
-.icon-crime:before {
-  content: "\54";
-}
-.icon-education:before {
-  content: "\55";
-}
-.icon-healthcare:before {
-  content: "\56";
-}
-.icon-immigration:before {
-  content: "\57";
-}
-.icon-taxes:before {
-  content: "\58";
-}
 .icon-check-mark:before {
   content: "\6b";
 }
@@ -126,7 +111,7 @@
   content: "\78";
 }
 .icon-comment:before {
-  content: '\79';
+  content: "\79";
 }
 .icon-trending-graph:before {
   content: "\7a";
@@ -146,7 +131,7 @@
 .icon-links:before {
   content: "\47";
 }
-.icon-twitter:before {
+.icon-social-twitter:before {
   content: "\44";
 }
 .icon-ios-search-strong:before {
@@ -205,4 +190,10 @@
 }
 .icon-edit:before {
   content: "\59";
+}
+.icon-globe:before {
+  content: "\5a";
+}
+.icon-binoculars:before {
+  content: "\30";
 }

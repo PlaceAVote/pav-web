@@ -1,9 +1,9 @@
-<div class="c-modal__wrapper" 
-     ng-class="{'c-modal__wrapper--active' : bill.showConfirmationModal}" 
+<div class="c-modal__wrapper"
+     ng-class="{'c-modal__wrapper--active' : bill.showConfirmationModal}"
      ng-show="bill.showConfirmationModal"
 ng-cloak>
 
-    
+
     <div class="c-modal c-modal--vote c-modal--vote-confirmed">
 
     <i class="icon-close-badge click"
@@ -12,13 +12,13 @@ ng-cloak>
       <div class="c-modal__vote-confirmed">
 
         <img src="//cdn.placeavote.com/img/pav_icon.svg" />
-        
+
         <h1>
-          Congratulations {{bill.rs.user.first_name}}! 
+          Congratulations {{bill.rs.user.first_name}}!
         </h1>
 
         <h2>
-          You have successfully voted on <span class="bold">{{bill.body.billData.bill_id}}</span> 
+          You have successfully voted on <span class="bold">{{bill.body.billData.bill_id}}</span>
         </h2>
 
       </div>
@@ -43,7 +43,7 @@ ng-cloak>
             </div>
 
             <div class="c-card__comment-body">
-              
+
               <p class="c-card__username">
                 {{bill.commentCard.author_first_name}}
               </p>
@@ -58,9 +58,9 @@ ng-cloak>
                 {{bill.commentCard.score}}
                 </span>
 
-                <i class="icon-thumbs-up" ng-class="{'score-up': bill.commentCard.liked == true}" ng-click="bill.commentCard.like(bill.commentService)"></i>
+                <i class="icon-thumbs-up" ng-class="{'score-up': bill.commentCard.liked == true}" ng-click="bill.commentCard.like(bill.commentService, {id: bill.body.billData.bill_id, type: 'bill'})"></i>
 
-                <i class="icon-thumbs-down" ng-class="{'score-down': bill.commentCard.disliked == true}" ng-click="bill.commentCard.dislike(bill.commentService)"></i>
+                <i class="icon-thumbs-down" ng-class="{'score-down': bill.commentCard.disliked == true}" ng-click="bill.commentCard.dislike(bill.commentService, {id: bill.body.billData.bill_id, type: 'bill'})"></i>
 
               </div>
 
@@ -79,7 +79,7 @@ ng-cloak>
               </div>
 
               <textarea name="commentOnBillBox" rows="1" ng-model="bill.commentCard.replyText" placeholder='Write your reply here' msd-elastic></textarea>
-              <button ng-click="bill.commentCard.reply(bill.id, bill.commentService)" class="c-comment__post-btn btn-blank">Post</button>
+              <button ng-click="bill.commentCard.reply({id: bill.body.billData.bill_id, type: 'bill'}, bill.commentService, bill.timeout)" class="c-comment__post-btn btn-blank">Post</button>
 
         </div>
 
@@ -88,14 +88,14 @@ ng-cloak>
 
 
       <!-- Exit Buttons -->
-        <div class="row 
-                    tablet-col 
+        <div class="row
+                    tablet-col
                     l-12
                     padding-large">
 
           <button
-          class="c-button 
-                 c-button--large 
+          class="c-button
+                 c-button--large
                  c-button--grey
                  l-6
                  m-12
@@ -106,8 +106,8 @@ ng-cloak>
 
 
           <button
-          class="c-button 
-                 c-button--large 
+          class="c-button
+                 c-button--large
                  c-button--blue
                  l-6
                  m-12

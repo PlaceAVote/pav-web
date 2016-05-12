@@ -1,5 +1,6 @@
 var expect = require('chai').expect;
 var IssuesController = require('../../src/controllers/issues_controller.js');
+var Issue = require('../../src/models/issue.js');
 
 describe('Issues Controller', function() {
   var mockTimeout = function(func) {
@@ -71,7 +72,7 @@ describe('Issues Controller', function() {
     subject.toggleLink();
     expect(subject.billSearch).to.equal(false);
   });
-  
+
   it('should return error message passed to it', function() {
     var subject = new IssuesController(undefined,undefined,undefined,mockTimeout);
     var error = 'This is a test error';
@@ -96,14 +97,14 @@ describe('Issues Controller', function() {
     expect(subject.attachments[0].type).to.equal('Article');
     expect(subject.linkAdd).to.equal(false);
   });
-  
+
   it('should delete attachment', function() {
     var subject = new IssuesController();
     subject.attachments = [{type: 'bill', title: 'Title'}];
     subject.deleteAttachment(0);
     expect(subject.attachments.length).to.equal(0);
   });
-  
+
   it('should attach link if URL is valid', function() {
     var subject = new IssuesController();
     subject.url = 'http://www.google.com';
@@ -120,7 +121,7 @@ describe('Issues Controller', function() {
   });
     var mockIssueService = {
       saveIssue: function(issue, callback) {
-        callback(undefined, true);
+        callback(undefined, issue);
       }
     };
 
@@ -140,9 +141,9 @@ describe('Issues Controller', function() {
 
   it('should posts issue without attachments', function() {
     var subject = new IssuesController(scope,undefined,undefined,undefined,mockIssueService);
-    subject.issue = {
+    subject.issue = new Issue({
       comment: 'Hello World',
-    };
+    });
     subject.attachments = [];
     subject.postIssue();
     expect(subject.issue).to.be.empty;
