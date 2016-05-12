@@ -147,7 +147,9 @@ var gulp = require('gulp'),
 
   gulp.task('browser-sync-website', function() {
     browserSync.init({
-      server: './app.js',
+      server: {
+        baseDir: "./web/dist/"
+      }
     });
     gulp.watch(["web/src/partials/*.html", "./web/dist/css/*.css", "./web/dist/js/*.js"]).on("change", browserSync.reload);
   });
@@ -165,7 +167,9 @@ var gulp = require('gulp'),
   // Static server
   gulp.task('browser-sync', function() {
     browserSync.init({
-      server: './app.js'
+      server: {
+        baseDir: "./"
+      }
     });
     gulp.watch(["partials/**/*","*.html", "css/*.css", "dist/js/*.js"]).on("change", browserSync.reload);
   });
