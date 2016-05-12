@@ -8,7 +8,10 @@ app.use('/img', express.static(__dirname + '/img'));
 app.use('/css', express.static(__dirname + '/css'));
 app.use('/partials', express.static(__dirname + '/partials'));
 
-app.use(require('prerender-node').set('prerenderToken', prerenderToken).set('protocol', 'https'));
+app.use(require('prerender-node').set('prerenderToken', prerenderToken).set('protocol', 'https').set('beforeRender', function(req, done) {
+  req.url += '?_escaped_fragment_';
+  done();
+}));
 
 app.use('/', express.static(__dirname));
 
