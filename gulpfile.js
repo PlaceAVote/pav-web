@@ -19,7 +19,8 @@ var gulp = require('gulp'),
   jscs = require('gulp-jscs'),
   gulpSequence = require('gulp-sequence'),
   mocha = require('gulp-mocha'),
-  util = require('gulp-util');
+  util = require('gulp-util'),
+	svgSprite = require('gulp-svg-sprite');
   var stylish = require('jshint-stylish');
   var mustache = require('gulp-mustache');
   var clean = require('gulp-clean');
@@ -243,5 +244,11 @@ var gulp = require('gulp'),
   gulp.task('watchIonic', function() {
     gulp.watch(['src/**/*_ionic.js', 'src/*_ionic.js', 'src/ionic-app.js', 'partials/*_ionic.html'], ['ionicise']);
   });
+
+	gulp.task('svgsprites', function() {
+		gulp.src('svgs/*.svg')
+		    .pipe(svgSprite({mode:{symbol:true}}))
+		    .pipe(gulp.dest('img'));
+	});
 
   gulp.task('default', ['autoPrefix', 'watchFiles', 'browserify-web', 'template-dev']);

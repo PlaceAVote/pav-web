@@ -106,6 +106,7 @@ var allActivityFeedDirective = require('./directives/all_activity_feed.js');
 var trendsActivityFeedDirective = require('./directives/trends_activity_feed.js');
 var cssScrollDirective = require('./directives/css_scroll.js');
 var issueModalDirective = require('./directives/issue_modal.js');
+var iconDirective = require('./directives/icon.js');
 
 // Thirdparty integrations
 var Facebook = require('./integrations/facebook.js');
@@ -208,7 +209,7 @@ app.config(['$routeProvider', '$locationProvider', '$compileProvider', 'Analytic
   $locationProvider
     .hashPrefix('!');
 
-  $compileProvider.debugInfoEnabled(false);
+  // $compileProvider.debugInfoEnabled(false);
 
   AnalyticsProvider.setAccount('UA-48538409-1');
 
@@ -361,3 +362,4 @@ app.directive('trendsactivityfeed', [trendsActivityFeedDirective]);
 app.directive('cssScroll', [cssScrollDirective]);
 app.directive('issueModal', issueModalDirective);
 issueModalDirective.$inject = ['$location', '$timeout', 'issueService', '$rootScope'];
+app.directive('icon', iconDirective);
