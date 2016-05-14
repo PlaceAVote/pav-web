@@ -4,7 +4,7 @@ var port = process.env.PORT || 3000;
 var app = express();
 var prerenderToken = 'XfWVDqvFXsFXTL8ngxB1';
 
-app.use(logger('common'));
+app.use(logger('combined'));
 app.use(require('prerender-node').set('prerenderToken', prerenderToken).set('protocol', 'https'));
 
 app.use('/dist', express.static(__dirname + '/dist'));
