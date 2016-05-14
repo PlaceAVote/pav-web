@@ -5,8 +5,14 @@ var prerenderToken = 'XfWVDqvFXsFXTL8ngxB1';
 
 app.use(require('prerender-node').set('prerenderToken', prerenderToken).set('protocol', 'https'));
 
+app.use('/dist', express.static(__dirname + '/dist'));
+app.use('/img', express.static(__dirname + '/img'));
+app.use('/css', express.static(__dirname + '/css'));
+app.use('/partials', express.static(__dirname + '/partials'));
+
+
 app.use('/', express.static(__dirname));
 
 app.listen(port, function() {
-  console.log('listening on ' + port, 'prerender running:', prerenderToken);
+  console.log('listening on ' + port);
 });
