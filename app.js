@@ -15,7 +15,7 @@ function serve(req, res) {
   res.sendFile('index.html', { root: __dirname + '/' });
 }
 
-app.all('/*', serve);
+app.use('*', serve);
 
 app.listen(port, function() {
   console.log('listening on ' + port);
