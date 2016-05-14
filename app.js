@@ -9,16 +9,13 @@ app.use('/dist', express.static(__dirname + '/dist'));
 app.use('/img', express.static(__dirname + '/img'));
 app.use('/css', express.static(__dirname + '/css'));
 app.use('/partials', express.static(__dirname + '/partials'));
+app.use('/font', express.static(__dirname + '/font'));
 
-function secure(req, res) {
-  if (!req.sequre) {
-    console.log('redirecting');
-    return res.redirect('https://' + req.headers.host + req.url);
-  }
+function serve(req, res) {
   res.sendFile('index.html', { root: __dirname + '/' });
 }
 
-app.all('/*', secure);
+app.all('/*', serve);
 
 app.listen(port, function() {
   console.log('listening on ' + port);
