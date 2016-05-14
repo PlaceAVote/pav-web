@@ -4,9 +4,9 @@
 
 /**
 * The side menu is currently only
-* present on the bills page can be 
-* found in the 
-* partials/bills/bill_wrapper.html partial. 
+* present on the bills page can be
+* found in the
+* partials/bills/bill_wrapper.html partial.
 *
 * It is stacked on desktop but moves to a
 * row layout on tablet and mobile.
@@ -68,7 +68,7 @@
 
 .c-side-menu--bill {
   top: -83px;
- 
+
   @include media(768px) {
     position: initial;
     top: initial;
@@ -96,7 +96,6 @@
     padding: 19px 5px;
   }
 
-
   /**
   * i is the icon element, they are
   * aligned to the left of the p tags
@@ -111,7 +110,7 @@
     left: 17px;
     top: 12px;
 
-    
+
     &.icon-arrow-right {
       display: block;
       right: 16px;
@@ -132,6 +131,11 @@
 
 }
 
+.c-side-menu-half li {
+  @include media($tablet) {
+    width: 50% !important;
+  }
+}
 
 .c-side-menu li p {
   @include font-size(14px);
@@ -165,7 +169,7 @@ li.c-side-menu__vote {
 
 li.c-side-menu--selected {
   border-bottom-color: $red !important;
-  
+
   p {
     font-weight: 700;
   }
@@ -201,7 +205,7 @@ li.c-side-menu--selected {
 
 
 li.c-side-menu__vote {
-  &.ng-hide-add, 
+  &.ng-hide-add,
   &.ng-hide-remove {
     transition: 0s linear all
   }
@@ -214,7 +218,7 @@ li.c-side-menu__vote {
   &.ng-hide-add {
     transform: translateY(0px);
     opacity: 1;
-  } 
+  }
 
   &.ng-hide-add.ng-hide-add-active {
     transform: translateY(20px);
@@ -230,5 +234,4 @@ li.c-side-menu__vote {
     transform: translateY(0px);
     opacity: 1;
   }
-} 
-
+}
