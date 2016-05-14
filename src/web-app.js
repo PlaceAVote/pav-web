@@ -205,9 +205,7 @@ app.config(['$routeProvider', '$locationProvider', '$compileProvider', 'Analytic
     redirectTo: '/',
   });
 
-  $locationProvider
-    .hashPrefix('!');
-
+  $locationProvider.html5Mode(true);
   $compileProvider.debugInfoEnabled(false);
 
   AnalyticsProvider.setAccount('UA-48538409-1');
