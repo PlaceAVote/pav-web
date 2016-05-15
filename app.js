@@ -13,7 +13,7 @@ app.use('/css', express.static(__dirname + '/css'));
 app.use('/partials', express.static(__dirname + '/partials'));
 app.use('/font', express.static(__dirname + '/font'));
 
-app.use('*', express.static(__dirname));
+app.use('/', express.static(__dirname));
 
 app.listen(port, function() {
   console.log('listening on ' + port);
