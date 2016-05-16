@@ -66,28 +66,28 @@ Do you agree or disagree? Join the discussion and place your vote today!"></upda
         ng-click="bill.view = 'summary'; bill.location.update_path('bill/' + bill.id + '/summary');">
             <icon icon="icon-document"></icon>
             <p>Summary</p>
-            <i class="icon-arrow-right"></i>
+            <icon icon="icon-arrow-right"></icon>
         </li>
         <li
         ng-class="{'c-side-menu--selected': bill.view === 'info'}"
         ng-click="bill.view = 'info'; bill.location.update_path('bill/' + bill.id + '/info');">
-            <i class="icon-bill-info"></i>
+            <icon icon="icon-bill-info"></icon>
             <p>Bill Info</p>
-            <i class="icon-arrow-right"></i>
+            <icon icon="icon-arrow-right"></icon>
         </li>
         <li
         ng-class="{'c-side-menu--selected': bill.view === 'comments', 'c-side-menu--last-item': bill.hasVoted}"
         ng-click="bill.view = 'comments'; bill.location.update_path('bill/' + bill.id + '/comments');">
-            <i class="icon-chat"></i>
+            <icon icon="icon-chat"></icon>
             <p>Comments <span class="bold"
                               ng-show="bill.body.billData.comment_count > 0">({{bill.body.billData.comment_count}})</span></p>
-            <i class="icon-arrow-right"></i>
+            <icon icon="icon-arrow-right"></icon>
         </li>
         <li class="c-side-menu__vote"
         ng-click="bill.userVote()"
         ga-track-event="['Opened Vote Modal']"
         ng-show="bill.hasVoted === false">
-            <i class="icon-logo"></i>
+            <icon icon="icon-logo"></icon>
             <p>I'm ready to vote!</p>
 
         </li>

@@ -5,9 +5,9 @@ module.exports = function() {
     scope: {
       icon: '<',
     },
-    template: '<svg class="{{icon}}"><use xlink:href=""/></svg>',
+    template: '<svg class="{{class}}"><use xlink:href=""/></svg>',
     link: function(scope, svg, attrs) {
-      console.log(scope, svg, attrs);
+      scope.class = attrs.icon;
       svg.children().attr('xlink:href', '/img/symbol/svg/sprite.symbol.svg#' + attrs.icon);
     },
   };
