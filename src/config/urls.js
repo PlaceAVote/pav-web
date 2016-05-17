@@ -3,9 +3,10 @@ var USER = 'https://apidev.placeavote.com';
 var NOTIFICATION = 'wss://apidev.placeavote.com';
 var VOTES = 'https://apidev.placeavote.com';
 var SEARCH = 'https://apidev.placeavote.com';
-var FACEBOOKAPPID = '1686805824874862';
+var FACEBOOKAPPID = '1624230887838566';
 var MANDRILAPIKEY = 'ijV-LsU9RGPbUj1vjdHX_A';
 var PRERENDER = 'https://prerenderdev.placeavote.com';
+var WATCHERS = true;
 
 module.exports = {
   CONGRESS: CONGRESS,
@@ -16,4 +17,5 @@ module.exports = {
   MANDRILAPIKEY: MANDRILAPIKEY,
   SEARCH: SEARCH,
   PRERENDER: PRERENDER,
+  WATCHERS: WATCHERS,
 };

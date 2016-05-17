@@ -13,6 +13,13 @@ function User(email, password) {
 User.createFromJson = function(json) {
   json = json || {};
   var user = new User();
+  user.last_activity = json.last_activity;
+  user.lat = json.lat;
+  user.lng = json.lng;
+  user.total_votes = json.total_votes;
+  user.created_at = json.created_at;
+  user.district = json.district;
+  user.state = json.state;
   user.zipcode = json.zipcode;
   user.email = json.email;
   user.password = json.password;
