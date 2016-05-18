@@ -1,11 +1,6 @@
+var config = require('./config/urls.js');
+
 console.log('%cPlaceavote', 'background: #543594; color: #ffffff; padding: 1px 3px; border-radius: 3px; font-size: 12px;font-family: sans-serif; margin-left: calc(100% - 70px);');
-
-
-// Redirects to https protocol
-
-if (window.location.protocol != 'https:' && window.location.hostname != 'localhost') {
-  window.location.href = window.location.href.replace(/^http:/, 'https:');
-}
 
 // Safari, in Private Browsing Mode, looks like it supports localStorage but all calls to setItem
 // Throw QuotaExceededError. We're going to detect this and just silently drop any calls to setItem
@@ -206,10 +201,9 @@ app.config(['$routeProvider', '$locationProvider', '$compileProvider', 'Analytic
     redirectTo: '/',
   });
 
-  $locationProvider
-    .hashPrefix('!');
+  $locationProvider.hashPrefix('!');
 
-  // $compileProvider.debugInfoEnabled(false);
+  $compileProvider.debugInfoEnabled(config.WATCHERS);
 
   AnalyticsProvider.setAccount('UA-48538409-1');
 

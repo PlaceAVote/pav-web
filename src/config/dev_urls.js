@@ -6,6 +6,7 @@ var SEARCH = 'https://apidev.placeavote.com';
 var FACEBOOKAPPID = '1624230887838566';
 var MANDRILAPIKEY = 'ijV-LsU9RGPbUj1vjdHX_A';
 var PRERENDER = 'https://prerenderdev.placeavote.com';
+var WATCHERS = true;
 
 module.exports = {
   CONGRESS: CONGRESS,
@@ -16,4 +17,5 @@ module.exports = {
   MANDRILAPIKEY: MANDRILAPIKEY,
   SEARCH: SEARCH,
   PRERENDER: PRERENDER,
+  WATCHERS: WATCHERS,
 };

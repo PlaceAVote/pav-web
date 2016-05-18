@@ -378,4 +378,3 @@ BillController.prototype.sponsorCount = function(sponsors) {
 };
 
 module.exports = BillController;
-

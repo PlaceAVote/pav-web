@@ -58,9 +58,10 @@ Do you agree or disagree? Join the discussion and place your vote today!"></upda
 
 
 <!-- Menu -->
-<div class="c-side-menu-wrapper">
+<div class="c-side-menu-wrapper" ng-if="bill.body.billData">
 
-    <ul class="c-side-menu c-side-menu--bill">
+    <ul class="c-side-menu c-side-menu--bill"
+        ng-class="{'c-side-menu-half': bill.body.billData.bill_type === 'ma'}">
         <li
         ng-class="{'c-side-menu--selected': bill.view === 'summary'}"
         ng-click="bill.view = 'summary'; bill.location.update_path('bill/' + bill.id + '/summary');">
@@ -70,6 +71,7 @@ Do you agree or disagree? Join the discussion and place your vote today!"></upda
         </li>
         <li
         ng-class="{'c-side-menu--selected': bill.view === 'info'}"
+        ng-if="bill.body.billData.bill_type !== 'ma'"
         ng-click="bill.view = 'info'; bill.location.update_path('bill/' + bill.id + '/info');">
             <icon icon="icon-bill-info"></icon>
             <p>Bill Info</p>
