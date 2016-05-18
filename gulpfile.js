@@ -246,7 +246,7 @@ var gulp = require('gulp'),
   });
 
 	gulp.task('svgsprites', function() {
-		gulp.src('svgs/*.svg')
+		gulp.src('icons/*.svg')
 		    .pipe(svgSprite({mode:{symbol:true}}))
 		    .pipe(gulp.dest('img'));
 	});
