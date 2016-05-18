@@ -115,9 +115,17 @@ ng-show="bill.forComment.author"
       </div>
     </div>
 
-    <textarea name='commentOnBillBox' rows="1" ng-model='bill.commentBody' placeholder='Write your comment here' msd-elastic></textarea>
+    <textarea
+      name='commentOnBillBox'
+      rows="1"
+      ng-model='bill.commentBody'
+      ng-focus="bill.commentInputFocus = true"
+      ng-blur="bill.commentInputFocus = false"
+      placeholder='Write your comment here'
+      msd-elastic></textarea>
     <button
     ng-click="bill.postComment()"
+    ng-class="{ 'btn-green': bill.commentInputFocus }"
     class="c-comment__post-btn btn-blank"
     ga-track-event="['Bill: Commented']">Post</button>
   </div>
