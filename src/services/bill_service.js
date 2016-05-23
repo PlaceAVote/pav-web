@@ -175,6 +175,26 @@ function BillService($resource, authService, userService) {
     resource.getTrends(undefined, onLoad, onError);
   };
 
+  var getRepresentation = function(data, callback) {
+
+    if (!data.bill_id || !data.state || !data.district) {
+      return callback('Incorrect or no parameters provided');
+    }
+
+    var onLoad = function(result) {
+      return callback(undefined, result);
+    };
+
+    var onError = function(err) {
+      return callback(err);
+    };
+
+    var url = config.votes.representation.endpoint(data);
+    var resource = new $resource(url, undefined, {rep: config.methods.getArray});
+
+    resource.rep(undefined, onLoad, onError);
+  };
+
   return {
     getBillVotes: getBillVotes,
     getBill: getBill,
@@ -182,6 +202,7 @@ function BillService($resource, authService, userService) {
     fetchComments: fetchComments,
     postComment: postComment,
     getTrends: getTrends,
+    getRepresentation: getRepresentation,
   };
 }
 

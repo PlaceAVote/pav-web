@@ -284,4 +284,65 @@ describe("Bill Service", function(){
       });
     });
   });
+
+    describe('getRepresentation', function() {
+        it('should return error if no bill_id provided', function() {
+          var subject = new BillService();
+          var data = {
+            state: 'CA',
+            district: 33,
+          };
+          subject.getRepresentation(data, function(err, result) {
+            expect(err).to.equal('Incorrect or no parameters provided');
+          });
+        });
+        it('should return error if no state provided', function() {
+          var subject = new BillService();
+          var data = {
+            bill_id: 'abcd1234',
+            district: 33,
+          };
+          subject.getRepresentation(data, function(err, result) {
+            expect(err).to.equal('Incorrect or no parameters provided');
+          });
+        });
+        it('should return error if no district provided', function() {
+          var subject = new BillService();
+          var data = {
+            state: 'CA',
+            bill_id: 'abcd1234'
+          };
+          subject.getRepresentation(data, function(err, result) {
+            expect(err).to.equal('Incorrect or no parameters provided');
+          });
+        });
+        it('should return obj if successful', function(done) {
+          var mockRepResource = function(url, params, method) {
+
+          };
+          var obj = {
+            votes: {
+              yes: 5,
+              no: 1,
+              total: 6
+            },
+            population: 1046824,
+            sampleSize: 390
+          };
+          mockRepResource.prototype.rep = function(body, onLoad, onError) {
+
+            return onLoad(obj);
+          };
+          var subject = new BillService(mockRepResource);
+          var data = {
+            state: 'CA',
+            bill_id: 'abcd1234',
+            district: 33,
+          };
+          subject.getRepresentation(data, function(err, result) {
+            expect(result).to.equal(obj);
+            done();
+          });
+        });
+    });
   });
