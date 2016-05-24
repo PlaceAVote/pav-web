@@ -26,7 +26,6 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
   this.getBill(this.id);
   this.getTopComments(this.id);
   this.getVotes(this.id);
-  this.getBillVotes(this.id);
   this.fetchComments();
   this.voteModal = {};
   this.stats = {};
@@ -35,6 +34,7 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
   this.authenticate();
   this.commentOrder = 'highest-score';
   this.representation = {};
+  this.getRepresentation(this.id);
 }
 
 BillController.prototype.authenticate = function() {
@@ -382,7 +382,7 @@ BillController.prototype.sponsorCount = function(sponsors) {
 BillController.prototype.getRepresentation = function() {
   var that = this;
 
-  if (!this.rs.user.district || !this.rs.user.state || !this.body.billData.bill_id) {
+  if (!this.rs.user.district || !this.rs.user.state) {
     this.representation.available = false;
     return;
   }
@@ -390,7 +390,7 @@ BillController.prototype.getRepresentation = function() {
   this.representation.for = {
     state: this.rs.user.state,
     district: this.rs.user.district,
-    bill_id: this.body.billData.bill_id,
+    bill_id: this.id,
   };
 
   this.representation.busy = true;
