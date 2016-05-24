@@ -189,8 +189,9 @@ function BillService($resource, authService, userService) {
       return callback(err);
     };
 
+    delete config.methods.get.headers.Authorization;
     var url = config.votes.representation.endpoint(data);
-    var resource = new $resource(url, undefined, {rep: config.methods.getArray});
+    var resource = new $resource(url, undefined, {rep: config.methods.get});
 
     resource.rep(undefined, onLoad, onError);
   };

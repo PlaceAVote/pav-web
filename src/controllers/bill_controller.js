@@ -34,6 +34,7 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
   this.showChart = true;
   this.authenticate();
   this.commentOrder = 'highest-score';
+  this.representation = {};
 }
 
 BillController.prototype.authenticate = function() {
@@ -374,6 +375,40 @@ BillController.prototype.sponsorCount = function(sponsors) {
   this.body.billData.cosponsors_count.democrat_per = sponsors.democrat / cent;
   this.body.billData.cosponsors_count.republican_per = sponsors.republican / cent;
   this.body.billData.cosponsors_count.independent_per = sponsors.independent / cent;
+
+};
+
+
+BillController.prototype.getRepresentation = function() {
+  var that = this;
+
+  if (!this.rs.user.district || !this.rs.user.state || !this.body.billData.bill_id) {
+    this.representation.available = false;
+    return;
+  }
+
+  this.representation.for = {
+    state: this.rs.user.state,
+    district: this.rs.user.district,
+    bill_id: this.body.billData.bill_id,
+  };
+
+  this.representation.busy = true;
+
+  this.billService.getRepresentation(this.representation.for, function(err, res) {
+
+    that.representation.busy = false;
+
+    if (err) {
+      that.representation.available = false;
+    }
+
+    if (res) {
+      that.representation.result = res;
+      console.log(res, that.representation);
+    }
+
+  });
 
 };
 

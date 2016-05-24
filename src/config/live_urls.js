@@ -1,6 +1,6 @@
 var CONGRESS = 'https://api.placeavote.com';
 var USER = 'https://api.placeavote.com';
-var CENSUS = 'http://census.placeavote.com/';
+var CENSUS = 'https://census.placeavote.com';
 var NOTIFICATION = 'wss://api.placeavote.com';
 var VOTES = 'https://api.placeavote.com';
 var SEARCH = 'https://api.placeavote.com';

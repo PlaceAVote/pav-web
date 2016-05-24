@@ -344,5 +344,27 @@ describe("Bill Service", function(){
             done();
           });
         });
+        it('should return obj if successful', function(done) {
+          var mockRepResource = function(url, params, method) {
+
+          };
+          var error = {
+            status: 'oh boy, looks like there was an error.'
+          };
+          mockRepResource.prototype.rep = function(body, onLoad, onError) {
+
+            return onError(error);
+          };
+          var subject = new BillService(mockRepResource);
+          var data = {
+            state: 'CA',
+            bill_id: 'abcd1234',
+            district: 33,
+          };
+          subject.getRepresentation(data, function(err, result) {
+            expect(err).to.equal(error);
+            done();
+          });
+        });
     });
   });

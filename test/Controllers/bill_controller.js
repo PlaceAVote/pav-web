@@ -846,7 +846,86 @@ describe('BillController', function() {
     var subject = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, mockView, mockAuthService, {}, mockTimeout);
     expect(subject.view).to.equal('comments');
   });
+
+  describe('getRepresentation', function() {
+    var mockRootScope = {
+      user: {
+        district: '33',
+        state: 'CA'
+      }
+    }
+
+    var mockView = {
+       $$path: '/comments',
+    }
+       var mockBillService = {
+     getRepresentation: function(data, callback) {
+       callback(undefined, {votes: 15});
+     },
+      getBillVotes: function(id, callback){
+        callback('Error');
+      },
+        getBill: function(id, callback){
+          callback('Error');
+        },
+        getTopComments: function(id, callback){
+          callback('Error');
+        },
+        fetchComments: function(id, order, from, undefined, callback) {
+          callback(undefined, []);
+        },
+        postComment: function(id, comment, callback) {
+          var c = new Comment();
+          c.id = 1;
+          return callback(undefined, c);
+        },
+      };
+      var mockLegislationService = {
+        getById: function(id, callback){
+          callback('Error');
+        },
+      };
+      var mockVoteService = {
+        getVotesForBill: function(id, callback){
+          callback('Error');
+        },
+        voteOnBill: function(id, vote, callback){
+          callback('Error');
+        },
+      };
+      var mockTimeout = function() {return;};
+
+    it('should create object containing state, district and bill_id', function() {
+
+    var subject = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, mockView, mockAuthService, mockRootScope, mockTimeout);
+    subject.body = {
+      billData: {
+        bill_id: '12345'
+      }
+    };
+    var testObj = {
+      state: mockRootScope.user.state,
+      district: mockRootScope.user.district,
+      bill_id: subject.body.billData.bill_id,
+    };
+    subject.getRepresentation();
+    expect(subject.representation.for.state).to.equal(testObj.state);
+    expect(subject.representation.for.district).to.equal(testObj.district);
+    expect(subject.representation.for.bill_id).to.equal(testObj.bill_id);
+    });
+    it('should put response into controller scope object', function() {
+      var subject = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, mockView, mockAuthService, mockRootScope, mockTimeout);
+      subject.body = {
+        billData: {
+          bill_id: '12345'
+        }
+      };
+      subject.getRepresentation();
+
+      expect(subject.representation.result.votes).to.equal(15);
+
+    });
+  });
 });
 
 //viewToggle
-
