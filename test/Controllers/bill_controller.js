@@ -975,11 +975,15 @@ getRepresentation: function(data, callback) {
     it('should create object containing state, district and bill_id', function() {
 
     var subject = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, mockView, mockAuthService, mockRootScope, mockTimeout);
-    subject.id = '12345';
+    subject.body = {
+      billData: {
+        bill_id: '12345'
+      }
+    };
     var testObj = {
       state: mockRootScope.user.state,
       district: mockRootScope.user.district,
-      bill_id: subject.id,
+      bill_id: subject.body.billData.bill_id,
     };
     subject.getRepresentation();
     expect(subject.representation.for.state).to.equal(testObj.state);
