@@ -40,18 +40,22 @@
 
 <!-- Representation Widget -->
 
-<div class="l-12 margin-top-medium c-representation-widget">
+<div class="l-12
+            margin-top-medium
+            tablet-margin-top-none
+            c-representation-widget"
+     ng-if="bill.rs.user.district">
 
   <div class="c-card row">
     <div class="l-12">
 
-      <p class="margin-bottom-small">To create an accurate voting sample for INSERT DISTRICT citizens need to vote on this bill NO. times more</p>
+      <p class="margin-bottom-small">To create an accurate voting sample for your district at least <span class="bold">{{bill.representation.result.sampleSize - bill.representation.result.votesTotal}}</span> citizens need to vote on this bill.</p>
 
       <!-- Bar -->
       <div class="c-bar">
-        <div class="c-bar__fill"></div>
+        <div class="c-bar__fill" ng-style="{'width' : bill.representation.result.representationPercent + '%'}"></div>
         <div class="c-bar__info">
-          <p><span class="bold">50/355</span> Required</p>
+          <p><span class="bold" ng-bind="bill.representation.result.representationScore"></span> Required</p>
         </div>
       </div>
 
