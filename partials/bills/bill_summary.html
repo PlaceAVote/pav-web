@@ -1,43 +1,8 @@
 <div class="row tablet-col l-12">
 
+  <div class="row tablet-col">
 
-
-<!-- Top Row -->
-  <!-- First Col -->
-
-  <div class="l-6 m-12 margin-right-medium tablet-margin-right-none"
-  ng-show="bill.body.billData.featured_bill_summary">
-
-    <div class="c-card c-card--bill c-card--footer-btn">
-
-      <h1>Short Summary</h1>
-
-      <hr />
-
-      <div class="c-card__content">
-
-      <h2 ng-bind-html="bill.body.billData.featured_bill_summary"></h2>
-
-      </div>
-
-      <div class="c-card__footer-btn"
-      ng-click="bill.view = 'info'; bill.location.update_path('bill/' + bill.id + '/info');">
-        Read More Information About This Bill >
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <!-- Second Col -->
-
-  <div
-  ng-class="{'row l-12 tablet-col': !bill.body.billData.featured_bill_summary, 'col l-6 m-12': bill.body.billData.featured_bill_summary}">
-
-    <div class="c-card c-card--bill c-card--icon tablet-margin-bottom-none m-12"
-      ng-class="{'l-6 margin-right-medium margin-bottom-medium-none' : !bill.body.billData.featured_bill_summary,
-      'margin-bottom-medium' : bill.body.billData.featured_bill_summary}"
+    <div class="c-card c-card--bill c-card--icon tablet-margin-bottom-none l-6 m-12 margin-right-medium tablet-margin-right-none"
       ng-show="bill.body.billData.points_infavor">
 
       <i class="icon-passed-house green"
@@ -53,9 +18,8 @@
     </div>
 
 
-    <div class="c-card c-card--bill c-card--icon m-12"
-      ng-show="bill.body.billData.points_against"
-      ng-class="{'l-6' : !bill.body.billData.featured_bill_summary}">
+    <div class="c-card c-card--bill c-card--icon l-6 m-12"
+      ng-show="bill.body.billData.points_against">
 
       <i class="icon-close red"
       style="font-size: 13px;top: 13px;"></i>
@@ -70,6 +34,37 @@
     </div>
 
   </div>
+
+</div>
+
+
+<!-- Representation Widget -->
+
+<div class="l-12 margin-top-medium c-representation-widget">
+
+  <div class="c-card row">
+    <div class="l-12">
+
+      <p class="margin-bottom-small">To create an accurate voting sample for INSERT DISTRICT citizens need to vote on this bill NO. times more</p>
+
+      <!-- Bar -->
+      <div class="c-bar">
+        <div class="c-bar__fill"></div>
+        <div class="c-bar__info">
+          <p><span class="bold">50/355</span> Required</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- <div class="c-representation-widget__cta-wrapper l-4">
+      <icon icon="icon-medal"><icon>
+      <div class="c-representation-widget__cta">
+      </div>
+    </div> -->
+
+  </div>
+
 
 </div>
 

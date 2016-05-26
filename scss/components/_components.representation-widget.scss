@@ -1,0 +1,36 @@
+/*------------------------------------*\
+    #COMPONENT-REPRESENTATION-WIDGET
+\*------------------------------------*/
+
+/**
+* A wrapper for the representation bar and info
+* on the BILL SUMMARY page at the time of writing.
+*/
+
+.c-representation-widget {
+
+
+  p {
+    @include font-size(10px);
+    color: $greydark;
+  }
+
+}
+
+
+.c-representation-widget .icon-medal {
+    fill: $greydark;
+    height: 75px;
+    width: 50px;
+    top: 0;
+    left: 15px;
+    position: absolute;
+  }
+
+
+.c-representation-widget__cta-wrapper {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  position: relative;
+}
