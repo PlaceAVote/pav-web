@@ -52,6 +52,7 @@ var QuestionService = require('./services/question_service.js');
 var MailService = require('./services/mail_service.js');
 
 // Dependencies
+var d3 = require('d3');
 var angular = require('angular');
 
 // Directives
@@ -102,6 +103,7 @@ var trendsActivityFeedDirective = require('./directives/trends_activity_feed.js'
 var cssScrollDirective = require('./directives/css_scroll.js');
 var issueModalDirective = require('./directives/issue_modal.js');
 var iconDirective = require('./directives/icon.js');
+var pieChartDirective = require('./directives/ring_chart.js');
 
 // Thirdparty integrations
 var Facebook = require('./integrations/facebook.js');
@@ -357,3 +359,4 @@ app.directive('cssScroll', [cssScrollDirective]);
 app.directive('issueModal', issueModalDirective);
 issueModalDirective.$inject = ['$location', '$timeout', 'issueService', '$rootScope'];
 app.directive('icon', iconDirective);
+app.directive('pieChart', pieChartDirective);
