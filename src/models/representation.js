@@ -18,12 +18,12 @@ Representation.prototype.getVotePercent = function(options) {
   var percentNo = (options.votes.no / (options.votes.no + options.votes.yes)) * 100;
   var percentYes = (options.votes.yes / (options.votes.no + options.votes.yes)) * 100;
   var voteNo = {
-    val: percentNo,
+    val: Math.round(percentNo * 100) / 100,
     label: 'Against',
     className: 'against'
   };
   var voteYes = {
-    val: percentYes,
+    val: Math.round(percentYes * 100) / 100,
     label: 'In Favor',
     className: 'favor',
   };

@@ -416,7 +416,6 @@ BillController.prototype.getRepresentation = function() {
 
     if (res) {
       that.representation.result = res;
-      console.log(res, that.representation);
     }
 
   });

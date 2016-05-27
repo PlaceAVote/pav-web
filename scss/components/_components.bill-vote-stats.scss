@@ -13,4 +13,13 @@
   position: absolute;
   width: 230px;
   top: 141px;
+  margin-bottom: 20px;
+}
+
+.c-pie-favor {
+  fill: $green;
+}
+
+.c-pie-against {
+  fill: $red;
 }
