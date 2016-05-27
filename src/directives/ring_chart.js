@@ -12,7 +12,6 @@ module.exports = function() {
 
         if (n) {
           dataset = n;
-          console.log(dataset);
           scope.createChart();
         }
 
