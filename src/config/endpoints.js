@@ -152,6 +152,11 @@ module.exports = {
     voteRecords: {
       endpoint: urls.VOTES + '/vote/bill/',
     },
+    representation: {
+      endpoint: function(data) {
+        return urls.CENSUS + '/demographic?billId=' + data.bill_id + '&state=' + data.state + '&district=' + data.district;
+      },
+    },
   },
   comments: {
     reply: {

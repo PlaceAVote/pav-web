@@ -1,5 +1,6 @@
 var CONGRESS = 'https://apidev.placeavote.com';
 var USER = 'https://apidev.placeavote.com';
+var CENSUS = 'https://censusdev.placeavote.com';
 var NOTIFICATION = 'wss://apidev.placeavote.com';
 var VOTES = 'https://apidev.placeavote.com';
 var SEARCH = 'https://apidev.placeavote.com';
@@ -11,6 +12,7 @@ var WATCHERS = true;
 module.exports = {
   CONGRESS: CONGRESS,
   USER: USER,
+  CENSUS: CENSUS,
   VOTES: VOTES,
   NOTIFICATION: NOTIFICATION,
   FACEBOOKAPPID: FACEBOOKAPPID,

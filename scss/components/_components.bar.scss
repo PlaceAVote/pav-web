@@ -1,0 +1,39 @@
+
+/*------------------------------------*\
+    #COMPONENT-BAR
+\*------------------------------------*/
+
+/**
+* Basic horizontal bar designed to display
+* simple stats
+*/
+
+.c-bar {
+  width: 100%;
+  border: 1px solid $widgetborder;
+  height: 50px;
+  background: white;
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+
+
+.c-bar__fill {
+  background: $green;
+  height: 100%;
+  width: 0;
+}
+
+
+.c-bar__info {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  @include font-size(14px);
+  color: $greydark;
+}

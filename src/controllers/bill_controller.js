@@ -26,7 +26,6 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
   this.getBill(this.id);
   this.getTopComments(this.id);
   this.getVotes(this.id);
-  this.getBillVotes(this.id);
   this.fetchComments();
   this.voteModal = {};
   this.stats = {};
@@ -34,6 +33,7 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
   this.showChart = true;
   this.authenticate();
   this.commentOrder = 'highest-score';
+  this.representation = {};
 }
 
 BillController.prototype.authenticate = function() {
@@ -128,6 +128,8 @@ BillController.prototype.voteConfirmed = function(vote) {
   this.hasVoted = true;
   var contrarianComment = vote ? this.againstComment : this.forComment;
   this.generateCommentCard(contrarianComment);
+  this.updateRepresentationView();
+
 };
 
 
@@ -214,6 +216,7 @@ BillController.prototype.getBill = function(id) {
       that.userVotedCheck();
       that.getLegislator(result.billData.sponsor);
       that.sponsorCount(result.billData.cosponsors_count);
+      that.getRepresentation();
     }
   });
 };
@@ -375,6 +378,59 @@ BillController.prototype.sponsorCount = function(sponsors) {
   this.body.billData.cosponsors_count.republican_per = sponsors.republican / cent;
   this.body.billData.cosponsors_count.independent_per = sponsors.independent / cent;
 
+};
+
+
+BillController.prototype.getRepresentation = function() {
+  var that = this;
+
+  if (!this.rs) {
+    this.representation.available = false;
+    return;
+  }
+
+  if (!this.rs.user.district || !this.rs.user.state) {
+    this.representation.available = false;
+    return;
+  }
+
+  if (!this.representation) {
+    this.representation = {};
+  }
+
+  this.representation.for = {
+    state: this.rs.user.state,
+    district: this.rs.user.district,
+    bill_id: this.body.billData.bill_id,
+  };
+
+  this.representation.busy = true;
+
+  this.billService.getRepresentation(this.representation.for, function(err, res) {
+
+    that.representation.busy = false;
+
+    if (err) {
+      that.representation.available = false;
+    }
+
+    if (res) {
+      console.log(res);
+      that.representation.result = res;
+    }
+
+  });
+
+};
+
+
+BillController.prototype.updateRepresentationView = function() {
+  var votesTotal = this.representation.result.votesTotal + 1;
+  var sampleSize = this.representation.result.sampleSize;
+  this.representation.result.representationScore = votesTotal + '/' + sampleSize;
+  if (this.representation.result.representationPercent < 100) {
+    this.representation.result.representationPercent = Math.ceil((votesTotal / sampleSize) * 100);
+  }
 };
 
 module.exports = BillController;
