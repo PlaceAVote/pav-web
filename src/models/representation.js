@@ -20,7 +20,7 @@ Representation.prototype.getVotePercent = function(options) {
   var voteNo = {
     val: Math.round(percentNo * 100) / 100,
     label: 'Against',
-    className: 'against'
+    className: 'against',
   };
   var voteYes = {
     val: Math.round(percentYes * 100) / 100,
@@ -28,7 +28,7 @@ Representation.prototype.getVotePercent = function(options) {
     className: 'favor',
   };
   this.votes.stats = [voteNo, voteYes];
-}
+};
 
 Representation.prototype.getRepresentationPercent = function(options) {
   if (this.votesTotal >= options.sampleSize) {
