@@ -8,16 +8,14 @@ module.exports = function() {
     link: function(scope, el, attr) {
       var dataset = scope.data;
 
-      if (dataset) {
-        scope.createChart();
-      }
-
       scope.$watch('data', function(n, o) {
 
         if (n) {
           dataset = n;
+          console.log(dataset);
           scope.createChart();
         }
+
       });
 
       scope.createChart = function() {

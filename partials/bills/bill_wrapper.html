@@ -101,7 +101,7 @@ Do you agree or disagree? Join the discussion and place your vote today!"></upda
     </ul>
 
 
-    <div class="c-card c-bill-vote-stats">
+    <div class="c-card c-bill-vote-stats" ng-if="bill.rs.user.district && bill.representation.result.votesTotal > 0">
         <h1>District Vote Statistics</h1>
       <hr />
         <div style="width: 100%;">
