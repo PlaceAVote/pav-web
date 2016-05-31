@@ -13,6 +13,7 @@ FeedController = function($scope, $location, userService, billService, authServi
   this.userService = userService;
   this.feedService = feedService;
   this.searchService = searchService;
+  this.zipExpression = /^\d{5}(?:[-\s]\d{4})?$/;
   this.timeout = $timeout;
   this.rs = $rootScope;
   this.rs.inApp = true;
@@ -46,8 +47,8 @@ FeedController = function($scope, $location, userService, billService, authServi
   this.categories.discovery.selectedCategory = this.categories.discovery.categories.trends;
   this.selectedCategory = this.categories.all;
   this.getTrends();
+  var that = this;
   this.getUserProfile(function(err, response) {
-    var that = this;
     if (err) {
       if (err.status === 401) {
         $location.path('/');
@@ -56,10 +57,28 @@ FeedController = function($scope, $location, userService, billService, authServi
       $rootScope.notLoggedIn = false;
       $scope.user = response;
       $scope.banner = new Banner(response);
+      that.showZipModal();
     }
   });
 
   this.getFeed();
+};
+
+FeedController.prototype.updateZip = function() {
+  if (!this.zipExpression.test(this.zipCode)) {
+    this.invalidZip = true;
+  } else {
+    this.invalidZip = false;
+  }
+};
+
+FeedController.prototype.showZipModal = function() {
+  if (!this.rs || !this.rs.user) {
+    return;
+  }
+  if (!this.rs.user.district || !this.rs.user.state) {
+    this.zipModal = true;
+  }
 };
 
 FeedController.prototype.getUserProfile = function(callback) {

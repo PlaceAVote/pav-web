@@ -15,6 +15,25 @@
 <section class="c-feed row tablet-col">
 
 
+<div ng-show="feed.zipModal" class="c-modal__wrapper c-modal__wrapper--active">
+  <div class="c-modal c-modal--zip">
+    <div class="c-modal__zip">
+      <div class="c-modal__zip__overlay c-modal__zip_overlay-gradient">
+        <h1>We can't seem to locate you!</h1>
+        <h3>Enter your zipcode to enable us to show more relevant voting statistics for your district and state</h3>
+        <hr />
+        <div class="c-modal__zip_form-body">
+          <input type="text" ng-class="{'c-modal__zip-invalid': feed.invalidZip}" ng-model="feed.zipCode" />
+          <div class="c-modal__zip_btn_column">
+            <button class="btn-blank c-modal__zip_button-reply-cancel" ng-click="feed.zipModal = false">Cancel</button>
+            <button class="btn-blank c-modal__zip_button-reply-update" ng-click="feed.updateZip()">Update</button>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="c-feed__menu-container"
     css-scroll
     css-scroll-when="1"
