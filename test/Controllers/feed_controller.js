@@ -269,4 +269,37 @@ describe("FeedController", function() {
        expect(subject.zipModal).to.eql(true);
      });
    });
+    describe('UpdateZip', function() {
+      it('doesnt call update user settings is zipCode is invalid', function(done) {
+        var called = false;
+        var mockUserService = {
+          getUserProfile: function(id, cb) { cb(null, {}) },
+          saveUserSettings: function(zip, cb) { called = true; cb() },
+        };
+        var subject = new FeedController({}, {}, mockUserService, new mockBillService(), new mockAuthService(), new mockFeedServiceEventsError(), {}, {}, mockSearchService);
+        subject.zipCode = 'cat';
+        subject.updateZip();
+        expect(subject.invalidZip).to.eql(true);
+        expect(called).to.eql(false);
+        done();
+      });
+
+      it('call update user settings is zipCode is valid', function(done) {
+        var called = false;
+        var calledBody;
+        var mockUserService = {
+          getUserProfile: function(id, cb) { cb(null, {}) },
+          saveUserSettings: function(body, cb) { called = true; calledBody = body; cb(); },
+        };
+        var subject = new FeedController({}, {}, mockUserService, new mockBillService(), new mockAuthService(), new mockFeedServiceEventsError(), {}, {}, mockSearchService);
+        subject.zipCode = '90210';
+        subject.zipModal = true;
+        subject.updateZip();
+        expect(subject.invalidZip).to.eql(false);
+        expect(subject.zipModal).to.eql(false);
+        expect(called).to.eql(true);
+        expect(calledBody).to.eql({zipcode: '90210'});
+        done();
+      });
+    });
 });

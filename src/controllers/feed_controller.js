@@ -67,9 +67,16 @@ FeedController = function($scope, $location, userService, billService, authServi
 FeedController.prototype.updateZip = function() {
   if (!this.zipExpression.test(this.zipCode)) {
     this.invalidZip = true;
-  } else {
-    this.invalidZip = false;
+    return;
   }
+  this.invalidZip = false;
+  this.zipModal = false;
+  var body = {
+    zipcode: this.zipCode,
+  };
+  this.userService.saveUserSettings(body, function() {
+    // No consequences ion passing or failing.
+  });
 };
 
 FeedController.prototype.showZipModal = function() {
