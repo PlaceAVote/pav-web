@@ -83,6 +83,7 @@ FeedController.prototype.showZipModal = function() {
   if (!this.rs || !this.rs.user) {
     return;
   }
+  this.rs.user.district = 0;
   if (!this.rs.user.district || !this.rs.user.state) {
     this.zipModal = true;
   }

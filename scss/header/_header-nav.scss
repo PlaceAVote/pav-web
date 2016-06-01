@@ -34,9 +34,7 @@ header {
   align-items: center;
   justify-content: center;
   border-bottom: 1px solid #2a385f;
-  -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+ 
 
   .row-header {
     @include max-width();
