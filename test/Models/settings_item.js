@@ -20,7 +20,7 @@ describe('SettingsItem', function(){
         first_name: 'stefan',
         last_name: 'huber',
         gender: 'male',
-        dob: 662083200000,
+        dob: '662083200000',
         public: false,
         city: 'Berlin'
       };

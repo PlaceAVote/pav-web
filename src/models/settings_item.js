@@ -26,7 +26,7 @@ SettingsItem.prototype.toBody = function() {
     first_name: this.first_name,
     last_name: this.last_name,
     gender: this.gender,
-    dob: this.dob.getTime(),
+    dob: this.dob.getTime().toString(),
     public: this.public,
     city: this.city,
   };

@@ -44,7 +44,7 @@ SignUpCtrl.prototype.setDateAsUTCTime = function(date) {
   if (!(date instanceof Date)) {
     return;
   }
-  this.additionalInformation.dob = date.getTime();
+  this.additionalInformation.dob = date.getTime().toString();
 };
 
 SignUpCtrl.prototype.signup = function() {
