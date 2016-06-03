@@ -312,5 +312,105 @@ describe("FeedController", function() {
         expect(calledBody).to.eql({zipcode: '90210'});
         done();
       });
+      it('doesnt update rootscope zip, district or state when service errors', function(done) {
+        var called = false;
+        var calledBody;
+        var rs = {
+          user: {
+            zipcode: '90201',
+          },
+        };
+        var mockUserService = {
+          getUserProfile: function(id, cb) { cb(null, {}) },
+          saveUserSettings: function(body, cb) { called = true; calledBody = body; cb(new Error('Service Error')); },
+        };
+        var subject = new FeedController({}, {}, mockUserService, new mockBillService(), new mockAuthService(), new mockFeedServiceEventsError(), rs, {}, mockSearchService);
+        subject.zipCode = '90210';
+        subject.zipModal = true;
+        subject.updateZip();
+        expect(subject.invalidZip).to.eql(false);
+        expect(subject.zipModal).to.eql(false);
+        expect(called).to.eql(true);
+        expect(calledBody).to.eql({zipcode: '90210'});
+        expect(rs.user.zipcode).to.eql('90201');
+        expect(rs.user.state).to.eql(undefined);
+        expect(rs.user.district).to.eql(undefined);
+        done();
+      });
+      it('updates zipCode is a result.zipcode is returned', function(done) {
+        var called = false;
+        var calledBody;
+        var rs = {
+          user: {
+            zipcode: '90201',
+          },
+        };
+        var mockUserService = {
+          getUserProfile: function(id, cb) { cb(null, {}) },
+          saveUserSettings: function(body, cb) { called = true; calledBody = body; cb(null, {zipcode: '90210'}); },
+        };
+        var subject = new FeedController({}, {}, mockUserService, new mockBillService(), new mockAuthService(), new mockFeedServiceEventsError(), rs, {}, mockSearchService);
+        subject.zipCode = '90210';
+        subject.zipModal = true;
+        subject.updateZip();
+        expect(subject.invalidZip).to.eql(false);
+        expect(subject.zipModal).to.eql(false);
+        expect(called).to.eql(true);
+        expect(calledBody).to.eql({zipcode: '90210'});
+        expect(rs.user.zipcode).to.eql('90210');
+        expect(rs.user.state).to.eql(undefined);
+        expect(rs.user.district).to.eql(undefined);
+        done();
+      });
+      it('updates district is a result.district is returned', function(done) {
+        var called = false;
+        var calledBody;
+        var rs = {
+          user: {
+            zipcode: '90201',
+          },
+        };
+        var mockUserService = {
+          getUserProfile: function(id, cb) { cb(null, {}) },
+          saveUserSettings: function(body, cb) { called = true; calledBody = body; cb(null, {zipcode: '90210', district: 4}); },
+        };
+        var subject = new FeedController({}, {}, mockUserService, new mockBillService(), new mockAuthService(), new mockFeedServiceEventsError(), rs, {}, mockSearchService);
+        subject.zipCode = '90210';
+        subject.zipModal = true;
+        subject.updateZip();
+        expect(subject.invalidZip).to.eql(false);
+        expect(subject.zipModal).to.eql(false);
+        expect(called).to.eql(true);
+        expect(calledBody).to.eql({zipcode: '90210'});
+        expect(rs.user.zipcode).to.eql('90210');
+        expect(rs.user.state).to.eql(undefined);
+        expect(rs.user.district).to.eql(4);
+        done();
+      });
+      it('updates state is a result.state is returned', function(done) {
+        var called = false;
+        var calledBody;
+        var rs = {
+          user: {
+            zipcode: '90201',
+          },
+        };
+        var mockUserService = {
+          getUserProfile: function(id, cb) { cb(null, {}) },
+          saveUserSettings: function(body, cb) { called = true; calledBody = body; cb(null, {zipcode: '90210', district: 4, state: 'CA'}); },
+        };
+        var subject = new FeedController({}, {}, mockUserService, new mockBillService(), new mockAuthService(), new mockFeedServiceEventsError(), rs, {}, mockSearchService);
+        subject.zipCode = '90210';
+        subject.zipModal = true;
+        subject.updateZip();
+        expect(subject.invalidZip).to.eql(false);
+        expect(subject.zipModal).to.eql(false);
+        expect(called).to.eql(true);
+        expect(calledBody).to.eql({zipcode: '90210'});
+        expect(rs.user.zipcode).to.eql('90210');
+        expect(rs.user.state).to.eql('CA');
+        expect(rs.user.district).to.eql(4);
+        done();
+      });
     });
 });

@@ -6,6 +6,7 @@ module.exports = function($compile, commentService, $anchorScroll, $timeout, $lo
       comment: '<',
       parent: '<',
       feed: '<',
+      modal: '<',
     },
     templateUrl: 'partials/comments/comments.html',
     link: function(scope, element, attrs) {
@@ -25,6 +26,16 @@ module.exports = function($compile, commentService, $anchorScroll, $timeout, $lo
       scope.location = $location;
       scope.window = $window;
       scope.userService = userService;
+
+      scope.clickUserName = function(path) {
+        if (!scope || !scope.modal) {
+          return $location.path(path);
+        }
+        scope.modal.removeClass('c-modal__wrapper c-modal__wrapper--active c-issue--modal');
+        scope.modal.empty();
+        angular.element(document.body).removeClass('c-modal__body--active');
+        $location.path(path);
+      };
 
       scope.$watch('feed', function(n,o) {
         if (n) {

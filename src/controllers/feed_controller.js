@@ -74,8 +74,20 @@ FeedController.prototype.updateZip = function() {
   var body = {
     zipcode: this.zipCode,
   };
-  this.userService.saveUserSettings(body, function() {
-    // No consequences on passing or failing.
+  var that = this;
+  this.userService.saveUserSettings(body, function(err, result) {
+    if (err || !result) {
+      return;
+    }
+    if (result.zipcode) {
+      that.rs.user.zipcode = result.zipcode;
+    }
+    if (result.district) {
+      that.rs.user.district = result.district;
+    }
+    if (result.state) {
+      that.rs.user.state = result.state;
+    }
   });
 };
 
