@@ -7,12 +7,12 @@ module.exports = function($location, $timeout, issueService, $rootScope) {
     },
     templateUrl: 'partials/issues/issue_modal.html',
     link: function(scope, el) {
+      scope.parent = el;
       scope.issueService = issueService;
       scope.location = $location;
       scope.timeout = $timeout;
       scope.commentOrder = 'highest-score';
       scope.img_url = $rootScope.user.img_url;
-
       scope.postComment = function() {
         var that = this;
 
