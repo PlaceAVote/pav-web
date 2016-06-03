@@ -15,7 +15,6 @@ module.exports = function($location, issueService, facebook, $window, userServic
     link: function(scope, el, attr, controller) {
       var that = this;
       scope.context = {};
-
       scope.location = $location;
 
       scope.issueService = issueService;
