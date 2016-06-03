@@ -3,9 +3,11 @@ var expect = require('chai').expect;
 var User = require('../../src/models/user.js');
 
 describe("FeedController", function() {
-    // this.welcomeMessage = function() {
-
-    // };
+    function mockSearchService(){
+      this.bills = function(callback) {
+        return callback();
+      }
+    };
     function mockAuthService(){
       this.validateToken = function(callback) {
         return callback(true);
@@ -237,6 +239,78 @@ describe("FeedController", function() {
         subject.subCategoryClick('discovery', 'technology');
         expect(subject.selectedCategory.name).to.eql('discovery');
         expect(subject.selectedCategory.selectedCategory.items.length).to.eql(0);
+      });
+    });
+    describe('Show Zip Model', function() {
+      it('wont break if rootScope doesnt have user', function() {
+         var subject = new FeedController({}, {}, new mockUserService(), new mockBillService(), new mockAuthService(), new mockFeedServiceEventsError(), {}, {}, mockSearchService);
+         expect(subject.zipModal).to.eql(undefined);
+         subject.showZipModal();
+         expect(subject.zipModal).to.eql(undefined);
+      });
+      it('will show modal is district isnt on the user model', function() {
+        var mockRS = {
+          user: {
+            state: 'CA',
+          },
+        };
+        var subject = new FeedController({}, {}, new mockUserService(), new mockBillService(), new mockAuthService(), new mockFeedServiceEventsError(), mockRS, {}, mockSearchService);
+       // Zip Modal is set on instantiation
+       expect(subject.zipModal).to.eql(true);
+     });
+     it('will show modal is state isnt on the user model', function() {
+       var mockRS = {
+         user: {
+           district: 6,
+         },
+       };
+       var subject = new FeedController({}, {}, new mockUserService(), new mockBillService(), new mockAuthService(), new mockFeedServiceEventsError(), mockRS, {}, mockSearchService);
+       // Zip Modal is set on instantiation
+       expect(subject.zipModal).to.eql(true);
+     });
+     it('wont show modal has state and district', function() {
+       var mockRS = {
+         user: {
+           district: 6,
+           state: 'CA',
+         },
+       };
+       var subject = new FeedController({}, {}, new mockUserService(), new mockBillService(), new mockAuthService(), new mockFeedServiceEventsError(), mockRS, {}, mockSearchService);
+       // Zip Modal is set on instantiation
+       expect(subject.zipModal).to.eql(undefined);
+     });
+   });
+    describe('UpdateZip', function() {
+      it('doesnt call update user settings is zipCode is invalid', function(done) {
+        var called = false;
+        var mockUserService = {
+          getUserProfile: function(id, cb) { cb(null, {}) },
+          saveUserSettings: function(zip, cb) { called = true; cb() },
+        };
+        var subject = new FeedController({}, {}, mockUserService, new mockBillService(), new mockAuthService(), new mockFeedServiceEventsError(), {}, {}, mockSearchService);
+        subject.zipCode = 'cat';
+        subject.updateZip();
+        expect(subject.invalidZip).to.eql(true);
+        expect(called).to.eql(false);
+        done();
+      });
+
+      it('call update user settings is zipCode is valid', function(done) {
+        var called = false;
+        var calledBody;
+        var mockUserService = {
+          getUserProfile: function(id, cb) { cb(null, {}) },
+          saveUserSettings: function(body, cb) { called = true; calledBody = body; cb(); },
+        };
+        var subject = new FeedController({}, {}, mockUserService, new mockBillService(), new mockAuthService(), new mockFeedServiceEventsError(), {}, {}, mockSearchService);
+        subject.zipCode = '90210';
+        subject.zipModal = true;
+        subject.updateZip();
+        expect(subject.invalidZip).to.eql(false);
+        expect(subject.zipModal).to.eql(false);
+        expect(called).to.eql(true);
+        expect(calledBody).to.eql({zipcode: '90210'});
+        done();
       });
     });
 });

@@ -36,7 +36,125 @@
     transition: 0.5s ease all;
 }
 
+/**
+* Zip Entry modal styling.
+*/
 
+.c-modal--zip {
+  border-radius:3px;
+    max-width: 600px;
+    width: 100%;
+    color: $greydark;
+    border: 1px solid $widgetborder;
+    @include media($tablet) {
+      top: 49px;
+      transform: translateY(0);
+      height: 100%;
+      max-width: 100%;
+    }
+    h1, h3 {
+      text-align: center;
+      padding:20px 0px 0px 0px;
+    }
+    h3 {
+      color: $greydark;
+      font-size: 90%;
+      padding:1px 0px 20px 0px;
+    }
+    button {
+
+    }
+}
+.c-modal__zip_btn_column {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -webkit-justify-content: center;
+  justify-content: center;
+  button {
+    color: $greydark;
+  }
+}
+
+.c-modal__zip {
+    width: 100%;
+    background-size: cover;
+
+    @include media($tablet) {
+      height: 100%;
+    }
+    .btn-green {padding:0px 10px;}
+    .btn-red {padding:0px 10px;}
+}
+
+.c-modal__zip__overlay {
+    background: $bgcolor;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+.c-modal__zip_button-reply-update {
+  transition: all 0.1s ease;
+  &:hover {
+    color: lighten($green, 10%);
+  }
+}
+
+.c-modal__zip_button-reply-cancel {
+  transition: all 0.1s ease;
+  &:hover {
+    color: lighten($red, 10%);
+  }
+}
+
+.c-modal__zip-invalid {
+  transition: all 0.1s ease;
+  border-color: $red !important;
+}
+
+.c-modal__zip_form-body {
+  background:$white;
+  color: $greydark;
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-bottom:10px;
+  @include medium();
+  input {
+    width: calc(100% - 40px);
+    height: 30px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 10px;
+    border-radius: 3px;
+    border: 1px solid $grey;
+    @include font-size(14px);
+    color: $purple;
+    padding-left: 10px;
+    outline: none;
+    transition: all 0.2s ease;
+    &:focus {
+      border: 1px solid darken($grey, 40%);
+          }
+          &::-webkit-input-placeholder {
+            color: $grey;
+          }
+          &::-moz-placeholder {
+            /* Firefox 19+ */
+            color: $grey;
+          }
+          &:-ms-input-placeholder {
+            color: $grey;
+          }
+          &:-moz-placeholder {
+            /* Firefox 18- */
+            color: $grey;
+          }
+      }
+}
 
 
 
@@ -103,7 +221,7 @@
     @include font-size(20px);
 }
 
-.c-modal__vote h1 {
+.c-modal__vote h1, {
     padding: 30px;
     text-align: center;
     position: relative;
