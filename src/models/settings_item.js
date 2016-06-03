@@ -26,7 +26,7 @@ SettingsItem.prototype.toBody = function() {
     first_name: this.first_name,
     last_name: this.last_name,
     gender: this.gender,
-    dob: strftime('%m/%d/%Y', this.dob),
+    dob: this.dob.getTime(),
     public: this.public,
     city: this.city,
   };
