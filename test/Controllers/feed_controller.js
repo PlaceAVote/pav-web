@@ -258,6 +258,29 @@ describe("FeedController", function() {
        // Zip Modal is set on instantiation
        expect(subject.zipModal).to.eql(true);
      });
+      it('will only show modal when rs.user.shownZipModal is false', function() {
+        var mockRS = {
+          user: {
+            state: 'CA',
+          },
+          shownZipModal: false,
+        };
+        var subject = new FeedController({}, {}, new mockUserService(), new mockBillService(), new mockAuthService(), new mockFeedServiceEventsError(), mockRS, {}, mockSearchService);
+       // Zip Modal is set on instantiation
+       expect(subject.zipModal).to.eql(true);
+     });
+      it('will not show when showZipModal is true', function() {
+        var mockRS = {
+          user: {
+            state: 'CA',
+            district: 6,
+          },
+          shownZipModal: true,
+        };
+        var subject = new FeedController({}, {}, new mockUserService(), new mockBillService(), new mockAuthService(), new mockFeedServiceEventsError(), mockRS, {}, mockSearchService);
+       // Zip Modal is set on instantiation
+       expect(subject.zipModal).to.eql(undefined);
+     });
      it('will show modal is state isnt on the user model', function() {
        var mockRS = {
          user: {
@@ -335,6 +358,7 @@ describe("FeedController", function() {
         expect(rs.user.zipcode).to.eql('90201');
         expect(rs.user.state).to.eql(undefined);
         expect(rs.user.district).to.eql(undefined);
+        expect(rs.shownZipModal).to.eql(true);
         done();
       });
       it('updates zipCode is a result.zipcode is returned', function(done) {
