@@ -23,6 +23,7 @@
         <h3>Enter your zipcode to enable us to show more relevant voting statistics for your district and state</h3>
         <hr />
         <div class="c-modal__zip_form-body">
+        <p ng-show="feed.invalidZip" class="text-center" style="color:red; padding-top: 10px">Please enter a valid zipcode</p>
           <input type="text" ng-class="{'c-modal__zip-invalid': feed.invalidZip}" ng-model="feed.zipCode" placeholder="Enter Zipcode Here"/>
           <div class="c-modal__zip_btn_column">
             <a class="btn-red text-center c-modal__zip_button-reply-cancel margin-right-medium" ng-click="feed.zipModal = false"><p>Cancel</p></a>

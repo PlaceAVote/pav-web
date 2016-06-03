@@ -75,7 +75,7 @@ FeedController.prototype.updateZip = function() {
     zipcode: this.zipCode,
   };
   this.userService.saveUserSettings(body, function() {
-    // No consequences ion passing or failing.
+    // No consequences on passing or failing.
   });
 };
 
@@ -83,7 +83,6 @@ FeedController.prototype.showZipModal = function() {
   if (!this.rs || !this.rs.user) {
     return;
   }
-  this.rs.user.district = 0;
   if (!this.rs.user.district || !this.rs.user.state) {
     this.zipModal = true;
   }

@@ -268,6 +268,17 @@ describe("FeedController", function() {
        // Zip Modal is set on instantiation
        expect(subject.zipModal).to.eql(true);
      });
+     it('wont show modal has state and district', function() {
+       var mockRS = {
+         user: {
+           district: 6,
+           state: 'CA',
+         },
+       };
+       var subject = new FeedController({}, {}, new mockUserService(), new mockBillService(), new mockAuthService(), new mockFeedServiceEventsError(), mockRS, {}, mockSearchService);
+       // Zip Modal is set on instantiation
+       expect(subject.zipModal).to.eql(undefined);
+     });
    });
     describe('UpdateZip', function() {
       it('doesnt call update user settings is zipCode is invalid', function(done) {
