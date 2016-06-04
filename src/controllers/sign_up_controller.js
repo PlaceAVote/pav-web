@@ -40,10 +40,17 @@ function SignUpCtrl($rootScope, $scope, $location, userService, authService, Ana
   ];
 }
 
+SignUpCtrl.prototype.setDateAsUTCTime = function(date) {
+  if (!(date instanceof Date)) {
+    return;
+  }
+  this.additionalInformation.dob = date.getTime().toString();
+};
+
 SignUpCtrl.prototype.signup = function() {
+  this.setDateAsUTCTime(this.additionalInformation.dob);
   this.userService.addAdditionalInformation(this.additionalInformation);
   var user = this.userService.getUser();
-
   if (!user) {
     this.invalid_user = true;
   } else {
