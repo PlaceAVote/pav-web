@@ -96,7 +96,7 @@ FeedController.prototype.updateZip = function() {
 };
 
 FeedController.prototype.showZipModal = function() {
-  if (!this.rs || !this.rs.user || this.rs.shownZipModal) {
+  if (!this.rs || !this.rs.user || this.rs.shownZipModal || this.rs.user.newUser) {
     return;
   }
   if (!this.rs.user.district || !this.rs.user.state) {
