@@ -1,9 +1,8 @@
 var config = require('./config/urls.js');
-var GMAIL = require('./integrations/gmail.js');
-var gapi;
-GMAIL.load(function(google) {
-  console.log('GMAIL', google);
-  gapi = google;
+var gmail = require('./integrations/gmail.js');
+
+gmail.loadContacts(function(response) {
+  console.log(response);
 });
 
 console.log('%cPlaceavote', 'background: #543594; color: #ffffff; padding: 1px 3px; border-radius: 3px; font-size: 12px;font-family: sans-serif; margin-left: calc(100% - 70px);');
