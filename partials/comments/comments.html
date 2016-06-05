@@ -8,9 +8,8 @@
   </div>
 
     <div class="c-card__comment-body">
-
       <p class="c-card__username"
-         ng-click="location.path('profile/' + comment.author)">
+         ng-click="clickUserName('profile/' + comment.author)">
       {{comment.author_first_name}} <span ng-show="feed">{{comment.author_last_name}}</span></p>
 
       <p ng-show="feed">
