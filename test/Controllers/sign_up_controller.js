@@ -170,7 +170,7 @@ describe('SignUpController', function() {
       var subject = new SignUpController(rs, undefined, undefined, mockUS, {}, Analytics);
       var date = new Date('25 Dec 1995 UTC');
       subject.setDateAsUTCTime(date);
-      expect(subject.additionalInformation.dob).to.eql('819849600000');
+      expect(subject.additionalInformation.dobFmt).to.eql('819849600000');
     });
     it('does not set the date as a utc if its not a date', function() {
       var mockUS = new MockUserService();
