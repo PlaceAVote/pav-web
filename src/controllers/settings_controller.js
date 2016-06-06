@@ -1,5 +1,6 @@
 var AuthorizeController = require('./autherize_controller.js');
 var title = require('../config/titles.js');
+var differ = require('../utils/differ.js');
 var SettingsItem = require('../models/settings_item.js');
 
 SettingsController = function($scope, $location, $timeout, userService, authService, $rootScope, $anchorScroll) {
@@ -28,8 +29,10 @@ SettingsController = function($scope, $location, $timeout, userService, authServ
   this.getUserSettings(function(err, result) {
     if (err) {
       that.settingsItem = new SettingsItem();
+    } else {
+      that.settingsItem = SettingsItem.createFromJson(result);
+      that.previousValues = SettingsItem.createFromJson(result);
     }
-    that.settingsItem = SettingsItem.createFromJson(result);
   });
 
   this.gender_options = [
@@ -66,7 +69,7 @@ SettingsController.prototype.getUserSettings = function(callback) {
 };
 
 SettingsController.prototype.saveUserSettings = function(callback) {
-  var params = this.settingsItem.toBody();
+  var params = differ(this.previousValues.toBody(), this.settingsItem.toBody());
   var that = this;
   this.saving = true;
   this.userService.saveUserSettings(params, function(err) {

@@ -274,6 +274,36 @@ describe('Settings Controller', function() {
         }, 1850);
       });
     });
+    it('should only call user settings save with diffed field', function(done) {
+      var user = {
+        email: 'test@settings.com',
+        first_name: 'John',
+        last_name: 'Locke',
+        gender: 'male',
+        dob: '662083200000',
+        public: false,
+        city: 'The Island'
+      };
+      var actualParams;
+      var mockUserService = {
+        getUserSettings: function(cb) { cb(null, user) },
+        saveUserSettings: function(params, cb) {
+          actualParams = params;
+          return cb(null);
+        }
+      };
+      var subject = new SettingsController(mockScope, mockLocation, mockTimeout, mockUserService, mockAuthService, mockRootScope, mockAnchorScroll);
+      // update first and last name
+      subject.settingsItem.first_name = 'Jeremy';
+      subject.settingsItem.last_name = 'Bentham';
+      subject.saveUserSettings(function(err) {
+        expect(actualParams.first_name).to.eql('Jeremy');
+        expect(actualParams.last_name).to.eql('Bentham');
+        expect(actualParams.dob).to.eql(undefined);
+        expect(err).to.eql(null);
+        done();
+      });
+    });
   });
   describe('Change Password', function() {
     it('set error state on subject and return', function() {
