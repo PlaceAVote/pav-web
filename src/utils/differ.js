@@ -4,6 +4,9 @@ function differ(original, changed) {
   if (!changed) {
     return null;
   }
+  if (!original) {
+    return changed;
+  }
   var difference = {};
   for (var key in changed) {
     if (original[key] !== changed[key]) {

@@ -11,6 +11,10 @@ describe('Differ', function() {
     var subject = differ(original, null);
     expect(subject).to.eql(null);
   });
+  it('returns changed if no original object given', function() {
+    var subject = differ(null, {a: 1});
+    expect(subject).to.eql({a: 1});
+  });
   it('returns null if objects are the same', function() {
     var changed = {
       a: 1,
