@@ -14,6 +14,7 @@ describe('SettingsItem', function(){
       settingsItem.img_url = 'image.com';
       settingsItem.public = false;
       settingsItem.social_login = true;
+      settingsItem.zipcode = '90210';
       var subject = settingsItem.toBody();
       var expected = {
         email: 'stefan@test.com',
@@ -22,7 +23,8 @@ describe('SettingsItem', function(){
         gender: 'male',
         dob: '662083200000',
         public: false,
-        city: 'Berlin'
+        city: 'Berlin',
+        zipcode: '90210',
       };
       expect(subject).to.eql(expected);
     });
@@ -37,12 +39,14 @@ describe('SettingsItem', function(){
       settingsItem.img_url = 'image.com';
       settingsItem.public = false;
       settingsItem.social_login = true;
+      settingsItem.zipcode = '90210';
       var subject = settingsItem.toBody();
       var expected = {
         email: 'stefan@test.com',
         first_name: 'stefan',
         last_name: 'huber',
         gender: 'male',
+        zipcode: '90210',
         public: false,
         city: 'Berlin'
       };
@@ -59,6 +63,7 @@ describe('SettingsItem', function(){
         dob: 662083200000,
         public: false,
         city: 'Berlin',
+        zipcode: '90210',
       };
       var subject = SettingsItem.createFromJson(expectedValues);
       expect(subject.email).to.eql('test@test.com');
@@ -71,6 +76,7 @@ describe('SettingsItem', function(){
       expect(subject.dob.getDay()).to.eql(2);
       expect(subject.dob.getMonth()).to.eql(11);
       expect(subject.dob.getYear()).to.eql(90);
+      expect(subject.zipcode).to.eql('90210');
     });
     it('can handle the date being a string', function() {
       var expectedValues = {

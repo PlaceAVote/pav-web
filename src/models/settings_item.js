@@ -26,6 +26,7 @@ SettingsItem.createFromJson = function(json) {
   settingsItem.user_id = json.user_id;
   settingsItem.social_login = json.social_login;
   settingsItem.public = json.public;
+  settingsItem.zipcode = json.zipcode;
   return settingsItem;
 };
 
@@ -37,6 +38,7 @@ SettingsItem.prototype.toBody = function() {
     gender: this.gender,
     public: this.public,
     city: this.city,
+    zipcode: this.zipcode,
   };
 
   if (this.dob) {
