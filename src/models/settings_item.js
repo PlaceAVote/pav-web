@@ -4,13 +4,22 @@ function SettingsItem() {
 
 }
 
+SettingsItem.prototype.createStringFromUTCString = function(utcInMiliString) {
+  dobNum = parseInt(utcInMiliString);
+  if (isNaN(dobNum)) {
+    this.dob = null;
+  } else {
+    this.dob = new Date(dobNum);
+  }
+};
+
 SettingsItem.createFromJson = function(json) {
   json = json || {};
   var settingsItem = new SettingsItem();
   settingsItem.email = json.email;
   settingsItem.first_name = json.first_name;
   settingsItem.last_name = json.last_name;
-  settingsItem.dob = new Date(json.dob);
+  settingsItem.createStringFromUTCString(json.dob);
   settingsItem.gender = json.gender;
   settingsItem.city = json.city;
   settingsItem.img_url = json.img_url || '//cdn.placeavote.com/img/profile/profile-picture.png';
@@ -26,11 +35,13 @@ SettingsItem.prototype.toBody = function() {
     first_name: this.first_name,
     last_name: this.last_name,
     gender: this.gender,
-    dob: this.dob.getTime().toString(),
     public: this.public,
     city: this.city,
   };
 
+  if (this.dob) {
+    body.dob = this.dob.getTime().toString();
+  }
   return body;
 };
 

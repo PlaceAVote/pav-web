@@ -58,9 +58,10 @@ describe('Settings Controller', function() {
       expect(subject.settingsItem.first_name).to.eql('John');
       expect(subject.settingsItem.last_name).to.eql('Locke');
       expect(subject.settingsItem.gender).to.eql('male');
-      expect(subject.settingsItem.dob).to.eql(new Date('662083200000'));
+      expect(subject.settingsItem.dob).to.eql(new Date(662083200000));
       expect(subject.settingsItem.public).to.eql(false);
       expect(subject.settingsItem.city).to.eql('The Island');
+      expect(subject.settingsItem).to.eql(subject.previousValues);
       done();
     });
 
