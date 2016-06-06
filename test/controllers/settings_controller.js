@@ -296,10 +296,13 @@ describe('Settings Controller', function() {
       // update first and last name
       subject.settingsItem.first_name = 'Jeremy';
       subject.settingsItem.last_name = 'Bentham';
+      // should not include empty properties
+      subject.settingsItem.zipcode = '';
       subject.saveUserSettings(function(err) {
         expect(actualParams.first_name).to.eql('Jeremy');
         expect(actualParams.last_name).to.eql('Bentham');
         expect(actualParams.dob).to.eql(undefined);
+        expect(actualParams.zipcode).to.eql(undefined);
         expect(err).to.eql(null);
         done();
       });

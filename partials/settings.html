@@ -44,9 +44,17 @@
               <!-- end link -->
             </div>
             <div class="profile-section">
-              <label>Residence<span class="autosave" ng-show="settings.autosaved.city">saved!</span></label>
-              <input type="text" ng-model='settings.settingsItem.city' ng-blur="settings.autoSave('city');" ng-placeholder="City" required />
-              
+              <div class="row">
+                <div class="l-6 m-12 indent">
+                  <label>City<span class="autosave" ng-show="settings.autosaved.city">saved!</span></label>
+                  <input type="text" ng-model='settings.settingsItem.city' ng-blur="settings.autoSave('city');" ng-placeholder="City" required />
+                </div>
+                <div class="l-6 m-12 indent">
+                <label>Zip<span class="autosave" ng-show="settings.autosaved.city">saved!</span></label>
+                <input type="text" ng-model='settings.settingsItem.zipcode' ng-blur="settings.autoSave('zipcode');" placeholder="Zip Code" ng-placeholder="Zip Code" required />
+              </div>
+            </div>
+
               <div class="row">
                 <div class="l-6 m-12 indent">
                   <label>Preferred Pronoun<span class="autosave" ng-show="settings.autosaved.gender">saved!</span></label>
@@ -60,7 +68,7 @@
                 </div>
               </div>
               <label>Email Address<span class="autosave" ng-show="settings.autosaved.email">saved!</span></label>
-              <input type="email" ng-model='settings.settingsItem.email' ng-blur="settings.autoSave('email');" required />
+              <input type="email" ng-model='settings.settingsItem.email' placeholder="Email" ng-blur="settings.autoSave('email');" required />
             </div>
 
           </div>
@@ -75,17 +83,17 @@
               <p class="margin-bottom-medium" ng-show="settings.passwordError">There was an error when trying to save your password.</p>
               <div class="l-3 m-12 margin-right-medium tablet-margin-right-none">
                 <label>Current Password</label>
-                <input class="margin-bottom-none talet-margin-bottom-medium" type="password" ng-model='settings.current_password'> 
+                <input class="margin-bottom-none talet-margin-bottom-medium" type="password" ng-model='settings.current_password'>
               </div>
               <div class="l-3 m-12 tablet-margin-bottom-medium">
                 <label>New Password</label>
-                <input class="margin-bottom-none" type="password" ng-model='settings.new_password'> 
+                <input class="margin-bottom-none" type="password" ng-model='settings.new_password'>
               </div>
                 <a class="btn-green h-right text-center bottom m-12" ng-click='settings.changePassword()'><p ng-show="settings.savingPassword">SAVING...</p><p ng-hide="settings.savingPassword || settings.newPassword">SAVE PASSWORD</p><p ng-show="settings.newPassword">PASSWORD SAVED!</p></a>
             </div>
             <div class="row" ng-if="settings.password_error">invaild current password</div>
-              <label>Make my profile page completely private so no one can view it<span class="autosave" ng-show="settings.autosaved.public">saved!</span></label> 
-              
+              <label>Make my profile page completely private so no one can view it<span class="autosave" ng-show="settings.autosaved.public">saved!</span></label>
+
               <input type="radio" ng-model='settings.settingsItem.public' ng-blur="settings.autoSave('public');" ng-value="false"><span>yes</span>
               <input type="radio" ng-model='settings.settingsItem.public' ng-blur="settings.autoSave('public');" ng-value="true"><span>no</span>
               <span class="private-description" ng-if='settings.settingsItem.public'>Your profile is currently set to public</span>

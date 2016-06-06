@@ -1,6 +1,7 @@
 var AuthorizeController = require('./autherize_controller.js');
 var title = require('../config/titles.js');
 var differ = require('../utils/differ.js');
+var filterObject = require('../utils/filter_object.js');
 var SettingsItem = require('../models/settings_item.js');
 
 SettingsController = function($scope, $location, $timeout, userService, authService, $rootScope, $anchorScroll) {
@@ -70,13 +71,16 @@ SettingsController.prototype.getUserSettings = function(callback) {
 
 SettingsController.prototype.saveUserSettings = function(callback) {
   var params = differ(this.previousValues.toBody(), this.settingsItem.toBody());
+  var filteredParams = filterObject(params);
   var that = this;
   this.saving = true;
-  this.userService.saveUserSettings(params, function(err) {
+  this.userService.saveUserSettings(filteredParams, function(err) {
     if (err) {
       that.saving = false;
       that.error = err;
-      return callback(err);
+      if (callback) {
+        return callback(err);
+      }
     }
 
     that.saveConfirmed = true;
@@ -84,7 +88,9 @@ SettingsController.prototype.saveUserSettings = function(callback) {
     that.timeout(function() {
       that.saveConfirmed = false;
     }, 1800);
-    callback(null);
+    if (callback) {
+      callback(null);
+    }
   });
 };
 
