@@ -14,6 +14,7 @@ describe('SettingsItem', function(){
       settingsItem.img_url = 'image.com';
       settingsItem.public = false;
       settingsItem.social_login = true;
+      settingsItem.zipcode = '90210';
       var subject = settingsItem.toBody();
       var expected = {
         email: 'stefan@test.com',
@@ -21,6 +22,31 @@ describe('SettingsItem', function(){
         last_name: 'huber',
         gender: 'male',
         dob: '662083200000',
+        public: false,
+        city: 'Berlin',
+        zipcode: '90210',
+      };
+      expect(subject).to.eql(expected);
+    });
+    it('toBody returns an object with no date when date is not defined', function(){
+      var settingsItem = new SettingsItem();
+      settingsItem.email = 'stefan@test.com';
+      settingsItem.first_name = 'stefan';
+      settingsItem.last_name = 'huber';
+      settingsItem.dob = null;
+      settingsItem.gender = 'male';
+      settingsItem.city = 'Berlin';
+      settingsItem.img_url = 'image.com';
+      settingsItem.public = false;
+      settingsItem.social_login = true;
+      settingsItem.zipcode = '90210';
+      var subject = settingsItem.toBody();
+      var expected = {
+        email: 'stefan@test.com',
+        first_name: 'stefan',
+        last_name: 'huber',
+        gender: 'male',
+        zipcode: '90210',
         public: false,
         city: 'Berlin'
       };
@@ -37,6 +63,7 @@ describe('SettingsItem', function(){
         dob: 662083200000,
         public: false,
         city: 'Berlin',
+        zipcode: '90210',
       };
       var subject = SettingsItem.createFromJson(expectedValues);
       expect(subject.email).to.eql('test@test.com');
@@ -49,6 +76,48 @@ describe('SettingsItem', function(){
       expect(subject.dob.getDay()).to.eql(2);
       expect(subject.dob.getMonth()).to.eql(11);
       expect(subject.dob.getYear()).to.eql(90);
+      expect(subject.zipcode).to.eql('90210');
+    });
+    it('can handle the date being a string', function() {
+      var expectedValues = {
+        email: 'test@test.com',
+        first_name: 'john',
+        last_name: 'locke',
+        gender: 'male',
+        dob: "662083200000",
+        public: false,
+        city: 'Berlin',
+      };
+      var subject = SettingsItem.createFromJson(expectedValues);
+      expect(subject.email).to.eql('test@test.com');
+      expect(subject.first_name).to.eql('john');
+      expect(subject.last_name).to.eql('locke');
+      expect(subject.gender).to.eql('male');
+      expect(subject.city).to.eql('Berlin');
+      expect(subject.public).to.eql(false);
+      expect(subject.dob).to.be.an.instanceof(Date);
+      expect(subject.dob.getDay()).to.eql(2);
+      expect(subject.dob.getMonth()).to.eql(11);
+      expect(subject.dob.getYear()).to.eql(90);
+    });
+    it('can handle the date being a non date', function() {
+      var expectedValues = {
+        email: 'test@test.com',
+        first_name: 'john',
+        last_name: 'locke',
+        gender: 'male',
+        dob: "cat",
+        public: false,
+        city: 'Berlin',
+      };
+      var subject = SettingsItem.createFromJson(expectedValues);
+      expect(subject.email).to.eql('test@test.com');
+      expect(subject.first_name).to.eql('john');
+      expect(subject.last_name).to.eql('locke');
+      expect(subject.gender).to.eql('male');
+      expect(subject.city).to.eql('Berlin');
+      expect(subject.public).to.eql(false);
+      expect(subject.dob).to.eq(null);
     });
   });
 });

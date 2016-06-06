@@ -1,6 +1,34 @@
 var AuthorizeController = require('./autherize_controller.js');
 var title = require('../config/titles.js');
+var differ = require('../utils/differ.js');
+var zipValidator = require('../utils/zipValidator.js');
+var emailValidator = require('../utils/email_validation.js');
+var filterObject = require('../utils/filter_object.js');
 var SettingsItem = require('../models/settings_item.js');
+
+function city(item) {
+  var valid = !!item;
+  var message = valid ? undefined : 'Invalid City';
+  return {
+    valid: valid,
+    message: message,
+  };
+}
+
+function email(item) {
+  var valid = emailValidator(item);
+  var message = valid ? undefined : 'Invalid Email Address';
+  return {
+    valid: valid,
+    message: message,
+  };
+}
+
+function alwaysTrue(item) {
+  return {
+    valid: true,
+  };
+}
 
 SettingsController = function($scope, $location, $timeout, userService, authService, $rootScope, $anchorScroll) {
   AuthorizeController.authorize({error: '/', authorizer: authService, location: $location});
@@ -11,6 +39,7 @@ SettingsController = function($scope, $location, $timeout, userService, authServ
   this.location = $location;
   this.anchorScroll = $anchorScroll;
   this.timeout = $timeout;
+  this.errors = [];
   this.current_password = '';
   this.new_password = '';
   this.autosaved = {
@@ -19,6 +48,7 @@ SettingsController = function($scope, $location, $timeout, userService, authServ
     dob: false,
     email: false,
     public: false,
+    zipcode: false,
   };
   this.showSettings = true;
   this.profilePicture = {
@@ -26,11 +56,33 @@ SettingsController = function($scope, $location, $timeout, userService, authServ
   };
   var that = this;
   this.getUserSettings(function(err, result) {
-    if (!err) {
+    if (err) {
+      that.settingsItem = new SettingsItem();
+    } else {
       that.settingsItem = SettingsItem.createFromJson(result);
-
+      that.previousValues = SettingsItem.createFromJson(result);
     }
   });
+
+  this.validators = {
+    zipcode: function(zip) {
+      var valid = zipValidator(zip);
+      if (valid) {
+        return {
+          valid: true,
+        };
+      }
+      return {
+        valid: false,
+        message: 'Invalid Zip Code',
+      };
+    },
+    city: city,
+    email: email,
+    gender: alwaysTrue,
+    dob: alwaysTrue,
+    public: alwaysTrue,
+  };
 
   this.gender_options = [
     {name: 'His', des: 'male'},
@@ -41,101 +93,92 @@ SettingsController = function($scope, $location, $timeout, userService, authServ
 
 SettingsController.prototype.autoSave = function(item) {
   var that = this;
-  if (item == 'city') {
-    if (this.settingsItem.city === '') {
+  // Dont try to save if the item is invalid
+  if (!this.validators[item](this.settingsItem[item]).valid) {
+    return;
+  }
+  this.saveUserSettings(function(error) {
+    if (error) {
       return;
     }
-  }
-  if (item == 'email') {
-    if (this.settingsItem.email === '') {
-      return;
-    }
-  }
-  this.saveUserSettings(function() {
-    if (!that.error) {
-      switch (item) {
-        case 'city': {
-          that.autosaved.city = true;
-          break;
-        }
-        case 'gender': {
-          that.autosaved.gender = true;
-          break;
-        }
-        case 'dob': {
-          that.autosaved.dob = true;
-          break;
-        }
-        case 'email': {
-          that.autosaved.email = true;
-          break;
-        }
-        case 'public': {
-          that.autosaved.public = true;
-          break;
-        }
-        default: {
-          break;
-        }
-      }
-      that.timeout(function() {
-        that.eraseAutoSave(item);
-      }, 1000);
-    }
+    that.autosaved[item] = true;
+    that.timeout(function() {
+      that.eraseAutoSave(item);
+    }, 1000);
   });
 };
 
 SettingsController.prototype.eraseAutoSave = function(item) {
-  switch (item) {
-    case 'city': {
-      this.autosaved.city = false;
-      break;
-    }
-    case 'gender': {
-      this.autosaved.gender = false;
-      break;
-    }
-    case 'dob': {
-      this.autosaved.dob = false;
-      break;
-    }
-    case 'email': {
-      this.autosaved.email = false;
-      break;
-    }
-    case 'public': {
-      this.autosaved.public = false;
-      break;
-    }
-    default: {
-      break;
-    }
-  }
+  this.autosaved[item] = false;
 };
 
 SettingsController.prototype.getUserSettings = function(callback) {
   this.userService.getUserSettings(callback);
 };
 
+function emptyBody(filtered) {
+  if (!filtered) {
+    return true;
+  }
+  if (Object.keys(filtered).length === 0 && filtered.constructor === Object) {
+    return true;
+  }
+  return false;
+}
+
+// Populates any error messages and returns true if
+// any errors were populated.
+SettingsController.prototype.populateErrors = function(body) {
+  this.errors = [];
+  for (var key in body) {
+    var validationResult = this.validators[key](body[key]);
+    if (!validationResult.valid) {
+      this.errors.push(validationResult.message);
+    }
+  }
+  if (this.errors.length > 0) {
+    return true;
+  }
+  return false;
+};
+
 SettingsController.prototype.saveUserSettings = function(callback) {
-  var params = this.settingsItem.toBody();
+  var params = differ(this.previousValues.toBody(), this.settingsItem.toBody());
+  if (this.populateErrors(params)) {
+    if (callback) {
+      return callback(new Error('Invalid Body'));
+    }
+    return;
+  }
+  var filteredParams = filterObject(params);
+  if (emptyBody(filteredParams)) {
+    this.errors.push('Nothing to Save');
+    if (callback) {
+      return callback(new Error('Invalid Body'));
+    }
+    return;
+  }
   var that = this;
   this.saving = true;
-  this.userService.saveUserSettings(params, function(err, result) {
+  this.userService.saveUserSettings(filteredParams, function(err) {
     if (err) {
       that.saving = false;
-      that.error = err;
+      that.errors.push('An error occurred while trying to save your settings');
+      that.timeout(function() {
+        that.errors = [];
+      }, 1800);
+      if (callback) {
+        return callback(err);
+      }
     }
 
-    if (result) {
-      that.saveConfirmed = true;
-      that.saving = false;
-      that.timeout(function() {
-        that.saveConfirmed = false;
-      }, 2000);
-      if (callback) {
-        callback();
-      }
+    that.saveConfirmed = true;
+    that.saving = false;
+    that.timeout(function() {
+      that.saveConfirmed = false;
+    }, 1800);
+    if (callback) {
+      callback(null);
     }
   });
 };
@@ -149,22 +192,22 @@ SettingsController.prototype.changePassword = function() {
   };
   var that = this;
   this.userService.changePassword(params, function(err, result) {
+    that.current_password = '';
+    that.new_password = '';
     if (err) {
       that.passwordError = true;
       that.savingPassword = false;
+      return;
     }
-    if (result) {
-      that.savingPassword = false;
-      that.newPassword = true;
-      that.timeout(function() {
-        that.newPassword = false;
-      }, 2000);
-    }
+    that.savingPassword = false;
+    that.newPassword = true;
+    that.timeout(function() {
+      that.newPassword = false;
+    }, 1800);
   });
-  this.current_password = '';
-  this.new_password = '';
 };
 
+// TODO is this used?
 SettingsController.prototype.maxDate = function() {
   var d = new Date();
   var y = d.getFullYear();
@@ -200,18 +243,15 @@ SettingsController.prototype.saveProfilePicture = function(img) {
   var that = this;
   this.profilePicture.saving = false;
   this.userService.profilePicture(img.img, function(err, res) {
+    that.profilePicture.saving = true;
     if (err) {
       that.profilePicture.error = true;
-      that.profilePicture.saving = true;
+      return;
     }
-
-    if (res) {
-      that.profilePicture.saving = true;
-      that.profilePicture.success = true;
-      that.settingsItem.img_url = res.img_url;
-      that.rs.user.img_url = res.img_url;
-      that.showModal = false;
-    }
+    that.profilePicture.success = true;
+    that.settingsItem.img_url = res.img_url;
+    that.rs.user.img_url = res.img_url;
+    that.showModal = false;
   });
 };
 

@@ -3,6 +3,7 @@ var AuthorizeController = require('./autherize_controller.js');
 var title = require('../config/titles.js');
 var BillSummary = require('../models/bill_summary.js');
 var Issue = require('../models/issue.js');
+var zipValidator = require('../utils/zipValidator.js');
 var SubFeedController = require('./sub_feed_controller.js');
 
 FeedController = function($scope, $location, userService, billService, authService, feedService, $rootScope, $timeout, searchService) {
@@ -13,7 +14,6 @@ FeedController = function($scope, $location, userService, billService, authServi
   this.userService = userService;
   this.feedService = feedService;
   this.searchService = searchService;
-  this.zipExpression = /^\d{5}(?:[-\s]\d{4})?$/;
   this.timeout = $timeout;
   this.rs = $rootScope;
   this.rs.inApp = true;
@@ -65,7 +65,7 @@ FeedController = function($scope, $location, userService, billService, authServi
 };
 
 FeedController.prototype.updateZip = function() {
-  if (!this.zipExpression.test(this.zipCode)) {
+  if (!zipValidator(this.zipCode)) {
     this.invalidZip = true;
     return;
   }
