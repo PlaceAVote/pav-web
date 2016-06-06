@@ -101,7 +101,9 @@
           </div>
         </div>
         <div class="doc-section">
-          <div ng-show="settings.error">Oops! An unexpected error occured.</div>
+          <div ng-repeat="error in settings.errors">
+            <p class="error">{{error}}</p>
+          </div>
           <div class="row tablet-col">
               <a ng-click="settings.showSettings = false;" class="btn-grey m-12 tablet-margin-bottom-medium text-center">Read our privacy policy</a>
               <a ng-click="settings.showSettings = false;" class="btn-grey m-12 tablet-margin-bottom-medium text-center">Read our terms of service</a>

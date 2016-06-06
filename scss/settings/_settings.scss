@@ -1,4 +1,13 @@
+
 .settings-wrapper {
+  p.error {
+    background: lighten($red, 20%);
+    color: white;
+    border-radius: 3px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid red;
+  }
 	width: 100%;
   display: flex;
   flex-direction: row;

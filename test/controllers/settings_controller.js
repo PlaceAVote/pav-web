@@ -265,8 +265,8 @@ describe('Settings Controller', function() {
       subject.settingsItem.email = 'test@test.com';
       subject.saveUserSettings(function(err) {
         expect(subject.saving).to.eql(false);
-        expect(subject.error.message).to.eql('Service Error');
-        expect(err).to.eql(subject.error);
+        expect(subject.errors[0]).to.eql('An error occurred while trying to save your settings');
+        expect(err.message).to.eql('Service Error');
         done();
       });
     });
@@ -289,7 +289,7 @@ describe('Settings Controller', function() {
         }, 1850);
       });
     });
-    it('should only call user settings save with diffed field', function(done) {
+    it('wont call save settings when not all updated fields are valid', function(done) {
       var user = {
         email: 'test@settings.com',
         first_name: 'John',
@@ -299,26 +299,23 @@ describe('Settings Controller', function() {
         public: false,
         city: 'The Island'
       };
-      var actualParams;
+      var called = false;
       var mockUserService = {
         getUserSettings: function(cb) { cb(null, user) },
         saveUserSettings: function(params, cb) {
-          actualParams = params;
+          called = true;
           return cb(null);
         }
       };
       var subject = new SettingsController(mockScope, mockLocation, mockTimeout, mockUserService, mockAuthService, mockRootScope, mockAnchorScroll);
       // update first and last name
-      subject.settingsItem.first_name = 'Jeremy';
-      subject.settingsItem.last_name = 'Bentham';
+      subject.settingsItem.city = 'LA X';
       // should not include empty properties
       subject.settingsItem.zipcode = '';
       subject.saveUserSettings(function(err) {
-        expect(actualParams.first_name).to.eql('Jeremy');
-        expect(actualParams.last_name).to.eql('Bentham');
-        expect(actualParams.dob).to.eql(undefined);
-        expect(actualParams.zipcode).to.eql(undefined);
-        expect(err).to.eql(null);
+        expect(called).to.eql(false);
+        expect(subject.errors.length).to.eql(1);
+        expect(err.message).to.eql('Invalid Body');
         done();
       });
     });
@@ -332,8 +329,8 @@ describe('Settings Controller', function() {
         }
       };
       var subject = new SettingsController(mockScope, mockLocation, mockTimeout, mockUserService, mockAuthService, mockRootScope, mockAnchorScroll);
-      // update first and last name
       subject.saveUserSettings(function(err) {
+        expect(subject.errors.length).to.eql(1);
         expect(called).to.eql(false);
         expect(err.message).to.eql('Invalid Body');
         done();
@@ -423,6 +420,17 @@ describe('Settings Controller', function() {
       expect(subject.profilePicture.success).to.eql(true);
       expect(subject.settingsItem.img_url).to.eql('Its working!');
       expect(subject.rs.user.img_url).to.eql('Its working!');
+    });
+  });
+  describe('Populate Errors', function() {
+    it('populates errors for invalid settings', function() {
+      var subject = new SettingsController(mockScope, mockLocation, mockTimeout, mockUserService, mockAuthService, mockRootScope, mockAnchorScroll);
+      var valid = subject.populateErrors({city: '', email: '', zipcode: '920'});
+      expect(valid).to.eql(true);
+      expect(subject.errors.length).to.eql(3);
+      expect(subject.errors[0]).to.eql('Invalid City');
+      expect(subject.errors[1]).to.eql('Invalid Email Address');
+      expect(subject.errors[2]).to.eql('Invalid Zip Code');
     });
   });
 });

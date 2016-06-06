@@ -2,15 +2,32 @@ var AuthorizeController = require('./autherize_controller.js');
 var title = require('../config/titles.js');
 var differ = require('../utils/differ.js');
 var zipValidator = require('../utils/zipValidator.js');
+var emailValidator = require('../utils/email_validation.js');
 var filterObject = require('../utils/filter_object.js');
 var SettingsItem = require('../models/settings_item.js');
 
-function nonDefined(item) {
-  return !!item;
+function city(item) {
+  var valid = !!item;
+  var message = valid ? undefined : 'Invalid City';
+  return {
+    valid: valid,
+    message: message,
+  };
+}
+
+function email(item) {
+  var valid = emailValidator(item);
+  var message = valid ? undefined : 'Invalid Email Address';
+  return {
+    valid: valid,
+    message: message,
+  };
 }
 
 function alwaysTrue(item) {
-  return true;
+  return {
+    valid: true,
+  };
 }
 
 SettingsController = function($scope, $location, $timeout, userService, authService, $rootScope, $anchorScroll) {
@@ -22,6 +39,7 @@ SettingsController = function($scope, $location, $timeout, userService, authServ
   this.location = $location;
   this.anchorScroll = $anchorScroll;
   this.timeout = $timeout;
+  this.errors = [];
   this.current_password = '';
   this.new_password = '';
   this.autosaved = {
@@ -47,9 +65,20 @@ SettingsController = function($scope, $location, $timeout, userService, authServ
   });
 
   this.validators = {
-    zipcode: zipValidator,
-    city: nonDefined,
-    email: nonDefined,
+    zipcode: function(zip) {
+      var valid = zipValidator(zip);
+      if (valid) {
+        return {
+          valid: true,
+        };
+      }
+      return {
+        valid: false,
+        message: 'Invalid Zip Code',
+      };
+    },
+    city: city,
+    email: email,
     gender: alwaysTrue,
     dob: alwaysTrue,
     public: alwaysTrue,
@@ -65,7 +94,7 @@ SettingsController = function($scope, $location, $timeout, userService, authServ
 SettingsController.prototype.autoSave = function(item) {
   var that = this;
   // Dont try to save if the item is invalid
-  if (!this.validators[item](this.settingsItem[item])) {
+  if (!this.validators[item](this.settingsItem[item]).valid) {
     return;
   }
   this.saveUserSettings(function(error) {
@@ -97,10 +126,33 @@ function emptyBody(filtered) {
   return false;
 }
 
+// Populates any error messages and returns true if
+// any errors were populated.
+SettingsController.prototype.populateErrors = function(body) {
+  this.errors = [];
+  for (var key in body) {
+    var validationResult = this.validators[key](body[key]);
+    if (!validationResult.valid) {
+      this.errors.push(validationResult.message);
+    }
+  }
+  if (this.errors.length > 0) {
+    return true;
+  }
+  return false;
+};
+
 SettingsController.prototype.saveUserSettings = function(callback) {
   var params = differ(this.previousValues.toBody(), this.settingsItem.toBody());
+  if (this.populateErrors(params)) {
+    if (callback) {
+      return callback(new Error('Invalid Body'));
+    }
+    return;
+  }
   var filteredParams = filterObject(params);
   if (emptyBody(filteredParams)) {
+    this.errors.push('Nothing to Save');
     if (callback) {
       return callback(new Error('Invalid Body'));
     }
@@ -111,7 +163,10 @@ SettingsController.prototype.saveUserSettings = function(callback) {
   this.userService.saveUserSettings(filteredParams, function(err) {
     if (err) {
       that.saving = false;
-      that.error = err;
+      that.errors.push('An error occurred while trying to save your settings');
+      that.timeout(function() {
+        that.errors = [];
+      }, 1800);
       if (callback) {
         return callback(err);
       }
