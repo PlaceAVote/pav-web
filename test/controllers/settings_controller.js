@@ -135,6 +135,17 @@ describe('Settings Controller', function() {
       subject.autoSave('city');
       expect(called).to.eql(false);
     });
+    it('only saves valid zipcodes', function() {
+      var subject = new SettingsController(mockScope, mockLocation, mockTimeout, mockUserService, mockAuthService, mockRootScope, mockAnchorScroll);
+
+      var called = false;
+      subject.saveUserSettings = function() {
+        called = true;
+      }
+      subject.settingsItem.zipcode = '902';
+      subject.autoSave('zipcode');
+      expect(called).to.eql(false);
+    });
     it('does not call save user settings if item is an empty email and the settingsItem of the subject is also empty', function() {
       var subject = new SettingsController(mockScope, mockLocation, mockTimeout, mockUserService, mockAuthService, mockRootScope, mockAnchorScroll);
 

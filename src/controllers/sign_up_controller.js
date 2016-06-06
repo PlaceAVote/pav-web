@@ -1,4 +1,5 @@
 var countryCodes = require('../utils/countrycodes.json');
+var zipValidator = require('../utils/zipValidator.js');
 
 function SignUpCtrl($rootScope, $scope, $location, userService, authService, Analytics) {
   $scope = $scope || {};
@@ -19,7 +20,6 @@ function SignUpCtrl($rootScope, $scope, $location, userService, authService, Ana
   this.country = countryCodes;
   this.rs = $rootScope;
   this.loggedIn = $rootScope.loggedIn;
-  this.zipExpression = /^\d{5}(?:[-\s]\d{4})?$/;
 
   if (!userService.user) {
     this.location.path('/');
@@ -104,10 +104,7 @@ SignUpCtrl.prototype.saveUser = function(user) {
 };
 
 SignUpCtrl.prototype.zipFormat = function(zip) {
-  if (!zip) {
-    return false;
-  }
-  return this.zipExpression.test(zip);
+  return zipValidator(zip);
 };
 
 SignUpCtrl.prototype.maxDate = function() {

@@ -1,8 +1,17 @@
 var AuthorizeController = require('./autherize_controller.js');
 var title = require('../config/titles.js');
 var differ = require('../utils/differ.js');
+var zipValidator = require('../utils/zipValidator.js');
 var filterObject = require('../utils/filter_object.js');
 var SettingsItem = require('../models/settings_item.js');
+
+function nonDefined(item) {
+  return !!item;
+}
+
+function alwaysTrue(item) {
+  return true;
+}
 
 SettingsController = function($scope, $location, $timeout, userService, authService, $rootScope, $anchorScroll) {
   AuthorizeController.authorize({error: '/', authorizer: authService, location: $location});
@@ -37,6 +46,15 @@ SettingsController = function($scope, $location, $timeout, userService, authServ
     }
   });
 
+  this.validators = {
+    zipcode: zipValidator,
+    city: nonDefined,
+    email: nonDefined,
+    gender: alwaysTrue,
+    dob: alwaysTrue,
+    public: alwaysTrue,
+  };
+
   this.gender_options = [
     {name: 'His', des: 'male'},
     {name: 'Her', des: 'female'},
@@ -46,10 +64,9 @@ SettingsController = function($scope, $location, $timeout, userService, authServ
 
 SettingsController.prototype.autoSave = function(item) {
   var that = this;
-  if (item === 'city' || item === 'email') {
-    if (!this.settingsItem[item]) {
-      return;
-    }
+  // Dont try to save if the item is invalid
+  if (!this.validators[item](this.settingsItem[item])) {
+    return;
   }
   this.saveUserSettings(function(error) {
     if (error) {
