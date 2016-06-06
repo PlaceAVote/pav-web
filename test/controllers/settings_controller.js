@@ -27,6 +27,7 @@ describe('Settings Controller', function() {
         dob:false,
         email: false,
         public: false,
+        zipcode: false,
       });
       expect(subject.showSettings).to.eql(true);
       expect(subject.profilePicture.saving).to.eql(true);
@@ -173,6 +174,7 @@ describe('Settings Controller', function() {
         dob:false,
         email: false,
         public: false,
+        zipcode: false,
       });
       subject.autoSave('dob');
       expect(subject.autosaved.dob).to.eql(true);
@@ -249,6 +251,7 @@ describe('Settings Controller', function() {
         }
       };
       var subject = new SettingsController(mockScope, mockLocation, mockTimeout, mockUserService, mockAuthService, mockRootScope, mockAnchorScroll);
+      subject.settingsItem.email = 'test@test.com';
       subject.saveUserSettings(function(err) {
         expect(subject.saving).to.eql(false);
         expect(subject.error.message).to.eql('Service Error');
@@ -264,6 +267,7 @@ describe('Settings Controller', function() {
         }
       };
       var subject = new SettingsController(mockScope, mockLocation, mockTimeout, mockUserService, mockAuthService, mockRootScope, mockAnchorScroll);
+      subject.settingsItem.email = 'test@test.com';
       subject.saveUserSettings(function(err) {
         expect(subject.saveConfirmed).to.eql(true);
         expect(subject.saving).to.eql(false);
@@ -304,6 +308,23 @@ describe('Settings Controller', function() {
         expect(actualParams.dob).to.eql(undefined);
         expect(actualParams.zipcode).to.eql(undefined);
         expect(err).to.eql(null);
+        done();
+      });
+    });
+    it('should not call user service with no keys in params', function(done) {
+      var called = false;
+      var mockUserService = {
+        getUserSettings: function(cb) { cb() },
+        saveUserSettings: function(params, cb) {
+          called = true;
+          return cb(null);
+        }
+      };
+      var subject = new SettingsController(mockScope, mockLocation, mockTimeout, mockUserService, mockAuthService, mockRootScope, mockAnchorScroll);
+      // update first and last name
+      subject.saveUserSettings(function(err) {
+        expect(called).to.eql(false);
+        expect(err.message).to.eql('Invalid Body');
         done();
       });
     });

@@ -21,6 +21,7 @@ SettingsController = function($scope, $location, $timeout, userService, authServ
     dob: false,
     email: false,
     public: false,
+    zipcode: false,
   };
   this.showSettings = true;
   this.profilePicture = {
@@ -69,9 +70,25 @@ SettingsController.prototype.getUserSettings = function(callback) {
   this.userService.getUserSettings(callback);
 };
 
+function emptyBody(filtered) {
+  if (!filtered) {
+    return true;
+  }
+  if (Object.keys(filtered).length === 0 && filtered.constructor === Object) {
+    return true;
+  }
+  return false;
+}
+
 SettingsController.prototype.saveUserSettings = function(callback) {
   var params = differ(this.previousValues.toBody(), this.settingsItem.toBody());
   var filteredParams = filterObject(params);
+  if (emptyBody(filteredParams)) {
+    if (callback) {
+      return callback(new Error('Invalid Body'));
+    }
+    return;
+  }
   var that = this;
   this.saving = true;
   this.userService.saveUserSettings(filteredParams, function(err) {
