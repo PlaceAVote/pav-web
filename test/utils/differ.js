@@ -29,4 +29,14 @@ describe('Differ', function() {
     var subject = differ(original, changed);
     expect(subject).to.eql({c: 4});
   });
+  it('should include any additional properties added', function() {
+    var changed = {
+      a: 1,
+      b: 2,
+      c: 4,
+      d: 5,
+    };
+    var subject = differ(original, changed);
+    expect(subject).to.eql({c: 4, d: 5});
+  });
 });
