@@ -89,6 +89,7 @@ var billSummaryDirective = require('./directives/bills/bill_summary.js');
 var billInfoDirective = require('./directives/bills/bill_info.js');
 var billCommentsDirective = require('./directives/bills/bill_comments.js');
 var billStatisticsDirective = require('./directives/bills/bill_statistics.js');
+var billRepresentationDirective = require('./directives/bills/bill_representation.js');
 var billStatusDirective = require('./directives/bills/bill_status.js');
 var voteModalDirective = require('./directives/bills/vote_modal.js');
 var voteConfirmedDirective = require('./directives/bills/vote_confirmed.js');
@@ -176,6 +177,10 @@ app.config(['$routeProvider', '$locationProvider', '$compileProvider', 'Analytic
     controller: 'BillCtrl as bill',
   })
   .when('/bill/:id/statistics', {
+    templateUrl: 'partials/bills/bill_wrapper.html',
+    controller: 'BillCtrl as bill',
+  })
+  .when('/bill/:id/representation', {
     templateUrl: 'partials/bills/bill_wrapper.html',
     controller: 'BillCtrl as bill',
   })
@@ -338,6 +343,8 @@ app.directive('billComments', billCommentsDirective);
 billCommentsDirective.$inject = ['$location'];
 app.directive('billStatistics', billStatisticsDirective);
 billStatisticsDirective.$inject = ['$location'];
+app.directive('billRepresentation', billRepresentationDirective);
+billRepresentationDirective.$inject = ['$location'];
 app.directive('billStatus', billStatusDirective);
 billStatusDirective.$inject = ['$location'];
 app.directive('voteModal', voteModalDirective);

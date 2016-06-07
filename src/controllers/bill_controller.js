@@ -21,7 +21,7 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
   this.billService = billService;
   this.legislatorService = legislatorService;
   this.voteService = voteService;
-  this.views = ['summary', 'comments', 'info', 'statistics'];
+  this.views = ['summary', 'comments', 'info', 'statistics', 'representation'];
   this.Identify($routeParams);
   this.getBill(this.id);
   this.getTopComments(this.id);

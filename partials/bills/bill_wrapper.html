@@ -78,11 +78,18 @@ Do you agree or disagree? Join the discussion and place your vote today!"></upda
             <icon icon="icon-arrow-right"></icon>
         </li>
         <li
-        ng-class="{'c-side-menu--selected': bill.view === 'comments', 'c-side-menu--last-item': bill.hasVoted}"
+        ng-class="{'c-side-menu--selected': bill.view === 'comments'}"
         ng-click="bill.view = 'comments'; bill.location.update_path('bill/' + bill.id + '/comments');">
             <icon icon="icon-chat"></icon>
             <p>Comments <span class="bold"
                               ng-show="bill.body.billData.comment_count > 0">({{bill.body.billData.comment_count}})</span></p>
+            <icon icon="icon-arrow-right"></icon>
+        </li>
+        <li
+        ng-class="{'c-side-menu--selected': bill.view === 'representation', 'c-side-menu--last-item': bill.hasVoted}" ng-if="bill.rs.user.district && bill.representation.result.votesTotal > 0"
+        ng-click="bill.view = 'representation'; bill.location.update_path('bill/' + bill.id + '/representation');">
+            <icon icon="icon-chat"></icon>
+            <p>Representation </p>
             <icon icon="icon-arrow-right"></icon>
         </li>
         <li class="c-side-menu__vote"
@@ -124,6 +131,8 @@ Do you agree or disagree? Join the discussion and place your vote today!"></upda
         <bill-comments ng-cloak ng-switch-when="comments"></bill-comments>
 
         <bill-statistics ng-cloak ng-switch-when="statistics"></bill-statistics>
+
+        <bill-representation ng-cloak ng-switch-when="representation"></bill-representation>
 
     </div>
 
