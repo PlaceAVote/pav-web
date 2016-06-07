@@ -165,6 +165,19 @@ describe('Settings Controller', function() {
       subject.autoSave('public');
       expect(subject.autosaved.public).to.eql(true);
     });
+    it('should set previousValues when save is complete', function() {
+      var mockUserService = {
+        getUserSettings: function(cb) {
+          return cb(null, { email: 'original@test.com'});
+       },
+        saveUserSettings: function(params, cb) { return cb() },
+      };
+      var subject = new SettingsController(mockScope, mockLocation, mockTimeout, mockUserService, mockAuthService, mockRootScope, mockAnchorScroll);
+
+      subject.settingsItem.email = 'changed@test.com';
+      subject.saveUserSettings();
+      expect(subject.previousValues.email).to.eql('changed@test.com');
+    });
     it('should call eraseAutoSave after timeout', function(done) {
       var subject = new SettingsController(mockScope, mockLocation, mockTimeout, mockUserService, mockAuthService, mockRootScope, mockAnchorScroll);
       var called = false;
