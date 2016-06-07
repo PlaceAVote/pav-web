@@ -22,7 +22,6 @@ describe('Settings Controller', function() {
       expect(subject.current_password).to.eql('');
       expect(subject.new_password).to.eql('');
       expect(subject.autosaved).to.eql({
-        city: false,
         gender: false,
         dob:false,
         email: false,
@@ -48,7 +47,6 @@ describe('Settings Controller', function() {
             gender: 'male',
             dob: '662083200000',
             public: false,
-            city: 'The Island'
           };
           callback(null, expected);
         },
@@ -61,7 +59,6 @@ describe('Settings Controller', function() {
       expect(subject.settingsItem.gender).to.eql('male');
       expect(subject.settingsItem.dob).to.eql(new Date(662083200000));
       expect(subject.settingsItem.public).to.eql(false);
-      expect(subject.settingsItem.city).to.eql('The Island');
       expect(subject.settingsItem).to.eql(subject.previousValues);
       done();
     });
@@ -74,7 +71,6 @@ describe('Settings Controller', function() {
       expect(subject.settingsItem.last_name).to.eql(undefined);
       expect(subject.settingsItem.gender).to.eql(undefined);
       expect(subject.settingsItem.public).to.eql(undefined);
-      expect(subject.settingsItem.city).to.eql(undefined);
       done();
     });
 
@@ -91,7 +87,6 @@ describe('Settings Controller', function() {
       expect(subject.settingsItem.last_name).to.eql(undefined);
       expect(subject.settingsItem.gender).to.eql(undefined);
       expect(subject.settingsItem.public).to.eql(undefined);
-      expect(subject.settingsItem.city).to.eql(undefined);
       done();
     });
 
@@ -108,33 +103,10 @@ describe('Settings Controller', function() {
       expect(subject.settingsItem.last_name).to.eql(undefined);
       expect(subject.settingsItem.gender).to.eql(undefined);
       expect(subject.settingsItem.public).to.eql(undefined);
-      expect(subject.settingsItem.city).to.eql(undefined);
       done();
     });
   });
   describe('AutoSave', function() {
-    it('does not call save user settings if item is an empty city and the settingsItem of the subject is also empty', function() {
-      var subject = new SettingsController(mockScope, mockLocation, mockTimeout, mockUserService, mockAuthService, mockRootScope, mockAnchorScroll);
-
-      var called = false;
-      subject.saveUserSettings = function() {
-        called = true;
-      }
-      subject.settingsItem.city = '';
-      subject.autoSave('city');
-      expect(called).to.eql(false);
-    });
-    it('does not call save user settings if item is an empty city and the settingsItem of the subject is null', function() {
-      var subject = new SettingsController(mockScope, mockLocation, mockTimeout, mockUserService, mockAuthService, mockRootScope, mockAnchorScroll);
-
-      var called = false;
-      subject.saveUserSettings = function() {
-        called = true;
-      }
-      subject.settingsItem.city = null;
-      subject.autoSave('city');
-      expect(called).to.eql(false);
-    });
     it('only saves valid zipcodes', function() {
       var subject = new SettingsController(mockScope, mockLocation, mockTimeout, mockUserService, mockAuthService, mockRootScope, mockAnchorScroll);
 
@@ -164,7 +136,6 @@ describe('Settings Controller', function() {
       subject.saveUserSettings = function() {
         called = true;
       }
-      subject.settingsItem.city = null;
       subject.autoSave('email');
       expect(called).to.eql(false);
     });
@@ -180,7 +151,6 @@ describe('Settings Controller', function() {
       expect(called).to.eql(true);
       // Shows only relevant fields are altered
       expect(subject.autosaved).to.eql({
-        city: false,
         gender: true,
         dob:false,
         email: false,
@@ -230,7 +200,6 @@ describe('Settings Controller', function() {
     it('sets autosaved properties to false', function() {
       var subject = new SettingsController(mockScope, mockLocation, mockTimeout, mockUserService, mockAuthService, mockRootScope, mockAnchorScroll);
       subject.autosaved = {
-        city: true,
         gender: true,
         dob:true,
         email: true,
@@ -239,7 +208,6 @@ describe('Settings Controller', function() {
       subject.eraseAutoSave('gender');
       // Shows only relevant fields are altered
       expect(subject.autosaved).to.eql({
-        city: true,
         gender: false,
         dob:true,
         email: true,
@@ -262,10 +230,9 @@ describe('Settings Controller', function() {
         }
       };
       var subject = new SettingsController(mockScope, mockLocation, mockTimeout, mockUserService, mockAuthService, mockRootScope, mockAnchorScroll);
-      subject.settingsItem.email = 'test@test.com';
+      subject.settingsItem.email = 'helloAddress@pav.com';
       subject.saveUserSettings(function(err) {
-        expect(subject.saving).to.eql(false);
-        expect(subject.errors[0]).to.eql('An error occurred while trying to save your settings');
+        expect(subject.errors.serverError.invalid).to.eql(true);
         expect(err.message).to.eql('Service Error');
         done();
       });
@@ -297,7 +264,6 @@ describe('Settings Controller', function() {
         gender: 'male',
         dob: '662083200000',
         public: false,
-        city: 'The Island'
       };
       var called = false;
       var mockUserService = {
@@ -308,13 +274,11 @@ describe('Settings Controller', function() {
         }
       };
       var subject = new SettingsController(mockScope, mockLocation, mockTimeout, mockUserService, mockAuthService, mockRootScope, mockAnchorScroll);
-      // update first and last name
-      subject.settingsItem.city = 'LA X';
-      // should not include empty properties
+      // invalid zip code wont call server
       subject.settingsItem.zipcode = '';
       subject.saveUserSettings(function(err) {
         expect(called).to.eql(false);
-        expect(subject.errors.length).to.eql(1);
+        expect(subject.errors.zipcode.invalid).to.eql(true);
         expect(err.message).to.eql('Invalid Body');
         done();
       });
@@ -330,7 +294,7 @@ describe('Settings Controller', function() {
       };
       var subject = new SettingsController(mockScope, mockLocation, mockTimeout, mockUserService, mockAuthService, mockRootScope, mockAnchorScroll);
       subject.saveUserSettings(function(err) {
-        expect(subject.errors.length).to.eql(1);
+        expect(subject.errors.nothingToSave.invalid).to.eql(true);
         expect(called).to.eql(false);
         expect(err.message).to.eql('Invalid Body');
         done();
@@ -425,12 +389,10 @@ describe('Settings Controller', function() {
   describe('Populate Errors', function() {
     it('populates errors for invalid settings', function() {
       var subject = new SettingsController(mockScope, mockLocation, mockTimeout, mockUserService, mockAuthService, mockRootScope, mockAnchorScroll);
-      var valid = subject.populateErrors({city: '', email: '', zipcode: '920'});
+      var valid = subject.populateErrors({email: '', zipcode: '920'});
       expect(valid).to.eql(true);
-      expect(subject.errors.length).to.eql(3);
-      expect(subject.errors[0]).to.eql('Invalid City');
-      expect(subject.errors[1]).to.eql('Invalid Email Address');
-      expect(subject.errors[2]).to.eql('Invalid Zip Code');
+      expect(subject.errors.email.invalid).to.eql(true);
+      expect(subject.errors.zipcode.invalid).to.eql(true);
     });
   });
 });

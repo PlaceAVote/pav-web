@@ -6,27 +6,37 @@ var emailValidator = require('../utils/email_validation.js');
 var filterObject = require('../utils/filter_object.js');
 var SettingsItem = require('../models/settings_item.js');
 
-function city(item) {
-  var valid = !!item;
-  var message = valid ? undefined : 'Invalid City';
-  return {
-    valid: valid,
-    message: message,
-  };
-}
-
-function email(item) {
-  var valid = emailValidator(item);
-  var message = valid ? undefined : 'Invalid Email Address';
-  return {
-    valid: valid,
-    message: message,
-  };
-}
-
 function alwaysTrue(item) {
+  return true;
+}
+
+function getErrorsObject() {
   return {
-    valid: true,
+    zipcode: {
+      invalid: false,
+      message: 'Invalid Zip Code',
+    },
+    email: {
+      invalid: false,
+      message: 'Invalid Email Address',
+    },
+    gender: {
+      invalid: false,
+    },
+    dob: {
+      invalid: false,
+    },
+    public: {
+      invalid: false,
+    },
+    nothingToSave: {
+      invalid: false,
+      message: 'No changes to make',
+    },
+    serverError: {
+      invalid: false,
+      message: 'An error occurred while updating your settings',
+    },
   };
 }
 
@@ -39,11 +49,9 @@ SettingsController = function($scope, $location, $timeout, userService, authServ
   this.location = $location;
   this.anchorScroll = $anchorScroll;
   this.timeout = $timeout;
-  this.errors = [];
   this.current_password = '';
   this.new_password = '';
   this.autosaved = {
-    city: false,
     gender: false,
     dob: false,
     email: false,
@@ -64,21 +72,11 @@ SettingsController = function($scope, $location, $timeout, userService, authServ
     }
   });
 
+  this.errors = getErrorsObject();
+
   this.validators = {
-    zipcode: function(zip) {
-      var valid = zipValidator(zip);
-      if (valid) {
-        return {
-          valid: true,
-        };
-      }
-      return {
-        valid: false,
-        message: 'Invalid Zip Code',
-      };
-    },
-    city: city,
-    email: email,
+    zipcode: zipValidator,
+    email: emailValidator,
     gender: alwaysTrue,
     dob: alwaysTrue,
     public: alwaysTrue,
@@ -94,7 +92,8 @@ SettingsController = function($scope, $location, $timeout, userService, authServ
 SettingsController.prototype.autoSave = function(item) {
   var that = this;
   // Dont try to save if the item is invalid
-  if (!this.validators[item](this.settingsItem[item]).valid) {
+  if (!this.validators[item](this.settingsItem[item])) {
+    this.errors[item].invalid = true;
     return;
   }
   this.saveUserSettings(function(error) {
@@ -129,17 +128,16 @@ function emptyBody(filtered) {
 // Populates any error messages and returns true if
 // any errors were populated.
 SettingsController.prototype.populateErrors = function(body) {
-  this.errors = [];
+  this.errors = getErrorsObject();
+  var errored = false;
   for (var key in body) {
     var validationResult = this.validators[key](body[key]);
-    if (!validationResult.valid) {
-      this.errors.push(validationResult.message);
+    if (!validationResult) {
+      this.errors[key].invalid = true;
+      errored = true;
     }
   }
-  if (this.errors.length > 0) {
-    return true;
-  }
-  return false;
+  return errored;
 };
 
 SettingsController.prototype.saveUserSettings = function(callback) {
@@ -152,7 +150,7 @@ SettingsController.prototype.saveUserSettings = function(callback) {
   }
   var filteredParams = filterObject(params);
   if (emptyBody(filteredParams)) {
-    this.errors.push('Nothing to Save');
+    this.errors.nothingToSave.invalid = true;
     if (callback) {
       return callback(new Error('Invalid Body'));
     }
@@ -163,10 +161,7 @@ SettingsController.prototype.saveUserSettings = function(callback) {
   this.userService.saveUserSettings(filteredParams, function(err) {
     if (err) {
       that.saving = false;
-      that.errors.push('An error occurred while trying to save your settings');
-      that.timeout(function() {
-        that.errors = [];
-      }, 1800);
+      that.errors.serverError.invalid = true;
       if (callback) {
         return callback(err);
       }
