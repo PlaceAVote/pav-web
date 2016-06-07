@@ -3,7 +3,6 @@ var Bill = require('../models/bill.js');
 var Comment = require('../models/comment.js');
 var config = require('../config/endpoints.js');
 var TrendingBill = require('../models/trending_bill.js');
-var Representation = require('../models/representation.js');
 
 /**
  * Maps a trend response to a trend model
@@ -183,7 +182,7 @@ function BillService($resource, authService, userService) {
     }
 
     var onLoad = function(result) {
-      return callback(undefined, new Representation(result));
+      return callback(undefined, result);
     };
 
     var onError = function(err) {

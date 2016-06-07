@@ -1,5 +1,6 @@
 var Comment = require('../models/comment.js');
 var AuthorizeController = require('./autherize_controller.js');
+var Demographics = require('../models/demographics.js');
 var title = require('../config/titles.js');
 var tweet = require('../models/tweet.js');
 
@@ -10,6 +11,7 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
   this.timeout = $timeout;
   this.rs = $rootScope;
   this.rs.inApp = true;
+  this.representation = new Demographics();
   this.authService = authService;
   this.location = $location;
   this.routeParams = $routeParams;
@@ -33,7 +35,6 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
   this.showChart = true;
   this.authenticate();
   this.commentOrder = 'highest-score';
-  this.representation = {};
 }
 
 BillController.prototype.authenticate = function() {
@@ -384,38 +385,28 @@ BillController.prototype.sponsorCount = function(sponsors) {
 BillController.prototype.getRepresentation = function() {
   var that = this;
 
-  if (!this.rs) {
-    this.representation.available = false;
+  if (!this.rs || !this.rs.user.district || !this.rs.user.state) {
+    this.representation.setAvailable(false);
     return;
   }
 
-  if (!this.rs.user.district || !this.rs.user.state) {
-    this.representation.available = false;
-    return;
-  }
-
-  if (!this.representation) {
-    this.representation = {};
-  }
-
-  this.representation.for = {
+  var request = {
     state: this.rs.user.state,
     district: this.rs.user.district,
     bill_id: this.body.billData.bill_id,
   };
 
-  this.representation.busy = true;
+  this.representation.setBusy(true);
 
-  this.billService.getRepresentation(this.representation.for, function(err, res) {
-
-    that.representation.busy = false;
+  this.billService.getRepresentation(request, function(err, res) {
 
     if (err) {
-      that.representation.available = false;
+      that.representation.setAvailable(false);
+      that.representation.setBusy(false);
     }
 
     if (res) {
-      that.representation.result = res;
+      that.representation.populate(res);
     }
 
   });

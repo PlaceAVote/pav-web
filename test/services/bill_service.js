@@ -2,7 +2,6 @@ var BillService = require('../../src/services/bill_service.js');
 var TrendingBill = require('../../src/models/trending_bill.js');
 var Bill = require('../../src/models/bill_summary.js');
 var Comment = require('../../src/models/comment.js');
-var Representation = require('../../src/models/representation.js');
 var AuthService = require('../../src/services/auth_service.js');
 var mockLocal = require('../mocks/local_storage.js');
 var authOptions = { window : {localStorage: new mockLocal() }};
@@ -341,8 +340,7 @@ describe("Bill Service", function(){
             district: 33,
           };
           subject.getRepresentation(data, function(err, result) {
-            var test = new Representation(obj);
-            expect(result.sampleSize).to.equal(test.sampleSize);
+            expect(result.sampleSize).to.equal(obj.sampleSize);
             done();
           });
         });
