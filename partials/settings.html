@@ -46,12 +46,8 @@
             <div class="profile-section">
               <div class="row">
                 <div class="l-6 m-12 indent">
-                  <label>City<span class="autosave" ng-show="settings.autosaved.city">saved!</span></label>
-                  <input type="text" ng-model='settings.settingsItem.city' ng-blur="settings.autoSave('city');" ng-placeholder="City" required />
-                </div>
-                <div class="l-6 m-12 indent">
-                <label>Zip<span class="autosave" ng-show="settings.autosaved.zipcode">saved!</span></label>
-                <input type="text" ng-model='settings.settingsItem.zipcode' ng-blur="settings.autoSave('zipcode');" placeholder="Zip Code" ng-placeholder="Zip Code" required />
+                <label>Zip Code<span class="autosave" ng-show="settings.autosaved.zipcode">saved!</span></label>
+                <input type="text" ng-class='{invalidInput: settings.errors.zipcode.invalid}' ng-model='settings.settingsItem.zipcode' ng-blur="settings.autoSave('zipcode');" placeholder="Zip Code" ng-placeholder="Zip Code" required />
               </div>
             </div>
 
@@ -68,7 +64,7 @@
                 </div>
               </div>
               <label>Email Address<span class="autosave" ng-show="settings.autosaved.email">saved!</span></label>
-              <input type="email" ng-model='settings.settingsItem.email' placeholder="Email" ng-blur="settings.autoSave('email');" required />
+              <input type="email" ng-class='{invalidInput: settings.errors.email.invalid}' ng-model='settings.settingsItem.email' placeholder="Email" ng-blur="settings.autoSave('email');" required />
             </div>
 
           </div>
@@ -101,8 +97,8 @@
           </div>
         </div>
         <div class="doc-section">
-          <div ng-repeat="error in settings.errors">
-            <p class="error">{{error}}</p>
+          <div ng-repeat="(key, value) in settings.errors">
+            <p ng-class="{show: value.invalid}" class="error">{{value.message}}</p>
           </div>
           <div class="row tablet-col">
               <a ng-click="settings.showSettings = false;" class="btn-grey m-12 tablet-margin-bottom-medium text-center">Read our privacy policy</a>
