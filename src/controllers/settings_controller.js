@@ -167,6 +167,7 @@ SettingsController.prototype.saveUserSettings = function(callback) {
       }
     }
 
+    that.previousValues = SettingsItem.createFromJson(that.settingsItem.toBody());
     that.saveConfirmed = true;
     that.saving = false;
     that.timeout(function() {
