@@ -167,4 +167,42 @@ describe('Demographics', function() {
       expect(subject.underRepresentedGenderGroup).to.eql(undefined);
     });
   });
+  describe('updateRepresentationView', function() {
+    it('increases the total of votes and representation properties', function() {
+      var subject = new Demographics();
+      var demographics = fixtures;
+      subject.populate(demographics);
+      expect(subject.representationScore).to.eql('7/390');
+      subject.representationPercent = 100;
+      subject.updateRepresentation();
+      expect(subject.representationScore).to.eql('8/390');
+      expect(subject.representationPercent).to.eql(100);
+    });
+    it('doesnt alter percent over 100', function() {
+      var subject = new Demographics();
+      var demographics = fixtures;
+      subject.populate(demographics);
+      subject.representationPercent = 101;
+      subject.updateRepresentation();
+      expect(subject.representationPercent).to.eql(101);
+    });
+    it('updates nothing when nothing is deinfed', function() {
+      var subject = new Demographics();
+      subject.updateRepresentation();
+      expect(subject.representationPercent).to.eql(undefined);
+    });
+    it('re calculates percentage when less than 100', function() {
+      var subject = new Demographics();
+      var demographics = fixtures;
+      subject.populate(demographics);
+      expect(subject.representationPercent).to.eql(3);
+      // update several times (as once does not increase it owed to the data);
+      subject.updateRepresentation();
+      subject.updateRepresentation();
+      subject.updateRepresentation();
+      subject.updateRepresentation();
+      subject.updateRepresentation();
+      expect(subject.representationPercent).to.eql(4);
+    });
+  });
 });

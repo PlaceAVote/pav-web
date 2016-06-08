@@ -413,14 +413,8 @@ BillController.prototype.getRepresentation = function() {
 
 };
 
-
 BillController.prototype.updateRepresentationView = function() {
-  var votesTotal = this.representation.result.votesTotal + 1;
-  var sampleSize = this.representation.result.sampleSize;
-  this.representation.result.representationScore = votesTotal + '/' + sampleSize;
-  if (this.representation.result.representationPercent < 100) {
-    this.representation.result.representationPercent = Math.ceil((votesTotal / sampleSize) * 100);
-  }
+  this.representation.updateRepresentation();
 };
 
 module.exports = BillController;

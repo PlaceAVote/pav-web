@@ -10,6 +10,13 @@
 function Demographics(dependencies) {
   var options = dependencies || {};
   this.available = false;
+  this.state = options.state;
+  this.district = options.district;
+}
+
+function toPercent(subsection, total) {
+  var percent = (subsection / (total)) * 100;
+  return Math.round(percent * 100) / 100;
 }
 
 Demographics.prototype.setBusy = function(busy) {
@@ -33,6 +40,8 @@ Demographics.prototype.populate = function(demographics) {
   this.setRepresentationPercent();
   this.setRepresentationScore();
   this.setVotePercent();
+  this.setUnderRepresentedGenderGroup();
+  this.isUnderRepresented();
   this.setAvailable(true);
   this.setBusy(false);
 };
@@ -54,16 +63,14 @@ Demographics.prototype.setVotePercent = function() {
     return;
   }
   var votes = this.demographics.votes;
-  var percentNo = (votes.no / (votes.total)) * 100;
-  var percentYes = (votes.yes / (votes.total)) * 100;
   var voteNo = {
-    val: Math.round(percentNo * 100) / 100,
+    val: toPercent(votes.no, votes.total),
     label: 'Against',
     className: 'against',
   };
 
   var voteYes = {
-    val: Math.round(percentYes * 100) / 100,
+    val: toPercent(votes.yes, votes.total),
     label: 'In Favor',
     className: 'favor',
   };
@@ -79,6 +86,36 @@ Demographics.prototype.setRepresentationPercent = function() {
   } else {
     this.representationPercent = Math.ceil((this.demographics.votes.total / this.demographics.sampleSize) * 100);
   }
+};
+
+Demographics.prototype.isUnderRepresented = function() {
+  return this.representationPercent < 100;
+};
+
+Demographics.prototype.setUnderRepresentedGenderGroup = function() {
+  if (!this.demographics) {
+    return;
+  }
+  var total = this.demographics.votes.total;
+  var maleTotal = this.demographics.gender.male.votes.total;
+  var femaleTotal = this.demographics.gender.female.votes.total;
+  var underRepresentedGroup = maleTotal < femaleTotal ? 'male' : 'female';
+  this.underRepresentedGenderGroup = {
+    percentage: toPercent(this.demographics.gender[underRepresentedGroup].votes.total, total),
+    gender: underRepresentedGroup,
+  };
+};
+
+Demographics.prototype.updateRepresentation = function() {
+  if (!this.demographics) {
+    return;
+  }
+  this.demographics.votes.total += 1;
+  this.representationScore = this.demographics.votes.total + '/' + this.demographics.sampleSize;
+  if (this.representationPercent >= 100) {
+    return;
+  }
+  this.representationPercent = Math.ceil((this.demographics.votes.total / this.demographics.sampleSize) * 100);
 };
 
 module.exports = Demographics;
