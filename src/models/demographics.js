@@ -84,7 +84,7 @@ Demographics.prototype.updateVotePercent = function(favor) {
   } else {
     this.demographics.votes.no += 1;
   }
-}
+};
 
 Demographics.prototype.setRepresentationPercent = function() {
   if (!this.demographics) {
