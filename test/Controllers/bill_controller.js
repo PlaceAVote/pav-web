@@ -459,16 +459,7 @@ describe('BillController', function() {
           callback({status: 409});
         },
       };
-      var result = {
-        votesTotal: 9,
-        sampleSize: 390,
-        representationScore: 10,
-        representationPercent: 10,
-      }
       var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, mockLocation, mockAuthService, mockRootScope);
-      billController.representation = {
-        result: result
-      };
       billController.vote = true;
       billController.voteOnBill(true);
       expect(scope.bill.userVoted).to.eql(true);
@@ -513,16 +504,8 @@ describe('BillController', function() {
           callback(undefined, true);
         },
       };
-      var result = {
-        votesTotal: 9,
-        sampleSize: 390,
-        representationScore: 10,
-        representationPercent: 10,
-      }
+
       var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, mockLocation, mockAuthService, mockRootScope);
-      billController.representation = {
-        result: result
-      };
       billController.vote = true;
       billController.voteOnBill(true);
       expect(scope.bill.voteFailed).to.eql(undefined);
