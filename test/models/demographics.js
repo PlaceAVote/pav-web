@@ -221,7 +221,7 @@ describe('Demographics', function() {
       expect(demographics.votes.no).to.eql(3);
     });
     it('increases the nay sayers', function() {
-      var subject = new Demographics();
+      var subject = new Demographics()
       var demographics = JSON.parse(JSON.stringify(fixtures));
       subject.populate(demographics);
       expect(demographics.votes.total).to.eql(7);
@@ -231,6 +231,36 @@ describe('Demographics', function() {
       expect(demographics.votes.total).to.eql(8);
       expect(demographics.votes.yes).to.eql(4);
       expect(demographics.votes.no).to.eql(4);
+    });
+    it('doesnt increase when demographics arent defined', function() {
+      var subject = new Demographics();
+      subject.updateVotePercent();
+      expect(subject.demographics).to.eql(undefined);
+    });
+  });
+  describe('setMinorityAgeRange', function() {
+    it('wont set majority age range with no demographics', function() {
+      var subject = new Demographics()
+      subject.setMinorityAgeRange();
+      expect(subject.minorityAgeRange).to.eql(undefined);
+    });
+    it('sets the minority age range across all genders', function() {
+      var subject = new Demographics()
+      var demographics = JSON.parse(JSON.stringify(fixtures));
+      subject.populate(demographics);
+      subject.setMinorityAgeRange();
+      expect(subject.minorityAgeRange.ageRange).to.eql('60+');
+      expect(subject.minorityAgeRange.percentage).to.eql(0);
+    });
+    it('sets the minority age range across all genders', function() {
+      var subject = new Demographics()
+      var demographics = JSON.parse(JSON.stringify(fixtures));
+      // shouldnt alter when min age is not 60
+      demographics.gender.female.ranges[6].votes.total = 100;
+      subject.populate(demographics);
+      subject.setMinorityAgeRange();
+      expect(subject.minorityAgeRange.ageRange).to.eql('53-60');
+      expect(subject.minorityAgeRange.percentage).to.eql(0);
     });
   });
 });

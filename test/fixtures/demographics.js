@@ -159,8 +159,8 @@ var demographics = {
       },
       ranges: [
         {
-          minAge: 0,
-          maxAge: 0,
+          minAge: 18,
+          maxAge: 25,
           votes: {
             yes: 0,
             no: 0,

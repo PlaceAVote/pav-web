@@ -78,6 +78,9 @@ Demographics.prototype.setVotePercent = function() {
 };
 
 Demographics.prototype.updateVotePercent = function(favor) {
+  if (!this.demographics) {
+    return;
+  }
   this.demographics.votes.total += 1;
   if (favor) {
     this.demographics.votes.yes += 1;
@@ -124,6 +127,58 @@ Demographics.prototype.updateRepresentation = function() {
     return;
   }
   this.representationPercent = Math.ceil((this.demographics.votes.total / this.demographics.sampleSize) * 100);
+};
+
+function mergeAgeRanges(demographics) {
+  var ageRanges = demographics.gender.male.ranges;
+  ageRanges = ageRanges.concat(demographics.gender.female.ranges);
+  ageRanges = ageRanges.concat(demographics.gender.they.ranges);
+  var mergedRanges = {};
+  ageRanges.forEach(function(range) {
+    var key = range.minAge + '-' + range.maxAge;
+    if (mergedRanges[key]) {
+      mergedRanges[key].votes.total += range.votes.total;
+    } else {
+      mergedRanges[key] = range;
+    }
+  });
+  return mergedRanges;
+}
+
+function extractHighestRange(mergedRanges) {
+  var highestRange;
+  for (var key in mergedRanges) {
+    var range = mergedRanges[key];
+    if (!highestRange) {
+      highestRange = range;
+    }
+    if (range.votes.total <= highestRange.votes.total) {
+      highestRange = range;
+    }
+  }
+  return highestRange;
+}
+
+function formatedAgeRange(highestRange, demographics) {
+  var ageRange;
+  if (highestRange.minAge === 60) {
+    ageRange = highestRange.minAge + '+';
+  } else {
+    ageRange = highestRange.minAge + '-' + highestRange.maxAge;
+  }
+  return {
+    ageRange: ageRange,
+    percentage: toPercent(highestRange.votes.total, demographics.votes.total),
+  };
+}
+
+Demographics.prototype.setMinorityAgeRange = function() {
+  if (!this.demographics) {
+    return;
+  }
+  var mergedRanges = mergeAgeRanges(this.demographics);
+  var highestRange = extractHighestRange(mergedRanges);
+  this.minorityAgeRange = formatedAgeRange(highestRange, this.demographics);
 };
 
 module.exports = Demographics;
