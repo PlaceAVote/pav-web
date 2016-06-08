@@ -7,7 +7,15 @@ describe('Demographics', function() {
     it('sets default properties', function() {
       var subject = new Demographics();
       expect(subject.available).to.eql(false);
-      expect(subject.available).to.eql(false);
+    });
+    it('sets state and district properties', function() {
+      var options = {
+        state: 'CA',
+        district: 6,
+      };
+      var subject = new Demographics(options);
+      expect(subject.state).to.eql('CA');
+      expect(subject.district).to.eql(6);
     });
   });
   describe('setBusy', function() {
@@ -113,8 +121,50 @@ describe('Demographics', function() {
       subject.setVotePercent = function () { calledCount++; }
       subject.setAvailable = function () { calledCount++; }
       subject.setBusy = function () { calledCount++; }
+      subject.setUnderRepresentedGenderGroup = function() { calledCount++; }
+      subject.isUnderRepresented = function() { calledCount++; }
       subject.populate();
-      expect(calledCount).to.eql(6);
+      expect(calledCount).to.eql(8);
+    });
+  });
+  describe('IsUnderRepresented', function() {
+    it('return true is representationPercent is less than one hundred', function() {
+      var subject = new Demographics();
+      subject.representationPercent = 80;
+      var result = subject.isUnderRepresented();
+      expect(result).to.eql(true);
+    });
+    it('return false is representationPercent is over 100', function() {
+      var subject = new Demographics();
+      subject.representationPercent = 120;
+      var result = subject.isUnderRepresented();
+      expect(result).to.eql(false);
+    });
+    it('return false is representationPercent is 100', function() {
+      var subject = new Demographics();
+      subject.representationPercent = 100;
+      var result = subject.isUnderRepresented();
+      expect(result).to.eql(false);
+    });
+    it('return false is representationPercent is undefined', function() {
+      var subject = new Demographics();
+      var result = subject.isUnderRepresented();
+      expect(result).to.eql(false);
+    });
+  });
+  describe('setUnderRepresentedGenderGroup', function() {
+    it('sets an object of the gender who is most under represented in the district/state', function() {
+      var subject = new Demographics();
+      var demographics = fixtures;
+      subject.populate(demographics);
+      subject.setUnderRepresentedGenderGroup();
+      expect(subject.underRepresentedGenderGroup.percentage).to.eql(42.86);
+      expect(subject.underRepresentedGenderGroup.gender).to.eql('female');
+    });
+    it('does not set when demographics are not defined', function() {
+      var subject = new Demographics();
+      subject.setUnderRepresentedGenderGroup();
+      expect(subject.underRepresentedGenderGroup).to.eql(undefined);
     });
   });
 });
