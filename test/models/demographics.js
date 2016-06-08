@@ -168,14 +168,12 @@ describe('Demographics', function() {
     });
   });
   describe('updateRepresentationView', function() {
-    it('increases the total of votes and representation properties', function() {
+    it('wont recalculate if 100 or more', function() {
       var subject = new Demographics();
       var demographics = fixtures;
       subject.populate(demographics);
-      expect(subject.representationScore).to.eql('7/390');
       subject.representationPercent = 100;
       subject.updateRepresentation();
-      expect(subject.representationScore).to.eql('8/390');
       expect(subject.representationPercent).to.eql(100);
     });
     it('doesnt alter percent over 100', function() {
@@ -193,16 +191,46 @@ describe('Demographics', function() {
     });
     it('re calculates percentage when less than 100', function() {
       var subject = new Demographics();
-      var demographics = fixtures;
+      var demographics = JSON.parse(JSON.stringify(fixtures));
       subject.populate(demographics);
-      expect(subject.representationPercent).to.eql(3);
-      // update several times (as once does not increase it owed to the data);
+      expect(subject.representationPercent).to.eql(2);
+      subject.demographics.votes.total = 100;
       subject.updateRepresentation();
-      subject.updateRepresentation();
-      subject.updateRepresentation();
-      subject.updateRepresentation();
-      subject.updateRepresentation();
-      expect(subject.representationPercent).to.eql(4);
+      expect(subject.representationPercent).to.eql(26);
+    });
+  });
+  describe('update vote percent', function() {
+    it('increases the votes total', function() {
+      var subject = new Demographics();
+      var demographics = JSON.parse(JSON.stringify(fixtures));
+      subject.populate(demographics);
+      expect(demographics.votes.total).to.eql(7);
+      subject.updateVotePercent();
+      expect(demographics.votes.total).to.eql(8);
+    });
+    it('increases the yes votes total', function() {
+      var subject = new Demographics();
+      var demographics = JSON.parse(JSON.stringify(fixtures));
+      subject.populate(demographics);
+      expect(demographics.votes.total).to.eql(7);
+      expect(demographics.votes.yes).to.eql(4);
+      expect(demographics.votes.no).to.eql(3);
+      subject.updateVotePercent(true);
+      expect(demographics.votes.total).to.eql(8);
+      expect(demographics.votes.yes).to.eql(5);
+      expect(demographics.votes.no).to.eql(3);
+    });
+    it('increases the nay sayers', function() {
+      var subject = new Demographics();
+      var demographics = JSON.parse(JSON.stringify(fixtures));
+      subject.populate(demographics);
+      expect(demographics.votes.total).to.eql(7);
+      expect(demographics.votes.yes).to.eql(4);
+      expect(demographics.votes.no).to.eql(3);
+      subject.updateVotePercent(false);
+      expect(demographics.votes.total).to.eql(8);
+      expect(demographics.votes.yes).to.eql(4);
+      expect(demographics.votes.no).to.eql(4);
     });
   });
 });

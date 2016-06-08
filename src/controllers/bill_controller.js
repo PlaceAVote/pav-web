@@ -129,8 +129,7 @@ BillController.prototype.voteConfirmed = function(vote) {
   this.hasVoted = true;
   var contrarianComment = vote ? this.againstComment : this.forComment;
   this.generateCommentCard(contrarianComment);
-  this.updateRepresentationView();
-
+  this.updateRepresentationView(vote);
 };
 
 
@@ -413,8 +412,10 @@ BillController.prototype.getRepresentation = function() {
 
 };
 
-BillController.prototype.updateRepresentationView = function() {
+BillController.prototype.updateRepresentationView = function(vote) {
+  this.representation.updateVotePercent(vote);
   this.representation.updateRepresentation();
+  this.representation.setVotePercent();
 };
 
 module.exports = BillController;

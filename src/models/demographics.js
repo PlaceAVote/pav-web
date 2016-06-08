@@ -77,6 +77,15 @@ Demographics.prototype.setVotePercent = function() {
   this.stats = [voteNo, voteYes];
 };
 
+Demographics.prototype.updateVotePercent = function(favor) {
+  this.demographics.votes.total += 1;
+  if (favor) {
+    this.demographics.votes.yes += 1;
+  } else {
+    this.demographics.votes.no += 1;
+  }
+}
+
 Demographics.prototype.setRepresentationPercent = function() {
   if (!this.demographics) {
     return;
@@ -110,7 +119,6 @@ Demographics.prototype.updateRepresentation = function() {
   if (!this.demographics) {
     return;
   }
-  this.demographics.votes.total += 1;
   this.representationScore = this.demographics.votes.total + '/' + this.demographics.sampleSize;
   if (this.representationPercent >= 100) {
     return;
