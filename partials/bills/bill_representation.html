@@ -1,1 +1,13 @@
-<h1>Bill Statistics</h1>
+<div>
+  <div class="c-bill-representation-banner" ng-show="demographics.isUnderRepresented()">
+    <div class="c-bill-representation-underrepresented">
+      <p> More votes are required on this bill for your district to be providing accurate voting data</p>
+    </div>
+    <div class="c-bill-representation-sample">
+      <p> We have {{demographics.demographics.votes.total}} out of {{demographics.demographics.sampleSize}} votes needed for {{demographics.state}} {{demographics.district}} District to be represented </p>
+    </div>
+  </div>
+  <div class="c-bill-representation-content">
+  <bill-statistics demographics="demographics"></bill-statistics>
+  </div>
+</div>

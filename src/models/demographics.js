@@ -42,6 +42,7 @@ Demographics.prototype.populate = function(demographics) {
   this.setVotePercent();
   this.setUnderRepresentedGenderGroup();
   this.isUnderRepresented();
+  this.setMinorityAgeRange();
   this.setAvailable(true);
   this.setBusy(false);
 };
@@ -132,7 +133,7 @@ Demographics.prototype.updateRepresentation = function() {
 function mergeAgeRanges(demographics) {
   var ageRanges = demographics.gender.male.ranges;
   ageRanges = ageRanges.concat(demographics.gender.female.ranges);
-  ageRanges = ageRanges.concat(demographics.gender.they.ranges);
+  ageRanges = ageRanges.concat(demographics.gender.nonBinary.ranges);
   var mergedRanges = {};
   ageRanges.forEach(function(range) {
     var key = range.minAge + '-' + range.maxAge;

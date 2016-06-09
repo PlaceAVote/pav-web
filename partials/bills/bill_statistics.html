@@ -1,1 +1,53 @@
-<h1>Bill Statistics</h1>
+<div class="c-card bill-representation-stats-container">
+  <h1>Voting Statistics ({{demographics.state}} {{demographics.district}} District) </h1>
+  <hr />
+  <div class="row">
+
+    <div class="c-card bill-representation-chart" style="border: none !important">
+        <div style="width: 100%;">
+          <pie-chart data="demographics.stats"></pie-chart>
+        </div>
+    </div>
+
+    <div>
+      <div class="row">
+        <div class="bill-representation-gender-icon">
+            <img style="height: 100%; width: 100%;" alt="female" src="../../svgs/female.svg" ng-show="demographics.underRepresentedGenderGroup.gender === 'female'" />
+        </div>
+        <div class="bill-representation-stats-gender">
+          <p>
+            <span ng-show="demographics.underRepresentedGenderGroup.gender === 'female'">Women</span>
+            <span ng-show="demographics.underRepresentedGenderGroup.gender === 'male'">Men</span>
+            are under represented on this bill
+          </p>
+          <p class="red bold">{{demographics.underRepresentedGenderGroup.percentage}}&#37;
+          </p>
+          <p>of voters are {{demographics.underRepresentedGenderGroup.gender}} </p>
+        </div>
+
+        <div class="bill-stats-percentage-large bold">{{demographics.minorityAgeRange.ageRange}}</div>
+
+        <div class="bill-representation-age-range">
+            <p>
+            {{demographics.minorityAgeRange.ageRange}} Make up the least represented demographic:
+            </p>
+            <p class="red bold"> {{demographics.minorityAgeRange.percentage}}&#37;</p>
+            <p>
+            of voters are {{demographics.minorityAgeRange.ageRange}}
+            </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="bill-representation-social">
+          <div>
+          <p>Lets work together to make every single voice in your district heard. Invite people in these under represented demographics to vote on this bill </p>
+          </div>
+          <div>
+            <a><span class="icon-facebook click"> </span> Share on Facebook </a>
+            <a><span class"icon-social-twitter click"> T </span> Share on Twitter </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -9,7 +9,7 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
   $scope.bill = this;
   $scope.commentService = commentService;
   this.timeout = $timeout;
-  this.rs = $rootScope;
+  this.rs = $rootScope || {};
   this.rs.inApp = true;
   this.representation = new Demographics();
   this.authService = authService;
@@ -395,6 +395,8 @@ BillController.prototype.getRepresentation = function() {
     bill_id: this.body.billData.bill_id,
   };
 
+  this.representation.state = this.rs.user.state;
+  this.representation.district = this.rs.user.district;
   this.representation.setBusy(true);
 
   this.billService.getRepresentation(request, function(err, res) {
