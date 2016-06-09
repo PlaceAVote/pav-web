@@ -57,10 +57,132 @@ describe('SignUpController', function() {
     expect(result).to.eql(false);
   });
 
+  it('only sets errored to true, others will be false', function(done) {
+    function MockUserService() {
+      this.saveUser = function(callback) {
+        callback({
+          data: {
+            errors: [
+              { dob: 'DOB ERROR' },
+              { last_name: 'LAST NAME ERROR' },
+              { email: 'EMAIL ERROR' },
+            ]
+          },
+        });
+        expect(subject.invalid_dob).to.eql(true);
+        expect(subject.invalid_last_name).to.eql(true);
+        expect(subject.invalid_first_name).to.eql(false);
+        expect(subject.invalid_email).to.eql(true);
+        expect(subject.invalid_password).to.eql(false);
+        expect(subject.invalid_topics).to.eql(false);
+        expect(subject.invalid_gender).to.eql(false);
+        expect(subject.invalid_zip).to.eql(false);
+        done();
+      };
+      this.addAdditionalInformation = function() {
+
+      };
+      this.getUser = function() {
+        return {
+          gender: 'they',
+          dob: new Date(),
+          zipcode: '90210',
+          first_name: 'Paul',
+          last_name: 'Test',
+        }
+      };
+      this.user = function() {
+        return
+      }
+    }
+    var mockUS = new MockUserService();
+    var subject = new SignUpController(rs, undefined, undefined, mockUS, {}, Analytics);
+    subject.additionalInformation.zipcode = '90210';
+    subject.signup();
+  });
+
+  it('sets field errors when it receives them from the backend', function(done) {
+    function MockUserService() {
+      this.saveUser = function(callback) {
+        callback({
+          data: {
+            errors: [
+              { dob: 'DOB ERROR' },
+              { last_name: 'LAST NAME ERROR' },
+              { first_name: 'FIRST NAME ERROR' },
+              { email: 'EMAIL ERROR' },
+              { password: 'PASSWORD ERROR' },
+              { topics: 'TOPICS ERROR' },
+              { gender: 'GENDER ERROR' },
+              { zipcode: 'ZIPCODE ERROR' },
+            ]
+          },
+        });
+        expect(subject.invalid_dob).to.eql(true);
+        expect(subject.invalid_last_name).to.eql(true);
+        expect(subject.invalid_first_name).to.eql(true);
+        expect(subject.invalid_email).to.eql(true);
+        expect(subject.invalid_password).to.eql(true);
+        expect(subject.invalid_topics).to.eql(true);
+        expect(subject.invalid_gender).to.eql(true);
+        expect(subject.invalid_zip).to.eql(true);
+        done();
+      };
+      this.addAdditionalInformation = function() {
+
+      };
+      this.getUser = function() {
+        return {
+          gender: 'they',
+          dob: new Date(),
+          zipcode: '90210',
+          first_name: 'Paul',
+          last_name: 'Test',
+        }
+      };
+      this.user = function() {
+        return
+      }
+    }
+    var mockUS = new MockUserService();
+    var subject = new SignUpController(rs, undefined, undefined, mockUS, {}, Analytics);
+    subject.additionalInformation.zipcode = '90210';
+    subject.signup();
+  });
+
+  it('sets a user exists error to be true when a 409 comes back', function(done) {
+    function MockUserService() {
+      this.saveUser = function(callback) {
+        callback({status: 409});
+        expect(subject.user_exists_error).to.eql(true);
+        done();
+      };
+      this.addAdditionalInformation = function() {
+
+      };
+      this.getUser = function() {
+        return {
+          gender: 'they',
+          dob: new Date(),
+          zipcode: '90210',
+          first_name: 'Paul',
+          last_name: 'Test',
+        }
+      };
+      this.user = function() {
+        return
+      }
+    }
+    var mockUS = new MockUserService();
+    var subject = new SignUpController(rs, undefined, undefined, mockUS, {}, Analytics);
+    subject.additionalInformation.zipcode = '90210';
+    subject.signup();
+  });
+
   it('when service returns error, set scope.error to be true', function(done) {
     function MockUserService() {
       this.saveUser = function(callback) {
-        callback('Server returned error');
+        callback('Unknown error');
         expect(subject.error).to.eql(true);
         done();
       };
@@ -69,8 +191,11 @@ describe('SignUpController', function() {
       };
       this.getUser = function() {
         return {
-          name: 'paul',
           gender: 'they',
+          dob: new Date(),
+          zipcode: '90210',
+          first_name: 'Paul',
+          last_name: 'Test',
         }
       };
       this.user = function() {
@@ -110,6 +235,7 @@ describe('SignUpController', function() {
         first_name: 'paul',
         last_name: 'barber',
         email: 'test@test.com',
+        zipcode: '90210',
         dob: new Date('04/01/1990'),
       };
       that.getUser = function() {
@@ -143,6 +269,102 @@ describe('SignUpController', function() {
         last_name: 'barber',
         email: 'test@test.com',
         dob: new Date('04/01/1990'),
+      };
+      that.getUser = function() {
+        return that.user;
+      };
+      that.saveUser = function(callback) {
+        called = true;
+        return callback(undefined);
+      };
+      that.addAdditionalInformation = function() {};
+    }
+    function Location() {
+      this.path = function(route) {
+        expect(route).to.eql('/feed');
+      }
+    };
+    var l = new Location();
+    var mockUS = new MockUserService();
+    var subject = new SignUpController(rs, undefined, l, mockUS, {}, Analytics);
+    subject.signup();
+    expect(called).to.eql(false);
+  });
+
+  it('doesnt call service when last_name is not defined', function() {
+    var called = false;
+    function MockUserService() {
+      var that = this;
+      that.user = {
+        gender: 'they',
+        zipcode: '90210',
+        email: 'test@test.com',
+        dob: new Date(),
+        first_name: 'Test',
+      };
+      that.getUser = function() {
+        return that.user;
+      };
+      that.saveUser = function(callback) {
+        called = true;
+        return callback(undefined);
+      };
+      that.addAdditionalInformation = function() {};
+    }
+    function Location() {
+      this.path = function(route) {
+        expect(route).to.eql('/feed');
+      }
+    };
+    var l = new Location();
+    var mockUS = new MockUserService();
+    var subject = new SignUpController(rs, undefined, l, mockUS, {}, Analytics);
+    subject.signup();
+    expect(called).to.eql(false);
+  });
+
+  it('doesnt call service when first_name is not defined', function() {
+    var called = false;
+    function MockUserService() {
+      var that = this;
+      that.user = {
+        gender: 'they',
+        last_name: 'barber',
+        zipcode: '90210',
+        email: 'test@test.com',
+        dob: new Date(),
+      };
+      that.getUser = function() {
+        return that.user;
+      };
+      that.saveUser = function(callback) {
+        called = true;
+        return callback(undefined);
+      };
+      that.addAdditionalInformation = function() {};
+    }
+    function Location() {
+      this.path = function(route) {
+        expect(route).to.eql('/feed');
+      }
+    };
+    var l = new Location();
+    var mockUS = new MockUserService();
+    var subject = new SignUpController(rs, undefined, l, mockUS, {}, Analytics);
+    subject.signup();
+    expect(called).to.eql(false);
+  });
+
+  it('doesnt call service when dob is not defined', function() {
+    var called = false;
+    function MockUserService() {
+      var that = this;
+      that.user = {
+        gender: 'they',
+        first_name: 'paul',
+        last_name: 'barber',
+        zipcode: '90210',
+        email: 'test@test.com',
       };
       that.getUser = function() {
         return that.user;

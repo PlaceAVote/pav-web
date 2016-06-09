@@ -20,6 +20,16 @@ function SignUpCtrl($rootScope, $scope, $location, userService, authService, Ana
   this.country = countryCodes;
   this.rs = $rootScope;
   this.loggedIn = $rootScope.loggedIn;
+  this.invalids = [
+    'invalid_first_name',
+    'invalid_last_name',
+    'invalid_password',
+    'invalid_gender',
+    'invalid_dob',
+    'invalid_zip',
+    'invalid_topics',
+    'invalid_email',
+  ];
 
   if (!userService.user) {
     this.location.path('/');
@@ -57,23 +67,96 @@ SignUpCtrl.prototype.signup = function() {
     this.invalid_user = false;
   }
 
-  if (!this.additionalInformation.gender) {
-    this.no_gender = true;
+  if (!user.dob) {
+    this.invalid_dob = true;
   } else {
-    this.no_gender = false;
+    this.invalid_dob = false;
   }
 
-  if (!this.zipFormat(this.additionalInformation.zipcode)) {
+  if (!user.first_name) {
+    this.invalid_first_name = true;
+  } else {
+    this.invalid_first_name = false;
+  }
+
+  if (!user.last_name) {
+    this.invalid_last_name = true;
+  } else {
+    this.invalid_last_name = false;
+  }
+
+  if (!user.gender) {
+    this.invalid_gender = true;
+  } else {
+    this.invalid_gender = false;
+  }
+
+  if (!this.zipFormat(user.zipcode)) {
     this.invalid_zip = true;
   } else {
     this.invalid_zip = false;
   }
 
-  if (this.invalid_user || this.no_gender || this.invalid_zip) {
+  var that = this;
+  var invalidState;
+  this.invalids.forEach(function(invalid) {
+    if (that[invalid]) {
+      invalidState = true;
+      return;
+    }
+  });
+  if (invalidState) {
+    return;
+  }
+  this.saveUser(user);
+};
+
+
+SignUpCtrl.prototype.setErrorsFromResponse = function(err) {
+  if (err.status === 409) {
+    this.user_exists_error = true;
+    this.analytics.trackEvent('Signup', 'Failed: already exists');
+    return;
+  }
+  if (!err.data || !err.data.errors) {
+    this.error = true;
+    this.analytics.trackEvent('Signup', 'Failed: Error: ' + err.status);
     return;
   }
 
-  this.saveUser(user);
+  // Reset errors
+  var that = this;
+  this.invalids.forEach(function(invalid) {
+    that[invalid] = false;
+  });
+  // Set errors from response.
+  err.data.errors.forEach(function(e) {
+    if (e.dob) {
+      that.invalid_dob = true;
+    }
+    if (e.last_name) {
+      that.invalid_last_name = true;
+    }
+    if (e.first_name) {
+      that.invalid_first_name = true;
+    }
+    if (e.email) {
+      that.invalid_email = true;
+    }
+    if (e.password) {
+      that.invalid_password = true;
+    }
+    if (e.topics) {
+      that.invalid_topics = true;
+    }
+    if (e.gender) {
+      that.invalid_gender = true;
+    }
+    if (e.zipcode) {
+      that.invalid_zip = true;
+    }
+  });
+  return;
 };
 
 SignUpCtrl.prototype.saveUser = function(user) {
@@ -82,13 +165,7 @@ SignUpCtrl.prototype.saveUser = function(user) {
   this.userService.saveUser(function(err, result) {
     that.loaded = true;
     if (err) {
-      if (err.status === 409) {
-        that.user_exists_error = true;
-        that.analytics.trackEvent('Signup', 'Failed: already exists');
-        return;
-      }
-      that.analytics.trackEvent('Signup', 'Failed: Error: ' + err.status);
-      that.error = true;
+      that.setErrorsFromResponse(err);
       return;
     }
     that.analytics.trackEvent('Signup', 'Success');
