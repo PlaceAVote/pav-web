@@ -398,7 +398,28 @@ describe('SignUpController', function() {
       var mockUS = new MockUserService();
       var subject = new SignUpController(rs, undefined, undefined, mockUS, {}, Analytics);
       subject.setDateAsUTCTime('not a date');
-      expect(subject.additionalInformation.dob).to.eql('');
+      expect(subject.additionalInformation.dobFmt).to.eql(undefined);
+    });
+    it('Cant use string format if it has more than 3 splits', function() {
+      var mockUS = new MockUserService();
+      var subject = new SignUpController(rs, undefined, undefined, mockUS, {}, Analytics);
+      subject.setDateAsUTCTime('01-04-1990-102');
+      var d = new Date('04 Jan 1990 UTC');
+      expect(subject.additionalInformation.dobFmt).to.eql(undefined);
+    });
+    it('Cant use if all splits arent a number', function() {
+      var mockUS = new MockUserService();
+      var subject = new SignUpController(rs, undefined, undefined, mockUS, {}, Analytics);
+      subject.setDateAsUTCTime('01-Tuesday-1990');
+      var d = new Date('04 Jan 1990 UTC');
+      expect(subject.additionalInformation.dobFmt).to.eql(undefined);
+    });
+    it('should be able to handlee the format \'MM-DD-YYYY\' as a string', function() {
+      var mockUS = new MockUserService();
+      var subject = new SignUpController(rs, undefined, undefined, mockUS, {}, Analytics);
+      subject.setDateAsUTCTime('01-04-1990');
+      var d = new Date('04 Jan 1990 UTC').getTime().toString();
+      expect(subject.additionalInformation.dobFmt).to.eql(d);
     });
   });
 });

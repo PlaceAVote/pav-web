@@ -51,10 +51,26 @@ function SignUpCtrl($rootScope, $scope, $location, userService, authService, Ana
 }
 
 SignUpCtrl.prototype.setDateAsUTCTime = function(date) {
-  if (!(date instanceof Date)) {
+  if (!date) {
     return;
   }
-  this.additionalInformation.dobFmt = date.getTime().toString();
+  if (date instanceof Date) {
+    this.additionalInformation.dobFmt = date.getTime().toString();
+    return;
+  }
+  var split = date.split('-');
+  if (split.length !== 3) {
+    return;
+  }
+  var componented = [];
+  for (var i = 0; i < split.length; i++) {
+    var d = parseInt(split[i]);
+    if (isNaN(d)) {
+      return;
+    }
+    componented.push(d);
+  }
+  this.additionalInformation.dobFmt = new Date(componented[2], componented[0] - 1, componented[1]).getTime().toString();
 };
 
 SignUpCtrl.prototype.signup = function() {
