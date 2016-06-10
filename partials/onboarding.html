@@ -17,6 +17,8 @@
 					<div class="topic-tick"><div class="icon-check-mark"></div></div>
 				</div>
 			</div>
+
+        <p class="register-error" ng-class="{'show': register.noTopicsSelected}">Please select at least one topic to continue</p>
 	<button ng-click="register.topicsSubmit()">Continue</button>
 	</div>
 	</section>

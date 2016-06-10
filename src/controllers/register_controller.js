@@ -28,7 +28,12 @@ function RegisterController($scope, $location, userService, $rootScope) {
 }
 
 RegisterController.prototype.topicsSubmit = function() {
-  this.userService.addTopics(this.getSelected());
+  var selected = this.getSelected();
+  if (selected.length === 0) {
+    this.noTopicsSelected = true;
+    return;
+  }
+  this.userService.addTopics(selected);
   this.location.path('/register');
 };
 

@@ -1,5 +1,4 @@
 var config = require('./config/urls.js');
-
 console.log('%cPlaceavote', 'background: #543594; color: #ffffff; padding: 1px 3px; border-radius: 3px; font-size: 12px;font-family: sans-serif; margin-left: calc(100% - 70px);');
 
 // Safari, in Private Browsing Mode, looks like it supports localStorage but all calls to setItem
@@ -57,6 +56,7 @@ var angular = require('angular');
 
 // Directives
 var search = require('./directives/search.js');
+var pavXBrowserDate = require('./directives/pavXBrowserDate.js');
 var mailcheck = require('./directives/mailcheck.js');
 var pavDirectives = require('./directives/directives.js');
 var websiteNav = require('./directives/website_nav.js');
@@ -292,6 +292,7 @@ app.value('THROTTLE_MILLISECONDS', null);
 // Directives
 app.directive('websiteNav', [websiteNav]);
 app.directive('headerNav', [headerNav]);
+app.directive('pavDate', [pavXBrowserDate]);
 app.directive('mailcheck', mailcheck);
 mailcheck.$inject = ['$compile','$sce'];
 app.directive('comment', commentDirective);

@@ -92,4 +92,32 @@ describe("RegisterController", function() {
       expect(recievedPath).to.eql('/');
 		});
   });
+  describe('Topic Submit', function() {
+    it('wont call location (go to next controller) if no topics are selected', function() {
+      var called = false;
+      var calledTopics = false;
+      var mockUserService = {
+        getUser: function() {
+          return {
+            email: 'test@test.com',
+            password: 'password!111',
+          };
+        },
+        addTopics: function() {
+         calledTopics = true;
+        }
+      };
+      var mockLocation = {
+        path: function(route) {
+          recievedPath = route;
+          called = true;
+        }
+      }
+			var subject = new RegisterController({}, mockLocation, mockUserService, {});
+      subject.topicsSubmit();
+      expect(called).to.eql(false);
+      expect(calledTopics).to.eql(false);
+      expect(subject.noTopicsSelected).to.eql(true);
+    });
+  });
 });
