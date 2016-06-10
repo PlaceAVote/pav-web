@@ -57,6 +57,7 @@ var angular = require('angular');
 // Directives
 var search = require('./directives/search.js');
 var pavXBrowserDate = require('./directives/pavXBrowserDate.js');
+var socialBox = require('./directives/social_box.js');
 var mailcheck = require('./directives/mailcheck.js');
 var pavDirectives = require('./directives/directives.js');
 var websiteNav = require('./directives/website_nav.js');
@@ -293,6 +294,7 @@ app.value('THROTTLE_MILLISECONDS', null);
 app.directive('websiteNav', [websiteNav]);
 app.directive('headerNav', [headerNav]);
 app.directive('pavDate', [pavXBrowserDate]);
+app.directive('socialBox', [socialBox]);
 app.directive('mailcheck', mailcheck);
 mailcheck.$inject = ['$compile','$sce'];
 app.directive('comment', commentDirective);
