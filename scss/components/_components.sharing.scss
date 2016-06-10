@@ -1,0 +1,35 @@
+/*------------------------------------------*\
+    #SOCIAL-SHARING-COMPONENT
+\*------------------------------------------*/
+
+ /**
+  * A Box for social sharing componentents
+  */
+.social-box {
+  background-color: $greylight;
+  font-size: 70%;
+  color: $greydark;
+  border: solid $grey 1px;
+  padding: 4%;
+  margin-top: 5%;
+  div {
+    display: inline-block;
+    width: 45%;
+    margin-right: 3%;
+  }
+}
+
+.social-box_buttons__long {
+  display: block;
+  padding-top: 7%;
+  margin-bottom: 7%;
+  text-align: center;
+  color: $white;
+  background-color: $blue;
+  padding-bottom: 7%;
+  padding-right: 7%;
+}
+
+.social-box_buttons_icon {
+  padding-right:10%;
+}

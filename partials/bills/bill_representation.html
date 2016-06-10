@@ -1,13 +1,13 @@
-<div>
-  <div class="c-bill-representation-banner" ng-show="demographics.isUnderRepresented()">
-    <div class="c-bill-representation-underrepresented">
+<div class="bill-representation-panel">
+  <div class="stats-underrepresented-banner" ng-show="demographics.isUnderRepresented()">
+    <div class="stats-underrepresented-banner__required">
       <p> More votes are required on this bill for your district to be providing accurate voting data</p>
     </div>
-    <div class="c-bill-representation-sample">
+    <div class="stats-underrepresented-banner__sample">
       <p> We have {{demographics.demographics.votes.total}} out of {{demographics.demographics.sampleSize}} votes needed for {{demographics.state}} {{demographics.district}} District to be represented </p>
     </div>
   </div>
-  <div class="c-bill-representation-content">
+  <div class="bill-representation-content">
   <bill-statistics demographics="demographics"></bill-statistics>
   </div>
 </div>
