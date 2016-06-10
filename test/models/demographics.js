@@ -56,7 +56,7 @@ describe('Demographics', function() {
   describe('setDemographics', function() {
     it('set demographics property', function() {
       var subject = new Demographics();
-      var demographics = fixtures;
+      var demographics = JSON.parse(JSON.stringify(fixtures));
       subject.setDemographics(demographics)
       expect(subject.demographics).to.eql(demographics);
       expect(subject.demographics.votes.total).to.eql(7);
@@ -65,9 +65,8 @@ describe('Demographics', function() {
   describe('getRepresentationScore', function() {
     it('sets the score as a string representation', function() {
       var subject = new Demographics();
-      var demographics = fixtures;
-      subject.setDemographics(demographics)
-      subject.setRepresentationScore()
+      var demographics = JSON.parse(JSON.stringify(fixtures));
+      subject.setRepresentationScore(demographics)
       expect(subject.representationScore).to.eql('7/390');
     });
     it('wont set when demographics are not set', function() {
@@ -79,9 +78,8 @@ describe('Demographics', function() {
   describe('setVotePercent', function() {
     it('sets the score as a string representation', function() {
       var subject = new Demographics();
-      var demographics = fixtures;
-      subject.setDemographics(demographics)
-      subject.setVotePercent()
+      var demographics = JSON.parse(JSON.stringify(fixtures));
+      subject.setVotePercent(demographics)
       expect(subject.stats.length).to.eql(2);
       expect(subject.stats[0].val).to.eql(42.86);
       expect(subject.stats[0].label).to.eql('Against');
@@ -99,9 +97,8 @@ describe('Demographics', function() {
   describe('setRepresentationPercent', function() {
     it('sets the representation percent', function() {
       var subject = new Demographics();
-      var demographics = fixtures;
-      subject.setDemographics(demographics)
-      subject.setRepresentationPercent()
+      var demographics = JSON.parse(JSON.stringify(fixtures));
+      subject.setRepresentationPercent(demographics)
       expect(subject.representationPercent).to.eql(2);
     });
     it('wont set when demographics are not set', function() {
@@ -155,7 +152,7 @@ describe('Demographics', function() {
   describe('setUnderRepresentedGenderGroup', function() {
     it('sets an object of the gender who is most under represented in the district/state', function() {
       var subject = new Demographics();
-      var demographics = fixtures;
+      var demographics = JSON.parse(JSON.stringify(fixtures));
       subject.populate(demographics);
       subject.setUnderRepresentedGenderGroup();
       expect(subject.underRepresentedGenderGroup.percentage).to.eql(42.86);
@@ -170,7 +167,7 @@ describe('Demographics', function() {
   describe('updateRepresentationView', function() {
     it('wont recalculate if 100 or more', function() {
       var subject = new Demographics();
-      var demographics = fixtures;
+      var demographics = JSON.parse(JSON.stringify(fixtures));
       subject.populate(demographics);
       subject.representationPercent = 100;
       subject.updateRepresentation();
@@ -178,8 +175,9 @@ describe('Demographics', function() {
     });
     it('doesnt alter percent over 100', function() {
       var subject = new Demographics();
-      var demographics = fixtures;
+      var demographics = JSON.parse(JSON.stringify(fixtures));
       subject.populate(demographics);
+      expect(subject.representationPercent).to.eql(2);
       subject.representationPercent = 101;
       subject.updateRepresentation();
       expect(subject.representationPercent).to.eql(101);
@@ -204,33 +202,45 @@ describe('Demographics', function() {
       var subject = new Demographics();
       var demographics = JSON.parse(JSON.stringify(fixtures));
       subject.populate(demographics);
-      expect(demographics.votes.total).to.eql(7);
+      expect(subject.demographics.votes.total).to.eql(7);
       subject.updateVotePercent();
-      expect(demographics.votes.total).to.eql(8);
+      expect(subject.demographics.votes.total).to.eql(8);
     });
     it('increases the yes votes total', function() {
       var subject = new Demographics();
       var demographics = JSON.parse(JSON.stringify(fixtures));
       subject.populate(demographics);
-      expect(demographics.votes.total).to.eql(7);
-      expect(demographics.votes.yes).to.eql(4);
-      expect(demographics.votes.no).to.eql(3);
+      expect(subject.demographics.votes.total).to.eql(7);
+      expect(subject.demographics.votes.yes).to.eql(4);
+      expect(subject.demographics.votes.no).to.eql(3);
       subject.updateVotePercent(true);
-      expect(demographics.votes.total).to.eql(8);
-      expect(demographics.votes.yes).to.eql(5);
-      expect(demographics.votes.no).to.eql(3);
+      expect(subject.demographics.votes.total).to.eql(8);
+      expect(subject.demographics.votes.yes).to.eql(5);
+      expect(subject.demographics.votes.no).to.eql(3);
     });
     it('increases the nay sayers', function() {
       var subject = new Demographics()
       var demographics = JSON.parse(JSON.stringify(fixtures));
       subject.populate(demographics);
-      expect(demographics.votes.total).to.eql(7);
-      expect(demographics.votes.yes).to.eql(4);
-      expect(demographics.votes.no).to.eql(3);
+      expect(subject.demographics.votes.total).to.eql(7);
+      expect(subject.demographics.votes.yes).to.eql(4);
+      expect(subject.demographics.votes.no).to.eql(3);
       subject.updateVotePercent(false);
-      expect(demographics.votes.total).to.eql(8);
-      expect(demographics.votes.yes).to.eql(4);
-      expect(demographics.votes.no).to.eql(4);
+      expect(subject.demographics.votes.total).to.eql(8);
+      expect(subject.demographics.votes.yes).to.eql(4);
+      expect(subject.demographics.votes.no).to.eql(4);
+    });
+    it('recalculates votePercent', function() {
+      var subject = new Demographics()
+      var demographics = JSON.parse(JSON.stringify(fixtures));
+      subject.populate(demographics);
+      expect(subject.stats.length).to.eql(2);
+      expect(subject.stats[0]).to.eql({ className: 'against', label: 'Against', val: 42.86 });
+      expect(subject.stats[1]).to.eql({ className: 'favor', label: 'In Favor', val: 57.14 });
+      subject.updateVotePercent(false);
+      expect(subject.stats.length).to.eql(2);
+      expect(subject.stats[0]).to.eql({ className: 'against', label: 'Against', val: 50 });
+      expect(subject.stats[1]).to.eql({ className: 'favor', label: 'In Favor', val: 50 });
     });
     it('doesnt increase when demographics arent defined', function() {
       var subject = new Demographics();
@@ -257,8 +267,7 @@ describe('Demographics', function() {
       var demographics = JSON.parse(JSON.stringify(fixtures));
       // shouldnt alter when min age is not 60
       demographics.gender.female.ranges[6].votes.total = 100;
-      subject.populate(demographics);
-      subject.setMinorityAgeRange();
+      subject.setMinorityAgeRange(demographics);
       expect(subject.minorityAgeRange.ageRange).to.eql('53-60');
       expect(subject.minorityAgeRange.percentage).to.eql(0);
     });

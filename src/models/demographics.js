@@ -37,14 +37,14 @@ Demographics.prototype.getAvailable = function() {
 
 Demographics.prototype.populate = function(demographics) {
   this.setDemographics(demographics);
-  this.setRepresentationPercent();
-  this.setRepresentationScore();
-  this.setVotePercent();
-  this.setUnderRepresentedGenderGroup();
-  this.isUnderRepresented();
-  this.setMinorityAgeRange();
+  this.setRepresentationPercent(demographics);
+  this.setRepresentationScore(demographics);
+  this.setVotePercent(demographics);
+  this.setUnderRepresentedGenderGroup(demographics);
+  this.setMinorityAgeRange(demographics);
   this.setAvailable(true);
   this.setBusy(false);
+  this.isUnderRepresented();
 };
 
 Demographics.prototype.setDemographics = function(demographics) {
@@ -52,18 +52,18 @@ Demographics.prototype.setDemographics = function(demographics) {
 };
 
 
-Demographics.prototype.setRepresentationScore = function() {
-  if (!this.demographics) {
+Demographics.prototype.setRepresentationScore = function(demographics) {
+  if (!demographics) {
     return;
   }
-  this.representationScore = this.demographics.votes.total + '/' + this.demographics.sampleSize;
+  this.representationScore = demographics.votes.total + '/' + demographics.sampleSize;
 };
 
-Demographics.prototype.setVotePercent = function() {
-  if (!this.demographics) {
+Demographics.prototype.setVotePercent = function(demographics) {
+  if (!demographics) {
     return;
   }
-  var votes = this.demographics.votes;
+  var votes = demographics.votes;
   var voteNo = {
     val: toPercent(votes.no, votes.total),
     label: 'Against',
@@ -78,6 +78,7 @@ Demographics.prototype.setVotePercent = function() {
   this.stats = [voteNo, voteYes];
 };
 
+
 Demographics.prototype.updateVotePercent = function(favor) {
   if (!this.demographics) {
     return;
@@ -88,16 +89,17 @@ Demographics.prototype.updateVotePercent = function(favor) {
   } else {
     this.demographics.votes.no += 1;
   }
+  this.setVotePercent(this.demographics);
 };
 
-Demographics.prototype.setRepresentationPercent = function() {
-  if (!this.demographics) {
+Demographics.prototype.setRepresentationPercent = function(demographics) {
+  if (!demographics) {
     return;
   }
-  if (this.demographics.votes.total >= this.demographics.sampleSize) {
+  if (demographics.votes.total >= demographics.sampleSize) {
     this.representationPercent = 100;
   } else {
-    this.representationPercent = Math.ceil((this.demographics.votes.total / this.demographics.sampleSize) * 100);
+    this.representationPercent = Math.ceil((demographics.votes.total / demographics.sampleSize) * 100);
   }
 };
 
@@ -105,16 +107,16 @@ Demographics.prototype.isUnderRepresented = function() {
   return this.representationPercent < 100;
 };
 
-Demographics.prototype.setUnderRepresentedGenderGroup = function() {
-  if (!this.demographics) {
+Demographics.prototype.setUnderRepresentedGenderGroup = function(demographics) {
+  if (!demographics) {
     return;
   }
-  var total = this.demographics.votes.total;
-  var maleTotal = this.demographics.gender.male.votes.total;
-  var femaleTotal = this.demographics.gender.female.votes.total;
+  var total = demographics.votes.total;
+  var maleTotal = demographics.gender.male.votes.total;
+  var femaleTotal = demographics.gender.female.votes.total;
   var underRepresentedGroup = maleTotal < femaleTotal ? 'male' : 'female';
   this.underRepresentedGenderGroup = {
-    percentage: toPercent(this.demographics.gender[underRepresentedGroup].votes.total, total),
+    percentage: toPercent(demographics.gender[underRepresentedGroup].votes.total, total),
     gender: underRepresentedGroup,
   };
 };
@@ -173,13 +175,13 @@ function formatedAgeRange(highestRange, demographics) {
   };
 }
 
-Demographics.prototype.setMinorityAgeRange = function() {
-  if (!this.demographics) {
+Demographics.prototype.setMinorityAgeRange = function(demographics) {
+  if (!demographics) {
     return;
   }
-  var mergedRanges = mergeAgeRanges(this.demographics);
+  var mergedRanges = mergeAgeRanges(demographics);
   var highestRange = extractHighestRange(mergedRanges);
-  this.minorityAgeRange = formatedAgeRange(highestRange, this.demographics);
+  this.minorityAgeRange = formatedAgeRange(highestRange, demographics);
 };
 
 module.exports = Demographics;

@@ -417,7 +417,6 @@ BillController.prototype.getRepresentation = function() {
 BillController.prototype.updateRepresentationView = function(vote) {
   this.representation.updateVotePercent(vote);
   this.representation.updateRepresentation();
-  this.representation.setVotePercent();
 };
 
 module.exports = BillController;

@@ -151,7 +151,7 @@ var demographics = {
         },
       ],
     },
-    they: {
+    nonBinary: {
       votes: {
         no: 0,
         total: 0,
