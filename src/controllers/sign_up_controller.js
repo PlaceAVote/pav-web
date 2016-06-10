@@ -29,6 +29,7 @@ function SignUpCtrl($rootScope, $scope, $location, userService, authService, Ana
     'invalid_zip',
     'invalid_topics',
     'invalid_email',
+    'invalid_dateFMT',
   ];
 
   if (!userService.user) {
@@ -55,22 +56,44 @@ SignUpCtrl.prototype.setDateAsUTCTime = function(date) {
     return;
   }
   if (date instanceof Date) {
+    this.invalid_dateFMT = false;
     this.additionalInformation.dobFmt = date.getTime().toString();
     return;
   }
+  // Split input on the '-'
   var split = date.split('-');
+  // Should have 3 components otherwise return;
   if (split.length !== 3) {
+    this.invalid_dateFMT = true;
     return;
   }
-  var componented = [];
+  var components = [];
   for (var i = 0; i < split.length; i++) {
+    // Check length of year value.
+    if (i === split.length - 1) {
+      if (split[i].length > 4) {
+        this.invalid_dateFMT = true;
+        return;
+      }
+    }
     var d = parseInt(split[i]);
     if (isNaN(d)) {
+      this.invalid_dateFMT = true;
       return;
     }
-    componented.push(d);
+    components.push(d);
   }
-  this.additionalInformation.dobFmt = new Date(componented[2], componented[0] - 1, componented[1]).getTime().toString();
+  var month = components[0];
+  var day = components[1];
+  var year = components[2];
+  // Naive check to see if month and day is
+  // (sort of) correct.
+  if (month > 12 || day > 31) {
+    this.invalid_dateFMT = true;
+    return;
+  }
+  this.invalid_dateFMT = false;
+  this.additionalInformation.dobFmt = new Date(components[2], components[0] - 1, components[1]).getTime().toString();
 };
 
 SignUpCtrl.prototype.signup = function() {
@@ -83,7 +106,7 @@ SignUpCtrl.prototype.signup = function() {
     this.invalid_user = false;
   }
 
-  if (!user.dob) {
+  if (!user.dob && !this.invalid_dateFMT) {
     this.invalid_dob = true;
   } else {
     this.invalid_dob = false;
