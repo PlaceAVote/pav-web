@@ -12,3 +12,17 @@
   margin: 7%;
   color: $grey;
 }
+
+.bill-representation-content_text__light {
+  font-size: 80%;
+  margin-right: 1%;
+}
+
+.bill-representation-card {
+  margin: 3% 0% 3% 0%;
+}
+
+.bill-representation-breakdown-cards {
+  display: flex;
+  justify-content: space-between;
+}

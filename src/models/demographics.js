@@ -37,6 +37,7 @@ Demographics.prototype.getAvailable = function() {
 
 Demographics.prototype.populate = function(demographics) {
   this.setDemographics(demographics);
+  this.setPopulation(demographics);
   this.setRepresentationPercent(demographics);
   this.setRepresentationScore(demographics);
   this.setVotePercent(demographics);
@@ -51,6 +52,9 @@ Demographics.prototype.setDemographics = function(demographics) {
   this.demographics = demographics;
 };
 
+Demographics.prototype.setPopulation = function(demographics) {
+  this.population = demographics.population;
+};
 
 Demographics.prototype.setRepresentationScore = function(demographics) {
   if (!demographics) {

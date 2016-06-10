@@ -1,1 +1,10 @@
 @import '_stats-underrepresented.scss';
+@import '_stats-demographic.scss';
+@import '_stats-district.scss';
+
+.stats_text__large {
+  display: inline-block;
+  font-size: 270%;
+  color: $greydark;
+  margin: 1%;
+}

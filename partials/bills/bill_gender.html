@@ -1,0 +1,53 @@
+<div class="c-card bill-representation-content_text__light bill-representation-card">
+  <h1>Demographics</h1>
+  <hr />
+  <div>
+    <p>To gain the most accurate possible voting sata we also try an ensure key demoragraphics are filled to make sure every voice in your district is heard. Below are the age demographics for {{demographics.state}} {{demographics.district}} District.</p>
+  </div>
+  <div class="row stats-demographic_breakdown">
+      <!-- Population -->
+      <div>
+          <p class="stats-demographics_population__large">Population</p>
+          <p class="stats_text__large bold">{{demographics.population | number}}</p>
+      </div>
+      <!-- Votes -->
+      <div></div>
+      <!-- Needed -->
+      <div></div>
+  </div>
+  <div>
+    <!-- could be a directive -->
+    <!-- male -->
+    <div class="stats-demographics_gender_breakdown">
+      <p><span> M </span> Male </p>
+      <!-- age breakdowns -->
+      <div>
+        <div ng-repeat="range in demographics.demographics.gender.male.ranges">
+          {{range.minAge}}-{{range.maxAge}} : {{range.votes.total}}
+        </div>
+      </div>
+    </div>
+
+    <!-- female -->
+    <div class="stats-demographics_gender_breakdown">
+      <p><span> F </span> Female </p>
+      <!-- age breakdowns -->
+      <div>
+        <div ng-repeat="range in demographics.demographics.gender.female.ranges">
+          {{range.minAge}}-{{range.maxAge}} : {{range.votes.total}}
+        </div>
+      </div>
+    </div>
+
+    <!-- nonBinary -->
+    <div class="stats-demographics_gender_breakdown">
+      <p><span> B </span> Non Binary </p>
+      <!-- age breakdowns -->
+      <div>
+        <div ng-repeat="range in demographics.demographics.gender.nonBinary.ranges">
+          {{range.minAge}}-{{range.maxAge}} : {{range.votes.total}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
