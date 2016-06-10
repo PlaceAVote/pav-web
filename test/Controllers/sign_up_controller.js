@@ -355,6 +355,40 @@ describe('SignUpController', function() {
     expect(called).to.eql(false);
   });
 
+  it('doesnt call service when dob is defined but invalid_dateFMT is true', function() {
+    var called = false;
+    function MockUserService() {
+      var that = this;
+      that.user = {
+        gender: 'they',
+        first_name: 'paul',
+        last_name: 'barber',
+        zipcode: '90210',
+        email: 'test@test.com',
+        dob: '92930292',
+      };
+      that.getUser = function() {
+        return that.user;
+      };
+      that.saveUser = function(callback) {
+        called = true;
+        return callback(undefined);
+      };
+      that.addAdditionalInformation = function() {};
+    }
+    function Location() {
+      this.path = function(route) {
+        expect(route).to.eql('/feed');
+      }
+    };
+    var l = new Location();
+    var mockUS = new MockUserService();
+    var subject = new SignUpController(rs, undefined, l, mockUS, {}, Analytics);
+    subject.additionalInformation.dob = 'cat-man'
+    subject.signup();
+    expect(called).to.eql(false);
+  });
+
   it('doesnt call service when dob is not defined', function() {
     var called = false;
     function MockUserService() {
@@ -393,12 +427,14 @@ describe('SignUpController', function() {
       var date = new Date('25 Dec 1995 UTC');
       subject.setDateAsUTCTime(date);
       expect(subject.additionalInformation.dobFmt).to.eql('819849600000');
+      expect(subject.invalid_dateFMT).to.eql(false);
     });
     it('does not set the date as a utc if its not a date', function() {
       var mockUS = new MockUserService();
       var subject = new SignUpController(rs, undefined, undefined, mockUS, {}, Analytics);
       subject.setDateAsUTCTime('not a date');
       expect(subject.additionalInformation.dobFmt).to.eql(undefined);
+      expect(subject.invalid_dateFMT).to.eql(true);
     });
     it('Cant use string format if it has more than 3 splits', function() {
       var mockUS = new MockUserService();
@@ -406,6 +442,7 @@ describe('SignUpController', function() {
       subject.setDateAsUTCTime('01-04-1990-102');
       var d = new Date('04 Jan 1990 UTC');
       expect(subject.additionalInformation.dobFmt).to.eql(undefined);
+      expect(subject.invalid_dateFMT).to.eql(true);
     });
     it('Cant use if all splits arent a number', function() {
       var mockUS = new MockUserService();
@@ -413,6 +450,7 @@ describe('SignUpController', function() {
       subject.setDateAsUTCTime('01-Tuesday-1990');
       var d = new Date('04 Jan 1990 UTC');
       expect(subject.additionalInformation.dobFmt).to.eql(undefined);
+      expect(subject.invalid_dateFMT).to.eql(true);
     });
     it('should be able to handlee the format \'MM-DD-YYYY\' as a string', function() {
       var mockUS = new MockUserService();
@@ -420,6 +458,42 @@ describe('SignUpController', function() {
       subject.setDateAsUTCTime('01-04-1990');
       var d = new Date('04 Jan 1990 UTC').getTime().toString();
       expect(subject.additionalInformation.dobFmt).to.eql(d);
+      expect(subject.invalid_dateFMT).to.eql(false);
+    });
+    it('should set is invalid flag when date is not recognised - month', function() {
+      var mockUS = new MockUserService();
+      var subject = new SignUpController(rs, undefined, undefined, mockUS, {}, Analytics);
+      subject.setDateAsUTCTime('13-40-1990');
+      expect(subject.additionalInformation.dobFmt).to.eql(undefined);
+      expect(subject.invalid_dateFMT).to.eql(true);
+    });
+    it('should set is invalid flag when date is not recognised - day', function() {
+      var mockUS = new MockUserService();
+      var subject = new SignUpController(rs, undefined, undefined, mockUS, {}, Analytics);
+      subject.setDateAsUTCTime('02-32-1990');
+      expect(subject.additionalInformation.dobFmt).to.eql(undefined);
+      expect(subject.invalid_dateFMT).to.eql(true);
+    });
+    it('should set is invalid flag when date is not recognised - year', function() {
+      var mockUS = new MockUserService();
+      var subject = new SignUpController(rs, undefined, undefined, mockUS, {}, Analytics);
+      subject.setDateAsUTCTime('02-20-20100');
+      expect(subject.additionalInformation.dobFmt).to.eql(undefined);
+      expect(subject.invalid_dateFMT).to.eql(true);
+    });
+    it('should set is invalid flag when date is not recognised - month (too many character)', function() {
+      var mockUS = new MockUserService();
+      var subject = new SignUpController(rs, undefined, undefined, mockUS, {}, Analytics);
+      subject.setDateAsUTCTime('124-20-2010');
+      expect(subject.additionalInformation.dobFmt).to.eql(undefined);
+      expect(subject.invalid_dateFMT).to.eql(true);
+    });
+    it('should set is invalid flag when date is not recognised - day (too many character)', function() {
+      var mockUS = new MockUserService();
+      var subject = new SignUpController(rs, undefined, undefined, mockUS, {}, Analytics);
+      subject.setDateAsUTCTime('12-202-2010');
+      expect(subject.additionalInformation.dobFmt).to.eql(undefined);
+      expect(subject.invalid_dateFMT).to.eql(true);
     });
   });
 });

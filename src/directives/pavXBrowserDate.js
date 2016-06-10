@@ -13,7 +13,6 @@ module.exports = function() {
       var e = document.createElement('input');
       e.setAttribute('type', 'date');
       if (e.type !== 'date') {
-        console.log('old');
         return 'partials/directives/date_old.html';
       }
       return 'partials/directives/date.html';
