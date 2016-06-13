@@ -120,8 +120,9 @@ describe('Demographics', function() {
       subject.setBusy = function () { calledCount++; }
       subject.setUnderRepresentedGenderGroup = function() { calledCount++; }
       subject.isUnderRepresented = function() { calledCount++; }
+      subject.setPopulation = function() { calledCount++; }
       subject.populate();
-      expect(calledCount).to.eql(8);
+      expect(calledCount).to.eql(9);
     });
   });
   describe('IsUnderRepresented', function() {
