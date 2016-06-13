@@ -4,6 +4,6 @@ module.exports = function($location) {
     scope: {
       demographics: '=demographics',
     },
-    templateUrl: 'partials/bills/bill_gender.html',
+    templateUrl: 'partials/bills/bill_demographics.html',
   };
 };

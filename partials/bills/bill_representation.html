@@ -1,20 +1,27 @@
 <div class="bill-representation-panel">
-  <div class="stats-underrepresented-banner" ng-show="demographics.isUnderRepresented()">
-    <div class="stats-underrepresented-banner__required">
+  <div class="bill-representation-panel__stats-banner" ng-show="demographics.isUnderRepresented()">
+    <div class="bill-representation-panel__stats-banner--required">
       <p> More votes are required on this bill for your district to be providing accurate voting data</p>
     </div>
-    <div class="stats-underrepresented-banner__sample">
-      <p> We have {{demographics.demographics.votes.total}} out of {{demographics.demographics.sampleSize}} votes needed for {{demographics.state}} {{demographics.district}} District to be represented </p>
+    <div class="bill-representation-panel__stats-banner--sample">
+      <div class="c-bar c-bar--straight">
+        <div class="c-bar__fill" ng-style="{'width' : demographics.demographics.votes.total + '%'}">
+        </div>
+        <div class="c-bar__info">
+          <p> We have {{demographics.demographics.votes.total}} out of {{demographics.demographics.sampleSize}} votes needed for {{demographics.state}} {{demographics.district}} District to be represented </p>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="bill-representation-content">
-  <bill-statistics demographics="demographics"></bill-statistics>
-  <div class="row tablet-row">
-    <div class="stats-district-card">
-      <bill-gender demographics="demographics"></bill-gender>
-    </div>
-    <div class="stats-demographics-card">
-      <bill-gender demographics="demographics"></bill-gender>
+  <div class="bill-representation-panel__content">
+    <bill-statistics demographics="demographics"></bill-statistics>
+    <div class="row tablet-row">
+      <div class="c-card__stats-district-card">
+        <bill-gender demographics="demographics"></bill-gender>
+      </div>
+      <div class="c-card__stats-demographics-card">
+        <bill-gender demographics="demographics"></bill-gender>
+      </div>
     </div>
   </div>
 </div>

@@ -1,0 +1,23 @@
+<div class="c-card c-stats__text--light c-card__bill-representation">
+  <h1>Demographics</h1>
+  <hr />
+  <div>
+    <p>To gain the most accurate possible voting sata we also try an ensure key demoragraphics are filled to make sure every voice in your district is heard. Below are the age demographics for {{demographics.state}} {{demographics.district}} District.</p>
+  </div>
+  <div class="row c-stats__demographic-breakdown">
+      <!-- Population -->
+      <div>
+          <p class="c-stats__text--large">Population</p>
+          <p class="c-stats__text--large bold">{{demographics.population | number}}</p>
+      </div>
+      <!-- Votes -->
+      <div></div>
+      <!-- Needed -->
+      <div></div>
+  </div>
+  <div>
+    <bill-gender-breakdown ico="'M'" gender="'Male'" ranges="demographics.demographics.gender.male.ranges" ></bill-gender-breakdown>
+    <bill-gender-breakdown ico="'F'" gender="'Female'" ranges="demographics.demographics.gender.female.ranges" ></bill-gender-breakdown>
+    <bill-gender-breakdown ico="'B'" gender="'Non Binary'" ranges="demographics.demographics.gender.nonBinary.ranges" ></bill-gender-breakdown>
+  </div>
+</div>

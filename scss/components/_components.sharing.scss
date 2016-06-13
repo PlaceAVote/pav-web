@@ -5,7 +5,7 @@
  /**
   * A Box for social sharing componentents
   */
-.social-box {
+.c-social-box {
   background-color: $greylight;
   font-size: 70%;
   color: $greydark;
@@ -19,11 +19,11 @@
   }
 }
 
-.twitter-button__background {
+.c-social-box__button--twbg {
   background-color: $twblue !important;
 }
 
-.social-box_buttons__long {
+.c-social-box__button--long {
   display: block;
   padding-top: 7%;
   margin-bottom: 7%;
@@ -34,6 +34,6 @@
   padding-right: 7%;
 }
 
-.social-box_buttons_icon {
+.c-social-box__button_icon {
   padding-right:10%;
 }

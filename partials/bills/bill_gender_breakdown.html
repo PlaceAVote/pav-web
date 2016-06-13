@@ -1,0 +1,13 @@
+<div class="c-stats__demographics-gender-breakdown">
+  <p><span> {{ico}}</span> {{gender}} </p>
+  <!-- age breakdowns -->
+  <div class="c-stats__demographics-gender-breakdown-bars">
+    <div ng-repeat="range in ranges">
+      {{range.minAge}}-{{range.maxAge}}
+      <div class="c-bar c-bar__stats-demographics-age-bar">
+        <div class="c-bar__fill" ng-style="{'width' : range.votes.total + '%'}">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

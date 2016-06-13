@@ -1,9 +1,9 @@
-<div class="c-card bill-representation-card">
+<div class="c-card c-card__bill-representation-card">
   <h1>Voting Statistics ({{demographics.state}} {{demographics.district}} District) </h1>
   <hr />
   <div class="row tablet-row">
 
-    <div class="c-card stats-underrepresented-statistics_chart">
+    <div class="c-card c-stats__underrepresneted-statistics-chart">
         <div style="width: 100%;">
           <pie-chart data="demographics.stats"></pie-chart>
         </div>
@@ -11,10 +11,10 @@
 
     <div>
       <div class="row tablet-row">
-        <div class="stats-underrepresented-statistics_gender_icon__large">
+        <div class="c-stats__gender-icon--large">
             <img style="height: 100%; width: 100%;" alt="female" src="../../svgs/female.svg" ng-show="demographics.underRepresentedGenderGroup.gender === 'female'" />
         </div>
-        <div class="bill-representation-content_text__light">
+        <div class="c-stats__text--light">
           <p>
             <span ng-show="demographics.underRepresentedGenderGroup.gender === 'female'">Women</span>
             <span ng-show="demographics.underRepresentedGenderGroup.gender === 'male'">Men</span>
@@ -25,9 +25,9 @@
           <p>of voters are {{demographics.underRepresentedGenderGroup.gender}} </p>
         </div>
 
-        <div class="stats_text__large bold">{{demographics.minorityAgeRange.ageRange}}</div>
+        <div class="c-stats__text--large bold">{{demographics.minorityAgeRange.ageRange}}</div>
 
-        <div class="stats-underrepresented-statistics_text__light">
+        <div class="c-stats__text--light">
             <p>
             {{demographics.minorityAgeRange.ageRange}} Make up the least represented demographic:
             </p>

@@ -1,0 +1,65 @@
+/*----------------------*\
+    #STATS-COMPONENTS
+\*----------------------*/
+
+// GENERAL STYLES
+.c-stats__text--large {
+  display: inline-block;
+  font-size: 270%;
+  color: $greydark;
+  margin: 1%;
+}
+
+.c-stats__gender-icon--large {
+  min-width: 8%;
+  margin: 1%;
+}
+
+.c-stats__text--light {
+  font-size: 80%;
+  margin-right: 1%;
+}
+
+// DEMOGRAPHICS BREAKDOWN BARS
+.c-stats__demographics-gender-breakdown-bars {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.c-card__stats-demographic-card {
+  margin-left: 5%;
+}
+
+.c-stats__demographics-age--large {
+  font-size: 130%;
+  font-weight: lighter;
+  color: $greydark;
+  text-align: center;
+}
+
+.c-stats__demographic-breakdown {
+  margin: 3% 1% 2% 1%;
+}
+
+.c-stats__demographics-gender-breakdown {
+  background-color: $greylight;
+  color: $greydark;
+  border: solid $grey 1px;
+  padding: 2% 5% 2% 5%;
+  margin: 2%;
+}
+
+// CHARTS WRAPPER
+.c-stats__underrepresneted-statistics-chart {
+  border: none !important;
+  box-shadow: none !important;
+  min-width: 215px;
+  margin-right: 20px;
+}
+
+// STATS CARD WRAPPER
+.c-card__stats-district-card {
+  margin-right: 5%;
+}
