@@ -38,7 +38,7 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
 }
 
 BillController.prototype.shareToTwitter = function() {
-  var url = 'https://twitter.com/intent/tweet?text=' + this.getShareMessage() + '&url=' + this.getLocation()
+  var url = 'https://twitter.com/intent/tweet?text=' + this.getShareMessage() + '&url=' + this.getLocation();
   return url;
 };
 
