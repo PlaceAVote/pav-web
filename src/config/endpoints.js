@@ -159,7 +159,7 @@ module.exports = {
     },
     districtleague: {
       endpoint: function(billId) {
-        return urls.CENSUS + '/districtleage?billId=' + billId;
+        return urls.CENSUS + '/districtleague?billId=' + billId;
       },
     },
   },

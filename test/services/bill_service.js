@@ -398,7 +398,7 @@ describe("Bill Service", function(){
         expect(result.total).to.eql(0);
         expect(result.league.length).to.eql(0);
         expect(actualParams).to.eql(undefined);
-        expect(actualUrl).to.contain('/districtleage?billId=hr2-123');
+        expect(actualUrl).to.contain('/districtleague?billId=hr2-123');
         expect(actualMethod.getDistrict.method).to.eql('GET');
         expect(actualBody).to.eql(undefined);
         done();
