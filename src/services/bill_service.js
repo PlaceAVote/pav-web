@@ -196,6 +196,25 @@ function BillService($resource, authService, userService) {
     resource.rep(undefined, onLoad, onError);
   };
 
+  var getDistrictLeague = function(billId, callback) {
+    if (!billId) {
+      return callback(new Error('Bill Id must be provided'));
+    }
+
+    var onLoad = function(result) {
+      return callback(null, result);
+    };
+
+    var onError = function(err) {
+      return callback(err);
+    };
+
+    delete config.methods.get.headers.Authorization;
+    var url = config.votes.districtleague.endpoint(billId);
+    var request = new $resource(url, undefined, { getDistrict: config.methods.get });
+    request.getDistrict(undefined, onLoad, onError);
+  };
+
   return {
     getBillVotes: getBillVotes,
     getBill: getBill,
@@ -204,6 +223,7 @@ function BillService($resource, authService, userService) {
     postComment: postComment,
     getTrends: getTrends,
     getRepresentation: getRepresentation,
+    getDistrictLeague: getDistrictLeague,
   };
 }
 

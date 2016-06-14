@@ -157,6 +157,11 @@ module.exports = {
         return urls.CENSUS + '/demographic?billId=' + data.bill_id + '&state=' + data.state + '&district=' + data.district;
       },
     },
+    districtleague: {
+      endpoint: function(billId) {
+        return urls.CENSUS + '/districtleage?billId=' + billId;
+      },
+    },
   },
   comments: {
     reply: {
