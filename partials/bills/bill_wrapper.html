@@ -48,7 +48,7 @@ Do you agree or disagree? Join the discussion and place your vote today!"></upda
             ng-click="bill.shareToFacebook()">
             </i>
             <a class="icon-social-twitter click"
-            ng-href="https://twitter.com/intent/tweet?text={{bill.getShareMessage()}}&url={{bill.getLocation()}}" target="_blank"  data-size="large"><a>
+            ng-href="{{bill.shareToTwitter()}}" target="_blank"  data-size="large"><a>
 
         </div>
 
@@ -130,7 +130,7 @@ Do you agree or disagree? Join the discussion and place your vote today!"></upda
 
         <bill-comments ng-cloak ng-switch-when="comments"></bill-comments>
 
-        <bill-representation demographics="bill.representation" ng-cloak ng-switch-when="representation"></bill-representation>
+        <bill-representation share-to-facebook="bill.shareToFacebook()" share-to-twitter="bill.shareToTwitter()" demographics="bill.representation" ng-cloak ng-switch-when="representation"></bill-representation>
 
     </div>
 

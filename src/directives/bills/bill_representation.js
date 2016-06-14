@@ -2,7 +2,9 @@ module.exports = function($location) {
   return {
     restict: 'E',
     scope: {
-      demographics: '=demographics',
+      demographics: '=',
+      shareToFacebook: '&',
+      shareToTwitter: '&',
     },
     templateUrl: 'partials/bills/bill_representation.html',
   };

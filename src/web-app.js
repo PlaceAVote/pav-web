@@ -214,6 +214,7 @@ app.config(['$routeProvider', '$locationProvider', '$compileProvider', 'Analytic
   $locationProvider.hashPrefix('!');
 
   $compileProvider.debugInfoEnabled(config.WATCHERS);
+  $compileProvider.aHrefSanitizationWhitelist(/^\s*(https)(:\/\/twitter).*/);
 
   AnalyticsProvider.setAccount('UA-48538409-1');
 

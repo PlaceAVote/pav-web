@@ -3,5 +3,10 @@ module.exports = function() {
     restrict: 'E',
     templateUrl: 'partials/sharing/social_box.html',
     transclude: true,
+    scope: {
+      demographics: '=',
+      shareToFacebook: '&',
+      shareToTwitter: '&',
+    },
   };
 };

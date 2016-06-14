@@ -37,6 +37,11 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
   this.commentOrder = 'highest-score';
 }
 
+BillController.prototype.shareToTwitter = function() {
+  var url = 'https://twitter.com/intent/tweet?text=' + this.getShareMessage() + '&url=' + this.getLocation()
+  return url;
+};
+
 BillController.prototype.authenticate = function() {
   var that = this;
   if (!that.authService) {

@@ -6,11 +6,25 @@
 */
 .bill-representation-panel {
   margin: -4% -4% 0 -4%;
+  @include media(768px) {
+    margin:0;
+  }
+}
+
+.row__wrap {
+  @include media(768px) {
+    display: flex;
+    flex-wrap: wrap;
+  }
 }
 
 .bill-representation-panel__content {
   margin: 7%;
   color: $grey;
+  @include media(768px) {
+    margin:0;
+    text-align: center;
+  }
 }
 
 .bill-representation__content_text--light {

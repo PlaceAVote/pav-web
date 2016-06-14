@@ -8,7 +8,11 @@
   font-size: 270%;
   color: $greydark;
   margin: 1%;
+  @include media(768px) {
+    font-size: 120%;
+  }
 }
+
 
 .c-stats__gender-icon--large {
   min-width: 8%;
@@ -59,7 +63,21 @@
   margin-right: 20px;
 }
 
+.c-stats__underrepresented-stats-content--center-align-mobile {
+  @include media(768px) {
+    width: 50%;
+    margin: 0 auto;
+  }
+}
+
 // STATS CARD WRAPPER
 .c-card__stats-district-card {
   margin-right: 5%;
+  @include media(768px) {
+    margin-right: 0%;
+  }
+}
+
+.c-stats__demographics-gender-breakdown-icon__small {
+  height: 20px;
 }
