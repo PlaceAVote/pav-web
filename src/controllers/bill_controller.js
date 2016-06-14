@@ -1,6 +1,7 @@
 var Comment = require('../models/comment.js');
 var AuthorizeController = require('./autherize_controller.js');
 var Demographics = require('../models/demographics.js');
+var DistrictLeague = require('../models/districtLeague.js');
 var title = require('../config/titles.js');
 var tweet = require('../models/tweet.js');
 
@@ -12,6 +13,7 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
   this.rs = $rootScope || {};
   this.rs.inApp = true;
   this.representation = new Demographics();
+  this.districtLeague = new DistrictLeague();
   this.authService = authService;
   this.location = $location;
   this.routeParams = $routeParams;
@@ -36,6 +38,23 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
   this.authenticate();
   this.commentOrder = 'highest-score';
 }
+
+BillController.prototype.getDistrictLeague = function() {
+  if (!this.rs || !this.rs.user) {
+    setTimeout(this.getDistrictLeague, 1000);
+    return;
+  }
+  this.districtLeague.setState(this.rs.user.state);
+  this.districtLeague.setDistrict(this.rs.user.district);
+
+  var that = this;
+  this.billService.getDistrictLeague(this.id, function(err, result) {
+    if (err) {
+      return;
+    }
+    that.districtLeague.populate(result);
+  });
+};
 
 BillController.prototype.shareToTwitter = function() {
   var url = 'https://twitter.com/intent/tweet?text=' + this.getShareMessage() + '&url=' + this.getLocation();
@@ -222,6 +241,7 @@ BillController.prototype.getBill = function(id) {
       that.getLegislator(result.billData.sponsor);
       that.sponsorCount(result.billData.cosponsors_count);
       that.getRepresentation();
+      that.getDistrictLeague();
     }
   });
 };
@@ -305,7 +325,6 @@ BillController.prototype.postComment = function() {
 
   if (scriptExp.test(this.commentBody) || objectExp.test(this.commentBody)) {
     this.commentError('Sorry, there was an error.');
-    console.log('caught');
     this.commentBody = '';
     return;
   }

@@ -42,6 +42,9 @@ describe('BillController', function() {
       getBill: function(id, callback){
         callback('Error');
       },
+      getDistrictLeague: function(id, callback) {
+        callback();
+      },
       getTopComments: function(id, callback){
         var result = {
           forComment: new Comment(topCommentsFixtures['for-comment']),
@@ -158,6 +161,9 @@ describe('BillController', function() {
       },
       getBill: function(id, callback){
         callback(undefined, bill);
+      },
+      getDistrictLeague: function(id, callback) {
+        callback(null, {});
       },
       getTopComments: function(id, callback){
         var result = {
@@ -976,6 +982,9 @@ describe('BillController', function() {
       var mocBillService = {
         fetchComments: function(id, co, so, ci, cb) { return cb(new Error('Error')) },
         getTopComments: function(params, cb) { return cb(new Error('Error')) },
+        getDistrictLeague: function(id, callback) {
+          callback(null, {});
+        },
         getBill: function(params, cb) {
           return cb(null, {
             billData: {
