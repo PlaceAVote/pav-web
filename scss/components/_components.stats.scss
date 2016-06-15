@@ -5,7 +5,8 @@
 // GENERAL STYLES
 .c-stats__text--large {
   display: inline-block;
-  font-size: 270%;
+  font-size: 170%;
+  padding-top: 10%;
   color: $greydark;
   margin: 1%;
   @include media(768px) {
@@ -43,6 +44,10 @@
   text-align: center;
 }
 
+.c-stats__demographic-breakdown-section {
+  text-align: center;
+  width: 33%;
+}
 .c-stats__demographic-breakdown {
   margin: 3% 1% 2% 1%;
 }
@@ -87,4 +92,24 @@
 .c-stats__district-league {
   width: 90%;
   margin: 0 auto;
+}
+
+.c-stats__demographic-chart-text {
+  color: $white;
+  position: relative;
+  top: -75px;
+}
+
+.c-stats__demographic-sample-size-graph {
+  fill: $green;
+  stroke-width: 3px;
+  stroke: $white;
+  @include shadow();
+}
+
+.c-stats__demographic-votes-graph {
+  fill: $red;
+  stroke-width: 3px;
+  stroke: $white;
+  @include shadow();
 }

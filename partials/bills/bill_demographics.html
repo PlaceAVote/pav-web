@@ -6,14 +6,38 @@
   </div>
   <div class="row c-stats__demographic-breakdown">
       <!-- Population -->
-      <div>
+      <div class="c-stats__demographic-breakdown-section">
           <p class="c-stats__text--large">Population</p>
           <p class="c-stats__text--large bold">{{demographics.population | number}}</p>
       </div>
       <!-- Votes -->
-      <div></div>
+      <div class="c-stats__demographic-breakdown-section">
+        <div>
+          <div>
+            <svg width="100" height="100">
+              <circle cx="50" cy="50" r="40" class="c-stats__demographic-votes-graph" />
+            </svg>
+          </div>
+          <div class="c-stats__demographic-chart-text">
+            <p class="bold">{{demographics.demographics.votes.total}}</p>
+            <p class="">VOTES</p>
+          </div>
+        </div>
+      </div>
       <!-- Needed -->
-      <div></div>
+      <div class="c-stats__demographic-breakdown-section">
+        <div>
+          <div>
+            <svg width="100" height="100">
+              <circle cx="50" cy="50" r="40" class="c-stats__demographic-sample-size-graph" />
+            </svg>
+          </div>
+          <div class="c-stats__demographic-chart-text">
+            <p class="bold">{{demographics.demographics.sampleSize}}</p>
+            <p class="">NEEDED</p>
+          </div>
+        </div>
+      </div>
   </div>
   <div>
     <bill-gender-breakdown ico="'M'" gender="'Male'" total="demographics.demographics.votes.total" ranges="demographics.demographics.gender.male.ranges" ></bill-gender-breakdown>
