@@ -3,6 +3,7 @@ module.exports = function($location) {
     restict: 'E',
     scope: {
       demographics: '=',
+      league: '=',
       shareToFacebook: '&',
       shareToTwitter: '&',
     },

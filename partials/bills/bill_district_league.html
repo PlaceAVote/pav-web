@@ -1,0 +1,17 @@
+<div class="c-card">
+<h1>District Rankings</h1>
+<hr />
+This table shows which districts are the most represented on the PlaceAVote accross the country. The higher your districs representation the more your congressman will be forced to follow the sentiment coming from you, the citizens of {{league.state}} {{league.district}}.
+  <table>
+    <tr class="c-table__head">
+      <th>Post.</th>
+      <th>District</th>
+      <th>Score <span> (Representation) </span></th>
+    </tr>
+    <tr ng-repeat="ranking in league.generateLeague()" ng-class="{'c-table__row--selected': ranking.current }">
+      <td>{{ ranking.position }}</td>
+      <td>{{ ranking.state }}</td>
+      <td>{{ ranking.percentage }}</td>
+    </tr>
+  </table>
+</div>
