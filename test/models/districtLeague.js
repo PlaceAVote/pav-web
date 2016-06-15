@@ -80,4 +80,133 @@ describe('District League', function() {
       expect(subject.league[0]).to.eql({ state: 'CA', district: 33, hits: 3 });
     });
   });
+
+  describe('getSurronding', function() {
+    it('returns the top 5 districts if their are less than 5 items in the league', function() {
+      var subject = new DistrictLeague({ total: 3, league: [ { state: 'CA', district: 33, hits: 3 } ] });
+      var selectionLeague = subject.getSurrounding();
+      expect(selectionLeague).to.eql([ { state: 'CA', district: 33, hits: 3 } ]);
+    });
+
+    it('returns the 5 states & districts surrounding the current state and district', function() {
+      var options = {
+        state: 'CA',
+        district: 6,
+        total: 200,
+        league: [
+          { state: 'CA', district: 11, hits: 25 },
+          { state: 'NY', district: 11, hits: 23 },
+          { state: 'NY', district: 14, hits: 22 },
+          { state: 'CA', district: 22, hits: 20 },
+          { state: 'PA', district: 11, hits: 20 },
+          { state: 'CA', district: 6, hits: 20 },
+          { state: 'NY', district: 12, hits: 17 },
+          { state: 'NY', district: 22, hits: 16 },
+          { state: 'PA', district: 13, hits: 15 },
+          { state: 'CA', district: 13, hits: 12 },
+          { state: 'NY', district: 13, hits: 10 },
+        ],
+      };
+      var subject = new DistrictLeague(options);
+      var selectionLeague = subject.getSurrounding();
+      expect(selectionLeague).to.eql([
+          { state: 'CA', district: 22, hits: 20, position: 4, },
+          { state: 'PA', district: 11, hits: 20, position: 5, },
+          { state: 'CA', district: 6, hits: 20, current: true, position: 6, },
+          { state: 'NY', district: 12, hits: 17, position: 7, },
+          { state: 'NY', district: 22, hits: 16, position: 8, },
+      ]);
+    });
+
+    it('returns top 5 when current state and district arent in the array', function() {
+      var options = {
+        state: 'CA',
+        district: 10,
+        total: 200,
+        league: [
+          { state: 'CA', district: 11, hits: 25 },
+          { state: 'NY', district: 11, hits: 23 },
+          { state: 'NY', district: 14, hits: 22 },
+          { state: 'CA', district: 22, hits: 20 },
+          { state: 'PA', district: 11, hits: 20 },
+          { state: 'CA', district: 6, hits: 20 },
+          { state: 'NY', district: 12, hits: 17 },
+          { state: 'NY', district: 22, hits: 16 },
+          { state: 'PA', district: 13, hits: 15 },
+          { state: 'CA', district: 13, hits: 12 },
+          { state: 'NY', district: 13, hits: 10 },
+        ],
+      };
+      var subject = new DistrictLeague(options);
+      var selectionLeague = subject.getSurrounding();
+      expect(selectionLeague).to.eql([
+          { state: 'CA', district: 11, hits: 25, position: 1 },
+          { state: 'NY', district: 11, hits: 23, position: 2 },
+          { state: 'NY', district: 14, hits: 22, position: 3 },
+          { state: 'CA', district: 22, hits: 20, position: 4 },
+          { state: 'PA', district: 11, hits: 20, position: 5 },
+      ]);
+    });
+
+    it('returns bottom 5 when current state and district is the last index in the array', function() {
+      var options = {
+        state: 'NY',
+        district: 13,
+        total: 200,
+        league: [
+          { state: 'CA', district: 11, hits: 25 },
+          { state: 'NY', district: 11, hits: 23 },
+          { state: 'NY', district: 14, hits: 22 },
+          { state: 'CA', district: 22, hits: 20 },
+          { state: 'PA', district: 11, hits: 20 },
+          { state: 'CA', district: 6, hits: 20 },
+          { state: 'NY', district: 12, hits: 17 },
+          { state: 'NY', district: 22, hits: 16 },
+          { state: 'PA', district: 13, hits: 15 },
+          { state: 'CA', district: 13, hits: 12 },
+          { state: 'NY', district: 13, hits: 10 },
+        ],
+      };
+      var subject = new DistrictLeague(options);
+      var selectionLeague = subject.getSurrounding();
+      expect(selectionLeague).to.eql([
+          { state: 'NY', district: 12, hits: 17, position: 7, },
+          { state: 'NY', district: 22, hits: 16, position: 8, },
+          { state: 'PA', district: 13, hits: 15, position: 9 },
+          { state: 'CA', district: 13, hits: 12, position: 10 },
+          { state: 'NY', district: 13, hits: 10, current: true, position: 11 },
+      ]);
+    });
+  });
+  describe('generateLeague', function() {
+    it('returns a subsection of the league populate for the view', function() {
+      var options = {
+        state: 'NY',
+        district: 13,
+        total: 200,
+        league: [
+          { state: 'CA', district: 11, hits: 25 },
+          { state: 'NY', district: 11, hits: 23 },
+          { state: 'NY', district: 14, hits: 22 },
+          { state: 'CA', district: 22, hits: 20 },
+          { state: 'PA', district: 11, hits: 20 },
+          { state: 'CA', district: 6, hits: 20 },
+          { state: 'NY', district: 12, hits: 17 },
+          { state: 'NY', district: 22, hits: 16 },
+          { state: 'PA', district: 13, hits: 15 },
+          { state: 'CA', district: 13, hits: 12 },
+          { state: 'NY', district: 13, hits: 10 },
+        ],
+      };
+      var subject = new DistrictLeague(options);
+      var selectionLeague = subject.generateLeague();
+      expect(selectionLeague).to.eql([
+          { state: 'NY', district: 12, hits: 17, percentage: '9%', position: 7, },
+          { state: 'NY', district: 22, hits: 16, percentage: '8%', position: 8,},
+          { state: 'PA', district: 13, hits: 15, percentage: '8%', position: 9,},
+          { state: 'CA', district: 13, hits: 12, percentage: '6%', position: 10,},
+          { state: 'NY', district: 13, hits: 10, current: true, percentage: '5%', position: 11 },
+      ]);
+    });
+  });
 });
