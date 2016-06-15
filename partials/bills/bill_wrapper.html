@@ -109,10 +109,10 @@ Do you agree or disagree? Join the discussion and place your vote today!"></upda
 
 
     <div class="c-card c-bill-vote-stats" ng-if="bill.rs.user.district && bill.representation.demographics.votes.total > 0">
-        <h1>District Vote Statistics</h1>
+        <h1>Overall Vote Statistics</h1>
       <hr />
         <div style="width: 100%;">
-          <pie-chart data="bill.representation.stats"></pie-chart>
+          <pie-chart data="bill.nationalStats"></pie-chart>
         </div>
     </div>
 </div>

@@ -123,7 +123,17 @@ BillController.prototype.getVotes = function(id) {
     if (err) {
       that.voteError = true;
     } else {
-      that.currentVotes = result;
+      var noVote = {
+        val: result.noPercentage,
+        label: 'Against',
+        className: 'against',
+      };
+      var yesVote = {
+        val: result.yesPercentage,
+        label: 'In Favor',
+        className: 'favor',
+      };
+      that.nationalStats = [ noVote, yesVote ];
     }
   });
 };

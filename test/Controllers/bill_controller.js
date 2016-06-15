@@ -390,8 +390,9 @@ describe('BillController', function() {
       var billController = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, mockLocation, mockAuthService, mockRootScope);
       billController.getVotes('hr2-114');
       expect(scope.bill.voteError).to.eql(undefined);
-      expect(scope.bill.currentVotes.yes).to.eql(100);
-      expect(scope.bill.currentVotes.no).to.eql(180);
+      expect(scope.bill.nationalStats.length).to.eql(2);
+      expect(scope.bill.nationalStats[0]).to.eql({ className: 'against', label: 'Against', val: 64 });
+      expect(scope.bill.nationalStats[1]).to.eql({ className: 'favor', label: 'In Favor', val: 36 });
     });
     it('sets error when server returns error', function(){
       var mockBillService = {
