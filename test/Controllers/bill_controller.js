@@ -242,9 +242,9 @@ describe('BillController', function() {
           }
           callback(undefined, result);
         },
-      fetchComments: function() {
-        return;
-      }
+        fetchComments: function() {
+          return;
+        }
       };
       var mockVoteService = {
         getVotesForBill: function(id, callback){
@@ -274,9 +274,9 @@ describe('BillController', function() {
         getTopComments: function(id, callback){
           callback('Error');
         },
-      fetchComments: function() {
-        return;
-      }
+        fetchComments: function() {
+          return;
+        }
       };
       var mockVoteService = {
         getVotesForBill: function(id, callback){
@@ -298,17 +298,17 @@ describe('BillController', function() {
           callback(undefined, demographics);
         },
         getBillVotes: function(id, callback){
-        callback('Error');
-      },
+          callback('Error');
+        },
         getBill: function(id, callback){
           callback('Error');
         },
         getTopComments: function(id, callback){
           callback('Error');
         },
-      fetchComments: function() {
-        return;
-      }
+        fetchComments: function() {
+          return;
+        }
       };
       var mockLegislationService = {
         getById: function(id, callback){
@@ -338,9 +338,9 @@ describe('BillController', function() {
         getTopComments: function(id, callback){
           callback('Error');
         },
-      fetchComments: function() {
-        return;
-      }
+        fetchComments: function() {
+          return;
+        }
       };
       var mockLegislationService = {
         getById: function(id, callback){
@@ -373,9 +373,9 @@ describe('BillController', function() {
         getTopComments: function(id, callback){
           callback('Error');
         },
-      fetchComments: function() {
-        return;
-      }
+        fetchComments: function() {
+          return;
+        }
       };
       var mockLegislationService = {
         getById: function(id, callback){
@@ -407,9 +407,9 @@ describe('BillController', function() {
         getTopComments: function(id, callback){
           callback('Error');
         },
-      fetchComments: function() {
-        return;
-      }
+        fetchComments: function() {
+          return;
+        }
       };
       var mockLegislationService = {
         getById: function(id, callback){
@@ -446,9 +446,9 @@ describe('BillController', function() {
         getTopComments: function(id, callback){
           callback('Error');
         },
-      fetchComments: function() {
-        return;
-      }
+        fetchComments: function() {
+          return;
+        }
       };
       var mockLegislationService = {
         getById: function(id, callback){
@@ -765,7 +765,7 @@ describe('BillController', function() {
         },
         getBillVotes: function(id, callback){
           callback('Error');
-      },
+        },
         getBill: function(id, callback){
           callback('Error');
         },
@@ -806,7 +806,7 @@ describe('BillController', function() {
         },
         getBillVotes: function(id, callback){
           callback('Error');
-      },
+        },
         getBill: function(id, callback){
           callback('Error');
         },
@@ -955,27 +955,27 @@ describe('BillController', function() {
       },
       fetchComments: function(id, order, from, undefined, callback) {
         callback(undefined, []);
-        },
-        postComment: function(id, comment, callback) {
-          var c = new Comment();
-          c.id = 1;
-          return callback(undefined, c);
-        },
-      };
-      var mockLegislationService = {
-        getById: function(id, callback){
-          callback('Error');
-        },
-      };
-      var mockVoteService = {
-        getVotesForBill: function(id, callback){
-          callback('Error');
-        },
-        voteOnBill: function(id, vote, callback){
-          callback('Error');
-        },
-      };
-      var mockTimeout = function() {return;};
+      },
+      postComment: function(id, comment, callback) {
+        var c = new Comment();
+        c.id = 1;
+        return callback(undefined, c);
+      },
+    };
+    var mockLegislationService = {
+      getById: function(id, callback){
+        callback('Error');
+      },
+    };
+    var mockVoteService = {
+      getVotesForBill: function(id, callback){
+        callback('Error');
+      },
+      voteOnBill: function(id, vote, callback){
+        callback('Error');
+      },
+    };
+    var mockTimeout = function() {return;};
 
     it('should create object containing state, district and bill_id', function() {
       var actualParams;
@@ -1023,6 +1023,138 @@ describe('BillController', function() {
       };
       subject.getRepresentation();
       expect(subject.representation.demographics.votes.total).to.equal(7);
+    });
+  });
+  describe('getDistrictLeague', function() {
+    // Generic Mocks
+    var mockRootScope = {
+      user: {
+        district: '33',
+        state: 'CA'
+      }
+    }
+
+    var mockView = {
+      $$path: '/comments',
+    }
+    var mockBillService = {
+      getRepresentation: function(data, callback) {
+        callback(undefined, demographics);
+      },
+      getBillVotes: function(id, callback){
+        callback('Error');
+      },
+      getBill: function(id, callback){
+        callback('Error');
+      },
+      getTopComments: function(id, callback){
+        callback('Error');
+      },
+      fetchComments: function(id, order, from, undefined, callback) {
+        callback(undefined, []);
+      },
+      postComment: function(id, comment, callback) {
+        var c = new Comment();
+        c.id = 1;
+        return callback(undefined, c);
+      },
+    };
+    var mockLegislationService = {
+      getById: function(id, callback){
+        callback('Error');
+      },
+    };
+    var mockVoteService = {
+      getVotesForBill: function(id, callback){
+        callback('Error');
+      },
+      voteOnBill: function(id, vote, callback){
+        callback('Error');
+      },
+    };
+    var mockTimeout = function() {return;};
+    var mockBillService = {
+      getRepresentation: function(data, callback) {
+        callback(undefined, demographics);
+      },
+      getBillVotes: function(id, callback){
+        callback('Error');
+      },
+      getBill: function(id, callback){
+        callback('Error');
+      },
+      getTopComments: function(id, callback){
+        callback('Error');
+      },
+      fetchComments: function(id, order, from, undefined, callback) {
+        callback(undefined, []);
+      },
+      postComment: function(id, comment, callback) {
+        var c = new Comment();
+        c.id = 1;
+        return callback(undefined, c);
+      },
+    };
+    it('returns if no root scope is defined not setting any state on the district league', function() {
+      var mockRootScope = null;
+      var subject = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, mockView, mockAuthService, mockRootScope, mockTimeout);
+      subject.getDistrictLeague();
+      expect(subject.districtLeague.state).to.eql(undefined);
+      expect(subject.districtLeague.district).to.eql(undefined);
+    });
+    it('returns if no root scope user is defined not setting any state on the district league', function() {
+      var mockRootScope = {};
+      var subject = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, mockView, mockAuthService, mockRootScope, mockTimeout);
+      subject.getDistrictLeague();
+      expect(subject.districtLeague.state).to.eql(undefined);
+      expect(subject.districtLeague.district).to.eql(undefined);
+    });
+    it('does not call populate if an error is returned', function() {
+      var mockRootScope = {
+        user: {
+          state: 'CA',
+          district: 33,
+        },
+      };
+      var actualId;
+      mockBillService.getDistrictLeague = function(id, callback) {
+        actualId = id;
+        callback(new Error('Nope'));
+      };
+      var subject = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, mockView, mockAuthService, mockRootScope, mockTimeout);
+      var called = false;
+      subject.districtLeague.populate = function() {
+        called = true;
+      }
+      subject.getDistrictLeague();
+      expect(subject.districtLeague.state).to.eql('CA');
+      expect(subject.districtLeague.district).to.eql(33);
+      expect(called).to.eql(false);
+      expect(actualId).to.eql('100');
+    });
+
+    it('does call populate if an no error is returned', function() {
+      var mockRootScope = {
+        user: {
+          state: 'CA',
+          district: 33,
+        },
+      };
+      var actualId;
+      mockBillService.getDistrictLeague = function(id, callback) {
+        actualId = id;
+        callback(null, { total: 20, league: [ { state: 'CA', district: 33, hits: 20 } ]});
+      };
+      var subject = new BillController(scope, routeParams, mockBillService, mockLegislationService, mockVoteService, undefined, mockView, mockAuthService, mockRootScope, mockTimeout);
+      expect(subject.districtLeague.isAvailable()).to.eql(false);
+      subject.getDistrictLeague();
+      expect(subject.districtLeague.state).to.eql('CA');
+      expect(subject.districtLeague.district).to.eql(33);
+      expect(subject.districtLeague.total).to.eql(20);
+      expect(subject.districtLeague.league.length).to.eql(1);
+      expect(subject.districtLeague.league[0]).to.eql({ state: 'CA', district: 33, hits: 20 });
+      expect(subject.districtLeague.isAvailable()).to.eql(true);
+      expect(actualId).to.eql('100');
     });
   });
 });

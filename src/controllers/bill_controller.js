@@ -41,7 +41,6 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
 
 BillController.prototype.getDistrictLeague = function() {
   if (!this.rs || !this.rs.user) {
-    setTimeout(this.getDistrictLeague, 1000);
     return;
   }
   this.districtLeague.setState(this.rs.user.state);
