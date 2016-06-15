@@ -66,14 +66,14 @@ module.exports = function() {
     link: function(scope, el, attr) {
       var dataset = scope.data;
       scope.$watch('data', function(n, o) {
-        // update if the new and old values are not the same.
+        // Update if the new and old values are not the same.
         if (n !== o) {
           scope.updateChart(n, el, attr);
         }
       });
       scope.updateChart = updateChart;
       scope.createChart = createChart;
-      // inisitalise chart with values.
+      // Inisitalise chart with values.
       scope.createChart(dataset, el, attr);
     },
   };
