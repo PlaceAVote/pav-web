@@ -5,13 +5,14 @@ var DistrictLeague = require('../models/districtLeague.js');
 var title = require('../config/titles.js');
 var tweet = require('../models/tweet.js');
 
-function BillController($scope, $routeParams, billService, legislatorService, voteService, commentService, $location, authService, $rootScope, $timeout, facebook, $route) {
+function BillController($scope, $routeParams, billService, legislatorService, voteService, commentService, $location, authService, $rootScope, $timeout, facebook, $route, $window) {
   $scope = $scope || {};
   $scope.bill = this;
   $scope.commentService = commentService;
   this.timeout = $timeout;
   this.rs = $rootScope || {};
   this.rs.inApp = true;
+  this.window = $window;
   this.representation = new Demographics();
   this.districtLeague = new DistrictLeague();
   this.authService = authService;
@@ -57,6 +58,7 @@ BillController.prototype.getDistrictLeague = function() {
 
 BillController.prototype.shareToTwitter = function() {
   var url = 'https://twitter.com/intent/tweet?text=' + this.getShareMessage() + '&url=' + this.getLocation();
+  this.window.open(url, '_blank');
   return url;
 };
 

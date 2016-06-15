@@ -263,7 +263,7 @@ LoginController.$inject = ['$scope','$location', 'userService', 'authService', '
 app.controller('FeedCtrl', FeedController);
 FeedController.$inject = ['$scope', '$location', 'userService', 'billService', 'authService', 'feedService', '$rootScope','$timeout', 'searchService'];
 app.controller('BillCtrl', BillController);
-BillController.$inject = ['$scope', '$routeParams', 'billService', 'legislationService', 'voteService', 'commentService', '$location', 'authService', '$rootScope', '$timeout', 'facebookService', '$route'];
+BillController.$inject = ['$scope', '$routeParams', 'billService', 'legislationService', 'voteService', 'commentService', '$location', 'authService', '$rootScope', '$timeout', 'facebookService', '$route', '$window'];
 app.controller('HeaderCtrl', HeaderController);
 HeaderController.$inject = ['$rootScope', '$scope', '$location', '$timeout', 'authService', 'userService', 'notificationService', 'searchService', '$window', '$route'];
 app.controller('ProfileCtrl', ProfileController);
