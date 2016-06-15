@@ -73,6 +73,7 @@
 // STATS CARD WRAPPER
 .c-card__stats-district-card {
   margin-right: 5%;
+  width: 150%;
   @include media(768px) {
     margin-right: 0%;
   }
@@ -80,4 +81,9 @@
 
 .c-stats__demographics-gender-breakdown-icon__small {
   height: 20px;
+}
+
+.c-stats__district-league {
+  width: 90%;
+  margin: 0 auto;
 }
