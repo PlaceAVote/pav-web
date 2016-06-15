@@ -119,8 +119,12 @@ Demographics.prototype.setUnderRepresentedGenderGroup = function(demographics) {
   var maleTotal = demographics.gender.male.votes.total;
   var femaleTotal = demographics.gender.female.votes.total;
   var underRepresentedGroup = maleTotal < femaleTotal ? 'male' : 'female';
+  var percentage = toPercent(demographics.gender[underRepresentedGroup].votes.total, total);
+  if (isNaN(percentage)) {
+    percentage = 0;
+  }
   this.underRepresentedGenderGroup = {
-    percentage: toPercent(demographics.gender[underRepresentedGroup].votes.total, total),
+    percentage: percentage,
     gender: underRepresentedGroup,
   };
 };
@@ -173,9 +177,14 @@ function formatedAgeRange(highestRange, demographics) {
   } else {
     ageRange = highestRange.minAge + '-' + highestRange.maxAge;
   }
+  var percentage = toPercent(highestRange.votes.total, demographics.votes.total);
+  if (isNaN(percentage)) {
+    percentage = 0;
+  }
+
   return {
     ageRange: ageRange,
-    percentage: toPercent(highestRange.votes.total, demographics.votes.total),
+    percentage: percentage,
   };
 }
 

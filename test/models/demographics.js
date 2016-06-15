@@ -159,7 +159,24 @@ describe('Demographics', function() {
       expect(subject.underRepresentedGenderGroup.percentage).to.eql(42.86);
       expect(subject.underRepresentedGenderGroup.gender).to.eql('female');
     });
-    it('does not set when demographics are not defined', function() {
+    it('wont show NaN when theres invalid data', function() {
+      var subject = new Demographics();
+      subject.setUnderRepresentedGenderGroup({
+        votes: {
+          total: 0,
+        },
+        gender: {
+          male: {
+            votes: 0,
+          },
+          female: {
+            votes: 0,
+          },
+        }
+      });
+      expect(subject.underRepresentedGenderGroup).to.eql({ percentage: 0, gender: 'female' });
+    });
+    it('sets default when demographics are not defined', function() {
       var subject = new Demographics();
       subject.setUnderRepresentedGenderGroup();
       expect(subject.underRepresentedGenderGroup).to.eql(undefined);
@@ -250,10 +267,40 @@ describe('Demographics', function() {
     });
   });
   describe('setMinorityAgeRange', function() {
-    it('wont set majority age range with no demographics', function() {
+    it('wont set minority age range with no demographics', function() {
       var subject = new Demographics()
       subject.setMinorityAgeRange();
       expect(subject.minorityAgeRange).to.eql(undefined);
+    });
+    it('wont set minority age range to NaN if invalid theres not enough data present', function() {
+      var subject = new Demographics()
+      subject.setMinorityAgeRange({
+        votes: {},
+        gender: {
+          male: {
+            ranges: [ {
+              minAge: 18,
+              maxAge: 60,
+              votes: {}
+            }],
+          },
+          female: {
+            ranges: [ {
+              minAge: 18,
+              maxAge: 60,
+              votes: {}
+            }],
+          },
+          nonBinary: {
+            ranges: [ {
+              minAge: 18,
+              maxAge: 60,
+              votes: {}
+            }],
+          },
+        },
+      });
+      expect(subject.minorityAgeRange).to.eql({ ageRange: '18-60', percentage: 0 });
     });
     it('sets the minority age range across all genders', function() {
       var subject = new Demographics()
