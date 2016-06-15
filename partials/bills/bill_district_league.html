@@ -1,8 +1,8 @@
 <div class="c-card c-stats__text--light">
 <h1>District Rankings</h1>
 <hr />
-  <div class="c-stats__district-league">
-  This table shows which districts are the most represented on the PlaceAVote accross the country. The higher your districs representation the more your congressman will be forced to follow the sentiment coming from you, the citizens of {{league.state}} {{league.district}}.
+  <div class="c-stats__district-league" ng-show="league.isAvailable()">
+  This table shows which districts are the most represented on PlaceAVote accross the country. The higher your districs representation the more your congressman will be forced to follow the sentiment coming from you, the citizens of {{league.state}} {{league.district}}.
     <table class="c-table">
       <tr class="c-table__head">
         <th>Pos.</th>
@@ -15,5 +15,10 @@
         <td>{{ ranking.percentage }}</td>
       </tr>
     </table>
+  </div>
+
+  <div class="c-stats__district-league" ng-hide="league.isAvailable()">
+    We haven't gathered enough votes yet to display a true representation leader board for this bill.
+    Make sure you spread the word and vote on all bills that you're interested in to help us make a difference.
   </div>
 </div>

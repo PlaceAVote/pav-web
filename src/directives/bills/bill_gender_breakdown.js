@@ -5,6 +5,7 @@ module.exports = function($location) {
       ranges: '=',
       gender: '=',
       ico: '=',
+      total: '=',
     },
     templateUrl: 'partials/bills/bill_gender_breakdown.html',
   };
