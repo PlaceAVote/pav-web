@@ -74,6 +74,7 @@
 .c-card__stats-district-card {
   margin-right: 5%;
   width: 150%;
+  margin-bottom: 5%;
   @include media(768px) {
     margin-right: 0%;
   }
