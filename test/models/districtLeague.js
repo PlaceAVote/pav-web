@@ -83,9 +83,9 @@ describe('District League', function() {
 
   describe('getSurronding', function() {
     it('returns the top 5 districts if their are less than 5 items in the league', function() {
-      var subject = new DistrictLeague({ total: 3, league: [ { state: 'CA', district: 33, hits: 3 } ] });
+      var subject = new DistrictLeague({ state: 'CA', district: 33, total: 3, league: [ { state: 'CA', district: '33', hits: 3 } ] });
       var selectionLeague = subject.getSurrounding();
-      expect(selectionLeague).to.eql([ { state: 'CA', district: 33, hits: 3 } ]);
+      expect(selectionLeague).to.eql([ { state: 'CA', district: '33', current: true, hits: 3, position: 1 } ]);
     });
 
     it('returns the 5 states & districts surrounding the current state and district', function() {

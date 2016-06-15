@@ -48,16 +48,13 @@ DistrictLeague.prototype.populate = function(result) {
  *                  Marks the current one with a current flag to true.
  */
 DistrictLeague.prototype.getSurrounding = function() {
-  if (this.league.length <= 5) {
-    return this.league;
-  }
   var index = 0;
   for (var i = 0; i < this.league.length; i++) {
     var position = this.league[i];
     // Add the league position.
     position.position = i + 1;
     // If this is position is the current state and district mark it.
-    if (this.state === position.state && this.district === position.district) {
+    if (this.state == position.state && this.district == position.district) {
       position.current = true;
       index = i;
     }
