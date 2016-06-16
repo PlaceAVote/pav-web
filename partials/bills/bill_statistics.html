@@ -3,7 +3,7 @@
   <hr />
   <div class="row row__wrap">
 
-    <div class="c-card c-stats__underrepresneted-statistics-chart c-stats__underrepresented-stats-content--center-align-mobile">
+    <div class="c-card c-stats__underrepresneted-statistics-chart c-stats__underrepresented-stats-content--center-align-mobile" ng-if="demographics.available">
         <div style="width: 100%;">
           <pie-chart data="demographics.stats"></pie-chart>
         </div>
