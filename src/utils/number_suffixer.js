@@ -1,10 +1,9 @@
-var lowerTeens = ['11', '12', '13'];
-
-function handleLowerTeen(num) {
-  return num.toString() + 'th';
+function handleLowerTeen(numbString) {
+  return numbString + 'th';
 }
 
 function isLowerTeen(numbString) {
+  var lowerTeens = ['11', '12', '13'];
   for (var i = 0; i < lowerTeens.length; i++) {
     if (numbString.endsWith(lowerTeens[i])) {
       return true;
@@ -14,9 +13,12 @@ function isLowerTeen(numbString) {
 }
 
 function numberSuffixer(num) {
-  var numbString = num + '';
+  if (typeof num !== 'number') {
+    return num;
+  }
+  var numbString = '' + num;
   if (isLowerTeen(numbString)) {
-    return handleLowerTeen(num);
+    return handleLowerTeen(numbString);
   }
   switch (numbString.charAt(numbString.length - 1)) {
     case '1': {

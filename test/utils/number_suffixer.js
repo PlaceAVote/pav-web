@@ -87,10 +87,17 @@ describe('Number Suffixer', function() {
     }
   })
   it('handles 13, 113, 1013 to be th', function() {
-    var values = [12, 112, 1012];
+    var values = [13, 113, 1013];
     for(var i = 0; i < values.length; i++) {
       var result = numberSuffixer(values[i]);
-      expect(result.endsWith('2th')).to.eql(true);
+      expect(result.endsWith('3th')).to.eql(true);
+    }
+  })
+  it('returns original value if not an int', function() {
+    var values = [{ object: true }];
+    for(var i = 0; i < values.length; i++) {
+      var result = numberSuffixer(values[i]);
+      expect(result).to.eql({object: true});
     }
   })
 });
