@@ -1,4 +1,5 @@
 var stateMappings = require('../utils/state_mappings.js');
+var numberSuffixer = require('../utils/number_suffixer.js');
 
 // Isolated Districtleague model to be used
 // as a common api by Districtleague directives.
@@ -21,10 +22,20 @@ function DistrictLeague(options) {
   this.league = DistrictLeague.getSortedLeague(options.league);
 }
 
+/**
+ * Given a league, add view data and sort.
+ */
 DistrictLeague.getSortedLeague = function(league) {
   league = league || [];
   league = DistrictLeague.mapViewData(league);
   return DistrictLeague.sort(league);
+};
+
+/**
+ * Wrapper around the utils function to allow access in views.
+ */
+DistrictLeague.prototype.numberSuffixer = function(num) {
+  return numberSuffixer(num);
 };
 
 /**

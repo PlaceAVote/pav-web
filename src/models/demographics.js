@@ -1,4 +1,5 @@
 var stateMappings = require('../utils/state_mappings.js');
+var numberSuffixer = require('../utils/number_suffixer.js');
 
 // Isolated Demographics model to be used
 // as a common api by Demographics directives.
@@ -20,6 +21,10 @@ function toPercent(subsection, total) {
   var percent = (subsection / (total)) * 100;
   return Math.round(percent * 100) / 100;
 }
+
+Demographics.prototype.numberSuffixer = function(num) {
+  return numberSuffixer(num);
+};
 
 Demographics.prototype.setDistrict = function(district) {
   this.district = district;
