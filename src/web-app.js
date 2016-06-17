@@ -266,7 +266,7 @@ SettingsController.$inject = ['$scope', '$location', '$timeout', 'userService', 
 app.controller('PasswordResetCtrl', PasswordController);
 PasswordController.$inject = ['$scope','$location','$routeParams','passwordService', 'authService'];
 app.controller('IssuesCtrl', IssuesController);
-IssuesController.$inject = ['$scope', '$rootScope', 'searchService', '$timeout', 'issueService'];
+IssuesController.$inject = ['$scope', '$rootScope', 'searchService', '$timeout', 'issueService', 'openGraphService'];
 app.controller('WizardCtrl', WizardController);
 WizardController.$inject = ['$scope', 'questionService','$rootScope'];
 

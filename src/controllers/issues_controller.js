@@ -1,10 +1,11 @@
 var issueValidator = require('../utils/validate_issue.js')();
 var Issue = require('../models/issue.js');
 
-function IssuesController($scope, $rootScope, searchService, $timeout, issueService) {
+function IssuesController($scope, $rootScope, searchService, $timeout, issueService, openGraphService) {
   this.rs = $rootScope;
   this.scope = $scope;
   this.searchService = searchService;
+  this.openGraphService = openGraphService;
   this.timeout = $timeout;
   this.issue = {};
   this.attachments = [];
@@ -88,12 +89,19 @@ IssuesController.prototype.attach = function(attachment) {
       title: attachment.article_link,
     });
     that.linkAdd = false;
+    that.openGraphService.getData(attachment.article_link, function(err, result) {
+      if (err) {
+        return;
+      }
+      that.openData = result;
+    });
   }
 };
 
 IssuesController.prototype.deleteAttachment = function(i) {
   if (this.attachments[i].type === 'Article') {
     delete this.issue.article_link;
+    delete this.openData;
   } else {
     delete this.issue.bill_id;
   }
