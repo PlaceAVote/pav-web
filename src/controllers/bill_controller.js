@@ -123,17 +123,9 @@ BillController.prototype.getVotes = function(id) {
     if (err) {
       that.voteError = true;
     } else {
-      var noVote = {
-        val: result.noPercentage,
-        label: 'Against',
-        className: 'against',
-      };
-      var yesVote = {
-        val: result.yesPercentage,
-        label: 'In Favor',
-        className: 'favor',
-      };
-      that.nationalStats = [ noVote, yesVote ];
+      that.noVote = result.no;
+      that.yesVote = result.yes;
+      that.calculatePie();
     }
   });
 };
@@ -449,7 +441,32 @@ BillController.prototype.getRepresentation = function() {
 
 };
 
+
+BillController.prototype.calculatePie = function() {
+  var noVote = {
+    val: Math.round((this.noVote / (this.noVote + this.yesVote)) * 100),
+    label: 'Against',
+    className: 'against',
+  };
+  var yesVote = {
+    val: Math.round((this.yesVote / (this.noVote + this.yesVote)) * 100),
+    label: 'In Favor',
+    className: 'favor',
+  };
+  this.nationalStats = [ noVote, yesVote ];
+};
+
+BillController.prototype.updateOverallStats = function(vote) {
+  if (vote) {
+    this.yesVote ++;
+  } else {
+    this.noVote ++;
+  }
+};
+
 BillController.prototype.updateRepresentationView = function(vote) {
+  this.updateOverallStats(vote);
+  this.calculatePie();
   this.representation.updateVotePercent(vote);
   this.representation.updateRepresentation();
 };
