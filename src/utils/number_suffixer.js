@@ -14,7 +14,7 @@ function isLowerTeen(numbString) {
 }
 
 function numberSuffixer(num) {
-  var numbString = num.toString();
+  var numbString = num + '';
   if (isLowerTeen(numbString)) {
     return handleLowerTeen(num);
   }
