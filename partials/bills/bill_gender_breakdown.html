@@ -10,7 +10,7 @@
         {{range.minAge}}+
       </div>
       <div class="c-bar c-bar__stats-demographics-age-bar">
-        <div class="c-bar__fill" ng-style="{'width' : ((range.votes.total / total) * 100) + '%'}">
+        <div class="c-bar__fill" ng-style="{'width' : ((range.votes.total / range.sampleSize) * 100) + '%'}">
         </div>
       </div>
     </div>
