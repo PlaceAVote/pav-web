@@ -49,6 +49,7 @@ var FeedService = require('./services/feed_service.js');
 var IssueService = require('./services/issue_service.js');
 var QuestionService = require('./services/question_service.js');
 var MailService = require('./services/mail_service.js');
+var OpenGraphService = require('./services/open_graph_service.js');
 
 // Dependencies
 var d3 = require('d3');
@@ -242,6 +243,8 @@ app.factory('questionService', QuestionService);
 QuestionService.$inject = ['$resource', 'authService'];
 app.factory('mailService', MailService);
 MailService.$inject = ['$resource'];
+app.factory('openGraphService', OpenGraphService);
+OpenGraphService.$inject = ['$resource'];
 
 // Controllers
 app.controller('TopicRegisterCtrl', RegisterController);

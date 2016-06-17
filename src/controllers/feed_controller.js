@@ -17,7 +17,6 @@ FeedController = function($scope, $location, userService, billService, authServi
   this.timeout = $timeout;
   this.rs = $rootScope;
   this.rs.inApp = true;
-
   this.categories = {
     all: new SubFeedController({name: 'all', icon: 'icon-globe', title: 'All Activity', noun: 'everything'}),
     following: new SubFeedController({name: 'following', icon: 'icon-add', title: 'Following', noun: 'people'}),
