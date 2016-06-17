@@ -3,8 +3,37 @@ function DistrictLeague(options) {
   this.state = options.state;
   this.district = options.district;
   this.total = options.total || 0;
-  this.league = options.league || [];
+  this.league = DistrictLeague.getSortedLeague(options.league);
 }
+
+DistrictLeague.getSortedLeague = function(league) {
+  league = league || [];
+  league = DistrictLeague.calculatePercentage(league);
+  return DistrictLeague.sort(league);
+};
+
+/**
+ * Calculates percentages based on hits and sampleSize.
+ */
+DistrictLeague.calculatePercentage = function(league) {
+  return league.map(function(position) {
+    var percentage = Math.round((position.hits / position.sampleSize) * 100);
+    if (isNaN(percentage)) {
+      percentage = 0;
+    }
+    position.percentage = percentage;
+    return position;
+  });
+};
+
+/**
+ * Sorts league in order of percentages
+ */
+DistrictLeague.sort = function(league) {
+  return league.sort(function(lastPosition, currentPosition) {
+    return currentPosition.percentage - lastPosition.percentage;
+  });
+};
 
 /**
  * Determines if there is any state available.
@@ -38,7 +67,7 @@ DistrictLeague.prototype.setDistrict = function(district) {
  * @param object : contains league (array) and total (int).
  */
 DistrictLeague.prototype.populate = function(result) {
-  this.league = result.league;
+  this.league = DistrictLeague.getSortedLeague(result.league);
   this.total = result.total;
 };
 
@@ -78,12 +107,7 @@ DistrictLeague.prototype.getSurrounding = function() {
  * @returns array: surround league standings.
  */
 DistrictLeague.prototype.generateLeague = function() {
-  var surrounding = this.getSurrounding();
-  for (var i = 0; i < surrounding.length; i++) {
-    var position = surrounding[i];
-    position.percentage = Math.round((position.hits / this.total) * 100) + '%';
-  }
-  return surrounding;
+  return this.getSurrounding();
 };
 
 module.exports = DistrictLeague;

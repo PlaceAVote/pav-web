@@ -12,7 +12,7 @@
       <tr ng-repeat="ranking in league.generateLeague()" class="c-table__row" ng-class="{'c-table__row--selected': ranking.current }">
         <td>{{ ranking.position }}</td>
         <td>{{ ranking.state }} {{ ranking.district }}</td>
-        <td>{{ ranking.percentage }}</td>
+        <td>{{ ranking.percentage }} &#37;</td>
       </tr>
     </table>
   </div>

@@ -1153,7 +1153,7 @@ describe('BillController', function() {
       expect(subject.districtLeague.district).to.eql(33);
       expect(subject.districtLeague.total).to.eql(20);
       expect(subject.districtLeague.league.length).to.eql(1);
-      expect(subject.districtLeague.league[0]).to.eql({ state: 'CA', district: 33, hits: 20 });
+      expect(subject.districtLeague.league[0]).to.eql({ state: 'CA', district: 33, hits: 20, percentage: 0 });
       expect(subject.districtLeague.isAvailable()).to.eql(true);
       expect(actualId).to.eql('100');
     });
