@@ -15,6 +15,7 @@ describe('Demographics', function() {
       };
       var subject = new Demographics(options);
       expect(subject.state).to.eql('CA');
+      expect(subject.stateName).to.eql('California');
       expect(subject.district).to.eql(6);
     });
   });

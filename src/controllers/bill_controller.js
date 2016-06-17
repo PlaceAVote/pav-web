@@ -422,8 +422,8 @@ BillController.prototype.getRepresentation = function() {
     bill_id: this.body.billData.bill_id,
   };
 
-  this.representation.state = this.rs.user.state;
-  this.representation.district = this.rs.user.district;
+  this.representation.setState(this.rs.user.state);
+  this.representation.setDistrict(this.rs.user.district);
   this.representation.setBusy(true);
 
   this.billService.getRepresentation(request, function(err, res) {

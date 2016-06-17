@@ -1,26 +1,42 @@
+var stateMappings = require('../utils/state_mappings.js');
+
+// Isolated Districtleague model to be used
+// as a common api by Districtleague directives.
+/**
+ * @class Districtleague
+ * @param options {Object}
+ *
+ * Takes in a hashed object containing
+ *  - current US state context
+ *  - current Us state district context.
+ *  - total votes in the league
+ *  - league array (containing states, district, population,
+ *    sampleSize and hits data).
+ */
 function DistrictLeague(options) {
   options = options || {};
-  this.state = options.state;
-  this.district = options.district;
+  this.setState(options.state);
+  this.setDistrict(options.district);
   this.total = options.total || 0;
   this.league = DistrictLeague.getSortedLeague(options.league);
 }
 
 DistrictLeague.getSortedLeague = function(league) {
   league = league || [];
-  league = DistrictLeague.calculatePercentage(league);
+  league = DistrictLeague.mapViewData(league);
   return DistrictLeague.sort(league);
 };
 
 /**
  * Calculates percentages based on hits and sampleSize.
  */
-DistrictLeague.calculatePercentage = function(league) {
+DistrictLeague.mapViewData = function(league) {
   return league.map(function(position) {
     var percentage = Math.round((position.hits / position.sampleSize) * 100);
     if (isNaN(percentage)) {
       percentage = 0;
     }
+    position.stateName = stateMappings(position.state);
     position.percentage = percentage;
     return position;
   });
@@ -52,6 +68,7 @@ DistrictLeague.prototype.isAvailable = function() {
  */
 DistrictLeague.prototype.setState = function(state) {
   this.state = state;
+  this.stateName = stateMappings(state);
 };
 
 /**

@@ -1,3 +1,5 @@
+var stateMappings = require('../utils/state_mappings.js');
+
 // Isolated Demographics model to be used
 // as a common api by Demographics directives.
 /**
@@ -10,14 +12,23 @@
 function Demographics(dependencies) {
   var options = dependencies || {};
   this.available = false;
-  this.state = options.state;
-  this.district = options.district;
+  this.setState(options.state);
+  this.setDistrict(options.district);
 }
 
 function toPercent(subsection, total) {
   var percent = (subsection / (total)) * 100;
   return Math.round(percent * 100) / 100;
 }
+
+Demographics.prototype.setDistrict = function(district) {
+  this.district = district;
+};
+
+Demographics.prototype.setState = function(state) {
+  this.state = state;
+  this.stateName = stateMappings(state);
+};
 
 Demographics.prototype.setBusy = function(busy) {
   this.busy = busy;
