@@ -158,6 +158,7 @@ IssuesController.prototype.postIssue = function() {
     if (res) {
       that.issue = {};
       that.attachments = [];
+      that.openData = null;
       that.myIssues.unshift(new Issue(res));
     }
   });

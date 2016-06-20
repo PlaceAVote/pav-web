@@ -57,6 +57,7 @@ var angular = require('angular');
 
 // Directives
 var search = require('./directives/search.js');
+var openGraph = require('./directives/open_graph.js');
 var pavXBrowserDate = require('./directives/pavXBrowserDate.js');
 var mailcheck = require('./directives/mailcheck.js');
 var pavDirectives = require('./directives/directives.js');
@@ -296,6 +297,7 @@ mailcheck.$inject = ['$compile','$sce'];
 app.directive('comment', commentDirective);
 commentDirective.$inject = ['$compile', 'commentService', '$anchorScroll', '$timeout', '$location', '$window', 'userService'];
 app.directive('comments', [commentsDirective]);
+app.directive('openGraph', [openGraph]);
 app.directive('banner', [bannerDirective]);
 app.directive('timeline', timelineDirective);
 timelineDirective.$inject = ['$location'];
