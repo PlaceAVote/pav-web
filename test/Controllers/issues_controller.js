@@ -89,12 +89,18 @@ describe('Issues Controller', function() {
     expect(subject.billSearch).to.equal(false);
   });
 
-  it('should push article into attachment array switch off linkAdd', function() {
-    var subject = new IssuesController();
+  it('should push article into attachment array switch off linkAdd setting the open graph data from the server', function() {
+    var mockService = {
+      getData: function(url, callback) {
+        callback(null, {article_title: 'Cute Dog Alert'});
+      },
+    };
+    var subject = new IssuesController(undefined, undefined, undefined, undefined, undefined, mockService);
     var mockArticle = {type:'article',article_link:'www.bbc.co.uk'};
     subject.attach(mockArticle);
     expect(subject.attachments[0].title).to.equal(mockArticle.article_link);
     expect(subject.attachments[0].type).to.equal('Article');
+    expect(subject.openData.article_title).to.equal('Cute Dog Alert');
     expect(subject.linkAdd).to.equal(false);
   });
 
@@ -105,12 +111,44 @@ describe('Issues Controller', function() {
     expect(subject.attachments.length).to.equal(0);
   });
 
-  it('should attach link if URL is valid', function() {
+  it('should delete article attachment with og data', function() {
     var subject = new IssuesController();
+    subject.openData = { dummy: 'object' };
+    subject.issue = {
+      article_link: 'www.article.com',
+    };
+    subject.attachments = [{type: 'Article', title: 'Title'}];
+    subject.deleteAttachment(0);
+    expect(subject.attachments.length).to.equal(0);
+    expect(subject.openData).to.eql(undefined);
+    expect(subject.issue.article_link).to.eql(undefined);
+  });
+
+  it('should attach link if URL is valid', function() {
+    var mockService = {
+      getData: function(url, callback) {
+        callback(null, {article_title: 'Cute Dog Alert'});
+      },
+    };
+    var subject = new IssuesController(null, null, null, null, null, mockService);
     subject.url = 'http://www.google.com';
     subject.validateUrl();
     expect(subject.attachments[0].title).to.equal(subject.url);
     expect(subject.attachments[0].type).to.equal('Article');
+  })
+
+  it('shouldnt add open graph if an error occurs', function() {
+    var mockService = {
+      getData: function(url, callback) {
+        callback(new Error('OG:ERROR'), 'shouldnt set');
+      },
+    };
+    var subject = new IssuesController(null, null, null, null, null, mockService);
+    subject.url = 'http://www.google.com';
+    subject.validateUrl();
+    expect(subject.attachments[0].title).to.equal(subject.url);
+    expect(subject.attachments[0].type).to.equal('Article');
+    expect(subject.openData).to.eql(undefined);
   })
 
   it('should return error if link is not a valid URL', function() {

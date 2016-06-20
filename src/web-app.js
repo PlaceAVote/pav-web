@@ -49,6 +49,7 @@ var FeedService = require('./services/feed_service.js');
 var IssueService = require('./services/issue_service.js');
 var QuestionService = require('./services/question_service.js');
 var MailService = require('./services/mail_service.js');
+var OpenGraphService = require('./services/open_graph_service.js');
 
 // Dependencies
 var d3 = require('d3');
@@ -56,6 +57,7 @@ var angular = require('angular');
 
 // Directives
 var search = require('./directives/search.js');
+var openGraph = require('./directives/open_graph.js');
 var pavXBrowserDate = require('./directives/pavXBrowserDate.js');
 var mailcheck = require('./directives/mailcheck.js');
 var pavDirectives = require('./directives/directives.js');
@@ -242,6 +244,8 @@ app.factory('questionService', QuestionService);
 QuestionService.$inject = ['$resource', 'authService'];
 app.factory('mailService', MailService);
 MailService.$inject = ['$resource'];
+app.factory('openGraphService', OpenGraphService);
+OpenGraphService.$inject = ['$resource'];
 
 // Controllers
 app.controller('TopicRegisterCtrl', RegisterController);
@@ -263,7 +267,7 @@ SettingsController.$inject = ['$scope', '$location', '$timeout', 'userService', 
 app.controller('PasswordResetCtrl', PasswordController);
 PasswordController.$inject = ['$scope','$location','$routeParams','passwordService', 'authService'];
 app.controller('IssuesCtrl', IssuesController);
-IssuesController.$inject = ['$scope', '$rootScope', 'searchService', '$timeout', 'issueService'];
+IssuesController.$inject = ['$scope', '$rootScope', 'searchService', '$timeout', 'issueService', 'openGraphService'];
 app.controller('WizardCtrl', WizardController);
 WizardController.$inject = ['$scope', 'questionService','$rootScope'];
 
@@ -293,6 +297,7 @@ mailcheck.$inject = ['$compile','$sce'];
 app.directive('comment', commentDirective);
 commentDirective.$inject = ['$compile', 'commentService', '$anchorScroll', '$timeout', '$location', '$window', 'userService'];
 app.directive('comments', [commentsDirective]);
+app.directive('openGraph', [openGraph]);
 app.directive('banner', [bannerDirective]);
 app.directive('timeline', timelineDirective);
 timelineDirective.$inject = ['$location'];
