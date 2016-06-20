@@ -1,9 +1,10 @@
 var config = require('./config/urls.js');
 var gmail = require('./integrations/gmail.js');
 
-gmail.loadContacts(function(response) {
+/*
+gmail.loadContacts(function(err, response) {
   console.log(response);
-});
+});*/
 
 console.log('%cPlaceavote', 'background: #543594; color: #ffffff; padding: 1px 3px; border-radius: 3px; font-size: 12px;font-family: sans-serif; margin-left: calc(100% - 70px);');
 

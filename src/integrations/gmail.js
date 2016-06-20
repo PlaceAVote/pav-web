@@ -1,7 +1,25 @@
 var GMAIL_SRC = 'https://apis.google.com/js/client.js';
-var SCOPES = ['https://www.googleapis.com/auth/contacts.readonly'];
+var SCOPES = ['https://www.googleapis.com/auth/contacts.readonly', 'https://www.googleapis.com/auth/user.emails.read'];
+var contacts = 'https://people.googleapis.com/v1/people/me/connections?requestMask.includeField=person.email_addresses&key=';
 var CLIENT_ID = '669186541269-rhcqafutbk80ffvshmupbq0sjkdvhfae.apps.googleusercontent.com';
+var API_KEY = 'AIzaSyAIQ5XNxQNdYWE9e5qX63UwX-qfZr13Nes';
 var googleApi;
+
+function get(options) {
+  return new Promise(function(load, error) {
+    var xhr = new XMLHttpRequest();
+    xhr.open(options.method, options.url, true);
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        load(JSON.parse(xhr.responseText));
+      }
+      if (xhr.readyState === 4 && xhr.status !== 200) {
+        error(JSON.parse(xhr.responseText));
+      }
+    }
+    xhr.send();
+  });
+}
 
 // Loads the script on page load and sets the gapi vairable;
 var importScript = (function(oHead) {
@@ -24,23 +42,18 @@ importScript(GMAIL_SRC, function() {
   googleApi = gapi;
 });
 
-function loadContacts(callback) {
-  console.log('in action');
-  console.log(googleApi);
-  var request = googleApi.client.gmail.users.labels.list({
-    'userId': 'me',
-  });
-
-  request.execute(function(resp) {
-    console.log(resp);
-    callback(resp);
-  });
-}
-
-function loadGmailApi(action, callback) {
-  googleApi.client.load('contacts', 'v3', function() {
-    console.log('actioned');
-    action(callback);
+function loadContacts(authResult, callback) {
+  var options = {
+    url: contacts + API_KEY + '&access_token=' + authResult.access_token,
+    method: 'GET',
+    headers: {
+      token: authResult.access_token,
+    },
+  };
+  return get(options).then(function(r) {
+    callback(null, r);
+  }).catch(function(er) {
+    callback(er);
   });
 }
 
@@ -48,7 +61,7 @@ function handleAuthResult(authResult, action, callback) {
   var authorizeDiv = document.getElementById('authorize-div');
   if (authResult && !authResult.error) {
     // AuthorizeDiv.style.display = 'none';
-    loadGmailApi(action, callback);
+    action(authResult, callback);
   } else {
     // Show auth UI, allowing the user to initiate authorization by
     // clicking authorize button.
@@ -57,24 +70,30 @@ function handleAuthResult(authResult, action, callback) {
 }
 
 function authorize(action, callback) {
-  console.log('start', googleApi);
   if (!googleApi) {
     return setTimeout(function() {
-      console.log('auth');
       authorize(action, callback);
     }, 1000);
   }
-  console.log('hello');
   googleApi.auth.authorize({
     client_id: CLIENT_ID,
     scope: SCOPES,
     immediate: false,
   }, function(resp) {
-      console.log('world');
-      console.log('RESP', resp);
       handleAuthResult(resp, action, callback);
-    });
+  });
 }
+
+function loaded() {
+  if (!googleApi) {
+    return setTimeout(function() {
+      loaded();
+    }, 1000);
+  } else {
+    console.log('Google API loaded');
+  }
+}
+loaded();
 
 
 module.exports = {
