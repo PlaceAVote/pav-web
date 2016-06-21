@@ -1,6 +1,6 @@
 var GMAIL_SRC = 'https://apis.google.com/js/client.js';
 var SCOPES = ['https://www.googleapis.com/auth/contacts.readonly', 'https://www.googleapis.com/auth/user.emails.read'];
-var contacts = 'https://people.googleapis.com/v1/people/me/connections?requestMask.includeField=person.email_addresses&key=';
+var contactsFeed = 'https://www.google.com/m8/feeds/contacts/default/full?key=';
 var CLIENT_ID = '669186541269-rhcqafutbk80ffvshmupbq0sjkdvhfae.apps.googleusercontent.com';
 var API_KEY = 'AIzaSyAIQ5XNxQNdYWE9e5qX63UwX-qfZr13Nes';
 var googleApi;
@@ -16,7 +16,7 @@ function get(options) {
       if (xhr.readyState === 4 && xhr.status !== 200) {
         error(JSON.parse(xhr.responseText));
       }
-    }
+    };
     xhr.send();
   });
 }
@@ -34,7 +34,7 @@ var importScript = (function(oHead) {
     if (fOnload) { oScript.onload = fOnload; }
     oHead.appendChild(oScript);
     oScript.src = sSrc;
-  }
+  };
 })(document.head || document.getElementsByTagName('head')[0]);
 
 importScript(GMAIL_SRC, function() {
@@ -43,12 +43,10 @@ importScript(GMAIL_SRC, function() {
 });
 
 function loadContacts(authResult, callback) {
+  console.log(authResult.access_token);
   var options = {
-    url: contacts + API_KEY + '&access_token=' + authResult.access_token,
+    url: contactsFeed + API_KEY + '&access_token=' + authResult.access_token + '&alt=json',
     method: 'GET',
-    headers: {
-      token: authResult.access_token,
-    },
   };
   return get(options).then(function(r) {
     callback(null, r);
@@ -70,7 +68,7 @@ function handleAuthResult(authResult, action, callback) {
 }
 
 function authorize(action, callback) {
-  if (!googleApi) {
+  if (!googleApi || !googleApi.auth) {
     return setTimeout(function() {
       authorize(action, callback);
     }, 1000);
@@ -80,24 +78,12 @@ function authorize(action, callback) {
     scope: SCOPES,
     immediate: false,
   }, function(resp) {
-      handleAuthResult(resp, action, callback);
+    handleAuthResult(resp, action, callback);
   });
 }
 
-function loaded() {
-  if (!googleApi) {
-    return setTimeout(function() {
-      loaded();
-    }, 1000);
-  } else {
-    console.log('Google API loaded');
-  }
-}
-loaded();
-
-
 module.exports = {
   loadContacts: function(callback) {
-    authorize(loadContacts, callback)
+    authorize(loadContacts, callback);
   },
 };
