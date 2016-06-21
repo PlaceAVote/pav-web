@@ -3,6 +3,7 @@ var AuthorizeController = require('./autherize_controller.js');
 var title = require('../config/titles.js');
 var BillSummary = require('../models/bill_summary.js');
 var Issue = require('../models/issue.js');
+var zipValidator = require('../utils/zipValidator.js');
 var SubFeedController = require('./sub_feed_controller.js');
 var Feedback = require('../models/feedback_feed_event.js');
 
@@ -14,11 +15,9 @@ FeedController = function($scope, $location, userService, billService, authServi
   this.userService = userService;
   this.feedService = feedService;
   this.searchService = searchService;
-  this.zipExpression = /^\d{5}(?:[-\s]\d{4})?$/;
   this.timeout = $timeout;
   this.rs = $rootScope;
   this.rs.inApp = true;
-
   this.categories = {
     all: new SubFeedController({name: 'all', icon: 'icon-globe', title: 'All Activity', noun: 'everything'}),
     following: new SubFeedController({name: 'following', icon: 'icon-add', title: 'Following', noun: 'people'}),
@@ -68,7 +67,7 @@ FeedController = function($scope, $location, userService, billService, authServi
 };
 
 FeedController.prototype.updateZip = function() {
-  if (!this.zipExpression.test(this.zipCode)) {
+  if (!zipValidator(this.zipCode)) {
     this.invalidZip = true;
     return;
   }
@@ -96,7 +95,7 @@ FeedController.prototype.updateZip = function() {
 };
 
 FeedController.prototype.showZipModal = function() {
-  if (!this.rs || !this.rs.user || this.rs.shownZipModal) {
+  if (!this.rs || !this.rs.user || this.rs.shownZipModal || this.rs.user.newUser) {
     return;
   }
   if (!this.rs.user.district || !this.rs.user.state) {

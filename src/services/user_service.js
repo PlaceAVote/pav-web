@@ -72,7 +72,7 @@ function UserService($resource, facebookService, authService, userStore) {
     this.user.first_name = additionalInformation.first_name;
     this.user.last_name = additionalInformation.last_name;
     this.user.zipcode = additionalInformation.zipcode;
-    this.user.dob = strftime('%m/%d/%Y', additionalInformation.dob);
+    this.user.dob = additionalInformation.dobFmt;
     this.user.gender = additionalInformation.gender;
   };
 
@@ -112,7 +112,6 @@ function UserService($resource, facebookService, authService, userStore) {
     };
 
     var onError = function(err) {
-      console.log(err.status + 'Unable to save user', 'Facebook Sign Up:');
       callback(err);
     };
 

@@ -12,6 +12,7 @@ function SearchResults(options) {
         bill_id: options[i].bill_id,
         official_title: options[i].official_title,
         short_title: options[i].short_title,
+        featured_bill_title: options[i].featured_bill_title,
         type: options[i].type,
         selected: false,
         subject: options[i].subject,
@@ -43,15 +44,8 @@ function SearchResults(options) {
 }
 
 SearchResults.prototype.fullTitle = function(o, x) {
-  var that = this;
-  if (!o.short_title) {
-    that.bills[x].full_title = o.bill_id + ' ' + o.official_title;
-    that.bills[x].html = o.bill_id + ' ' + o.official_title;
-  } else {
-    that.bills[x].full_title = o.bill_id + ' ' + o.short_title;
-    that.bills[x].html = o.bill_id + ' ' + o.short_title;
-  }
-
+  this.bills[x].full_title = o.bill_id + ' ' + (o.featured_bill_title || o.short_title || o.official_title);
+  this.bills[x].html = o.bill_id + ' ' + (o.featured_bill_title || o.short_title || o.official_title);
 };
 
 SearchResults.prototype.getIcon = function(o, x) {

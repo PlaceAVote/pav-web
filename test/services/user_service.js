@@ -78,7 +78,7 @@ describe("User Service", function() {
       var additonalInformation = {
         first_name : "paul",
         last_name : "barber",
-        dob : "04/01/1990",
+        dob : "638924400000",
         country_code: "USA"
       }
       subject.addAdditionalInformation(additonalInformation);
@@ -91,14 +91,14 @@ describe("User Service", function() {
       var additionalInformation = {
         first_name : "paul",
         last_name : "barber",
-        dob : new Date(),
+        dobFmt: new Date('04/01/1990 UTC').getTime().toString(),
         zipcode : 1234
       };
       subject.addAdditionalInformation(additionalInformation);
       var user = subject.getUser();
       expect(user.first_name).to.eql("paul");
       expect(user.last_name).to.eql("barber");
-      expect(user.dob).to.eql(strftime('%m/%d/%Y', new Date()));
+      expect(user.dob).to.eql('638928000000');
       expect(user.zipcode).to.eql(1234);
     });
   });
@@ -113,7 +113,7 @@ describe("User Service", function() {
           expect(user.first_name).to.eql('paul');
           expect(user.last_name).to.eql('barber');
           expect(user.email).to.eql('test@email.com');
-          expect(user.dob).to.eql(strftime('%m/%d/%Y', new Date()));
+          expect(user.dob).to.eql('638928000000');
           expect(user.zipcode).to.eql(1234);
           done();
         };
@@ -125,7 +125,7 @@ describe("User Service", function() {
       var additionalInformation = {
         first_name : "paul",
         last_name : "barber",
-        dob : new Date(),
+        dobFmt: new Date('04/01/1990 UTC').getTime().toString(),
         zipcode : 1234,
       };
       subject.addAdditionalInformation(additionalInformation);
@@ -144,7 +144,7 @@ describe("User Service", function() {
       var additionalInformation = {
         first_name : "paul",
         last_name : "barber",
-        dob : new Date(),
+        dobFmt: new Date('04/01/1990 UTC').getTime().toString(),
         zipcode : 1234,
       };
       subject.addAdditionalInformation(additionalInformation);
@@ -152,7 +152,7 @@ describe("User Service", function() {
         expect(err).to.be.undefined;
         expect(user.first_name).to.eql('paul');
         expect(user.last_name).to.eql('barber');
-        expect(user.dob).to.eql(strftime('%m/%d/%Y', new Date()));
+        expect(user.dob).to.eql('638928000000');
         expect(user.zipcode).to.eql(1234);
         done();
       });
@@ -315,10 +315,10 @@ describe("User Service", function() {
         first_name : "paul",
         last_name : "barber",
         zipcode : 1234,
+        dobFmt: new Date('04/01/1990 UTC').getTime().toString(),
       };
       subject.user.topics = [{name:'guns'}];
       subject.user.img_url = 'img.com';
-      subject.user.dob = new Date('04/01/1990');
       subject.user.facebookId = 'TestId'
       subject.user.facebookToken = 'TestToken'
       subject.addAdditionalInformation(additionalInformation);
@@ -353,13 +353,13 @@ describe("User Service", function() {
       var subject = new UserService(mockResource, facebook, authService);
       subject.createUser("test@email.com", "p4SSw0rD!");
       var additionalInformation = {
-        first_name : "paul",
-        last_name : "barber",
-        zipcode : 1234,
+        first_name: "paul",
+        last_name: "barber",
+        zipcode: 1234,
+        dobFmt: new Date('04/01/1990 UTC').getTime().toString(),
       };
       subject.user.topics = [{name:'guns'}];
       subject.user.img_url = 'img.com';
-      subject.user.dob = new Date('04/01/1990');
       subject.addAdditionalInformation(additionalInformation);
       subject.userToken = {
         accessToken: "AUTHT0k3n"
@@ -523,7 +523,7 @@ describe("User Service", function() {
     settingsItem.email = "stefan@test.com";
     settingsItem.first_name = "stefan";
     settingsItem.last_name = "huber";
-    settingsItem.dob = new Date('12/12/1985');
+    settingsItem.dob = new Date('12/12/1985 UTC');
     settingsItem.gender = "male";
     settingsItem.public = true;
     settingsItem.social_login = false;
@@ -565,7 +565,7 @@ describe("User Service", function() {
         expect(result.first_name).to.eql('stefan');
         expect(result.last_name).to.eql('huber');
         expect(result.email).to.eql('stefan@test.com');
-        expect(result.dob).to.eql(new Date("12/12/1985"));
+        expect(result.dob).to.eql(new Date("12/12/1985 UTC"));
         expect(result.city).to.eql('Berlin');
         done();
       });

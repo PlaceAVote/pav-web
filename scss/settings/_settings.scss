@@ -1,4 +1,19 @@
+
 .settings-wrapper {
+  p.error {
+    height: 0;
+    transition: all 0.2s ease;
+    overflow: hidden;
+    &.show {
+    height: auto;
+    background: lighten($red, 20%);
+    border-radius: 3px;
+    border: 1px solid $red;
+    color: white;
+    padding: 10px;
+    margin-bottom: 20px;
+    }
+  }
 	width: 100%;
   display: flex;
   flex-direction: row;
@@ -113,6 +128,9 @@
       color: $blue;
     }
 
+    input.invalidInput {
+      border-color: $red;
+    }
     input {
       width: 100%;
       height: 40px;
