@@ -17,7 +17,7 @@ function sendMessageToMany($request, authService, params, callback) {
   var url = config.email.url();
   var method = config.methods.get;
   method.headers.Authorization = token;
-  var req = new $request(url, undefined, { sendMany : config.methods.get });
+  var req = new $request(url, undefined, { sendMany: config.methods.get });
   var onLoad = function(response) {
     return callback(null, response);
   };

@@ -16,11 +16,11 @@ function Google(googleApi) {
  * Contacts are stored in this instances contacts array in reverse
  * order from the google api for increased performance on interaction.
  */
-Google.prototype.getContacts = function() {
+Google.prototype.getContacts = function(callback) {
   var that = this;
   this.googleApi.loadContacts(function(err, response) {
     if (err || !response.feed) {
-      return;
+      return callback(err || new Error('No Feed Item Returned'));
     }
     var connections = response.feed.entry;
     var uniques = {};
@@ -52,7 +52,7 @@ Google.prototype.getContacts = function() {
         name: uniques[key],
       });
     }
-    console.log(that.contacts);
+    return callback(null, that.contacts);
   });
 };
 
