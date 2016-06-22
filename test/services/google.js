@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var Google = require('../../src/models/google.js');
+var google = require('../../src/services/google.js');
 
 describe('Google', function() {
   describe('getContacts', function() {
@@ -9,7 +9,7 @@ describe('Google', function() {
           return callback(new Error('Nope'));
         },
       };
-      var subject = new Google(mockApi);
+      var subject = google(mockApi);
       subject.getContacts(function(err, response) {
         expect(err.message).to.eql('Nope');
         done();
@@ -22,7 +22,7 @@ describe('Google', function() {
           return callback(null, {});
         },
       };
-      var subject = new Google(mockApi);
+      var subject = google(mockApi);
       subject.getContacts(function(err, contacts) {
         expect(err.message).to.eql('No Feed Item Returned');
         done();
@@ -50,7 +50,7 @@ describe('Google', function() {
           });
         },
       };
-      var subject = new Google(mockApi);
+      var subject = google(mockApi);
       subject.getContacts(function(err, contacts) {
         expect(contacts.length).to.eql(1);
         expect(contacts[0].email).to.eql('email@address.com');
@@ -75,7 +75,7 @@ describe('Google', function() {
           });
         },
       };
-      var subject = new Google(mockApi);
+      var subject = google(mockApi);
       subject.getContacts(function(err, contacts) {
         expect(contacts.length).to.eql(0);
         done();
@@ -101,7 +101,7 @@ describe('Google', function() {
           });
         },
       };
-      var subject = new Google(mockApi);
+      var subject = google(mockApi);
       subject.getContacts(function(er, contacts) {
         expect(contacts.length).to.eql(0);
         done();
@@ -126,7 +126,7 @@ describe('Google', function() {
           });
         },
       };
-      var subject = new Google(mockApi);
+      var subject = google(mockApi);
       subject.getContacts(function(err, contacts) {
         expect(contacts.length).to.eql(1);
         expect(contacts[0].email).to.eql('test@testing.com');
@@ -154,7 +154,7 @@ describe('Google', function() {
           });
         },
       };
-      var subject = new Google(mockApi);
+      var subject = google(mockApi);
       subject.getContacts(function(err, contacts) {
         expect(contacts.length).to.eql(1);
         expect(contacts[0].email).to.eql('test@testing.com');
@@ -190,7 +190,7 @@ describe('Google', function() {
           });
         },
       };
-      var subject = new Google(mockApi);
+      var subject = google(mockApi);
       subject.getContacts(function(e, contacts) {
         expect(contacts.length).to.eql(2);
         expect(contacts[1].email).to.eql('email@address.com');
@@ -242,7 +242,7 @@ describe('Google', function() {
           });
         },
       };
-      var subject = new Google(mockApi);
+      var subject = google(mockApi);
       subject.getContacts(function(er, contacts) {
         expect(contacts.length).to.eql(2);
         expect(contacts[1].email).to.eql('email@address.com');
@@ -295,7 +295,7 @@ describe('Google', function() {
           });
         },
       };
-      var subject = new Google(mockApi);
+      var subject = google(mockApi);
       subject.getContacts(function(err, contacts) {
         expect(contacts.length).to.eql(3);
         expect(contacts[2].email).to.eql('email@address.com');

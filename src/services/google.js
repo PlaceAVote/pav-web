@@ -1,27 +1,17 @@
 /**
- * @class Google api wrapper to be used with
- * the google api through user interaction
- * with various/multiple directives and controllers.
- */
-function Google(googleApi) {
-  this.googleApi = googleApi;
-  this.contacts = [];
-}
-
-/**
  * GetContacts, given no errors, populate the contacts array
  * with the email addresses from the google api.
  * Triggers a user interaction through googles OAuth/Sign in.
  *
- * Contacts are stored in this instances contacts array in reverse
- * order from the google api for increased performance on interaction.
+ * Contacts are returned  in reverse order from the google
+ * api for increased performance on interaction.
  */
-Google.prototype.getContacts = function(callback) {
-  var that = this;
-  this.googleApi.loadContacts(function(err, response) {
+function getContacts(googleApi, callback) {
+  googleApi.loadContacts(function(err, response) {
     if (err || !response.feed) {
       return callback(err || new Error('No Feed Item Returned'));
     }
+    var contacts = [];
     var connections = response.feed.entry;
     var uniques = {};
     // For all connections.
@@ -47,13 +37,27 @@ Google.prototype.getContacts = function(callback) {
     // Push all unique email addresses and names into
     // the instances contacts.
     for (var key in uniques) {
-      that.contacts.push({
+      contacts.push({
         email: key,
         name: uniques[key],
       });
     }
-    return callback(null, that.contacts);
+    return callback(null, contacts);
   });
+}
+
+/**
+ * Google api wrapper to be used with
+ * the google api through user interaction
+ * with various/multiple directives and controllers.
+ */
+var google = function(googleApi) {
+  return {
+    getContacts: function(callback) {
+      return getContacts(googleApi, callback);
+    },
+  };
 };
 
-module.exports = Google;
+
+module.exports = google;

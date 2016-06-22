@@ -5,7 +5,8 @@ var contact = function() {
   };
 };
 
-function EmailController(google, emailService) {
+function EmailController(google, emailService, $scope) {
+  //  $scope.email = this;
   this.google = google;
   this.emailService = emailService;
   this.mesage = '';

@@ -82,8 +82,10 @@ function authorize(action, callback) {
   });
 }
 
-module.exports = {
-  loadContacts: function(callback) {
-    authorize(loadContacts, callback);
-  },
+module.exports = function() {
+  return {
+    loadContacts: function(callback) {
+      authorize(loadContacts, callback);
+    },
+  };
 };
