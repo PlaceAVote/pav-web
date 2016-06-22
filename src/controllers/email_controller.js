@@ -1,3 +1,4 @@
+var emailValidator = require('../utils/email_validation.js');
 var contact = function() {
   return {
     email: '',
@@ -6,18 +7,37 @@ var contact = function() {
 };
 
 function EmailController(google, emailService, $scope) {
-  //  $scope.email = this;
+  this.show = true;
+  this.importContacts = true;
   this.google = google;
   this.emailService = emailService;
   this.mesage = '';
   this.contacts = [];
+  this.fetching = null;
+  this.googleLoadedContacts = null;
   this.googleContacts = {};
   this.inputContact = contact();
+  this.googleContactsError = null;
 }
 
 EmailController.prototype.addInput = function() {
-  this.contacts.push(this.inputContact);
+  if (!emailValidator(this.inputContact.email)) {
+    this.inputContact.invalid = true;
+    return;
+  }
+  this.pushValue(this.inputContact);
   this.inputContact = contact();
+};
+
+EmailController.prototype.togglePage = function() {
+  this.errNoContacts = false;
+  this.errUnkown = false;
+  this.errUnauth = false;
+  this.importContacts = this.importContacts ? false : true;
+};
+
+EmailController.prototype.close = function() {
+  this.show = false;
 };
 
 /**
@@ -25,8 +45,12 @@ EmailController.prototype.addInput = function() {
  */
 EmailController.prototype.fetchGmailEmails = function() {
   var that = this;
+  this.fetching = true;
+  this.googleContactsError = false;
   this.google.getContacts(function(err, contacts) {
     if (err) {
+      that.fetching = false;
+      that.googleContactsError = true;
       // Set user error feedback?
       return;
     }
@@ -37,10 +61,13 @@ EmailController.prototype.fetchGmailEmails = function() {
       that.googleContacts[value.email] = {
         name: value.name,
         push: function() {
+          this.added = true;
           that.pushValue.call(that, value);
         },
       };
     });
+    that.googleContactsLoaded = true;
+    that.fetching = false;
   });
 };
 
@@ -61,10 +88,36 @@ EmailController.prototype.sendMessages = function() {
   if (this.message) {
     params.message = this.message;
   }
+  var that = this;
   this.emailService.sendMessageToMany(params, function(err) {
     if (err) {
-      // Set error message for user?
+      switch (err.message) {
+        case 'Invalid Params: Contacts Needed.': {
+          that.errNoContacts = true;
+          break;
+        }
+        case 'Invalid Params: Auth Token Needed.': {
+          that.errUnauth = true;
+          break;
+        }
+        default: {
+          that.errUnknown = true;
+          break;
+        }
+      }
+      return;
     }
+    // Clear state
+    //   - need a good way to hide this too?
+    //   - and be accessible from anywhere in the app.
+    that.mesage = '';
+    that.contacts = [];
+    that.fetching = null;
+    that.googleLoadedContacts = null;
+    that.googleContacts = {};
+    that.inputContact = contact();
+    that.importContacts = true;
+    that.show = false;
   });
 };
 
