@@ -160,7 +160,7 @@ module.exports = {
   },
   email: {
     url: function() {
-      return urls.EMAIL + '/emailcontacts/';
+      return urls.EMAIL + '/user/invite/';
     },
   },
   openGraph: {

@@ -15,9 +15,9 @@ function sendMessageToMany($request, authService, params, callback) {
     return callback(new Error('Invalid Params: Auth Token Needed.'));
   }
   var url = config.email.url();
-  var method = config.methods.get;
+  var method = config.methods.post;
   method.headers.Authorization = token;
-  var req = new $request(url, undefined, { sendMany: config.methods.get });
+  var req = new $request(url, undefined, { sendMany: method });
   var onLoad = function(response) {
     return callback(null, response);
   };

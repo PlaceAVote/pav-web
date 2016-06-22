@@ -70,9 +70,9 @@ describe('Email Service', function() {
       };
       subject.sendMessageToMany(params, function(e) {
         expect(e).to.eql(null);
-        expect(actualUrl).to.contain('email');
+        expect(actualUrl).to.contain('invite');
         expect(actualParams).to.eql(undefined);
-        expect(actualMethod.sendMany.method).to.eql('GET');
+        expect(actualMethod.sendMany.method).to.eql('POST');
         expect(actualMethod.sendMany.headers.Authorization).to.eql('PAV PAV_AUTH_TOKEN');
         done();
       });
