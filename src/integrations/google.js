@@ -43,7 +43,6 @@ importScript(GMAIL_SRC, function() {
 });
 
 function loadContacts(authResult, callback) {
-  console.log(authResult.access_token);
   var options = {
     url: contactsFeed + API_KEY + '&access_token=' + authResult.access_token + '&alt=json',
     method: 'GET',
@@ -58,12 +57,9 @@ function loadContacts(authResult, callback) {
 function handleAuthResult(authResult, action, callback) {
   var authorizeDiv = document.getElementById('authorize-div');
   if (authResult && !authResult.error) {
-    // AuthorizeDiv.style.display = 'none';
     action(authResult, callback);
   } else {
-    // Show auth UI, allowing the user to initiate authorization by
-    // clicking authorize button.
-    authorizeDiv.style.display = 'inline';
+    callback(new Error('Unautherized'));
   }
 }
 
