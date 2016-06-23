@@ -1,9 +1,17 @@
-<div class="c-social-box">
-  <div>
+<div class="c-social-box row tablet-col l-12 padding-medium margin-top-large">
+  <div class="l-6 m-12 middle margin-right-medium tablet-margin-right-none tablet-margin-bottom-medium">
     <p ng-transclude></p>
   </div>
-  <div>
-    <a class="c-social-box__button--long" ng-click="shareToFacebook()"><span class="icon-facebook c-social-box__button_icon click"></span>Share on Facebook</a>
-    <a class="c-social-box__button--long c-social-box__button--twbg click" href="" ng-click="shareToTwitter()" tar><span class="icon-social-twitter c-social-box__button_icon click"></span>Share on Twitter</a>
+  <div class="col l-6 m-12">
+    <a class="c-button
+              c-button--medium
+              c-button--facebook
+              margin-bottom-medium"
+       ng-click="shareToFacebook()">
+      <icon icon="icon-facebook"></icon>
+      Share on Facebook</a>
+    <a class="c-button c-button--medium c-button--twitter" href="" ng-click="shareToTwitter()" tar>
+      <icon icon="icon-social-twitter"></icon>
+      Share on Twitter</a>
   </div>
 </div>

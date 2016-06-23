@@ -377,3 +377,4 @@ app.directive('issueModal', issueModalDirective);
 issueModalDirective.$inject = ['$location', '$timeout', 'issueService', '$rootScope'];
 app.directive('icon', iconDirective);
 app.directive('pieChart', pieChartDirective);
+pieChartDirective.$inject = ['$window'];

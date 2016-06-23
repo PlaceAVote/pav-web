@@ -1,12 +1,21 @@
 var d3 = require('d3');
 
-function createChart(dataset, el, attr) {
+function createChart(dataset, el, attr, window) {
+
   var padding = window.getComputedStyle(el[0].offsetParent, null).getPropertyValue('padding-left');
   padding = parseInt(padding.replace('px', '')) * 2;
 
   var width = el[0].offsetParent.offsetWidth - padding;
   var height = el[0].offsetParent.offsetWidth - padding;
   var radius = Math.min(width, height) / 1.5;
+  var chartId = 'chartId_' + Math.floor((Math.random() * 1000)).toString();
+
+
+  if (height > 300 || width > 300) {
+    height = 260;
+    width: 260;
+    radius = Math.min(width, height) / 1.5;
+  }
 
   var pie = d3.layout.pie()
     .value(function(d, i) {
@@ -20,6 +29,7 @@ function createChart(dataset, el, attr) {
   var svg = d3.select(el[0]).append('svg')
     .attr('width', width)
     .attr('height', height)
+    .attr('id', chartId)
     .append('g')
     .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
 
@@ -51,13 +61,19 @@ function createChart(dataset, el, attr) {
     .attr('dy', 20)
     .attr('font-size', '14px')
     .text(dataset[0].label);
+
+  d3.select(window).on('resize', function() {
+    d3.select('#' + chartId).remove();
+    createChart(dataset, el, attr, window);
+  });
 }
 
 function updateChart(dataset, el, attr) {
+
   // Nothing to do.
 }
 
-module.exports = function() {
+module.exports = function($window) {
   return {
     restrict: 'E',
     scope: {
@@ -74,7 +90,7 @@ module.exports = function() {
       scope.updateChart = updateChart;
       scope.createChart = createChart;
       // Inisitalise chart with values.
-      scope.createChart(dataset, el, attr);
+      scope.createChart(dataset, el, attr, $window);
     },
   };
 };

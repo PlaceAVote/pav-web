@@ -7,34 +7,7 @@
   */
 .c-social-box {
   background-color: $greylight;
-  font-size: 70%;
+  @include font-size(12px);
   color: $greydark;
   border: solid $grey 1px;
-  padding: 4%;
-  margin-top: 5%;
-  div {
-    display: inline-block;
-    width: 45%;
-    margin-right: 3%;
-  }
-}
-
-.c-social-box__button--twbg {
-  background-color: $twblue !important;
-  text-decoration: inherit;
-}
-
-.c-social-box__button--long {
-  display: block;
-  padding-top: 7%;
-  margin-bottom: 7%;
-  text-align: center;
-  color: $white;
-  background-color: $blue;
-  padding-bottom: 7%;
-  padding-right: 7%;
-}
-
-.c-social-box__button_icon {
-  padding-right:10%;
 }

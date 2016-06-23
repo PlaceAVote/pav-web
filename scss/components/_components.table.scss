@@ -13,13 +13,18 @@
   text-align: left;
   @include font-size(14px);
   @include light();
-  margin-top: 2%;
   td {
-    padding: 1% 5% 1% 7%;
+    padding: 6px 11px;
   }
   th {
-    padding: 2% 5% 2% 7%;
+    padding: 6px 11px;
+    vertical-align: middle;
   }
+}
+
+p.c-table__th--small {
+  font-size: 10px !important;
+  // @include font-size(8px);
 }
 
 .c-table__head {

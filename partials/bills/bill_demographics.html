@@ -1,44 +1,37 @@
-<div class="c-card c-stats__text--light c-card__bill-representation">
+<div class="c-card c-card--bill margin-bottom-large c-card--demographics">
   <h1>Demographics</h1>
   <hr />
-  <div>
+  <div class="c-card__content">
     <p>To gain the most accurate possible voting data we also try an ensure key demoragraphics are filled to make sure every voice in your district is heard. Below are the age demographics for {{demographics.stateName}}'s {{demographics.numberSuffixer(demographics.district)}} District.</p>
   </div>
-  <div class="row c-stats__demographic-breakdown">
-      <!-- Population -->
-      <div class="c-stats__demographic-breakdown-section">
-          <p class="c-stats__text--large">Population</p>
-          <p class="c-stats__text--large bold">{{demographics.population | number}}</p>
-      </div>
-      <!-- Votes -->
-      <div class="c-stats__demographic-breakdown-section">
-        <div>
-          <div>
-            <svg width="100" height="100">
-              <circle cx="50" cy="50" r="40" class="c-stats__demographic-votes-graph" />
-            </svg>
-          </div>
-          <div class="c-stats__demographic-chart-text">
-            <p class="bold">{{demographics.demographics.votes.total}}</p>
-            <p class="">VOTES</p>
-          </div>
-        </div>
-      </div>
-      <!-- Needed -->
-      <div class="c-stats__demographic-breakdown-section">
-        <div>
-          <div>
-            <svg width="100" height="100">
-              <circle cx="50" cy="50" r="40" class="c-stats__demographic-sample-size-graph" />
-            </svg>
-          </div>
-          <div class="c-stats__demographic-chart-text">
-            <p class="bold">{{demographics.demographics.sampleSize}}</p>
-            <p class="">NEEDED</p>
-          </div>
-        </div>
-      </div>
+
+  <div class="row l-12 margin-top-small">
+
+    <div class="l-4">
+      <p class="bold">
+        Population
+      </p>
+      <p>
+        {{demographics.population | number}}
+      </p>
+    </div>
+
+    <div class="l-4">
+      <p class="bold">
+        Votes
+      </p>
+      <p ng-bind="demographics.demographics.votes.total"></p>
+    </div>
+
+    <div class="l-4">
+      <p class="bold">
+        Needed
+      </p>
+      <p ng-bind="demographics.demographics.sampleSize"></p>
+    </div>
+
   </div>
+
   <div>
     <bill-gender-breakdown ico="'M'" gender="'Male'" total="demographics.demographics.votes.total" ranges="demographics.demographics.gender.male.ranges" ></bill-gender-breakdown>
     <bill-gender-breakdown ico="'../svgs/female.svg'" gender="'Female'" total="demographics.demographics.votes.total" ranges="demographics.demographics.gender.female.ranges" ></bill-gender-breakdown>

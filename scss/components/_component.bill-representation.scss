@@ -5,21 +5,22 @@
 /**
 */
 .bill-representation-panel {
-  margin: -4% 0% 0 -4%;
+  // margin: -4% 0% 0 -4%;
+  position: absolute;
   @include media(768px) {
     margin:0;
   }
 }
 
-.row__wrap {
-  @include media(768px) {
-    display: flex;
-    flex-wrap: wrap;
-  }
-}
+// .row__wrap {
+//   @include media(768px) {
+//     display: flex;
+//     flex-wrap: wrap;
+//   }
+// }
 
 .bill-representation-panel__content {
-  margin: 7%;
+  margin-top: 100px;
   @include media(768px) {
     margin:0;
     text-align: center;
@@ -32,12 +33,23 @@
 }
 
 .bill-representation-panel__stats-banner {
+  position: absolute;
+  left: -20px;
+  top: -20px;
+  width: calc(100% + 20px);
   @include shadow();
   p {
     font-weight: 100;
     font-size: 80%;
     text-align:center;
     padding: 2%;
+  }
+
+  @include media($tablet) {
+    width: 100%;
+    position:initial;
+    left: 0;
+    top: 0;
   }
 }
 

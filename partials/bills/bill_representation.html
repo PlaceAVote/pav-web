@@ -1,8 +1,10 @@
 <div class="bill-representation-panel">
   <div class="bill-representation-panel__stats-banner" ng-show="demographics.isUnderRepresented()">
+
     <div class="bill-representation-panel__stats-banner--required">
       <p> More votes are required on this bill for your district to be providing accurate voting data</p>
     </div>
+
     <div class="bill-representation-panel__stats-banner--sample">
       <div class="c-bar c-bar--straight">
         <div class="c-bar__fill" ng-style="{'width' : demographics.demographics.votes.total + '%'}">
@@ -12,16 +14,14 @@
         </div>
       </div>
     </div>
+
   </div>
+
   <div class="bill-representation-panel__content">
     <bill-statistics demographics="demographics" share-to-facebook="shareToFacebook()" share-to-twitter="shareToTwitter()"></bill-statistics>
-    <div class="row row__wrap">
-      <div class="c-card__stats-district-card">
+    <div class="row tablet-col">
         <district-league league="league"></district-league>
-      </div>
-      <div class="c-card__stats-demographics-card">
         <bill-gender demographics="demographics"></bill-gender>
-      </div>
     </div>
   </div>
 </div>

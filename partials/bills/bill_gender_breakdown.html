@@ -1,15 +1,15 @@
-<div class="c-stats__demographics-gender-breakdown">
+<div class="c-stats__demographics-gender-breakdown padding-small margin-top-small">
   <p>{{gender}} </p>
   <!-- age breakdowns -->
   <div class="c-stats__demographics-gender-breakdown-bars">
-    <div ng-repeat="range in ranges">
-      <div ng-show="range.minAge != 60">
+    <div ng-repeat="range in ranges" class="l-6">
+      <div ng-show="range.minAge != 60" class="c-stats__demographics-label">
         {{range.minAge}}-{{range.maxAge}}
       </div>
-      <div ng-hide="range.minAge != 60">
+      <div ng-hide="range.minAge != 60" class="c-stats__demographics-label">
         {{range.minAge}}+
       </div>
-      <div class="c-bar c-bar__stats-demographics-age-bar">
+      <div class="c-bar c-bar__stats-demographics-age-bar l-12">
         <div class="c-bar__fill" ng-style="{'width' : ((range.votes.total / range.sampleSize) * 100) + '%'}">
         </div>
       </div>
