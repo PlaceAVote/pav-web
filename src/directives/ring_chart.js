@@ -13,7 +13,7 @@ function createChart(dataset, el, attr, window) {
 
   if (height > 300 || width > 300) {
     height = 260;
-    width: 260;
+    width = 260;
     radius = Math.min(width, height) / 1.5;
   }
 
