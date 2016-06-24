@@ -14,29 +14,6 @@ if (typeof localStorage === 'object') {
     Storage.prototype.setItem = function() {};
   }
 }
-
-// Website Controllers
-var HomeController = require('./controllers/website/home_controller.js');
-var FaqController = require('./controllers/website/faq_controller.js');
-var TeamController = require('./controllers/website/team_controller.js');
-var PressController = require('./controllers/website/press_controller.js');
-var MenuController = require('./controllers/website/menu_controller.js');
-var ContactController = require('./controllers/website/contact_controller.js');
-
-// App Controllers
-var RegisterController = require('./controllers/register_controller.js');
-var SignUpController = require('./controllers/sign_up_controller.js');
-var LoginController = require('./controllers/login_controller.js');
-var FeedController = require('./controllers/feed_controller.js');
-var BillController = require('./controllers/bill_controller.js');
-var HeaderController = require('./controllers/header_controller.js');
-var ProfileController = require('./controllers/profile_controller.js');
-var SettingsController = require('./controllers/settings_controller.js');
-var PasswordController = require('./controllers/password_controller.js');
-var WizardController = require('./controllers/wizard_controller.js');
-var IssuesController = require('./controllers/issues_controller.js');
-var EmailController = require('./controllers/email_controller.js');
-
 // Services
 var UserService = require('./services/user_service.js');
 var BillService = require('./services/bill_service.js');
@@ -56,61 +33,7 @@ var EmailService = require('./services/email_service.js');
 var google = require('./services/google.js');
 
 // Dependencies
-var d3 = require('d3');
 var angular = require('angular');
-
-// Directives
-var search = require('./directives/search.js');
-var openGraph = require('./directives/open_graph.js');
-var pavXBrowserDate = require('./directives/pavXBrowserDate.js');
-var mailcheck = require('./directives/mailcheck.js');
-var pavDirectives = require('./directives/directives.js');
-var websiteNav = require('./directives/website_nav.js');
-var commentsDirective = require('./directives/comments.js');
-var commentDirective = require('./directives/comment.js');
-var bannerDirective = require('./directives/banner.js');
-var timelineDirective = require('./directives/timeline.js');
-var timelineFollowingEventDirective = require('./directives/following_event.js');
-var timelineFollowedEventDirective = require('./directives/followed_event.js');
-var voteEventDirective = require('./directives/vote_event.js');
-var headerNav = require('./directives/header_directive.js');
-var notificationsDirective = require('./directives/notifications.js');
-var commentReplyNotificationDirective = require('./directives/comment_reply_notification.js');
-var trendsDirective = require('./directives/trends.js');
-var websiteFooter = require('./directives/footer.js');
-var termsAndConditionsDirective = require('./directives/terms_and_conditions.js');
-var issuesPostDirective = require('./directives/issues_post.js');
-var wizardDirective = require('./directives/wizard.js');
-var sliderDirective = require('./directives/wizard_slider.js');
-var dragAndDropDirective = require('./directives/wizard_drag_and_drop.js');
-var taxMultiDirective = require('./directives/wizard_tax_multi.js');
-var imageCropDirective = require('./directives/imagecrop.js');
-var fileReadDirective = require('./directives/fileread.js');
-var preloaderDirective = require('./directives/preloader.js');
-var issueDirective = require('./directives/issue.js');
-var feedEventsDirective = require('./directives/feed_events.js');
-var feedBillEventDirective = require('./directives/feed_bill_event.js');
-var infiniteScroll = require('./directives/infinite_scroll.js');
-var billSummaryDirective = require('./directives/bills/bill_summary.js');
-var billInfoDirective = require('./directives/bills/bill_info.js');
-var billCommentsDirective = require('./directives/bills/bill_comments.js');
-var billStatisticsDirective = require('./directives/bills/bill_statistics.js');
-var billStatusDirective = require('./directives/bills/bill_status.js');
-var voteModalDirective = require('./directives/bills/vote_modal.js');
-var voteConfirmedDirective = require('./directives/bills/vote_confirmed.js');
-var imageSmartDirective = require('./directives/image_smart.js');
-var updateMetaDirective = require('./directives/update_meta.js');
-var compileDirective = require('./directives/compile.js');
-var feedVoteEventDirective = require('./directives/feed_vote_event.js');
-var invalidDirective = require('./directives/invalid.js');
-var feedCommentEventDirective = require('./directives/feed_comment_event.js');
-var allActivityFeedDirective = require('./directives/all_activity_feed.js');
-var trendsActivityFeedDirective = require('./directives/trends_activity_feed.js');
-var cssScrollDirective = require('./directives/css_scroll.js');
-var issueModalDirective = require('./directives/issue_modal.js');
-var iconDirective = require('./directives/icon.js');
-var pieChartDirective = require('./directives/ring_chart.js');
-var emailConnections = require('./directives/email_connections.js');
 
 // Thirdparty integrations
 var Facebook = require('./integrations/facebook.js');
@@ -258,125 +181,101 @@ OpenGraphService.$inject = ['$resource'];
 app.factory('emailService', EmailService);
 EmailService.$inject = ['$resource', 'authService'];
 
-// Controllers
-app.controller('TopicRegisterCtrl', RegisterController);
-RegisterController.$inject = ['$scope','$location', 'userService', '$rootScope'];
-app.controller('SignUpCtrl', SignUpController);
-SignUpController.$inject = ['$rootScope','$scope','$location', 'userService', 'authService', 'Analytics'];
-app.controller('LoginCtrl', LoginController);
-LoginController.$inject = ['$scope','$location', 'userService', 'authService', '$rootScope', '$routeParams', 'passwordService', '$timeout', '$window', 'Analytics'];
-app.controller('FeedCtrl', FeedController);
-FeedController.$inject = ['$scope', '$location', 'userService', 'billService', 'authService', 'feedService', '$rootScope','$timeout', 'searchService'];
-app.controller('BillCtrl', BillController);
-BillController.$inject = ['$scope', '$routeParams', 'billService', 'legislationService', 'voteService', 'commentService', '$location', 'authService', '$rootScope', '$timeout', 'facebookService', '$route'];
-app.controller('HeaderCtrl', HeaderController);
-HeaderController.$inject = ['$rootScope', '$scope', '$location', '$timeout', 'authService', 'userService', 'notificationService', 'searchService', '$window', '$route'];
-app.controller('ProfileCtrl', ProfileController);
-ProfileController.$inject = ['$scope', '$location', '$routeParams', 'authService', 'userService','issueService', '$rootScope'];
-app.controller('SettingsCtrl', SettingsController);
-SettingsController.$inject = ['$scope', '$location', '$timeout', 'userService', 'authService', '$rootScope','$anchorScroll'];
-app.controller('PasswordResetCtrl', PasswordController);
-PasswordController.$inject = ['$scope','$location','$routeParams','passwordService', 'authService'];
-app.controller('IssuesCtrl', IssuesController);
-IssuesController.$inject = ['$scope', '$rootScope', 'searchService', '$timeout', 'issueService', 'openGraphService'];
-app.controller('WizardCtrl', WizardController);
-WizardController.$inject = ['$scope', 'questionService','$rootScope'];
-app.controller('EmailCtrl', EmailController);
-EmailController.$inject = ['google', 'emailService', '$scope'];
-
-// Web controllers
-app.controller('HomeCtrl', HomeController);
-HomeController.$inject = ['$scope', '$location','$anchorScroll', 'userService', '$rootScope', 'authService'];
-app.controller('FaqCtrl', FaqController);
-FaqController.$inject = ['$scope', '$location'];
-app.controller('TeamCtrl', TeamController);
-TeamController.$inject = ['$scope', '$location'];
-app.controller('PressCtrl', PressController);
-PressController.$inject = ['$scope', '$location'];
-app.controller('MenuCtrl', MenuController);
-MenuController.$inject = ['$scope', '$location', '$routeParams'];
-app.controller('ContactCtrl', ContactController);
-ContactController.$inject = ['$scope', '$timeout', 'mailService'];
-
 // Values
 app.value('THROTTLE_MILLISECONDS', null);
 
-// Directives
-app.directive('websiteNav', [websiteNav]);
-app.directive('headerNav', [headerNav]);
-app.directive('pavDate', [pavXBrowserDate]);
-app.directive('mailcheck', mailcheck);
-mailcheck.$inject = ['$compile','$sce'];
-app.directive('comment', commentDirective);
-commentDirective.$inject = ['$compile', 'commentService', '$anchorScroll', '$timeout', '$location', '$window', 'userService'];
-app.directive('comments', [commentsDirective]);
-app.directive('openGraph', [openGraph]);
-app.directive('banner', [bannerDirective]);
-app.directive('timeline', timelineDirective);
-timelineDirective.$inject = ['$location'];
-app.directive('following', timelineFollowingEventDirective);
-timelineFollowingEventDirective.$inject = ['$location'];
-app.directive('followed', timelineFollowedEventDirective);
-timelineFollowedEventDirective.$inject = ['$location'];
-app.directive('vote', voteEventDirective);
-voteEventDirective.$inject = ['$location'];
-app.directive('notifications', notificationsDirective);
-notificationsDirective.$inject = ['$location'];
-app.directive('commentreply', commentReplyNotificationDirective);
-commentReplyNotificationDirective.$inject = ['$location'];
-app.directive('trends', trendsDirective);
-trendsDirective.$inject = ['$location'];
-app.directive('websiteFooter', [websiteFooter]);
-app.directive('searchBar', search);
-search.$inject = ['$sce' ,'$location'];
-app.directive('termsAndConditions', [termsAndConditionsDirective]);
-app.directive('issuesPost', [issuesPostDirective]);
-app.directive('issue', issueDirective);
-issueDirective.$inject = ['$location', 'issueService', 'facebookService', '$window', 'userService', '$timeout', '$compile'];
-app.directive('wizard', [wizardDirective]);
-app.directive('slider', sliderDirective);
-sliderDirective.$inject = ['$timeout'];
-app.directive('dad', [dragAndDropDirective]);
-app.directive('tax', taxMultiDirective);
-taxMultiDirective.$inject = ['$filter', '$location','$anchorScroll'];
-app.directive('imageCrop', [imageCropDirective]);
-app.directive('fileread', [fileReadDirective]);
-app.directive('loader', preloaderDirective);
-preloaderDirective.$inject = ['$location'];
-app.directive('feedEvents', [feedEventsDirective]);
-app.directive('invalid', [invalidDirective]);
-app.directive('feedBillEvent', feedBillEventDirective);
-feedBillEventDirective.$inject = ['$location', 'facebookService'];
-app.directive('infiniteScroll', infiniteScroll);
-infiniteScroll.$inject = ['$rootScope', '$window', '$interval', 'THROTTLE_MILLISECONDS'];
-app.directive('billSummary', billSummaryDirective);
-billSummaryDirective.$inject = ['$location'];
-app.directive('billInfo', billInfoDirective);
-billInfoDirective.$inject = ['$location'];
-app.directive('billComments', billCommentsDirective);
-billCommentsDirective.$inject = ['$location'];
-app.directive('billStatistics', billStatisticsDirective);
-billStatisticsDirective.$inject = ['$location'];
-app.directive('billStatus', billStatusDirective);
-billStatusDirective.$inject = ['$location'];
-app.directive('voteModal', voteModalDirective);
-voteModalDirective.$inject = ['$location'];
-app.directive('voteConfirmed', voteConfirmedDirective);
-voteConfirmedDirective.$inject = ['$location'];
-app.directive('imageSmart', [imageSmartDirective]);
-app.directive('updateMeta', updateMetaDirective);
-updateMetaDirective.$inject = ['$log'];
-app.directive('compile', compileDirective);
-compileDirective.$inject = ['$compile', '$window', '$sce', '$sanitize'];
-app.directive('feedVoteEvent', feedVoteEventDirective);
-feedVoteEventDirective.$inject = ['$location'];
-app.directive('feedCommentEvent', feedCommentEventDirective);
-feedCommentEventDirective.$inject = ['$location'];
-app.directive('allactivityfeed', [allActivityFeedDirective]);
-app.directive('trendsactivityfeed', [trendsActivityFeedDirective]);
-app.directive('cssScroll', [cssScrollDirective]);
-app.directive('issueModal', issueModalDirective);
-issueModalDirective.$inject = ['$location', '$timeout', 'issueService', '$rootScope'];
-app.directive('icon', iconDirective);
-app.directive('pieChart', pieChartDirective);
-app.directive('emailConnections', emailConnections);
+
+function register(params) {
+  var dep = document.createElement('script');
+  dep.type = 'text/javascript';
+  dep.onerror = function() {
+    console.log('error with crl', params.route);
+  };
+  dep.onload = function(r) {
+    var pav = PAV || {};
+    console.log('Registering', params.name, params.global);
+    app[params.func](params.name, PAV[params.global]);
+    if (params.deps) {
+      PAV[params.global].$inject = params.deps;
+    }
+  };
+  dep.src = 'dist/js/' +  params.path;
+  document.body.appendChild(dep);
+}
+
+// Controllers
+var ctrls = [
+  { name: 'TopicRegisterCtrl', path: 'register_controller.js', global: 'registerController', func: 'controller', deps: ['$scope', '$location', 'userService', '$rootScope'] },
+  { name: 'SignUpCtrl', path: 'sign_up_controller.js', global: 'signUpController', func: 'controller', deps: ['$rootScope','$scope','$location', 'userService', 'authService', 'Analytics'] },
+  { name: 'LoginCtrl', path: 'login_controller.js', global: 'loginController', func: 'controller', deps: ['$scope','$location', 'userService', 'authService', '$rootScope', '$routeParams', 'passwordService', '$timeout', '$window', 'Analytics'] },
+  { name: 'FeedCtrl', path: 'feed_controller.js', global: 'feedController', func: 'controller', deps: ['$scope', '$location', 'userService', 'billService', 'authService', 'feedService', '$rootScope','$timeout', 'searchService'] },
+  { name: 'BillCtrl', path: 'bill_controller.js', global: 'billController', func: 'controller', deps: ['$scope', '$routeParams', 'billService', 'legislationService', 'voteService', 'commentService', '$location', 'authService', '$rootScope', '$timeout', 'facebookService', '$route'] },
+  { name: 'HeaderCtrl', path: 'header_controller.js', global: 'headerController', func: 'controller', deps: ['$rootScope', '$scope', '$location', '$timeout', 'authService', 'userService', 'notificationService', 'searchService', '$window', '$route'] },
+  { name: 'ProfileCtrl', path: 'profile_controller.js', global: 'profileController', func: 'controller', deps: ['$scope', '$location', '$routeParams', 'authService', 'userService','issueService', '$rootScope'] },
+  { name: 'SettingsCtrl', path: 'settings_controller.js', global: 'settingsController', func: 'controller', deps: ['$scope', '$location', '$timeout', 'userService', 'authService', '$rootScope','$anchorScroll'] },
+  { name: 'PasswordResetCtrl', path: 'password_controller.js', global: 'passwordController', func: 'controller', deps: ['$scope','$location','$routeParams','passwordService', 'authService'] },
+  { name: 'IssuesCtrl', path: 'issues_controller.js', global: 'issuesController', func: 'controller', deps: ['$scope', '$rootScope', 'searchService', '$timeout', 'issueService', 'openGraphService'] },
+  { name: 'WizardCtrl', path: 'wizard_controller.js', global: 'wizardController', func: 'controller', deps: ['$scope', 'questionService','$rootScope'] },
+  { name: 'EmailCtrl', path: 'email_controller.js', global: 'emailController', func: 'controller', deps: ['google', 'emailService', '$scope'] },
+  { name: 'ContactCtrl', path: 'contact_controller.js', global: 'contactController', func: 'controller', deps: ['$scope', '$timeout','mailService'] },
+  { name: 'HomeCtrl', path: 'home_controller.js', global: 'homeController', func: 'controller', deps: ['$scope', '$location','$anchorScroll', 'userService', '$rootScope', 'authService'] },
+  { name: 'FaqCtrl', path: 'faq_controller.js', global: 'faqController', func: 'controller', deps: ['$scope', '$location'] },
+  { name: 'TeamCtrl', path: 'team_controller.js', global: 'teamController', func: 'controller', deps: ['$scope', '$location'] },
+  { name: 'PressCtrl', path: 'press_controller.js', global: 'pressController', func: 'controller', deps: ['$scope', '$location'] },
+  { name: 'MenuCtrl', path: 'menu_controller.js', global: 'menuController', func: 'controller', deps: ['$scope', '$location', '$routeParams'] },
+  { name: 'websiteNav', path: 'website_nav.js', global: 'websiteNavDirective', func: 'directive' },
+  { name: 'headerNav', path: 'header_directive.js', global: 'headerNavDirective', func: 'directive' },
+  { name: 'pavDate', path: 'pavXBrowserDate.js', global: 'pavXBrowserDateDirective', func: 'directive' },
+  { name: 'mailcheck', path: 'mailcheck.js', global: 'mailCheckDirective', func: 'directive', deps: ['$compile', '$sce'] },
+  { name: 'comment', path: 'comment.js', global: 'commentDirective', func: 'directive', deps: ['$compile', 'commentService', '$anchorScroll', '$timeout', '$location', '$window', 'userService'] },
+  { name: 'comments', path: 'comments.js', global: 'commentsDirective', func: 'directive' },
+  { name: 'openGraph', path: 'open_graph.js', global: 'openGraphDirective', func: 'directive' },
+  { name: 'banner', path: 'banner.js', global: 'bannerDirective', func: 'directive' },
+  { name: 'timeline', path: 'timeline.js', global: 'timelineDirective', func: 'directive', deps: ['$location'] },
+  { name: 'following', path: 'following_event.js', global: 'followingEventDirective', func: 'directive', deps: ['$location'] },
+  { name: 'followed', path: 'followed_event.js', global: 'followedEventDirective', func: 'directive', deps: ['$location'] },
+  { name: 'vote', path: 'vote_event.js', global: 'voteEventDirective', func: 'directive', deps: ['$location'] },
+  { name: 'notifications', path: 'notifications.js', global: 'notificationsDirective', func: 'directive', deps: ['$location'] },
+  { name: 'commentreply', path: 'comment_reply_notification.js', global: 'commentReplyNotificationDirective', func: 'directive', deps: ['$location'] },
+  { name: 'trends', path: 'trends.js', global: 'trendsDirective', func: 'directive', deps: ['$location'] },
+  { name: 'websiteFooter', path: 'footer.js', global: 'footerDirective', func: 'directive' },
+  { name: 'searchBar', path: 'search.js', global: 'searchBarDirective', func: 'directive', deps: ['$sce', '$location'] },
+  { name: 'termsAndConditions', path: 'terms_and_conditions.js', global: 'termsAndConditionsDirective', func: 'directive' },
+  { name: 'issuesPost', path: 'issues_post.js', global: 'issuesPostDirective', func: 'directive' },
+  { name: 'issue', path: 'issue.js', global: 'issueDirective', func: 'directive', deps: ['$location', 'issueService', 'facebookService', '$window', 'userService', '$timeout', '$compile'] },
+  { name: 'wizard', path: 'wizard.js', global: 'wizardDirective', func: 'directive' },
+  { name: 'slider', path: 'wizard_slider.js', global: 'sliderDirective', func: 'directive', deps: ['$timeout'] },
+  { name: 'dad', path: 'wizard_drag_and_drop.js', global: 'dragAndDropDirective', func: 'directive' },
+  { name: 'tax', path: 'wizard_tax_multi.js', global: 'taxMultiDirective', func: 'directive', deps: ['$filter', '$location', '$anchorScroll'] },
+  { name: 'imageCrop', path: 'imagecrop.js', global: 'imageCropDirective', func: 'directive' },
+  { name: 'fileread', path: 'fileread.js', global: 'fileReadDirective', func: 'directive' },
+  { name: 'loader', path: 'preloader.js', global: 'preloaderDirective', func: 'directive', deps: ['$location'] },
+  { name: 'feedEvents', path: 'feed_events.js', global: 'feedEventsDirective', func: 'directive' },
+  { name: 'invalid', path: 'invalid.js', global: 'invalidDirective', func: 'directive' },
+  { name: 'feedBillEvent', path: 'feed_bill_event.js', global: 'feedBillEventDirective', func: 'directive', deps: ['$location', 'facebookService'] },
+  { name: 'infiniteScroll', path: 'infinite_scroll.js', global: 'infiniteScrollDirective', func: 'directive', deps: ['$rootScope', '$window', '$interval', 'THROTTLE_MILLISECONDS'] },
+  { name: 'billSummary', path: 'bill_summary.js', global: 'billSummaryDirective', func: 'directive', deps: ['$location'] },
+  { name: 'billInfo', path: 'bill_info.js', global: 'billInfoDirective', func: 'directive', deps: ['$location'] },
+  { name: 'billComments', path: 'bill_comments.js', global: 'billCommentsDirective', func: 'directive', deps: ['$location'] },
+  { name: 'billStatistics', path: 'bill_statistics.js', global: 'billStatisticsDirective', func: 'directive', deps: ['$location'] },
+  { name: 'billStatus', path: 'bill_status.js', global: 'billStatusDirective', func: 'directive', deps: ['$location'] },
+  { name: 'voteModal', path: 'vote_modal.js', global: 'voteModalDirective', func: 'directive', deps: ['$location'] },
+  { name: 'voteConfirmed', path: 'vote_confirmed.js', global: 'voteConfirmedDirective', func: 'directive', deps: ['$location'] },
+  { name: 'imageSmart', path: 'image_smart.js', global: 'imageSmartDirective', func: 'directive' },
+  { name: 'updateMeta', path: 'update_meta.js', global: 'updateMetaDirective', func: 'directive', deps: ['$log'] },
+  { name: 'compile', path: 'compile.js', global: 'compileDirective', func: 'directive', deps: ['$compile', '$window', '$sce', '$sanitize'] },
+  { name: 'feedVoteEvent', path: 'feed_vote_event.js', global: 'feedVoteEventDirective', func: 'directive', deps: ['$location'] },
+  { name: 'feedCommentEvent', path: 'feed_comment_event.js', global: 'feedCommentEventDirective', func: 'directive', deps: ['$location'] },
+  { name: 'allactivityfeed', path: 'all_activity_feed.js', global: 'allActivityFeedDirective', func: 'directive' },
+  { name: 'trendsactivityfeed', path: 'trends_activity_feed.js', global: 'trendsActivityFeedDirective', func: 'directive' },
+  { name: 'cssScroll', path: 'css_scroll.js', global: 'cssScrollDirective', func: 'directive' },
+  { name: 'issueModal', path: 'issue_modal.js', global: 'issueModalDirective', func: 'directive', deps: ['$location', '$timeout', 'issueService', '$rootScope'] },
+  { name: 'icon', path: 'icon.js', global: 'iconDirective', func: 'directive' },
+  { name: 'pieChart', path: 'ring_chart.js', global: 'pieChartDirective', func: 'directive' },
+  { name: 'emailConnections', path: 'email_connections.js', global: 'emailConnectionsDirective', func: 'directive' },
+  { name: 'finishedRender', path: 'finished_render.js', global: 'finishedRenderDirective', func: 'directive' },
+];
+for (var i = 0, len = ctrls.length - 1; len >= i; len --) {
+  console.log(ctrls[len]);
+  register(ctrls[len]);
+}
