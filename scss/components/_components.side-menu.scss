@@ -245,5 +245,8 @@ li.c-side-menu__vote {
 .c-side-menu--bill.c-side-menu.c-side-menu--representation li {
   @include media($tablet) {
     width: 25% !important;
+    span {
+      display: none;
+    }
   }
 }
