@@ -24,8 +24,10 @@ var gulp = require('gulp'),
   var stylish = require('jshint-stylish');
   var mustache = require('gulp-mustache');
   var clean = require('gulp-clean');
+  var fs = require('fs');
 
-  var lintedPaths = ['./src/**/*.js', './*.js', '!./src/utils/metatags.js', '!./src/utils/location_update.js', '!./src/utils/fitie.js'];
+  var lintedPaths = ['./src/**/*.js', './*.js', '!./src/utils/metatags.js',
+    '!./src/utils/location_update.js', '!./src/utils/fitie.js', '!./src/third_party_scripts.js'];
 
   gulp.task('lint:jshint', function() {
     return gulp.src(lintedPaths)
@@ -196,11 +198,39 @@ var gulp = require('gulp'),
     .pipe(gulp.dest('dist/js'));
   });
 
+
+  gulp.task('browserify-components', function() {
+    var directories = ['src/controllers/', 'src/controllers/website/', 'src/directives/', 'src/directives/bills/',
+      'src/integrations/', 'src/services/' ];
+    directories.forEach(function(directory) {
+      var files = fs.readdirSync(directory);
+      files.forEach(function(file) {
+        if (fs.lstatSync(directory + file).isDirectory()) {
+          return;
+        }
+        return	browserify(directory + file)
+        .bundle()
+        .pipe(source(file))
+        .pipe(gulp.dest('dist/js'));
+      });
+    });
+  });
+
+  gulp.task('comp-min', function() {
+    var files = fs.readdirSync('dist/js/');
+    files.forEach(function(file) {
+      return gulp.src('dist/js/' + file)
+        .pipe(uglify())
+        .pipe(minify())
+        .pipe(gulp.dest('dist/js/'));
+    });
+  });
+
   gulp.task('app-min', function(){
-    gulp.src('dist/js/app.js')
-    .pipe(uglify())
-    .pipe(minify())
-    .pipe(gulp.dest('dist/js'));
+    return gulp.src('dist/js/app.js')
+      .pipe(uglify())
+      .pipe(minify())
+      .pipe(gulp.dest('dist/js/'));
   });
 
   gulp.task('ionicise', function(){
