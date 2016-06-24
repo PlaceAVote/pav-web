@@ -1,3 +1,4 @@
+var PAV = window.PAV || {};
 function PressController($scope, $location) {
 	$scope.press = this;
 	this.articles = [
@@ -43,5 +44,5 @@ function PressController($scope, $location) {
 		},
 	];
 }
-
+PAV.pressController = PressController;
 module.exports = PressController;

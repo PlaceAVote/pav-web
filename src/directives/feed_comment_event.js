@@ -1,4 +1,5 @@
-module.exports = function() {
+var PAV = window.PAV || {};
+var feedCommentEventDirective = function() {
   return {
     restrict: 'E',
     scope: {
@@ -10,3 +11,5 @@ module.exports = function() {
     },
   };
 };
+PAV.feedCommentEventDirective = feedCommentEventDirective;
+module.exports = feedCommentEventDirective;

@@ -1,3 +1,4 @@
+var PAV = window.PAV || {};
 var emailValidator = require('../utils/email_validation.js');
 var contact = function() {
   return {
@@ -122,3 +123,4 @@ EmailController.prototype.sendMessages = function() {
 };
 
 module.exports = EmailController;
+PAV.emailController = EmailController;

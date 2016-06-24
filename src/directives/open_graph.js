@@ -1,4 +1,5 @@
-module.exports = function($location) {
+var PAV = window.PAV || {};
+var openGraphDirective = function($location) {
   return {
     restrict: 'E',
     scope: {
@@ -7,3 +8,5 @@ module.exports = function($location) {
     templateUrl: 'partials/open_graph.html',
   };
 };
+PAV.openGraphDirective = openGraphDirective;
+module.exports = openGraphDirective;

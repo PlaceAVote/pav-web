@@ -1,4 +1,5 @@
-module.exports = function($compile, commentService, $anchorScroll, $timeout, $location, $window, userService) {
+var PAV = window.PAV || {};
+var comment = function($compile, commentService, $anchorScroll, $timeout, $location, $window, userService) {
   return {
     restrict: 'E',
     replace: true,
@@ -147,3 +148,5 @@ module.exports = function($compile, commentService, $anchorScroll, $timeout, $lo
     },
   };
 };
+PAV.commentDirective = comment;
+module.exports = comment;

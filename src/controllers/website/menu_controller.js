@@ -1,3 +1,4 @@
+var PAV = window.PAV || {};
 function MenuController($scope, $location, $routeParams) {
 	$scope.menu = this;
 	this.menu = true;
@@ -13,5 +14,5 @@ function MenuController($scope, $location, $routeParams) {
 		}
 	};
 }
-
+PAV.menuController = MenuController;
 module.exports = MenuController;

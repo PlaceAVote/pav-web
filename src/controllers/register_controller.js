@@ -1,3 +1,4 @@
+var PAV = window.PAV || {};
 var Interest = require('./../models/interest.js');
 
 function RegisterController($scope, $location, userService, $rootScope) {
@@ -72,3 +73,4 @@ RegisterController.prototype.getInterest = function(name) {
 
 
 module.exports = RegisterController;
+PAV.registerController = RegisterController;

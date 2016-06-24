@@ -1,7 +1,12 @@
 var expect = require('chai').expect;
-var EmailController = require('../../src/controllers/email_controller.js');
+var jsdom = require('mocha-jsdom');
+var EmailController;
 
 describe('EmailController', function() {
+  jsdom();
+  before(function() {
+    EmailController = require('../../src/controllers/email_controller.js');
+  });
   describe('fetchGmailEmails', function() {
     it('does not populat googleContacts on error from the google getContacts implementation', function() {
       var google = {

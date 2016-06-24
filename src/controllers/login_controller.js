@@ -1,3 +1,4 @@
+var PAV = window.PAV || {};
 var AuthorizeController = require('./autherize_controller.js');
 var validateEmail = require('../utils/email_validation.js');
 
@@ -182,3 +183,4 @@ LoginCtrl.prototype.passwordReset = function(email) {
 };
 
 module.exports = LoginCtrl;
+PAV.loginController = LoginCtrl;

@@ -1,4 +1,5 @@
-module.exports = function($location) {
+var PAV = window.PAV || {};
+var billComments = function($location) {
   return {
     restict: 'E',
     templateUrl: 'partials/bills/bill_comments.html',
@@ -7,3 +8,6 @@ module.exports = function($location) {
     },
   };
 };
+
+module.exports = billComments;
+PAV.billCommentsDirective = billComments;

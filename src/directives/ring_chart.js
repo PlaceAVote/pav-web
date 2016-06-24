@@ -1,5 +1,6 @@
 var d3 = require('d3');
-module.exports = function() {
+var PAV = window.PAV || {};
+var ringChartDirective = function() {
   return {
     restrict: 'E',
     scope: {
@@ -74,3 +75,5 @@ module.exports = function() {
     },
   };
 };
+PAV.pieChartDirective = ringChartDirective;
+module.exports = ringChartDirective;

@@ -1,6 +1,6 @@
 var mailcheck = require('mailcheck');
-
-module.exports = function($compile, $sce) {
+var PAV = window.PAV || {};
+var mailCheckDirective = function($compile, $sce) {
   return {
     restrict: 'A',
     replace: false,
@@ -45,3 +45,5 @@ module.exports = function($compile, $sce) {
     },
   };
 };
+PAV.mailCheckDirective = mailCheckDirective;
+module.exports = mailCheckDirective;

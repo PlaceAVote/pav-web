@@ -1,5 +1,6 @@
 var expect = require('chai').expect;
-var Comment = require('../../src/directives/comment.js');
+var jsdom = require('mocha-jsdom');
+var Comment;
 var CommentModel = require('../../src/models/comment.js');
 
 //Dependencies
@@ -48,7 +49,10 @@ var element = new El();
 
 
 describe('Comment Directive', function() {
-
+  jsdom();
+  before(function() {
+    Comment = require('../../src/directives/comment.js');
+  });
   it('Should delete comment when user is the comment author and selects delete', function() {
     scope.comment = new CommentModel({
       'body': 'hello world',

@@ -1,4 +1,5 @@
-module.exports = function($location) {
+var PAV = window.PAV || {};
+var feedVoteEvent = function($location) {
   return {
     retsrict: 'E',
     scope: {
@@ -10,3 +11,5 @@ module.exports = function($location) {
     },
   };
 };
+PAV.feedVoteEventDirective = feedVoteEvent;
+module.exports = feedVoteEvent;

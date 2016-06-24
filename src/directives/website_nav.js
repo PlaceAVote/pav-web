@@ -1,4 +1,5 @@
-module.exports = function() {
+var PAV = window.PAV || {};
+var websiteNavDirective = function() {
   return {
     restrict: 'E',
     replace: true,
@@ -17,4 +18,5 @@ module.exports = function() {
     templateUrl: 'partials/website_partials/website_nav.html',
   };
 };
-
+PAV.websiteNavDirective = websiteNavDirective;
+module.exports = websiteNavDirective;

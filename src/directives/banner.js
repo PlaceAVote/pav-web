@@ -1,4 +1,5 @@
-module.exports = function() {
+var PAV = window.PAV || {};
+var bannerDirective = function() {
   return {
     restrict: 'E',
     replace: true,
@@ -46,3 +47,5 @@ module.exports = function() {
     },
   };
 };
+PAV.bannerDirective = bannerDirective;
+module.exports = bannerDirective;

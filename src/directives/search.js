@@ -1,4 +1,5 @@
-module.exports = function($sce, $location) {
+var PAV = window.PAV || {};
+var searchBarDirective = function($sce, $location) {
   return {
     restrict: 'E',
     scope: {
@@ -242,3 +243,5 @@ module.exports = function($sce, $location) {
     },
   };
 };
+PAV.searchBarDirective = searchBarDirective;
+module.exports = searchBarDirective;

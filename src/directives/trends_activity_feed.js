@@ -1,4 +1,5 @@
-module.exports = function() {
+var PAV = window.PAV || {};
+var trendsActivityFeed = function() {
   return {
     restrict: 'E',
     scope: {
@@ -7,3 +8,5 @@ module.exports = function() {
     templateUrl: 'partials/feed/trends_activity_feed.html',
   };
 };
+PAV.trendsActivityFeedDirective = trendsActivityFeed;
+module.exports = trendsActivityFeed;

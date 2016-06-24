@@ -1,7 +1,7 @@
 var tweet = require('../models/tweet.js');
 var Issue = require('../models/issue.js');
-
-module.exports = function($location, issueService, facebook, $window, userService, $timeout, $compile) {
+var PAV = window.PAV || {};
+var issueDirective = function($location, issueService, facebook, $window, userService, $timeout, $compile) {
   return {
     restrict: 'E',
     scope: {
@@ -249,3 +249,5 @@ module.exports = function($location, issueService, facebook, $window, userServic
     },
   };
 };
+PAV.issueDirective = issueDirective;
+module.exports = issueDirective;

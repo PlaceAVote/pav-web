@@ -1,4 +1,5 @@
-module.exports = function($location) {
+var PAV = window.PAV || {};
+var followedEventDirective = function($location) {
   return {
     restrict: 'E',
     replace: true,
@@ -12,3 +13,5 @@ module.exports = function($location) {
     },
   };
 };
+PAV.followedEventDirective = followedEventDirective;
+module.exports = followedEventDirective;

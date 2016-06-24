@@ -1,4 +1,5 @@
-module.exports = function($location) {
+var PAV = window.PAV || {};
+var notificationsDirective = function($location) {
   return {
     restrict: 'E',
     scope: {
@@ -35,3 +36,5 @@ module.exports = function($location) {
     },
   };
 };
+PAV.notificationsDirective = notificationsDirective;
+module.exports = notificationsDirective;

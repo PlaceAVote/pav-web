@@ -1,5 +1,6 @@
 /* jshint ignore:start */
-module.exports = function($rootScope, $window, $interval, THROTTLE_MILLISECONDS) {
+var PAV = window.PAV || {};
+var infiniteScrollDirective = function($rootScope, $window, $interval, THROTTLE_MILLISECONDS) {
     return {
       scope: {
         infiniteScroll: '&',
@@ -191,3 +192,5 @@ module.exports = function($rootScope, $window, $interval, THROTTLE_MILLISECONDS)
     };
   };
 /* jshint ignore:end */
+PAV.infiniteScrollDirective = infiniteScrollDirective;
+module.exports = infiniteScrollDirective;

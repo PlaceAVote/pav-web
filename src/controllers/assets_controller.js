@@ -1,3 +1,4 @@
+var PAV = window.PAV || {};
 AssetsController = function($scope, $routeParams, $location) {
   $scope = $scope || {};
   $scope.assets = this;
@@ -5,3 +6,4 @@ AssetsController = function($scope, $routeParams, $location) {
 };
 
 module.exports = AssetsController;
+PAV.assetsController = AssetsController;

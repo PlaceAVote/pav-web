@@ -1,7 +1,12 @@
 var expect = require('chai').expect;
-var ProfileController = require('../../src/controllers/profile_controller.js');
+var jsdom = require('mocha-jsdom');
+var ProfileController;
 
 describe('Populate Profile', function() {
+  jsdom();
+  before(function() {
+    ProfileController = require('../../src/controllers/profile_controller.js');
+  });
   var location = {
     path: function(){}
   };

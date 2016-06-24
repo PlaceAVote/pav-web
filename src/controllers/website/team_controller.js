@@ -1,3 +1,4 @@
+var PAV = window.PAV || {};
 function TeamController($scope, $location) {
   $scope.team = this;
   this.founders = [
@@ -85,5 +86,5 @@ function TeamController($scope, $location) {
  	}
  ];
 }
-
+PAV.teamController = TeamController;
 module.exports = TeamController;

@@ -1,3 +1,4 @@
+var PAV = window.PAV || {};
 var Comment = require('../models/comment.js');
 var AuthorizeController = require('./autherize_controller.js');
 var title = require('../config/titles.js');
@@ -433,3 +434,4 @@ BillController.prototype.updateRepresentationView = function() {
 };
 
 module.exports = BillController;
+PAV.billController = BillController;

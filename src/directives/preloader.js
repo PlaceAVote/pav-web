@@ -1,4 +1,5 @@
-module.exports = function(location) {
+var PAV = window.PAV || {};
+var preloaderDirective = function(location) {
   return {
     restrict: 'A',
     transclude: true,
@@ -21,3 +22,5 @@ module.exports = function(location) {
     },
   };
 };
+PAV.preloaderDirective = preloaderDirective;
+module.exports = preloaderDirective;

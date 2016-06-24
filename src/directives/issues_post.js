@@ -1,5 +1,6 @@
+var PAV = window.PAV || {};
 var ExampleIssue = require('../models/issue.js');
-module.exports = function() {
+var issuesPostDirective = function() {
   return {
     restrict: 'E',
     scope: {
@@ -57,3 +58,5 @@ module.exports = function() {
     },
   };
 };
+PAV.issuesPostDirective = issuesPostDirective;
+module.exports = issuesPostDirective;

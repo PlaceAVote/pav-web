@@ -1,4 +1,5 @@
-module.exports = function($location) {
+var PAV = window.PAV || {};
+var voteConfirmed = function($location) {
   return {
     restict: 'E',
     templateUrl: 'partials/bills/bill_vote_confirmed.html',
@@ -9,3 +10,5 @@ module.exports = function($location) {
     },
   };
 };
+PAV.voteConfirmedDirective = voteConfirmed;
+module.exports = voteConfirmed;

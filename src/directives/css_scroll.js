@@ -1,4 +1,5 @@
-module.exports = function() {
+var PAV = window.PAV || {};
+var cssScrollDirective = function() {
   return {
     restrict: 'A',
     scope: {
@@ -35,3 +36,5 @@ module.exports = function() {
     },
   };
 };
+PAV.cssScrollDirective = cssScrollDirective;
+module.exports = cssScrollDirective;

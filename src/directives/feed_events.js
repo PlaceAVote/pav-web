@@ -1,4 +1,5 @@
-module.exports = function() {
+var PAV = window.PAV || {};
+var feedEventsDirective = function() {
   return {
     restrict: 'E',
     scope: {
@@ -10,3 +11,5 @@ module.exports = function() {
     templateUrl: 'partials/feed/feed_events.html',
   };
 };
+PAV.feedEventsDirective = feedEventsDirective;
+module.exports = feedEventsDirective;

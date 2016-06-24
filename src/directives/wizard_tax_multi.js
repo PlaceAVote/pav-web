@@ -1,4 +1,5 @@
-module.exports = function($filter, $location, $anchorScroll) {
+var PAV = window.PAV || {};
+var taxMultiDirective = function($filter, $location, $anchorScroll) {
   return {
     restrict: 'E',
     scope: {
@@ -35,3 +36,5 @@ module.exports = function($filter, $location, $anchorScroll) {
     },
   };
 };
+PAV.taxMultiDirective = taxMultiDirective;
+module.exports = taxMultiDirective;

@@ -1,4 +1,5 @@
-module.exports = function($location) {
+var PAV = window.PAV || {};
+var commentReplyNotificationDirective = function($location) {
   return {
     restrict: 'E',
     replace: true,
@@ -12,3 +13,6 @@ module.exports = function($location) {
     },
   };
 };
+
+PAV.commentReplyNotificationDirective = commentReplyNotificationDirective;
+module.exports = commentReplyNotificationDirective;

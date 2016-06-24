@@ -1,4 +1,5 @@
-module.exports = function() {
+var PAV = window.PAV || {};
+var fileReadDirective = function() {
   return {
     restrict: 'A',
     scope: {
@@ -17,3 +18,6 @@ module.exports = function() {
     },
   };
 };
+
+PAV.fileReadDirective = fileReadDirective;
+module.exports = fileReadDirective;

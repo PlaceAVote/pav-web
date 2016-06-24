@@ -1,4 +1,5 @@
-module.exports = function() {
+var PAV = window.PAV || {};
+var iconDirective = function() {
   return {
     restrict: 'E',
     replace: true,
@@ -12,3 +13,5 @@ module.exports = function() {
     },
   };
 };
+PAV.iconDirective = iconDirective;
+module.exports = iconDirective;

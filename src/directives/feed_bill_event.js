@@ -1,6 +1,7 @@
 var tweet = require('../models/tweet.js');
+var PAV = window.PAV || {};
 
-module.exports = function($location, facebook) {
+var feedBillEventDirective = function($location, facebook) {
   return {
     restrict: 'E',
     scope: {
@@ -47,3 +48,5 @@ module.exports = function($location, facebook) {
     },
   };
 };
+PAV.feedBillEventDirective = feedBillEventDirective;
+module.exports = feedBillEventDirective;

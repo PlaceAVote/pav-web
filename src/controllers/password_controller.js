@@ -1,3 +1,4 @@
+var PAV = window.PAV || {};
 var AuthorizeController = require('./autherize_controller.js');
 
 function PasswordController($scope, $location, $routeParams, passwordService, authService) {
@@ -45,3 +46,4 @@ PasswordController.prototype.goTo = function(url) {
 };
 
 module.exports = PasswordController;
+PAV.passwordController = PasswordController;

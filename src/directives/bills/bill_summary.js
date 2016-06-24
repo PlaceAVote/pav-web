@@ -1,4 +1,5 @@
-module.exports = function($location) {
+var PAV = window.PAV || {};
+var billSummary = function($location) {
   return {
     restict: 'E',
     templateUrl: 'partials/bills/bill_summary.html',
@@ -11,3 +12,5 @@ module.exports = function($location) {
     },
   };
 };
+PAV.billSummaryDirective = billSummary;
+module.exports = billSummary;
