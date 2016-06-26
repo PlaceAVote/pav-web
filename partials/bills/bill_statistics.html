@@ -9,7 +9,7 @@
   <div class="row tablet-col">
 
     <div class="c-card c-stats__underrepresneted-statistics-chart c-stats__underrepresented-stats-content--center-align-mobile" ng-if="demographics.available">
-        <div style="width: 100%;">
+        <div style="width: 100%;" class="c-pie-chart--center">
           <pie-chart data="demographics.stats"></pie-chart>
         </div>
     </div>
@@ -17,30 +17,35 @@
     <div>
       <div class="row tablet-col">
         <div class="row tablet-margin-bottom-large tablet-margin-top-medium">
-              <icon icon="icon-gender-female"></icon>
+              <div class="c-bill-stats__accent-symbol">
+                <icon ng-if="demographics.underRepresentedGenderGroup.gender === 'female'"
+                      icon="icon-gender-female"></icon>
+                <icon ng-if="demographics.underRepresentedGenderGroup.gender === 'male'"
+                      icon="icon-gender-male"></icon>
+              </div>
           <div class="c-bill-stats__text">
             <p>
-              <span ng-show="demographics.underRepresentedGenderGroup.gender === 'female'">Women</span>
-              <span ng-show="demographics.underRepresentedGenderGroup.gender === 'male'">Men</span>
+              <span ng-if="demographics.underRepresentedGenderGroup.gender === 'female'">Women</span>
+              <span ng-if="demographics.underRepresentedGenderGroup.gender === 'male'">Men</span>
               are under represented on this bill
             </p>
             <p class="red bold">{{demographics.underRepresentedGenderGroup.percentage}}&#37;
             </p>
-            <p>of voters are {{demographics.underRepresentedGenderGroup.gender}} </p>
+            <p>of voters are {{demographics.underRepresentedGenderGroup.gender}}.</p>
 
           </div>
 
         </div>
 
         <div class="row">
-          <div class="c-bill-stats__age">{{demographics.minorityAgeRange.ageRange}}</div>
+          <div class="c-bill-stats__age c-bill-stats__accent-symbol">{{demographics.minorityAgeRange.ageRange}}</div>
           <div class="c-bill-stats__text">
               <p>
               {{demographics.minorityAgeRange.ageRange}} Make up the least represented demographic:
               </p>
               <p class="red bold"> {{demographics.minorityAgeRange.percentage}}&#37;</p>
               <p>
-              of voters are {{demographics.minorityAgeRange.ageRange}}
+              of voters are {{demographics.minorityAgeRange.ageRange}}.
               </p>
           </div>
         </div>

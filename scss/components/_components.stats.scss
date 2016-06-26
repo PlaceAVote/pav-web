@@ -33,6 +33,22 @@
   @include font-size(12px);
   @include media($tablet) {
     @include font-size(14px);
+    p {
+      display: inline-block;
+    }
+  }
+}
+
+.c-pie-chart--center {
+  svg {
+    display: block;
+    margin: auto;
+  }
+}
+
+.c-bill-stats__accent-symbol {
+  @include media($tablet) {
+    display: none;
   }
 }
 
@@ -53,7 +69,8 @@
   }
 }
 
-.c-card__bill-representation-card .icon-gender-female {
+.c-card__bill-representation-card .icon-gender-female,
+.c-card__bill-representation-card .icon-gender-male {
   fill: darken($grey, 20%);
   height: 80px;
   width: 64px;
@@ -124,6 +141,9 @@
   box-shadow: none !important;
   min-width: 215px;
   margin-right: 20px;
+  @include media($tablet) {
+    margin-right: 0;
+  }
 }
 
 // .c-stats__underrepresented-stats-content--center-align-mobile {
