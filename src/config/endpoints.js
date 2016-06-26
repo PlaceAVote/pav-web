@@ -163,6 +163,11 @@ module.exports = {
       },
     },
   },
+  openGraph: {
+    scrape: function(url) {
+      return urls.OPENGRAPH + '/opengraph/scrape?link=' + url;
+    },
+  },
   comments: {
     reply: {
       endpoint: function(id) {
