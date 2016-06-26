@@ -2,6 +2,10 @@ var d3 = require('d3');
 
 function createChart(dataset, el, attr, window) {
 
+  if (el[0].offsetParent === null) {
+    return;
+  }
+
   var padding = window.getComputedStyle(el[0].offsetParent, null).getPropertyValue('padding-left');
   padding = parseInt(padding.replace('px', '')) * 2;
 

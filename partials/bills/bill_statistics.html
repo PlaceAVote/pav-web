@@ -4,7 +4,7 @@
           c-card__bill-representation-card
           margin-bottom-medium
           tablet-margin-bottom-none">
-  <h1>Voting Statistics ({{demographics.stateName}}'s {{demographics.numberSuffixer(demographics.district)}} District) </h1>
+  <h1>Voting Statistics (<span ng-bind="demographics.stateName"></span>'s <span ng-bind="demographics.numberSuffixer(demographics.district)"></span> District)</h1>
   <hr />
   <div class="row tablet-col">
 
@@ -29,9 +29,9 @@
               <span ng-if="demographics.underRepresentedGenderGroup.gender === 'male'">Men</span>
               are under represented on this bill
             </p>
-            <p class="red bold">{{demographics.underRepresentedGenderGroup.percentage}}&#37;
+            <p class="red bold"><span ng-bind="demographics.underRepresentedGenderGroup.percentage"></span>&#37;
             </p>
-            <p>of voters are {{demographics.underRepresentedGenderGroup.gender}}.</p>
+            <p>of voters are <span ng-bind="demographics.underRepresentedGenderGroup.gender"></span>.</p>
 
           </div>
 
@@ -41,11 +41,11 @@
           <div class="c-bill-stats__age c-bill-stats__accent-symbol">{{demographics.minorityAgeRange.ageRange}}</div>
           <div class="c-bill-stats__text">
               <p>
-              {{demographics.minorityAgeRange.ageRange}} Make up the least represented demographic:
+              <span ng-bind="demographics.minorityAgeRange.ageRange"></span> Make up the least represented demographic:
               </p>
-              <p class="red bold"> {{demographics.minorityAgeRange.percentage}}&#37;</p>
+              <p class="red bold"> <span ng-bind="demographics.minorityAgeRange.percentage"></span>&#37;</p>
               <p>
-              of voters are {{demographics.minorityAgeRange.ageRange}}.
+              of voters are <span ng-bind="demographics.minorityAgeRange.ageRange"></span>.
               </p>
           </div>
         </div>

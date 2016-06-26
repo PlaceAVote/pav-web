@@ -5,7 +5,7 @@
       tablet-margin-right-none">
 <h1>District Rankings</h1>
 <hr />
-  <div class="c-card__content" ng-show="league.isAvailable()">
+  <div class="c-card__content" ng-if="league.isAvailable()">
     <p>
     This table shows which districts are the most represented on PlaceAVote accross the country. The higher your districs representation the more your congressman will be forced to follow the sentiment coming from you, the citizens of {{league.stateName}}'s {{league.numberSuffixer(league.district)}} district.
     </p>
@@ -17,9 +17,9 @@
            <p class="c-table__th--small">(Representation)</p></th>
       </tr>
       <tr ng-repeat="ranking in league.generateLeague()" class="c-table__row" ng-class="{'c-table__row--selected': ranking.current }">
-        <td>{{ ranking.position }}</td>
-        <td>{{ ranking.stateName }}'s {{league.numberSuffixer(ranking.district)}}</td>
-        <td>{{ ranking.percentage }} &#37;</td>
+        <td><span ng-bind="ranking.position"></span></td>
+        <td><span ng-bind="ranking.stateName"></span>'s <span ng-bind="league.numberSuffixer(ranking.district)"></span></td>
+        <td><span ng-bind="ranking.percentage"></span>&#37;</td>
       </tr>
     </table>
   </div>

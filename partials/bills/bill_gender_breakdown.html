@@ -3,7 +3,7 @@
   <!-- age breakdowns -->
   <div class="c-stats__demographics-gender-breakdown-bars">
     <div ng-repeat="range in ranges" class="l-6">
-      <div ng-show="range.minAge != 60" class="c-stats__demographics-label">
+      <div ng-if="range.minAge != 60" class="c-stats__demographics-label">
         {{range.minAge}}-{{range.maxAge}}
       </div>
       <div ng-hide="range.minAge != 60" class="c-stats__demographics-label">

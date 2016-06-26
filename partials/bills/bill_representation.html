@@ -1,5 +1,5 @@
 <div class="bill-representation-panel">
-  <div class="bill-representation-panel__stats-banner" ng-show="demographics.isUnderRepresented()">
+  <div class="bill-representation-panel__stats-banner" ng-if="demographics.isUnderRepresented()">
 
     <div class="bill-representation-panel__stats-banner--required">
       <p> More votes are required on this bill for your district to be providing accurate voting data</p>
@@ -10,7 +10,7 @@
         <div class="c-bar__fill" ng-style="{'width' : demographics.demographics.votes.total + '%'}">
         </div>
         <div class="c-bar__info">
-          <p> We have {{demographics.demographics.votes.total}} out of {{demographics.demographics.sampleSize}} votes needed for {{demographics.stateName}}'s {{demographics.numberSuffixer(demographics.district)}} District to be represented </p>
+          <p> We have <span ng-bind="demographics.demographics.votes.total"></span> out of <span ng-bind="demographics.demographics.sampleSize"></span> votes needed for <span ng-bind="demographics.stateName"></span>'s <span ng-bind="demographics.numberSuffixer(demographics.district)"></span> District to be represented </p>
         </div>
       </div>
     </div>
