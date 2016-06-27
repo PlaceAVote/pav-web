@@ -1,0 +1,33 @@
+<div class="
+      c-card
+      c-card--bill
+      margin-right-medium
+      tablet-margin-right-none">
+<h1>District Rankings</h1>
+<hr />
+  <div class="c-card__content" ng-if="league.isAvailable()">
+    <p>
+    This table shows which districts are the most represented on PlaceAVote accross the country. The higher your districs representation the more your congressman will be forced to follow the sentiment coming from you, the citizens of {{league.stateName}}'s {{league.numberSuffixer(league.district)}} district.
+    </p>
+    <table class="c-table margin-top-small">
+      <tr class="c-table__head">
+        <th>Pos.</th>
+        <th>District</th>
+        <th><p>Score</p>
+           <p class="c-table__th--small">(Representation)</p></th>
+      </tr>
+      <tr ng-repeat="ranking in league.generateLeague()" class="c-table__row" ng-class="{'c-table__row--selected': ranking.current }">
+        <td><span ng-bind="ranking.position"></span></td>
+        <td><span ng-bind="ranking.stateName"></span>'s <span ng-bind="league.numberSuffixer(ranking.district)"></span></td>
+        <td><span ng-bind="ranking.percentage"></span>&#37;</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="c-card__content" ng-hide="league.isAvailable()">
+    <p>
+    We haven't gathered enough votes yet to display a true representation leader board for this bill.
+    Make sure you spread the word and vote on all bills that you're interested in to help us make a difference.
+    </p>
+  </div>
+</div>

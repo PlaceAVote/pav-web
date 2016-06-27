@@ -6,7 +6,7 @@
 /**
 * Bill Status containings a stacked list
 * of potential bill statuses. It can be found
-* in it's own bill_status.html partial 
+* in it's own bill_status.html partial
 */
 
 
@@ -81,6 +81,10 @@
     transform: translateY(-50%);
     @include font-size(18px);
   }
+}
+.c-stats__text--small {
+  @include light();
+  @include font-size(10px);
 }
 
 .c-card__status-icon--active,

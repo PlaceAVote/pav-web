@@ -1,0 +1,46 @@
+
+/*------------------------------------*\
+    #TABLE
+\*------------------------------------*/
+
+/**
+* Table styling
+*/
+.c-table {
+  border: solid $grey 1px;
+  width: 100%;
+  color: $greydark;
+  text-align: left;
+  @include font-size(14px);
+  @include light();
+  td {
+    padding: 6px 11px;
+  }
+  th {
+    padding: 6px 11px;
+    vertical-align: middle;
+  }
+}
+
+p.c-table__th--small {
+  font-size: 10px !important;
+  // @include font-size(8px);
+}
+
+.c-table__head {
+  background-color: $purple;
+  color: $white;
+  @include shadow();
+}
+
+.c-table__row {
+  border: solid $greylight 1px;
+}
+
+.c-table__cell {
+  padding: 0% 5% 0% 5%;
+}
+
+.c-table__row--selected {
+  background-color: $greylight;
+}

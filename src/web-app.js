@@ -59,6 +59,7 @@ var angular = require('angular');
 var search = require('./directives/search.js');
 var openGraph = require('./directives/open_graph.js');
 var pavXBrowserDate = require('./directives/pavXBrowserDate.js');
+var socialBox = require('./directives/social_box.js');
 var mailcheck = require('./directives/mailcheck.js');
 var pavDirectives = require('./directives/directives.js');
 var websiteNav = require('./directives/website_nav.js');
@@ -91,6 +92,10 @@ var billSummaryDirective = require('./directives/bills/bill_summary.js');
 var billInfoDirective = require('./directives/bills/bill_info.js');
 var billCommentsDirective = require('./directives/bills/bill_comments.js');
 var billStatisticsDirective = require('./directives/bills/bill_statistics.js');
+var billGenderDemograhpicsDirective = require('./directives/bills/bill_demographics.js');
+var billGenderBreakdownDirective = require('./directives/bills/bill_gender_breakdown.js');
+var billRepresentationDirective = require('./directives/bills/bill_representation.js');
+var billDistrictLeagueDirective = require('./directives/bills/bill_district_league.js');
 var billStatusDirective = require('./directives/bills/bill_status.js');
 var voteModalDirective = require('./directives/bills/vote_modal.js');
 var voteConfirmedDirective = require('./directives/bills/vote_confirmed.js');
@@ -181,6 +186,10 @@ app.config(['$routeProvider', '$locationProvider', '$compileProvider', 'Analytic
     templateUrl: 'partials/bills/bill_wrapper.html',
     controller: 'BillCtrl as bill',
   })
+  .when('/bill/:id/representation', {
+    templateUrl: 'partials/bills/bill_wrapper.html',
+    controller: 'BillCtrl as bill',
+  })
   .when('/bill/:id/comment/:commentid', {
     templateUrl: 'partials/bill.html',
     controller: 'BillCtrl as bill',
@@ -208,6 +217,7 @@ app.config(['$routeProvider', '$locationProvider', '$compileProvider', 'Analytic
   $locationProvider.hashPrefix('!');
 
   $compileProvider.debugInfoEnabled(config.WATCHERS);
+  $compileProvider.aHrefSanitizationWhitelist(/^\s*(https)(:\/\/twitter).*/);
 
   AnalyticsProvider.setAccount('UA-48538409-1');
 
@@ -257,7 +267,7 @@ LoginController.$inject = ['$scope','$location', 'userService', 'authService', '
 app.controller('FeedCtrl', FeedController);
 FeedController.$inject = ['$scope', '$location', 'userService', 'billService', 'authService', 'feedService', '$rootScope','$timeout', 'searchService'];
 app.controller('BillCtrl', BillController);
-BillController.$inject = ['$scope', '$routeParams', 'billService', 'legislationService', 'voteService', 'commentService', '$location', 'authService', '$rootScope', '$timeout', 'facebookService', '$route'];
+BillController.$inject = ['$scope', '$routeParams', 'billService', 'legislationService', 'voteService', 'commentService', '$location', 'authService', '$rootScope', '$timeout', 'facebookService', '$route', '$window'];
 app.controller('HeaderCtrl', HeaderController);
 HeaderController.$inject = ['$rootScope', '$scope', '$location', '$timeout', 'authService', 'userService', 'notificationService', 'searchService', '$window', '$route'];
 app.controller('ProfileCtrl', ProfileController);
@@ -292,6 +302,8 @@ app.value('THROTTLE_MILLISECONDS', null);
 app.directive('websiteNav', [websiteNav]);
 app.directive('headerNav', [headerNav]);
 app.directive('pavDate', [pavXBrowserDate]);
+app.directive('socialBox', [socialBox]);
+app.directive('districtLeague', [billDistrictLeagueDirective]);
 app.directive('mailcheck', mailcheck);
 mailcheck.$inject = ['$compile','$sce'];
 app.directive('comment', commentDirective);
@@ -342,8 +354,12 @@ app.directive('billInfo', billInfoDirective);
 billInfoDirective.$inject = ['$location'];
 app.directive('billComments', billCommentsDirective);
 billCommentsDirective.$inject = ['$location'];
+app.directive('billGender', [billGenderDemograhpicsDirective]);
+app.directive('billGenderBreakdown', [billGenderBreakdownDirective]);
 app.directive('billStatistics', billStatisticsDirective);
 billStatisticsDirective.$inject = ['$location'];
+app.directive('billRepresentation', billRepresentationDirective);
+billRepresentationDirective.$inject = ['$location'];
 app.directive('billStatus', billStatusDirective);
 billStatusDirective.$inject = ['$location'];
 app.directive('voteModal', voteModalDirective);
@@ -366,3 +382,4 @@ app.directive('issueModal', issueModalDirective);
 issueModalDirective.$inject = ['$location', '$timeout', 'issueService', '$rootScope'];
 app.directive('icon', iconDirective);
 app.directive('pieChart', pieChartDirective);
+pieChartDirective.$inject = ['$window'];
