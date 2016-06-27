@@ -193,7 +193,6 @@ function register(params) {
   };
   dep.onload = function(r) {
     var pav = PAV || {};
-    console.log('Registering', params.name, params.global);
     app[params.func](params.name, PAV[params.global]);
     if (params.deps) {
       PAV[params.global].$inject = params.deps;
@@ -276,6 +275,5 @@ var ctrls = [
   { name: 'finishedRender', path: 'finished_render.js', global: 'finishedRenderDirective', func: 'directive' },
 ];
 for (var i = 0, len = ctrls.length - 1; len >= i; len --) {
-  console.log(ctrls[len]);
   register(ctrls[len]);
 }
