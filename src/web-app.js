@@ -188,6 +188,7 @@ app.value('THROTTLE_MILLISECONDS', null);
 function bind(params) {
   var pav = PAV || {};
   app[params.func](params.name, PAV[params.global]);
+  console.log(pav);
   if (params.deps) {
     PAV[params.global].$inject = params.deps;
   }

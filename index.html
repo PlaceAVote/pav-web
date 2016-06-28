@@ -30,8 +30,17 @@
   <link rel="shortcut icon" href="img/favicon_pav.ico" type="image/vnd.microsoft.icon">
   <style>
     @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
-    .pre-app__spinner {
+    .pre-app__container {
       z-index: 10000; background-color: #6B55AD !important; width: 100%; position: fixed; height: 100%;
+    }
+    .pre-app__spinner--container {
+      width: 30%;
+      margin: 0 auto;
+      margin-top: 10%;
+    }
+    .pre-app__spinner--logo {
+      width: 100%;
+      animation: spin 4s linear infinite;
     }
     .pre-app__meter {
       margin: 0 auto;
@@ -42,26 +51,34 @@
       border-radius: 25px;
       padding: 5px;
     }
-    .pre-app__spinner .pre-app__meter .pre-app__progress_bar {
+    .pre-app__meter--container {
+      width: 100%;
+     margin-top: 20%; 
+    }
+    .pre-app__meter .pre-app__progress_bar {
       line-height: 0px;
       display: block;
       height: 100%;
+      width: 15%;
       border-radius: 20px;
       background: #81C05C;
       position: relative;
       overflow: hidden;
       transition: width, 1s;
     }
+    body {
+      padding: 0;
+      margin: 0;
+    }
   </style>
  </head>
- <body style="padding:0; margin: 0;">
-
-   <div id="preloading-spinner" class="pre-app__spinner">
-     <div style="width: 30%; margin: 0 auto; margin-top: 10%;">
-       <img style="width: 100%; animation: spin 4s linear infinite;" src="/img/pav_icon.svg" alt="placeavote" />
-       <div style="width: 100%; margin-top: 20%;">
+ <body>
+   <div id="preloading-spinner" class="pre-app__container">
+     <div class="pre-app__spinner--container">
+       <img class="pre-app__spinner--logo" src="/img/pav_icon.svg" alt="placeavote" />
+       <div class="pre-app__meter--container">
          <div class="pre-app__meter">
-           <div id="pre-app__progress" class="pre-app__progress_bar" style="width: 15%"></div>
+           <div id="pre-app__progress" class="pre-app__progress_bar"></div>
          </div>
        </div>
      </div>
@@ -74,6 +91,6 @@
   </div>
 <div>
 <!-- ASYNC OUR APP -->
-<script async src="src/initial_loads.js"></script>
+<script defer src="src/initial_loads.js"></script>
  </body>
 </html>

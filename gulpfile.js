@@ -1,20 +1,21 @@
 'use_strict';
 
 var gulp = require('gulp'),
-	concat = require('gulp-concat'),
-	uglify = require('gulp-uglify'),
-	rename = require('gulp-rename'),
-	browserify = require('browserify'),
-	minifycss = require('gulp-minify-css'),
-	sass = require('gulp-sass'),
-	source = require('vinyl-source-stream'),
-	maps = require('gulp-sourcemaps'),
-	minify = require('gulp-minify'),
-	autoprefix = require('gulp-autoprefixer'),
-	browserSync = require('browser-sync').create(),
-	imagemin = require('gulp-imagemin'), //image optimiser
-	pngquant = require('imagemin-pngquant'), //png optimiser to work with imagemin
-	mozjpeg = require('imagemin-mozjpeg'),
+  concat = require('gulp-concat'),
+  uglify = require('gulp-uglify'),
+  rename = require('gulp-rename'),
+  browserify = require('browserify'),
+  gulpBrowserify = require('gulp-browserify'),
+  minifycss = require('gulp-minify-css'),
+  sass = require('gulp-sass'),
+  source = require('vinyl-source-stream'),
+  maps = require('gulp-sourcemaps'),
+  minify = require('gulp-minify'),
+  autoprefix = require('gulp-autoprefixer'),
+  browserSync = require('browser-sync').create(),
+  imagemin = require('gulp-imagemin'), //image optimiser
+  pngquant = require('imagemin-pngquant'), //png optimiser to work with imagemin
+  mozjpeg = require('imagemin-mozjpeg'),
   jshint = require('gulp-jshint'),
   jscs = require('gulp-jscs'),
   gulpSequence = require('gulp-sequence'),
@@ -209,9 +210,8 @@ var gulp = require('gulp'),
         if (fs.lstatSync(directory + file).isDirectory()) {
           return;
         }
-        return	browserify(directory + file)
-          .bundle()
-          .pipe(source(file))
+        return gulp.src(directory + file)
+        	.pipe(gulpBrowserify({ insertGlobals: true, }))
           .pipe(gulp.dest('dist/js'));
       });
     });
