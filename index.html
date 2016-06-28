@@ -61,7 +61,7 @@
        <img style="width: 100%; animation: spin 4s linear infinite;" src="/img/pav_icon.svg" alt="placeavote" />
        <div style="width: 100%; margin-top: 20%;">
          <div class="pre-app__meter">
-           <div id="pre-app__progress" class="pre-app__progress_bar" style="width: 5%"></div>
+           <div id="pre-app__progress" class="pre-app__progress_bar" style="width: 15%"></div>
          </div>
        </div>
      </div>
@@ -74,21 +74,6 @@
   </div>
 <div>
 <!-- ASYNC OUR APP -->
-<script>
-  var PAV = window.PAV || {};
-  console.log('runing loading initial scripts');
-  var app = document.createElement('script');
-  app.type = 'text/javascript';
-  app.onerror = function() {
-    console.log('error loading intial script');
-  };
-  app.onload = function() {
-    console.log('loaded initial');
-    var el = document.getElementById('pre-app__progress');
-    el.style.width = '15%';
-  };
-  app.src = "src/initial_loads.js"
-  document.body.appendChild(app);
-</script>
+<script async src="src/initial_loads.js"></script>
  </body>
 </html>

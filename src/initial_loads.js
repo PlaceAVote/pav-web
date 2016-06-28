@@ -1,22 +1,17 @@
+var PAV = window.PAV || {};
 (function() {
   function setPreSpinnerWidth(width) {
     var el = document.getElementById('pre-app__progress');
     var w = el.style.width.slice(0, el.style.width.length - 1);
-    console.log('current width', w);
-    console.log('try to set width', width);
     if (w < width) {
-      console.log('setting width to', width);
       el.style.width = width + '%';
     }
   }
 
   function loadPAV() {
-    console.log('runing loading');
     document.body.addEventListener('angularReady', function() {
-      console.log('angular ready');
       setPreSpinnerWidth(100);
       setTimeout(function() {
-        console.log('remove');
         var post = document.getElementById('post-app');
         post.style.display = '';
         var pre = document.getElementById('preloading-spinner');

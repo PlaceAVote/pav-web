@@ -1,3 +1,4 @@
+(function() {
 var PAV = window.PAV || {};
 var config = require('./config/urls.js');
 console.log('%cPlaceavote', 'background: #543594; color: #ffffff; padding: 1px 3px; border-radius: 3px; font-size: 12px;font-family: sans-serif; margin-left: calc(100% - 70px);');
@@ -184,6 +185,14 @@ EmailService.$inject = ['$resource', 'authService'];
 // Values
 app.value('THROTTLE_MILLISECONDS', null);
 
+function bind(params) {
+  var pav = PAV || {};
+  app[params.func](params.name, PAV[params.global]);
+  if (params.deps) {
+    PAV[params.global].$inject = params.deps;
+  }
+}
+
 
 function register(params) {
   var dep = document.createElement('script');
@@ -191,12 +200,8 @@ function register(params) {
   dep.onerror = function() {
     console.log('error with crl', params.route);
   };
-  dep.onload = function(r) {
-    var pav = PAV || {};
-    app[params.func](params.name, PAV[params.global]);
-    if (params.deps) {
-      PAV[params.global].$inject = params.deps;
-    }
+  dep.onload = function() {
+    bind(params);
   };
   dep.src = 'dist/js/' +  params.path;
   document.body.appendChild(dep);
@@ -277,3 +282,4 @@ var ctrls = [
 for (var i = 0, len = ctrls.length - 1; len >= i; len --) {
   register(ctrls[len]);
 }
+})();
