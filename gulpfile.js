@@ -25,6 +25,7 @@ var gulp = require('gulp'),
   var mustache = require('gulp-mustache');
   var clean = require('gulp-clean');
   var fs = require('fs');
+  var ignore = require('gulp-ignore');
 
   var lintedPaths = ['./src/**/*.js', './*.js', '!./src/utils/metatags.js',
     '!./src/utils/location_update.js', '!./src/utils/fitie.js', '!./src/third_party_scripts.js'];
@@ -179,23 +180,23 @@ var gulp = require('gulp'),
 
   gulp.task('compileSass', function() {
     return gulp.src('./scss/*.scss')
-    .pipe(maps.init())
-    .pipe(sass({includePaths: ['./scss'], outputStyle: 'compressed'}))
-    .pipe(maps.write('./'))
-    .pipe(gulp.dest('./css'));
+      .pipe(maps.init())
+      .pipe(sass({includePaths: ['./scss'], outputStyle: 'compressed'}))
+      .pipe(maps.write('./'))
+      .pipe(gulp.dest('./css'));
   });
 
   gulp.task('autoPrefix', ['compileSass'] , function() {
     return gulp.src('css/styles.css')
-    .pipe(autoprefix())
-    .pipe(gulp.dest('css'));
+      .pipe(autoprefix())
+      .pipe(gulp.dest('css'));
   });
 
   gulp.task('browserify-web', function() {
     return	browserify('./src/web-app.js')
-    .bundle()
-    .pipe(source('app.js'))
-    .pipe(gulp.dest('dist/js'));
+      .bundle()
+      .pipe(source('app.js'))
+      .pipe(gulp.dest('dist/js'));
   });
 
 
@@ -209,21 +210,19 @@ var gulp = require('gulp'),
           return;
         }
         return	browserify(directory + file)
-        .bundle()
-        .pipe(source(file))
-        .pipe(gulp.dest('dist/js'));
+          .bundle()
+          .pipe(source(file))
+          .pipe(gulp.dest('dist/js'));
       });
     });
   });
 
   gulp.task('comp-min', function() {
-    var files = fs.readdirSync('dist/js/');
-    files.forEach(function(file) {
-      return gulp.src('dist/js/' + file)
-        .pipe(uglify())
-        .pipe(minify())
-        .pipe(gulp.dest('dist/js/'));
-    });
+    return gulp.src('dist/js/*.js')
+      .pipe(ignore.exclude([ 'dist/js*-min.js' ]))
+      .pipe(uglify().on('error', util.log))
+      .pipe(minify())
+      .pipe(gulp.dest('dist/js/'));
   });
 
   gulp.task('app-min', function(){
