@@ -1,0 +1,13 @@
+/*------------------------------------------*\
+    #SOCIAL-SHARING-COMPONENT
+\*------------------------------------------*/
+
+ /**
+  * A Box for social sharing componentents
+  */
+.c-social-box {
+  background-color: $greylight;
+  @include font-size(12px);
+  color: $greydark;
+  border: solid $grey 1px;
+}

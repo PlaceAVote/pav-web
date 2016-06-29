@@ -1,0 +1,201 @@
+/*----------------------*\
+    #STATS-COMPONENTS
+\*----------------------*/
+
+// GENERAL STYLES
+// .c-stats__text--large {
+//   display: inline-block;
+//   font-size: 170%;
+//   padding-top: 10%;
+//   color: $greydark;
+//   margin: 1%;
+//   @include media(768px) {
+//     font-size: 120%;
+//   }
+// }
+
+
+// .c-stats__gender-icon--large {
+//   min-width: 8%;
+//   margin: 1%;
+// }
+
+// .c-stats__text--light {
+//   font-size: 80%;
+//   margin-right: 1%;
+// }
+
+
+.c-bill-stats__text {
+  color: darken($grey, 20%);
+  padding-right: 20px;
+  text-align: left;
+  @include font-size(12px);
+  @include media($tablet) {
+    @include font-size(14px);
+    p {
+      display: inline-block;
+    }
+  }
+}
+
+.c-pie-chart--center {
+  svg {
+    display: block;
+    margin: auto;
+  }
+}
+
+.c-bill-stats__accent-symbol {
+  @include media($tablet) {
+    display: none;
+  }
+}
+
+.c-bill-stats__text .red.bold {
+  @include font-size(18px);
+}
+
+
+.c-bill-stats__age {
+  color: darken($grey, 20%);
+  margin-right: 10px;
+  line-height: 76px;
+  @include font-size(92px);
+  @include bold();
+  @include media($tablet) {
+    @include font-size(47px);
+    margin-right: 15px;
+  }
+}
+
+.c-card__bill-representation-card .icon-gender-female,
+.c-card__bill-representation-card .icon-gender-male {
+  fill: darken($grey, 20%);
+  height: 80px;
+  width: 64px;
+  margin-right: 10px;
+  @include media($tablet) {
+    width: 92px;
+    margin-right: 15px;
+  }
+}
+
+
+
+// DEMOGRAPHICS BREAKDOWN BARS
+.c-stats__demographics-gender-breakdown-bars {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  div {
+    // width: calc(50% - 5px);
+  }
+  div:nth-child(2n+2) {
+    .c-stats__demographics-label {
+      padding-left: 5px;
+    }
+    .c-bar {
+      margin-left: 5px;
+    }
+  }
+}
+
+.c-card--demographics {
+    @include media($tablet) {
+      margin-bottom: 46px;
+    }
+}
+
+.c-card__stats-demographic-card {
+  margin-left: 5%;
+}
+
+.c-stats__demographics-age--large {
+  font-size: 130%;
+  font-weight: lighter;
+  color: $greydark;
+  text-align: center;
+}
+
+.c-stats__demographic-breakdown-section {
+  text-align: center;
+  width: 33%;
+}
+.c-stats__demographic-breakdown {
+  margin: 3% 1% 2% 1%;
+}
+
+.c-stats__demographics-gender-breakdown {
+  background-color: $greylight;
+  color: $greydark;
+  border: solid $grey 1px;
+  // padding: 2% 5% 2% 5%;
+  // margin: 2%;
+}
+
+// CHARTS WRAPPER
+.c-stats__underrepresneted-statistics-chart {
+  border: none !important;
+  box-shadow: none !important;
+  min-width: 215px;
+  margin-right: 20px;
+  @include media($tablet) {
+    margin-right: 0;
+  }
+}
+
+// .c-stats__underrepresented-stats-content--center-align-mobile {
+//   @include media(768px) {
+//     width: 50%;
+//     margin: 0 auto;
+//   }
+// }
+
+// STATS CARD WRAPPER
+.c-card__stats-district-card {
+  // margin-right: 5%;
+  // width: 150%;
+  // margin-bottom: 5%;
+  @include media(768px) {
+    // margin-right: 0%;
+  }
+}
+
+
+.c-stats__piechart-container {
+  width: 100%;
+  @include media($tablet) {
+      // width: 200px;
+  }
+}
+
+.c-stats__demographics-gender-breakdown-icon__small {
+  height: 20px;
+}
+
+.c-stats__district-league {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.c-stats__demographic-chart-text {
+  color: $white;
+  position: relative;
+  top: -75px;
+}
+
+.c-stats__demographic-sample-size-graph {
+  fill: $green;
+  stroke-width: 3px;
+  stroke: $white;
+  @include shadow();
+}
+
+.c-stats__demographic-votes-graph {
+  fill: $red;
+  stroke-width: 3px;
+  stroke: $white;
+  @include shadow();
+}

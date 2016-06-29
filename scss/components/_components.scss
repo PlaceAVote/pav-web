@@ -1,6 +1,14 @@
 @import '_components.bill-banner.scss';
 
+@import '_components.bar-demographics.scss';
+
+@import '_components.bill-representation.scss';
+
+@import '_components.stats.scss';
+
 @import '_components.tags.scss';
+
+@import '_components.table.scss';
 
 @import '_components.side-menu.scss';
 
@@ -30,6 +38,8 @@
 
 @import '_components.feed-social.scss';
 
+@import '_components.sharing.scss';
+
 @import '_components.transitions.scss';
 
 @import '_components.comment-event.scss';
@@ -53,3 +63,5 @@
 @import '_components.opengraph.scss';
 
 @import '_components.bill-vote-stats.scss';
+
+@import '_components.bill-representation.scss';

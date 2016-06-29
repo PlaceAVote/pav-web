@@ -25,6 +25,26 @@
     }
  }
 
+/**
+* Enables the modal to be scrollable if
+* content is bigger than viewheight.
+*/
+
+.c-modal--scroll {
+  overflow-y: scroll;
+  height: 100vh;
+  .c-card {
+    margin-bottom: 100px;
+  }
+  @include media($tablet) {
+    z-index: 99999;
+    background: white;
+    .c-card {
+      margin-bottom: 0px;
+    }
+  }
+}
+
 
 .c-modal {
     position: absolute;

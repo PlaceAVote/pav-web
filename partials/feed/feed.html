@@ -15,8 +15,6 @@
 <section class="c-feed row tablet-col">
 
 
-<email-connections></email-connections>
-
 <div ng-show="feed.zipModal" class="c-modal__wrapper c-modal__wrapper--active">
   <div class="c-modal c-modal--zip">
     <div class="c-modal__zip">
@@ -76,6 +74,7 @@
 
 
 <div class="c-feed__column">
+  <email-connections></email-connections>
     <issues-post posted="feed.getFeed()" ng-if="feed.selectedCategory.name !== 'discovery'"></issues-post>
     <div ng-switch on="feed.selectedCategory.name" infinite-scroll="feed.feedCheck();" infinite-scroll-distance="2">
       <trendsactivityfeed ng-show="feed.selectedCategory.name === 'discovery'" class="c-feed__events-container" feed="feed"></trendsactivityfeed>
@@ -92,4 +91,5 @@
   	<trends data="feed.trends" refresh="feed.trendsLoading"></trends>
   </div>
 </div>
+
 </section>

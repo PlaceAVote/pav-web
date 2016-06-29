@@ -1,0 +1,49 @@
+<!-- Modal -->
+<div class="c-modal__wrapper c-modal__wrapper--active c-modal--scroll">
+  <div class="c-card c-card--modal">
+ <!-- Step One -->
+   <!-- Google Contact -->
+   <div ng-show="googleContactsLoaded">
+     <h1>
+       Google Contacts
+     </h1>
+     <hr />
+     <div class="c-card__content">
+       <div ng-repeat="(em, value) in googleContacts" class="row margin-bottom-small">
+         <div class="col l-10">
+           <input type="text" ng-model="value.name" placeholder="Add name" />
+           <p ng-bind="em" class="italic"></p>
+         </div>
+         <div class="l-2">
+           <button ng-click="pushValue({name: value.name, email: em}); value.added = true;"
+                  ng-hide="value.added">Add</button>
+           <button ng-click="removeValue(em); value.added = false;" ng-show="value.added">Remove</button>
+         </div>
+       </div>
+     </div>
+   </div>
+
+ <!-- Step One || Two -->
+   <!-- Add your own -->
+   <!-- <div>
+     <h1>
+       Add Email Contacts Contacts
+     </h1>
+     <hr />
+     <div class="c-card__content">
+     </div>
+   </div> -->
+ <!-- Step Three -->
+   <!-- Message -->
+   <!-- Confirm -->
+   <!-- <div>
+     <h1>
+       Add Email Contacts Contacts
+     </h1>
+     <hr />
+     <div class="c-card__content">
+     </div>
+   </div> -->
+
+   </div>
+</div>

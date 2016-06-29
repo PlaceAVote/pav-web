@@ -3,9 +3,10 @@ module.exports = function($location) {
     restict: 'E',
     scope: {
       demographics: '=',
+      league: '=',
       shareToFacebook: '&',
       shareToTwitter: '&',
     },
-    templateUrl: 'partials/bills/bill_statistics.html',
+    templateUrl: 'partials/bills/bill_representation.html',
   };
 };

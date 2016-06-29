@@ -2,7 +2,6 @@ var BillService = require('../../src/services/bill_service.js');
 var TrendingBill = require('../../src/models/trending_bill.js');
 var Bill = require('../../src/models/bill_summary.js');
 var Comment = require('../../src/models/comment.js');
-var Representation = require('../../src/models/representation.js');
 var AuthService = require('../../src/services/auth_service.js');
 var mockLocal = require('../mocks/local_storage.js');
 var authOptions = { window : {localStorage: new mockLocal() }};
@@ -286,87 +285,124 @@ describe("Bill Service", function(){
     });
   });
 
-    describe('getRepresentation', function() {
-        it('should return error if no bill_id provided', function() {
-          var subject = new BillService();
-          var data = {
-            state: 'CA',
-            district: 33,
-          };
-          subject.getRepresentation(data, function(err, result) {
-            expect(err).to.equal('Incorrect or no parameters provided');
-          });
-        });
-        it('should return error if no state provided', function() {
-          var subject = new BillService();
-          var data = {
-            bill_id: 'abcd1234',
-            district: 33,
-          };
-          subject.getRepresentation(data, function(err, result) {
-            expect(err).to.equal('Incorrect or no parameters provided');
-          });
-        });
-        it('should return error if no district provided', function() {
-          var subject = new BillService();
-          var data = {
-            state: 'CA',
-            bill_id: 'abcd1234'
-          };
-          subject.getRepresentation(data, function(err, result) {
-            expect(err).to.equal('Incorrect or no parameters provided');
-          });
-        });
-        it('should return obj if successful', function(done) {
-          var mockRepResource = function(url, params, method) {
+  describe('getRepresentation', function() {
+    it('should return error if no bill_id provided', function() {
+      var subject = new BillService();
+      var data = {
+        state: 'CA',
+        district: 33,
+      };
+      subject.getRepresentation(data, function(err, result) {
+        expect(err).to.equal('Incorrect or no parameters provided');
+      });
+    });
+    it('should return error if no state provided', function() {
+      var subject = new BillService();
+      var data = {
+        bill_id: 'abcd1234',
+        district: 33,
+      };
+      subject.getRepresentation(data, function(err, result) {
+        expect(err).to.equal('Incorrect or no parameters provided');
+      });
+    });
+    it('should return error if no district provided', function() {
+      var subject = new BillService();
+      var data = {
+        state: 'CA',
+        bill_id: 'abcd1234'
+      };
+      subject.getRepresentation(data, function(err, result) {
+        expect(err).to.equal('Incorrect or no parameters provided');
+      });
+    });
+    it('should return obj if successful', function(done) {
+      var mockRepResource = function(url, params, method) {
 
-          };
-          var obj = {
-            votes: {
-              yes: 5,
-              no: 1,
-              total: 6
-            },
-            population: 1046824,
-            sampleSize: 390
-          };
-          mockRepResource.prototype.rep = function(body, onLoad, onError) {
+      };
+      var obj = {
+        votes: {
+          yes: 5,
+          no: 1,
+          total: 6
+        },
+        population: 1046824,
+        sampleSize: 390
+      };
+      mockRepResource.prototype.rep = function(body, onLoad, onError) {
 
-            return onLoad(obj);
-          };
-          var subject = new BillService(mockRepResource);
-          var data = {
-            state: 'CA',
-            bill_id: 'abcd1234',
-            district: 33,
-          };
-          subject.getRepresentation(data, function(err, result) {
-            var test = new Representation(obj);
-            expect(result.sampleSize).to.equal(test.sampleSize);
-            done();
-          });
-        });
-        it('should return obj if successful', function(done) {
-          var mockRepResource = function(url, params, method) {
+        return onLoad(obj);
+      };
+      var subject = new BillService(mockRepResource);
+      var data = {
+        state: 'CA',
+        bill_id: 'abcd1234',
+        district: 33,
+      };
+      subject.getRepresentation(data, function(err, result) {
+        expect(result.sampleSize).to.equal(obj.sampleSize);
+        done();
+      });
+    });
+    it('should return obj if successful', function(done) {
+      var mockRepResource = function(url, params, method) {
 
-          };
-          var error = {
-            status: 'oh boy, looks like there was an error.'
-          };
-          mockRepResource.prototype.rep = function(body, onLoad, onError) {
+      };
+      var error = {
+        status: 'oh boy, looks like there was an error.'
+      };
+      mockRepResource.prototype.rep = function(body, onLoad, onError) {
 
-            return onError(error);
-          };
-          var subject = new BillService(mockRepResource);
-          var data = {
-            state: 'CA',
-            bill_id: 'abcd1234',
-            district: 33,
-          };
-          subject.getRepresentation(data, function(err, result) {
-            expect(err).to.equal(error);
-            done();
-          });
-        });
+        return onError(error);
+      };
+      var subject = new BillService(mockRepResource);
+      var data = {
+        state: 'CA',
+        bill_id: 'abcd1234',
+        district: 33,
+      };
+      subject.getRepresentation(data, function(err, result) {
+        expect(err).to.equal(error);
+        done();
+      });
     });
   });
+  describe('get District League', function() {
+    it('should return an error in the callback if billId is not defined', function(done) {
+      var subject = new BillService();
+      subject.getDistrictLeague(null, function(e) {
+        expect(e.message).to.eql('Bill Id must be provided');
+        done();
+      });
+    });
+
+    it('should call resource with correct params', function(done) {
+      var actualParams;
+      var actualUrl;
+      var actualMethod;
+      var actualBody;
+      function mockResource(url, params, method) {
+        actualUrl = url;
+        actualParams = params;
+        actualMethod = method;
+        return {
+          getDistrict: function(body, onLoad, onError) {
+            actualBody = body;
+            onLoad({ total: 0, league: [] });
+          },
+        };
+      };
+      var subject = new BillService(mockResource);
+      subject.getDistrictLeague('hr2-123', function(e, result) {
+        expect(e).to.eql(null);
+        expect(result.total).to.eql(0);
+        expect(result.league.length).to.eql(0);
+        expect(actualParams).to.eql(undefined);
+        expect(actualUrl).to.contain('/districtleague?billId=hr2-123');
+        expect(actualMethod.getDistrict.method).to.eql('GET');
+        expect(actualBody).to.eql(undefined);
+        done();
+      });
+    });
+  });
+});

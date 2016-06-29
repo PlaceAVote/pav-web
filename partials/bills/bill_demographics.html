@@ -1,0 +1,40 @@
+<div class="c-card c-card--bill margin-bottom-large c-card--demographics">
+  <h1>Demographics</h1>
+  <hr />
+  <div class="c-card__content">
+    <p>To gain the most accurate possible voting data we also try an ensure key demoragraphics are filled to make sure every voice in your district is heard. Below are the age demographics for {{demographics.stateName}}'s {{demographics.numberSuffixer(demographics.district)}} District.</p>
+  </div>
+
+  <div class="row l-12 margin-top-small">
+
+    <div class="l-4">
+      <p class="bold">
+        Population
+      </p>
+      <p>
+        {{demographics.population | number}}
+      </p>
+    </div>
+
+    <div class="l-4">
+      <p class="bold">
+        Votes
+      </p>
+      <p ng-bind="demographics.demographics.votes.total"></p>
+    </div>
+
+    <div class="l-4">
+      <p class="bold">
+        Needed
+      </p>
+      <p ng-bind="demographics.demographics.sampleSize"></p>
+    </div>
+
+  </div>
+
+  <div>
+    <bill-gender-breakdown ico="'M'" gender="'Male'" total="demographics.demographics.votes.total" ranges="demographics.demographics.gender.male.ranges" ></bill-gender-breakdown>
+    <bill-gender-breakdown ico="'../svgs/female.svg'" gender="'Female'" total="demographics.demographics.votes.total" ranges="demographics.demographics.gender.female.ranges" ></bill-gender-breakdown>
+    <bill-gender-breakdown ico="'B'" gender="'Non Binary'" total="demographics.demographics.votes.total" ranges="demographics.demographics.gender.nonBinary.ranges" ></bill-gender-breakdown>
+  </div>
+</div>

@@ -1,47 +1,32 @@
-<div style="background-color: white; z-index:10; position:absolute" ng-controller="EmailCtrl as email">
-  <div ng-if="email.show">
-    <div ng-show="email.importContacts">
-      <h1>Load Contacts</h1>
-      <div ng-show="!email.googleContactsLoaded">
-        <a ng-click="email.fetchGmailEmails()">Import Google Contacts</a>
-        <span ng-show="email.fetching">YOU SPIN ME RIGHT ROUND BABY RIGHT ROUND LIKE A RECORD BABY</span>
-        <span ng-show="email.googleContactsError"> Sorry we couldn't load you contacts. </span>
-      </div>
-      <div ng-show="email.googleContactsLoaded">
-        <div ng-repeat="(em, value) in email.googleContacts">
-          {{em}} {{value.name}} <button ng-click="value.push()" ng-disabled="value.added">Add</button>
-        </div>
-      </div>
-      <hr />
-      <div>
-        <h2>Added Contacts</h2>
-        <div ng-repeat="contact in email.contacts">
-          <span>{{contact.email}}</span>
-          <input type="text" ng-model="contact.name" value="{{contact.name}}" />
-        </div>
-        <div>
-          <h2>Insert Contact</h2>
-          <input type="text" ng-class="{ red: email.inputContact.invalid }" ng-model="email.inputContact.email" value="{{email.inputContact.email}}" />
-          <span class="red" ng-show="email.inputContact.invalid"> Please enter a valid Email Address. </span>
-          <input type="text" ng-model="email.inputContact.name" value="{{email.inputContact.name}}" />
-          <button ng-click="email.addInput()"> Add </button>
-        </div>
-      </div>
-      <button ng-click="email.togglePage()">Next</button>
-    </div>
+<div>
 
-    <! -- "second" page -->
-    <div ng-hide="email.importContacts">
-      <div ng-repeat="contact in email.contacts">
-        {{contact.email}} {{contact.name}}
+  <!-- Invite Card -->
+    <!-- Message -->
+      <!-- Add Google Contacts -->
+      <!-- Add your own -->
+      <div class="c-card">
+        <h1>
+          Invite your friends
+        </h1>
+        <hr />
+        <div class="c-card__content">
+          <p>Invite your friends and family to ensure they're represented</p>
+
+          <button class="c-button
+                         c-button--large
+                         c-button--green"
+                  ng-click="showModal('gmail');">
+                         via GMail Contact
+          </button>
+
+          <button class="c-button
+                         c-button--large
+                         c-button--green"
+                  ng-click="showModal('email');">
+                         via Email
+          </button>
+
+        </div>
       </div>
-      <textarea ng-model="email.message">{{email.message}}</textarea>
-      <button ng-click="email.togglePage()">Back</button>
-      <button ng-click="email.sendMessages()">Send</button>
-      <span ng-show="email.errNoContacts" class="red"> You must include at least one contact to send a message.</span>
-      <span ng-show="email.errUnauth" class="red"> You must log in to use this feature.</span>
-      <span ng-show="email.errUnkown" class="red"> An unkown error has occured. Please try again.</span>
-    </div>
-    <button ng-click="email.close()">Close</button>
-  </div>
+
 </div>
