@@ -10,14 +10,12 @@ var FACEBOOKAPPID = '1624230887838566';
 var MANDRILAPIKEY = 'ijV-LsU9RGPbUj1vjdHX_A';
 var PRERENDER = 'https://prerenderdev.placeavote.com';
 var WATCHERS = true;
-var PRECONTROLLER = 'dist/js/';
-var PREDIRECTIVE = 'dist/js/';
-var SUFFILE = '.js';
+var APPPATH = 'dist/js/app.js';
+var THIRDPARTYPATH = 'src/third_party_scripts.js';
 
 module.exports = {
-  PRECONTROLLER: PRECONTROLLER,
-  PREDIRECTIVE: PREDIRECTIVE,
-  SUFFILE: SUFFILE,
+  APPPATH: APPPATH,
+  THIRDPARTYPATH: THIRDPARTYPATH,
   CONGRESS: CONGRESS,
   USER: USER,
   CENSUS: CENSUS,

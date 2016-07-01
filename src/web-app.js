@@ -13,6 +13,9 @@ if (typeof localStorage === 'object') {
     Storage.prototype.setItem = function() {};
   }
 }
+// Dependencies
+var angular = require('angular');
+
 // Services
 var UserService = require('./services/user_service.js');
 var BillService = require('./services/bill_service.js');
@@ -31,8 +34,26 @@ var OpenGraphService = require('./services/open_graph_service.js');
 var EmailService = require('./services/email_service.js');
 var google = require('./services/google.js');
 
-// Dependencies
-var angular = require('angular');
+// Website Controllers
+var HomeController = require('./controllers/website/home_controller.js');
+var FaqController = require('./controllers/website/faq_controller.js');
+var TeamController = require('./controllers/website/team_controller.js');
+var PressController = require('./controllers/website/press_controller.js');
+var MenuController = require('./controllers/website/menu_controller.js');
+var ContactController = require('./controllers/website/contact_controller.js');
+// App Controllers
+var RegisterController = require('./controllers/register_controller.js');
+var SignUpController = require('./controllers/sign_up_controller.js');
+var LoginController = require('./controllers/login_controller.js');
+var FeedController = require('./controllers/feed_controller.js');
+var BillController = require('./controllers/bill_controller.js');
+var HeaderController = require('./controllers/header_controller.js');
+var ProfileController = require('./controllers/profile_controller.js');
+var SettingsController = require('./controllers/settings_controller.js');
+var PasswordController = require('./controllers/password_controller.js');
+var WizardController = require('./controllers/wizard_controller.js');
+var IssuesController = require('./controllers/issues_controller.js');
+
 
 // Directives
 var search = require('./directives/search.js');
@@ -90,6 +111,7 @@ var cssScrollDirective = require('./directives/css_scroll.js');
 var issueModalDirective = require('./directives/issue_modal.js');
 var iconDirective = require('./directives/icon.js');
 var pieChartDirective = require('./directives/ring_chart.js');
+var finishedRender = require('./directives/finished_render.js');
 
 // Thirdparty integrations
 var Facebook = require('./integrations/facebook.js');
@@ -368,3 +390,4 @@ issueModalDirective.$inject = ['$location', '$timeout', 'issueService', '$rootSc
 app.directive('icon', iconDirective);
 app.directive('pieChart', pieChartDirective);
 pieChartDirective.$inject = ['$window'];
+app.directive('finishedRender', [finishedRender]);

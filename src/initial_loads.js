@@ -1,4 +1,4 @@
-var PAV = window.PAV || {};
+var config = require('./config/urls');
 (function() {
   function setPreSpinnerWidth(width) {
     var el = document.getElementById('pre-app__progress');
@@ -26,7 +26,7 @@ var PAV = window.PAV || {};
     app.onload = function() {
       setPreSpinnerWidth(75);
     };
-    app.src = 'dist/js/web-app.js';
+    app.src = config.APPPATH;
     document.body.appendChild(app);
   }
 
@@ -61,7 +61,7 @@ var PAV = window.PAV || {};
     thirdParties.onload = function() {
       setPreSpinnerWidth(20);
     };
-    thirdParties.src = 'dist/js/third_party_scripts.js';
+    thirdParties.src = config.THIRDPARTYPATH;
     document.body.appendChild(thirdParties);
   }
   loadPAV();

@@ -7,6 +7,7 @@ echo "-- Building Web-app..."
 gulp autoPrefix
 gulp dev-config
 gulp browserify-web
+gulp browserify-init
 gulp app-min
 gulp template-prod
 gulp svgsprites

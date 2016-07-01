@@ -200,32 +200,15 @@ var gulp = require('gulp'),
       .pipe(gulp.dest('dist/js'));
   });
 
-
-  gulp.task('browserify-components', function() {
-    var directories = ['src/', 'src/controllers/', 'src/controllers/website/', 'src/directives/', 'src/directives/bills/' ];
-    directories.forEach(function(directory) {
-      var files = fs.readdirSync(directory);
-      files.forEach(function(file) {
-        if (fs.lstatSync(directory + file).isDirectory()) {
-          return;
-        }
-        return gulp.src(directory + file)
-        	.pipe(gulpBrowserify({ insertGlobals: true, }))
-          .pipe(gulp.dest('dist/js'));
-      });
-    });
-  });
-
-  gulp.task('comp-min', function() {
-    return gulp.src('dist/js/*.js')
-      .pipe(ignore.exclude([ 'dist/js*-min.js' ]))
-      .pipe(uglify().on('error', util.log))
-      .pipe(minify())
-      .pipe(gulp.dest('dist/js/'));
+  gulp.task('browserify-init', function() {
+    return	browserify('./src/initial_loads.js')
+      .bundle()
+      .pipe(source('initial_loads.js'))
+      .pipe(gulp.dest('dist/js'));
   });
 
   gulp.task('app-min', function(){
-    return gulp.src('dist/js/app.js')
+    return gulp.src('dist/js/*.js')
       .pipe(uglify())
       .pipe(minify())
       .pipe(gulp.dest('dist/js/'));
@@ -279,4 +262,4 @@ var gulp = require('gulp'),
 		    .pipe(gulp.dest('img'));
 	});
 
-  gulp.task('default', ['autoPrefix', 'watchFiles', 'browserify-components', 'template-dev']);
+  gulp.task('default', ['autoPrefix', 'watchFiles', 'browserify-web', 'browserify-init', 'template-dev']);
