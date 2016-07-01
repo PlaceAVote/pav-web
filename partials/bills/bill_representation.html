@@ -1,0 +1,27 @@
+<div class="bill-representation-panel">
+  <div class="bill-representation-panel__stats-banner" ng-if="demographics.isUnderRepresented()">
+
+    <div class="bill-representation-panel__stats-banner--required">
+      <p> More votes are required on this bill for your district to be providing accurate voting data</p>
+    </div>
+
+    <div class="bill-representation-panel__stats-banner--sample">
+      <div class="c-bar c-bar--straight">
+        <div class="c-bar__fill" ng-style="{'width' : demographics.demographics.votes.total + '%'}">
+        </div>
+        <div class="c-bar__info">
+          <p> We have <span ng-bind="demographics.demographics.votes.total"></span> out of <span ng-bind="demographics.demographics.sampleSize"></span> votes needed for <span ng-bind="demographics.stateName"></span>'s <span ng-bind="demographics.numberSuffixer(demographics.district)"></span> District to be represented </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="bill-representation-panel__content">
+    <bill-statistics demographics="demographics" share-to-facebook="shareToFacebook()" share-to-twitter="shareToTwitter()"></bill-statistics>
+    <div class="row tablet-col">
+        <district-league league="league"></district-league>
+        <bill-gender demographics="demographics"></bill-gender>
+    </div>
+  </div>
+</div>

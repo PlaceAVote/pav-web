@@ -3,7 +3,6 @@ var Bill = require('../models/bill.js');
 var Comment = require('../models/comment.js');
 var config = require('../config/endpoints.js');
 var TrendingBill = require('../models/trending_bill.js');
-var Representation = require('../models/representation.js');
 
 /**
  * Maps a trend response to a trend model
@@ -183,7 +182,7 @@ function BillService($resource, authService, userService) {
     }
 
     var onLoad = function(result) {
-      return callback(undefined, new Representation(result));
+      return callback(undefined, result);
     };
 
     var onError = function(err) {
@@ -197,6 +196,25 @@ function BillService($resource, authService, userService) {
     resource.rep(undefined, onLoad, onError);
   };
 
+  var getDistrictLeague = function(billId, callback) {
+    if (!billId) {
+      return callback(new Error('Bill Id must be provided'));
+    }
+
+    var onLoad = function(result) {
+      return callback(null, result);
+    };
+
+    var onError = function(err) {
+      return callback(err);
+    };
+
+    delete config.methods.get.headers.Authorization;
+    var url = config.votes.districtleague.endpoint(billId);
+    var request = new $resource(url, undefined, { getDistrict: config.methods.get });
+    request.getDistrict(undefined, onLoad, onError);
+  };
+
   return {
     getBillVotes: getBillVotes,
     getBill: getBill,
@@ -205,6 +223,7 @@ function BillService($resource, authService, userService) {
     postComment: postComment,
     getTrends: getTrends,
     getRepresentation: getRepresentation,
+    getDistrictLeague: getDistrictLeague,
   };
 }
 

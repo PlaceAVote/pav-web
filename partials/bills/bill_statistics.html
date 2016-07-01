@@ -1,1 +1,58 @@
-<h1>Bill Statistics</h1>
+<div class="
+          c-card
+          c-card--bill
+          c-card__bill-representation-card
+          margin-bottom-medium
+          tablet-margin-bottom-none">
+  <h1>Voting Statistics (<span ng-bind="demographics.stateName"></span>'s <span ng-bind="demographics.numberSuffixer(demographics.district)"></span> District)</h1>
+  <hr />
+  <div class="row tablet-col">
+
+    <div class="c-card c-stats__underrepresneted-statistics-chart c-stats__underrepresented-stats-content--center-align-mobile" ng-if="demographics.available">
+        <div style="width: 100%;" class="c-pie-chart--center">
+          <pie-chart data="demographics.stats"></pie-chart>
+        </div>
+    </div>
+
+    <div>
+      <div class="row tablet-col">
+        <div class="row tablet-margin-bottom-large tablet-margin-top-medium">
+              <div class="c-bill-stats__accent-symbol">
+                <icon ng-if="demographics.underRepresentedGenderGroup.gender === 'female'"
+                      icon="icon-gender-female"></icon>
+                <icon ng-if="demographics.underRepresentedGenderGroup.gender === 'male'"
+                      icon="icon-gender-male"></icon>
+              </div>
+          <div class="c-bill-stats__text">
+            <p>
+              <span ng-if="demographics.underRepresentedGenderGroup.gender === 'female'">Women</span>
+              <span ng-if="demographics.underRepresentedGenderGroup.gender === 'male'">Men</span>
+              are under represented on this bill
+            </p>
+            <p class="red bold"><span ng-bind="demographics.underRepresentedGenderGroup.percentage"></span>&#37;
+            </p>
+            <p>of voters are <span ng-bind="demographics.underRepresentedGenderGroup.gender"></span>.</p>
+
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="c-bill-stats__age c-bill-stats__accent-symbol">{{demographics.minorityAgeRange.ageRange}}</div>
+          <div class="c-bill-stats__text">
+              <p>
+              <span ng-bind="demographics.minorityAgeRange.ageRange"></span> Make up the least represented demographic:
+              </p>
+              <p class="red bold"> <span ng-bind="demographics.minorityAgeRange.percentage"></span>&#37;</p>
+              <p>
+              of voters are <span ng-bind="demographics.minorityAgeRange.ageRange"></span>.
+              </p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <social-box share-to-facebook="shareToFacebook()" share-to-twitter="shareToTwitter()" >Lets work together to make every single voice in your district heard. Invite people in these under represented demographics to vote on this bill</social-box>
+      </div>
+    </div>
+  </div>
+</div>

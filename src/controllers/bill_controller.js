@@ -1,16 +1,21 @@
 var PAV = window.PAV || {};
 var Comment = require('../models/comment.js');
 var AuthorizeController = require('./autherize_controller.js');
+var Demographics = require('../models/demographics.js');
+var DistrictLeague = require('../models/districtLeague.js');
 var title = require('../config/titles.js');
 var tweet = require('../models/tweet.js');
 
-function BillController($scope, $routeParams, billService, legislatorService, voteService, commentService, $location, authService, $rootScope, $timeout, facebook, $route) {
+function BillController($scope, $routeParams, billService, legislatorService, voteService, commentService, $location, authService, $rootScope, $timeout, facebook, $route, $window) {
   $scope = $scope || {};
   $scope.bill = this;
   $scope.commentService = commentService;
   this.timeout = $timeout;
-  this.rs = $rootScope;
+  this.rs = $rootScope || {};
   this.rs.inApp = true;
+  this.window = $window;
+  this.representation = new Demographics();
+  this.districtLeague = new DistrictLeague();
   this.authService = authService;
   this.location = $location;
   this.routeParams = $routeParams;
@@ -22,7 +27,7 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
   this.billService = billService;
   this.legislatorService = legislatorService;
   this.voteService = voteService;
-  this.views = ['summary', 'comments', 'info', 'statistics'];
+  this.views = ['summary', 'comments', 'info', 'statistics', 'representation'];
   this.Identify($routeParams);
   this.getBill(this.id);
   this.getTopComments(this.id);
@@ -34,8 +39,29 @@ function BillController($scope, $routeParams, billService, legislatorService, vo
   this.showChart = true;
   this.authenticate();
   this.commentOrder = 'highest-score';
-  this.representation = {};
 }
+
+BillController.prototype.getDistrictLeague = function() {
+  if (!this.rs || !this.rs.user) {
+    return;
+  }
+  this.districtLeague.setState(this.rs.user.state);
+  this.districtLeague.setDistrict(this.rs.user.district);
+
+  var that = this;
+  this.billService.getDistrictLeague(this.id, function(err, result) {
+    if (err) {
+      return;
+    }
+    that.districtLeague.populate(result);
+  });
+};
+
+BillController.prototype.shareToTwitter = function() {
+  var url = 'https://twitter.com/intent/tweet?text=' + this.getShareMessage() + '&url=' + this.getLocation();
+  this.window.open(url, '_blank');
+  return url;
+};
 
 BillController.prototype.authenticate = function() {
   var that = this;
@@ -98,7 +124,9 @@ BillController.prototype.getVotes = function(id) {
     if (err) {
       that.voteError = true;
     } else {
-      that.currentVotes = result;
+      that.noVote = result.no;
+      that.yesVote = result.yes;
+      that.calculatePie();
     }
   });
 };
@@ -129,8 +157,7 @@ BillController.prototype.voteConfirmed = function(vote) {
   this.hasVoted = true;
   var contrarianComment = vote ? this.againstComment : this.forComment;
   this.generateCommentCard(contrarianComment);
-  this.updateRepresentationView();
-
+  this.updateRepresentationView(vote);
 };
 
 
@@ -218,6 +245,7 @@ BillController.prototype.getBill = function(id) {
       that.getLegislator(result.billData.sponsor);
       that.sponsorCount(result.billData.cosponsors_count);
       that.getRepresentation();
+      that.getDistrictLeague();
     }
   });
 };
@@ -301,7 +329,6 @@ BillController.prototype.postComment = function() {
 
   if (scriptExp.test(this.commentBody) || objectExp.test(this.commentBody)) {
     this.commentError('Sorry, there was an error.');
-    console.log('caught');
     this.commentBody = '';
     return;
   }
@@ -385,38 +412,30 @@ BillController.prototype.sponsorCount = function(sponsors) {
 BillController.prototype.getRepresentation = function() {
   var that = this;
 
-  if (!this.rs) {
-    this.representation.available = false;
+  if (!this.rs || !this.rs.user.district || !this.rs.user.state) {
+    this.representation.setAvailable(false);
     return;
   }
 
-  if (!this.rs.user.district || !this.rs.user.state) {
-    this.representation.available = false;
-    return;
-  }
-
-  if (!this.representation) {
-    this.representation = {};
-  }
-
-  this.representation.for = {
+  var request = {
     state: this.rs.user.state,
     district: this.rs.user.district,
     bill_id: this.body.billData.bill_id,
   };
 
-  this.representation.busy = true;
+  this.representation.setState(this.rs.user.state);
+  this.representation.setDistrict(this.rs.user.district);
+  this.representation.setBusy(true);
 
-  this.billService.getRepresentation(this.representation.for, function(err, res) {
-
-    that.representation.busy = false;
+  this.billService.getRepresentation(request, function(err, res) {
 
     if (err) {
-      that.representation.available = false;
+      that.representation.setAvailable(false);
+      that.representation.setBusy(false);
     }
 
     if (res) {
-      that.representation.result = res;
+      that.representation.populate(res);
     }
 
   });
@@ -424,13 +443,33 @@ BillController.prototype.getRepresentation = function() {
 };
 
 
-BillController.prototype.updateRepresentationView = function() {
-  var votesTotal = this.representation.result.votesTotal + 1;
-  var sampleSize = this.representation.result.sampleSize;
-  this.representation.result.representationScore = votesTotal + '/' + sampleSize;
-  if (this.representation.result.representationPercent < 100) {
-    this.representation.result.representationPercent = Math.ceil((votesTotal / sampleSize) * 100);
+BillController.prototype.calculatePie = function() {
+  var noVote = {
+    val: Math.round((this.noVote / (this.noVote + this.yesVote)) * 100),
+    label: 'Against',
+    className: 'against',
+  };
+  var yesVote = {
+    val: Math.round((this.yesVote / (this.noVote + this.yesVote)) * 100),
+    label: 'In Favor',
+    className: 'favor',
+  };
+  this.nationalStats = [ noVote, yesVote ];
+};
+
+BillController.prototype.updateOverallStats = function(vote) {
+  if (vote) {
+    this.yesVote ++;
+  } else {
+    this.noVote ++;
   }
+};
+
+BillController.prototype.updateRepresentationView = function(vote) {
+  this.updateOverallStats(vote);
+  this.calculatePie();
+  this.representation.updateVotePercent(vote);
+  this.representation.updateRepresentation();
 };
 
 module.exports = BillController;
