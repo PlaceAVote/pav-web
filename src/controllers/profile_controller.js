@@ -69,8 +69,7 @@ ProfileController.prototype.populateProfile = function() {
     if (err) {
       // Profile Not Found
       if (err.status === 404) {
-        console.log('Nothing here!');
-        that.location.path('/userNotFound');
+        that.location.path('/usernotfound');
         return;
       }
       return;
