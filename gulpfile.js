@@ -62,20 +62,6 @@ var gulp = require('gulp'),
     gulpSequence('lint:jshint', 'lint:jscs', 'test', done);
   });
 
-  gulp.task('compress', function() {
-    return gulp.src('./web/dist/js/app.js')
-    .pipe(minify())
-    .pipe(uglify())
-    .pipe(gulp.dest('./web/dist/js'));
-  });
-
-  gulp.task('minify', function() {
-    return gulp.src('./dist/js/app.js')
-    .pipe(minify())
-    .pipe(uglify())
-    .pipe(gulp.dest('./dist/js'));
-  });
-
   gulp.task('template-prod', function() {
     return gulp.src('./index.mustache')
       .pipe(mustache('./app-path.json', { extension: '.html' }))
@@ -98,75 +84,6 @@ var gulp = require('gulp'),
     gulp.src(['./src/config/dev_urls.js'])
     .pipe(rename('urls.js'))
     .pipe(gulp.dest('./src/config/'));
-  });
-
-  // Website
-
-  // Website Sass
-  gulp.task('website-sass', function() {
-    return gulp.src('./web/src/scss/*.scss')
-    .pipe(sass({includePaths: ['./scss']}))
-    .pipe(gulp.dest('./web/dist/css'));
-  });
-
-  gulp.task('website-autoPrefix', ['website-sass'], function() {
-    return gulp.src('./web/dist/css/styles.css')
-    .pipe(autoprefix())
-    .pipe(minifycss())
-    .pipe(gulp.dest('./web/dist/css'));
-  });
-
-  // Website Browserify
-  gulp.task('browserify-website', function() {
-    return browserify('./web/src/website.js')
-    .bundle()
-    .pipe(source('app.js'))
-    .pipe(gulp.dest('./web/dist/js'));
-  });
-
-  // Website Imgs
-  gulp.task('website-imgs', function() {
-    return gulp.src('./web/src/img/**')
-    .pipe(gulp.dest('./web/dist/img'));
-  });
-
-  gulp.task('website-fonts', function() {
-    return gulp.src('./web/src/font/**')
-    .pipe(gulp.dest('./web/dist/font'));
-  });
-  // Website HTML
-  gulp.task('website-html', function(){
-    return gulp.src('./web/src/partials/*.html')
-    .pipe(gulp.dest('./web/dist/partials'));
-  });
-
-  gulp.task('index-html', function() {
-    return gulp.src('./web/src/index.html')
-    .pipe(gulp.dest('./web/dist/'));
-  });
-
-  gulp.task('download-folder', function() {
-    return gulp.src('./web/src/downloads/**')
-    .pipe(gulp.dest('./web/dist/downloads/'));
-  });
-
-  gulp.task('browser-sync-website', function() {
-    browserSync.init({
-      server: {
-        baseDir: "./web/dist/"
-      }
-    });
-    gulp.watch(["web/src/partials/*.html", "./web/dist/css/*.css", "./web/dist/js/*.js"]).on("change", browserSync.reload);
-  });
-
-  gulp.task('watch-website',  ['website-autoPrefix', 'index-html', 'website-fonts', 'browserify-website', 'website-imgs', 'website-html', 'download-folder', 'browser-sync-website'] , function() {
-    gulp.watch(['./web/src/scss/*.scss','./web/src/website.js', './web/src/js/**/*', './web/src/index.html', './web/src/partials/*.html'], ['website-autoPrefix', 'index-html' ,'browserify-website', 'website-imgs', 'website-html']);
-  });
-
-  gulp.task('build-site', ['index-html', 'website-fonts', 'browserify-website', 'website-imgs', 'website-html', 'download-folder', 'website-autoPrefix'],function() {
-    return gulp.src('./web/dist/js/app.js')
-    .pipe(minify())
-    .pipe(gulp.dest('./web/dist/js'));
   });
 
   // Static server
@@ -214,22 +131,6 @@ var gulp = require('gulp'),
       .pipe(gulp.dest('dist/js/'));
   });
 
-  gulp.task('ionicise', function(){
-    gulp.src(['img/*'])
-    .pipe(gulp.dest('pav_ionic/www/img'));
-    gulp.src(['css/*.css'])
-    .pipe(gulp.dest('pav_ionic/www/css'));
-    gulp.src(['partials/*_ionic.html'])
-    .pipe(gulp.dest('pav_ionic/www/partials'));
-    gulp.src(['index_ionic.html'])
-    .pipe(rename('index.html'))
-    .pipe(gulp.dest('pav_ionic/www/'));
-    browserify('./src/ionic-app.js')
-    .bundle()
-    .pipe(source('mobile-app.js'))
-    .pipe(gulp.dest('pav_ionic/www/dist/js'));
-  });
-
   gulp.task('img-shrink', function () {
     return gulp.src(['./img_raw/**/*.png','./img_raw/**/*.svg','./img_raw/**/*.ico'])
     .pipe(imagemin({
@@ -250,10 +151,6 @@ var gulp = require('gulp'),
     gulp.watch('scss/**/**/*', ['autoPrefix']);
     gulp.watch(['src/**/*.js', 'src/*.js'], ['browserify-web']);
     gulp.watch('partials/**/*');
-  });
-
-  gulp.task('watchIonic', function() {
-    gulp.watch(['src/**/*_ionic.js', 'src/*_ionic.js', 'src/ionic-app.js', 'partials/*_ionic.html'], ['ionicise']);
   });
 
 	gulp.task('svgsprites', function() {
