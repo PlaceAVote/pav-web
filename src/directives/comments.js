@@ -1,4 +1,3 @@
-var PAV = window.PAV || {};
 var commentsDirective = function() {
   return {
     restrict: 'E',
@@ -9,5 +8,4 @@ var commentsDirective = function() {
     template: '<comment ng-repeat=\'comment in comments\' comment=\'comment\'></comment>',
   };
 };
-PAV.commentsDirective = commentsDirective;
 module.exports = commentsDirective;

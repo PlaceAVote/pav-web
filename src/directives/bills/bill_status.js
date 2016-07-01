@@ -1,4 +1,3 @@
-var PAV = window.PAV || {};
 var billStatus = function($location) {
   return {
     restict: 'E',
@@ -6,5 +5,4 @@ var billStatus = function($location) {
   };
 };
 
-PAV.billStatusDirective = billStatus;
 module.exports = billStatus;

@@ -1,4 +1,3 @@
-var PAV = window.PAV || {};
 var issueModalDirective = function($location, $timeout, issueService, $rootScope) {
   return {
     restrict: 'E',
@@ -113,5 +112,4 @@ var issueModalDirective = function($location, $timeout, issueService, $rootScope
     },
   };
 };
-PAV.issueModalDirective = issueModalDirective;
 module.exports = issueModalDirective;

@@ -1,4 +1,3 @@
-var PAV = window.PAV || {};
 var timelineDirective = function($location) {
   return {
     restrict: 'E',
@@ -13,5 +12,4 @@ var timelineDirective = function($location) {
     },
   };
 };
-PAV.timelineDirective = timelineDirective;
 module.exports = timelineDirective;

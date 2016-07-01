@@ -1,5 +1,4 @@
 var d3 = require('d3');
-var PAV = window.PAV || {};
 
 function createChart(dataset, el, attr, window) {
 
@@ -99,5 +98,4 @@ var ringChartDirective = function($window) {
     },
   };
 };
-PAV.pieChartDirective = ringChartDirective;
 module.exports = ringChartDirective;

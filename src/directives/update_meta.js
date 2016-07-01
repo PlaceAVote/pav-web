@@ -1,4 +1,3 @@
-var PAV = window.PAV || {};
 var updateMetaDirective = function($log) {
   function updateAttribute(selector, attributeName, attributeValue) {
     if (!document) {
@@ -63,5 +62,4 @@ var updateMetaDirective = function($log) {
     },
   };
 };
-PAV.updateMetaDirective = updateMetaDirective;
 module.exports = updateMetaDirective;

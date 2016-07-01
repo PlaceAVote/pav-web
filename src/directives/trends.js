@@ -1,4 +1,3 @@
-var PAV = window.PAV || {};
 var trends = function($location) {
   return {
     restrict: 'E',
@@ -13,5 +12,4 @@ var trends = function($location) {
     },
   };
 };
-PAV.trendsDirective = trends;
 module.exports = trends;

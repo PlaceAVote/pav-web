@@ -1,4 +1,3 @@
-var PAV = window.PAV || {};
 var voteConfirmed = function($location) {
   return {
     restict: 'E',
@@ -10,5 +9,4 @@ var voteConfirmed = function($location) {
     },
   };
 };
-PAV.voteConfirmedDirective = voteConfirmed;
 module.exports = voteConfirmed;

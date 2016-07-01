@@ -1,4 +1,3 @@
-var PAV = window.PAV || {};
 var ExampleIssue = require('../models/issue.js');
 var issuesPostDirective = function() {
   return {
@@ -58,5 +57,4 @@ var issuesPostDirective = function() {
     },
   };
 };
-PAV.issuesPostDirective = issuesPostDirective;
 module.exports = issuesPostDirective;

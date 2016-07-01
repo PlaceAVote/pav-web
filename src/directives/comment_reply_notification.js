@@ -1,4 +1,3 @@
-var PAV = window.PAV || {};
 var commentReplyNotificationDirective = function($location) {
   return {
     restrict: 'E',
@@ -14,5 +13,4 @@ var commentReplyNotificationDirective = function($location) {
   };
 };
 
-PAV.commentReplyNotificationDirective = commentReplyNotificationDirective;
 module.exports = commentReplyNotificationDirective;

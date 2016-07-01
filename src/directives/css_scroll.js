@@ -1,4 +1,3 @@
-var PAV = window.PAV || {};
 var cssScrollDirective = function() {
   return {
     restrict: 'A',
@@ -36,5 +35,4 @@ var cssScrollDirective = function() {
     },
   };
 };
-PAV.cssScrollDirective = cssScrollDirective;
 module.exports = cssScrollDirective;

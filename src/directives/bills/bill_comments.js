@@ -1,4 +1,3 @@
-var PAV = window.PAV || {};
 var billComments = function($location) {
   return {
     restict: 'E',
@@ -10,4 +9,3 @@ var billComments = function($location) {
 };
 
 module.exports = billComments;
-PAV.billCommentsDirective = billComments;

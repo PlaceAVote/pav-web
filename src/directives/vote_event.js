@@ -1,4 +1,3 @@
-var PAV = window.PAV || {};
 var voteEventDirective = function($location) {
   return {
     restrict: 'E',
@@ -13,5 +12,4 @@ var voteEventDirective = function($location) {
     },
   };
 };
-PAV.voteEventDirective = voteEventDirective;
 module.exports = voteEventDirective;

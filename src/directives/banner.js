@@ -1,4 +1,3 @@
-var PAV = window.PAV || {};
 var bannerDirective = function() {
   return {
     restrict: 'E',
@@ -47,5 +46,4 @@ var bannerDirective = function() {
     },
   };
 };
-PAV.bannerDirective = bannerDirective;
 module.exports = bannerDirective;

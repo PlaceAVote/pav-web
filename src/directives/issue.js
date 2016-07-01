@@ -1,6 +1,5 @@
 var tweet = require('../models/tweet.js');
 var Issue = require('../models/issue.js');
-var PAV = window.PAV || {};
 var issueDirective = function($location, issueService, facebook, $window, userService, $timeout, $compile) {
   return {
     restrict: 'E',
@@ -249,5 +248,4 @@ var issueDirective = function($location, issueService, facebook, $window, userSe
     },
   };
 };
-PAV.issueDirective = issueDirective;
 module.exports = issueDirective;

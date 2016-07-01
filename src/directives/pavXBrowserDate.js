@@ -1,4 +1,3 @@
-var PAV = window.PAV || {};
 var pavXBrowserDateDirective = function() {
   return {
     restrict: 'E',
@@ -20,5 +19,4 @@ var pavXBrowserDateDirective = function() {
     },
   };
 };
-PAV.pavXBrowserDateDirective = pavXBrowserDateDirective;
 module.exports = pavXBrowserDateDirective;

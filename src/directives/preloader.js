@@ -1,4 +1,3 @@
-var PAV = window.PAV || {};
 var preloaderDirective = function(location) {
   return {
     restrict: 'A',
@@ -22,5 +21,4 @@ var preloaderDirective = function(location) {
     },
   };
 };
-PAV.preloaderDirective = preloaderDirective;
 module.exports = preloaderDirective;

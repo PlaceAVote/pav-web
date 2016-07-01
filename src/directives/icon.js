@@ -1,4 +1,3 @@
-var PAV = window.PAV || {};
 var iconDirective = function() {
   return {
     restrict: 'E',
@@ -13,5 +12,4 @@ var iconDirective = function() {
     },
   };
 };
-PAV.iconDirective = iconDirective;
 module.exports = iconDirective;

@@ -1,4 +1,3 @@
-var PAV = window.PAV || {};
 var feedCommentEventDirective = function() {
   return {
     restrict: 'E',
@@ -11,5 +10,4 @@ var feedCommentEventDirective = function() {
     },
   };
 };
-PAV.feedCommentEventDirective = feedCommentEventDirective;
 module.exports = feedCommentEventDirective;

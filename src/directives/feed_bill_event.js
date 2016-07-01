@@ -1,5 +1,4 @@
 var tweet = require('../models/tweet.js');
-var PAV = window.PAV || {};
 
 var feedBillEventDirective = function($location, facebook) {
   return {
@@ -48,5 +47,4 @@ var feedBillEventDirective = function($location, facebook) {
     },
   };
 };
-PAV.feedBillEventDirective = feedBillEventDirective;
 module.exports = feedBillEventDirective;

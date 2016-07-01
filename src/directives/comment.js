@@ -1,4 +1,3 @@
-var PAV = window.PAV || {};
 var comment = function($compile, commentService, $anchorScroll, $timeout, $location, $window, userService) {
   return {
     restrict: 'E',
@@ -148,5 +147,4 @@ var comment = function($compile, commentService, $anchorScroll, $timeout, $locat
     },
   };
 };
-PAV.commentDirective = comment;
 module.exports = comment;

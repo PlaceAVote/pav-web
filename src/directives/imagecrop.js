@@ -1,5 +1,4 @@
 var ImageCropper = require('../utils/imagecrop.js');
-var PAV = window.PAV || {};
 var imageCropDirective = function() {
   return {
     restrict: 'E',
@@ -50,5 +49,4 @@ var imageCropDirective = function() {
     },
   };
 };
-PAV.imageCropDirective = imageCropDirective;
 module.exports = imageCropDirective;

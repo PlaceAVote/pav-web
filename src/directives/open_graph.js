@@ -1,4 +1,3 @@
-var PAV = window.PAV || {};
 var openGraphDirective = function() {
   return {
     restrict: 'E',
@@ -8,5 +7,4 @@ var openGraphDirective = function() {
     templateUrl: 'partials/open_graph.html',
   };
 };
-PAV.openGraphDirective = openGraphDirective;
 module.exports = openGraphDirective;

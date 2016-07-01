@@ -1,4 +1,3 @@
-var PAV = window.PAV || {};
 var emailConnectionsDirective = function() {
   return {
     restrict: 'E',
@@ -6,5 +5,4 @@ var emailConnectionsDirective = function() {
     templateUrl: 'partials/email_connections.html',
   };
 };
-PAV.emailConnectionsDirective = emailConnectionsDirective;
 module.exports = emailConnectionsDirective;

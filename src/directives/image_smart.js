@@ -1,5 +1,4 @@
 var objectFitImages = require('object-fit-images');
-var PAV = window.PAV || {};
 var imageSmartDirective = function() {
   return {
     restrict: 'E',
@@ -34,5 +33,4 @@ var imageSmartDirective = function() {
     },
   };
 };
-PAV.imageSmartDirective = imageSmartDirective;
 module.exports = imageSmartDirective;

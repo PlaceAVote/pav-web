@@ -1,4 +1,3 @@
-var PAV = window.PAV || {};
 var sliderDirective = function($timeout) {
   return {
     restrict: 'E',
@@ -27,5 +26,4 @@ var sliderDirective = function($timeout) {
     },
   };
 };
-PAV.sliderDirective = sliderDirective;
 module.exports = sliderDirective;

@@ -1,4 +1,3 @@
-var PAV = window.PAV || {};
 var searchBarDirective = function($sce, $location) {
   return {
     restrict: 'E',
@@ -243,5 +242,4 @@ var searchBarDirective = function($sce, $location) {
     },
   };
 };
-PAV.searchBarDirective = searchBarDirective;
 module.exports = searchBarDirective;

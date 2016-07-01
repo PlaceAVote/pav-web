@@ -1,4 +1,3 @@
-var PAV = window.PAV || {};
 var compileDirective = function($compile, $window, $sce, $sanitize) {
   return {
     restrict: 'A',
@@ -20,5 +19,4 @@ var compileDirective = function($compile, $window, $sce, $sanitize) {
     },
   };
 };
-PAV.compileDirective = compileDirective;
 module.exports = compileDirective;

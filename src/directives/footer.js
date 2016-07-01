@@ -1,4 +1,3 @@
-var PAV = window.PAV || {};
 var footerDirective = function() {
   return {
     restrict: 'E',
@@ -6,5 +5,4 @@ var footerDirective = function() {
     templateUrl: 'partials/website_partials/footer.html',
   };
 };
-PAV.footerDirective = footerDirective;
 module.exports = footerDirective;

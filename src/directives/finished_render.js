@@ -1,4 +1,3 @@
-var PAV = window.PAV || {};
 var finishedRenderDirective = function() {
   return {
     priority: -1000,
@@ -9,5 +8,4 @@ var finishedRenderDirective = function() {
     },
   };
 };
-PAV.finishedRenderDirective = finishedRenderDirective;
 module.exports = finishedRenderDirective;

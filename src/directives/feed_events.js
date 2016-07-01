@@ -1,4 +1,3 @@
-var PAV = window.PAV || {};
 var feedEventsDirective = function() {
   return {
     restrict: 'E',
@@ -11,5 +10,4 @@ var feedEventsDirective = function() {
     templateUrl: 'partials/feed/feed_events.html',
   };
 };
-PAV.feedEventsDirective = feedEventsDirective;
 module.exports = feedEventsDirective;
