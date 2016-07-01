@@ -13,12 +13,6 @@ Run browser-sync for live browser experience with option to view on mobile if yo
 
 	gulp browser-sync
 
-or you can use http-server
-
-	http-server -o
-
-You must provide a valid email and password containing a minimum of 8 characters that consists of at least one digit and one uppercase character.
-
 Testing:
 
 Testing is ran using a mocha js.
@@ -37,41 +31,3 @@ This will require instaling mocha globally.
 
 All tests should be passing before submitting a pull request from branch -> master.
 CircleCi will not deploy a broken build.
-
-#pav website
-
-To get the website up and running run:
-
-	gulp watch-website
-
-Change app-min.js to app.js in web/src/index.html *change this back before you merge it to master*
-
-Do the safety dance
-
-#pav ionic
-
-Install dependencies
-
-	npm install
-
-Install ionic & cordova
-
-	sudo npm install -g cordova ionic
-
-Create the ionic app
-
-	ionic start pav_ionic
-
-The name here is very important so make sure it's right.  Other naming conventions include naming specific
-ionic only files (eg. index_ionic.html) to have a trailing _ionic attatched before the file type.
-
-Run the gulp tak
-
-	gulp ionicise
-
-Finally jump into the pav_ionic folder and run the emulate function:
-
-	cd pav_ionic && ionic emulate ios
-
-By default ionic adds the ios platform to the project.  However, you must be running OSX and XCode installed.
-To run android versions refer see [here] (http://cordova.apache.org/docs/en/3.3.0/guide_platforms_android_index.md.html#Android%20Platform%20Guide)
