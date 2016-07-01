@@ -43,7 +43,8 @@ DistrictLeague.prototype.numberSuffixer = function(num) {
  */
 DistrictLeague.mapViewData = function(league) {
   return league.map(function(position) {
-    var percentage = Math.round((position.hits / position.sampleSize) * 100);
+    var percentage = ((position.hits / position.sampleSize) * 100);
+    percentage = percentage.toFixed(1);
     if (isNaN(percentage)) {
       percentage = 0;
     }
