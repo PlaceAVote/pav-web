@@ -38,7 +38,7 @@ describe('District League', function() {
       var league = [ { state: 'CA', district: 33, hits: 2, population: 100, sampleSize: 20 }, ];
       var actual = DistrictLeague.mapViewData(league);
       expect(actual.length).to.eql(1);
-      expect(actual[0]).to.eql({ state: 'CA', district: 33, hits: 2, population: 100, sampleSize: 20, percentage: 10, stateName: 'California' });
+      expect(actual[0]).to.eql({ state: 'CA', district: 33, hits: 2, population: 100, sampleSize: 20, percentage: '10.0', stateName: 'California' });
     });
     it('sets population to 0 if theres no sampleSize', function() {
       var league = [ { state: 'CA', district: 33, hits: 2, population: 100, }, ];
@@ -140,11 +140,11 @@ describe('District League', function() {
       var subject = new DistrictLeague(options);
       var selectionLeague = subject.getSurrounding();
       expect(selectionLeague).to.eql([
-          { state: 'CA', district: 22, hits: 20, position: 4, percentage: 8, sampleSize: 250, stateName: 'California'},
-          { state: 'PA', district: 11, hits: 20, position: 5, percentage: 8, sampleSize: 250, stateName: 'Pennsylvania' },
-          { state: 'CA', district: 6, hits: 20, current: true, position: 6, percentage: 8, sampleSize: 250, stateName: 'California' },
-          { state: 'NY', district: 12, hits: 17, position: 7, percentage: 7, sampleSize: 250, stateName: 'New York' },
-          { state: 'NY', district: 22, hits: 16, position: 8, percentage: 6, sampleSize: 250, stateName: 'New York' },
+          { state: 'CA', district: 22, hits: 20, position: 4, percentage: '8.0', sampleSize: 250, stateName: 'California'},
+          { state: 'PA', district: 11, hits: 20, position: 5, percentage: '8.0', sampleSize: 250, stateName: 'Pennsylvania' },
+          { state: 'CA', district: 6, hits: 20, current: true, position: 6, percentage: '8.0', sampleSize: 250, stateName: 'California' },
+          { state: 'NY', district: 12, hits: 17, position: 7, percentage: '6.8', sampleSize: 250, stateName: 'New York' },
+          { state: 'NY', district: 22, hits: 16, position: 8, percentage: '6.4', sampleSize: 250, stateName: 'New York' },
       ]);
     });
 
@@ -170,11 +170,11 @@ describe('District League', function() {
       var subject = new DistrictLeague(options);
       var selectionLeague = subject.getSurrounding();
       expect(selectionLeague).to.eql([
-          { state: 'CA', district: 11, hits: 25, position: 1, percentage: 10, sampleSize: 250, stateName: 'California', },
-          { state: 'NY', district: 14, hits: 22, position: 2, percentage: 9, sampleSize: 250, stateName: 'New York' },
-          { state: 'NY', district: 11, hits: 23, position: 3, percentage: 9, sampleSize: 250, stateName: 'New York' },
-          { state: 'CA', district: 22, hits: 20, position: 4, percentage: 8, sampleSize: 250, stateName: 'California' },
-          { state: 'PA', district: 11, hits: 20, position: 5, percentage: 8, sampleSize: 250, stateName: 'Pennsylvania' },
+          { state: 'CA', district: 11, hits: 25, position: 1, percentage: '10.0', sampleSize: 250, stateName: 'California', },
+          { state: 'NY', district: 11, hits: 23, position: 2, percentage: '9.2', sampleSize: 250, stateName: 'New York' },
+          { state: 'NY', district: 14, hits: 22, position: 3, percentage: '8.8', sampleSize: 250, stateName: 'New York' },
+          { state: 'CA', district: 22, hits: 20, position: 4, percentage: '8.0', sampleSize: 250, stateName: 'California' },
+          { state: 'PA', district: 11, hits: 20, position: 5, percentage: '8.0', sampleSize: 250, stateName: 'Pennsylvania' },
       ]);
     });
 
@@ -200,11 +200,11 @@ describe('District League', function() {
       var subject = new DistrictLeague(options);
       var selectionLeague = subject.getSurrounding();
       expect(selectionLeague).to.eql([
-          { state: 'NY', district: 12, hits: 17, position: 7, sampleSize: 250, percentage: 7, stateName: 'New York' },
-          { state: 'NY', district: 22, hits: 16, position: 8, sampleSize: 250, percentage: 6, stateName: 'New York' },
-          { state: 'PA', district: 13, hits: 15, position: 9, sampleSize: 250, percentage: 6, stateName: 'Pennsylvania' },
-          { state: 'CA', district: 13, hits: 12, position: 10, sampleSize: 250, percentage: 5, stateName: 'California' },
-          { state: 'NY', district: 13, hits: 10, current: true, position: 11, sampleSize: 250, percentage: 4, stateName: 'New York' },
+          { state: 'NY', district: 12, hits: 17, percentage: '6.8', position: 7, sampleSize: 250, stateName: 'New York' },
+          { state: 'NY', district: 22, hits: 16, percentage: '6.4', position: 8, sampleSize: 250, stateName: 'New York' },
+          { state: 'PA', district: 13, hits: 15, percentage: '6.0', position: 9, sampleSize: 250, stateName: 'Pennsylvania' },
+          { state: 'CA', district: 13, hits: 12, percentage: '4.8', position: 10, sampleSize: 250, stateName: 'California' },
+          { state: 'NY', district: 13, hits: 10, current: true, percentage: '4.0', position: 11, sampleSize: 250, stateName: 'New York' },
       ]);
     });
   });
@@ -231,11 +231,11 @@ describe('District League', function() {
       var subject = new DistrictLeague(options);
       var selectionLeague = subject.generateLeague();
       expect(selectionLeague).to.eql([
-          { state: 'NY', district: 12, hits: 17, percentage: 7, position: 7, sampleSize: 250, stateName: 'New York' },
-          { state: 'NY', district: 22, hits: 16, percentage: 6, position: 8, sampleSize: 250, stateName: 'New York' },
-          { state: 'PA', district: 13, hits: 15, percentage: 6, position: 9, sampleSize: 250, stateName: 'Pennsylvania' },
-          { state: 'CA', district: 13, hits: 12, percentage: 5, position: 10, sampleSize: 250, stateName: 'California' },
-          { state: 'NY', district: 13, hits: 10, current: true, percentage: 4, position: 11, sampleSize: 250, stateName: 'New York' },
+          { state: 'NY', district: 12, hits: 17, percentage: '6.8', position: 7, sampleSize: 250, stateName: 'New York' },
+          { state: 'NY', district: 22, hits: 16, percentage: '6.4', position: 8, sampleSize: 250, stateName: 'New York' },
+          { state: 'PA', district: 13, hits: 15, percentage: '6.0', position: 9, sampleSize: 250, stateName: 'Pennsylvania' },
+          { state: 'CA', district: 13, hits: 12, percentage: '4.8', position: 10, sampleSize: 250, stateName: 'California' },
+          { state: 'NY', district: 13, hits: 10, current: true, percentage: '4.0', position: 11, sampleSize: 250, stateName: 'New York' },
       ]);
     });
   });
