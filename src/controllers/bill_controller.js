@@ -1,4 +1,3 @@
-var PAV = window.PAV || {};
 var Comment = require('../models/comment.js');
 var AuthorizeController = require('./autherize_controller.js');
 var Demographics = require('../models/demographics.js');
@@ -473,4 +472,3 @@ BillController.prototype.updateRepresentationView = function(vote) {
 };
 
 module.exports = BillController;
-PAV.billController = BillController;

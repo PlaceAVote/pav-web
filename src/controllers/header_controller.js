@@ -1,4 +1,3 @@
-var PAV = window.PAV || {};
 var AuthorizeController = require('./autherize_controller.js');
 var title = require('../config/titles.js');
 
@@ -286,4 +285,3 @@ HeaderCtrl.prototype.feedRefresh = function() {
 };
 
 module.exports = HeaderCtrl;
-PAV.headerController = HeaderCtrl;

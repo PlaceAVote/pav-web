@@ -1,4 +1,3 @@
-var PAV = window.PAV || {};
 var title = require('../config/titles.js');
 
 function ProfileController($scope, $location, $routeParams, authService, userService, issueService, $rootScope) {
@@ -222,4 +221,3 @@ ProfileController.prototype.saveProfilePicture = function(img) {
   });
 };
 module.exports = ProfileController;
-PAV.profileController = ProfileController;

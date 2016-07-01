@@ -1,5 +1,4 @@
 var config = require('../../config/endpoints.js');
-var PAV = window.PAV || {};
 function ContactController($scope, $timeout, mailService) {
   $scope = $scope || {};
   this.scope = $scope;
@@ -33,5 +32,4 @@ ContactController.prototype.toMail = function() {
   });
 };
 
-PAV.contactController = ContactController;
 module.exports = ContactController;

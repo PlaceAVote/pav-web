@@ -1,4 +1,3 @@
-var PAV = window.PAV || {};
 var taxCalculator = require('../models/tax_calculator.js')();
 var TaxMultiPart = require('../models/tax_multi_part_question.js');
 
@@ -98,4 +97,3 @@ WizardController.prototype.closeWizard = function() {
 };
 
 module.exports = WizardController;
-PAV.wizardController = WizardController;

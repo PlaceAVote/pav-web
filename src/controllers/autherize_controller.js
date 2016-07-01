@@ -1,4 +1,3 @@
-var PAV = window.PAV || {};
 function AuthorizeController() {}
 /**
  ** Autherize the current session.
@@ -33,6 +32,4 @@ AuthorizeController.logout = function(options) {
   });
 };
 
-
 module.exports = AuthorizeController;
-PAV.autherizeController = AuthorizeController;

@@ -1,4 +1,3 @@
-var PAV = window.PAV || {};
 var AuthorizeController = require('./autherize_controller.js');
 var title = require('../config/titles.js');
 var differ = require('../utils/differ.js');
@@ -230,4 +229,3 @@ SettingsController.prototype.saveProfilePicture = function(img) {
 };
 
 module.exports = SettingsController;
-PAV.settingsController = SettingsController;

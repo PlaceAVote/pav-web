@@ -1,4 +1,3 @@
-var PAV = window.PAV || {};
 var issueValidator = require('../utils/validate_issue.js')();
 var Issue = require('../models/issue.js');
 
@@ -167,4 +166,3 @@ IssuesController.prototype.postIssue = function() {
 };
 
 module.exports = IssuesController;
-PAV.issuesController = IssuesController;

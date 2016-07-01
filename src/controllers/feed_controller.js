@@ -1,4 +1,3 @@
-var PAV = window.PAV || {};
 var Banner = require('../models/banner.js');
 var AuthorizeController = require('./autherize_controller.js');
 var title = require('../config/titles.js');
@@ -262,4 +261,3 @@ FeedController.prototype.feedMessage = function(message) {
 };
 
 module.exports = FeedController;
-PAV.feedController = FeedController;

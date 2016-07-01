@@ -1,4 +1,3 @@
-var PAV = window.PAV || {};
 var countryCodes = require('../utils/countrycodes.json');
 var zipValidator = require('../utils/zipValidator.js');
 
@@ -246,4 +245,3 @@ SignUpCtrl.prototype.maxDate = function() {
 };
 
 module.exports = SignUpCtrl;
-PAV.signUpController = SignUpCtrl;

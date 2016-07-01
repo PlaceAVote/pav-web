@@ -1,4 +1,3 @@
-var PAV = window.PAV || {};
 function FaqController($scope, $location) {
 
 	$scope.faq = this;
@@ -65,5 +64,4 @@ function FaqController($scope, $location) {
 		}
 	];
 }
-PAV.faqController = FaqController;
 module.exports = FaqController;
