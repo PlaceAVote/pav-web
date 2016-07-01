@@ -1,6 +1,9 @@
 var urls = require('./urls.js');
 
 module.exports = {
+  preController: urls.PRECONTROLLER,
+  preDirective: urls.PREDIRECTIVE,
+  suffile: urls.SUFFILE,
   facebookAppId: urls.FACEBOOKAPPID,
   mandrillKey: urls.MANDRILAPIKEY,
   methods: {

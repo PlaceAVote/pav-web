@@ -1,5 +1,5 @@
 var PAV = window.PAV || {};
-var openGraphDirective = function($location) {
+var openGraphDirective = function() {
   return {
     restrict: 'E',
     scope: {

@@ -188,7 +188,6 @@ app.value('THROTTLE_MILLISECONDS', null);
 function bind(params) {
   var pav = PAV || {};
   app[params.func](params.name, PAV[params.global]);
-  console.log(pav);
   if (params.deps) {
     PAV[params.global].$inject = params.deps;
   }
@@ -204,7 +203,13 @@ function register(params) {
   dep.onload = function() {
     bind(params);
   };
-  dep.src = 'dist/js/' +  params.path + '-min.js';
+  var pre;
+  if (params.func === 'directive') {
+    pre = config.PREDIRECTIVE;
+  } else {
+    pre = config.PRECONTROLLER;
+  }
+  dep.src = pre + params.path + config.SUFFILE;
   document.body.appendChild(dep);
 }
 

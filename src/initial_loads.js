@@ -16,7 +16,7 @@ var PAV = window.PAV || {};
         post.style.display = '';
         var pre = document.getElementById('preloading-spinner');
         pre.style.display = 'none';
-      }, 3000);
+      }, 1000);
     });
     var app = document.createElement('script');
     app.type = 'text/javascript';
@@ -24,20 +24,17 @@ var PAV = window.PAV || {};
       console.log('error');
     };
     app.onload = function() {
-      console.log('loaded script app');
       setPreSpinnerWidth(75);
     };
-    app.src = 'dist/js/app-min.js';
+    app.src = 'dist/js/web-app.js';
     document.body.appendChild(app);
   }
 
   function loadStyles() {
-    console.log('runing style');
     var styles = document.createElement('link');
     styles.type = 'text/css';
     styles.rel = 'stylesheet';
     styles.onload = function() {
-      console.log('loaded styles');
       setPreSpinnerWidth(50);
     };
     styles.href = '/css/styles.css';
@@ -45,12 +42,10 @@ var PAV = window.PAV || {};
   }
 
   function loadFonts() {
-    console.log('runing font');
     var fonts = document.createElement('link');
     fonts.type = 'text/css';
     fonts.rel = 'stylesheet';
     fonts.onload = function() {
-      console.log('loaded fonts');
       setPreSpinnerWidth(35);
     };
     fonts.href = '//cloud.typography.com/6645674/6646752/css/fonts.css';
@@ -58,17 +53,15 @@ var PAV = window.PAV || {};
   }
 
   function loadThirdParties() {
-    console.log('runing tp');
     var thirdParties = document.createElement('script');
     thirdParties.type = 'text/javascript';
     thirdParties.onerror = function(e) {
       console.log('error', e);
     };
     thirdParties.onload = function() {
-      console.log('loaded tp');
       setPreSpinnerWidth(20);
     };
-    thirdParties.src = 'src/third_party_scripts.js';
+    thirdParties.src = 'dist/js/third_party_scripts.js';
     document.body.appendChild(thirdParties);
   }
   loadPAV();

@@ -1,5 +1,5 @@
 var PAV = window.PAV || {};
-var invalidDirective = function($scope) {
+var invalidDirective = function() {
   return {
     restrict: 'E',
     templateUrl: 'partials/invalid.html',

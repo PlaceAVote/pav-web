@@ -1,4 +1,4 @@
 {
-  "path": "app-min.js",
+  "initialPath": "dist/js/initial-min.js",
   "fb_app_id": "949301848442473"
 }

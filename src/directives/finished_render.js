@@ -6,7 +6,6 @@ var finishedRenderDirective = function() {
     link: function() {
       var readyEvent = new Event('angularReady');
       document.body.dispatchEvent(readyEvent);
-      console.log('I should render now?');
     },
   };
 };

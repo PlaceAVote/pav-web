@@ -29,9 +29,9 @@
   <link rel="icon" sizes="192x192" href="img/icons/pav192x192white.png">
   <link rel="shortcut icon" href="img/favicon_pav.ico" type="image/vnd.microsoft.icon">
   <style>
-    @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
     .pre-app__container {
-      z-index: 10000; background-color: #6B55AD !important; width: 100%; position: fixed; height: 100%;
+      background: linear-gradient(135deg, #87e0fd 0%, #5b7da8 0%, #746898 100%);
+      z-index: 10000; width: 100%; position: fixed; height: 100%;
     }
     .pre-app__spinner--container {
       width: 30%;
@@ -40,7 +40,21 @@
     }
     .pre-app__spinner--logo {
       width: 100%;
-      animation: spin 4s linear infinite;
+      -webkit-animation: spin 8s infinite linear;
+      animation: spin 8s infinite linear;
+    }
+    @-webkit-keyframes spin {
+      100% { -webkit-transform: rotate(360deg); }
+    }
+    @-moz-keyframes spin {
+      100% { -moz-transform: rotate(360deg); }
+    }
+    @keyframes spin {
+      100% {
+        -moz-transform:rotate(360deg);
+        -o-transform:rotate(360deg);
+        transform:rotate(360deg);
+      }
     }
     .pre-app__meter {
       margin: 0 auto;
@@ -50,10 +64,11 @@
       -webkit-border-radius: 25px;
       border-radius: 25px;
       padding: 5px;
+      box-sizing: content-box;
     }
     .pre-app__meter--container {
       width: 100%;
-     margin-top: 20%; 
+      margin-top: 20%;
     }
     .pre-app__meter .pre-app__progress_bar {
       line-height: 0px;
@@ -84,13 +99,13 @@
      </div>
    </div>
 
-   <div finished-render style="display: none;" id="post-app">
+   <div finished-render id="post-app">
      <invalid> </invalid>
      <header-nav> </header-nav>
     <div ng-view autoscroll id="view">
   </div>
 <div>
 <!-- ASYNC OUR APP -->
-<script defer src="src/initial_loads.js"></script>
+<script async src="src&#x2F;initial_loads.js"></script>
  </body>
 </html>

@@ -202,8 +202,7 @@ var gulp = require('gulp'),
 
 
   gulp.task('browserify-components', function() {
-    var directories = ['src/controllers/', 'src/controllers/website/', 'src/directives/', 'src/directives/bills/',
-      'src/integrations/', 'src/services/' ];
+    var directories = ['src/', 'src/controllers/', 'src/controllers/website/', 'src/directives/', 'src/directives/bills/' ];
     directories.forEach(function(directory) {
       var files = fs.readdirSync(directory);
       files.forEach(function(file) {
@@ -280,4 +279,4 @@ var gulp = require('gulp'),
 		    .pipe(gulp.dest('img'));
 	});
 
-  gulp.task('default', ['autoPrefix', 'watchFiles', 'browserify-web', 'template-dev']);
+  gulp.task('default', ['autoPrefix', 'watchFiles', 'browserify-components', 'template-dev']);

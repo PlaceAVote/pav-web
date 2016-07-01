@@ -10,8 +10,14 @@ var FACEBOOKAPPID = '949301848442473';
 var MANDRILAPIKEY = 'ijV-LsU9RGPbUj1vjdHX_A';
 var PRERENDER = 'https://prerender.placeavote.com';
 var WATCHERS = false;
+var PRECONTROLLER = 'https://d2eeaipid2lh9y.cloudfront.net/';
+var PREDIRECTIVE = 'https://dn70zjpa8vlbc.cloudfront.net/';
+var SUFFILE = '-min.js';
 
 module.exports = {
+  PRECONTROLLER: PRECONTROLLER,
+  PREDIRECTIVE: PREDIRECTIVE,
+  SUFFILE: SUFFILE,
   CONGRESS: CONGRESS,
   USER: USER,
   CENSUS: CENSUS,
