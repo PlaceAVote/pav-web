@@ -14,10 +14,9 @@ module.exports = function($compile) {
       };
 
       scope.closeModal = function() {
-        console.log('closing');
         scope.body.removeClass('c-modal__body--active');
         angular.element(document.querySelector('email-connections-modal')).remove();
       };
-    }
+    },
   };
 };

@@ -34,7 +34,6 @@ var SettingsController = require('./controllers/settings_controller.js');
 var PasswordController = require('./controllers/password_controller.js');
 var WizardController = require('./controllers/wizard_controller.js');
 var IssuesController = require('./controllers/issues_controller.js');
-var EmailController = require('./controllers/email_controller.js');
 
 // Services
 var UserService = require('./services/user_service.js');
@@ -291,8 +290,6 @@ app.controller('IssuesCtrl', IssuesController);
 IssuesController.$inject = ['$scope', '$rootScope', 'searchService', '$timeout', 'issueService', 'openGraphService'];
 app.controller('WizardCtrl', WizardController);
 WizardController.$inject = ['$scope', 'questionService','$rootScope'];
-app.controller('EmailCtrl', EmailController);
-EmailController.$inject = ['google', 'emailService', '$scope'];
 
 // Web controllers
 app.controller('HomeCtrl', HomeController);
@@ -399,4 +396,3 @@ app.directive('emailConnections', emailConnections);
 pieChartDirective.$inject = ['$compile'];
 app.directive('emailConnectionsModal', emailConnectionsModal);
 emailConnectionsModal.$inject = ['google', 'emailService', '$timeout'];
-// emailConnectiosnModal.$inject = ['$compile'];
