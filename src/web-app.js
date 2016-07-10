@@ -34,6 +34,7 @@ var SettingsController = require('./controllers/settings_controller.js');
 var PasswordController = require('./controllers/password_controller.js');
 var WizardController = require('./controllers/wizard_controller.js');
 var IssuesController = require('./controllers/issues_controller.js');
+var UserNotFoundContoller = require('./controllers/user_not_found_controller.js');
 
 // Services
 var UserService = require('./services/user_service.js');
@@ -158,6 +159,10 @@ app.config(['$routeProvider', '$locationProvider', '$compileProvider', 'Analytic
   .when('/signup', {
     templateUrl: 'partials/login.html',
     controller: 'LoginCtrl as login',
+  })
+  .when('/usernotfound', {
+    templateUrl: 'partials/user_not_found.html',
+    controller: 'UserNotFoundCtrl as userNotFound',
   })
 	.when('/onboarding', {
   templateUrl: 'partials/onboarding.html',
@@ -290,6 +295,8 @@ app.controller('IssuesCtrl', IssuesController);
 IssuesController.$inject = ['$scope', '$rootScope', 'searchService', '$timeout', 'issueService', 'openGraphService'];
 app.controller('WizardCtrl', WizardController);
 WizardController.$inject = ['$scope', 'questionService','$rootScope'];
+app.controller('UserNotFoundCtrl', UserNotFoundContoller);
+UserNotFoundContoller.$inject = ['$location'];
 
 // Web controllers
 app.controller('HomeCtrl', HomeController);
