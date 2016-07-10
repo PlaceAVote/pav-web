@@ -398,5 +398,5 @@ app.directive('pieChart', pieChartDirective);
 app.directive('emailConnections', emailConnections);
 pieChartDirective.$inject = ['$compile'];
 app.directive('emailConnectionsModal', emailConnectionsModal);
-emailConnectionsModal.$inject = ['google', 'emailService'];
+emailConnectionsModal.$inject = ['google', 'emailService', '$timeout'];
 // emailConnectiosnModal.$inject = ['$compile'];

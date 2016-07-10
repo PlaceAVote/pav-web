@@ -392,3 +392,13 @@
   }
 
 }
+
+
+
+.c-modal__close {
+  z-index: 99999;
+  position: absolute;
+  right: 11px;
+  top: 12px;
+  @include font-size(12px);
+}

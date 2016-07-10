@@ -7,16 +7,16 @@ module.exports = function($compile) {
       scope.showModal = function(context) {
         scope.context = context;
         scope.body = angular.element(document.body);
-        $compile('<email-connections-modal context="context"></email-connections-modal>')(scope, function(cloned, scope) {
+        $compile('<email-connections-modal id="email-connections-modal" context="context"></email-connections-modal>')(scope, function(cloned, scope) {
           scope.body.append(cloned);
           scope.body.addClass('c-modal__body--active');
         });
       };
 
       scope.closeModal = function() {
-        scope.body = angular.element(document.body);
+        console.log('closing');
         scope.body.removeClass('c-modal__body--active');
-        el[0].offsetParent.offsetParent.offsetParent.remove();
+        angular.element(document.querySelector('email-connections-modal')).remove();
       };
     }
   };

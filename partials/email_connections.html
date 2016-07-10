@@ -12,20 +12,25 @@
         <div class="c-card__content">
           <p>Invite your friends and family to ensure they're represented</p>
 
-          <button class="c-button
-                         c-button--large
-                         c-button--green"
-                  ng-click="showModal('gmail');">
-                         via GMail Contact
-          </button>
+         <div class="row margin-top-small">
+            <button class="c-button
+                           c-button--large
+                           c-button--grey
+                           c-button--gmail
+                           margin-right-small"
+                    ng-click="showModal('gmail');">
+                          <img src="img/gmail-icon.svg" />
+                          Gmail Contacts
+            </button>
 
-          <button class="c-button
-                         c-button--large
-                         c-button--green"
-                  ng-click="showModal('email');">
-                         via Email
-          </button>
-
+            <button class="c-button
+                           c-button--large
+                           c-button--green
+                           c-button--email"
+                    ng-click="showModal('email');">
+                           Email
+            </button>
+          </div>
         </div>
       </div>
 

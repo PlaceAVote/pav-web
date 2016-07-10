@@ -122,6 +122,29 @@
   padding-left: 30px;
 }
 
+.c-button--gmail {
+  position: relative;
+  background: #e2584c;
+  color: white;
+  border: 1px solid darken(#e2584c, 10%);
+  padding-left: 45px;
+  padding-right: 15px;
+}
+
+.c-button--email {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.c-button--gmail img {
+  height: 20px;
+  top:50%;
+  left: 5px;
+  box-shadow: 0px 1px 3px 1px rgba(0,0,0,0.2);
+  transform: translateY(-50%);
+  position: absolute;
+}
+
 
 .c-button--facebook svg {
   fill: white;

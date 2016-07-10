@@ -1,6 +1,6 @@
 var emailValidator = require('../utils/email_validation.js');
 
-module.exports = function(google, emailService) {
+module.exports = function(google, emailService, $timeout) {
   return {
     restrict: 'E',
     scope: {
@@ -8,7 +8,6 @@ module.exports = function(google, emailService) {
     },
     templateUrl: 'partials/email_connections_modal.html',
     link: function(scope, el, attr) {
-
         var contact = function() {
           return {
             email: '',
@@ -16,7 +15,6 @@ module.exports = function(google, emailService) {
           };
         };
 
-        scope.show = true;
         scope.importContacts = true;
         scope.google = google;
         scope.emailService = emailService;
@@ -27,32 +25,38 @@ module.exports = function(google, emailService) {
         scope.googleContacts = {};
         scope.inputContact = contact();
         scope.googleContactsError = null;
+        scope.timeout = $timeout;
+        scope.manualContacts = false;
+        scope.inputContact = {
+          name: '',
+          email: '',
+        };
 
-        scope.addInput = function() {
-          if (!emailValidator(scope.inputContact.email)) {
-            scope.inputContact.invalid = true;
-            return;
+        scope.views = {
+          gmail: false,
+          manual: false,
+          confirm: false,
+          error: false,
+          success: false,
+        };
+
+        scope.view = function(view) {
+          for (v in scope.views) {
+            // console.log(Object.keys(scope.views[v]));
+            if (view === v) {
+              scope.views[view] = true;
+            } else {
+              scope.views[v] = false;
+            }
           }
-          scope.pushValue(scope.inputContact);
-          scope.inputContact = contact();
         };
 
-        scope.togglePage = function() {
-          scope.errNoContacts = false;
-          scope.errUnkown = false;
-          scope.errUnauth = false;
-          scope.importContacts = scope.importContacts ? false : true;
-        };
-
-        scope.close = function() {
-          scope.show = false;
-        };
+          //
 
         /**
          * Fetches contacts from the google api.
          */
         scope.fetchGmailEmails = function() {
-          console.log('hit');
           var that = this;
           scope.fetching = true;
           scope.googleContactsError = false;
@@ -60,6 +64,7 @@ module.exports = function(google, emailService) {
             if (err) {
               scope.fetching = false;
               scope.googleContactsError = true;
+              scope.manualContacts = true;
               // Set user error feedback?
               return;
             }
@@ -72,14 +77,49 @@ module.exports = function(google, emailService) {
 
             scope.googleContactsLoaded = true;
             scope.fetching = false;
+            scope.view('gmail')
             scope.$apply();
           });
         };
 
+        scope.addGmailContact = function(value) {
+            if (scope.googleContacts[value.email]) {
+
+              if (!scope.googleContacts[value.email].added) {
+                scope.googleContacts[value.email].added = true;
+                scope.pushValue(value);
+                return;
+              } else {
+                scope.googleContacts[value.email].added = false;
+                scope.removeValue(value.email);
+                return;
+              }
+            }
+        }
+
+        scope.addUserContact = function(value) {
+
+          if(!emailValidator(value.email)) {
+            scope.emailInvalid = true;
+            return;
+          }
+
+          scope.emailInvalid = false;
+
+          for(contact in scope.contacts) {
+            if(scope.contacts[contact].email === value.email) {
+              scope.removeValue(value.email);
+              return;
+            }
+          }
+          scope.pushValue(value);
+        }
+
         scope.pushValue = function(value) {
-          scope.contacts.push({
+          scope.contacts.unshift({
             email: value.email,
             name: value.name,
+            added: true,
           });
           console.log(scope.contacts);
         };
@@ -87,17 +127,31 @@ module.exports = function(google, emailService) {
         scope.removeValue = function(email) {
           for(contact in scope.contacts) {
             if (scope.contacts[contact].email === email) {
-              delete scope.contacts[contact];
+              scope.contacts.splice(contact,1);
             }
           }
           console.log(scope.contacts);
-        }
+        };
+
+
+        scope.toMessage = function() {
+          if(scope.contacts.length <= 0) {
+            scope.confirmationError = true;
+            return;
+          } else {
+            scope.view('confirm');
+            return;
+          }
+        };
 
         /*
          * Server Interaction to send messages to users.
          */
 
         scope.sendMessages = function() {
+          for(contact in scope.contacts) {
+            delete scope.contacts[contact].added;
+          }
           var params = {
             contacts: scope.contacts,
           };
@@ -105,42 +159,34 @@ module.exports = function(google, emailService) {
             params.message = scope.message;
           }
           var that = this;
-          scope.emailService.sendMessageToMany(params, function(err) {
+          scope.confirming = true;
+          scope.emailService.sendMessageToMany(params, function(err, res) {
+            scope.confirming = false;
             if (err) {
-              switch (err.message) {
-                case 'Invalid Params: Contacts Needed.': {
-                  scope.errNoContacts = true;
-                  break;
-                }
-                case 'Invalid Params: Auth Token Needed.': {
-                  scope.errUnauth = true;
-                  break;
-                }
-                default: {
-                  scope.errUnknown = true;
-                  break;
-                }
-              }
-              return;
+              scope.view('error');
             }
-            // Clear state
-            //   - need a good way to hide this too?
-            //   - and be accessible from anywhere in the app.
-            scope.mesage = '';
-            scope.contacts = [];
-            scope.fetching = null;
-            scope.googleLoadedContacts = null;
-            scope.googleContacts = {};
-            scope.inputContact = contact();
-            scope.importContacts = true;
-            scope.show = false;
-          });
-      }
 
+            if (res) {
+              scope.view('success');
+            }
+
+            scope.timeout(function() {
+              scope.closeModal();
+            }, 2000)
+          });
+      };
+
+      scope.closeModal = function () {
+        scope.$parent.closeModal();
+      };
 
       switch (scope.context) {
         case 'gmail':
           scope.fetchGmailEmails();
+          break;
+        case 'email':
+          scope.view('manual');
+          break;
       }
     },
   };
