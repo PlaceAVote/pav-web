@@ -4,6 +4,7 @@ var CENSUS = 'https://census.placeavote.com';
 var NOTIFICATION = 'wss://api.placeavote.com';
 var VOTES = 'https://api.placeavote.com';
 var SEARCH = 'https://api.placeavote.com';
+var EMAIL = 'https://api.placeavote.com';
 var OPENGRAPH = 'https://api.placeavote.com';
 var FACEBOOKAPPID = '949301848442473';
 var MANDRILAPIKEY = 'ijV-LsU9RGPbUj1vjdHX_A';
@@ -15,6 +16,7 @@ module.exports = {
   USER: USER,
   CENSUS: CENSUS,
   VOTES: VOTES,
+  EMAIL: EMAIL,
   NOTIFICATION: NOTIFICATION,
   FACEBOOKAPPID: FACEBOOKAPPID,
   MANDRILAPIKEY: MANDRILAPIKEY,

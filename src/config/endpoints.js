@@ -163,6 +163,11 @@ module.exports = {
       },
     },
   },
+  email: {
+    url: function() {
+      return urls.EMAIL + '/user/invite/';
+    },
+  },
   openGraph: {
     scrape: function(url) {
       return urls.OPENGRAPH + '/opengraph/scrape?link=' + url;

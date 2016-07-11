@@ -5,6 +5,7 @@ var BillSummary = require('../models/bill_summary.js');
 var Issue = require('../models/issue.js');
 var zipValidator = require('../utils/zipValidator.js');
 var SubFeedController = require('./sub_feed_controller.js');
+var Feedback = require('../models/feedback_feed_event.js');
 
 FeedController = function($scope, $location, userService, billService, authService, feedService, $rootScope, $timeout, searchService) {
   AuthorizeController.authorize({error: '/', authorizer: authService, location: $location});
@@ -42,6 +43,8 @@ FeedController = function($scope, $location, userService, billService, authServi
         ],
     }),
   };
+  // Prepopulate with a feedback event.
+  this.categories.all.push([new Feedback({ link: 'http://goo.gl/forms/UMEmQll6XSpeIy4G2' })]);
 
   this.categories.discovery.selectedCategory = this.categories.discovery.categories.trends;
   this.selectedCategory = this.categories.all;

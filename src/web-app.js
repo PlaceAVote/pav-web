@@ -51,6 +51,8 @@ var IssueService = require('./services/issue_service.js');
 var QuestionService = require('./services/question_service.js');
 var MailService = require('./services/mail_service.js');
 var OpenGraphService = require('./services/open_graph_service.js');
+var EmailService = require('./services/email_service.js');
+var google = require('./services/google.js');
 
 // Dependencies
 var d3 = require('d3');
@@ -112,9 +114,12 @@ var cssScrollDirective = require('./directives/css_scroll.js');
 var issueModalDirective = require('./directives/issue_modal.js');
 var iconDirective = require('./directives/icon.js');
 var pieChartDirective = require('./directives/ring_chart.js');
+var emailConnections = require('./directives/email_connections.js');
+var emailConnectionsModal = require('./directives/email_connections_modal.js');
 
 // Thirdparty integrations
 var Facebook = require('./integrations/facebook.js');
+var googleApi = require('./integrations/google.js');
 var Twitter = require('./integrations/twitter.js');
 var slider = require('angularjs-slider');
 var draggable = require('angular-ui-tree');
@@ -232,6 +237,9 @@ app.run(['Analytics', function(Analytics) {}]);
 
 // Services
 app.factory('facebookService', Facebook);
+app.factory('googleApi', googleApi);
+app.factory('google', google);
+google.$inject = ['googleApi'];
 app.factory('twitterService', Twitter);
 app.factory('authService', AuthService);
 AuthService.$inject = ['$resource'];
@@ -261,6 +269,8 @@ app.factory('mailService', MailService);
 MailService.$inject = ['$resource'];
 app.factory('openGraphService', OpenGraphService);
 OpenGraphService.$inject = ['$resource'];
+app.factory('emailService', EmailService);
+EmailService.$inject = ['$resource', 'authService'];
 
 // Controllers
 app.controller('TopicRegisterCtrl', RegisterController);
@@ -389,4 +399,7 @@ app.directive('issueModal', issueModalDirective);
 issueModalDirective.$inject = ['$location', '$timeout', 'issueService', '$rootScope'];
 app.directive('icon', iconDirective);
 app.directive('pieChart', pieChartDirective);
-pieChartDirective.$inject = ['$window'];
+app.directive('emailConnections', emailConnections);
+pieChartDirective.$inject = ['$compile'];
+app.directive('emailConnectionsModal', emailConnectionsModal);
+emailConnectionsModal.$inject = ['google', 'emailService', '$timeout'];
