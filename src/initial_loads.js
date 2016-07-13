@@ -81,6 +81,7 @@ var config = require('./config/urls');
     styles.rel = 'stylesheet';
     styles.onload = function() {
       setPreSpinnerWidth(50);
+      setTimeout(speak, 100);
     };
     styles.href = '/css/styles.css';
     document.getElementsByTagName('head')[0].appendChild(styles);
@@ -92,7 +93,6 @@ var config = require('./config/urls');
     fonts.rel = 'stylesheet';
     fonts.onload = function() {
       setPreSpinnerWidth(35);
-      setTimeout(speak, 100);
     };
     fonts.href = '//cloud.typography.com/6645674/6646752/css/fonts.css';
     document.getElementsByTagName('head')[0].appendChild(fonts);
