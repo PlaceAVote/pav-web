@@ -10,8 +10,10 @@
 
 
 .c-invite__email-contact {
-  border-left: 2px solid $grey;
+  // border-left: 2px solid $grey;
   // margin-bottom: 5px;
+  border: 1px solid $widgetborder;
+  border-radius: 3px;
   margin-top: 15px;
   padding-left: 11px;
 }
@@ -20,18 +22,18 @@
   margin-bottom: 5px;
 }
 
-.c-invite__email-contact svg {
-  width: 20px;
-  height: 48px;
-  fill: $grey;
-  transition: fill 0.5s ease;
-  display: block;
-  margin: auto;
-}
-
-svg.c-invite__email-contact--added {
-  fill: $green;
-}
+// .c-invite__email-contact svg {
+//   width: 20px;
+//   height: 48px;
+//   fill: $grey;
+//   transition: fill 0.5s ease;
+//   display: block;
+//   margin: auto;
+// }
+//
+// svg.c-invite__email-contact--added {
+//   fill: $green;
+// }
 
 
 .c-invite__email-contact--name,
@@ -44,6 +46,7 @@ svg.c-invite__email-contact--added {
   @include font-size(14px);
   color: $red;
   margin-bottom: 5px;
+  margin-top: 8px;
   transition: border-bottom-color 0.2s ease;
   &:focus {
     border-bottom-color: $red;
@@ -53,6 +56,19 @@ svg.c-invite__email-contact--added {
 .c-invite__input-email-contact--name {
   border-bottom-color: $red;
 }
+
+
+.c-invite__email-contact__input {
+  border: 1px solid $widgetborder;
+  padding: 6px;
+  outline: none;
+  width: 100%;
+  &:focus {
+    border-color: $purple;
+  }
+}
+
+
 
 .c-invite__textarea {
   height: 37px;

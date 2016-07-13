@@ -20,26 +20,37 @@
      <hr />
      <div class="c-card__content">
        <div ng-repeat="(em, value) in googleContacts" class="row margin-bottom-small c-invite__email-contact">
-         <div class="col l-10">
+         <div class="col l-9">
            <input type="text"
                   class="c-invite__email-contact--name"
                   ng-model="value.name"
                   placeholder="Add name" />
            <p ng-bind="em" class="italic"></p>
          </div>
-         <div class="l-2">
-           <icon ng-click="addGmailContact({name: value.name, email: em});"
-                 class="click"
-                 ng-class="{'c-invite__email-contact--added': value.added}"
-                 icon="icon-add-2-1">
-           </icon>
+         <div class="l-3">
+           <button ng-click="sendInvite({name: value.name, email: em});"
+                   class="c-button c-button--green c-button--medium c-button--invite"
+                   ng-class="{'c-button--blue': value.invited}">
+                   <icon ng-if="!value.invited"
+                         icon="icon-add-2-1"></icon>
+                  <p ng-if="!value.invited && !value.sendingInvite">Invite</p>
+                  <p ng-if="value.sendingInvite">Sending</p>
+                  <icon ng-if="value.invited"
+                        icon="icon-check-mark"></icon>
+                  <p ng-if="value.invited">Invited</p>
+           </button>
          </div>
        </div>
        <button
           ng-click="view('manual')"
           class="c-button c-button--medium c-button--green">
-         Next
+         Add More Contacts
        </button>
+       <button
+          ng-click="closeModal()"
+          class="margin-small-left c-button--grey c-button c-button--medium">
+          Done
+        </button>
      </div>
    </div>
 
@@ -51,100 +62,80 @@
      </h1>
      <hr />
      <div class="c-card__content">
-       <p ng-show="googleContactsError">
-         It looks like there was an error when trying to fetch your Gmail contacts. You can still enter emails manually
-       </p>
-       <p ng-show="googleContactsLoaded">
-         You can add further contacts to your list manually before confirming.
-       </p>
-       <div class="row margin-bottom-small c-invite__email-contact">
-         <div class="col l-10">
-           <input type="text"
-                  ng-model="inputContact.name"
-                  class="c-invite__input-email-contact--name"
-                  placeholder="Add name" />
-           <input ng-model="inputContact.email"
-                  class="c-invite__input-email-contact--name"
-                  placeholder="Add email" />
-         </div>
-         <div class="l-2">
-           <icon ng-click="addUserContact({name: inputContact.name, email: inputContact.email});
-                           inputContact.email = '';
-                           inputContact.name = '';"
-                 class="click"
-                 icon="icon-add-2-1">
-           </icon>
-         </div>
-       </div>
-       <p class="red" ng-show="emailInvalid">
-         The email you entered is not valid
-       </p>
 
        <div ng-repeat="contact in contacts" class="row margin-bottom-small c-invite__email-contact">
-         <div class="col l-10">
+         <div class="col l-9">
            <input type="text"
                   class="c-invite__email-contact--name"
                   ng-model="contact.name"
-                  placeholder="Add name" />
+                  placeholder="Add name"
+                  disabled />
            <p ng-bind="contact.email" class="italic"></p>
          </div>
-         <div class="l-2">
+         <div class="l-3">
 
-           <icon ng-click="addUserContact(contact)"
-                 class="click c-invite__email-contact--added"
-                 ng-class="{'c-invite__email-contact--added': contact.added}"
-                 icon="icon-add-2-1"></icon>
+           <button
+                 class="c-button c-button--blue c-button--medium c-button--invite">
+                 <icon icon="icon-check-mark"></icon>
+                  <p>Invited</p>
+           </button>
 
          </div>
        </div>
-       <button ng-click="toMessage()"
-               class="c-button c-button--medium c-button--green">Confirm</button>
+
+
+       <p ng-show="googleContactsError">
+         It looks like there was an error when trying to fetch your Gmail contacts. You can still enter emails manually
+       </p>
+       <div class="col c-invite__email-contact">
+           <div class="row margin-top-small">
+             <div class="l-4">
+               <p>Name</p>
+             </div>
+             <div class="l-8">
+               <p>Email Address</p>
+             </div>
+           </div>
+           <div class="row margin-bottom-small">
+             <div class="l-4 margin-right-small">
+               <input type="text"
+                      ng-model="inputContact.name"
+                      placeholder="Add name"
+                      class="c-invite__email-contact__input" />
+             </div>
+             <div class="l-5 margin-right-small">
+               <input ng-model="inputContact.email"
+               class="c-invite__email-contact__input"
+               placeholder="Add email" />
+             </div>
+             <div class="l-3">
+               <button ng-click="sendInvite({name: inputContact.name, email: inputContact.email}, true);
+                               inputContact.email = '';
+                               inputContact.name = '';"
+                     class="c-button c-button--green c-button--medium c-button--invite c-button--invite-manual"
+                     icon="icon-add-2-1">
+                     <icon icon="icon-add-2-1"></icon>
+                     <p ng-if="!sendingInvite">Invite</p>
+                     <p ng-if="sendingInvite">Sending</p>
+               </button>
+             </div>
+           </div>
+        </div>
+       <p class="red" ng-show="emailInvalid">
+         The email you entered is not valid.
+       </p>
+
+       <p class="red" ng-show="alreadyInvited">
+         You have already sent an invite to this address.
+       </p>
+
+       <button ng-click="closeModal()"
+               class="c-button c-button--medium c-button--grey margin-top-medium">Done</button>
      </div>
    </div>
 
 
 
-<!-- Step Three Send Invite -->
-
-
-   <div ng-show="views.confirm" loader loader-context="confirming" truthy>
-     <h1>
-       Send invites
-     </h1>
-     <hr />
-     <div class="c-card__content">
-       <p class="margin-bottom-medium">Enter a message for your contacts.</p>
-       <textarea class="c-invite__textarea" ng-model="message" msd-elastic></textarea>
-       <button ng-click="sendMessages();"
-               class="c-button c-button--medium c-button--green">Send</button>
-     </div>
-   </div>
-
-   <!-- Send Success -->
-
-   <div ng-show="views.success">
-     <h1>
-       Success
-     </h1>
-     <hr />
-     <div class="c-card__content">
-       <p>Your contacts have been invited to Placevote.</p>
-     </div>
-   </div>
-
-   <!-- Send Error -->
-
-   <div ng-show="views.error">
-     <h1>
-       Error
-     </h1>
-     <hr />
-     <div class="c-card__content">
-       <p>Sorry, there was an error inviting your contacts to Placeavote.</p>
-     </div>
-   </div>
-
-   <!-- End -->
 
    </div>
 </div>
