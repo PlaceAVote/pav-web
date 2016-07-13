@@ -30,7 +30,7 @@
   <link rel="shortcut icon" href="img/favicon_pav.ico" type="image/vnd.microsoft.icon">
   <style>
     .pre-app__container {
-      background: linear-gradient(135deg, #87e0fd 0%, #5b7da8 0%, #746898 100%);
+      background: white;
       z-index: 10000; width: 100%; position: fixed; height: 100%;
     }
     .pre-app__spinner--container {
@@ -40,8 +40,8 @@
     }
     .pre-app__spinner--logo {
       width: 100%;
-      -webkit-animation: spin 8s infinite linear;
-      animation: spin 8s infinite linear;
+      -webkit-transition: -webkit-transition: 1s ease-in-out;
+      transition: transform 1s ease-in-out;
     }
     @-webkit-keyframes spin {
       100% { -webkit-transform: rotate(360deg); }
@@ -81,6 +81,11 @@
       overflow: hidden;
       transition: width, 1s;
     }
+    .pre-app__sayings {
+      padding-top: 5px;
+      color: grey;
+      text-align: center;
+    }
     body {
       padding: 0;
       margin: 0;
@@ -90,10 +95,13 @@
  <body>
    <div id="preloading-spinner" class="pre-app__container">
      <div class="pre-app__spinner--container">
-       <img class="pre-app__spinner--logo" src="/img/pav_icon.svg" alt="placeavote" />
+       <img class="pre-app__spinner--logo" src="/img/mark_full_color.svg" alt="placeavote" />
        <div class="pre-app__meter--container">
          <div class="pre-app__meter">
            <div id="pre-app__progress" class="pre-app__progress_bar"></div>
+         </div>
+         <div class="pre-app__sayings">
+           <span id="pre-text"></span>
          </div>
        </div>
      </div>

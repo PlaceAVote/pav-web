@@ -62,7 +62,6 @@ var openGraph = require('./directives/open_graph.js');
 var pavXBrowserDate = require('./directives/pavXBrowserDate.js');
 var socialBox = require('./directives/social_box.js');
 var mailcheck = require('./directives/mailcheck.js');
-var pavDirectives = require('./directives/directives.js');
 var websiteNav = require('./directives/website_nav.js');
 var commentsDirective = require('./directives/comments.js');
 var commentDirective = require('./directives/comment.js');

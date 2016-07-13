@@ -5,11 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "gulp check",
-    "start": "node app.js",
-    "install": "napa"
-  },
-  "napa": {
-    "ionic": "driftyco/ionic-bower#v1.0.0"
+    "start": "node app.js"
   },
   "author": "Anthony O'Neill",
   "license": "MIT",
@@ -72,11 +68,6 @@
     "morgan": "^1.7.0",
     "prerender-node": "^2.2.1",
     "vinyl-source-stream": "^1.1.0"
-  },
-  "browserify": {
-    "transform": [
-      "browserify-shim"
-    ]
   },
   "repository": {
     "type": "git",
