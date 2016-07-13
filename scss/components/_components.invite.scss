@@ -57,6 +57,19 @@
   border-bottom-color: $red;
 }
 
+
+.c-invite__email-contact__input {
+  border: 1px solid $widgetborder;
+  padding: 6px;
+  outline: none;
+  width: 100%;
+  &:focus {
+    border-color: $purple;
+  }
+}
+
+
+
 .c-invite__textarea {
   height: 37px;
   min-height: 37px !important;

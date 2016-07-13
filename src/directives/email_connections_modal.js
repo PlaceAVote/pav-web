@@ -35,9 +35,6 @@ module.exports = function(google, emailService, $timeout) {
       scope.views = {
         gmail: false,
         manual: false,
-        confirm: false,
-        error: false,
-        success: false,
       };
 
       scope.view = function(view) {
@@ -117,58 +114,21 @@ module.exports = function(google, emailService, $timeout) {
         });
       };
 
-      scope.removeValue = function(email) {
-        for (var contact in scope.contacts) {
-          if (scope.contacts[contact].email === email) {
-            scope.contacts.splice(contact,1);
-          }
-        }
-      };
-
-
-      scope.toMessage = function() {
-        if (scope.contacts.length <= 0) {
-          scope.confirmationError = true;
-        } else {
-          scope.view('confirm');
-          return;
-        }
-      };
 
       /*
        * Server Interaction to send messages to users.
        */
 
-      scope.sendMessages = function() {
-        for (var contact in scope.contacts) {
-          delete scope.contacts[contact].added;
-        }
-        var params = {
-          contacts: scope.contacts,
-        };
-        if (scope.message) {
-          params.message = scope.message;
-        }
-        var that = this;
-        scope.confirming = true;
-        scope.emailService.sendMessageToMany(params, function(err, res) {
-          scope.confirming = false;
-          if (err) {
-            scope.view('error');
-          }
-
-          if (res) {
-            scope.view('success');
-          }
-
-          scope.timeout(function() {
-            scope.closeModal();
-          }, 2000);
-        });
-      };
-
-      scope.sendInvite = function(userContact) {
+      scope.sendInvite = function(userContact, manual) {
         if (!userContact) {
+          return;
+        }
+
+        if (!emailValidator(userContact.email)) {
+          scope.emailInvalid = true;
+          scope.timeout(function() {
+            scope.emailInvalid = false;
+          }, 2000);
           return;
         }
 
@@ -176,32 +136,37 @@ module.exports = function(google, emailService, $timeout) {
         // If so, it checks if the user has already been invited
         if (scope.googleContacts[userContact.email]) {
           if (scope.googleContacts[userContact.email].invited) {
+            scope.alreadyInvited = true;
+            scope.timeout(function() {
+              scope.alreadyInvited = false;
+            }, 2000);
             return;
           }
         }
+
+        if (scope.sendingInvite && scope.googleContacts[userContact.email].sendingInvite) {
+          return;
+        }
+
+        scope.googleContacts[userContact.email] && !manual ? scope.googleContacts[userContact.email].sendingInvite = true : scope.sendingInvite = true;
 
         var params = {
           contacts: [userContact],
         };
 
-        console.log(params);
-
         scope.emailService.sendMessageToMany(params, function(err, res) {
-
+          scope.googleContacts[userContact.email] && !manual ? scope.googleContacts[userContact.email].sendingInvite = false : scope.sendingInvite = false;
           if (err) {
             return;
           }
 
           if (res) {
-            if (scope.googleContacts[userContact.email]) {
+            if (scope.googleContacts[userContact.email] && !manual) {
               scope.googleContacts[userContact.email].invited = true;
+            } else {
+              scope.contacts.push(userContact);
             }
-            // scope.view('success');
           }
-
-          // scope.timeout(function() {
-          //   scope.closeModal();
-          // }, 2000);
         });
 
       }
