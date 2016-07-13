@@ -167,6 +167,45 @@ module.exports = function(google, emailService, $timeout) {
         });
       };
 
+      scope.sendInvite = function(userContact) {
+        if (!userContact) {
+          return;
+        }
+
+        // Checks to see if contact is a google contacts
+        // If so, it checks if the user has already been invited
+        if (scope.googleContacts[userContact.email]) {
+          if (scope.googleContacts[userContact.email].invited) {
+            return;
+          }
+        }
+
+        var params = {
+          contacts: [userContact],
+        };
+
+        console.log(params);
+
+        scope.emailService.sendMessageToMany(params, function(err, res) {
+
+          if (err) {
+            return;
+          }
+
+          if (res) {
+            if (scope.googleContacts[userContact.email]) {
+              scope.googleContacts[userContact.email].invited = true;
+            }
+            // scope.view('success');
+          }
+
+          // scope.timeout(function() {
+          //   scope.closeModal();
+          // }, 2000);
+        });
+
+      }
+
       scope.closeModal = function() {
         scope.$parent.closeModal();
       };

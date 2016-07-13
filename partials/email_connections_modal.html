@@ -20,26 +20,36 @@
      <hr />
      <div class="c-card__content">
        <div ng-repeat="(em, value) in googleContacts" class="row margin-bottom-small c-invite__email-contact">
-         <div class="col l-10">
+         <div class="col l-9">
            <input type="text"
                   class="c-invite__email-contact--name"
                   ng-model="value.name"
                   placeholder="Add name" />
            <p ng-bind="em" class="italic"></p>
          </div>
-         <div class="l-2">
-           <icon ng-click="addGmailContact({name: value.name, email: em});"
-                 class="click"
-                 ng-class="{'c-invite__email-contact--added': value.added}"
-                 icon="icon-add-2-1">
-           </icon>
+         <div class="l-3">
+           <button ng-click="sendInvite({name: value.name, email: em});"
+                   class="c-button c-button--green c-button--medium c-button--invite"
+                   ng-class="{'c-button--blue': value.invited}">
+                   <icon ng-if="!value.invited"
+                         icon="icon-add-2-1"></icon>
+                  <p ng-if="!value.invited">Invite</p>
+                  <icon ng-if="value.invited"
+                        icon="icon-check-mark"></icon>
+                  <p ng-if="value.invited">Invited</p>
+           </button>
          </div>
        </div>
        <button
           ng-click="view('manual')"
           class="c-button c-button--medium c-button--green">
-         Next
+         Add More Contacts
        </button>
+       <button
+          ng-click="closeModal()"
+          class="margin-small-left c-button--grey c-button c-button--medium">
+          Done
+        </button>
      </div>
    </div>
 

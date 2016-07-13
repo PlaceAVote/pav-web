@@ -136,6 +136,35 @@
   padding-right: 15px;
 }
 
+.c-button--invite {
+  position: relative;
+  width: calc(100% - 15px);
+  margin-top: 15px;
+}
+
+
+.c-button--invite p {
+  margin-bottom: 0 !important;
+  padding-left: 5px;
+}
+
+
+.c-button--invite svg {
+  position: absolute;
+  left: 10px;
+  height: 12px;
+  width: 12px;
+  fill: white;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+
+.c-button--invite svg.icon-check-mark {
+  top: 45% !important;
+}
+
+
 .c-button--gmail img {
   height: 20px;
   top: 50%;
