@@ -6,8 +6,10 @@ var d = {
   google: function() {
     return;
   },
-  emailService: function() {
-    return;
+  emailService: {
+    sendMessageToMany: function(params, callback) {
+      return callback(undefined, true);
+    }
   },
   $timeout: function() {
     return;
@@ -32,23 +34,26 @@ describe('Email Connections Modal', function() {
     expect(scope.views.manual).to.equal(true);
   });
 
-  it('should add email to contacts list', function() {
+  it('it should add email to scope.contacts', function() {
     var subject = new EmailModal(d.google, d.emailService, d.$timeout);
     subject.link(scope, {}, {});
-    var contacts = [{email:'anthony@email.com', name:'anthony'}]
-    scope.addUserContact(contacts[0]);
-    expect(scope.contacts[0].name).to.equal('anthony');
+    scope.sendInvite({email:'anthony@email.com', name: 'Anthony'});
     expect(scope.contacts[0].email).to.equal('anthony@email.com');
-    expect(scope.contacts[0].added).to.equal(true);
+    expect(scope.contacts[0].name).to.equal('Anthony');
   });
 
-  it('should remove email from contacts list if email exists in contact list', function() {
+
+  it('it should send invite to google contact and mark contact as invited', function() {
     var subject = new EmailModal(d.google, d.emailService, d.$timeout);
     subject.link(scope, {}, {});
-    var contacts = [{email:'anthony@email.com', name:'anthony'}]
-    scope.contacts = contacts;
-    scope.addUserContact(contacts[0]);
-    expect(scope.contacts).to.be.empty;
+    scope.googleContacts = {
+      'anthony@email.com' : {
+        name: 'Anthony',
+        invited: false,
+      },
+    };
+    scope.sendInvite({email:'anthony@email.com', name: 'Anthony'});
+    expect(scope.googleContacts['anthony@email.com'].invited).to.equal(true);
   });
 
 });
