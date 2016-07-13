@@ -53,6 +53,7 @@ var SettingsController = require('./controllers/settings_controller.js');
 var PasswordController = require('./controllers/password_controller.js');
 var WizardController = require('./controllers/wizard_controller.js');
 var IssuesController = require('./controllers/issues_controller.js');
+var UserNotFoundContoller = require('./controllers/user_not_found_controller.js');
 
 
 // Directives
@@ -112,6 +113,8 @@ var issueModalDirective = require('./directives/issue_modal.js');
 var iconDirective = require('./directives/icon.js');
 var pieChartDirective = require('./directives/ring_chart.js');
 var finishedRender = require('./directives/finished_render.js');
+var emailConnections = require('./directives/email_connections.js');
+var emailConnectionsModal = require('./directives/email_connections_modal.js');
 
 // Thirdparty integrations
 var Facebook = require('./integrations/facebook.js');
@@ -155,6 +158,10 @@ app.config(['$routeProvider', '$locationProvider', '$compileProvider', 'Analytic
   .when('/signup', {
     templateUrl: 'partials/login.html',
     controller: 'LoginCtrl as login',
+  })
+  .when('/usernotfound', {
+    templateUrl: 'partials/user_not_found.html',
+    controller: 'UserNotFoundCtrl as userNotFound',
   })
 	.when('/onboarding', {
   templateUrl: 'partials/onboarding.html',
@@ -287,6 +294,8 @@ app.controller('IssuesCtrl', IssuesController);
 IssuesController.$inject = ['$scope', '$rootScope', 'searchService', '$timeout', 'issueService', 'openGraphService'];
 app.controller('WizardCtrl', WizardController);
 WizardController.$inject = ['$scope', 'questionService','$rootScope'];
+app.controller('UserNotFoundCtrl', UserNotFoundContoller);
+UserNotFoundContoller.$inject = ['$location'];
 
 // Web controllers
 app.controller('HomeCtrl', HomeController);
@@ -391,3 +400,8 @@ app.directive('icon', iconDirective);
 app.directive('pieChart', pieChartDirective);
 pieChartDirective.$inject = ['$window'];
 app.directive('finishedRender', [finishedRender]);
+pieChartDirective.$inject = ['$compile'];
+app.directive('emailConnections', emailConnections);
+emailConnections.$inject = ['$compile'];
+app.directive('emailConnectionsModal', emailConnectionsModal);
+emailConnectionsModal.$inject = ['google', 'emailService', '$timeout'];

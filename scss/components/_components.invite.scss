@@ -1,0 +1,77 @@
+/*------------------------------------*\
+    #COMPONENT-EMAIL-INVITE
+\*------------------------------------*/
+
+/**
+* This provides styling for the step by step
+* email invite modal
+*/
+
+
+
+.c-invite__email-contact {
+  border-left: 2px solid $grey;
+  // margin-bottom: 5px;
+  margin-top: 15px;
+  padding-left: 11px;
+}
+
+.c-invite__email-contact p {
+  margin-bottom: 5px;
+}
+
+.c-invite__email-contact svg {
+  width: 20px;
+  height: 48px;
+  fill: $grey;
+  transition: fill 0.5s ease;
+  display: block;
+  margin: auto;
+}
+
+svg.c-invite__email-contact--added {
+  fill: $green;
+}
+
+
+.c-invite__email-contact--name,
+.c-invite__input-email-contact--name {
+  border: none;
+  border-bottom: 1px solid transparent;
+  outline: none;
+  padding: 0 0 2px 0;
+  margin-right: 50px;
+  @include font-size(14px);
+  color: $red;
+  margin-bottom: 5px;
+  transition: border-bottom-color 0.2s ease;
+  &:focus {
+    border-bottom-color: $red;
+  }
+}
+
+.c-invite__input-email-contact--name {
+  border-bottom-color: $red;
+}
+
+.c-invite__textarea {
+  height: 37px;
+  min-height: 37px !important;
+  // height: auto;
+  width: 100%;
+  outline: none;
+  border-radius: 3px;
+  border: 1px solid $grey;
+  color: $black;
+  font-family: $font;
+  @include light();
+  resize: none;
+  line-height: 14px;
+  @include font-size(12px);
+  padding: 12px 60px 12px 12px;
+  overflow-y:hidden;
+  transition: all 0.3s ease;
+  &:focus {
+    border-color: $blue;
+  }
+}

@@ -101,8 +101,7 @@
             <p ng-class="{show: value.invalid}" class="error">{{value.message}}</p>
           </div>
           <div class="row tablet-col">
-              <a ng-click="settings.showSettings = false;" class="btn-grey m-12 tablet-margin-bottom-medium text-center">Read our privacy policy</a>
-              <a ng-click="settings.showSettings = false;" class="btn-grey m-12 tablet-margin-bottom-medium text-center">Read our terms of service</a>
+              <a ng-click="settings.showSettings = false;" class="btn-grey m-12 tablet-margin-bottom-medium text-center">Read our ToS &amp; Privacy Policy</a>
               <a class="btn-green h-right tablet-h-center s-12" ng-click="settings.saveUserSettings();"><p ng-show="settings.saving">SAVING...</p><p ng-hide="settings.saving || settings.saveConfirmed">SAVE SETTING</p><p ng-show="settings.saveConfirmed">SAVED!</p></a>
           </div>
         </div>

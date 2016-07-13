@@ -44,6 +44,7 @@ EmailController.prototype.close = function() {
  * Fetches contacts from the google api.
  */
 EmailController.prototype.fetchGmailEmails = function() {
+  console.log('hit');
   var that = this;
   this.fetching = true;
   this.googleContactsError = false;
@@ -68,6 +69,7 @@ EmailController.prototype.fetchGmailEmails = function() {
     });
     that.googleContactsLoaded = true;
     that.fetching = false;
+    console.log(that.googleContacts);
   });
 };
 
