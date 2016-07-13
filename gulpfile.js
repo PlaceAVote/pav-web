@@ -124,6 +124,13 @@ var gulp = require('gulp'),
       .pipe(gulp.dest('dist/js'));
   });
 
+  gulp.task('browserify-tps', function() {
+    return	browserify('./src/third_party_scripts.js')
+      .bundle()
+      .pipe(source('third_party_scripts.js'))
+      .pipe(gulp.dest('dist/js'));
+  });
+
   gulp.task('app-min', function(){
     return gulp.src('dist/js/*.js')
       .pipe(uglify())
@@ -159,4 +166,4 @@ var gulp = require('gulp'),
 		    .pipe(gulp.dest('img'));
 	});
 
-  gulp.task('default', ['autoPrefix', 'watchFiles', 'browserify-web', 'browserify-init', 'template-dev']);
+  gulp.task('default', ['autoPrefix', 'watchFiles', 'browserify-web', 'browserify-init', 'browserify-tps', 'template-dev']);

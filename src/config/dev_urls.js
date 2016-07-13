@@ -11,7 +11,7 @@ var MANDRILAPIKEY = 'ijV-LsU9RGPbUj1vjdHX_A';
 var PRERENDER = 'https://prerenderdev.placeavote.com';
 var WATCHERS = true;
 var APPPATH = 'dist/js/app.js';
-var THIRDPARTYPATH = 'src/third_party_scripts.js';
+var THIRDPARTYPATH = 'dist/js/third_party_scripts.js';
 
 module.exports = {
   APPPATH: APPPATH,

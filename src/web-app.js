@@ -124,13 +124,35 @@ var draggable = require('angular-ui-tree');
 var textarea = require('angular-elastic');
 var moment = require('angular-moment');
 var locationUpdate = require('./utils/location_update.js');
+// Dependencies
+var dependencies = [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'rzModule', 'ui.tree', 'monospaced.elastic', 'angularMoment', 'ngLocationUpdate', 'angular-google-analytics'];
 
-var GoogleAnalytics = require('angular-google-analytics');
+// Inject any other dependencies which should only be enabled in prod.
+if (config.PROD) {
+  var GoogleAnalytics = require('angular-google-analytics');
+  dependencies.push('angular-google-analytics');
+} else {
+  // Mock google analytics
+  angular.module('angular-google-analytics', [])
+    .provider('Analytics', function() {
+      return {
+        $get: function() {
+          return {
+            trackEvent: function(e) {
+              console.log('A Mock Track Event Occured: ', e);
+            },
+          };
+        },
+        setAccount: function(accountNo) {
+          console.log('You\'re currently on a development environment.' +
+            ' Google Analytics for ' + accountNo + ' is not running');
+        },
+      };
+    });
+}
 
-var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'rzModule', 'ui.tree', 'monospaced.elastic', 'angularMoment', 'ngLocationUpdate', 'angular-google-analytics']);
-
-app.config(['$routeProvider', '$locationProvider', '$compileProvider', 'AnalyticsProvider', function($routeProvider, $locationProvider, $compileProvider, AnalyticsProvider) {
-
+var app = angular.module('pavApp', dependencies);
+var configSetup = function($routeProvider, $locationProvider, $compileProvider, AnalyticsProvider) {
   $routeProvider
   .when('/', {
     templateUrl: 'partials/website_partials/home.html',
@@ -221,15 +243,15 @@ app.config(['$routeProvider', '$locationProvider', '$compileProvider', 'Analytic
   .otherwise({
     redirectTo: '/',
   });
-
   $locationProvider.hashPrefix('!');
-
   $compileProvider.debugInfoEnabled(config.WATCHERS);
   $compileProvider.aHrefSanitizationWhitelist(/^\s*(https)(:\/\/twitter).*/);
-
   AnalyticsProvider.setAccount('UA-48538409-1');
+};
 
-},]);
+var applicationconfigs = ['$routeProvider', '$locationProvider', '$compileProvider', 'AnalyticsProvider'];
+applicationconfigs.push(configSetup);
+app.config(applicationconfigs);
 
 app.run(['Analytics', function(Analytics) {}]);
 

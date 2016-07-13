@@ -4,7 +4,7 @@ var config = require('./config/urls');
   function spin() {
     var els = document.getElementsByClassName('pre-app__spinner--logo');
     var el = els[0];
-    // if there's no el the page has loaded, stop recursive call.
+    // If there's no el the page has loaded, stop recursive call.
     if (!el) {
       return;
     }
