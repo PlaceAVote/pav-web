@@ -148,14 +148,24 @@ module.exports = function(google, emailService, $timeout) {
           return;
         }
 
-        scope.googleContacts[userContact.email] && !manual ? scope.googleContacts[userContact.email].sendingInvite = true : scope.sendingInvite = true;
+        if (scope.googleContacts[userContact.email] && !manual) {
+          scope.googleContacts[userContact.email].sendingInvite = true;
+        } else {
+          scope.sendingInvite = true;
+        }
 
         var params = {
           contacts: [userContact],
         };
 
         scope.emailService.sendMessageToMany(params, function(err, res) {
-          scope.googleContacts[userContact.email] && !manual ? scope.googleContacts[userContact.email].sendingInvite = false : scope.sendingInvite = false;
+
+          if (scope.googleContacts[userContact.email] && !manual) {
+            scope.googleContacts[userContact.email].sendingInvite = false;
+          } else {
+            scope.sendingInvite = false;
+          }
+
           if (err) {
             return;
           }
@@ -169,7 +179,7 @@ module.exports = function(google, emailService, $timeout) {
           }
         });
 
-      }
+      };
 
       scope.closeModal = function() {
         scope.$parent.closeModal();
