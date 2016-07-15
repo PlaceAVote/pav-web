@@ -85,5 +85,4 @@ function TeamController($scope, $location) {
  	}
  ];
 }
-
 module.exports = TeamController;

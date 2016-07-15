@@ -1,7 +1,12 @@
 var expect = require('chai').expect;
-var SubFeedController = require('../../src/controllers/sub_feed_controller.js');
+var jsdom = require('mocha-jsdom');
+var SubFeedController;
 
 describe('sub feed', function() {
+  jsdom();
+  before(function() {
+    SubFeedController = require('../../src/controllers/sub_feed_controller.js');
+  });
   it('can take null options', function() {
     var sub = new SubFeedController(null);
     expect(sub.name).to.eql(undefined);

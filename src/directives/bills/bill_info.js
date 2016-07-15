@@ -1,4 +1,4 @@
-module.exports = function($location) {
+var billInfo = function($location) {
   return {
     restict: 'E',
     templateUrl: 'partials/bills/bill_info.html',
@@ -11,3 +11,5 @@ module.exports = function($location) {
     },
   };
 };
+
+module.exports = billInfo;

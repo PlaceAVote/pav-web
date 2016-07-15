@@ -1,5 +1,6 @@
 var expect = require('chai').expect;
-var HeaderCtrl = require('../../src/controllers/header_controller.js');
+var jsdom = require('mocha-jsdom');
+var HeaderCtrl;
 var mockUserService = {
   getUserProfile: function() {},
 };
@@ -17,7 +18,10 @@ var mockSearch = {
   }
 };
 describe('HeaderCtrl', function() {
-
+  jsdom();
+  before(function() {
+    HeaderCtrl = require('../../src/controllers/header_controller.js');
+  });
   it('search wont search unless query has changed', function() {
     var called = false;
     var subject = new HeaderCtrl({}, mockScope, {}, mockTimeout, {}, mockUserService, {}, mockSearch, {});

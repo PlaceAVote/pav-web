@@ -1,6 +1,7 @@
-var RegisterController = require('../../src/controllers/register_controller.js');
-var Interest = require('../../src/models/interest.js');
 var expect = require('chai').expect;
+var jsdom = require('mocha-jsdom');
+var Interest = require('../../src/models/interest.js');
+var RegisterController;
 
 var mockUserService = {
   getUser: function() {},
@@ -12,6 +13,10 @@ var mockLocation = {
 function undefinedUser(){}
 
 describe("RegisterController", function() {
+  jsdom();
+  before(function() {
+    RegisterController = require('../../src/controllers/register_controller.js');
+  });
 	it("go function calls location.path", function() {
 		var called, args, added;
 		var location = {

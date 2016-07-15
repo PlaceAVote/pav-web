@@ -1,5 +1,5 @@
 var ExampleIssue = require('../models/issue.js');
-module.exports = function() {
+var issuesPostDirective = function() {
   return {
     restrict: 'E',
     scope: {
@@ -57,3 +57,4 @@ module.exports = function() {
     },
   };
 };
+module.exports = issuesPostDirective;

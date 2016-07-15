@@ -1,4 +1,4 @@
-module.exports = function($location) {
+var followedEventDirective = function($location) {
   return {
     restrict: 'E',
     replace: true,
@@ -12,3 +12,4 @@ module.exports = function($location) {
     },
   };
 };
+module.exports = followedEventDirective;

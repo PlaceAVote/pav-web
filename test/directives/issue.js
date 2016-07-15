@@ -1,8 +1,12 @@
 var expect = require('chai').expect;
-var Issues = require('../../src/directives/issue.js');
+var jsdom = require('mocha-jsdom');
+var Issues;
 
 describe('Issue Directive', function() {
-
+  jsdom();
+  before(function() {
+    Issues = require('../../src/directives/issue.js');
+  });
   var mockIssueService = {
     deleteIssueResponse: function(id, emo, callback) {
       callback(undefined, true);

@@ -1,5 +1,5 @@
 var ImageCropper = require('../utils/imagecrop.js');
-module.exports = function() {
+var imageCropDirective = function() {
   return {
     restrict: 'E',
     scope: {
@@ -49,6 +49,4 @@ module.exports = function() {
     },
   };
 };
-
-
-
+module.exports = imageCropDirective;

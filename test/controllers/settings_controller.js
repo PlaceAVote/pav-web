@@ -1,7 +1,12 @@
 var expect = require('chai').expect;
-var SettingsController = require('../../src/controllers/settings_controller.js');
+var jsdom = require('mocha-jsdom');
+var SettingsController;
 
 describe('Settings Controller', function() {
+  jsdom();
+  before(function() {
+    SettingsController = require('../../src/controllers/settings_controller.js');
+  });
   var mockScope = {};
   var mockLocation = {};
   var mockTimeout = setTimeout;

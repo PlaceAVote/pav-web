@@ -1,4 +1,4 @@
-module.exports = function() {
+var cssScrollDirective = function() {
   return {
     restrict: 'A',
     scope: {
@@ -35,3 +35,4 @@ module.exports = function() {
     },
   };
 };
+module.exports = cssScrollDirective;

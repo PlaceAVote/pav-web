@@ -1,4 +1,4 @@
-module.exports = function() {
+var feedEventsDirective = function() {
   return {
     restrict: 'E',
     scope: {
@@ -10,3 +10,4 @@ module.exports = function() {
     templateUrl: 'partials/feed/feed_events.html',
   };
 };
+module.exports = feedEventsDirective;

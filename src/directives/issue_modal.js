@@ -1,4 +1,4 @@
-module.exports = function($location, $timeout, issueService, $rootScope) {
+var issueModalDirective = function($location, $timeout, issueService, $rootScope) {
   return {
     restrict: 'E',
     replace: true,
@@ -112,3 +112,4 @@ module.exports = function($location, $timeout, issueService, $rootScope) {
     },
   };
 };
+module.exports = issueModalDirective;

@@ -1,8 +1,13 @@
 var expect = require('chai').expect;
-var IssuesController = require('../../src/controllers/issues_controller.js');
+var jsdom = require('mocha-jsdom');
+var IssuesController;
 var Issue = require('../../src/models/issue.js');
 
 describe('Issues Controller', function() {
+  jsdom();
+  before(function() {
+    IssuesController = require('../../src/controllers/issues_controller.js');
+  });
   var mockTimeout = function(func) {
     return func;
   }

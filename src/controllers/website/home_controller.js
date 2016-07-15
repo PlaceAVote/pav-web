@@ -49,5 +49,4 @@ HomeController.prototype.loginWithFacebook = function() {
     }
   });
 };
-
 module.exports = HomeController;

@@ -1,4 +1,4 @@
-module.exports = function($location) {
+var billComments = function($location) {
   return {
     restict: 'E',
     templateUrl: 'partials/bills/bill_comments.html',
@@ -7,3 +7,5 @@ module.exports = function($location) {
     },
   };
 };
+
+module.exports = billComments;

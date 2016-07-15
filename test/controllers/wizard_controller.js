@@ -1,10 +1,14 @@
-var Wizard = require('../../src/controllers/wizard_controller.js');
-var Slider = require('../../src/models/slider_question.js');
 var expect = require('chai').expect;
+var jsdom = require('mocha-jsdom');
+var Wizard;
+var Slider = require('../../src/models/slider_question.js');
 
 describe('Wizard', function() {
+  jsdom();
+  before(function() {
+    Wizard = require('../../src/controllers/wizard_controller.js');
+  });
   describe('getNextQuestion', function() {
-
     it('returns null if questions list is undefined', function() {
       var subject = new Wizard();
       var question = subject.getNextQuestion();
@@ -87,15 +91,23 @@ describe('Wizard', function() {
   });
 
   describe('skip', function() {
-    var subject = new Wizard();
-    subject.currentQuestion = 'skip';
-    subject.skipQuestion();
-    expect(subject.skipped.length).to.eql(1);
-    expect(subject.skipped[0]).to.eql('skip');
-    expect(subject.currentQuestion).to.eql(null);
+    before(function() {
+      Wizard = require('../../src/controllers/wizard_controller.js');
+    });
+    it('should skip', function() {
+      var subject = new Wizard();
+      subject.currentQuestion = 'skip';
+      subject.skipQuestion();
+      expect(subject.skipped.length).to.eql(1);
+      expect(subject.skipped[0]).to.eql('skip');
+      expect(subject.currentQuestion).to.eql(null);
+    });
   });
 
   describe('load questions', function() {
+    before(function() {
+      Wizard = require('../../src/controllers/wizard_controller.js');
+    });
     it('loads the questions and returns the current one', function(done) {
       var called = false;
       var expectedQuestion = new Slider({question_id: '1'});

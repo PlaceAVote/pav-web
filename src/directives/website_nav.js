@@ -1,4 +1,4 @@
-module.exports = function() {
+var websiteNavDirective = function() {
   return {
     restrict: 'E',
     replace: true,
@@ -17,4 +17,4 @@ module.exports = function() {
     templateUrl: 'partials/website_partials/website_nav.html',
   };
 };
-
+module.exports = websiteNavDirective;

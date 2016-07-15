@@ -44,7 +44,6 @@ FeedController = function($scope, $location, userService, billService, authServi
   };
   // Prepopulate with a feedback event.
   this.categories.all.push();
-
   this.categories.discovery.selectedCategory = this.categories.discovery.categories.trends;
   this.selectedCategory = this.categories.all;
   this.getTrends();

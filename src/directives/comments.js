@@ -1,4 +1,4 @@
-module.exports = function() {
+var commentsDirective = function() {
   return {
     restrict: 'E',
     replace: true,
@@ -8,3 +8,4 @@ module.exports = function() {
     template: '<comment ng-repeat=\'comment in comments\' comment=\'comment\'></comment>',
   };
 };
+module.exports = commentsDirective;

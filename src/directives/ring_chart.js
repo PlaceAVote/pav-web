@@ -77,7 +77,7 @@ function updateChart(dataset, el, attr) {
   // Nothing to do.
 }
 
-module.exports = function($window) {
+var ringChartDirective = function($window) {
   return {
     restrict: 'E',
     scope: {
@@ -98,3 +98,4 @@ module.exports = function($window) {
     },
   };
 };
+module.exports = ringChartDirective;

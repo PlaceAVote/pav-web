@@ -1,4 +1,4 @@
-module.exports = function() {
+var feedCommentEventDirective = function() {
   return {
     restrict: 'E',
     scope: {
@@ -10,3 +10,4 @@ module.exports = function() {
     },
   };
 };
+module.exports = feedCommentEventDirective;

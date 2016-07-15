@@ -1,6 +1,5 @@
 var objectFitImages = require('object-fit-images');
-
-module.exports = function() {
+var imageSmartDirective = function() {
   return {
     restrict: 'E',
     scope: {
@@ -34,3 +33,4 @@ module.exports = function() {
     },
   };
 };
+module.exports = imageSmartDirective;

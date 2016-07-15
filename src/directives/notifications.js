@@ -1,4 +1,4 @@
-module.exports = function($location) {
+var notificationsDirective = function($location) {
   return {
     restrict: 'E',
     scope: {
@@ -35,3 +35,4 @@ module.exports = function($location) {
     },
   };
 };
+module.exports = notificationsDirective;

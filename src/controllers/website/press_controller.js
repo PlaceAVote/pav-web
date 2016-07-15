@@ -43,5 +43,4 @@ function PressController($scope, $location) {
 		},
 	];
 }
-
 module.exports = PressController;

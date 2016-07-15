@@ -64,5 +64,4 @@ function FaqController($scope, $location) {
 		}
 	];
 }
-
 module.exports = FaqController;

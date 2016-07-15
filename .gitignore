@@ -8,3 +8,4 @@ pav_ionic/
 coverage/
 web/dist/*
 css/*
+index.html

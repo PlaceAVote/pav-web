@@ -1,5 +1,6 @@
 var expect = require('chai').expect;
-var BillController = require('../../src/controllers/bill_controller.js');
+var jsdom = require('mocha-jsdom');
+var BillController;
 var Bill = require('../../src/models/bill.js');
 var Comment = require('../../src/models/comment.js');
 var Legislator = require('../../src/models/legislator.js');
@@ -27,6 +28,10 @@ var mockLocation = {
   path: function() {},
 }
 describe('BillController', function() {
+  jsdom();
+  before(function() {
+    BillController = require('../../src/controllers/bill_controller.js');
+  });
   var scope = {};
   var routeParams = {
     id: '100'

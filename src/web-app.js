@@ -13,28 +13,8 @@ if (typeof localStorage === 'object') {
     Storage.prototype.setItem = function() {};
   }
 }
-
-// Website Controllers
-var HomeController = require('./controllers/website/home_controller.js');
-var FaqController = require('./controllers/website/faq_controller.js');
-var TeamController = require('./controllers/website/team_controller.js');
-var PressController = require('./controllers/website/press_controller.js');
-var MenuController = require('./controllers/website/menu_controller.js');
-var ContactController = require('./controllers/website/contact_controller.js');
-
-// App Controllers
-var RegisterController = require('./controllers/register_controller.js');
-var SignUpController = require('./controllers/sign_up_controller.js');
-var LoginController = require('./controllers/login_controller.js');
-var FeedController = require('./controllers/feed_controller.js');
-var BillController = require('./controllers/bill_controller.js');
-var HeaderController = require('./controllers/header_controller.js');
-var ProfileController = require('./controllers/profile_controller.js');
-var SettingsController = require('./controllers/settings_controller.js');
-var PasswordController = require('./controllers/password_controller.js');
-var WizardController = require('./controllers/wizard_controller.js');
-var IssuesController = require('./controllers/issues_controller.js');
-var UserNotFoundContoller = require('./controllers/user_not_found_controller.js');
+// Dependencies
+var angular = require('angular');
 
 // Services
 var UserService = require('./services/user_service.js');
@@ -54,9 +34,27 @@ var OpenGraphService = require('./services/open_graph_service.js');
 var EmailService = require('./services/email_service.js');
 var google = require('./services/google.js');
 
-// Dependencies
-var d3 = require('d3');
-var angular = require('angular');
+// Website Controllers
+var HomeController = require('./controllers/website/home_controller.js');
+var FaqController = require('./controllers/website/faq_controller.js');
+var TeamController = require('./controllers/website/team_controller.js');
+var PressController = require('./controllers/website/press_controller.js');
+var MenuController = require('./controllers/website/menu_controller.js');
+var ContactController = require('./controllers/website/contact_controller.js');
+// App Controllers
+var RegisterController = require('./controllers/register_controller.js');
+var SignUpController = require('./controllers/sign_up_controller.js');
+var LoginController = require('./controllers/login_controller.js');
+var FeedController = require('./controllers/feed_controller.js');
+var BillController = require('./controllers/bill_controller.js');
+var HeaderController = require('./controllers/header_controller.js');
+var ProfileController = require('./controllers/profile_controller.js');
+var SettingsController = require('./controllers/settings_controller.js');
+var PasswordController = require('./controllers/password_controller.js');
+var WizardController = require('./controllers/wizard_controller.js');
+var IssuesController = require('./controllers/issues_controller.js');
+var UserNotFoundContoller = require('./controllers/user_not_found_controller.js');
+
 
 // Directives
 var search = require('./directives/search.js');
@@ -64,7 +62,6 @@ var openGraph = require('./directives/open_graph.js');
 var pavXBrowserDate = require('./directives/pavXBrowserDate.js');
 var socialBox = require('./directives/social_box.js');
 var mailcheck = require('./directives/mailcheck.js');
-var pavDirectives = require('./directives/directives.js');
 var websiteNav = require('./directives/website_nav.js');
 var commentsDirective = require('./directives/comments.js');
 var commentDirective = require('./directives/comment.js');
@@ -114,6 +111,7 @@ var cssScrollDirective = require('./directives/css_scroll.js');
 var issueModalDirective = require('./directives/issue_modal.js');
 var iconDirective = require('./directives/icon.js');
 var pieChartDirective = require('./directives/ring_chart.js');
+var finishedRender = require('./directives/finished_render.js');
 var emailConnections = require('./directives/email_connections.js');
 var emailConnectionsModal = require('./directives/email_connections_modal.js');
 
@@ -126,13 +124,35 @@ var draggable = require('angular-ui-tree');
 var textarea = require('angular-elastic');
 var moment = require('angular-moment');
 var locationUpdate = require('./utils/location_update.js');
+// Dependencies
+var dependencies = [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'rzModule', 'ui.tree', 'monospaced.elastic', 'angularMoment', 'ngLocationUpdate', 'angular-google-analytics'];
 
-var GoogleAnalytics = require('angular-google-analytics');
+// Inject any other dependencies which should only be enabled in prod.
+if (config.PROD) {
+  var GoogleAnalytics = require('angular-google-analytics');
+  dependencies.push('angular-google-analytics');
+} else {
+  // Mock google analytics
+  angular.module('angular-google-analytics', [])
+    .provider('Analytics', function() {
+      return {
+        $get: function() {
+          return {
+            trackEvent: function(e) {
+              console.log('A Mock Track Event Occured: ', e);
+            },
+          };
+        },
+        setAccount: function(accountNo) {
+          console.log('You\'re currently on a development environment.' +
+            ' Google Analytics for ' + accountNo + ' is not running');
+        },
+      };
+    });
+}
 
-var app = angular.module('pavApp', [require('angular-route'), require('angular-animate'), require('angular-resource'), require('angular-sanitize'), 'rzModule', 'ui.tree', 'monospaced.elastic', 'angularMoment', 'ngLocationUpdate', 'angular-google-analytics']);
-
-app.config(['$routeProvider', '$locationProvider', '$compileProvider', 'AnalyticsProvider', function($routeProvider, $locationProvider, $compileProvider, AnalyticsProvider) {
-
+var app = angular.module('pavApp', dependencies);
+var configSetup = function($routeProvider, $locationProvider, $compileProvider, AnalyticsProvider) {
   $routeProvider
   .when('/', {
     templateUrl: 'partials/website_partials/home.html',
@@ -223,15 +243,15 @@ app.config(['$routeProvider', '$locationProvider', '$compileProvider', 'Analytic
   .otherwise({
     redirectTo: '/',
   });
-
   $locationProvider.hashPrefix('!');
-
   $compileProvider.debugInfoEnabled(config.WATCHERS);
   $compileProvider.aHrefSanitizationWhitelist(/^\s*(https)(:\/\/twitter).*/);
-
   AnalyticsProvider.setAccount('UA-48538409-1');
+};
 
-},]);
+var applicationconfigs = ['$routeProvider', '$locationProvider', '$compileProvider', 'AnalyticsProvider'];
+applicationconfigs.push(configSetup);
+app.config(applicationconfigs);
 
 app.run(['Analytics', function(Analytics) {}]);
 
@@ -399,6 +419,8 @@ app.directive('issueModal', issueModalDirective);
 issueModalDirective.$inject = ['$location', '$timeout', 'issueService', '$rootScope'];
 app.directive('icon', iconDirective);
 app.directive('pieChart', pieChartDirective);
+pieChartDirective.$inject = ['$window'];
+app.directive('finishedRender', [finishedRender]);
 pieChartDirective.$inject = ['$compile'];
 app.directive('emailConnections', emailConnections);
 emailConnections.$inject = ['$compile'];
