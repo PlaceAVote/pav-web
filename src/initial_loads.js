@@ -11,7 +11,7 @@ var config = require('./config/urls');
     var rot = 'rotate(' + rotation + 'deg)';
     el.style.transform = rot;
     el.style['-webkit-transition'] = rot;
-    rotation += 90
+    rotation += 90;
     setTimeout(spin, 2500);
   }
 
