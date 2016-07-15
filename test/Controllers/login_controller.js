@@ -1,5 +1,6 @@
-var LoginCtrl = require("../../src/controllers/login_controller.js");
 var expect = require("chai").expect;
+var jsdom = require('mocha-jsdom');
+var LoginCtrl;
 var document = {document: { body: { addEventListener: function(){}}}};
 var authService = {
   validateToken: function(callback){
@@ -12,6 +13,10 @@ var Analytics = {
 };
 
 describe('LoginCtrl', function() {
+  jsdom();
+  before(function() {
+    LoginCtrl = require("../../src/controllers/login_controller.js");
+  });
   var mockLocationGlobal = {
     $$search: {
       forgot: false,

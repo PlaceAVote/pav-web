@@ -1,4 +1,4 @@
-module.exports = function($location) {
+var openGraphDirective = function() {
   return {
     restrict: 'E',
     scope: {
@@ -7,3 +7,4 @@ module.exports = function($location) {
     templateUrl: 'partials/open_graph.html',
   };
 };
+module.exports = openGraphDirective;

@@ -59,12 +59,14 @@ function HeaderCtrl($rootScope, $scope, $location, $timeout, authService, userSe
 }
 
 HeaderCtrl.prototype.intercomInit = function(user) {
+  if (!window.Intercom) {
+    return;
+  }
   window.Intercom('boot', {
     app_id: 'sh17vmbl',
     name: user.first_name + ' ' + user.last_name,
     email: user.email,
   });
-
 };
 
 
@@ -284,6 +286,4 @@ HeaderCtrl.prototype.feedRefresh = function() {
   this.route.reload();
 };
 
-
 module.exports = HeaderCtrl;
-

@@ -1,4 +1,4 @@
-module.exports = function() {
+var dragAndDropDirective = function() {
   return {
     restrict: 'E',
     scope: {
@@ -7,3 +7,4 @@ module.exports = function() {
     templateUrl: 'partials/wizard_drag_and_drop.html',
   };
 };
+module.exports = dragAndDropDirective;

@@ -1,4 +1,4 @@
-module.exports = function() {
+var bannerDirective = function() {
   return {
     restrict: 'E',
     replace: true,
@@ -46,3 +46,4 @@ module.exports = function() {
     },
   };
 };
+module.exports = bannerDirective;

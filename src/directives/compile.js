@@ -1,4 +1,4 @@
-module.exports = function($compile, $window, $sce, $sanitize) {
+var compileDirective = function($compile, $window, $sce, $sanitize) {
   return {
     restrict: 'A',
     scope: {
@@ -19,3 +19,4 @@ module.exports = function($compile, $window, $sce, $sanitize) {
     },
   };
 };
+module.exports = compileDirective;

@@ -1,4 +1,4 @@
-module.exports = function() {
+var pavXBrowserDateDirective = function() {
   return {
     restrict: 'E',
     scope: {
@@ -19,3 +19,4 @@ module.exports = function() {
     },
   };
 };
+module.exports = pavXBrowserDateDirective;

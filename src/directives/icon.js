@@ -1,4 +1,4 @@
-module.exports = function() {
+var iconDirective = function() {
   return {
     restrict: 'E',
     replace: true,
@@ -12,3 +12,4 @@ module.exports = function() {
     },
   };
 };
+module.exports = iconDirective;

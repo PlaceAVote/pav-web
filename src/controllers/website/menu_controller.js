@@ -13,5 +13,4 @@ function MenuController($scope, $location, $routeParams) {
 		}
 	};
 }
-
 module.exports = MenuController;

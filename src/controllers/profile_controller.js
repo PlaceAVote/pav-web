@@ -227,4 +227,3 @@ ProfileController.prototype.saveProfilePicture = function(img) {
   });
 };
 module.exports = ProfileController;
-

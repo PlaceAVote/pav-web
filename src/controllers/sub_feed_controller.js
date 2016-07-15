@@ -1,5 +1,4 @@
 'use strict';
-
 /**
  * A Generic Controller to be used by the Feedcontroller
  *

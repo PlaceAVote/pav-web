@@ -1,7 +1,12 @@
 var expect = require('chai').expect;
-var AuthorizeController = require('../../src/controllers/autherize_controller.js');
+var jsdom = require('mocha-jsdom');
+var AuthorizeController;
 
 describe('Auth Base', function() {
+  jsdom();
+  before(function() {
+    AuthorizeController = require('../../src/controllers/autherize_controller.js');
+  });
   it('uses auth service to log in (uses success path)', function(done){
     var authService = {
       validateToken: function(callback) {

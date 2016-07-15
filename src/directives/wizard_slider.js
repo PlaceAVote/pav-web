@@ -1,4 +1,4 @@
-module.exports = function($timeout) {
+var sliderDirective = function($timeout) {
   return {
     restrict: 'E',
     scope: {
@@ -26,3 +26,4 @@ module.exports = function($timeout) {
     },
   };
 };
+module.exports = sliderDirective;

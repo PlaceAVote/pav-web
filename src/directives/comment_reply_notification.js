@@ -1,4 +1,4 @@
-module.exports = function($location) {
+var commentReplyNotificationDirective = function($location) {
   return {
     restrict: 'E',
     replace: true,
@@ -12,3 +12,5 @@ module.exports = function($location) {
     },
   };
 };
+
+module.exports = commentReplyNotificationDirective;

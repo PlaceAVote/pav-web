@@ -6,7 +6,6 @@ var prerenderToken = 'XfWVDqvFXsFXTL8ngxB1';
 
 app.use(logger('combined'));
 app.use(require('prerender-node').set('prerenderToken', prerenderToken).set('protocol', 'https'));
-
 app.use('/dist', express.static(__dirname + '/dist'));
 app.use('/img', express.static(__dirname + '/img'));
 app.use('/css', express.static(__dirname + '/css'));

@@ -1,7 +1,12 @@
 var expect = require('chai').expect;
-var ContactCtrl = require('../../src/controllers/website/contact_controller.js');
+var jsdom = require('mocha-jsdom');
+var ContactCtrl;
 
 describe('Contact Controller', function() {
+  jsdom();
+  before(function() {
+    ContactCtrl = require('../../src/controllers/website/contact_controller.js');
+  });
   var scope = {
     mailData: {
       name: "bob",

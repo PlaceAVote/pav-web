@@ -1,8 +1,13 @@
-var FeedController = require('../../src/controllers/feed_controller.js');
 var expect = require('chai').expect;
+var jsdom = require('mocha-jsdom');
+var FeedController;
 var User = require('../../src/models/user.js');
 
 describe("FeedController", function() {
+  jsdom();
+  before(function() {
+    FeedController = require('../../src/controllers/feed_controller.js');
+  });
     function mockSearchService(){
       this.bills = function(callback) {
         return callback();

@@ -1,4 +1,4 @@
-module.exports = function(location) {
+var preloaderDirective = function(location) {
   return {
     restrict: 'A',
     transclude: true,
@@ -21,3 +21,4 @@ module.exports = function(location) {
     },
   };
 };
+module.exports = preloaderDirective;

@@ -1,6 +1,6 @@
 var expect = require('chai').expect;
-var PasswordController = require('../../src/controllers/password_controller.js');
-// PasswordController($scope, $location, $routeParams, passwordService)
+var jsdom = require('mocha-jsdom');
+var PasswordController;
 var scope = {};
 var location = {
   path: function(url) {
@@ -17,6 +17,10 @@ var mockAuthService = {
 var params = {token: 'token'};
 
 describe('Password Controller', function() {
+  jsdom();
+  before(function() {
+    PasswordController = require('../../src/controllers/password_controller.js');
+  });
   it('Should pass token to service and return a status 200', function() {
     var mockService = {
       newPassword: function(user, callback) {

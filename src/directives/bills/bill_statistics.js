@@ -1,4 +1,4 @@
-module.exports = function($location) {
+var billStatistics = function($location) {
   return {
     restict: 'E',
     scope: {
@@ -9,3 +9,5 @@ module.exports = function($location) {
     templateUrl: 'partials/bills/bill_statistics.html',
   };
 };
+
+module.exports = billStatistics;

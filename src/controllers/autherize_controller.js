@@ -32,5 +32,4 @@ AuthorizeController.logout = function(options) {
   });
 };
 
-
 module.exports = AuthorizeController;

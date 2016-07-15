@@ -5,11 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "gulp check",
-    "start": "node app.js",
-    "install": "napa"
-  },
-  "napa": {
-    "ionic": "driftyco/ionic-bower#v1.0.0"
+    "start": "node app.js"
   },
   "author": "Anthony O'Neill",
   "license": "MIT",
@@ -32,12 +28,13 @@
     "browserify": "^11.0.1",
     "browserify-shim": "^3.8.10",
     "chai": "^3.2.0",
-    "cordova": "^5.3.1",
     "d3": "^3.5.6",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^2.3.1",
+    "gulp-browserify": "^0.5.1",
     "gulp-clean": "^0.3.1",
     "gulp-concat": "^2.6.0",
+    "gulp-ignore": "^2.0.1",
     "gulp-imagemin": "^2.4.0",
     "gulp-jscs": "^3.0.2",
     "gulp-jshint": "^2.0.0",
@@ -54,12 +51,12 @@
     "gulp-util": "^3.0.7",
     "imagemin-mozjpeg": "^5.1.0",
     "imagemin-pngquant": "^4.2.0",
-    "ionic": "^1.6.4",
+    "jsdom": "^9.2.1",
     "jshint": "^2.9.1",
     "jshint-stylish": "^2.1.0",
     "localtunnel": "^1.7.0",
+    "mocha-jsdom": "^1.1.0",
     "moment": "^2.11.2",
-    "napa": "^1.2.0",
     "node-sass": "~3.4.2",
     "object-fit-images": "^2.3.0",
     "pretty-bytes": "^2.0.1",
@@ -71,17 +68,6 @@
     "morgan": "^1.7.0",
     "prerender-node": "^2.2.1",
     "vinyl-source-stream": "^1.1.0"
-  },
-  "browser": {
-    "ionic": "./node_modules/ionic/js/ionic.js"
-  },
-  "browserify": {
-    "transform": [
-      "browserify-shim"
-    ]
-  },
-  "browserify-shim": {
-    "ionic": "ionic"
   },
   "repository": {
     "type": "git",

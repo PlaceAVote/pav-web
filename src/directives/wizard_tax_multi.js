@@ -1,4 +1,4 @@
-module.exports = function($filter, $location, $anchorScroll) {
+var taxMultiDirective = function($filter, $location, $anchorScroll) {
   return {
     restrict: 'E',
     scope: {
@@ -35,3 +35,4 @@ module.exports = function($filter, $location, $anchorScroll) {
     },
   };
 };
+module.exports = taxMultiDirective;

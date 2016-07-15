@@ -1,4 +1,4 @@
-module.exports = function($compile, commentService, $anchorScroll, $timeout, $location, $window, userService) {
+var comment = function($compile, commentService, $anchorScroll, $timeout, $location, $window, userService) {
   return {
     restrict: 'E',
     replace: true,
@@ -147,3 +147,4 @@ module.exports = function($compile, commentService, $anchorScroll, $timeout, $lo
     },
   };
 };
+module.exports = comment;

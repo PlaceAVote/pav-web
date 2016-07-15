@@ -1,4 +1,4 @@
-module.exports = function($compile) {
+var emailConnectionsDirective = function($compile) {
   return {
     restrict: 'E',
     replace: true,
@@ -20,3 +20,4 @@ module.exports = function($compile) {
     },
   };
 };
+module.exports = emailConnectionsDirective;

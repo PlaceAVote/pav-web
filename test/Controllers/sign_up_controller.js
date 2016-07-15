@@ -1,7 +1,12 @@
-var SignUpController = require('../../src/controllers/sign_up_controller.js');
 var expect = require('chai').expect;
+var jsdom = require('mocha-jsdom');
+var SignUpController;
 
 describe('SignUpController', function() {
+  jsdom();
+  before(function() {
+    SignUpController = require('../../src/controllers/sign_up_controller.js');
+  });
   function MockUserService() {
     this.getUser = function() {
       return {

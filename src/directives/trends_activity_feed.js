@@ -1,4 +1,4 @@
-module.exports = function() {
+var trendsActivityFeed = function() {
   return {
     restrict: 'E',
     scope: {
@@ -7,3 +7,4 @@ module.exports = function() {
     templateUrl: 'partials/feed/trends_activity_feed.html',
   };
 };
+module.exports = trendsActivityFeed;

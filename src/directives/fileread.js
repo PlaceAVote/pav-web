@@ -1,4 +1,4 @@
-module.exports = function() {
+var fileReadDirective = function() {
   return {
     restrict: 'A',
     scope: {
@@ -17,3 +17,5 @@ module.exports = function() {
     },
   };
 };
+
+module.exports = fileReadDirective;

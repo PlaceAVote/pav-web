@@ -1,4 +1,4 @@
-module.exports = function($location) {
+var voteConfirmed = function($location) {
   return {
     restict: 'E',
     templateUrl: 'partials/bills/bill_vote_confirmed.html',
@@ -9,3 +9,4 @@ module.exports = function($location) {
     },
   };
 };
+module.exports = voteConfirmed;

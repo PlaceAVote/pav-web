@@ -1,4 +1,4 @@
-module.exports = function($location) {
+var feedVoteEvent = function($location) {
   return {
     retsrict: 'E',
     scope: {
@@ -10,3 +10,4 @@ module.exports = function($location) {
     },
   };
 };
+module.exports = feedVoteEvent;

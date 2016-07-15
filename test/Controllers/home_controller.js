@@ -1,5 +1,6 @@
-var HomeCtrl = require("../../src/controllers/website/home_controller.js");
 var expect = require("chai").expect;
+var jsdom = require('mocha-jsdom');
+var HomeCtrl;
 var authService = {
   validateToken: function(callback){
     return callback(false);
@@ -7,6 +8,10 @@ var authService = {
 };
 
 describe('HomeCtrl', function() {
+  jsdom();
+  before(function() {
+    HomeCtrl = require("../../src/controllers/website/home_controller.js");
+  });
   describe("Facebook login", function(){
     it("should call go with 'topics' if user is undefined", function(done){
       var location = {
