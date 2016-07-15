@@ -1,6 +1,6 @@
 var config = require('./config/urls');
 (function() {
-  var rotation = 360;
+  var rotation = 90;
   function spin() {
     var els = document.getElementsByClassName('pre-app__spinner--logo');
     var el = els[0];
@@ -11,7 +11,7 @@ var config = require('./config/urls');
     var rot = 'rotate(' + rotation + 'deg)';
     el.style.transform = rot;
     el.style['-webkit-transition'] = rot;
-    rotation += 360;
+    rotation += 90
     setTimeout(spin, 2500);
   }
 
