@@ -33,27 +33,32 @@
       background: white;
       z-index: 10000; width: 100%; position: fixed; height: 100%;
     }
+    .pre-app__icons {
+      width: 30%;
+      margin: 0 auto;
+      margin-top: 10%;
+    }
     .pre-app__spinner--container {
-      width: 20%;
+      width: 30%;
       margin: 0 auto;
       margin-top: 10%;
     }
     .pre-app__spinner--logo {
       width: 100%;
-      -webkit-transition: -webkit-transition: 1s ease-in-out;
-      transition: transform 1s ease-in-out;
+      -webkit-transition: -webkit-transition: .5s ease-in-out;
+      transition: transform .5s ease-in-out;
     }
     @-webkit-keyframes spin {
-      100% { -webkit-transform: rotate(360deg); }
+      100% { -webkit-transform: rotate(90deg); }
     }
     @-moz-keyframes spin {
-      100% { -moz-transform: rotate(360deg); }
+      100% { -moz-transform: rotate(90deg); }
     }
     @keyframes spin {
       100% {
-        -moz-transform:rotate(360deg);
-        -o-transform:rotate(360deg);
-        transform:rotate(360deg);
+        -moz-transform:rotate(90deg);
+        -o-transform:rotate(90deg);
+        transform:rotate(90deg);
       }
     }
     .pre-app__meter {
@@ -85,10 +90,13 @@
       padding-top: 10%;
       color: grey;
       text-align: center;
+      font: Arial, sans-serif;
     }
     .pre-app__text-logo {
       padding-top: 20%;
-      width: 100%;
+      display: block;
+      width: 80%;
+      margin: 0 auto;
     }
     body {
       padding: 0;
@@ -98,8 +106,10 @@
  </head>
  <body>
    <div id="preloading-spinner" class="pre-app__container">
-     <div class="pre-app__spinner--container">
-       <img class="pre-app__spinner--logo" src="/img/mark_full_color.svg" alt="placeavote" />
+     <div class="pre-app__icons">
+       <div class="pre-app__spinner--container">
+         <img class="pre-app__spinner--logo" src="/img/mark_full_color.svg" alt="placeavote" />
+       </div>
        <img class="pre-app__text-logo" src="/img/just-text.svg" alt="placeavote" />
        <div class="pre-app__meter--container">
          <div class="pre-app__meter">
