@@ -421,7 +421,6 @@ app.directive('icon', iconDirective);
 app.directive('pieChart', pieChartDirective);
 pieChartDirective.$inject = ['$window'];
 app.directive('finishedRender', [finishedRender]);
-pieChartDirective.$inject = ['$compile'];
 app.directive('emailConnections', emailConnections);
 emailConnections.$inject = ['$compile'];
 app.directive('emailConnectionsModal', emailConnectionsModal);
